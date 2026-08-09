@@ -2,9 +2,17 @@
 
 An open, organization-agnostic body of knowledge for metrology — and a platform that turns demonstrated competence into a portable, cryptographically verifiable credential that **the individual owns**.
 
-### → [Browse the taxonomy](https://recamerino.github.io/metrology-competence-system/)
+### Read the taxonomy
 
-All 43 domains, 257 competency areas and 2232 elements, searchable and filterable by level and by competence kind. Rebuilt automatically from the source files on every change.
+43 domains · 257 competency areas · 2232 elements. Three ways in, for three different jobs:
+
+| | Best for |
+|---|---|
+| **[Interactive viewer](https://recamerino.github.io/metrology-competence-system/)** | Searching and filtering across every domain at once |
+| **[Markdown documents](docs/taxonomy/)** | Reading linearly, reviewing a change, diffing two versions, printing |
+| **[`taxonomy.csv`](docs/taxonomy/taxonomy.csv)** | Spreadsheet analysis, filtering, importing elsewhere |
+
+All three are generated from [`content/taxonomy/domains/`](content/taxonomy/domains/) and regenerated in CI, so none of them can drift from the source.
 
 > **Status: pre-alpha.** The taxonomy skeleton is complete (Phase 1). No content is authored against it yet and there is no usable application. See [Roadmap](#roadmap).
 

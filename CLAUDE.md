@@ -84,11 +84,18 @@ content/sources/registry.yaml     Source licence register, Tier 1/2/3.
 content/elements/                 Element prose. EMPTY until Phase 4.
 schemas/                          JSON Schema. Frozen at Phase 3.
 packages/validator/               Integrity checks + 20 guardrail tests.
-apps/viewer/                      Read-only taxonomy viewer (template + build).
+apps/viewer/                      Viewer SOURCE (template + build script).
+                                  template.html has a __TAXONOMY__ placeholder
+                                  and is not readable on its own — data is
+                                  injected at build time.
+docs/taxonomy/                    GENERATED. Markdown + CSV for reading and
+                                  auditing. Never hand-edit; CI fails if stale.
 tools/ceiling-plan.json           Level-ceiling judgement, per area + overrides.
 tools/kind-plan.json              Knowledge/skill/judgment classification.
 docs/                             Decision record, playbook, licence policy.
 ```
+
+**Three generated views of the taxonomy, all from the same YAML.** `docs/taxonomy/*.md` for linear reading and diffing, `docs/taxonomy/taxonomy.csv` for spreadsheets, and the [published viewer](https://recamerino.github.io/metrology-competence-system/) for search and filter. Regenerate with `npm run build:docs` and `npm run build:viewer`. The Markdown and CSV are committed because their diffs *are* the audit record; the 270 KB built HTML is not.
 
 Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s prefix is *historical*; the authoritative `domain` and `competencyArea` are fields. This lets an element be reorganised without renaming an ID a credential may already attest.
 
@@ -103,6 +110,8 @@ npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, gaps
 npm run report:quotes     # complete quotation manifest for legal review
 npm run registry:sync     # append new IDs to the lock; commit the result
+npm run build:docs        # regenerate docs/taxonomy/ — commit the result
+npm run check:docs        # fail if docs/taxonomy/ is stale (CI runs this)
 npm run build:viewer      # regenerate apps/viewer/index.html
 npm run check:airgap      # scan build output for external references
 ```

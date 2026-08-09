@@ -33,6 +33,12 @@ jobs:
       - name: Validate corpus
         run: npm run validate
 
+      # A generated document that can silently go stale is worse than no
+      # document: an auditor reads it and believes it. This fails the build if
+      # docs/taxonomy/ does not match the YAML it claims to describe.
+      - name: Generated taxonomy documents are current
+        run: npm run check:docs
+
       - name: Coverage report
         run: npm run report:coverage
 

@@ -18,6 +18,8 @@
     "registry:sync": "node packages/validator/src/cli.ts registry-sync",
     "build:bok": "node packages/compiler/src/cli.ts",
     "build:viewer": "node tools/build-viewer.ts",
+    "build:docs": "node tools/build-docs.ts",
+    "check:docs": "node tools/build-docs.ts --check",
     "check:airgap": "node tools/check-airgap.ts",
     "test": "node --test \"packages/**/*.test.ts\"",
     "typecheck": "tsc --noEmit"
