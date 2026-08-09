@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/item-archetype.schema.json",
+  "title": "Assessment archetype — a reusable, parameterized item shape",
+  "description": "Governs content/items/archetypes/<id>.yaml. An archetype is an assessment SHAPE, not an item about a particular element: 'construct a budget containing a correlated pair', 'diagnose a defective certificate', 'defend a decision rule against a stated alternative'. It is bound to specific assessable units by an item binding, which supplies the element's own parameters and rubric. One archetype may serve twenty to fifty units, and that ratio is the only reason a 9096-unit item bank is finishable at all — see decision 36 in docs/00-context.md. Archetypes are expensive and few; bindings are cheap and many. Write accordingly: an archetype that can only ever serve one element is a binding wearing the wrong hat.",
+
+  "type": "object",
+  "required": ["id", "title", "itemType", "kinds", "levels", "status", "prompt", "parameters", "scoring", "lookupResistance"],
+  "additionalProperties": false,
+
+  "properties": {
+    "id": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/archetypeId" },
+
+    "title": { "type": "string", "minLength": 1 },
+
+    "itemType": {
+      "enum": [
+        "parameterized-worked-problem",
+        "error-finding",
+        "scenario-judgment",
+        "data-analysis",
+        "position-and-defend",
+        "multiple-choice"
+      ],
+      "description": "Listed in the order the authoring playbook prefers them. multiple-choice is permitted ONLY for genuine terminology and convention checks; anything else expressed as MCQ is a defective item, because the candidate has the internet open."
+    },
+
+    "kinds": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementKind" },
+      "description": "Which element kinds this archetype may be bound to. The validator refuses a binding whose element kind is absent here, which is the mechanical guard against the commonest binding defect: attaching a knowledge-shaped archetype to a skill element, so the candidate explains the thing instead of doing it. Most archetypes serve exactly one kind. An archetype claiming all three is usually too generic to test anything specific."
+    },
+
+    "levels": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel" },
+      "description": "Proficiency levels this archetype can assess, normally a contiguous band. Difficulty is carried by the parameter ranges the binding supplies and by the rubric, not by a different item."
+    },
+
+    "status": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/lifecycleStatus" },
+
+    "prompt": {
+      "type": "string",
+      "minLength": 40,
+      "description": "The candidate-facing prompt template. Parameter placeholders are written {{name}} and must every one of them be declared in `parameters`; the validator rejects an undeclared placeholder and an unused parameter alike."
+    },
+
+    "parameters": {
+      "type": "array",
+      "minItems": 0,
+      "description": "The knobs a binding sets. Every candidate receives a different draw, which is what makes a shared answer key worthless and is the whole basis on which proctoring was abolished.",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+          "type": { "enum": ["real", "integer", "choice", "dataset"] },
+          "unit": {
+            "type": "string",
+            "description": "SI or accepted unit for the drawn value. Recorded so the scorer can check units rather than only magnitude — a numerically right answer in the wrong unit is wrong."
+          },
+          "description": { "type": "string", "maxLength": 400 },
+          "constraint": {
+            "type": "string",
+            "maxLength": 400,
+            "description": "A relationship this parameter must satisfy against others, stated for the human reviewer rather than evaluated here. Example: 'must exceed u_a so the correlated term dominates'. A draw that violates physical sense produces an item that is unfair rather than merely hard."
+          }
+        }
+      }
+    },
+
+    "scoring": {
+      "type": "object",
+      "required": ["method"],
+      "additionalProperties": false,
+      "description": "How a response becomes a result. Deterministic where the question genuinely has a right answer; rubric-scored by a credentialed reviewer where it does not. Human effort is concentrated where judgement is actually required.",
+      "properties": {
+        "method": {
+          "enum": ["deterministic", "rubric", "hybrid"],
+          "description": "hybrid: a numeric part auto-scored, a justification part rubric-scored. Common for judgment elements, where the arithmetic is checkable but the defence is the point."
+        },
+        "toleranceBand": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Accepted deviation for a deterministic result, and its basis. A tolerance band that merely encodes rounding is too tight; one that accepts a wrong method is worthless."
+        },
+        "unitChecked": { "type": "boolean", "default": true },
+        "rubricRef": {
+          "type": "string",
+          "description": "Path to the rubric, which the playbook requires to ship in the same commit as the item. Required by the validator whenever method is rubric or hybrid: an unrubricked judgment item cannot be scored consistently by two reviewers, and inter-rater reliability is what makes the credential survive an audit."
+        }
+      }
+    },
+
+    "lookupResistance": {
+      "type": "string",
+      "minLength": 80,
+      "description": "REQUIRED, and the field most likely to get an archetype rejected. State why a competent person cannot answer this by looking it up or by pasting the prompt into an AI assistant. Every assessment here is open-resource and unproctored, so this sentence is where integrity actually lives — if it cannot be written convincingly, the archetype is defective and no amount of parameterization repairs it. 'The numbers differ per candidate' is NOT sufficient on its own: an AI assistant solves a novel arithmetic draw effortlessly. What resists is a task requiring the candidate's own judgement, their own data, or a defence of a choice the source material does not make for them."
+    },
+
+    "citations": {
+      "type": "array",
+      "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/citation" },
+      "description": "Clause-level references grounding the archetype's technical content. Not required here as it is on an element — the bound element carries the authoritative citation — but an archetype asserting a technical fact should say where it comes from."
+    },
+
+    "exposureLimit": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Maximum times this archetype may be served to one candidate across all their bindings, before the bank must offer a different shape. Guards against a candidate meeting the same shape at every level of every element and learning the archetype rather than the competence."
+    },
+
+    "notes": { "type": "string" },
+
+    "authoring": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Provenance for the archetype itself: who wrote it, when, and when it was last reviewed."
+    }
+  }
+}

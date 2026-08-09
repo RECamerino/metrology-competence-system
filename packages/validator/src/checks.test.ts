@@ -11,7 +11,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import type { Corpus, ElementFile } from './corpus.ts';
+import type { Corpus, ElementFile, ItemFile } from './corpus.ts';
 import { runAllChecks } from './checks.ts';
 
 /* -- Fixtures ------------------------------------------------------------ */
@@ -103,7 +103,53 @@ function element(overrides: Record<string, unknown> = {}): ElementFile {
   };
 }
 
-function corpus(elements: ElementFile[], lockedIds?: string[] | null): Corpus {
+/**
+ * The item bank. CM-01-001 is `knowledge` with a ceiling of 3; CM-01-002 is
+ * `skill` with a ceiling of 2. Several tests below turn on that difference.
+ */
+function archetypeFile(overrides: Record<string, unknown> = {}): ItemFile {
+  return {
+    path: `content/items/archetypes/${(overrides.id as string) ?? 'ARC-0001'}.yaml`,
+    data: {
+      id: 'ARC-0001',
+      title: 'Test archetype',
+      itemType: 'parameterized-worked-problem',
+      kinds: ['knowledge'],
+      levels: [1, 2, 3],
+      status: 'draft',
+      prompt: 'Given a standard uncertainty of {{u_a}}, determine the combined value.',
+      parameters: [{ name: 'u_a', type: 'real' }],
+      scoring: { method: 'deterministic' },
+      lookupResistance: LONG,
+      ...overrides,
+    },
+  };
+}
+
+function bindingFile(binding: Record<string, unknown> = {}, element = 'CM-01-001'): ItemFile {
+  return {
+    path: `content/items/bindings/CM-01/${element}.yaml`,
+    data: {
+      schemaVersion: 1,
+      element,
+      bindings: [
+        {
+          level: 2,
+          archetype: 'ARC-0001',
+          status: 'draft',
+          justification: LONG,
+          ...binding,
+        },
+      ],
+    },
+  };
+}
+
+function corpus(
+  elements: ElementFile[],
+  lockedIds?: string[] | null,
+  items: { archetypes?: ItemFile[]; bindings?: ItemFile[] } = {},
+): Corpus {
   return {
     taxonomy,
     taxonomyFiles: [{ path: 'content/taxonomy/domains/CM-01.yaml', data: taxonomy }],
@@ -111,9 +157,15 @@ function corpus(elements: ElementFile[], lockedIds?: string[] | null): Corpus {
     roles,
     sources,
     elements,
+    archetypes: items.archetypes ?? [],
+    bindings: items.bindings ?? [],
     lockedIds: lockedIds === undefined ? ['CM-01', 'CM-01-A01', 'CM-01-001', 'CM-01-002'] : lockedIds,
   };
 }
+
+/** Standard element set plus an item bank, for the item-bank tests. */
+const withItems = (archetypes: ItemFile[], bindings: ItemFile[]): Corpus =>
+  corpus([element()], undefined, { archetypes, bindings });
 
 const errorsOf = (c: Corpus): string[] =>
   runAllChecks(c)
@@ -296,5 +348,83 @@ test('a prerequisite pointing at a nonexistent element is rejected', () => {
 
 test('duplicate element IDs across files are rejected', () => {
   const errors = errorsOf(corpus([element(), { ...element(), path: 'content/elements/CM-01/dup.md' }]));
+  assert.ok(errors.some((e) => e.includes('also defined in')));
+});
+
+/* -- Item bank ------------------------------------------------------------ */
+
+test('a well-formed archetype and binding produce no errors', () => {
+  assert.deepEqual(errorsOf(withItems([archetypeFile()], [bindingFile()])), []);
+});
+
+test('binding a knowledge archetype to a skill element is rejected', () => {
+  // CM-01-002 is `skill`; ARC-0001 serves `knowledge`. The candidate would be
+  // asked to explain the task rather than perform it, which is the commonest
+  // way an assessment ends up measuring the wrong thing.
+  const errors = errorsOf(
+    withItems([archetypeFile()], [bindingFile({ level: 2 }, 'CM-01-002')]),
+  );
+  assert.ok(
+    errors.some((e) => e.includes("binds a 'skill' element") && e.includes('ARC-0001')),
+    `expected a kind-mismatch error, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('a binding above the element ceiling is rejected, because no such unit exists', () => {
+  const errors = errorsOf(withItems([archetypeFile()], [bindingFile({ level: 3 }, 'CM-01-002')]));
+  assert.ok(
+    errors.some((e) => e.includes("exceeds the element's ceiling of 2")),
+    `expected a ceiling error, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('a binding at a level the archetype does not serve is rejected', () => {
+  const errors = errorsOf(
+    withItems([archetypeFile({ levels: [4, 5] })], [bindingFile()]),
+  );
+  assert.ok(errors.some((e) => e.includes('declares levels 4, 5')));
+});
+
+test('a binding naming an unknown archetype is rejected', () => {
+  const errors = errorsOf(withItems([archetypeFile()], [bindingFile({ archetype: 'ARC-9999' })]));
+  assert.ok(errors.some((e) => e.includes("unknown archetype 'ARC-9999'")));
+});
+
+test('a binding setting a parameter the archetype does not declare is rejected', () => {
+  const errors = errorsOf(
+    withItems([archetypeFile()], [bindingFile({ parameterRanges: [{ name: 'u_b', min: 1, max: 2 }] })]),
+  );
+  assert.ok(errors.some((e) => e.includes("sets parameter 'u_b'")));
+});
+
+test('an undeclared prompt placeholder is rejected, since it renders literally', () => {
+  const errors = errorsOf(
+    withItems([archetypeFile({ prompt: 'Given {{u_a}} and {{k_factor}}, determine the result.' })], []),
+  );
+  assert.ok(errors.some((e) => e.includes('{{k_factor}}')));
+});
+
+test('a declared but unused parameter is rejected, since it varies nothing', () => {
+  const errors = errorsOf(
+    withItems(
+      [archetypeFile({ parameters: [{ name: 'u_a', type: 'real' }, { name: 'unused', type: 'real' }] })],
+      [],
+    ),
+  );
+  assert.ok(errors.some((e) => e.includes("parameter 'unused'")));
+});
+
+test('a rubric-scored archetype with no rubric is rejected', () => {
+  const errors = errorsOf(withItems([archetypeFile({ scoring: { method: 'rubric' } })], []));
+  assert.ok(
+    errors.some((e) => e.includes('no rubricRef')),
+    `expected a missing-rubric error, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('duplicate archetype IDs are rejected', () => {
+  const errors = errorsOf(
+    withItems([archetypeFile(), { ...archetypeFile(), path: 'content/items/archetypes/dup.yaml' }], []),
+  );
   assert.ok(errors.some((e) => e.includes('also defined in')));
 });

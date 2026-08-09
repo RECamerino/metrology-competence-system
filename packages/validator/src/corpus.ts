@@ -30,6 +30,14 @@ export const PATHS = {
   roles: join(REPO_ROOT, 'content', 'roles', 'registry.yaml'),
   sources: join(REPO_ROOT, 'content', 'sources', 'registry.yaml'),
   elements: join(REPO_ROOT, 'content', 'elements'),
+  /**
+   * The item bank, split the way its economics are split: few expensive
+   * archetypes, many cheap bindings. An archetype is a reusable assessment
+   * shape; a binding attaches one to a specific (element × level). See
+   * decision 36 in docs/00-context.md.
+   */
+  archetypes: join(REPO_ROOT, 'content', 'items', 'archetypes'),
+  bindings: join(REPO_ROOT, 'content', 'items', 'bindings'),
 } as const;
 
 /** A parsed element file: frontmatter plus the Markdown body beneath it. */
@@ -46,6 +54,12 @@ export interface TaxonomyFile {
   data: Record<string, unknown>;
 }
 
+/** A YAML file from the item bank — one archetype, or one element's bindings. */
+export interface ItemFile {
+  path: string;
+  data: Record<string, unknown>;
+}
+
 export interface Corpus {
   /** All per-domain files merged into a single taxonomy document. */
   taxonomy: Record<string, unknown> | null;
@@ -55,6 +69,8 @@ export interface Corpus {
   roles: Record<string, unknown> | null;
   sources: Record<string, unknown> | null;
   elements: ElementFile[];
+  archetypes: ItemFile[];
+  bindings: ItemFile[];
   /** Every ID recorded in the lock file, or null when the lock does not exist yet. */
   lockedIds: string[] | null;
 }
@@ -104,18 +120,21 @@ export function parseFrontmatter(raw: string, path: string): { data: Record<stri
   return { data, body };
 }
 
-function walkMarkdown(dir: string, out: string[] = []): string[] {
+function walkFiles(dir: string, matches: (name: string) => boolean, out: string[] = []): string[] {
   if (!existsSync(dir)) return out;
-  for (const entry of readdirSync(dir)) {
+  for (const entry of readdirSync(dir).sort()) {
     const full = join(dir, entry);
     if (statSync(full).isDirectory()) {
-      walkMarkdown(full, out);
-    } else if (entry.endsWith('.md')) {
+      walkFiles(full, matches, out);
+    } else if (matches(entry)) {
       out.push(full);
     }
   }
   return out;
 }
+
+const isMarkdown = (name: string): boolean => name.endsWith('.md');
+const isYaml = (name: string): boolean => name.endsWith('.yaml') || name.endsWith('.yml');
 
 export function loadCorpus(): { corpus: Corpus; parseErrors: string[] } {
   const parseErrors: string[] = [];
@@ -130,7 +149,7 @@ export function loadCorpus(): { corpus: Corpus; parseErrors: string[] } {
   };
 
   const elements: ElementFile[] = [];
-  for (const file of walkMarkdown(PATHS.elements)) {
+  for (const file of walkFiles(PATHS.elements, isMarkdown)) {
     const rel = repoRelative(file);
     try {
       const { data, body } = parseFrontmatter(readFileSync(file, 'utf8'), rel);
@@ -158,6 +177,21 @@ export function loadCorpus(): { corpus: Corpus; parseErrors: string[] } {
   );
   const taxonomy = taxonomyFiles.length > 0 ? { schemaVersion: 1, domains: mergedDomains } : null;
 
+  const loadItems = (dir: string): ItemFile[] => {
+    const files: ItemFile[] = [];
+    for (const file of walkFiles(dir, isYaml)) {
+      try {
+        files.push({ path: repoRelative(file), data: loadYamlFile(file) ?? {} });
+      } catch (err) {
+        parseErrors.push((err as Error).message);
+      }
+    }
+    return files;
+  };
+
+  const archetypes = loadItems(PATHS.archetypes);
+  const bindings = loadItems(PATHS.bindings);
+
   const lockedIds = existsSync(PATHS.idLock)
     ? readFileSync(PATHS.idLock, 'utf8')
         .split('\n')
@@ -173,6 +207,8 @@ export function loadCorpus(): { corpus: Corpus; parseErrors: string[] } {
       roles: safe(() => loadYamlFile(PATHS.roles), null),
       sources: safe(() => loadYamlFile(PATHS.sources), null),
       elements,
+      archetypes,
+      bindings,
       lockedIds,
     },
     parseErrors,
@@ -258,4 +294,36 @@ export function indexSources(sources: Record<string, unknown> | null): Map<strin
 
 export function roleIds(roles: Record<string, unknown> | null): string[] {
   return ((roles?.roles ?? []) as Array<Record<string, any>>).map((r) => r.id).filter(Boolean);
+}
+
+export interface ArchetypeEntry {
+  id: string;
+  path: string;
+  kinds: string[];
+  levels: number[];
+  parameterNames: string[];
+  scoringMethod: string;
+  status: string;
+}
+
+/** Archetypes keyed by ID, so a binding can be checked against the shape it names. */
+export function indexArchetypes(archetypes: ItemFile[]): Map<string, ArchetypeEntry> {
+  const index = new Map<string, ArchetypeEntry>();
+
+  for (const file of archetypes) {
+    const d = file.data as Record<string, any>;
+    if (!d.id) continue; // the schema check reports this
+    index.set(d.id, {
+      id: d.id,
+      path: file.path,
+      kinds: (d.kinds ?? []) as string[],
+      levels: (d.levels ?? []) as number[],
+      parameterNames: ((d.parameters ?? []) as Array<Record<string, any>>)
+        .map((p) => p?.name)
+        .filter(Boolean),
+      scoringMethod: d.scoring?.method,
+      status: d.status,
+    });
+  }
+  return index;
 }

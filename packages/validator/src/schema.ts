@@ -55,7 +55,9 @@ export type SchemaName =
   | 'element'
   | 'role-registry'
   | 'source-registry'
-  | 'proficiency';
+  | 'proficiency'
+  | 'item-archetype'
+  | 'item-binding';
 
 let cached: AjvInstance | null = null;
 

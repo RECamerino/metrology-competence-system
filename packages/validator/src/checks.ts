@@ -11,6 +11,7 @@ import {
   type Corpus,
   type ElementFile,
   allTaxonomyIds,
+  indexArchetypes,
   indexSources,
   indexStubs,
   roleIds,
@@ -67,6 +68,20 @@ function checkSchemas(corpus: Corpus): Finding[] {
   for (const element of corpus.elements) {
     if (!validateElement(element.data)) {
       findings.push(...formatErrors(element.path, validateElement.errors).map(err));
+    }
+  }
+
+  const validateArchetype = validatorFor('item-archetype');
+  for (const file of corpus.archetypes) {
+    if (!validateArchetype(file.data)) {
+      findings.push(...formatErrors(file.path, validateArchetype.errors).map(err));
+    }
+  }
+
+  const validateBinding = validatorFor('item-binding');
+  for (const file of corpus.bindings) {
+    if (!validateBinding(file.data)) {
+      findings.push(...formatErrors(file.path, validateBinding.errors).map(err));
     }
   }
 
@@ -342,11 +357,156 @@ function checkPrerequisiteGraph(corpus: Corpus): Finding[] {
 
 /* ------------------------------------------------------------------------ */
 
+/**
+ * Item bank integrity.
+ *
+ * The economics of the bank — few archetypes, many bindings — are what make
+ * 9096 assessable units tractable, and they are also what makes it fragile.
+ * An excellent archetype and a well-formed binding can still combine into an
+ * item that tests the archetype's generic shape rather than the element. No
+ * validator can read prose and catch that, so the checks here enforce the
+ * conditions under which it is at least POSSIBLE for the binding to be right,
+ * and leave the judgement to binding review.
+ *
+ * The kind check is the one that earns its keep mechanically: binding a
+ * knowledge-shaped archetype to a skill element produces a candidate who
+ * explains the task instead of performing it, which is the commonest way an
+ * assessment ends up measuring the wrong thing.
+ */
+function checkItemBank(corpus: Corpus): Finding[] {
+  const findings: Finding[] = [];
+  const stubs = indexStubs(corpus.taxonomy);
+  const archetypes = indexArchetypes(corpus.archetypes);
+  const seenArchetypes = new Map<string, string>();
+
+  // -- Archetypes ----------------------------------------------------------
+  for (const file of corpus.archetypes) {
+    const d = file.data as Record<string, any>;
+    const at = (msg: string) => `${file.path}: ${msg}`;
+    if (!d.id) continue;
+
+    const duplicate = seenArchetypes.get(d.id);
+    if (duplicate) {
+      findings.push(err(at(`archetype ID '${d.id}' is also defined in ${duplicate}`)));
+    }
+    seenArchetypes.set(d.id, file.path);
+
+    // Every {{placeholder}} must be declared, and every declared parameter
+    // must be used. An undeclared placeholder renders literally to the
+    // candidate; an unused parameter is a draw nobody sees, which usually
+    // means the prompt was edited and the parameter list was not.
+    const declared = new Set(
+      ((d.parameters ?? []) as Array<Record<string, any>>).map((p) => p?.name).filter(Boolean),
+    );
+    const used = new Set(
+      [...String(d.prompt ?? '').matchAll(/\{\{\s*([a-z][a-z0-9_]*)\s*\}\}/g)].map((m) => m[1]),
+    );
+
+    for (const name of used) {
+      if (!declared.has(name)) {
+        findings.push(
+          err(at(`prompt uses {{${name}}}, which is not declared in parameters. It would render literally to the candidate.`)),
+        );
+      }
+    }
+    for (const name of declared) {
+      if (!used.has(name)) {
+        findings.push(
+          err(at(`parameter '${name}' is declared but never used in the prompt. A parameter nobody sees does not vary the item.`)),
+        );
+      }
+    }
+
+    // A judgment item without a rubric cannot be scored consistently by two
+    // reviewers, and inter-rater reliability is what makes the credential
+    // survive an accreditation audit.
+    const method: string | undefined = d.scoring?.method;
+    if ((method === 'rubric' || method === 'hybrid') && !String(d.scoring?.rubricRef ?? '').trim()) {
+      findings.push(
+        err(at(`scoring method is '${method}' but no rubricRef is given. Every non-auto-scored item ships with its rubric in the same commit.`)),
+      );
+    }
+  }
+
+  // -- Bindings ------------------------------------------------------------
+  const seenUnits = new Map<string, string>();
+
+  for (const file of corpus.bindings) {
+    const d = file.data as Record<string, any>;
+    const elementId: string | undefined = d.element;
+    const at = (msg: string) => `${file.path}: ${msg}`;
+    if (!elementId) continue;
+
+    const stub = stubs.get(elementId);
+    if (!stub) {
+      findings.push(err(at(`binds unknown element '${elementId}'`)));
+      continue;
+    }
+
+    for (const binding of (d.bindings ?? []) as Array<Record<string, any>>) {
+      const level: number = binding?.level;
+      const label = `${elementId} @ L${level}`;
+
+      if (typeof level === 'number' && level > stub.levelCeiling) {
+        findings.push(
+          err(at(`${label} exceeds the element's ceiling of ${stub.levelCeiling}. There is no such assessable unit.`)),
+        );
+      }
+
+      const key = `${elementId}@${level}:${binding?.archetype}`;
+      const duplicate = seenUnits.get(key);
+      if (duplicate) {
+        findings.push(
+          err(at(`${label} is bound to ${binding?.archetype} more than once (also ${duplicate}). Two bindings of one archetype to one unit serve the candidate the same shape twice.`)),
+        );
+      }
+      seenUnits.set(key, file.path);
+
+      const archetype = archetypes.get(binding?.archetype);
+      if (!archetype) {
+        findings.push(err(at(`${label} names unknown archetype '${binding?.archetype}'`)));
+        continue;
+      }
+
+      if (!archetype.kinds.includes(stub.kind)) {
+        findings.push(
+          err(at(`${label} binds a '${stub.kind}' element to ${archetype.id}, which serves ${archetype.kinds.join('/')}. Kind determines what evidence proves attainment, so this asks the candidate for the wrong sort of thing entirely.`)),
+        );
+      }
+
+      if (typeof level === 'number' && !archetype.levels.includes(level)) {
+        findings.push(
+          err(at(`${label} uses ${archetype.id}, which declares levels ${archetype.levels.join(', ')}`)),
+        );
+      }
+
+      if (archetype.status === 'deprecated') {
+        findings.push(
+          warn(at(`${label} binds deprecated archetype ${archetype.id}. Existing credentials stay valid; rebind before authoring more against it.`)),
+        );
+      }
+
+      for (const range of (binding?.parameterRanges ?? []) as Array<Record<string, any>>) {
+        if (range?.name && !archetype.parameterNames.includes(range.name)) {
+          findings.push(
+            err(at(`${label} sets parameter '${range.name}', which ${archetype.id} does not declare`)),
+          );
+        }
+      }
+    }
+  }
+
+  return findings;
+}
+
+/* ------------------------------------------------------------------------ */
+
 export function runAllChecks(corpus: Corpus): Finding[] {
   return [
     ...checkSchemas(corpus),
     ...checkIdRegistry(corpus),
     ...checkElementIntegrity(corpus),
     ...checkPrerequisiteGraph(corpus),
+    ...checkItemBank(corpus),
   ];
 }
