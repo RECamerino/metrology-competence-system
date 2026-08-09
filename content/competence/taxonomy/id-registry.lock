@@ -1,12 +1,13 @@
 # ID registry lock — APPEND-ONLY.
 #
 # Every identifier ever issued by this corpus. `npm run validate` fails if any
-# of these disappears from content/taxonomy/domains/*.yaml, because a credential
+# of these disappears from content/competence/taxonomy/domains/*.yaml, because a credential
 # attesting an ID must resolve to the same element forever. Deprecate and
 # supersede elements; never rename or delete them.
 #
 # Regenerate with: npm run registry:sync
 
+BOK-0001
 CM-01
 CM-01-001
 CM-01-002

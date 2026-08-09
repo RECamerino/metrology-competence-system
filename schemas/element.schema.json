@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://metrology-bok.org/schemas/element.schema.json",
-  "title": "BOK element frontmatter",
-  "description": "Governs the YAML frontmatter of content/elements/<domain>/<element-id>.md. The Markdown body below the frontmatter carries the explanatory prose, worked examples, and equations. Structured facts go in frontmatter so they can be validated, queried, and compiled; prose goes in the body so it can be read and diffed.",
+  "title": "Competence element frontmatter",
+  "description": "Governs the YAML frontmatter of content/competence/elements/<domain>/<element-id>.md. An element is an ASSESSABLE CLAIM ABOUT A PERSON: what they know, can do, or can judge, and how that would be observed. It is not where the subject is explained — that is a BOK article, and the element points at one through `knowledgeRefs`.\n\nThis was one file until decision 38. Merging them produced 2232 assessment-shaped fragments instead of an encyclopedia, duplicated any knowledge serving more than one element, and left the BOK impossible to cite on its own terms. The Markdown body here is now short: notes for assessors and item authors about how the claim is tested. Teaching material belongs in content/bok/.",
 
   "type": "object",
   "required": [
@@ -16,7 +16,8 @@
     "levelCeiling",
     "anchors",
     "roleTargets",
-    "citations"
+    "citations",
+    "knowledgeRefs"
   ],
   "additionalProperties": false,
 
@@ -88,6 +89,13 @@
       "type": "array",
       "description": "Optional, tier-gated. Limits are enforced by the validator against content/sources/registry.yaml, not here.",
       "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/quote" }
+    },
+
+    "knowledgeRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/knowledgeRef" },
+      "description": "REQUIRED, at least one. Where a person goes to learn this, and — more importantly — where they go to REMIND themselves. Someone credentialed eight months ago who has forgotten one detail will not retrain; they will look it up, and this is the link that has to work. Section-level rather than article-level for exactly that reason.\n\nThis imposes an ordering on authoring, deliberately: the reference material must exist before the claim that someone has mastered it. An element that cannot point at an explanation is an element nobody can prepare for."
     },
 
     "prerequisites": {

@@ -35,7 +35,7 @@ export function coverageReport(corpus: Corpus): string {
   lines.push('');
 
   if (domains.length === 0) {
-    lines.push('No taxonomy yet. Phase 1 has not produced content/taxonomy/domains/*.yaml.');
+    lines.push('No taxonomy yet. Phase 1 has not produced content/competence/taxonomy/domains/*.yaml.');
     return lines.join('\n');
   }
 

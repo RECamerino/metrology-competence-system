@@ -84,7 +84,7 @@ const sources = {
 
 function element(overrides: Record<string, unknown> = {}): ElementFile {
   return {
-    path: `content/elements/CM-01/${(overrides.id as string) ?? 'CM-01-001'}.md`,
+    path: `content/competence/elements/CM-01/${(overrides.id as string) ?? 'CM-01-001'}.md`,
     body: 'Body prose.',
     data: {
       id: 'CM-01-001',
@@ -98,6 +98,28 @@ function element(overrides: Record<string, unknown> = {}): ElementFile {
       anchors: { '1': LONG, '2': LONG, '3': LONG },
       roleTargets: { 'test-technician': 2, 'test-engineer': 3 },
       citations: [{ source: 'OPEN-SOURCE-1', clause: '5.1.2' }],
+      knowledgeRefs: [{ article: 'BOK-0001', section: 's01' }],
+      ...overrides,
+    },
+  };
+}
+
+/**
+ * A BOK article. Every element must reach one, so the baseline corpus carries
+ * this whether the test is about the BOK or not.
+ */
+function article(overrides: Record<string, unknown> = {}, body?: string): ElementFile {
+  return {
+    path: 'content/bok/CM-01/test-article.md',
+    body: body ?? 'Prose.\n\n## First {#s01}\n\nMore prose.\n',
+    data: {
+      id: 'BOK-0001',
+      title: 'Test article',
+      subjects: ['CM-01'],
+      status: 'draft',
+      summary: LONG,
+      sections: [{ id: 's01', heading: 'First' }],
+      citations: [{ source: 'OPEN-SOURCE-1', clause: '5.1.2' }],
       ...overrides,
     },
   };
@@ -109,7 +131,7 @@ function element(overrides: Record<string, unknown> = {}): ElementFile {
  */
 function archetypeFile(overrides: Record<string, unknown> = {}): ItemFile {
   return {
-    path: `content/items/archetypes/${(overrides.id as string) ?? 'ARC-0001'}.yaml`,
+    path: `content/competence/items/archetypes/${(overrides.id as string) ?? 'ARC-0001'}.yaml`,
     data: {
       id: 'ARC-0001',
       title: 'Test archetype',
@@ -128,7 +150,7 @@ function archetypeFile(overrides: Record<string, unknown> = {}): ItemFile {
 
 function bindingFile(binding: Record<string, unknown> = {}, element = 'CM-01-001'): ItemFile {
   return {
-    path: `content/items/bindings/CM-01/${element}.yaml`,
+    path: `content/competence/items/bindings/CM-01/${element}.yaml`,
     data: {
       schemaVersion: 1,
       element,
@@ -148,18 +170,24 @@ function bindingFile(binding: Record<string, unknown> = {}, element = 'CM-01-001
 function corpus(
   elements: ElementFile[],
   lockedIds?: string[] | null,
-  items: { archetypes?: ItemFile[]; bindings?: ItemFile[] } = {},
+  items: { archetypes?: ItemFile[]; bindings?: ItemFile[]; bok?: ElementFile[] } = {},
 ): Corpus {
   return {
     taxonomy,
-    taxonomyFiles: [{ path: 'content/taxonomy/domains/CM-01.yaml', data: taxonomy }],
+    taxonomyFiles: [{ path: 'content/competence/taxonomy/domains/CM-01.yaml', data: taxonomy }],
     proficiency: null,
     roles,
     sources,
     elements,
+    bok: items.bok ?? [article()],
     archetypes: items.archetypes ?? [],
     bindings: items.bindings ?? [],
-    lockedIds: lockedIds === undefined ? ['CM-01', 'CM-01-A01', 'CM-01-001', 'CM-01-002'] : lockedIds,
+    // BOK article IDs share the append-only registry with taxonomy IDs, so the
+    // baseline lock has to carry the fixture article.
+    lockedIds:
+      lockedIds === undefined
+        ? ['CM-01', 'CM-01-A01', 'CM-01-001', 'CM-01-002', 'BOK-0001']
+        : lockedIds,
   };
 }
 
@@ -347,7 +375,7 @@ test('a prerequisite pointing at a nonexistent element is rejected', () => {
 });
 
 test('duplicate element IDs across files are rejected', () => {
-  const errors = errorsOf(corpus([element(), { ...element(), path: 'content/elements/CM-01/dup.md' }]));
+  const errors = errorsOf(corpus([element(), { ...element(), path: 'content/competence/elements/CM-01/dup.md' }]));
   assert.ok(errors.some((e) => e.includes('also defined in')));
 });
 
@@ -424,7 +452,7 @@ test('a rubric-scored archetype with no rubric is rejected', () => {
 
 test('duplicate archetype IDs are rejected', () => {
   const errors = errorsOf(
-    withItems([archetypeFile(), { ...archetypeFile(), path: 'content/items/archetypes/dup.yaml' }], []),
+    withItems([archetypeFile(), { ...archetypeFile(), path: 'content/competence/items/archetypes/dup.yaml' }], []),
   );
   assert.ok(errors.some((e) => e.includes('also defined in')));
 });
@@ -472,9 +500,90 @@ test('a generator parameter absent from the prompt is accepted', () => {
 test('a rubricRef pointing at a nonexistent file is rejected', () => {
   const errors = errorsOf(
     withItems(
-      [archetypeFile({ scoring: { method: 'rubric', rubricRef: 'content/items/rubrics/NOPE.md' } })],
+      [archetypeFile({ scoring: { method: 'rubric', rubricRef: 'content/competence/items/rubrics/NOPE.md' } })],
       [],
     ),
   );
   assert.ok(errors.some((e) => e.includes('does not exist')));
+});
+
+/* -- The BOK, and the link from a claim to the knowledge behind it --------- */
+
+test('an element pointing at a nonexistent article is rejected', () => {
+  const errors = errorsOf(
+    corpus([element({ knowledgeRefs: [{ article: 'BOK-9999', section: 's01' }] })]),
+  );
+  assert.ok(errors.some((e) => e.includes("unknown article 'BOK-9999'")));
+});
+
+test('an element pointing at a section the article does not declare is rejected', () => {
+  // The refresher path for someone who has forgotten one detail. Broken, it
+  // fails silently for exactly the person who most needs it.
+  const errors = errorsOf(
+    corpus([element({ knowledgeRefs: [{ article: 'BOK-0001', section: 's07' }] })]),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('BOK-0001#s07') && e.includes('fails silently')),
+    `expected a dangling section error, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('an element with no knowledgeRefs is rejected', () => {
+  const errors = errorsOf(corpus([element({ knowledgeRefs: [] })]));
+  assert.ok(errors.some((e) => e.includes('knowledgeRefs')));
+});
+
+test('a declared section with no anchor in the body is rejected', () => {
+  const errors = errorsOf(
+    corpus([element()], undefined, {
+      bok: [
+        article(
+          { sections: [{ id: 's01', heading: 'First' }, { id: 's02', heading: 'Second' }] },
+          'Prose.\n\n## First {#s01}\n',
+        ),
+      ],
+    }),
+  );
+  assert.ok(errors.some((e) => e.includes("section 's02' is declared")));
+});
+
+test('an anchor in the body that no section declares is rejected', () => {
+  // Undeclared anchors get renamed by people who cannot see anything depends
+  // on them.
+  const errors = errorsOf(
+    corpus([element()], undefined, {
+      bok: [article({}, 'Prose.\n\n## First {#s01}\n\n## Stray {#s09}\n')],
+    }),
+  );
+  assert.ok(errors.some((e) => e.includes("'{#s09}'")));
+});
+
+test('a deprecated section with no forward pointer is rejected', () => {
+  const errors = errorsOf(
+    corpus([element()], undefined, {
+      bok: [article({ sections: [{ id: 's01', heading: 'First', deprecated: true }] })],
+    }),
+  );
+  assert.ok(errors.some((e) => e.includes('supersededBy')));
+});
+
+test('duplicate article IDs are rejected', () => {
+  const errors = errorsOf(
+    corpus([element()], undefined, {
+      bok: [article(), { ...article(), path: 'content/bok/CM-01/dup.md' }],
+    }),
+  );
+  assert.ok(errors.some((e) => e.includes('also defined in')));
+});
+
+test('an article no element references warns rather than fails', () => {
+  // The BOK is allowed to exceed the taxonomy. An encyclopedia constrained to
+  // exactly what is examinable is not one.
+  const findings = runAllChecks(
+    corpus([element()], ['CM-01', 'CM-01-A01', 'CM-01-001', 'CM-01-002', 'BOK-0001', 'BOK-0002'], {
+      bok: [article(), { ...article({ id: 'BOK-0002' }), path: 'content/bok/CM-01/other.md' }],
+    }),
+  );
+  assert.ok(findings.some((f) => f.level === 'warn' && f.message.includes('BOK-0002')));
+  assert.ok(!findings.some((f) => f.level === 'error' && f.message.includes('BOK-0002')));
 });

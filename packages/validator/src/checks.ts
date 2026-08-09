@@ -13,7 +13,7 @@ import {
   type Corpus,
   type ElementFile,
   REPO_ROOT,
-  allTaxonomyIds,
+  allCorpusIds,
   indexArchetypes,
   indexSources,
   indexStubs,
@@ -42,7 +42,7 @@ function checkSchemas(corpus: Corpus): Finding[] {
   // that caused it rather than the merged view.
   const validateTaxonomy = validatorFor('taxonomy');
   if (corpus.taxonomyFiles.length === 0) {
-    findings.push(warn('content/taxonomy/domains/ contains no domain files yet — skipped'));
+    findings.push(warn('content/competence/taxonomy/domains/ contains no domain files yet — skipped'));
   }
   for (const file of corpus.taxonomyFiles) {
     if (!validateTaxonomy(file.data)) {
@@ -51,8 +51,8 @@ function checkSchemas(corpus: Corpus): Finding[] {
   }
 
   const registryFiles = [
-    ['proficiency', corpus.proficiency, 'content/taxonomy/proficiency.yaml'],
-    ['role-registry', corpus.roles, 'content/roles/registry.yaml'],
+    ['proficiency', corpus.proficiency, 'content/competence/taxonomy/proficiency.yaml'],
+    ['role-registry', corpus.roles, 'content/competence/roles/registry.yaml'],
     ['source-registry', corpus.sources, 'content/sources/registry.yaml'],
   ] as const;
 
@@ -71,6 +71,13 @@ function checkSchemas(corpus: Corpus): Finding[] {
   for (const element of corpus.elements) {
     if (!validateElement(element.data)) {
       findings.push(...formatErrors(element.path, validateElement.errors).map(err));
+    }
+  }
+
+  const validateBok = validatorFor('bok-article');
+  for (const article of corpus.bok) {
+    if (!validateBok(article.data)) {
+      findings.push(...formatErrors(article.path, validateBok.errors).map(err));
     }
   }
 
@@ -96,7 +103,7 @@ function checkSchemas(corpus: Corpus): Finding[] {
 /**
  * The single most important check in the project.
  *
- * `content/taxonomy/id-registry.lock` records every ID ever issued. An ID that
+ * `content/competence/taxonomy/id-registry.lock` records every ID ever issued. An ID that
  * disappears from the skeleton is a rename or a deletion, and either one breaks
  * every credential already issued against it — the holder of that credential is
  * harmed, and there is no way to repair it after the fact. Deprecate and
@@ -106,20 +113,20 @@ function checkIdRegistry(corpus: Corpus): Finding[] {
   const findings: Finding[] = [];
   if (!corpus.taxonomy) return findings;
 
-  const declared = allTaxonomyIds(corpus.taxonomy);
+  const declared = allCorpusIds(corpus);
   const current = new Set(declared);
 
   // Splitting the taxonomy across per-domain files makes a collision possible
   // in a way a single file did not, so check for it explicitly.
   const duplicates = declared.filter((id, i) => i > 0 && declared[i - 1] === id);
   for (const id of new Set(duplicates)) {
-    findings.push(err(`ID '${id}' is declared more than once across content/taxonomy/domains/`));
+    findings.push(err(`ID '${id}' is declared more than once across content/competence/taxonomy/domains/`));
   }
 
   if (corpus.lockedIds === null) {
     findings.push(
       warn(
-        `content/taxonomy/id-registry.lock does not exist — run \`npm run registry:sync\` to create it. Until it exists, nothing prevents an ID from being silently renamed.`,
+        `content/competence/taxonomy/id-registry.lock does not exist — run \`npm run registry:sync\` to create it. Until it exists, nothing prevents an ID from being silently renamed.`,
       ),
     );
     return findings;
@@ -361,6 +368,105 @@ function checkPrerequisiteGraph(corpus: Corpus): Finding[] {
 /* ------------------------------------------------------------------------ */
 
 /**
+ * The BOK, and the link from a competence claim to the knowledge behind it.
+ *
+ * The link is the point. Someone who demonstrated competence eight months ago
+ * and has forgotten one detail will not retrain — they will look it up. If the
+ * knowledgeRef does not resolve, that path dies silently for exactly the person
+ * who most needs it, and nothing else in the system notices.
+ *
+ * Sections are checked in both directions for the same reason placeholders are
+ * checked in both directions on an archetype: a declared section with no anchor
+ * is an unreachable reference, and an anchor nobody declared is a heading that
+ * can be renamed without anyone noticing it was load-bearing.
+ */
+function checkBok(corpus: Corpus): Finding[] {
+  const findings: Finding[] = [];
+  const articles = new Map<string, { path: string; sections: Set<string> }>();
+  const seen = new Map<string, string>();
+
+  for (const article of corpus.bok) {
+    const d = article.data as Record<string, any>;
+    const at = (msg: string) => `${article.path}: ${msg}`;
+    const id: string | undefined = d.id;
+    if (!id) continue;
+
+    const duplicate = seen.get(id);
+    if (duplicate) findings.push(err(at(`article ID '${id}' is also defined in ${duplicate}`)));
+    seen.set(id, article.path);
+
+    const declared = new Set<string>(
+      ((d.sections ?? []) as Array<Record<string, any>>).map((s) => s?.id).filter(Boolean),
+    );
+    const anchored = new Set(
+      [...article.body.matchAll(/\{#(s[0-9]{2})\}/g)].map((m) => m[1]!),
+    );
+
+    for (const section of declared) {
+      if (!anchored.has(section)) {
+        findings.push(
+          err(at(`section '${section}' is declared but has no {#${section}} anchor in the body. An element pointing at it would resolve to nothing.`)),
+        );
+      }
+    }
+    for (const section of anchored) {
+      if (!declared.has(section)) {
+        findings.push(
+          err(at(`the body anchors '{#${section}}' but no such section is declared. Undeclared anchors get renamed by people who cannot see that anything depends on them.`)),
+        );
+      }
+    }
+
+    for (const section of (d.sections ?? []) as Array<Record<string, any>>) {
+      if (section?.deprecated && !section?.supersededBy) {
+        findings.push(
+          err(at(`section '${section.id}' is deprecated with no supersededBy. A reader following an old reference must land somewhere that tells them what changed.`)),
+        );
+      }
+    }
+
+    articles.set(id, { path: article.path, sections: declared });
+  }
+
+  // -- Every element must reach the knowledge behind it ---------------------
+  const referenced = new Set<string>();
+
+  for (const element of corpus.elements) {
+    const d = element.data as Record<string, any>;
+    const at = (msg: string) => `${element.path}: ${msg}`;
+
+    for (const ref of (d.knowledgeRefs ?? []) as Array<Record<string, any>>) {
+      const article = articles.get(ref?.article);
+      if (!article) {
+        findings.push(err(at(`knowledgeRef points at unknown article '${ref?.article}'`)));
+        continue;
+      }
+      referenced.add(ref.article);
+      if (!article.sections.has(ref?.section)) {
+        findings.push(
+          err(at(`knowledgeRef points at '${ref.article}#${ref?.section}', which that article does not declare. This is the refresher path for someone who has forgotten a detail; broken, it fails silently.`)),
+        );
+      }
+    }
+  }
+
+  // Warn rather than error: the BOK is allowed to exceed the taxonomy. Context
+  // and background articles that no element assesses are legitimate, and an
+  // encyclopedia constrained to exactly what is examinable is not one.
+  for (const [id, article] of articles) {
+    if (!referenced.has(id) && corpus.elements.length > 0) {
+      findings.push(
+        warn(`${article.path}: article '${id}' is not referenced by any element. Legitimate for background material; check it is not an orphan.`),
+      );
+    }
+  }
+
+  return findings;
+}
+
+/* ------------------------------------------------------------------------ */
+
+/**
  * Item bank integrity.
  *
  * The economics of the bank — few archetypes, many bindings — are what make
@@ -526,6 +632,7 @@ export function runAllChecks(corpus: Corpus): Finding[] {
     ...checkIdRegistry(corpus),
     ...checkElementIntegrity(corpus),
     ...checkPrerequisiteGraph(corpus),
+    ...checkBok(corpus),
     ...checkItemBank(corpus),
   ];
 }

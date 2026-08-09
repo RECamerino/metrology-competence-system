@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/authorization.schema.json",
+  "title": "Authorization — what an organization permits, which is never what a person earned",
+  "description": "A first-class object, deliberately NOT a kind of credential. Knowledge, skill and judgment are earned and are properties of a person; authority is granted, and is a relationship between a person, an organization and a scope of work. An approved signatory who leaves a laboratory keeps every competency they demonstrated and loses the signatory authority, because the laboratory granted it and the accreditation body recognised it AT THAT LABORATORY, FOR THAT SCOPE. A wallet that treated the two identically would let someone arrive at a new employer holding what looks like signing authority — a defect in the credential model, not in the taxonomy. This schema exists so that defect is structurally impossible rather than merely discouraged: `portable` and `walletExportable` are const false and cannot be authored otherwise.",
+
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "subject",
+    "grantedBy",
+    "scope",
+    "grantedOn",
+    "basis",
+    "portable",
+    "walletExportable",
+    "revocation"
+  ],
+  "additionalProperties": false,
+
+  "properties": {
+    "schemaVersion": { "const": 1 },
+
+    "id": {
+      "type": "string",
+      "pattern": "^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+
+    "subject": {
+      "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did",
+      "description": "The person permitted to do the work. Same identifier as their competency credentials use, which is what allows an organization to check competence before granting — and what makes it tempting to treat the two objects alike. They are not alike."
+    },
+
+    "grantedBy": {
+      "type": "object",
+      "required": ["organization"],
+      "additionalProperties": false,
+      "description": "The organization granting permission. Note there is no `issuer` here and no trust registry: an authorization is not verified by a stranger against a registry, it is asserted by an employer within its own boundary. That asymmetry is the point.",
+      "properties": {
+        "organization": { "type": "string", "minLength": 1 },
+        "grantedByPerson": {
+          "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did",
+          "description": "Who signed the grant. Usually a laboratory manager — the role registry records this as an authority the role commonly carries."
+        },
+        "accreditationRecognition": {
+          "type": "string",
+          "description": "Where an accreditation body recognises this authority, the scope reference under which it does. Recognition is bounded by that scope and does not travel outside it."
+        }
+      }
+    },
+
+    "scope": {
+      "type": "object",
+      "required": ["activities"],
+      "additionalProperties": false,
+      "description": "What the person may actually do. An authorization with no scope is meaningless — 'authorized' unqualified is the failure mode this object exists to prevent.",
+      "properties": {
+        "activities": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "Signing accredited certificates, releasing results, approving methods, conducting assessments."
+        },
+        "methods": { "type": "array", "items": { "type": "string" } },
+        "ranges": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Measurement ranges the authority covers. A signatory authorised for gauge blocks to 100 mm is not authorised at 500 mm, and the range is where that is recorded."
+        },
+        "locations": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "grantedOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+
+    "expiresOn": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate",
+      "description": "Optional, because most authorizations end by event rather than by date — see `endsOn`. An authorization with neither is still bounded: it ends when the granting organization says it does."
+    },
+
+    "basis": {
+      "type": "array",
+      "minItems": 1,
+      "description": "The competence this grant relied on, recorded as the elements and levels it was justified by. REQUIRED: an authorization granted on no competence basis is exactly the thing this system exists to make visible. Competence is a necessary input; it is never sufficient, because authorization also depends on appointment, current scope, organizational policy and continued employment.",
+      "items": {
+        "type": "object",
+        "required": ["element", "level"],
+        "additionalProperties": false,
+        "properties": {
+          "element": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
+          "level": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel" },
+          "credentialId": {
+            "type": "string",
+            "description": "The credential relied on, where one exists. An organization may also grant on internally assessed competence that never became a credential; that is legitimate and should be visible as such."
+          }
+        }
+      }
+    },
+
+    "portable": {
+      "const": false,
+      "description": "Cannot be authored otherwise. An authorization does not travel with the person under any circumstances, including when the person would very much like it to."
+    },
+
+    "walletExportable": {
+      "const": false,
+      "description": "Belt and braces, deliberately. `portable` describes the object's nature; this constrains the one operation that would violate it. A wallet export that included authorizations would produce a holder who appears to arrive at a new employer already holding signing authority."
+    },
+
+    "revocation": {
+      "type": "object",
+      "required": ["revocable", "unilateral", "appealableOnCompetence"],
+      "additionalProperties": false,
+      "description": "The properties that most sharply distinguish this from a credential.",
+      "properties": {
+        "revocable": { "const": true },
+        "unilateral": {
+          "const": true,
+          "description": "The granting organization may withdraw it without the holder's agreement and without notice."
+        },
+        "appealableOnCompetence": {
+          "const": false,
+          "description": "A revoked authorization cannot be contested by demonstrating competence, because competence was never what conferred it. This is the field that stops the two objects collapsing into one another: a person may hold verified L4 judgment in CMM task-specific uncertainty and still not be authorized to release a CMM result, and both statements are true and non-contradictory."
+        },
+        "endsOn": {
+          "type": "array",
+          "items": { "enum": ["departure", "reorganization", "scope-change", "policy-change", "withdrawal"] },
+          "description": "Events that end it automatically. Departure is the important one and is why nothing here is portable."
+        }
+      }
+    },
+
+    "status": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "active": { "type": "boolean", "default": true },
+        "endedOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+        "endedBecause": { "enum": ["departure", "reorganization", "scope-change", "policy-change", "withdrawal", "expiry"] }
+      }
+    },
+
+    "notes": { "type": "string" }
+  }
+}

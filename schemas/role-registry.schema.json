@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://metrology-bok.org/schemas/role-registry.schema.json",
   "title": "Role registry",
-  "description": "Governs content/roles/registry.yaml. These are REFERENCE roles, not prescriptions. Roles are data, never code: an organization may edit, delete, add, or entirely replace this set through its local overlay without touching the corpus, and its own job titles will drive gap analysis exactly as the shipped ones do. The shipped set exists so the platform is useful on first run, not because these are the correct roles for anyone in particular.",
+  "description": "Governs content/competence/roles/registry.yaml. These are REFERENCE roles, not prescriptions. Roles are data, never code: an organization may edit, delete, add, or entirely replace this set through its local overlay without touching the corpus, and its own job titles will drive gap analysis exactly as the shipped ones do. The shipped set exists so the platform is useful on first run, not because these are the correct roles for anyone in particular.",
 
   "type": "object",
   "required": ["schemaVersion", "roles"],

@@ -46,7 +46,7 @@ parameters:
 
 scoring:
   method: rubric
-  rubricRef: content/items/rubrics/ARC-0003.md
+  rubricRef: content/competence/items/rubrics/ARC-0003.md
 
 lookupResistance: >-
   This is the shape most resistant to lookup and most resistant to an AI

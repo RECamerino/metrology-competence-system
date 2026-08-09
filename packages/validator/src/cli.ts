@@ -11,7 +11,7 @@
  */
 
 import { writeFileSync } from 'node:fs';
-import { PATHS, allTaxonomyIds, loadCorpus } from './corpus.ts';
+import { PATHS, allCorpusIds, loadCorpus } from './corpus.ts';
 import { runAllChecks, type Finding } from './checks.ts';
 import { coverageReport, quoteManifest } from './reports.ts';
 
@@ -68,11 +68,11 @@ function main(): number {
 
     case 'registry-sync': {
       if (!corpus.taxonomy) {
-        console.error('No taxonomy files in content/taxonomy/domains/ — nothing to sync.');
+        console.error('No taxonomy files in content/competence/taxonomy/domains/ — nothing to sync.');
         return 1;
       }
 
-      const current = allTaxonomyIds(corpus.taxonomy);
+      const current = allCorpusIds(corpus);
       const existing = new Set(corpus.lockedIds ?? []);
 
       // Union, never difference: an ID that has left the taxonomy stays in the
@@ -87,7 +87,7 @@ function main(): number {
           '# ID registry lock — APPEND-ONLY.',
           '#',
           '# Every identifier ever issued by this corpus. `npm run validate` fails if any',
-          '# of these disappears from content/taxonomy/domains/*.yaml, because a credential',
+          '# of these disappears from content/competence/taxonomy/domains/*.yaml, because a credential',
           '# attesting an ID must resolve to the same element forever. Deprecate and',
           '# supersede elements; never rename or delete them.',
           '#',

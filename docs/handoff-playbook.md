@@ -21,6 +21,9 @@ These fail the build. They are not style guidance.
 | Rule | What fails |
 |---|---|
 | Every element has ≥1 clause-level citation | `citations: []` or absent |
+| Every element reaches the knowledge behind it | `knowledgeRefs` absent, or pointing at an article or section that does not exist |
+| Every BOK section is reachable | A declared section with no `{#sNN}` anchor, or an anchor with no declared section |
+| A deprecated section points forward | `deprecated: true` with no `supersededBy` |
 | Every cited source is in the register | Citation to an unregistered `sourceId` |
 | Quotations respect their source's tier and limits | Tier 3 quoted at all; over word cap; too many per element; restricted quote without commentary |
 | Every attainable level has an observable anchor | `anchors` missing any level from 1 to `levelCeiling` |
@@ -33,13 +36,66 @@ These fail the build. They are not style guidance.
 
 ---
 
+## Two trees, and which one you are writing in
+
+Before anything else, know which artifact you are producing. They are different documents with different jobs, and conflating them is the mistake decision 38 exists to prevent.
+
+| | `content/bok/` | `content/competence/elements/` |
+|---|---|---|
+| Answers | What is true about this subject | What must a person be able to do |
+| Written for | A reader looking something up | An assessor deciding if someone can do it |
+| Sized by | Subject coherence | One assessable claim |
+| Carries | Explanation, worked examples, failure modes | `kind`, `levelCeiling`, `anchors`, `roleTargets` |
+| Never carries | Levels, roles, anchors | Teaching material |
+| Ages when | A standard is revised | Professional practice moves |
+
+**Write the article first.** An element must point at the reference material through `knowledgeRefs`, and CI requires at least one. That ordering is deliberate: knowledge before the claim that somebody has mastered it. An element nobody can prepare for is not assessable.
+
+---
+
+## Adding a BOK article
+
+`content/bok/CM-03/correlation-and-covariance.md`. See `BOK-0001` — it is the worked reference for this format.
+
+```yaml
+---
+id: BOK-0001
+title: Correlation and covariance in uncertainty budgets
+subjects: [CM-03, CM-05]      # subject matter does not respect the taxonomy
+status: draft
+summary: >-
+  What the article covers and what it is for.
+sections:
+  - id: s01
+    heading: Why inputs become correlated
+    covers: >-
+      What a reader will actually find here — written for someone arriving
+      cold from a credential eight months later, not for the author.
+citations:
+  - source: JCGM-100-2008
+    clause: "5.2.2"
+---
+
+## Why inputs become correlated {#s01}
+```
+
+**Every declared section needs a matching `{#sNN}` anchor in the body, and every anchor needs a declared section.** CI checks both directions. A declared section with no anchor is a reference that resolves to nothing; an anchor nobody declared is a heading that will get renamed by someone who cannot see anything depends on it.
+
+**Section ids are append-only.** Add them freely; never reuse one for different content, and never renumber. An element's `knowledgeRefs` and a reader's bookmark both resolve through them. To retire one, set `deprecated: true` and `supersededBy` — CI requires the forward pointer, because a reader following an old link must land somewhere that tells them what changed.
+
+**Size sections by what someone would come back for.** The test is not "is this a tidy heading" but "if a practitioner forgot this one thing, would this section be where they land?"
+
+Then `npm run registry:sync` — BOK ids share the append-only lock with taxonomy ids.
+
+---
+
 ## Adding an element
 
 ### 1. Register the ID first
 
-Add the stub to the domain's file in `content/taxonomy/domains/` — one file per domain — under the right competency area's `elements:` list:
+Add the stub to the domain's file in `content/competence/taxonomy/domains/` — one file per domain — under the right competency area's `elements:` list:
 
-`content/taxonomy/domains/CM-03.yaml`:
+`content/competence/taxonomy/domains/CM-03.yaml`:
 
 ```yaml
       - id: CM-03-A05
@@ -63,7 +119,7 @@ Commit the lock-file change alongside the skeleton change, so the ID addition is
 
 ### 2. Write the file
 
-`content/elements/CM-03/CM-03-053.md`:
+`content/competence/elements/CM-03/CM-03-053.md`:
 
 ```markdown
 ---
@@ -105,6 +161,13 @@ citations:
       correlated inputs, which the whole element builds on.
   - source: ISO-IEC-17025-2017
     clause: "7.6.1"
+knowledgeRefs:
+  - article: BOK-0001
+    section: s03
+    relevance: The covariance term and how to lay it out in a budget table.
+  - article: BOK-0001
+    section: s04
+    relevance: Where the correlation coefficient comes from.
 currency:
   authorityStatus: normative
   volatility: controlled
@@ -119,8 +182,11 @@ authoring:
   createdOn: "2026-08-09"
 ---
 
-Prose body: the explanation, worked examples, equations, failure modes.
+Short body: notes for assessors and item authors about how this claim is
+tested. NOT the explanation — that lives in the BOK article above.
 ```
+
+**`knowledgeRefs` is required, and points at sections rather than whole articles.** The person following it is usually not learning the subject from scratch; they demonstrated this competence months ago and have forgotten one detail. Send them to the passage, not the article.
 
 **The anchors above are performance, not understanding, because `kind` is `skill`.** "Recognises that inputs may be correlated" would be a knowledge anchor and wrong for this element — see [Write the anchors to match the element's kind](#write-the-anchors-to-match-the-elements-kind).
 
