@@ -17,16 +17,16 @@ domains:
         title: AC Voltage and Current
         status: draft
         elements:
-          - { id: DP-09-001, title: "RMS, average and peak values and their relationships", levelCeiling: 4, status: draft }
+          - { id: DP-09-001, title: "RMS, average and peak values and their relationships", levelCeiling: 3, status: draft }
           - { id: DP-09-002, title: "Thermal converters and AC-DC transfer difference", levelCeiling: 5, status: draft }
-          - { id: DP-09-003, title: "Multijunction thermal converters", levelCeiling: 5, status: draft }
-          - { id: DP-09-004, title: "AC-DC transfer standards and their use", levelCeiling: 5, status: draft }
-          - { id: DP-09-005, title: "Sampling and digital AC measurement", levelCeiling: 5, status: draft }
-          - { id: DP-09-006, title: "Josephson AC voltage synthesis", levelCeiling: 5, status: draft }
+          - { id: DP-09-003, title: "Multijunction thermal converters", levelCeiling: 4, status: draft }
+          - { id: DP-09-004, title: "AC-DC transfer standards and their use", levelCeiling: 4, status: draft }
+          - { id: DP-09-005, title: "Sampling and digital AC measurement", levelCeiling: 4, status: draft }
+          - { id: DP-09-006, title: "Josephson AC voltage synthesis", levelCeiling: 4, status: draft }
           - { id: DP-09-007, title: "AC voltage calibration procedures", levelCeiling: 4, status: draft }
-          - { id: DP-09-008, title: "Frequency response and flatness of AC instruments", levelCeiling: 5, status: draft }
-          - { id: DP-09-009, title: "AC current measurement and shunts", levelCeiling: 5, status: draft }
-          - { id: DP-09-010, title: "Waveform distortion and non-sinusoidal measurement", levelCeiling: 5, status: draft }
+          - { id: DP-09-008, title: "Frequency response and flatness of AC instruments", levelCeiling: 4, status: draft }
+          - { id: DP-09-009, title: "AC current measurement and shunts", levelCeiling: 4, status: draft }
+          - { id: DP-09-010, title: "Waveform distortion and non-sinusoidal measurement", levelCeiling: 4, status: draft }
           - { id: DP-09-011, title: "Crest factor and instrument limitations", levelCeiling: 4, status: draft }
           - { id: DP-09-012, title: "Uncertainty budget for AC voltage calibration", levelCeiling: 5, status: draft }
 
@@ -34,29 +34,29 @@ domains:
         title: Impedance Standards and Measurement
         status: draft
         elements:
-          - { id: DP-09-013, title: "Impedance, admittance and their representations", levelCeiling: 4, status: draft }
-          - { id: DP-09-014, title: "Capacitance standards and their construction", levelCeiling: 5, status: draft }
+          - { id: DP-09-013, title: "Impedance, admittance and their representations", levelCeiling: 3, status: draft }
+          - { id: DP-09-014, title: "Capacitance standards and their construction", levelCeiling: 4, status: draft }
           - { id: DP-09-015, title: "The calculable capacitor and the Thompson-Lampard theorem", levelCeiling: 5, status: draft }
-          - { id: DP-09-016, title: "Inductance standards", levelCeiling: 5, status: draft }
-          - { id: DP-09-017, title: "AC resistance and its frequency dependence", levelCeiling: 5, status: draft }
-          - { id: DP-09-018, title: "Transformer ratio bridges", levelCeiling: 5, status: draft }
-          - { id: DP-09-019, title: "Quadrature bridges and impedance scaling", levelCeiling: 5, status: draft }
+          - { id: DP-09-016, title: "Inductance standards", levelCeiling: 4, status: draft }
+          - { id: DP-09-017, title: "AC resistance and its frequency dependence", levelCeiling: 4, status: draft }
+          - { id: DP-09-018, title: "Transformer ratio bridges", levelCeiling: 4, status: draft }
+          - { id: DP-09-019, title: "Quadrature bridges and impedance scaling", levelCeiling: 4, status: draft }
           - { id: DP-09-020, title: "LCR meters and impedance analysers", levelCeiling: 4, status: draft }
           - { id: DP-09-021, title: "Two, three and four terminal-pair definitions", levelCeiling: 5, status: draft }
-          - { id: DP-09-022, title: "Lead and fixture compensation in impedance measurement", levelCeiling: 5, status: draft }
-          - { id: DP-09-023, title: "Dissipation factor and loss measurement", levelCeiling: 5, status: draft }
-          - { id: DP-09-024, title: "Impedance from quantum Hall resistance", levelCeiling: 5, status: draft }
+          - { id: DP-09-022, title: "Lead and fixture compensation in impedance measurement", levelCeiling: 4, status: draft }
+          - { id: DP-09-023, title: "Dissipation factor and loss measurement", levelCeiling: 4, status: draft }
+          - { id: DP-09-024, title: "Impedance from quantum Hall resistance", levelCeiling: 4, status: draft }
 
       - id: DP-09-A03
         title: Phase, Frequency and Waveform
         status: draft
         elements:
           - { id: DP-09-025, title: "Phase measurement and phase standards", levelCeiling: 5, status: draft }
-          - { id: DP-09-026, title: "Phase angle calibration", levelCeiling: 5, status: draft }
+          - { id: DP-09-026, title: "Phase angle calibration", levelCeiling: 4, status: draft }
           - { id: DP-09-027, title: "Waveform generators and their calibration", levelCeiling: 4, status: draft }
           - { id: DP-09-028, title: "Arbitrary waveform synthesis and fidelity", levelCeiling: 4, status: draft }
           - { id: DP-09-029, title: "Oscilloscope AC and bandwidth calibration", levelCeiling: 4, status: draft }
-          - { id: DP-09-030, title: "Digitiser characterisation and effective bits", levelCeiling: 5, status: draft }
+          - { id: DP-09-030, title: "Digitiser characterisation and effective bits", levelCeiling: 4, status: draft }
           - { id: DP-09-031, title: "Harmonic and distortion measurement", levelCeiling: 4, status: draft }
 
       - id: DP-09-A04
@@ -65,12 +65,12 @@ domains:
         elements:
           - { id: DP-09-032, title: "Active, reactive and apparent power", levelCeiling: 4, status: draft }
           - { id: DP-09-033, title: "Power factor and its measurement", levelCeiling: 4, status: draft }
-          - { id: DP-09-034, title: "Power standards and sampling wattmeters", levelCeiling: 5, status: draft }
-          - { id: DP-09-035, title: "Power measurement under distorted waveforms", levelCeiling: 5, status: draft }
+          - { id: DP-09-034, title: "Power standards and sampling wattmeters", levelCeiling: 4, status: draft }
+          - { id: DP-09-035, title: "Power measurement under distorted waveforms", levelCeiling: 4, status: draft }
           - { id: DP-09-036, title: "Energy meters and their calibration", levelCeiling: 4, status: draft }
-          - { id: DP-09-037, title: "Three-phase power measurement and connection methods", levelCeiling: 5, status: draft }
+          - { id: DP-09-037, title: "Three-phase power measurement and connection methods", levelCeiling: 4, status: draft }
           - { id: DP-09-038, title: "Instrument transformers: current and voltage", levelCeiling: 5, status: draft }
-          - { id: DP-09-039, title: "Instrument transformer calibration and burden effects", levelCeiling: 5, status: draft }
+          - { id: DP-09-039, title: "Instrument transformer calibration and burden effects", levelCeiling: 4, status: draft }
           - { id: DP-09-040, title: "Uncertainty budget for power and energy calibration", levelCeiling: 5, status: draft }
 
       - id: DP-09-A05
@@ -78,10 +78,10 @@ domains:
         status: draft
         elements:
           - { id: DP-09-041, title: "Power quality parameters and standards", levelCeiling: 4, status: draft }
-          - { id: DP-09-042, title: "Harmonics, interharmonics and flicker measurement", levelCeiling: 5, status: draft }
+          - { id: DP-09-042, title: "Harmonics, interharmonics and flicker measurement", levelCeiling: 4, status: draft }
           - { id: DP-09-043, title: "Voltage dips, swells and interruptions", levelCeiling: 4, status: draft }
-          - { id: DP-09-044, title: "Transient and surge measurement", levelCeiling: 5, status: draft }
+          - { id: DP-09-044, title: "Transient and surge measurement", levelCeiling: 4, status: draft }
           - { id: DP-09-045, title: "Phasor measurement units and synchrophasors", levelCeiling: 5, status: draft }
-          - { id: DP-09-046, title: "Measurement in renewable generation and inverter-dominated grids", levelCeiling: 5, status: draft }
+          - { id: DP-09-046, title: "Measurement in renewable generation and inverter-dominated grids", levelCeiling: 4, status: draft }
           - { id: DP-09-047, title: "DC and battery system power measurement", levelCeiling: 4, status: draft }
           - { id: DP-09-048, title: "Electric vehicle charging measurement", levelCeiling: 4, status: draft }

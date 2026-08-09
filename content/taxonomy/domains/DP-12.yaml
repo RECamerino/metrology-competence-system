@@ -23,7 +23,7 @@ domains:
           - { id: DP-12-004, title: "Photopic, scotopic and mesopic vision", levelCeiling: 4, status: draft }
           - { id: DP-12-005, title: "Solid angle, projected area and the inverse square law", levelCeiling: 4, status: draft }
           - { id: DP-12-006, title: "Lambertian sources and the cosine law", levelCeiling: 4, status: draft }
-          - { id: DP-12-007, title: "Distance, alignment and the limits of the point source assumption", levelCeiling: 5, status: draft }
+          - { id: DP-12-007, title: "Distance, alignment and the limits of the point source assumption", levelCeiling: 4, status: draft }
           - { id: DP-12-008, title: "Units and conversion in photometry and radiometry", levelCeiling: 3, status: draft }
 
       - id: DP-12-A02
@@ -32,29 +32,29 @@ domains:
         elements:
           - { id: DP-12-009, title: "Cryogenic radiometers as primary standards", levelCeiling: 5, status: draft }
           - { id: DP-12-010, title: "Silicon and other photodiode detectors", levelCeiling: 4, status: draft }
-          - { id: DP-12-011, title: "Trap detectors and predictable quantum efficiency devices", levelCeiling: 5, status: draft }
+          - { id: DP-12-011, title: "Trap detectors and predictable quantum efficiency devices", levelCeiling: 4, status: draft }
           - { id: DP-12-012, title: "Thermal detectors: thermopiles and pyroelectrics", levelCeiling: 4, status: draft }
-          - { id: DP-12-013, title: "Photometer heads and V-lambda filtering", levelCeiling: 5, status: draft }
+          - { id: DP-12-013, title: "Photometer heads and V-lambda filtering", levelCeiling: 4, status: draft }
           - { id: DP-12-014, title: "Spectral mismatch correction", levelCeiling: 5, status: draft }
-          - { id: DP-12-015, title: "Detector linearity, spatial uniformity and temperature dependence", levelCeiling: 5, status: draft }
+          - { id: DP-12-015, title: "Detector linearity, spatial uniformity and temperature dependence", levelCeiling: 4, status: draft }
           - { id: DP-12-016, title: "Standard lamps and source standards", levelCeiling: 4, status: draft }
           - { id: DP-12-017, title: "Lamp ageing, seasoning and operating conditions", levelCeiling: 4, status: draft }
-          - { id: DP-12-018, title: "Integrating spheres and their characterisation", levelCeiling: 5, status: draft }
-          - { id: DP-12-019, title: "Stray light and its control", levelCeiling: 5, status: draft }
+          - { id: DP-12-018, title: "Integrating spheres and their characterisation", levelCeiling: 4, status: draft }
+          - { id: DP-12-019, title: "Stray light and its control", levelCeiling: 4, status: draft }
 
       - id: DP-12-A03
         title: Photometric and Radiometric Measurement
         status: draft
         elements:
           - { id: DP-12-020, title: "Luminous intensity and illuminance measurement", levelCeiling: 4, status: draft }
-          - { id: DP-12-021, title: "Luminous flux measurement by sphere and goniophotometry", levelCeiling: 5, status: draft }
+          - { id: DP-12-021, title: "Luminous flux measurement by sphere and goniophotometry", levelCeiling: 4, status: draft }
           - { id: DP-12-022, title: "Luminance measurement and display metrology", levelCeiling: 4, status: draft }
-          - { id: DP-12-023, title: "Goniophotometry and angular distribution", levelCeiling: 5, status: draft }
-          - { id: DP-12-024, title: "Solid state lighting measurement", levelCeiling: 5, status: draft }
-          - { id: DP-12-025, title: "Reflectance and transmittance measurement", levelCeiling: 5, status: draft }
-          - { id: DP-12-026, title: "BRDF and appearance measurement", levelCeiling: 5, status: draft }
-          - { id: DP-12-027, title: "Spectral irradiance and spectral radiance scales", levelCeiling: 5, status: draft }
-          - { id: DP-12-028, title: "Solar and UV irradiance measurement", levelCeiling: 5, status: draft }
+          - { id: DP-12-023, title: "Goniophotometry and angular distribution", levelCeiling: 4, status: draft }
+          - { id: DP-12-024, title: "Solid state lighting measurement", levelCeiling: 4, status: draft }
+          - { id: DP-12-025, title: "Reflectance and transmittance measurement", levelCeiling: 4, status: draft }
+          - { id: DP-12-026, title: "BRDF and appearance measurement", levelCeiling: 4, status: draft }
+          - { id: DP-12-027, title: "Spectral irradiance and spectral radiance scales", levelCeiling: 4, status: draft }
+          - { id: DP-12-028, title: "Solar and UV irradiance measurement", levelCeiling: 4, status: draft }
           - { id: DP-12-029, title: "Uncertainty evaluation in photometry", levelCeiling: 5, status: draft }
 
       - id: DP-12-A04
@@ -70,9 +70,9 @@ domains:
           - { id: DP-12-036, title: "Correlated colour temperature and distance from the Planckian locus", levelCeiling: 4, status: draft }
           - { id: DP-12-037, title: "Colour rendering and fidelity metrics", levelCeiling: 4, status: draft }
           - { id: DP-12-038, title: "Spectrophotometers and colorimeters", levelCeiling: 4, status: draft }
-          - { id: DP-12-039, title: "Colour measurement of fluorescent and translucent materials", levelCeiling: 5, status: draft }
-          - { id: DP-12-040, title: "Colour standards, tiles and inter-instrument agreement", levelCeiling: 5, status: draft }
-          - { id: DP-12-041, title: "Visual assessment and its relationship to instrumental colour", levelCeiling: 5, status: draft }
+          - { id: DP-12-039, title: "Colour measurement of fluorescent and translucent materials", levelCeiling: 4, status: draft }
+          - { id: DP-12-040, title: "Colour standards, tiles and inter-instrument agreement", levelCeiling: 4, status: draft }
+          - { id: DP-12-041, title: "Visual assessment and its relationship to instrumental colour", levelCeiling: 4, status: draft }
 
       - id: DP-12-A05
         title: Applied Optical Radiation Measurement
@@ -82,6 +82,6 @@ domains:
           - { id: DP-12-043, title: "Display and projector measurement", levelCeiling: 4, status: draft }
           - { id: DP-12-044, title: "Photobiological safety and blue light hazard", levelCeiling: 4, status: draft }
           - { id: DP-12-045, title: "UV disinfection dose measurement", levelCeiling: 4, status: draft }
-          - { id: DP-12-046, title: "Photovoltaic device measurement and solar simulators", levelCeiling: 5, status: draft }
+          - { id: DP-12-046, title: "Photovoltaic device measurement and solar simulators", levelCeiling: 4, status: draft }
           - { id: DP-12-047, title: "Optical properties of materials for industry", levelCeiling: 4, status: draft }
           - { id: DP-12-048, title: "Retroreflection and road safety measurement", levelCeiling: 4, status: draft }

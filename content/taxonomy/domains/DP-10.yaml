@@ -17,14 +17,14 @@ domains:
         title: RF Fundamentals
         status: draft
         elements:
-          - { id: DP-10-001, title: "Transmission line theory and characteristic impedance", levelCeiling: 5, status: draft }
+          - { id: DP-10-001, title: "Transmission line theory and characteristic impedance", levelCeiling: 4, status: draft }
           - { id: DP-10-002, title: "Reflection coefficient, VSWR and return loss", levelCeiling: 4, status: draft }
           - { id: DP-10-003, title: "Scattering parameters and their meaning", levelCeiling: 5, status: draft }
           - { id: DP-10-004, title: "The Smith chart and impedance transformation", levelCeiling: 4, status: draft }
-          - { id: DP-10-005, title: "Waveguide modes and cutoff", levelCeiling: 5, status: draft }
-          - { id: DP-10-006, title: "Skin effect, dielectric loss and dispersion", levelCeiling: 5, status: draft }
+          - { id: DP-10-005, title: "Waveguide modes and cutoff", levelCeiling: 4, status: draft }
+          - { id: DP-10-006, title: "Skin effect, dielectric loss and dispersion", levelCeiling: 4, status: draft }
           - { id: DP-10-007, title: "Mismatch uncertainty and its evaluation", levelCeiling: 5, status: draft }
-          - { id: DP-10-008, title: "Connector types, care and repeatability", levelCeiling: 5, status: draft }
+          - { id: DP-10-008, title: "Connector types, care and repeatability", levelCeiling: 4, status: draft }
           - { id: DP-10-009, title: "Cable effects, flexure and phase stability", levelCeiling: 4, status: draft }
 
       - id: DP-10-A02
@@ -33,29 +33,29 @@ domains:
         elements:
           - { id: DP-10-010, title: "RF power definitions and units", levelCeiling: 4, status: draft }
           - { id: DP-10-011, title: "Microcalorimeters as primary power standards", levelCeiling: 5, status: draft }
-          - { id: DP-10-012, title: "Thermistor and bolometric power sensors", levelCeiling: 5, status: draft }
+          - { id: DP-10-012, title: "Thermistor and bolometric power sensors", levelCeiling: 4, status: draft }
           - { id: DP-10-013, title: "Thermocouple and diode power sensors", levelCeiling: 4, status: draft }
-          - { id: DP-10-014, title: "Effective efficiency and calibration factor", levelCeiling: 5, status: draft }
-          - { id: DP-10-015, title: "Power sensor calibration and transfer", levelCeiling: 5, status: draft }
-          - { id: DP-10-016, title: "Peak and pulse power measurement", levelCeiling: 5, status: draft }
-          - { id: DP-10-017, title: "High power measurement and directional couplers", levelCeiling: 5, status: draft }
+          - { id: DP-10-014, title: "Effective efficiency and calibration factor", levelCeiling: 4, status: draft }
+          - { id: DP-10-015, title: "Power sensor calibration and transfer", levelCeiling: 4, status: draft }
+          - { id: DP-10-016, title: "Peak and pulse power measurement", levelCeiling: 4, status: draft }
+          - { id: DP-10-017, title: "High power measurement and directional couplers", levelCeiling: 4, status: draft }
           - { id: DP-10-018, title: "Uncertainty budget for RF power measurement", levelCeiling: 5, status: draft }
 
       - id: DP-10-A03
         title: Network Analysis and S-Parameters
         status: draft
         elements:
-          - { id: DP-10-019, title: "Vector network analyser architecture", levelCeiling: 5, status: draft }
+          - { id: DP-10-019, title: "Vector network analyser architecture", levelCeiling: 4, status: draft }
           - { id: DP-10-020, title: "Error models and systematic error terms", levelCeiling: 5, status: draft }
-          - { id: DP-10-021, title: "SOLT calibration", levelCeiling: 5, status: draft }
+          - { id: DP-10-021, title: "SOLT calibration", levelCeiling: 4, status: draft }
           - { id: DP-10-022, title: "TRL and LRM calibration techniques", levelCeiling: 5, status: draft }
-          - { id: DP-10-023, title: "Calibration kit definitions and standard models", levelCeiling: 5, status: draft }
-          - { id: DP-10-024, title: "Verification of a network analyser calibration", levelCeiling: 5, status: draft }
-          - { id: DP-10-025, title: "De-embedding and fixture removal", levelCeiling: 5, status: draft }
-          - { id: DP-10-026, title: "On-wafer and probe-station measurement", levelCeiling: 5, status: draft }
-          - { id: DP-10-027, title: "Time domain reflectometry and gating", levelCeiling: 5, status: draft }
+          - { id: DP-10-023, title: "Calibration kit definitions and standard models", levelCeiling: 4, status: draft }
+          - { id: DP-10-024, title: "Verification of a network analyser calibration", levelCeiling: 4, status: draft }
+          - { id: DP-10-025, title: "De-embedding and fixture removal", levelCeiling: 4, status: draft }
+          - { id: DP-10-026, title: "On-wafer and probe-station measurement", levelCeiling: 4, status: draft }
+          - { id: DP-10-027, title: "Time domain reflectometry and gating", levelCeiling: 4, status: draft }
           - { id: DP-10-028, title: "Uncertainty evaluation for S-parameter measurement", levelCeiling: 5, status: draft }
-          - { id: DP-10-029, title: "Nonlinear device characterisation and large-signal measurement", levelCeiling: 5, status: draft }
+          - { id: DP-10-029, title: "Nonlinear device characterisation and large-signal measurement", levelCeiling: 4, status: draft }
 
       - id: DP-10-A04
         title: Signal Generation, Analysis and Noise
@@ -63,39 +63,39 @@ domains:
         elements:
           - { id: DP-10-030, title: "Signal generator characterisation and calibration", levelCeiling: 4, status: draft }
           - { id: DP-10-031, title: "Spectrum analyser architecture and calibration", levelCeiling: 4, status: draft }
-          - { id: DP-10-032, title: "Attenuation measurement and standards", levelCeiling: 5, status: draft }
+          - { id: DP-10-032, title: "Attenuation measurement and standards", levelCeiling: 4, status: draft }
           - { id: DP-10-033, title: "Modulation measurement and analysis", levelCeiling: 4, status: draft }
-          - { id: DP-10-034, title: "Noise figure and noise temperature", levelCeiling: 5, status: draft }
-          - { id: DP-10-035, title: "Noise sources and excess noise ratio", levelCeiling: 5, status: draft }
+          - { id: DP-10-034, title: "Noise figure and noise temperature", levelCeiling: 4, status: draft }
+          - { id: DP-10-035, title: "Noise sources and excess noise ratio", levelCeiling: 4, status: draft }
           - { id: DP-10-036, title: "Phase noise measurement", levelCeiling: 5, status: draft }
-          - { id: DP-10-037, title: "Intermodulation and linearity measurement", levelCeiling: 5, status: draft }
-          - { id: DP-10-038, title: "Digital modulation and error vector magnitude", levelCeiling: 5, status: draft }
+          - { id: DP-10-037, title: "Intermodulation and linearity measurement", levelCeiling: 4, status: draft }
+          - { id: DP-10-038, title: "Digital modulation and error vector magnitude", levelCeiling: 4, status: draft }
 
       - id: DP-10-A05
         title: Antennas and Field Measurement
         status: draft
         elements:
-          - { id: DP-10-039, title: "Antenna parameters: gain, pattern, polarisation, efficiency", levelCeiling: 5, status: draft }
-          - { id: DP-10-040, title: "Antenna gain measurement methods", levelCeiling: 5, status: draft }
-          - { id: DP-10-041, title: "Near-field and far-field regions", levelCeiling: 5, status: draft }
-          - { id: DP-10-042, title: "Anechoic chambers and antenna ranges", levelCeiling: 5, status: draft }
+          - { id: DP-10-039, title: "Antenna parameters: gain, pattern, polarisation, efficiency", levelCeiling: 4, status: draft }
+          - { id: DP-10-040, title: "Antenna gain measurement methods", levelCeiling: 4, status: draft }
+          - { id: DP-10-041, title: "Near-field and far-field regions", levelCeiling: 4, status: draft }
+          - { id: DP-10-042, title: "Anechoic chambers and antenna ranges", levelCeiling: 4, status: draft }
           - { id: DP-10-043, title: "Near-field scanning and transformation", levelCeiling: 5, status: draft }
-          - { id: DP-10-044, title: "Field strength measurement and probes", levelCeiling: 5, status: draft }
-          - { id: DP-10-045, title: "Antenna factor and its calibration", levelCeiling: 5, status: draft }
-          - { id: DP-10-046, title: "Over-the-air testing and reverberation chambers", levelCeiling: 5, status: draft }
-          - { id: DP-10-047, title: "Radar cross section and scattering measurement", levelCeiling: 5, status: draft }
+          - { id: DP-10-044, title: "Field strength measurement and probes", levelCeiling: 4, status: draft }
+          - { id: DP-10-045, title: "Antenna factor and its calibration", levelCeiling: 4, status: draft }
+          - { id: DP-10-046, title: "Over-the-air testing and reverberation chambers", levelCeiling: 4, status: draft }
+          - { id: DP-10-047, title: "Radar cross section and scattering measurement", levelCeiling: 4, status: draft }
 
       - id: DP-10-A06
         title: Electromagnetic Compatibility
         status: draft
         elements:
-          - { id: DP-10-048, title: "EMC concepts: emissions, immunity and coupling paths", levelCeiling: 4, status: draft }
+          - { id: DP-10-048, title: "EMC concepts: emissions, immunity and coupling paths", levelCeiling: 3, status: draft }
           - { id: DP-10-049, title: "Conducted emissions measurement and LISN", levelCeiling: 4, status: draft }
-          - { id: DP-10-050, title: "Radiated emissions measurement and test sites", levelCeiling: 5, status: draft }
-          - { id: DP-10-051, title: "Test site validation and site attenuation", levelCeiling: 5, status: draft }
+          - { id: DP-10-050, title: "Radiated emissions measurement and test sites", levelCeiling: 4, status: draft }
+          - { id: DP-10-051, title: "Test site validation and site attenuation", levelCeiling: 4, status: draft }
           - { id: DP-10-052, title: "Immunity testing: radiated and conducted", levelCeiling: 4, status: draft }
           - { id: DP-10-053, title: "ESD, surge and transient immunity testing", levelCeiling: 4, status: draft }
-          - { id: DP-10-054, title: "EMC receivers, detectors and measurement bandwidth", levelCeiling: 5, status: draft }
+          - { id: DP-10-054, title: "EMC receivers, detectors and measurement bandwidth", levelCeiling: 4, status: draft }
           - { id: DP-10-055, title: "Uncertainty in EMC measurement and CISPR treatment", levelCeiling: 5, status: draft }
           - { id: DP-10-056, title: "Calibration of EMC test equipment", levelCeiling: 4, status: draft }
-          - { id: DP-10-057, title: "Human exposure and SAR measurement", levelCeiling: 5, status: draft }
+          - { id: DP-10-057, title: "Human exposure and SAR measurement", levelCeiling: 4, status: draft }

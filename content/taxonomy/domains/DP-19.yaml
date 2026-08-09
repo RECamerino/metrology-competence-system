@@ -20,14 +20,14 @@ domains:
         elements:
           - { id: DP-19-001, title: "Additive processes and their measurement implications", levelCeiling: 4, status: draft }
           - { id: DP-19-002, title: "Why additive parts defeat conventional inspection", levelCeiling: 5, status: draft }
-          - { id: DP-19-003, title: "Internal geometry and inaccessible feature measurement", levelCeiling: 5, status: draft }
-          - { id: DP-19-004, title: "Computed tomography for additive part inspection", levelCeiling: 5, status: draft }
+          - { id: DP-19-003, title: "Internal geometry and inaccessible feature measurement", levelCeiling: 4, status: draft }
+          - { id: DP-19-004, title: "Computed tomography for additive part inspection", levelCeiling: 4, status: draft }
           - { id: DP-19-005, title: "CT calibration, artefacts and dimensional traceability", levelCeiling: 5, status: draft }
-          - { id: DP-19-006, title: "Surface texture of as-built additive surfaces", levelCeiling: 5, status: draft }
-          - { id: DP-19-007, title: "Porosity, density and defect characterisation", levelCeiling: 5, status: draft }
-          - { id: DP-19-008, title: "Residual stress measurement in additive parts", levelCeiling: 5, status: draft }
-          - { id: DP-19-009, title: "Distortion, warping and datum instability", levelCeiling: 5, status: draft }
-          - { id: DP-19-010, title: "Test artefacts and machine qualification for additive processes", levelCeiling: 5, status: draft }
+          - { id: DP-19-006, title: "Surface texture of as-built additive surfaces", levelCeiling: 4, status: draft }
+          - { id: DP-19-007, title: "Porosity, density and defect characterisation", levelCeiling: 4, status: draft }
+          - { id: DP-19-008, title: "Residual stress measurement in additive parts", levelCeiling: 4, status: draft }
+          - { id: DP-19-009, title: "Distortion, warping and datum instability", levelCeiling: 4, status: draft }
+          - { id: DP-19-010, title: "Test artefacts and machine qualification for additive processes", levelCeiling: 4, status: draft }
           - { id: DP-19-011, title: "Feedstock powder characterisation", levelCeiling: 4, status: draft }
           - { id: DP-19-012, title: "Qualification of additive parts for critical applications", levelCeiling: 5, status: draft }
 
@@ -35,13 +35,13 @@ domains:
         title: In-Process and In-Line Measurement
         status: draft
         elements:
-          - { id: DP-19-013, title: "In-process monitoring principles and their limits", levelCeiling: 5, status: draft }
-          - { id: DP-19-014, title: "Melt pool and thermal monitoring", levelCeiling: 5, status: draft }
-          - { id: DP-19-015, title: "Layer-wise optical inspection", levelCeiling: 5, status: draft }
+          - { id: DP-19-013, title: "In-process monitoring principles and their limits", levelCeiling: 4, status: draft }
+          - { id: DP-19-014, title: "Melt pool and thermal monitoring", levelCeiling: 4, status: draft }
+          - { id: DP-19-015, title: "Layer-wise optical inspection", levelCeiling: 4, status: draft }
           - { id: DP-19-016, title: "Traceability of an in-process measurement", levelCeiling: 5, status: draft }
           - { id: DP-19-017, title: "In-line dimensional measurement in production", levelCeiling: 4, status: draft }
-          - { id: DP-19-018, title: "On-machine probing and machine tool measurement", levelCeiling: 5, status: draft }
-          - { id: DP-19-019, title: "Relating in-process signals to part quality", levelCeiling: 5, status: draft }
+          - { id: DP-19-018, title: "On-machine probing and machine tool measurement", levelCeiling: 4, status: draft }
+          - { id: DP-19-019, title: "Relating in-process signals to part quality", levelCeiling: 4, status: draft }
           - { id: DP-19-020, title: "Measurement-driven process control and closed loop correction", levelCeiling: 5, status: draft }
 
       - id: DP-19-A03
@@ -61,11 +61,11 @@ domains:
         title: Production Systems and Integration
         status: draft
         elements:
-          - { id: DP-19-029, title: "Designing an inspection strategy for a production line", levelCeiling: 5, status: draft }
+          - { id: DP-19-029, title: "Designing an inspection strategy for a production line", levelCeiling: 4, status: draft }
           - { id: DP-19-030, title: "First article inspection and production part approval", levelCeiling: 4, status: draft }
-          - { id: DP-19-031, title: "Automated inspection cells and robot-mounted metrology", levelCeiling: 5, status: draft }
+          - { id: DP-19-031, title: "Automated inspection cells and robot-mounted metrology", levelCeiling: 4, status: draft }
           - { id: DP-19-032, title: "Machine vision inspection systems", levelCeiling: 4, status: draft }
-          - { id: DP-19-033, title: "Sampling plans and inspection frequency", levelCeiling: 5, status: draft }
+          - { id: DP-19-033, title: "Sampling plans and inspection frequency", levelCeiling: 4, status: draft }
           - { id: DP-19-034, title: "Fixturing, repeatability and part presentation", levelCeiling: 4, status: draft }
           - { id: DP-19-035, title: "Traceability and identification through a production process", levelCeiling: 4, status: draft }
           - { id: DP-19-036, title: "Reverse engineering and as-built model generation", levelCeiling: 4, status: draft }

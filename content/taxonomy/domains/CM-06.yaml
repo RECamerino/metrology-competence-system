@@ -18,9 +18,9 @@ domains:
         status: draft
         elements:
           - { id: CM-06-001, title: "What calibration is, and why it is not adjustment", levelCeiling: 3, status: draft }
-          - { id: CM-06-002, title: "Calibration, verification and validation distinguished", levelCeiling: 4, status: draft }
+          - { id: CM-06-002, title: "Calibration, verification and validation distinguished", levelCeiling: 3, status: draft }
           - { id: CM-06-003, title: "The calibration relation and the calibration function", levelCeiling: 4, status: draft }
-          - { id: CM-06-004, title: "Calibration points, ranges and coverage of use", levelCeiling: 4, status: draft }
+          - { id: CM-06-004, title: "Calibration points, ranges and coverage of use", levelCeiling: 3, status: draft }
           - { id: CM-06-005, title: "Reference standard selection and adequacy", levelCeiling: 4, status: draft }
           - { id: CM-06-006, title: "Instrument specifications and how to read them critically", levelCeiling: 5, status: draft }
           - { id: CM-06-007, title: "Tolerance, specification limit and maximum permissible error", levelCeiling: 4, status: draft }
@@ -34,11 +34,11 @@ domains:
           - { id: CM-06-010, title: "Writing a procedure that a competent stranger can execute", levelCeiling: 5, status: draft }
           - { id: CM-06-011, title: "Selecting a measurement method for the required capability", levelCeiling: 5, status: draft }
           - { id: CM-06-012, title: "Number and placement of calibration points", levelCeiling: 4, status: draft }
-          - { id: CM-06-013, title: "Repetition, ordering and randomisation within a procedure", levelCeiling: 5, status: draft }
+          - { id: CM-06-013, title: "Repetition, ordering and randomisation within a procedure", levelCeiling: 4, status: draft }
           - { id: CM-06-014, title: "Hysteresis, loading sequence and directional effects", levelCeiling: 4, status: draft }
           - { id: CM-06-015, title: "Stabilisation, soak time and thermal equilibrium", levelCeiling: 4, status: draft }
           - { id: CM-06-016, title: "Environmental control and monitoring within a procedure", levelCeiling: 4, status: draft }
-          - { id: CM-06-017, title: "Adapting a published method to local conditions", levelCeiling: 5, status: draft }
+          - { id: CM-06-017, title: "Adapting a published method to local conditions", levelCeiling: 4, status: draft }
           - { id: CM-06-018, title: "Procedure review, approval and version control", levelCeiling: 4, status: draft }
 
       - id: CM-06-A03
@@ -46,10 +46,10 @@ domains:
         status: draft
         elements:
           - { id: CM-06-019, title: "Why a method must be validated before use", levelCeiling: 4, status: draft }
-          - { id: CM-06-020, title: "Validation parameters and acceptance criteria", levelCeiling: 5, status: draft }
+          - { id: CM-06-020, title: "Validation parameters and acceptance criteria", levelCeiling: 4, status: draft }
           - { id: CM-06-021, title: "Verifying a standard method in your own hands", levelCeiling: 4, status: draft }
           - { id: CM-06-022, title: "Validating a non-standard or in-house method", levelCeiling: 5, status: draft }
-          - { id: CM-06-023, title: "Demonstrating that a method achieves its claimed capability", levelCeiling: 5, status: draft }
+          - { id: CM-06-023, title: "Demonstrating that a method achieves its claimed capability", levelCeiling: 4, status: draft }
           - { id: CM-06-024, title: "Revalidation triggers", levelCeiling: 4, status: draft }
           - { id: CM-06-025, title: "Validation records and their evidentiary value", levelCeiling: 4, status: draft }
 
@@ -64,8 +64,8 @@ domains:
           - { id: CM-06-027, title: "Deciding whether to adjust", levelCeiling: 5, status: draft }
           - { id: CM-06-028, title: "Adjustment technique and its own uncertainty", levelCeiling: 4, status: draft }
           - { id: CM-06-029, title: "Limited calibration and restricted-range calibration", levelCeiling: 4, status: draft }
-          - { id: CM-06-030, title: "Handling an out-of-tolerance finding", levelCeiling: 5, status: draft }
-          - { id: CM-06-031, title: "Reverse traceability and impact assessment after an OOT", levelCeiling: 5, status: draft }
+          - { id: CM-06-030, title: "Handling an out-of-tolerance finding", levelCeiling: 4, status: draft }
+          - { id: CM-06-031, title: "Reverse traceability and impact assessment after an OOT", levelCeiling: 4, status: draft }
           - { id: CM-06-032, title: "Customer notification obligations", levelCeiling: 4, status: draft }
           - { id: CM-06-033, title: "Repair, refurbishment and their effect on calibration history", levelCeiling: 4, status: draft }
           - { id: CM-06-034, title: "Recognising a failing instrument from its calibration history", levelCeiling: 5, status: draft }
@@ -75,12 +75,12 @@ domains:
         status: draft
         elements:
           - { id: CM-06-035, title: "Direct comparison methods", levelCeiling: 4, status: draft }
-          - { id: CM-06-036, title: "Substitution and transposition methods", levelCeiling: 5, status: draft }
+          - { id: CM-06-036, title: "Substitution and transposition methods", levelCeiling: 4, status: draft }
           - { id: CM-06-037, title: "Null and balance methods", levelCeiling: 4, status: draft }
-          - { id: CM-06-038, title: "Ratio and bridge techniques", levelCeiling: 5, status: draft }
-          - { id: CM-06-039, title: "Designed comparison schemes for artefact intercomparison", levelCeiling: 5, status: draft }
-          - { id: CM-06-040, title: "Round-robin and circulating artefact studies", levelCeiling: 5, status: draft }
-          - { id: CM-06-041, title: "Self-calibration and closure techniques", levelCeiling: 5, status: draft }
+          - { id: CM-06-038, title: "Ratio and bridge techniques", levelCeiling: 4, status: draft }
+          - { id: CM-06-039, title: "Designed comparison schemes for artefact intercomparison", levelCeiling: 4, status: draft }
+          - { id: CM-06-040, title: "Round-robin and circulating artefact studies", levelCeiling: 4, status: draft }
+          - { id: CM-06-041, title: "Self-calibration and closure techniques", levelCeiling: 4, status: draft }
           - { id: CM-06-042, title: "Cancelling systematic effects by experimental design", levelCeiling: 5, status: draft }
 
       - id: CM-06-A06
@@ -97,7 +97,7 @@ domains:
           - { id: CM-06-046, title: "Opinions and interpretations and when they may be given", levelCeiling: 5, status: draft }
           - { id: CM-06-047, title: "Amending or withdrawing an issued certificate", levelCeiling: 4, status: draft }
           - { id: CM-06-048, title: "Raw data retention and reconstructability of a result", levelCeiling: 4, status: draft }
-          - { id: CM-06-049, title: "Reviewing a certificate you have received from a supplier", levelCeiling: 5, status: draft }
+          - { id: CM-06-049, title: "Reviewing a certificate you have received from a supplier", levelCeiling: 4, status: draft }
           - { id: CM-06-050, title: "Accreditation body marks and their correct use", levelCeiling: 3, status: draft }
 
       - id: CM-06-A07
@@ -121,7 +121,7 @@ domains:
           the metrological judgement behind the decision.
         elements:
           - { id: CM-06-057, title: "Deciding what to calibrate in house and what to send out", levelCeiling: 5, status: draft }
-          - { id: CM-06-058, title: "Qualifying and monitoring an external calibration supplier", levelCeiling: 5, status: draft }
+          - { id: CM-06-058, title: "Qualifying and monitoring an external calibration supplier", levelCeiling: 4, status: draft }
           - { id: CM-06-059, title: "Building a calibration programme from a measurement requirement", levelCeiling: 5, status: draft }
           - { id: CM-06-060, title: "Equipment identification, inventory and status control", levelCeiling: 4, status: draft }
           - { id: CM-06-061, title: "Recall systems and preventing use of overdue equipment", levelCeiling: 4, status: draft }

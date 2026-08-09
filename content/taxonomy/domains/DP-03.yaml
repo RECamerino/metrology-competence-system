@@ -16,16 +16,16 @@ domains:
         title: Pressure Fundamentals and Realisation
         status: draft
         elements:
-          - { id: DP-03-001, title: "Pressure definitions: absolute, gauge, differential, sealed gauge", levelCeiling: 4, status: draft }
+          - { id: DP-03-001, title: "Pressure definitions: absolute, gauge, differential, sealed gauge", levelCeiling: 3, status: draft }
           - { id: DP-03-002, title: "Pressure units and conversion pitfalls", levelCeiling: 3, status: draft }
-          - { id: DP-03-003, title: "Liquid column manometers as primary standards", levelCeiling: 5, status: draft }
-          - { id: DP-03-004, title: "Mercury and water column corrections", levelCeiling: 5, status: draft }
-          - { id: DP-03-005, title: "Piston gauges and pressure balances", levelCeiling: 5, status: draft }
+          - { id: DP-03-003, title: "Liquid column manometers as primary standards", levelCeiling: 4, status: draft }
+          - { id: DP-03-004, title: "Mercury and water column corrections", levelCeiling: 4, status: draft }
+          - { id: DP-03-005, title: "Piston gauges and pressure balances", levelCeiling: 4, status: draft }
           - { id: DP-03-006, title: "Effective area and its determination", levelCeiling: 5, status: draft }
-          - { id: DP-03-007, title: "Pressure distortion coefficient", levelCeiling: 5, status: draft }
-          - { id: DP-03-008, title: "Head correction, fluid density and reference level", levelCeiling: 5, status: draft }
+          - { id: DP-03-007, title: "Pressure distortion coefficient", levelCeiling: 4, status: draft }
+          - { id: DP-03-008, title: "Head correction, fluid density and reference level", levelCeiling: 4, status: draft }
           - { id: DP-03-009, title: "Local gravity in pressure realisation", levelCeiling: 4, status: draft }
-          - { id: DP-03-010, title: "Cross-floating technique", levelCeiling: 5, status: draft }
+          - { id: DP-03-010, title: "Cross-floating technique", levelCeiling: 4, status: draft }
           - { id: DP-03-011, title: "Uncertainty budget for pressure balance calibration", levelCeiling: 5, status: draft }
 
       - id: DP-03-A02
@@ -34,13 +34,13 @@ domains:
         elements:
           - { id: DP-03-012, title: "Bourdon, diaphragm and capsule gauges", levelCeiling: 3, status: draft }
           - { id: DP-03-013, title: "Pressure transducers and transmitters", levelCeiling: 4, status: draft }
-          - { id: DP-03-014, title: "Resonant and quartz pressure sensors", levelCeiling: 5, status: draft }
+          - { id: DP-03-014, title: "Resonant and quartz pressure sensors", levelCeiling: 4, status: draft }
           - { id: DP-03-015, title: "Digital pressure controllers and calibrators", levelCeiling: 4, status: draft }
           - { id: DP-03-016, title: "Calibration procedure design for pressure instruments", levelCeiling: 4, status: draft }
           - { id: DP-03-017, title: "Hysteresis, zero shift and span error", levelCeiling: 4, status: draft }
           - { id: DP-03-018, title: "Temperature effects on pressure measurement", levelCeiling: 4, status: draft }
-          - { id: DP-03-019, title: "Media compatibility, contamination and cleaning for oxygen service", levelCeiling: 4, status: draft }
-          - { id: DP-03-020, title: "Dynamic pressure measurement", levelCeiling: 5, status: draft }
+          - { id: DP-03-019, title: "Media compatibility, contamination and cleaning for oxygen service", levelCeiling: 5, status: draft }
+          - { id: DP-03-020, title: "Dynamic pressure measurement", levelCeiling: 4, status: draft }
           - { id: DP-03-021, title: "Barometric and low differential pressure measurement", levelCeiling: 4, status: draft }
           - { id: DP-03-022, title: "Safety in high pressure work", levelCeiling: 4, status: draft }
 
@@ -49,17 +49,17 @@ domains:
         status: draft
         elements:
           - { id: DP-03-023, title: "Vacuum ranges and the regimes of gas behaviour", levelCeiling: 4, status: draft }
-          - { id: DP-03-024, title: "Mean free path, Knudsen number and flow regimes", levelCeiling: 5, status: draft }
-          - { id: DP-03-025, title: "Spinning rotor gauges", levelCeiling: 5, status: draft }
+          - { id: DP-03-024, title: "Mean free path, Knudsen number and flow regimes", levelCeiling: 4, status: draft }
+          - { id: DP-03-025, title: "Spinning rotor gauges", levelCeiling: 4, status: draft }
           - { id: DP-03-026, title: "Capacitance diaphragm gauges", levelCeiling: 4, status: draft }
           - { id: DP-03-027, title: "Thermal conductivity gauges: Pirani and thermocouple", levelCeiling: 4, status: draft }
-          - { id: DP-03-028, title: "Ionisation gauges: hot and cold cathode", levelCeiling: 5, status: draft }
-          - { id: DP-03-029, title: "Gas species dependence and correction factors", levelCeiling: 5, status: draft }
+          - { id: DP-03-028, title: "Ionisation gauges: hot and cold cathode", levelCeiling: 4, status: draft }
+          - { id: DP-03-029, title: "Gas species dependence and correction factors", levelCeiling: 4, status: draft }
           - { id: DP-03-030, title: "Static and dynamic expansion primary standards", levelCeiling: 5, status: draft }
-          - { id: DP-03-031, title: "Orifice flow standards for vacuum", levelCeiling: 5, status: draft }
-          - { id: DP-03-032, title: "Outgassing, pumping and system effects on a calibration", levelCeiling: 5, status: draft }
+          - { id: DP-03-031, title: "Orifice flow standards for vacuum", levelCeiling: 4, status: draft }
+          - { id: DP-03-032, title: "Outgassing, pumping and system effects on a calibration", levelCeiling: 4, status: draft }
           - { id: DP-03-033, title: "Leak detection and leak rate measurement", levelCeiling: 4, status: draft }
-          - { id: DP-03-034, title: "Residual gas analysis", levelCeiling: 5, status: draft }
+          - { id: DP-03-034, title: "Residual gas analysis", levelCeiling: 4, status: draft }
           - { id: DP-03-035, title: "Uncertainty evaluation in vacuum measurement", levelCeiling: 5, status: draft }
 
       - id: DP-03-A04
@@ -67,27 +67,27 @@ domains:
         status: draft
         elements:
           - { id: DP-03-036, title: "Density definitions and reference conditions", levelCeiling: 3, status: draft }
-          - { id: DP-03-037, title: "Hydrostatic weighing for solid density", levelCeiling: 5, status: draft }
-          - { id: DP-03-038, title: "Silicon spheres and density standards", levelCeiling: 5, status: draft }
+          - { id: DP-03-037, title: "Hydrostatic weighing for solid density", levelCeiling: 4, status: draft }
+          - { id: DP-03-038, title: "Silicon spheres and density standards", levelCeiling: 4, status: draft }
           - { id: DP-03-039, title: "Pycnometry", levelCeiling: 4, status: draft }
           - { id: DP-03-040, title: "Oscillating tube densitometers", levelCeiling: 4, status: draft }
           - { id: DP-03-041, title: "Hydrometers and their calibration", levelCeiling: 4, status: draft }
           - { id: DP-03-042, title: "Air density determination and formulae", levelCeiling: 5, status: draft }
           - { id: DP-03-043, title: "Water density as a reference and its temperature dependence", levelCeiling: 4, status: draft }
-          - { id: DP-03-044, title: "Density of gases and compressibility", levelCeiling: 5, status: draft }
+          - { id: DP-03-044, title: "Density of gases and compressibility", levelCeiling: 4, status: draft }
 
       - id: DP-03-A05
         title: Viscosity and Rheology
         status: draft
         elements:
           - { id: DP-03-045, title: "Dynamic and kinematic viscosity", levelCeiling: 4, status: draft }
-          - { id: DP-03-046, title: "The viscosity scale and water as the primary reference", levelCeiling: 5, status: draft }
-          - { id: DP-03-047, title: "Capillary viscometers and the step-up procedure", levelCeiling: 5, status: draft }
+          - { id: DP-03-046, title: "The viscosity scale and water as the primary reference", levelCeiling: 4, status: draft }
+          - { id: DP-03-047, title: "Capillary viscometers and the step-up procedure", levelCeiling: 4, status: draft }
           - { id: DP-03-048, title: "Rotational viscometers and rheometers", levelCeiling: 4, status: draft }
           - { id: DP-03-049, title: "Falling body and vibrating viscometers", levelCeiling: 4, status: draft }
           - { id: DP-03-050, title: "Certified viscosity reference liquids", levelCeiling: 4, status: draft }
-          - { id: DP-03-051, title: "Temperature control in viscosity measurement", levelCeiling: 5, status: draft }
-          - { id: DP-03-052, title: "Non-Newtonian behaviour and shear rate dependence", levelCeiling: 5, status: draft }
+          - { id: DP-03-051, title: "Temperature control in viscosity measurement", levelCeiling: 4, status: draft }
+          - { id: DP-03-052, title: "Non-Newtonian behaviour and shear rate dependence", levelCeiling: 4, status: draft }
           - { id: DP-03-053, title: "Uncertainty evaluation in viscosity measurement", levelCeiling: 5, status: draft }
 
       - id: DP-03-A06

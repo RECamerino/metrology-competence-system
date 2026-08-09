@@ -20,15 +20,15 @@ domains:
           colleague, a supplier, or a standard is not.
         elements:
           - { id: CM-02-001, title: "Purpose and structure of the VIM", levelCeiling: 3, status: draft }
-          - { id: CM-02-002, title: "Concept systems and why definitions are ordered as they are", levelCeiling: 4, status: draft }
-          - { id: CM-02-003, title: "Core VIM terms for quantities and units", levelCeiling: 4, status: draft }
-          - { id: CM-02-004, title: "Core VIM terms for measurement and its results", levelCeiling: 4, status: draft }
-          - { id: CM-02-005, title: "Core VIM terms for measuring instruments and their properties", levelCeiling: 4, status: draft }
-          - { id: CM-02-006, title: "Core VIM terms for measurement standards and traceability", levelCeiling: 4, status: draft }
+          - { id: CM-02-002, title: "Concept systems and why definitions are ordered as they are", levelCeiling: 3, status: draft }
+          - { id: CM-02-003, title: "Core VIM terms for quantities and units", levelCeiling: 3, status: draft }
+          - { id: CM-02-004, title: "Core VIM terms for measurement and its results", levelCeiling: 3, status: draft }
+          - { id: CM-02-005, title: "Core VIM terms for measuring instruments and their properties", levelCeiling: 3, status: draft }
+          - { id: CM-02-006, title: "Core VIM terms for measurement standards and traceability", levelCeiling: 3, status: draft }
           - { id: CM-02-007, title: "Terms commonly misused in laboratory practice", levelCeiling: 4, status: draft }
-          - { id: CM-02-008, title: "Deprecated terminology still found in circulation", levelCeiling: 4, status: draft }
-          - { id: CM-02-009, title: "Reconciling VIM3 with sector-specific vocabularies", levelCeiling: 5, status: draft }
-          - { id: CM-02-010, title: "Translation and terminology across languages and jurisdictions", levelCeiling: 4, status: draft }
+          - { id: CM-02-008, title: "Deprecated terminology still found in circulation", levelCeiling: 3, status: draft }
+          - { id: CM-02-009, title: "Reconciling VIM3 with sector-specific vocabularies", levelCeiling: 4, status: draft }
+          - { id: CM-02-010, title: "Translation and terminology across languages and jurisdictions", levelCeiling: 3, status: draft }
 
       - id: CM-02-A02
         title: Structure of the SI
@@ -40,9 +40,9 @@ domains:
           - { id: CM-02-013, title: "Coherence and why it matters computationally", levelCeiling: 4, status: draft }
           - { id: CM-02-014, title: "SI prefixes and their correct application", levelCeiling: 3, status: draft }
           - { id: CM-02-015, title: "Units outside the SI accepted for use with it", levelCeiling: 3, status: draft }
-          - { id: CM-02-016, title: "Special names and units with the same dimension", levelCeiling: 4, status: draft }
-          - { id: CM-02-017, title: "The mole and quantities of amount of substance", levelCeiling: 4, status: draft }
-          - { id: CM-02-018, title: "Photometric units and the human observer in the SI", levelCeiling: 4, status: draft }
+          - { id: CM-02-016, title: "Special names and units with the same dimension", levelCeiling: 3, status: draft }
+          - { id: CM-02-017, title: "The mole and quantities of amount of substance", levelCeiling: 3, status: draft }
+          - { id: CM-02-018, title: "Photometric units and the human observer in the SI", levelCeiling: 3, status: draft }
 
       - id: CM-02-A03
         title: The 2019 Redefinition and the Defining Constants
@@ -52,14 +52,14 @@ domains:
           consequences — most of which are smaller than commonly assumed, but
           not zero.
         elements:
-          - { id: CM-02-019, title: "The seven defining constants", levelCeiling: 4, status: draft }
+          - { id: CM-02-019, title: "The seven defining constants", levelCeiling: 3, status: draft }
           - { id: CM-02-020, title: "Why the kilogram artefact was abandoned", levelCeiling: 3, status: draft }
           - { id: CM-02-021, title: "Realisation of the kilogram: Kibble balance and X-ray crystal density", levelCeiling: 5, status: draft }
-          - { id: CM-02-022, title: "Realisation of the ampere from the elementary charge", levelCeiling: 5, status: draft }
-          - { id: CM-02-023, title: "Realisation of the kelvin from the Boltzmann constant", levelCeiling: 5, status: draft }
-          - { id: CM-02-024, title: "Mise en pratique documents and their status", levelCeiling: 4, status: draft }
+          - { id: CM-02-022, title: "Realisation of the ampere from the elementary charge", levelCeiling: 4, status: draft }
+          - { id: CM-02-023, title: "Realisation of the kelvin from the Boltzmann constant", levelCeiling: 4, status: draft }
+          - { id: CM-02-024, title: "Mise en pratique documents and their status", levelCeiling: 3, status: draft }
           - { id: CM-02-025, title: "Practical consequences of the redefinition for working laboratories", levelCeiling: 4, status: draft }
-          - { id: CM-02-026, title: "Continuity of dissemination across the redefinition", levelCeiling: 4, status: draft }
+          - { id: CM-02-026, title: "Continuity of dissemination across the redefinition", levelCeiling: 3, status: draft }
 
       - id: CM-02-A04
         title: Expression, Style and Notation
@@ -73,8 +73,8 @@ domains:
           - { id: CM-02-029, title: "Significant figures and rounding conventions", levelCeiling: 4, status: draft }
           - { id: CM-02-030, title: "Expressing quantity values with uncertainty", levelCeiling: 4, status: draft }
           - { id: CM-02-031, title: "Quantity symbols, subscripts and typographic conventions", levelCeiling: 3, status: draft }
-          - { id: CM-02-032, title: "Expressing ratios, percentages and parts-per notations", levelCeiling: 4, status: draft }
-          - { id: CM-02-033, title: "Logarithmic quantities: decibel, neper and reference levels", levelCeiling: 4, status: draft }
+          - { id: CM-02-032, title: "Expressing ratios, percentages and parts-per notations", levelCeiling: 3, status: draft }
+          - { id: CM-02-033, title: "Logarithmic quantities: decibel, neper and reference levels", levelCeiling: 3, status: draft }
           - { id: CM-02-034, title: "Common style errors found on calibration certificates", levelCeiling: 4, status: draft }
 
       - id: CM-02-A05
@@ -85,8 +85,8 @@ domains:
           - { id: CM-02-035, title: "Dimensional analysis as a verification technique", levelCeiling: 4, status: draft }
           - { id: CM-02-036, title: "Unit conversion and exact versus approximate conversion factors", levelCeiling: 3, status: draft }
           - { id: CM-02-037, title: "Uncertainty propagation through unit conversion", levelCeiling: 4, status: draft }
-          - { id: CM-02-038, title: "Temperature scales and the difference between interval and point conversion", levelCeiling: 4, status: draft }
-          - { id: CM-02-039, title: "Gauge, absolute and differential quantities", levelCeiling: 4, status: draft }
+          - { id: CM-02-038, title: "Temperature scales and the difference between interval and point conversion", levelCeiling: 3, status: draft }
+          - { id: CM-02-039, title: "Gauge, absolute and differential quantities", levelCeiling: 3, status: draft }
           - { id: CM-02-040, title: "Conversion errors that have caused documented failures", levelCeiling: 3, status: draft }
 
       - id: CM-02-A06
@@ -101,4 +101,4 @@ domains:
           - { id: CM-02-043, title: "Sector-specific units in pressure, vacuum and flow", levelCeiling: 3, status: draft }
           - { id: CM-02-044, title: "Sector-specific units in radiation and dosimetry", levelCeiling: 3, status: draft }
           - { id: CM-02-045, title: "Units in clinical and laboratory medicine", levelCeiling: 3, status: draft }
-          - { id: CM-02-046, title: "Managing mixed-unit environments without error", levelCeiling: 4, status: draft }
+          - { id: CM-02-046, title: "Managing mixed-unit environments without error", levelCeiling: 3, status: draft }

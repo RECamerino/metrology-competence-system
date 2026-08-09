@@ -18,7 +18,7 @@ domains:
         title: Audit and Assessment Fundamentals
         status: draft
         elements:
-          - { id: CM-11-001, title: "Purpose of audit and the difference from inspection", levelCeiling: 4, status: draft }
+          - { id: CM-11-001, title: "Purpose of audit and the difference from inspection", levelCeiling: 3, status: draft }
           - { id: CM-11-002, title: "First, second and third party audit", levelCeiling: 3, status: draft }
           - { id: CM-11-003, title: "Audit principles: evidence, independence, fair presentation", levelCeiling: 4, status: draft }
           - { id: CM-11-004, title: "Audit programme, plan and scope", levelCeiling: 4, status: draft }
@@ -31,15 +31,15 @@ domains:
         status: draft
         elements:
           - { id: CM-11-008, title: "Opening meetings and setting expectations", levelCeiling: 4, status: draft }
-          - { id: CM-11-009, title: "Interviewing technique and open questioning", levelCeiling: 5, status: draft }
+          - { id: CM-11-009, title: "Interviewing technique and open questioning", levelCeiling: 4, status: draft }
           - { id: CM-11-010, title: "Objective evidence: what counts and what does not", levelCeiling: 5, status: draft }
-          - { id: CM-11-011, title: "Sampling strategy during an assessment", levelCeiling: 5, status: draft }
-          - { id: CM-11-012, title: "Witnessing a measurement and what to look for", levelCeiling: 5, status: draft }
+          - { id: CM-11-011, title: "Sampling strategy during an assessment", levelCeiling: 4, status: draft }
+          - { id: CM-11-012, title: "Witnessing a measurement and what to look for", levelCeiling: 4, status: draft }
           - { id: CM-11-013, title: "Vertical audit and traceability of a single result end to end", levelCeiling: 5, status: draft }
           - { id: CM-11-014, title: "Technical assessment of uncertainty budgets and CMCs", levelCeiling: 5, status: draft }
           - { id: CM-11-015, title: "Recognising a management system that exists only on paper", levelCeiling: 5, status: draft }
           - { id: CM-11-016, title: "Note-taking, traceable findings and the audit trail", levelCeiling: 4, status: draft }
-          - { id: CM-11-017, title: "Closing meetings and delivering difficult findings", levelCeiling: 5, status: draft }
+          - { id: CM-11-017, title: "Closing meetings and delivering difficult findings", levelCeiling: 4, status: draft }
 
       - id: CM-11-A03
         title: Findings, Reporting and Follow-Up
@@ -47,11 +47,11 @@ domains:
         elements:
           - { id: CM-11-018, title: "Grading findings: nonconformity, observation, opportunity", levelCeiling: 4, status: draft }
           - { id: CM-11-019, title: "Writing a finding that is specific, evidenced and actionable", levelCeiling: 5, status: draft }
-          - { id: CM-11-020, title: "Avoiding findings that are opinion rather than nonconformance", levelCeiling: 5, status: draft }
+          - { id: CM-11-020, title: "Avoiding findings that are opinion rather than nonconformance", levelCeiling: 4, status: draft }
           - { id: CM-11-021, title: "Assessing a proposed root cause and corrective action", levelCeiling: 5, status: draft }
-          - { id: CM-11-022, title: "Verifying effectiveness of a corrective action", levelCeiling: 5, status: draft }
+          - { id: CM-11-022, title: "Verifying effectiveness of a corrective action", levelCeiling: 4, status: draft }
           - { id: CM-11-023, title: "Audit report structure and audience", levelCeiling: 4, status: draft }
-          - { id: CM-11-024, title: "Escalation and unresolved disagreement", levelCeiling: 5, status: draft }
+          - { id: CM-11-024, title: "Escalation and unresolved disagreement", levelCeiling: 4, status: draft }
 
       - id: CM-11-A04
         title: Assessor Competence and Conduct
@@ -60,14 +60,14 @@ domains:
           Governed by ISO/IEC 17011 obligations on accreditation bodies. The
           area the Assessor Competence Dossier is designed to evidence.
         elements:
-          - { id: CM-11-025, title: "Competence requirements for assessors", levelCeiling: 5, status: draft }
+          - { id: CM-11-025, title: "Competence requirements for assessors", levelCeiling: 4, status: draft }
           - { id: CM-11-026, title: "Technical competence for a specific scope of assessment", levelCeiling: 5, status: draft }
           - { id: CM-11-027, title: "Demonstrating and maintaining assessor competence", levelCeiling: 5, status: draft }
-          - { id: CM-11-028, title: "Impartiality, conflict of interest and recusal", levelCeiling: 5, status: draft }
+          - { id: CM-11-028, title: "Impartiality, conflict of interest and recusal", levelCeiling: 4, status: draft }
           - { id: CM-11-029, title: "Confidentiality obligations of an assessor", levelCeiling: 4, status: draft }
           - { id: CM-11-030, title: "Assessor calibration and consistency between assessors", levelCeiling: 5, status: draft }
-          - { id: CM-11-031, title: "Behaviour, authority and the assessor who oversteps", levelCeiling: 5, status: draft }
-          - { id: CM-11-032, title: "Lead assessor responsibilities and team management", levelCeiling: 5, status: draft }
+          - { id: CM-11-031, title: "Behaviour, authority and the assessor who oversteps", levelCeiling: 4, status: draft }
+          - { id: CM-11-032, title: "Lead assessor responsibilities and team management", levelCeiling: 4, status: draft }
           - { id: CM-11-033, title: "Technical expert role distinguished from assessor role", levelCeiling: 4, status: draft }
 
       - id: CM-11-A05
@@ -79,22 +79,22 @@ domains:
           deliberately weighted toward judgement and accountability.
         elements:
           - { id: CM-11-034, title: "What an approved signatory is undertaking", levelCeiling: 5, status: draft }
-          - { id: CM-11-035, title: "Scope of signatory authority and its limits", levelCeiling: 5, status: draft }
-          - { id: CM-11-036, title: "Technical review before signature", levelCeiling: 5, status: draft }
+          - { id: CM-11-035, title: "Scope of signatory authority and its limits", levelCeiling: 4, status: draft }
+          - { id: CM-11-036, title: "Technical review before signature", levelCeiling: 4, status: draft }
           - { id: CM-11-037, title: "Recognising a result that should not be released", levelCeiling: 5, status: draft }
           - { id: CM-11-038, title: "Refusing to sign and the pressure to sign anyway", levelCeiling: 5, status: draft }
-          - { id: CM-11-039, title: "Delegation, deputising and continuity of signatory coverage", levelCeiling: 5, status: draft }
-          - { id: CM-11-040, title: "Becoming an approved signatory: evidence and appointment", levelCeiling: 5, status: draft }
-          - { id: CM-11-041, title: "Maintaining signatory competence and periodic reauthorisation", levelCeiling: 5, status: draft }
+          - { id: CM-11-039, title: "Delegation, deputising and continuity of signatory coverage", levelCeiling: 4, status: draft }
+          - { id: CM-11-040, title: "Becoming an approved signatory: evidence and appointment", levelCeiling: 4, status: draft }
+          - { id: CM-11-041, title: "Maintaining signatory competence and periodic reauthorisation", levelCeiling: 4, status: draft }
           - { id: CM-11-042, title: "Liability, professional responsibility and personal exposure", levelCeiling: 5, status: draft }
 
       - id: CM-11-A06
         title: Building and Running an Internal Audit Function
         status: draft
         elements:
-          - { id: CM-11-043, title: "Establishing an internal audit programme", levelCeiling: 5, status: draft }
-          - { id: CM-11-044, title: "Selecting and developing internal auditors", levelCeiling: 5, status: draft }
-          - { id: CM-11-045, title: "Independence within a small laboratory", levelCeiling: 5, status: draft }
+          - { id: CM-11-043, title: "Establishing an internal audit programme", levelCeiling: 4, status: draft }
+          - { id: CM-11-044, title: "Selecting and developing internal auditors", levelCeiling: 4, status: draft }
+          - { id: CM-11-045, title: "Independence within a small laboratory", levelCeiling: 4, status: draft }
           - { id: CM-11-046, title: "Audit checklists: their value and their failure mode", levelCeiling: 4, status: draft }
           - { id: CM-11-047, title: "Making internal audit useful rather than ceremonial", levelCeiling: 5, status: draft }
-          - { id: CM-11-048, title: "Supplier and subcontractor audit", levelCeiling: 5, status: draft }
+          - { id: CM-11-048, title: "Supplier and subcontractor audit", levelCeiling: 4, status: draft }

@@ -18,16 +18,16 @@ domains:
         title: Professional Ethics
         status: draft
         elements:
-          - { id: CM-19-001, title: "Professional obligations of a metrologist", levelCeiling: 4, status: draft }
+          - { id: CM-19-001, title: "Professional obligations of a metrologist", levelCeiling: 3, status: draft }
           - { id: CM-19-002, title: "Honesty in reporting and the duty not to mislead", levelCeiling: 5, status: draft }
           - { id: CM-19-003, title: "Data selection, exclusion and the boundary with fabrication", levelCeiling: 5, status: draft }
-          - { id: CM-19-004, title: "Pressure to report a favourable result", levelCeiling: 5, status: draft }
-          - { id: CM-19-005, title: "Conflicts of interest and impartiality in practice", levelCeiling: 5, status: draft }
-          - { id: CM-19-006, title: "Competence limits and declining work you cannot do", levelCeiling: 5, status: draft }
-          - { id: CM-19-007, title: "Confidentiality and its limits", levelCeiling: 4, status: draft }
-          - { id: CM-19-008, title: "Raising concerns and whistleblowing", levelCeiling: 5, status: draft }
-          - { id: CM-19-009, title: "Research integrity and authorship", levelCeiling: 4, status: draft }
-          - { id: CM-19-010, title: "Case studies in measurement-related failure and misconduct", levelCeiling: 5, status: draft }
+          - { id: CM-19-004, title: "Pressure to report a favourable result", levelCeiling: 4, status: draft }
+          - { id: CM-19-005, title: "Conflicts of interest and impartiality in practice", levelCeiling: 4, status: draft }
+          - { id: CM-19-006, title: "Competence limits and declining work you cannot do", levelCeiling: 4, status: draft }
+          - { id: CM-19-007, title: "Confidentiality and its limits", levelCeiling: 3, status: draft }
+          - { id: CM-19-008, title: "Raising concerns and whistleblowing", levelCeiling: 4, status: draft }
+          - { id: CM-19-009, title: "Research integrity and authorship", levelCeiling: 3, status: draft }
+          - { id: CM-19-010, title: "Case studies in measurement-related failure and misconduct", levelCeiling: 4, status: draft }
 
       - id: CM-19-A02
         title: Legal Metrology Frameworks
@@ -50,11 +50,11 @@ domains:
           - { id: CM-19-020, title: "Trade measurement and weights and measures enforcement", levelCeiling: 3, status: draft }
           - { id: CM-19-021, title: "Prepackaged goods and average quantity systems", levelCeiling: 4, status: draft }
           - { id: CM-19-022, title: "Utility metering: electricity, gas, water and heat", levelCeiling: 4, status: draft }
-          - { id: CM-19-023, title: "Fuel dispensing and custody transfer", levelCeiling: 4, status: draft }
+          - { id: CM-19-023, title: "Fuel dispensing and custody transfer", levelCeiling: 3, status: draft }
           - { id: CM-19-024, title: "Medical and clinical measurement regulation", levelCeiling: 4, status: draft }
           - { id: CM-19-025, title: "Pharmaceutical GMP and measurement obligations", levelCeiling: 4, status: draft }
           - { id: CM-19-026, title: "Environmental and emissions monitoring requirements", levelCeiling: 4, status: draft }
-          - { id: CM-19-027, title: "Road safety, speed and breath alcohol measurement", levelCeiling: 4, status: draft }
+          - { id: CM-19-027, title: "Road safety, speed and breath alcohol measurement", levelCeiling: 3, status: draft }
           - { id: CM-19-028, title: "Nuclear, radiation and safety-critical measurement regimes", levelCeiling: 4, status: draft }
           - { id: CM-19-029, title: "Aviation, defence and space measurement requirements", levelCeiling: 4, status: draft }
 
@@ -62,12 +62,12 @@ domains:
         title: Measurement in Law and Dispute
         status: draft
         elements:
-          - { id: CM-19-030, title: "Measurement evidence in legal proceedings", levelCeiling: 5, status: draft }
+          - { id: CM-19-030, title: "Measurement evidence in legal proceedings", levelCeiling: 4, status: draft }
           - { id: CM-19-031, title: "Chain of custody for measured items and data", levelCeiling: 4, status: draft }
           - { id: CM-19-032, title: "Acting as a technical or expert witness", levelCeiling: 5, status: draft }
-          - { id: CM-19-033, title: "Uncertainty and the burden of proof", levelCeiling: 5, status: draft }
-          - { id: CM-19-034, title: "Contractual disputes over measurement results", levelCeiling: 5, status: draft }
-          - { id: CM-19-035, title: "Liability, negligence and professional exposure", levelCeiling: 5, status: draft }
+          - { id: CM-19-033, title: "Uncertainty and the burden of proof", levelCeiling: 4, status: draft }
+          - { id: CM-19-034, title: "Contractual disputes over measurement results", levelCeiling: 4, status: draft }
+          - { id: CM-19-035, title: "Liability, negligence and professional exposure", levelCeiling: 4, status: draft }
           - { id: CM-19-036, title: "Record retention for legal and regulatory purposes", levelCeiling: 4, status: draft }
 
       - id: CM-19-A05
@@ -77,13 +77,13 @@ domains:
           Obligations that constrain how measurement information may be handled
           and moved, which metrologists frequently encounter and rarely study.
         elements:
-          - { id: CM-19-037, title: "Export control and controlled technology in metrology", levelCeiling: 4, status: draft }
-          - { id: CM-19-038, title: "Classified and restricted measurement environments", levelCeiling: 4, status: draft }
-          - { id: CM-19-039, title: "Personal data protection in competence and personnel records", levelCeiling: 4, status: draft }
-          - { id: CM-19-040, title: "Cross-border transfer of data and instruments", levelCeiling: 4, status: draft }
+          - { id: CM-19-037, title: "Export control and controlled technology in metrology", levelCeiling: 3, status: draft }
+          - { id: CM-19-038, title: "Classified and restricted measurement environments", levelCeiling: 3, status: draft }
+          - { id: CM-19-039, title: "Personal data protection in competence and personnel records", levelCeiling: 3, status: draft }
+          - { id: CM-19-040, title: "Cross-border transfer of data and instruments", levelCeiling: 3, status: draft }
           - { id: CM-19-041, title: "Intellectual property in methods, data and procedures", levelCeiling: 4, status: draft }
           - { id: CM-19-042, title: "Standards copyright and lawful use of normative documents", levelCeiling: 4, status: draft }
-          - { id: CM-19-043, title: "Anti-bribery and integrity in accreditation and certification", levelCeiling: 4, status: draft }
+          - { id: CM-19-043, title: "Anti-bribery and integrity in accreditation and certification", levelCeiling: 3, status: draft }
 
       - id: CM-19-A06
         title: Measurement, Society and Sustainability
@@ -91,6 +91,6 @@ domains:
         elements:
           - { id: CM-19-044, title: "Measurement in public trust and consumer protection", levelCeiling: 3, status: draft }
           - { id: CM-19-045, title: "Metrology for climate and environmental accountability", levelCeiling: 4, status: draft }
-          - { id: CM-19-046, title: "Measurement equity and access in developing metrology systems", levelCeiling: 4, status: draft }
+          - { id: CM-19-046, title: "Measurement equity and access in developing metrology systems", levelCeiling: 3, status: draft }
           - { id: CM-19-047, title: "Sustainability of laboratory operations", levelCeiling: 3, status: draft }
-          - { id: CM-19-048, title: "Measurement claims in marketing and advertising", levelCeiling: 4, status: draft }
+          - { id: CM-19-048, title: "Measurement claims in marketing and advertising", levelCeiling: 3, status: draft }

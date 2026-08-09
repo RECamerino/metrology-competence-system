@@ -52,14 +52,14 @@ domains:
           internationally, and how a laboratory reads and uses it.
         elements:
           - { id: CM-04-017, title: "Purpose and structure of the CIPM MRA", levelCeiling: 4, status: draft }
-          - { id: CM-04-018, title: "Key comparisons and supplementary comparisons", levelCeiling: 4, status: draft }
+          - { id: CM-04-018, title: "Key comparisons and supplementary comparisons", levelCeiling: 3, status: draft }
           - { id: CM-04-019, title: "Key comparison reference values and degrees of equivalence", levelCeiling: 5, status: draft }
           - { id: CM-04-020, title: "The BIPM Key Comparison Database and how to search it", levelCeiling: 3, status: draft }
           - { id: CM-04-021, title: "Calibration and Measurement Capabilities: what a CMC asserts", levelCeiling: 5, status: draft }
           - { id: CM-04-022, title: "CMC review and approval process", levelCeiling: 4, status: draft }
           - { id: CM-04-023, title: "Reading a CMC entry and judging whether it meets your need", levelCeiling: 4, status: draft }
           - { id: CM-04-024, title: "Mutual recognition and the acceptance of foreign certificates", levelCeiling: 4, status: draft }
-          - { id: CM-04-025, title: "Limits of the MRA and what it does not guarantee", levelCeiling: 5, status: draft }
+          - { id: CM-04-025, title: "Limits of the MRA and what it does not guarantee", levelCeiling: 4, status: draft }
 
       - id: CM-04-A04
         title: Reference Materials
@@ -69,7 +69,7 @@ domains:
           covered in depth in DP-16 and DP-17; this area covers the concepts
           every metrologist needs.
         elements:
-          - { id: CM-04-026, title: "Reference materials and certified reference materials distinguished", levelCeiling: 4, status: draft }
+          - { id: CM-04-026, title: "Reference materials and certified reference materials distinguished", levelCeiling: 3, status: draft }
           - { id: CM-04-027, title: "Certified values, property values and their uncertainties", levelCeiling: 4, status: draft }
           - { id: CM-04-028, title: "Commutability and matrix effects", levelCeiling: 5, status: draft }
           - { id: CM-04-029, title: "Homogeneity and stability assessment", levelCeiling: 5, status: draft }
@@ -87,10 +87,10 @@ domains:
           - { id: CM-04-033, title: "What makes a standard intrinsic", levelCeiling: 4, status: draft }
           - { id: CM-04-034, title: "Josephson voltage standards", levelCeiling: 5, status: draft }
           - { id: CM-04-035, title: "Quantum Hall resistance standards", levelCeiling: 5, status: draft }
-          - { id: CM-04-036, title: "Atomic frequency standards as intrinsic references", levelCeiling: 5, status: draft }
-          - { id: CM-04-037, title: "Fixed points and thermometric intrinsic standards", levelCeiling: 5, status: draft }
-          - { id: CM-04-038, title: "Stabilised lasers and optical frequency references", levelCeiling: 5, status: draft }
-          - { id: CM-04-039, title: "Traceability claims for an intrinsic standard and their evidence", levelCeiling: 5, status: draft }
+          - { id: CM-04-036, title: "Atomic frequency standards as intrinsic references", levelCeiling: 4, status: draft }
+          - { id: CM-04-037, title: "Fixed points and thermometric intrinsic standards", levelCeiling: 4, status: draft }
+          - { id: CM-04-038, title: "Stabilised lasers and optical frequency references", levelCeiling: 4, status: draft }
+          - { id: CM-04-039, title: "Traceability claims for an intrinsic standard and their evidence", levelCeiling: 4, status: draft }
           - { id: CM-04-040, title: "Quantum-based dissemination and the changing role of NMIs", levelCeiling: 5, status: draft }
 
       - id: CM-04-A06

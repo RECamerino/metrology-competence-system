@@ -19,11 +19,11 @@ domains:
         status: draft
         summary: What the framework claims, what it assumes, and where it is contested.
         elements:
-          - { id: CM-03-001, title: "Scope and intent of the GUM", levelCeiling: 4, status: draft }
+          - { id: CM-03-001, title: "Scope and intent of the GUM", levelCeiling: 3, status: draft }
           - { id: CM-03-002, title: "The uncertainty approach contrasted with the error approach", levelCeiling: 4, status: draft }
-          - { id: CM-03-003, title: "Standard uncertainty as a standard deviation", levelCeiling: 4, status: draft }
+          - { id: CM-03-003, title: "Standard uncertainty as a standard deviation", levelCeiling: 3, status: draft }
           - { id: CM-03-004, title: "Type A and Type B: what the distinction does and does not mean", levelCeiling: 4, status: draft }
-          - { id: CM-03-005, title: "Coverage probability and level of confidence", levelCeiling: 4, status: draft }
+          - { id: CM-03-005, title: "Coverage probability and level of confidence", levelCeiling: 3, status: draft }
           - { id: CM-03-006, title: "Assumptions underlying the GUM framework", levelCeiling: 5, status: draft }
           - { id: CM-03-007, title: "The GUM family of documents and their relationship", levelCeiling: 3, status: draft }
           - { id: CM-03-008, title: "Accreditation and regulatory expectations for uncertainty", levelCeiling: 4, status: draft }
@@ -46,7 +46,7 @@ domains:
           - { id: CM-03-017, title: "Modelling influence quantities", levelCeiling: 4, status: draft }
           - { id: CM-03-018, title: "Cause-and-effect analysis for uncertainty sources", levelCeiling: 4, status: draft }
           - { id: CM-03-019, title: "Completeness: finding the sources you have missed", levelCeiling: 5, status: draft }
-          - { id: CM-03-020, title: "Validating a measurement model against reality", levelCeiling: 5, status: draft }
+          - { id: CM-03-020, title: "Validating a measurement model against reality", levelCeiling: 4, status: draft }
           - { id: CM-03-021, title: "Nonlinear models and when linearisation fails", levelCeiling: 5, status: draft }
           - { id: CM-03-022, title: "Implicit, staged and chained measurement models", levelCeiling: 5, status: draft }
 
@@ -60,7 +60,7 @@ domains:
           - { id: CM-03-025, title: "Degrees of freedom in Type A evaluation", levelCeiling: 4, status: draft }
           - { id: CM-03-026, title: "Pooled estimates of variance", levelCeiling: 4, status: draft }
           - { id: CM-03-027, title: "Analysis of variance for separating uncertainty components", levelCeiling: 5, status: draft }
-          - { id: CM-03-028, title: "Type A evaluation from designed experiments", levelCeiling: 5, status: draft }
+          - { id: CM-03-028, title: "Type A evaluation from designed experiments", levelCeiling: 4, status: draft }
           - { id: CM-03-029, title: "Sample size and the reliability of a Type A estimate", levelCeiling: 4, status: draft }
           - { id: CM-03-030, title: "Serial correlation and non-independent observations", levelCeiling: 5, status: draft }
           - { id: CM-03-031, title: "Estimating covariance from observed data", levelCeiling: 5, status: draft }
@@ -76,14 +76,14 @@ domains:
         elements:
           - { id: CM-03-033, title: "Sources of Type B information and their reliability", levelCeiling: 4, status: draft }
           - { id: CM-03-034, title: "Using a calibration certificate as a Type B input", levelCeiling: 4, status: draft }
-          - { id: CM-03-035, title: "Using manufacturer specifications as a Type B input", levelCeiling: 5, status: draft }
+          - { id: CM-03-035, title: "Using manufacturer specifications as a Type B input", levelCeiling: 4, status: draft }
           - { id: CM-03-036, title: "Assigning a rectangular distribution", levelCeiling: 4, status: draft }
           - { id: CM-03-037, title: "Assigning a triangular distribution", levelCeiling: 4, status: draft }
           - { id: CM-03-038, title: "Assigning a normal distribution from a stated confidence", levelCeiling: 4, status: draft }
           - { id: CM-03-039, title: "Assigning a U-shaped or arcsine distribution", levelCeiling: 4, status: draft }
           - { id: CM-03-040, title: "Choosing between distributions and defending the choice", levelCeiling: 5, status: draft }
           - { id: CM-03-041, title: "Resolution and quantisation contributions", levelCeiling: 4, status: draft }
-          - { id: CM-03-042, title: "Drift and stability contributions between calibrations", levelCeiling: 5, status: draft }
+          - { id: CM-03-042, title: "Drift and stability contributions between calibrations", levelCeiling: 4, status: draft }
           - { id: CM-03-043, title: "Environmental effects as Type B contributions", levelCeiling: 4, status: draft }
           - { id: CM-03-044, title: "Operator and procedural effects", levelCeiling: 4, status: draft }
           - { id: CM-03-045, title: "Effective degrees of freedom for Type B estimates", levelCeiling: 5, status: draft }
@@ -130,8 +130,8 @@ domains:
         elements:
           - { id: CM-03-067, title: "Propagation of distributions contrasted with propagation of uncertainty", levelCeiling: 5, status: draft }
           - { id: CM-03-068, title: "The Monte Carlo method for uncertainty evaluation", levelCeiling: 5, status: draft }
-          - { id: CM-03-069, title: "Assigning probability density functions to input quantities", levelCeiling: 5, status: draft }
-          - { id: CM-03-070, title: "Sampling, convergence and adaptive procedures", levelCeiling: 5, status: draft }
+          - { id: CM-03-069, title: "Assigning probability density functions to input quantities", levelCeiling: 4, status: draft }
+          - { id: CM-03-070, title: "Sampling, convergence and adaptive procedures", levelCeiling: 4, status: draft }
           - { id: CM-03-071, title: "Deriving coverage intervals from a Monte Carlo distribution", levelCeiling: 5, status: draft }
           - { id: CM-03-072, title: "Shortest versus probabilistically symmetric coverage intervals", levelCeiling: 5, status: draft }
           - { id: CM-03-073, title: "Validating a GUM result against a Monte Carlo result", levelCeiling: 5, status: draft }
@@ -155,7 +155,7 @@ domains:
           - { id: CM-03-082, title: "Identifying dominant terms and simplifying defensibly", levelCeiling: 4, status: draft }
           - { id: CM-03-083, title: "Best measurement capability and derivation of a CMC", levelCeiling: 5, status: draft }
           - { id: CM-03-084, title: "Uncertainty across a scope of accreditation", levelCeiling: 5, status: draft }
-          - { id: CM-03-085, title: "Uncertainty for a range rather than a single point", levelCeiling: 5, status: draft }
+          - { id: CM-03-085, title: "Uncertainty for a range rather than a single point", levelCeiling: 4, status: draft }
           - { id: CM-03-086, title: "Reviewing another person's uncertainty budget", levelCeiling: 5, status: draft }
           - { id: CM-03-087, title: "Common budget defects and how assessors find them", levelCeiling: 5, status: draft }
           - { id: CM-03-088, title: "Maintaining budgets as equipment and methods change", levelCeiling: 4, status: draft }
@@ -192,4 +192,4 @@ domains:
           - { id: CM-03-101, title: "Least-squares estimation and curve-fit uncertainty", levelCeiling: 5, status: draft }
           - { id: CM-03-102, title: "Uncertainty in interpolation and calibration curves", levelCeiling: 5, status: draft }
           - { id: CM-03-103, title: "Uncertainty of a result derived from a machine-learning model", levelCeiling: 5, status: draft }
-          - { id: CM-03-104, title: "The GUM revision effort and the state of the debate", levelCeiling: 5, status: draft }
+          - { id: CM-03-104, title: "The GUM revision effort and the state of the debate", levelCeiling: 4, status: draft }

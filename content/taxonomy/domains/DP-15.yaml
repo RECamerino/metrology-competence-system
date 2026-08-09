@@ -20,11 +20,11 @@ domains:
         elements:
           - { id: DP-15-001, title: "Types of ionising radiation and their interactions", levelCeiling: 4, status: draft }
           - { id: DP-15-002, title: "Activity, decay and half-life", levelCeiling: 4, status: draft }
-          - { id: DP-15-003, title: "Fluence, kerma and absorbed dose", levelCeiling: 5, status: draft }
+          - { id: DP-15-003, title: "Fluence, kerma and absorbed dose", levelCeiling: 4, status: draft }
           - { id: DP-15-004, title: "Equivalent dose, effective dose and radiation weighting", levelCeiling: 4, status: draft }
           - { id: DP-15-005, title: "Operational quantities for radiation protection", levelCeiling: 4, status: draft }
           - { id: DP-15-006, title: "Charged particle equilibrium and cavity theory", levelCeiling: 5, status: draft }
-          - { id: DP-15-007, title: "Stopping power, attenuation and build-up", levelCeiling: 5, status: draft }
+          - { id: DP-15-007, title: "Stopping power, attenuation and build-up", levelCeiling: 4, status: draft }
           - { id: DP-15-008, title: "Why absorbed dose in tissue is usually inferred rather than measured", levelCeiling: 5, status: draft }
 
       - id: DP-15-A02
@@ -34,28 +34,28 @@ domains:
           - { id: DP-15-009, title: "Ionisation chambers", levelCeiling: 5, status: draft }
           - { id: DP-15-010, title: "Proportional counters and Geiger-Muller tubes", levelCeiling: 4, status: draft }
           - { id: DP-15-011, title: "Scintillation detectors and photomultipliers", levelCeiling: 4, status: draft }
-          - { id: DP-15-012, title: "Semiconductor detectors: HPGe, silicon and CdZnTe", levelCeiling: 5, status: draft }
-          - { id: DP-15-013, title: "Neutron detection techniques", levelCeiling: 5, status: draft }
-          - { id: DP-15-014, title: "Pulse processing, shaping and pile-up", levelCeiling: 5, status: draft }
+          - { id: DP-15-012, title: "Semiconductor detectors: HPGe, silicon and CdZnTe", levelCeiling: 4, status: draft }
+          - { id: DP-15-013, title: "Neutron detection techniques", levelCeiling: 4, status: draft }
+          - { id: DP-15-014, title: "Pulse processing, shaping and pile-up", levelCeiling: 4, status: draft }
           - { id: DP-15-015, title: "Dead time and its correction", levelCeiling: 5, status: draft }
-          - { id: DP-15-016, title: "Energy resolution and detector efficiency", levelCeiling: 5, status: draft }
-          - { id: DP-15-017, title: "Energy and angular dependence of detector response", levelCeiling: 5, status: draft }
-          - { id: DP-15-018, title: "Background, shielding and low-level counting", levelCeiling: 5, status: draft }
+          - { id: DP-15-016, title: "Energy resolution and detector efficiency", levelCeiling: 4, status: draft }
+          - { id: DP-15-017, title: "Energy and angular dependence of detector response", levelCeiling: 4, status: draft }
+          - { id: DP-15-018, title: "Background, shielding and low-level counting", levelCeiling: 4, status: draft }
 
       - id: DP-15-A03
         title: Standards, Calibration and Traceability
         status: draft
         elements:
-          - { id: DP-15-019, title: "Primary standards for air kerma and absorbed dose", levelCeiling: 5, status: draft }
+          - { id: DP-15-019, title: "Primary standards for air kerma and absorbed dose", levelCeiling: 4, status: draft }
           - { id: DP-15-020, title: "Graphite and water calorimetry", levelCeiling: 5, status: draft }
-          - { id: DP-15-021, title: "Free air ionisation chambers", levelCeiling: 5, status: draft }
-          - { id: DP-15-022, title: "Reference radiation fields and their establishment", levelCeiling: 5, status: draft }
+          - { id: DP-15-021, title: "Free air ionisation chambers", levelCeiling: 4, status: draft }
+          - { id: DP-15-022, title: "Reference radiation fields and their establishment", levelCeiling: 4, status: draft }
           - { id: DP-15-023, title: "Calibration of dosimeters and survey instruments", levelCeiling: 4, status: draft }
-          - { id: DP-15-024, title: "Radionuclide standardisation and activity measurement", levelCeiling: 5, status: draft }
+          - { id: DP-15-024, title: "Radionuclide standardisation and activity measurement", levelCeiling: 4, status: draft }
           - { id: DP-15-025, title: "Radioactive reference sources and their certification", levelCeiling: 4, status: draft }
           - { id: DP-15-026, title: "Secondary standard dosimetry laboratories", levelCeiling: 4, status: draft }
           - { id: DP-15-027, title: "Uncertainty evaluation with counting statistics", levelCeiling: 5, status: draft }
-          - { id: DP-15-028, title: "Traceability chains in radiation dosimetry", levelCeiling: 5, status: draft }
+          - { id: DP-15-028, title: "Traceability chains in radiation dosimetry", levelCeiling: 4, status: draft }
 
       - id: DP-15-A04
         title: Dosimetry Practice
@@ -66,7 +66,7 @@ domains:
           - { id: DP-15-031, title: "Area monitoring and survey instrumentation", levelCeiling: 4, status: draft }
           - { id: DP-15-032, title: "Environmental radiation monitoring", levelCeiling: 4, status: draft }
           - { id: DP-15-033, title: "Contamination monitoring and surface activity", levelCeiling: 4, status: draft }
-          - { id: DP-15-034, title: "Internal dosimetry and bioassay", levelCeiling: 5, status: draft }
+          - { id: DP-15-034, title: "Internal dosimetry and bioassay", levelCeiling: 4, status: draft }
           - { id: DP-15-035, title: "Neutron dosimetry and its particular difficulties", levelCeiling: 5, status: draft }
           - { id: DP-15-036, title: "Dosimetry service accreditation and performance testing", levelCeiling: 4, status: draft }
 
@@ -75,13 +75,13 @@ domains:
         status: draft
         elements:
           - { id: DP-15-037, title: "Radiotherapy dosimetry and reference dosimetry protocols", levelCeiling: 5, status: draft }
-          - { id: DP-15-038, title: "Treatment machine output calibration", levelCeiling: 5, status: draft }
-          - { id: DP-15-039, title: "Relative dosimetry, phantoms and beam data", levelCeiling: 5, status: draft }
+          - { id: DP-15-038, title: "Treatment machine output calibration", levelCeiling: 4, status: draft }
+          - { id: DP-15-039, title: "Relative dosimetry, phantoms and beam data", levelCeiling: 4, status: draft }
           - { id: DP-15-040, title: "Diagnostic radiology dosimetry and dose indices", levelCeiling: 4, status: draft }
           - { id: DP-15-041, title: "Nuclear medicine activity measurement and dose calibrators", levelCeiling: 4, status: draft }
-          - { id: DP-15-042, title: "Brachytherapy source strength measurement", levelCeiling: 5, status: draft }
+          - { id: DP-15-042, title: "Brachytherapy source strength measurement", levelCeiling: 4, status: draft }
           - { id: DP-15-043, title: "Industrial radiography and gauging measurement", levelCeiling: 4, status: draft }
           - { id: DP-15-044, title: "Radiation processing and sterilisation dosimetry", levelCeiling: 4, status: draft }
-          - { id: DP-15-045, title: "Nuclear power plant instrumentation and in-core measurement", levelCeiling: 5, status: draft }
+          - { id: DP-15-045, title: "Nuclear power plant instrumentation and in-core measurement", levelCeiling: 4, status: draft }
           - { id: DP-15-046, title: "Nuclear material accountancy and safeguards measurement", levelCeiling: 5, status: draft }
-          - { id: DP-15-047, title: "Decommissioning and waste characterisation measurement", levelCeiling: 5, status: draft }
+          - { id: DP-15-047, title: "Decommissioning and waste characterisation measurement", levelCeiling: 4, status: draft }

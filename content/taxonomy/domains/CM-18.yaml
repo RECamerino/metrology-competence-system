@@ -20,12 +20,12 @@ domains:
           - { id: CM-18-001, title: "Defining scope, deliverables and acceptance criteria", levelCeiling: 4, status: draft }
           - { id: CM-18-002, title: "Work breakdown and estimation", levelCeiling: 4, status: draft }
           - { id: CM-18-003, title: "Scheduling, dependencies and critical path", levelCeiling: 4, status: draft }
-          - { id: CM-18-004, title: "Resource planning and allocation", levelCeiling: 4, status: draft }
-          - { id: CM-18-005, title: "Risk identification, assessment and mitigation", levelCeiling: 5, status: draft }
-          - { id: CM-18-006, title: "Progress tracking and honest status reporting", levelCeiling: 4, status: draft }
-          - { id: CM-18-007, title: "Change control and scope management", levelCeiling: 4, status: draft }
-          - { id: CM-18-008, title: "Project closure and lessons learned", levelCeiling: 4, status: draft }
-          - { id: CM-18-009, title: "Iterative and adaptive delivery approaches", levelCeiling: 4, status: draft }
+          - { id: CM-18-004, title: "Resource planning and allocation", levelCeiling: 3, status: draft }
+          - { id: CM-18-005, title: "Risk identification, assessment and mitigation", levelCeiling: 4, status: draft }
+          - { id: CM-18-006, title: "Progress tracking and honest status reporting", levelCeiling: 3, status: draft }
+          - { id: CM-18-007, title: "Change control and scope management", levelCeiling: 3, status: draft }
+          - { id: CM-18-008, title: "Project closure and lessons learned", levelCeiling: 3, status: draft }
+          - { id: CM-18-009, title: "Iterative and adaptive delivery approaches", levelCeiling: 3, status: draft }
 
       - id: CM-18-A02
         title: The Business Case for Measurement
@@ -35,22 +35,22 @@ domains:
           is funded or cut.
         elements:
           - { id: CM-18-010, title: "Cost of poor measurement quantified", levelCeiling: 5, status: draft }
-          - { id: CM-18-011, title: "Cost of quality and the economics of prevention", levelCeiling: 5, status: draft }
-          - { id: CM-18-012, title: "Building a capital business case for measurement capability", levelCeiling: 5, status: draft }
-          - { id: CM-18-013, title: "Return on investment, payback and total cost of ownership", levelCeiling: 4, status: draft }
-          - { id: CM-18-014, title: "Make or buy analysis for calibration capability", levelCeiling: 5, status: draft }
-          - { id: CM-18-015, title: "Quantifying the value of reduced measurement uncertainty", levelCeiling: 5, status: draft }
-          - { id: CM-18-016, title: "Presenting a technical case in financial terms", levelCeiling: 5, status: draft }
+          - { id: CM-18-011, title: "Cost of quality and the economics of prevention", levelCeiling: 4, status: draft }
+          - { id: CM-18-012, title: "Building a capital business case for measurement capability", levelCeiling: 4, status: draft }
+          - { id: CM-18-013, title: "Return on investment, payback and total cost of ownership", levelCeiling: 3, status: draft }
+          - { id: CM-18-014, title: "Make or buy analysis for calibration capability", levelCeiling: 4, status: draft }
+          - { id: CM-18-015, title: "Quantifying the value of reduced measurement uncertainty", levelCeiling: 4, status: draft }
+          - { id: CM-18-016, title: "Presenting a technical case in financial terms", levelCeiling: 4, status: draft }
           - { id: CM-18-017, title: "Defending a metrology budget under pressure", levelCeiling: 5, status: draft }
 
       - id: CM-18-A03
         title: Operations and Performance Management
         status: draft
         elements:
-          - { id: CM-18-018, title: "Defining meaningful performance indicators for a laboratory", levelCeiling: 5, status: draft }
-          - { id: CM-18-019, title: "Turnaround, throughput and utilisation", levelCeiling: 4, status: draft }
-          - { id: CM-18-020, title: "Capacity planning and demand forecasting", levelCeiling: 5, status: draft }
-          - { id: CM-18-021, title: "Costing and pricing calibration services", levelCeiling: 5, status: draft }
+          - { id: CM-18-018, title: "Defining meaningful performance indicators for a laboratory", levelCeiling: 4, status: draft }
+          - { id: CM-18-019, title: "Turnaround, throughput and utilisation", levelCeiling: 3, status: draft }
+          - { id: CM-18-020, title: "Capacity planning and demand forecasting", levelCeiling: 4, status: draft }
+          - { id: CM-18-021, title: "Costing and pricing calibration services", levelCeiling: 4, status: draft }
           - { id: CM-18-022, title: "Continuous improvement methods applied to laboratory work", levelCeiling: 4, status: draft }
           - { id: CM-18-023, title: "Lean thinking and waste in measurement processes", levelCeiling: 4, status: draft }
           - { id: CM-18-024, title: "Metrics that distort behaviour when targeted", levelCeiling: 5, status: draft }
@@ -59,35 +59,35 @@ domains:
         title: Stakeholders, Influence and Organisational Position
         status: draft
         elements:
-          - { id: CM-18-025, title: "Identifying stakeholders and their actual interests", levelCeiling: 4, status: draft }
+          - { id: CM-18-025, title: "Identifying stakeholders and their actual interests", levelCeiling: 3, status: draft }
           - { id: CM-18-026, title: "Influence without authority", levelCeiling: 5, status: draft }
-          - { id: CM-18-027, title: "Negotiating requirements and specifications", levelCeiling: 5, status: draft }
-          - { id: CM-18-028, title: "Managing conflict between quality and delivery pressure", levelCeiling: 5, status: draft }
-          - { id: CM-18-029, title: "Where metrology sits in an organisation and why it matters", levelCeiling: 5, status: draft }
-          - { id: CM-18-030, title: "Building a corporate metrology function", levelCeiling: 5, status: draft }
-          - { id: CM-18-031, title: "Standardising measurement practice across multiple sites", levelCeiling: 5, status: draft }
-          - { id: CM-18-032, title: "Working with procurement, engineering and production", levelCeiling: 4, status: draft }
+          - { id: CM-18-027, title: "Negotiating requirements and specifications", levelCeiling: 4, status: draft }
+          - { id: CM-18-028, title: "Managing conflict between quality and delivery pressure", levelCeiling: 4, status: draft }
+          - { id: CM-18-029, title: "Where metrology sits in an organisation and why it matters", levelCeiling: 4, status: draft }
+          - { id: CM-18-030, title: "Building a corporate metrology function", levelCeiling: 4, status: draft }
+          - { id: CM-18-031, title: "Standardising measurement practice across multiple sites", levelCeiling: 4, status: draft }
+          - { id: CM-18-032, title: "Working with procurement, engineering and production", levelCeiling: 3, status: draft }
 
       - id: CM-18-A05
         title: Contracts, Suppliers and Customers
         status: draft
         elements:
-          - { id: CM-18-033, title: "Contract review and identifying undeliverable requirements", levelCeiling: 5, status: draft }
-          - { id: CM-18-034, title: "Specifying measurement requirements in a purchase contract", levelCeiling: 5, status: draft }
-          - { id: CM-18-035, title: "Supplier qualification, monitoring and de-listing", levelCeiling: 5, status: draft }
-          - { id: CM-18-036, title: "Service level agreements for calibration", levelCeiling: 4, status: draft }
-          - { id: CM-18-037, title: "Customer relationship and expectation management", levelCeiling: 4, status: draft }
-          - { id: CM-18-038, title: "Handling complaints and disputed results", levelCeiling: 5, status: draft }
-          - { id: CM-18-039, title: "Commercial confidentiality and competing customers", levelCeiling: 4, status: draft }
+          - { id: CM-18-033, title: "Contract review and identifying undeliverable requirements", levelCeiling: 3, status: draft }
+          - { id: CM-18-034, title: "Specifying measurement requirements in a purchase contract", levelCeiling: 4, status: draft }
+          - { id: CM-18-035, title: "Supplier qualification, monitoring and de-listing", levelCeiling: 4, status: draft }
+          - { id: CM-18-036, title: "Service level agreements for calibration", levelCeiling: 3, status: draft }
+          - { id: CM-18-037, title: "Customer relationship and expectation management", levelCeiling: 3, status: draft }
+          - { id: CM-18-038, title: "Handling complaints and disputed results", levelCeiling: 4, status: draft }
+          - { id: CM-18-039, title: "Commercial confidentiality and competing customers", levelCeiling: 3, status: draft }
 
       - id: CM-18-A06
         title: Leading a Technical Function
         status: draft
         elements:
-          - { id: CM-18-040, title: "Technical leadership contrasted with people management", levelCeiling: 5, status: draft }
+          - { id: CM-18-040, title: "Technical leadership contrasted with people management", levelCeiling: 4, status: draft }
           - { id: CM-18-041, title: "Setting technical direction and strategy", levelCeiling: 5, status: draft }
-          - { id: CM-18-042, title: "Recruiting for metrology roles", levelCeiling: 5, status: draft }
-          - { id: CM-18-043, title: "Retention, progression and the technical career ladder", levelCeiling: 5, status: draft }
-          - { id: CM-18-044, title: "Delegation and holding technical accountability", levelCeiling: 5, status: draft }
-          - { id: CM-18-045, title: "Managing a distributed or multi-site team", levelCeiling: 5, status: draft }
-          - { id: CM-18-046, title: "Leading through a merger, closure or relocation", levelCeiling: 5, status: draft }
+          - { id: CM-18-042, title: "Recruiting for metrology roles", levelCeiling: 3, status: draft }
+          - { id: CM-18-043, title: "Retention, progression and the technical career ladder", levelCeiling: 3, status: draft }
+          - { id: CM-18-044, title: "Delegation and holding technical accountability", levelCeiling: 4, status: draft }
+          - { id: CM-18-045, title: "Managing a distributed or multi-site team", levelCeiling: 4, status: draft }
+          - { id: CM-18-046, title: "Leading through a merger, closure or relocation", levelCeiling: 4, status: draft }

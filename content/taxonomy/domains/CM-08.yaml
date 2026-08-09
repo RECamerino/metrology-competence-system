@@ -17,11 +17,11 @@ domains:
         title: Conformity Assessment Fundamentals
         status: draft
         elements:
-          - { id: CM-08-001, title: "Conformity assessment and the role of measurement within it", levelCeiling: 4, status: draft }
+          - { id: CM-08-001, title: "Conformity assessment and the role of measurement within it", levelCeiling: 3, status: draft }
           - { id: CM-08-002, title: "Specification limits, tolerance and the acceptance interval", levelCeiling: 4, status: draft }
           - { id: CM-08-003, title: "Why a result on the limit is not a decision", levelCeiling: 4, status: draft }
           - { id: CM-08-004, title: "Conformance and non-conformance as probabilistic statements", levelCeiling: 5, status: draft }
-          - { id: CM-08-005, title: "Who owns the decision: laboratory, customer or regulator", levelCeiling: 5, status: draft }
+          - { id: CM-08-005, title: "Who owns the decision: laboratory, customer or regulator", levelCeiling: 4, status: draft }
           - { id: CM-08-006, title: "Consequences of a wrong decision and their asymmetry", levelCeiling: 5, status: draft }
 
       - id: CM-08-A02
@@ -42,15 +42,15 @@ domains:
         title: Measurement Decision Risk Theory
         status: draft
         elements:
-          - { id: CM-08-016, title: "False accept and false reject risk defined", levelCeiling: 5, status: draft }
-          - { id: CM-08-017, title: "Consumer risk and producer risk", levelCeiling: 5, status: draft }
+          - { id: CM-08-016, title: "False accept and false reject risk defined", levelCeiling: 4, status: draft }
+          - { id: CM-08-017, title: "Consumer risk and producer risk", levelCeiling: 4, status: draft }
           - { id: CM-08-018, title: "Specific risk contrasted with global risk", levelCeiling: 5, status: draft }
           - { id: CM-08-019, title: "The prior distribution of the measurand and where it comes from", levelCeiling: 5, status: draft }
           - { id: CM-08-020, title: "In-tolerance probability and end-of-period reliability as priors", levelCeiling: 5, status: draft }
           - { id: CM-08-021, title: "Computing false accept risk", levelCeiling: 5, status: draft }
-          - { id: CM-08-022, title: "Computing false reject risk", levelCeiling: 5, status: draft }
+          - { id: CM-08-022, title: "Computing false reject risk", levelCeiling: 4, status: draft }
           - { id: CM-08-023, title: "Sensitivity of computed risk to prior assumptions", levelCeiling: 5, status: draft }
-          - { id: CM-08-024, title: "Risk analysis under JCGM 106", levelCeiling: 5, status: draft }
+          - { id: CM-08-024, title: "Risk analysis under JCGM 106", levelCeiling: 4, status: draft }
           - { id: CM-08-025, title: "Bayesian formulation of measurement decision risk", levelCeiling: 5, status: draft }
 
       - id: CM-08-A04
@@ -59,12 +59,12 @@ domains:
         elements:
           - { id: CM-08-026, title: "What a guardband is and what it buys", levelCeiling: 4, status: draft }
           - { id: CM-08-027, title: "Guardbanding to a target false accept risk", levelCeiling: 5, status: draft }
-          - { id: CM-08-028, title: "The RDS and other common guardband multipliers", levelCeiling: 5, status: draft }
+          - { id: CM-08-028, title: "The RDS and other common guardband multipliers", levelCeiling: 4, status: draft }
           - { id: CM-08-029, title: "Guardbanding by a fixed fraction of expanded uncertainty", levelCeiling: 4, status: draft }
-          - { id: CM-08-030, title: "Asymmetric guardbands", levelCeiling: 5, status: draft }
+          - { id: CM-08-030, title: "Asymmetric guardbands", levelCeiling: 4, status: draft }
           - { id: CM-08-031, title: "The cost of guardbanding: false rejects and rework", levelCeiling: 5, status: draft }
-          - { id: CM-08-032, title: "Guardbanding in a multi-parameter calibration", levelCeiling: 5, status: draft }
-          - { id: CM-08-033, title: "Explaining a guardband to a customer who sees only failed units", levelCeiling: 5, status: draft }
+          - { id: CM-08-032, title: "Guardbanding in a multi-parameter calibration", levelCeiling: 4, status: draft }
+          - { id: CM-08-033, title: "Explaining a guardband to a customer who sees only failed units", levelCeiling: 4, status: draft }
 
       - id: CM-08-A05
         title: Accuracy Ratios and Legacy Approaches
@@ -76,11 +76,11 @@ domains:
         elements:
           - { id: CM-08-034, title: "Test uncertainty ratio and test accuracy ratio", levelCeiling: 4, status: draft }
           - { id: CM-08-035, title: "The 4:1 ratio requirement and its origins", levelCeiling: 4, status: draft }
-          - { id: CM-08-036, title: "What a ratio rule assumes and when those assumptions fail", levelCeiling: 5, status: draft }
+          - { id: CM-08-036, title: "What a ratio rule assumes and when those assumptions fail", levelCeiling: 4, status: draft }
           - { id: CM-08-037, title: "ANSI/NCSL Z540-1 requirements and their continuing contractual use", levelCeiling: 4, status: draft }
           - { id: CM-08-038, title: "ANSI/NCSLI Z540.3 and the 2 percent false accept requirement", levelCeiling: 5, status: draft }
-          - { id: CM-08-039, title: "Migrating a programme from a ratio rule to a risk-based rule", levelCeiling: 5, status: draft }
-          - { id: CM-08-040, title: "Demonstrating compliance when the ratio cannot be met", levelCeiling: 5, status: draft }
+          - { id: CM-08-039, title: "Migrating a programme from a ratio rule to a risk-based rule", levelCeiling: 4, status: draft }
+          - { id: CM-08-040, title: "Demonstrating compliance when the ratio cannot be met", levelCeiling: 4, status: draft }
 
       - id: CM-08-A06
         title: Risk in Regulation, Sampling and Systems
@@ -89,9 +89,9 @@ domains:
           Boundary: enterprise and quality risk management is CM-10 and CM-18;
           this area is measurement decision risk in its regulatory setting.
         elements:
-          - { id: CM-08-041, title: "Sampling inspection and its interaction with measurement risk", levelCeiling: 5, status: draft }
+          - { id: CM-08-041, title: "Sampling inspection and its interaction with measurement risk", levelCeiling: 4, status: draft }
           - { id: CM-08-042, title: "Risk-based thinking in ISO 9001 and ISO/IEC 17025", levelCeiling: 4, status: draft }
-          - { id: CM-08-043, title: "Measurement risk in safety-critical and regulated products", levelCeiling: 5, status: draft }
+          - { id: CM-08-043, title: "Measurement risk in safety-critical and regulated products", levelCeiling: 4, status: draft }
           - { id: CM-08-044, title: "Legal metrology and conformity in trade", levelCeiling: 4, status: draft }
           - { id: CM-08-045, title: "Aggregating measurement risk across a process chain", levelCeiling: 5, status: draft }
           - { id: CM-08-046, title: "Building the economic case for a measurement capability improvement", levelCeiling: 5, status: draft }

@@ -17,24 +17,24 @@ domains:
         title: Spectroscopic Fundamentals
         status: draft
         elements:
-          - { id: DP-13-001, title: "Wavelength, wavenumber, frequency and energy relationships", levelCeiling: 4, status: draft }
+          - { id: DP-13-001, title: "Wavelength, wavenumber, frequency and energy relationships", levelCeiling: 3, status: draft }
           - { id: DP-13-002, title: "Absorption, emission and scattering processes", levelCeiling: 4, status: draft }
           - { id: DP-13-003, title: "Spectral resolution, bandpass and slit function", levelCeiling: 5, status: draft }
-          - { id: DP-13-004, title: "Line shapes and broadening mechanisms", levelCeiling: 5, status: draft }
+          - { id: DP-13-004, title: "Line shapes and broadening mechanisms", levelCeiling: 4, status: draft }
           - { id: DP-13-005, title: "Beer-Lambert law and its limits of validity", levelCeiling: 4, status: draft }
-          - { id: DP-13-006, title: "Signal to noise and detection limits in spectroscopy", levelCeiling: 5, status: draft }
+          - { id: DP-13-006, title: "Signal to noise and detection limits in spectroscopy", levelCeiling: 4, status: draft }
 
       - id: DP-13-A02
         title: Spectrometers and Their Calibration
         status: draft
         elements:
           - { id: DP-13-007, title: "Dispersive spectrometer architectures", levelCeiling: 4, status: draft }
-          - { id: DP-13-008, title: "Fourier transform spectrometers", levelCeiling: 5, status: draft }
+          - { id: DP-13-008, title: "Fourier transform spectrometers", levelCeiling: 4, status: draft }
           - { id: DP-13-009, title: "Array detectors and their characterisation", levelCeiling: 4, status: draft }
           - { id: DP-13-010, title: "Wavelength calibration and reference standards", levelCeiling: 5, status: draft }
-          - { id: DP-13-011, title: "Photometric and absorbance scale calibration", levelCeiling: 5, status: draft }
-          - { id: DP-13-012, title: "Stray light characterisation and correction", levelCeiling: 5, status: draft }
-          - { id: DP-13-013, title: "Bandwidth effects on measured absorbance", levelCeiling: 5, status: draft }
+          - { id: DP-13-011, title: "Photometric and absorbance scale calibration", levelCeiling: 4, status: draft }
+          - { id: DP-13-012, title: "Stray light characterisation and correction", levelCeiling: 4, status: draft }
+          - { id: DP-13-013, title: "Bandwidth effects on measured absorbance", levelCeiling: 4, status: draft }
           - { id: DP-13-014, title: "Spectrometer verification standards and filters", levelCeiling: 4, status: draft }
           - { id: DP-13-015, title: "Uncertainty evaluation in spectrophotometry", levelCeiling: 5, status: draft }
 
@@ -47,9 +47,9 @@ domains:
           - { id: DP-13-018, title: "Raman spectroscopy", levelCeiling: 4, status: draft }
           - { id: DP-13-019, title: "Fluorescence and luminescence spectroscopy", levelCeiling: 4, status: draft }
           - { id: DP-13-020, title: "Atomic absorption and emission spectroscopy", levelCeiling: 4, status: draft }
-          - { id: DP-13-021, title: "Laser-based absorption and cavity enhanced techniques", levelCeiling: 5, status: draft }
-          - { id: DP-13-022, title: "Frequency comb spectroscopy", levelCeiling: 5, status: draft }
-          - { id: DP-13-023, title: "Hyperspectral imaging", levelCeiling: 5, status: draft }
+          - { id: DP-13-021, title: "Laser-based absorption and cavity enhanced techniques", levelCeiling: 4, status: draft }
+          - { id: DP-13-022, title: "Frequency comb spectroscopy", levelCeiling: 4, status: draft }
+          - { id: DP-13-023, title: "Hyperspectral imaging", levelCeiling: 4, status: draft }
           - { id: DP-13-024, title: "Chemometrics and multivariate spectral calibration", levelCeiling: 5, status: draft }
 
       - id: DP-13-A04
@@ -57,24 +57,24 @@ domains:
         status: draft
         elements:
           - { id: DP-13-025, title: "Laser principles and beam characteristics", levelCeiling: 4, status: draft }
-          - { id: DP-13-026, title: "Beam quality, M-squared and beam profiling", levelCeiling: 5, status: draft }
+          - { id: DP-13-026, title: "Beam quality, M-squared and beam profiling", levelCeiling: 4, status: draft }
           - { id: DP-13-027, title: "Laser power and energy measurement", levelCeiling: 4, status: draft }
-          - { id: DP-13-028, title: "Wavelength and frequency stabilisation", levelCeiling: 5, status: draft }
+          - { id: DP-13-028, title: "Wavelength and frequency stabilisation", levelCeiling: 4, status: draft }
           - { id: DP-13-029, title: "Stabilised lasers as length and frequency standards", levelCeiling: 5, status: draft }
-          - { id: DP-13-030, title: "Optical frequency combs", levelCeiling: 5, status: draft }
-          - { id: DP-13-031, title: "Linewidth and coherence measurement", levelCeiling: 5, status: draft }
-          - { id: DP-13-032, title: "Pulsed laser characterisation", levelCeiling: 5, status: draft }
+          - { id: DP-13-030, title: "Optical frequency combs", levelCeiling: 4, status: draft }
+          - { id: DP-13-031, title: "Linewidth and coherence measurement", levelCeiling: 4, status: draft }
+          - { id: DP-13-032, title: "Pulsed laser characterisation", levelCeiling: 4, status: draft }
           - { id: DP-13-033, title: "Laser safety classification and control measures", levelCeiling: 4, status: draft }
 
       - id: DP-13-A05
         title: Interferometry
         status: draft
         elements:
-          - { id: DP-13-034, title: "Interferometer configurations and their applications", levelCeiling: 5, status: draft }
-          - { id: DP-13-035, title: "Fringe counting and phase interpolation", levelCeiling: 5, status: draft }
-          - { id: DP-13-036, title: "Environmental compensation in interferometry", levelCeiling: 5, status: draft }
-          - { id: DP-13-037, title: "Surface form interferometry", levelCeiling: 5, status: draft }
-          - { id: DP-13-038, title: "White light and low coherence interferometry", levelCeiling: 5, status: draft }
+          - { id: DP-13-034, title: "Interferometer configurations and their applications", levelCeiling: 4, status: draft }
+          - { id: DP-13-035, title: "Fringe counting and phase interpolation", levelCeiling: 4, status: draft }
+          - { id: DP-13-036, title: "Environmental compensation in interferometry", levelCeiling: 4, status: draft }
+          - { id: DP-13-037, title: "Surface form interferometry", levelCeiling: 4, status: draft }
+          - { id: DP-13-038, title: "White light and low coherence interferometry", levelCeiling: 4, status: draft }
           - { id: DP-13-039, title: "Error sources in interferometric measurement", levelCeiling: 5, status: draft }
 
       - id: DP-13-A06
@@ -86,7 +86,7 @@ domains:
           - { id: DP-13-042, title: "Optical time domain reflectometry", levelCeiling: 4, status: draft }
           - { id: DP-13-043, title: "Optical power meter calibration", levelCeiling: 4, status: draft }
           - { id: DP-13-044, title: "Connector loss, return loss and end face quality", levelCeiling: 4, status: draft }
-          - { id: DP-13-045, title: "Dispersion measurement: chromatic and polarisation mode", levelCeiling: 5, status: draft }
+          - { id: DP-13-045, title: "Dispersion measurement: chromatic and polarisation mode", levelCeiling: 4, status: draft }
           - { id: DP-13-046, title: "Optical spectrum analysis for communications", levelCeiling: 4, status: draft }
-          - { id: DP-13-047, title: "Fibre optic sensing and distributed measurement", levelCeiling: 5, status: draft }
+          - { id: DP-13-047, title: "Fibre optic sensing and distributed measurement", levelCeiling: 4, status: draft }
           - { id: DP-13-048, title: "Uncertainty in optical fibre measurement", levelCeiling: 5, status: draft }

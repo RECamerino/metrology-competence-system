@@ -23,7 +23,7 @@ domains:
           - { id: CM-22-004, title: "Fatigue, shift work and circadian effects on performance", levelCeiling: 4, status: draft }
           - { id: CM-22-005, title: "Expectation bias and reading what you expect to see", levelCeiling: 5, status: draft }
           - { id: CM-22-006, title: "Anchoring, rounding habits and digit preference", levelCeiling: 4, status: draft }
-          - { id: CM-22-007, title: "Blinding and masking to control observer bias", levelCeiling: 5, status: draft }
+          - { id: CM-22-007, title: "Blinding and masking to control observer bias", levelCeiling: 4, status: draft }
           - { id: CM-22-008, title: "Quantifying operator contribution to uncertainty", levelCeiling: 5, status: draft }
 
       - id: CM-22-A02
@@ -32,11 +32,11 @@ domains:
         elements:
           - { id: CM-22-009, title: "Slips, lapses, mistakes and violations distinguished", levelCeiling: 4, status: draft }
           - { id: CM-22-010, title: "Latent conditions and the systemic origin of human error", levelCeiling: 5, status: draft }
-          - { id: CM-22-011, title: "Error-tolerant procedure and interface design", levelCeiling: 5, status: draft }
+          - { id: CM-22-011, title: "Error-tolerant procedure and interface design", levelCeiling: 4, status: draft }
           - { id: CM-22-012, title: "Checklists, independent verification and double-checking", levelCeiling: 4, status: draft }
-          - { id: CM-22-013, title: "Automation surprise and mode confusion", levelCeiling: 5, status: draft }
-          - { id: CM-22-014, title: "Just culture and reporting without blame", levelCeiling: 5, status: draft }
-          - { id: CM-22-015, title: "Investigating an error without stopping at operator fault", levelCeiling: 5, status: draft }
+          - { id: CM-22-013, title: "Automation surprise and mode confusion", levelCeiling: 4, status: draft }
+          - { id: CM-22-014, title: "Just culture and reporting without blame", levelCeiling: 4, status: draft }
+          - { id: CM-22-015, title: "Investigating an error without stopping at operator fault", levelCeiling: 4, status: draft }
           - { id: CM-22-016, title: "Workload, time pressure and their effect on measurement quality", levelCeiling: 4, status: draft }
 
       - id: CM-22-A03
@@ -73,7 +73,7 @@ domains:
         elements:
           - { id: CM-22-035, title: "Psychological safety and willingness to report a doubtful result", levelCeiling: 5, status: draft }
           - { id: CM-22-036, title: "Handover and communication between shifts and teams", levelCeiling: 4, status: draft }
-          - { id: CM-22-037, title: "Speaking up across a hierarchy", levelCeiling: 5, status: draft }
+          - { id: CM-22-037, title: "Speaking up across a hierarchy", levelCeiling: 4, status: draft }
           - { id: CM-22-038, title: "Isolation and lone working in specialist roles", levelCeiling: 3, status: draft }
           - { id: CM-22-039, title: "Sustained pressure, burnout and technical judgement", levelCeiling: 4, status: draft }
-          - { id: CM-22-040, title: "Building a measurement culture that values being right over being fast", levelCeiling: 5, status: draft }
+          - { id: CM-22-040, title: "Building a measurement culture that values being right over being fast", levelCeiling: 4, status: draft }

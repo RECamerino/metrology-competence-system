@@ -17,20 +17,20 @@ domains:
         title: Humidity Quantities and Relationships
         status: draft
         elements:
-          - { id: DP-06-001, title: "Relative humidity, dew point, mixing ratio and absolute humidity", levelCeiling: 4, status: draft }
-          - { id: DP-06-002, title: "Conversion between humidity quantities and its dependencies", levelCeiling: 5, status: draft }
+          - { id: DP-06-001, title: "Relative humidity, dew point, mixing ratio and absolute humidity", levelCeiling: 3, status: draft }
+          - { id: DP-06-002, title: "Conversion between humidity quantities and its dependencies", levelCeiling: 4, status: draft }
           - { id: DP-06-003, title: "Saturation vapour pressure formulations", levelCeiling: 5, status: draft }
-          - { id: DP-06-004, title: "Enhancement factor and non-ideal gas behaviour", levelCeiling: 5, status: draft }
+          - { id: DP-06-004, title: "Enhancement factor and non-ideal gas behaviour", levelCeiling: 4, status: draft }
           - { id: DP-06-005, title: "Frost point and its distinction from dew point", levelCeiling: 4, status: draft }
           - { id: DP-06-006, title: "Wet-bulb temperature and psychrometry", levelCeiling: 4, status: draft }
-          - { id: DP-06-007, title: "Choosing the right humidity quantity for an application", levelCeiling: 5, status: draft }
+          - { id: DP-06-007, title: "Choosing the right humidity quantity for an application", levelCeiling: 4, status: draft }
 
       - id: DP-06-A02
         title: Humidity Generation and Standards
         status: draft
         elements:
-          - { id: DP-06-008, title: "Two-pressure humidity generators", levelCeiling: 5, status: draft }
-          - { id: DP-06-009, title: "Two-temperature and divided-flow generators", levelCeiling: 5, status: draft }
+          - { id: DP-06-008, title: "Two-pressure humidity generators", levelCeiling: 4, status: draft }
+          - { id: DP-06-009, title: "Two-temperature and divided-flow generators", levelCeiling: 4, status: draft }
           - { id: DP-06-010, title: "Saturated salt solutions and their limitations", levelCeiling: 4, status: draft }
           - { id: DP-06-011, title: "Gravimetric hygrometry as a primary method", levelCeiling: 5, status: draft }
           - { id: DP-06-012, title: "Standard humidity chambers and uniformity", levelCeiling: 4, status: draft }
@@ -40,16 +40,16 @@ domains:
         title: Humidity Instruments and Calibration
         status: draft
         elements:
-          - { id: DP-06-014, title: "Chilled mirror hygrometers", levelCeiling: 5, status: draft }
+          - { id: DP-06-014, title: "Chilled mirror hygrometers", levelCeiling: 4, status: draft }
           - { id: DP-06-015, title: "Capacitive and resistive polymer sensors", levelCeiling: 4, status: draft }
           - { id: DP-06-016, title: "Electrolytic and aluminium oxide sensors", levelCeiling: 4, status: draft }
-          - { id: DP-06-017, title: "Spectroscopic humidity measurement", levelCeiling: 5, status: draft }
+          - { id: DP-06-017, title: "Spectroscopic humidity measurement", levelCeiling: 4, status: draft }
           - { id: DP-06-018, title: "Calibration procedures for humidity instruments", levelCeiling: 4, status: draft }
           - { id: DP-06-019, title: "Sensor hysteresis, drift and contamination", levelCeiling: 4, status: draft }
           - { id: DP-06-020, title: "Response time and equilibration in humidity measurement", levelCeiling: 4, status: draft }
           - { id: DP-06-021, title: "Sampling systems and the problem of the sample line", levelCeiling: 5, status: draft }
-          - { id: DP-06-022, title: "Trace moisture measurement in gases", levelCeiling: 5, status: draft }
-          - { id: DP-06-023, title: "High temperature and high pressure humidity measurement", levelCeiling: 5, status: draft }
+          - { id: DP-06-022, title: "Trace moisture measurement in gases", levelCeiling: 4, status: draft }
+          - { id: DP-06-023, title: "High temperature and high pressure humidity measurement", levelCeiling: 4, status: draft }
           - { id: DP-06-024, title: "Uncertainty budget for humidity calibration", levelCeiling: 5, status: draft }
 
       - id: DP-06-A04
@@ -61,16 +61,16 @@ domains:
           - { id: DP-06-027, title: "Karl Fischer titration", levelCeiling: 4, status: draft }
           - { id: DP-06-028, title: "Near infrared and microwave moisture measurement", levelCeiling: 4, status: draft }
           - { id: DP-06-029, title: "Water activity measurement", levelCeiling: 4, status: draft }
-          - { id: DP-06-030, title: "Moisture reference materials and method comparability", levelCeiling: 5, status: draft }
+          - { id: DP-06-030, title: "Moisture reference materials and method comparability", levelCeiling: 4, status: draft }
           - { id: DP-06-031, title: "Sampling and homogeneity in moisture determination", levelCeiling: 5, status: draft }
 
       - id: DP-06-A05
         title: Applied Humidity Measurement
         status: draft
         elements:
-          - { id: DP-06-032, title: "Humidity control in metrology laboratories", levelCeiling: 4, status: draft }
+          - { id: DP-06-032, title: "Humidity control in metrology laboratories", levelCeiling: 3, status: draft }
           - { id: DP-06-033, title: "Environmental chamber qualification and mapping", levelCeiling: 4, status: draft }
-          - { id: DP-06-034, title: "Humidity in pharmaceutical and food storage", levelCeiling: 4, status: draft }
-          - { id: DP-06-035, title: "Meteorological humidity measurement", levelCeiling: 4, status: draft }
+          - { id: DP-06-034, title: "Humidity in pharmaceutical and food storage", levelCeiling: 3, status: draft }
+          - { id: DP-06-035, title: "Meteorological humidity measurement", levelCeiling: 3, status: draft }
           - { id: DP-06-036, title: "Humidity in compressed gas and process systems", levelCeiling: 4, status: draft }
-          - { id: DP-06-037, title: "Condensation risk assessment", levelCeiling: 4, status: draft }
+          - { id: DP-06-037, title: "Condensation risk assessment", levelCeiling: 3, status: draft }

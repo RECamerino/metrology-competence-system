@@ -17,29 +17,29 @@ domains:
         title: Foundations of Clinical Measurement
         status: draft
         elements:
-          - { id: DP-17-001, title: "Measurand definition in laboratory medicine", levelCeiling: 5, status: draft }
+          - { id: DP-17-001, title: "Measurand definition in laboratory medicine", levelCeiling: 4, status: draft }
           - { id: DP-17-002, title: "Traceability in laboratory medicine and reference measurement systems", levelCeiling: 5, status: draft }
-          - { id: DP-17-003, title: "Reference measurement procedures and reference laboratories", levelCeiling: 5, status: draft }
+          - { id: DP-17-003, title: "Reference measurement procedures and reference laboratories", levelCeiling: 4, status: draft }
           - { id: DP-17-004, title: "The JCTLM database and listed reference materials", levelCeiling: 4, status: draft }
           - { id: DP-17-005, title: "Commutability in clinical reference materials", levelCeiling: 5, status: draft }
           - { id: DP-17-006, title: "International units and conventionally defined biological activity", levelCeiling: 5, status: draft }
-          - { id: DP-17-007, title: "Standardisation and harmonisation of clinical assays", levelCeiling: 5, status: draft }
-          - { id: DP-17-008, title: "Biological variation and its effect on interpretation", levelCeiling: 5, status: draft }
+          - { id: DP-17-007, title: "Standardisation and harmonisation of clinical assays", levelCeiling: 4, status: draft }
+          - { id: DP-17-008, title: "Biological variation and its effect on interpretation", levelCeiling: 4, status: draft }
 
       - id: DP-17-A02
         title: Clinical Laboratory Measurement
         status: draft
         elements:
           - { id: DP-17-009, title: "Clinical chemistry analysers and their calibration", levelCeiling: 4, status: draft }
-          - { id: DP-17-010, title: "Immunoassay principles and calibration challenges", levelCeiling: 5, status: draft }
+          - { id: DP-17-010, title: "Immunoassay principles and calibration challenges", levelCeiling: 4, status: draft }
           - { id: DP-17-011, title: "Haematology and cell counting measurement", levelCeiling: 4, status: draft }
           - { id: DP-17-012, title: "Blood gas, electrolyte and point of care measurement", levelCeiling: 4, status: draft }
-          - { id: DP-17-013, title: "Molecular diagnostics and nucleic acid quantification", levelCeiling: 5, status: draft }
+          - { id: DP-17-013, title: "Molecular diagnostics and nucleic acid quantification", levelCeiling: 4, status: draft }
           - { id: DP-17-014, title: "Digital PCR as a counting-based reference method", levelCeiling: 5, status: draft }
           - { id: DP-17-015, title: "Flow cytometry measurement", levelCeiling: 4, status: draft }
           - { id: DP-17-016, title: "Microbiological enumeration and its uncertainty", levelCeiling: 4, status: draft }
           - { id: DP-17-017, title: "Internal quality control and external quality assessment", levelCeiling: 4, status: draft }
-          - { id: DP-17-018, title: "Reference intervals and decision limits", levelCeiling: 5, status: draft }
+          - { id: DP-17-018, title: "Reference intervals and decision limits", levelCeiling: 4, status: draft }
           - { id: DP-17-019, title: "Measurement uncertainty in laboratory medicine", levelCeiling: 5, status: draft }
           - { id: DP-17-020, title: "ISO 15189 requirements and their difference from 17025", levelCeiling: 4, status: draft }
 
@@ -63,12 +63,12 @@ domains:
         title: Biological and Biotechnology Measurement
         status: draft
         elements:
-          - { id: DP-17-032, title: "Protein quantification and its method dependence", levelCeiling: 5, status: draft }
-          - { id: DP-17-033, title: "Enzyme activity measurement and unit conventions", levelCeiling: 5, status: draft }
+          - { id: DP-17-032, title: "Protein quantification and its method dependence", levelCeiling: 4, status: draft }
+          - { id: DP-17-033, title: "Enzyme activity measurement and unit conventions", levelCeiling: 4, status: draft }
           - { id: DP-17-034, title: "Cell counting and viability measurement", levelCeiling: 4, status: draft }
-          - { id: DP-17-035, title: "Bioassay design and potency determination", levelCeiling: 5, status: draft }
+          - { id: DP-17-035, title: "Bioassay design and potency determination", levelCeiling: 4, status: draft }
           - { id: DP-17-036, title: "Biological reference preparations and international standards", levelCeiling: 5, status: draft }
-          - { id: DP-17-037, title: "Genomic and sequencing measurement quality", levelCeiling: 5, status: draft }
+          - { id: DP-17-037, title: "Genomic and sequencing measurement quality", levelCeiling: 4, status: draft }
           - { id: DP-17-038, title: "Biomanufacturing process measurement", levelCeiling: 4, status: draft }
           - { id: DP-17-039, title: "Uncertainty in biological measurement", levelCeiling: 5, status: draft }
 

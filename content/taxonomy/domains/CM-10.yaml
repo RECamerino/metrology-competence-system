@@ -23,20 +23,20 @@ domains:
           - { id: CM-10-004, title: "Document control and version integrity", levelCeiling: 4, status: draft }
           - { id: CM-10-005, title: "Records, retention and retrievability", levelCeiling: 4, status: draft }
           - { id: CM-10-006, title: "Risk-based thinking in a laboratory context", levelCeiling: 4, status: draft }
-          - { id: CM-10-007, title: "Writing a procedure people will actually follow", levelCeiling: 5, status: draft }
+          - { id: CM-10-007, title: "Writing a procedure people will actually follow", levelCeiling: 4, status: draft }
           - { id: CM-10-008, title: "Management system architecture and the cost of over-documentation", levelCeiling: 5, status: draft }
 
       - id: CM-10-A02
         title: ISO/IEC 17025 Structural and Resource Requirements
         status: draft
         elements:
-          - { id: CM-10-009, title: "Scope, structure and intent of ISO/IEC 17025:2017", levelCeiling: 4, status: draft }
+          - { id: CM-10-009, title: "Scope, structure and intent of ISO/IEC 17025:2017", levelCeiling: 3, status: draft }
           - { id: CM-10-010, title: "Impartiality and its identification and mitigation", levelCeiling: 5, status: draft }
           - { id: CM-10-011, title: "Confidentiality obligations", levelCeiling: 4, status: draft }
           - { id: CM-10-012, title: "Structural requirements and defining the laboratory", levelCeiling: 4, status: draft }
           - { id: CM-10-013, title: "Personnel competence requirements", levelCeiling: 5, status: draft }
-          - { id: CM-10-014, title: "Competence records and demonstrating competence", levelCeiling: 5, status: draft }
-          - { id: CM-10-015, title: "Authorisation of personnel for specific activities", levelCeiling: 5, status: draft }
+          - { id: CM-10-014, title: "Competence records and demonstrating competence", levelCeiling: 4, status: draft }
+          - { id: CM-10-015, title: "Authorisation of personnel for specific activities", levelCeiling: 4, status: draft }
           - { id: CM-10-016, title: "Facilities and environmental condition requirements", levelCeiling: 4, status: draft }
           - { id: CM-10-017, title: "Equipment requirements and metrological traceability obligations", levelCeiling: 4, status: draft }
           - { id: CM-10-018, title: "Externally provided products and services", levelCeiling: 4, status: draft }
@@ -46,8 +46,8 @@ domains:
         status: draft
         elements:
           - { id: CM-10-019, title: "Review of requests, tenders and contracts", levelCeiling: 4, status: draft }
-          - { id: CM-10-020, title: "Selection, verification and validation of methods", levelCeiling: 5, status: draft }
-          - { id: CM-10-021, title: "Sampling requirements", levelCeiling: 4, status: draft }
+          - { id: CM-10-020, title: "Selection, verification and validation of methods", levelCeiling: 4, status: draft }
+          - { id: CM-10-021, title: "Sampling requirements", levelCeiling: 3, status: draft }
           - { id: CM-10-022, title: "Handling of test and calibration items", levelCeiling: 4, status: draft }
           - { id: CM-10-023, title: "Technical records and their reconstructability", levelCeiling: 4, status: draft }
           - { id: CM-10-024, title: "Evaluation of measurement uncertainty as a clause requirement", levelCeiling: 4, status: draft }
@@ -68,29 +68,29 @@ domains:
           - { id: CM-10-034, title: "Corrective action and root cause analysis", levelCeiling: 5, status: draft }
           - { id: CM-10-035, title: "Distinguishing correction from corrective action", levelCeiling: 4, status: draft }
           - { id: CM-10-036, title: "Improvement and customer feedback", levelCeiling: 4, status: draft }
-          - { id: CM-10-037, title: "Effectiveness measurement and meaningful quality objectives", levelCeiling: 5, status: draft }
+          - { id: CM-10-037, title: "Effectiveness measurement and meaningful quality objectives", levelCeiling: 4, status: draft }
 
       - id: CM-10-A05
         title: Accreditation in Practice
         status: draft
         elements:
-          - { id: CM-10-038, title: "What accreditation is and what it is not", levelCeiling: 4, status: draft }
+          - { id: CM-10-038, title: "What accreditation is and what it is not", levelCeiling: 3, status: draft }
           - { id: CM-10-039, title: "Scope of accreditation: construction and meaning", levelCeiling: 5, status: draft }
-          - { id: CM-10-040, title: "Flexible scope and its obligations", levelCeiling: 5, status: draft }
-          - { id: CM-10-041, title: "The accreditation lifecycle: application to surveillance to renewal", levelCeiling: 4, status: draft }
-          - { id: CM-10-042, title: "Preparing a laboratory for assessment", levelCeiling: 5, status: draft }
-          - { id: CM-10-043, title: "Responding to findings and nonconformities", levelCeiling: 5, status: draft }
+          - { id: CM-10-040, title: "Flexible scope and its obligations", levelCeiling: 4, status: draft }
+          - { id: CM-10-041, title: "The accreditation lifecycle: application to surveillance to renewal", levelCeiling: 3, status: draft }
+          - { id: CM-10-042, title: "Preparing a laboratory for assessment", levelCeiling: 4, status: draft }
+          - { id: CM-10-043, title: "Responding to findings and nonconformities", levelCeiling: 4, status: draft }
           - { id: CM-10-044, title: "Proficiency testing participation requirements", levelCeiling: 4, status: draft }
           - { id: CM-10-045, title: "ILAC and IAF arrangements and cross-border recognition", levelCeiling: 4, status: draft }
           - { id: CM-10-046, title: "Suspension, withdrawal and reduction of scope", levelCeiling: 4, status: draft }
-          - { id: CM-10-047, title: "Costs, benefits and the decision to seek accreditation", levelCeiling: 5, status: draft }
+          - { id: CM-10-047, title: "Costs, benefits and the decision to seek accreditation", levelCeiling: 4, status: draft }
 
       - id: CM-10-A06
         title: Adjacent and Sector Management Standards
         status: draft
         elements:
           - { id: CM-10-048, title: "ISO 9001 and its relationship to ISO/IEC 17025", levelCeiling: 4, status: draft }
-          - { id: CM-10-049, title: "ISO 10012 measurement management systems", levelCeiling: 4, status: draft }
+          - { id: CM-10-049, title: "ISO 10012 measurement management systems", levelCeiling: 3, status: draft }
           - { id: CM-10-050, title: "ISO/IEC 17020 inspection and ISO/IEC 17065 product certification", levelCeiling: 3, status: draft }
           - { id: CM-10-051, title: "ISO 15189 for medical laboratories", levelCeiling: 3, status: draft }
           - { id: CM-10-052, title: "ISO/IEC 17043 proficiency testing providers", levelCeiling: 3, status: draft }
