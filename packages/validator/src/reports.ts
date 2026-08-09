@@ -81,6 +81,29 @@ export function coverageReport(corpus: Corpus): string {
   lines.push(`Assessable units (element × level, L1–L2 bundled per area): ${assessableUnits}`);
   lines.push('');
 
+  /* -- Level ceiling distribution ---------------------------------------- */
+  // The honesty check on the taxonomy. Inflated ceilings manufacture depth
+  // that isn't there and create assessable units nobody can write real items
+  // for. A distribution skewed toward 5 means someone was being generous.
+
+  const ceilings = new Map<number, number>();
+  for (const stub of stubs.values()) {
+    ceilings.set(stub.levelCeiling, (ceilings.get(stub.levelCeiling) ?? 0) + 1);
+  }
+
+  const totalStubs = stubs.size || 1;
+  lines.push('LEVEL CEILING DISTRIBUTION');
+  lines.push('-'.repeat(78));
+  for (let level = 1; level <= 5; level++) {
+    const count = ceilings.get(level) ?? 0;
+    const percent = (count / totalStubs) * 100;
+    const bar = '#'.repeat(Math.round(percent / 2));
+    lines.push(
+      `  L${level}  ${padLeft(count, 5)}  ${padLeft(percent.toFixed(1), 5)}%  ${bar}`,
+    );
+  }
+  lines.push('');
+
   /* -- Gaps worth acting on ---------------------------------------------- */
 
   const orphans = [...authored.keys()].filter((id) => !stubs.has(id));

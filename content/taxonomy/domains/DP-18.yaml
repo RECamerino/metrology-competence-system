@@ -1,0 +1,78 @@
+schemaVersion: 1
+domains:
+  - id: DP-18
+    title: Nanometrology and Surface Science
+    kind: discipline
+    status: draft
+    summary: >-
+      Measurement at scales where the probe, the surface and the measurand
+      cease to be separable. Distinguished from DP-01 by the fact that
+      instrument tip geometry, surface forces and contamination are not
+      corrections to the result but constitutive of it. Boundary: conventional
+      surface texture is DP-01-A07; nanoscale chemical analysis overlaps DP-16.
+
+    competencyAreas:
+
+      - id: DP-18-A01
+        title: Foundations at the Nanoscale
+        status: draft
+        elements:
+          - { id: DP-18-001, title: "What changes about measurement below one hundred nanometres", levelCeiling: 5, status: draft }
+          - { id: DP-18-002, title: "Surface forces, adhesion and their effect on probing", levelCeiling: 5, status: draft }
+          - { id: DP-18-003, title: "Tip-sample convolution and dilation", levelCeiling: 5, status: draft }
+          - { id: DP-18-004, title: "Traceability of nanoscale dimensional measurement", levelCeiling: 5, status: draft }
+          - { id: DP-18-005, title: "Nanoscale transfer standards and calibration artefacts", levelCeiling: 5, status: draft }
+          - { id: DP-18-006, title: "Contamination, oxidation and surface condition", levelCeiling: 5, status: draft }
+          - { id: DP-18-007, title: "Uncertainty evaluation at the nanoscale", levelCeiling: 5, status: draft }
+
+      - id: DP-18-A02
+        title: Scanning Probe Microscopy
+        status: draft
+        elements:
+          - { id: DP-18-008, title: "Atomic force microscopy principles and modes", levelCeiling: 5, status: draft }
+          - { id: DP-18-009, title: "Cantilever calibration: spring constant and sensitivity", levelCeiling: 5, status: draft }
+          - { id: DP-18-010, title: "Scanner calibration, nonlinearity, creep and hysteresis", levelCeiling: 5, status: draft }
+          - { id: DP-18-011, title: "Metrological AFM with interferometric position feedback", levelCeiling: 5, status: draft }
+          - { id: DP-18-012, title: "Scanning tunnelling microscopy", levelCeiling: 5, status: draft }
+          - { id: DP-18-013, title: "Tip characterisation, wear and artefact recognition", levelCeiling: 5, status: draft }
+          - { id: DP-18-014, title: "Force spectroscopy and nanomechanical measurement", levelCeiling: 5, status: draft }
+          - { id: DP-18-015, title: "Image processing, levelling and the risk of creating features", levelCeiling: 5, status: draft }
+
+      - id: DP-18-A03
+        title: Electron and Ion Microscopy
+        status: draft
+        elements:
+          - { id: DP-18-016, title: "Scanning electron microscopy for dimensional measurement", levelCeiling: 5, status: draft }
+          - { id: DP-18-017, title: "SEM magnification calibration and edge definition", levelCeiling: 5, status: draft }
+          - { id: DP-18-018, title: "Transmission electron microscopy and lattice references", levelCeiling: 5, status: draft }
+          - { id: DP-18-019, title: "Critical dimension metrology in semiconductor manufacture", levelCeiling: 5, status: draft }
+          - { id: DP-18-020, title: "Focused ion beam and destructive cross-sectioning", levelCeiling: 5, status: draft }
+          - { id: DP-18-021, title: "Charging, beam damage and sample preparation artefacts", levelCeiling: 5, status: draft }
+          - { id: DP-18-022, title: "Electron backscatter diffraction and crystallography", levelCeiling: 5, status: draft }
+
+      - id: DP-18-A04
+        title: Surface Analysis and Composition
+        status: draft
+        elements:
+          - { id: DP-18-023, title: "X-ray photoelectron spectroscopy", levelCeiling: 5, status: draft }
+          - { id: DP-18-024, title: "Auger electron spectroscopy", levelCeiling: 5, status: draft }
+          - { id: DP-18-025, title: "Secondary ion mass spectrometry", levelCeiling: 5, status: draft }
+          - { id: DP-18-026, title: "Depth profiling and sputter rate calibration", levelCeiling: 5, status: draft }
+          - { id: DP-18-027, title: "Quantification in surface analysis and sensitivity factors", levelCeiling: 5, status: draft }
+          - { id: DP-18-028, title: "Ellipsometry and thin film thickness measurement", levelCeiling: 5, status: draft }
+          - { id: DP-18-029, title: "X-ray reflectometry and diffraction for thin films", levelCeiling: 5, status: draft }
+          - { id: DP-18-030, title: "Contact angle and surface energy at small scales", levelCeiling: 4, status: draft }
+
+      - id: DP-18-A05
+        title: Nanoparticles and Nanomaterials
+        status: draft
+        elements:
+          - { id: DP-18-031, title: "Particle size definitions and the equivalent sphere problem", levelCeiling: 5, status: draft }
+          - { id: DP-18-032, title: "Dynamic light scattering", levelCeiling: 4, status: draft }
+          - { id: DP-18-033, title: "Particle tracking and single particle techniques", levelCeiling: 4, status: draft }
+          - { id: DP-18-034, title: "Electron microscopy for particle size distribution", levelCeiling: 5, status: draft }
+          - { id: DP-18-035, title: "Specific surface area and porosity measurement", levelCeiling: 4, status: draft }
+          - { id: DP-18-036, title: "Zeta potential and colloidal stability measurement", levelCeiling: 4, status: draft }
+          - { id: DP-18-037, title: "Nanoparticle reference materials", levelCeiling: 4, status: draft }
+          - { id: DP-18-038, title: "Method comparability for particle size and its disagreements", levelCeiling: 5, status: draft }
+          - { id: DP-18-039, title: "Regulatory definitions of nanomaterial and their measurement basis", levelCeiling: 5, status: draft }

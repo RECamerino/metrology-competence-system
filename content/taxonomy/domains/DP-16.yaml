@@ -1,0 +1,118 @@
+schemaVersion: 1
+domains:
+  - id: DP-16
+    title: Analytical Chemistry, Reference Materials and Gas Metrology
+    kind: discipline
+    status: draft
+    summary: >-
+      Chemical measurement, where the sample is usually destroyed, the
+      measurand is defined by the method, and sampling error routinely exceeds
+      analytical error by an order of magnitude. That inversion of priorities
+      relative to physical metrology is the central thing a physically-trained
+      metrologist must absorb. Boundary: spectroscopic instrumentation is DP-13;
+      clinical measurement is DP-17.
+
+    competencyAreas:
+
+      - id: DP-16-A01
+        title: Foundations of Chemical Measurement
+        status: draft
+        elements:
+          - { id: DP-16-001, title: "Amount of substance, the mole and concentration quantities", levelCeiling: 4, status: draft }
+          - { id: DP-16-002, title: "Concentration expressions and conversion between them", levelCeiling: 4, status: draft }
+          - { id: DP-16-003, title: "Operationally defined measurands in chemistry", levelCeiling: 5, status: draft }
+          - { id: DP-16-004, title: "Traceability in chemical measurement", levelCeiling: 5, status: draft }
+          - { id: DP-16-005, title: "Primary methods of measurement in chemistry", levelCeiling: 5, status: draft }
+          - { id: DP-16-006, title: "Metrological hierarchy in analytical chemistry", levelCeiling: 5, status: draft }
+          - { id: DP-16-007, title: "Purity assessment and its role in traceability", levelCeiling: 5, status: draft }
+
+      - id: DP-16-A02
+        title: Sampling and Sample Preparation
+        status: draft
+        summary: >-
+          Placed early and deliberately: in chemical measurement, sampling is
+          usually the dominant uncertainty contributor and the least controlled
+          step.
+        elements:
+          - { id: DP-16-008, title: "Sampling theory and representativeness", levelCeiling: 5, status: draft }
+          - { id: DP-16-009, title: "Sampling uncertainty and its estimation", levelCeiling: 5, status: draft }
+          - { id: DP-16-010, title: "Heterogeneity, particle size and sample mass", levelCeiling: 5, status: draft }
+          - { id: DP-16-011, title: "Sample handling, preservation and stability", levelCeiling: 4, status: draft }
+          - { id: DP-16-012, title: "Digestion, extraction and dissolution", levelCeiling: 4, status: draft }
+          - { id: DP-16-013, title: "Dilution, weighing and volumetric technique", levelCeiling: 4, status: draft }
+          - { id: DP-16-014, title: "Contamination control and blank correction", levelCeiling: 5, status: draft }
+          - { id: DP-16-015, title: "Volumetric glassware and pipette calibration", levelCeiling: 4, status: draft }
+
+      - id: DP-16-A03
+        title: Analytical Techniques
+        status: draft
+        elements:
+          - { id: DP-16-016, title: "Gravimetric and titrimetric analysis", levelCeiling: 4, status: draft }
+          - { id: DP-16-017, title: "Coulometry as a primary method", levelCeiling: 5, status: draft }
+          - { id: DP-16-018, title: "Gas chromatography", levelCeiling: 4, status: draft }
+          - { id: DP-16-019, title: "Liquid chromatography", levelCeiling: 4, status: draft }
+          - { id: DP-16-020, title: "Mass spectrometry principles and instrumentation", levelCeiling: 5, status: draft }
+          - { id: DP-16-021, title: "Isotope dilution mass spectrometry", levelCeiling: 5, status: draft }
+          - { id: DP-16-022, title: "ICP-OES and ICP-MS", levelCeiling: 5, status: draft }
+          - { id: DP-16-023, title: "Atomic absorption spectrometry", levelCeiling: 4, status: draft }
+          - { id: DP-16-024, title: "X-ray fluorescence and elemental analysis", levelCeiling: 4, status: draft }
+          - { id: DP-16-025, title: "Nuclear magnetic resonance for quantitative analysis", levelCeiling: 5, status: draft }
+          - { id: DP-16-026, title: "Thermal analysis techniques", levelCeiling: 4, status: draft }
+
+      - id: DP-16-A04
+        title: Calibration, Validation and Data Quality
+        status: draft
+        elements:
+          - { id: DP-16-027, title: "Calibration curves and standard preparation", levelCeiling: 4, status: draft }
+          - { id: DP-16-028, title: "Standard addition and internal standards", levelCeiling: 4, status: draft }
+          - { id: DP-16-029, title: "Matrix effects and matrix matching", levelCeiling: 5, status: draft }
+          - { id: DP-16-030, title: "Recovery studies and their interpretation", levelCeiling: 5, status: draft }
+          - { id: DP-16-031, title: "Limit of detection and limit of quantification", levelCeiling: 5, status: draft }
+          - { id: DP-16-032, title: "Selectivity, specificity and interference", levelCeiling: 5, status: draft }
+          - { id: DP-16-033, title: "Method validation in analytical chemistry", levelCeiling: 5, status: draft }
+          - { id: DP-16-034, title: "Uncertainty evaluation for analytical results", levelCeiling: 5, status: draft }
+          - { id: DP-16-035, title: "Quality control charts and internal quality control", levelCeiling: 4, status: draft }
+          - { id: DP-16-036, title: "Reporting results below the detection limit", levelCeiling: 5, status: draft }
+
+      - id: DP-16-A05
+        title: Reference Materials
+        status: draft
+        summary: >-
+          Boundary: reference material concepts for all disciplines are in
+          CM-04-A04; this area is their production and certification.
+        elements:
+          - { id: DP-16-037, title: "Reference material production planning", levelCeiling: 5, status: draft }
+          - { id: DP-16-038, title: "Homogeneity assessment and between-bottle variability", levelCeiling: 5, status: draft }
+          - { id: DP-16-039, title: "Short-term and long-term stability studies", levelCeiling: 5, status: draft }
+          - { id: DP-16-040, title: "Characterisation approaches and value assignment", levelCeiling: 5, status: draft }
+          - { id: DP-16-041, title: "Uncertainty of a certified value", levelCeiling: 5, status: draft }
+          - { id: DP-16-042, title: "Commutability assessment", levelCeiling: 5, status: draft }
+          - { id: DP-16-043, title: "Certification reporting and the certificate content", levelCeiling: 4, status: draft }
+          - { id: DP-16-044, title: "ISO 17034 requirements for reference material producers", levelCeiling: 4, status: draft }
+
+      - id: DP-16-A06
+        title: Gas Metrology
+        status: draft
+        elements:
+          - { id: DP-16-045, title: "Gravimetric preparation of gas mixtures", levelCeiling: 5, status: draft }
+          - { id: DP-16-046, title: "Dynamic gas mixture generation", levelCeiling: 5, status: draft }
+          - { id: DP-16-047, title: "Gas standard stability and cylinder effects", levelCeiling: 5, status: draft }
+          - { id: DP-16-048, title: "Ambient air quality measurement", levelCeiling: 4, status: draft }
+          - { id: DP-16-049, title: "Emissions and stack gas measurement", levelCeiling: 4, status: draft }
+          - { id: DP-16-050, title: "Greenhouse gas measurement and the WMO scales", levelCeiling: 5, status: draft }
+          - { id: DP-16-051, title: "Natural gas composition and calorific value", levelCeiling: 4, status: draft }
+          - { id: DP-16-052, title: "Breath alcohol and forensic gas measurement", levelCeiling: 4, status: draft }
+          - { id: DP-16-053, title: "Hydrogen purity measurement", levelCeiling: 4, status: draft }
+
+      - id: DP-16-A07
+        title: Electrochemistry and pH
+        status: draft
+        elements:
+          - { id: DP-16-054, title: "pH definition and its metrological basis", levelCeiling: 5, status: draft }
+          - { id: DP-16-055, title: "Primary pH measurement by the Harned cell", levelCeiling: 5, status: draft }
+          - { id: DP-16-056, title: "pH buffers and their certification", levelCeiling: 4, status: draft }
+          - { id: DP-16-057, title: "Glass electrodes, calibration and liquid junction potential", levelCeiling: 4, status: draft }
+          - { id: DP-16-058, title: "Electrolytic conductivity measurement", levelCeiling: 4, status: draft }
+          - { id: DP-16-059, title: "Ion selective electrodes", levelCeiling: 4, status: draft }
+          - { id: DP-16-060, title: "Redox potential measurement", levelCeiling: 4, status: draft }
+          - { id: DP-16-061, title: "Uncertainty in pH and conductivity measurement", levelCeiling: 5, status: draft }
