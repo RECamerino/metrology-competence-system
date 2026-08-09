@@ -24,7 +24,7 @@ These are the ones that cannot be undone, or that would break credentials alread
 
 ### 1. The ID registry
 
-`content/taxonomy/skeleton.yaml` is **append-only**. IDs may be added. **IDs may never be renamed or removed.**
+`content/taxonomy/domains/*.yaml` is **append-only**. IDs may be added. **IDs may never be renamed or removed.**
 
 Once a credential attests competence in `CM-03-014`, that identifier must mean the same thing permanently, or the credential becomes unverifiable and its holder is harmed. Elements that turn out to be wrong, redundant, or badly scoped are **deprecated and superseded**, with an explicit `supersededBy` pointer — never deleted. CI enforces this; stewards may not waive it.
 

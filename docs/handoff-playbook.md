@@ -37,14 +37,19 @@ These fail the build. They are not style guidance.
 
 ### 1. Register the ID first
 
-Add the stub to `content/taxonomy/skeleton.yaml` under the right competency area:
+Add the stub to the domain's file in `content/taxonomy/domains/` — one file per domain — under the right competency area's `elements:` list:
+
+`content/taxonomy/domains/CM-03.yaml`:
 
 ```yaml
-- id: CM-03-014
-  title: Correlated input quantities in an uncertainty budget
-  levelCeiling: 5
-  status: draft
+      - id: CM-03-A02
+        title: Modelling the Measurement
+        elements:
+          # …
+          - { id: CM-03-014, title: "Correlated input quantities in an uncertainty budget", kind: judgment, levelCeiling: 5, status: draft }
 ```
+
+`kind` and `levelCeiling` are governed by `tools/kind-plan.json` and `tools/ceiling-plan.json` and applied across files by `node tools/apply-kinds.ts` / `node tools/apply-ceilings.ts`. Set them there, not by hand — the tools refuse to run if an area is unplanned, which is how a forgotten element gets caught.
 
 Then:
 

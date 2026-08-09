@@ -148,7 +148,7 @@ So a person can hold verified L4 judgment in CMM task-specific uncertainty and s
 
 ## The one rule that cannot be waived
 
-**IDs are append-only.** `content/taxonomy/skeleton.yaml` and `content/taxonomy/id-registry.lock` may grow. Nothing in them may ever be renamed or removed.
+**IDs are append-only.** `content/taxonomy/domains/*.yaml` and `content/taxonomy/id-registry.lock` may grow. Nothing in them may ever be renamed or removed.
 
 Once a credential attests competence in `CM-03-014`, that identifier must resolve to the same element permanently. Rename it and you have silently invalidated somebody's evidence of their own competence, with no way to repair it. Elements that turn out to be wrong, redundant, or badly scoped are **deprecated and superseded**, never deleted.
 

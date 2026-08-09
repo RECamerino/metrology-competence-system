@@ -68,14 +68,14 @@ function main(): number {
 
     case 'registry-sync': {
       if (!corpus.taxonomy) {
-        console.error('No taxonomy skeleton at content/taxonomy/skeleton.yaml — nothing to sync.');
+        console.error('No taxonomy files in content/taxonomy/domains/ — nothing to sync.');
         return 1;
       }
 
       const current = allTaxonomyIds(corpus.taxonomy);
       const existing = new Set(corpus.lockedIds ?? []);
 
-      // Union, never difference: an ID that has left the skeleton stays in the
+      // Union, never difference: an ID that has left the taxonomy stays in the
       // lock so that `validate` keeps flagging its disappearance. Sync adds; it
       // never forgets.
       const merged = [...new Set([...existing, ...current])].sort();
@@ -87,7 +87,7 @@ function main(): number {
           '# ID registry lock — APPEND-ONLY.',
           '#',
           '# Every identifier ever issued by this corpus. `npm run validate` fails if any',
-          '# of these disappears from content/taxonomy/skeleton.yaml, because a credential',
+          '# of these disappears from content/taxonomy/domains/*.yaml, because a credential',
           '# attesting an ID must resolve to the same element forever. Deprecate and',
           '# supersede elements; never rename or delete them.',
           '#',
@@ -104,7 +104,7 @@ function main(): number {
         for (const id of added.slice(0, 20)) console.log(`  + ${id}`);
         if (added.length > 20) console.log(`  … and ${added.length - 20} more`);
         console.log('');
-        console.log('Commit the lock file alongside the skeleton change so the addition is visible in review.');
+        console.log('Commit the lock file alongside the taxonomy change so the addition is visible in review.');
       }
       return 0;
     }

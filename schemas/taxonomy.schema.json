@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://metrology-bok.org/schemas/taxonomy.schema.json",
   "title": "Taxonomy skeleton — the immutable ID registry",
-  "description": "Governs content/taxonomy/skeleton.yaml. This file is APPEND-ONLY. IDs may be added; IDs may never be renamed or removed, and the validator fails the build on either. The reason is not tidiness: once a credential attests competence in an element, that identifier must resolve to the same element permanently or the credential becomes unverifiable and its holder is harmed. Elements that prove wrong, redundant, or badly scoped are deprecated and superseded, never deleted.",
+  "description": "Governs the per-domain taxonomy files in content/taxonomy/domains/. These files are APPEND-ONLY. IDs may be added; IDs may never be renamed or removed, and the validator fails the build on either. The reason is not tidiness: once a credential attests competence in an element, that identifier must resolve to the same element permanently or the credential becomes unverifiable and its holder is harmed. Elements that prove wrong, redundant, or badly scoped are deprecated and superseded, never deleted.",
 
   "type": "object",
   "required": ["schemaVersion", "domains"],
