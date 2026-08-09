@@ -74,8 +74,11 @@ const standalone = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Metrology BOK — Taxonomy Skeleton</title>
-<meta name="description" content="Every domain, competency area and element in the Metrology Body of Knowledge, with attainable level ceilings.">
+<title>Metrology Competence System — Taxonomy</title>
+<meta name="description" content="Every domain, competency area and element in the Metrology Competence System body of knowledge, with attainable level ceilings and competence kinds.">
+<meta property="og:title" content="Metrology Competence System — Taxonomy">
+<meta property="og:description" content="${domains.length} domains, ${areaCount} competency areas and ${elementCount} elements, searchable and filterable by level and competence kind.">
+<meta property="og:type" content="website">
 <style>*{margin:0}</style>
 </head>
 <body>
