@@ -1,0 +1,75 @@
+name: Publish taxonomy viewer
+
+# The corpus lives in 43 YAML files, which is the right format to author and
+# review in and a poor one to browse. This builds the read-only viewer from
+# those same files and publishes it, so anyone can read the taxonomy without
+# cloning anything.
+#
+# The built page is not committed: it is a 270 KB derived artifact that would
+# churn on every taxonomy edit. Building it here keeps the published page
+# current without putting generated output in the history.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/taxonomy/**'
+      - 'apps/viewer/template.html'
+      - 'tools/build-viewer.ts'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never cancel a deploy in progress; let it finish and queue the next one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build viewer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18'
+          cache: npm
+
+      - run: npm ci
+
+      # Refuse to publish a corpus that does not validate. A broken taxonomy
+      # should never be the version the public sees.
+      - name: Validate corpus
+        run: npm run validate
+
+      - name: Build viewer
+        run: npm run build:viewer
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp apps/viewer/index.html _site/index.html
+          # Jekyll would otherwise try to process the output and mangle it.
+          touch _site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    name: Deploy to Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -2,7 +2,11 @@
 
 An open, organization-agnostic body of knowledge for metrology — and a platform that turns demonstrated competence into a portable, cryptographically verifiable credential that **the individual owns**.
 
-> **Status: pre-alpha.** Phase 0 (foundation). No usable application yet. The corpus is being authored. See [Roadmap](#roadmap).
+### → [Browse the taxonomy](https://recamerino.github.io/metrology-competence-system/)
+
+All 43 domains, 257 competency areas and 2232 elements, searchable and filterable by level and by competence kind. Rebuilt automatically from the source files on every change.
+
+> **Status: pre-alpha.** The taxonomy skeleton is complete (Phase 1). No content is authored against it yet and there is no usable application. See [Roadmap](#roadmap).
 
 ---
 
@@ -67,9 +71,9 @@ Start with [`docs/00-context.md`](docs/00-context.md) for the design rationale, 
 
 | Phase | Deliverable | State |
 |---|---|---|
-| 0 | Foundation — scaffold, licenses, schemas, CI, source register | In progress |
-| 1 | Taxonomy skeleton — all domains, competency areas, element IDs | Not started |
-| 2 | Proficiency rubric, evidence model, credential and protocol design | Not started |
+| 0 | Foundation — scaffold, licenses, schemas, CI, source register | **Done** |
+| 1 | Taxonomy skeleton — all domains, competency areas, element IDs | **Done** |
+| 2 | Proficiency rubric, evidence model, credential and protocol design | Next |
 | 3 | Guardrail kit — frozen schemas, validators, gold reference set | Not started |
 | 4 | Cross-cutting core content (`CM-01`…`CM-22`) | Not started |
 | 5 | Discipline packs (`DP-01`…`DP-20`) | Not started |
