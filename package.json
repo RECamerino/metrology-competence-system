@@ -2,7 +2,7 @@
   "name": "metrology-bok",
   "version": "0.0.0",
   "private": true,
-  "description": "Open Metrology Body of Knowledge and portable competency credentialing platform",
+  "description": "Metrology Competence System — an open body of knowledge for metrology and a portable competency credentialing platform",
   "license": "Apache-2.0",
   "type": "module",
   "engines": {

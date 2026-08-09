@@ -1,4 +1,4 @@
-# Metrology Body of Knowledge & Credentialing Platform
+# Metrology Competence System
 
 An open, organization-agnostic body of knowledge for metrology — and a platform that turns demonstrated competence into a portable, cryptographically verifiable credential that **the individual owns**.
 
