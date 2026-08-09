@@ -1,0 +1,86 @@
+# ARC-0001 — Standard uncertainty from an ambiguous source statement
+#
+# The workhorse archetype for Type B assignment. Deliberately NOT "compute
+# a/sqrt(3)": that arithmetic is trivially lookupable and would make a
+# defective item. What the candidate must supply is the step the source does
+# not take for them — deciding what distribution the statement actually
+# justifies, when real statements are written loosely.
+
+id: ARC-0001
+title: Standard uncertainty from an ambiguous source statement
+itemType: parameterized-worked-problem
+kinds:
+  - skill
+levels: [2, 3, 4]
+status: draft
+
+prompt: >-
+  A {{source_kind}} states: "{{statement}}". The stated value is
+  {{stated_value}} {{unit}}, and the quantity is used in a measurement at
+  {{operating_point}} {{unit}}.
+
+  Derive the standard uncertainty contribution from this statement. State
+  the distribution you assigned, the divisor you used, and — in no more than
+  four sentences — what in the wording of the statement supports that
+  assignment rather than the most plausible alternative.
+
+parameters:
+  - name: source_kind
+    type: choice
+    description: >-
+      Manufacturer datasheet, calibration certificate, in-house history, or a
+      published limit. Each carries different implicit reliability, which is
+      the point.
+  - name: statement
+    type: choice
+    description: >-
+      The verbatim source wording, drawn from a set written to be realistically
+      ambiguous — "accuracy ±0.5 %", "expanded uncertainty 0.4 mm", "maximum
+      permissible error", "typical variation". No draw states its distribution
+      outright.
+  - name: stated_value
+    type: real
+    description: The numeric value carried in the statement.
+  - name: unit
+    type: choice
+    description: Unit of the stated value; carried so the scorer can check units, not only magnitude.
+  - name: operating_point
+    type: real
+    description: >-
+      Where in the range the quantity is actually used. Matters when the draw
+      is a percentage-of-reading statement and does not when it is absolute.
+    constraint: >-
+      Must sit inside the range the drawn statement plausibly covers, or the
+      item becomes unfair rather than merely hard.
+
+scoring:
+  method: hybrid
+  toleranceBand: >-
+    Numeric part: within 2 % of the value implied by the defensible
+    distribution. Where two assignments are both defensible, either numeric
+    result is accepted and the justification carries the mark — which is the
+    whole reason this is not deterministic.
+  unitChecked: true
+  rubricRef: content/items/rubrics/ARC-0001.md
+
+lookupResistance: >-
+  The arithmetic here is lookupable and an AI assistant will produce it
+  instantly — that is accepted, and it is why the numeric part carries little
+  weight. What cannot be looked up is which distribution a loosely worded
+  source statement justifies: the drawn statements never say, real ones rarely
+  do, and the defensible reading depends on the source kind and the operating
+  point in the same draw. A candidate who assigns a divisor without engaging
+  the wording scores the numeric part and fails the item.
+
+citations:
+  - source: JCGM-100-2008
+    clause: "4.3"
+    relevance: >-
+      Governs Type B evaluation and the assignment of distributions from
+      non-statistical information, which is the competence this archetype
+      exercises.
+
+exposureLimit: 3
+
+authoring:
+  createdOn: "2026-08-09"

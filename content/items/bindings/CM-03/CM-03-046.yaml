@@ -1,0 +1,42 @@
+schemaVersion: 1
+element: CM-03-046
+
+bindings:
+  - level: 4
+    archetype: ARC-0002
+    status: draft
+    justification: >-
+      The element is double-counting between Type A and Type B specifically, so
+      the injected defect is fixed to that class: a repeatability contribution
+      evaluated from observations AND carried again from a manufacturer's
+      specification that already includes it. The candidate must notice that
+      one physical effect appears twice under two names, which is what makes
+      this the element's competence rather than general budget arithmetic.
+    parameterRanges:
+      - name: defect_class
+        choices: [double-counted contribution]
+      - name: measurement_context
+        choices:
+          - dimensional gauge block comparison
+          - pressure transducer calibration
+          - resistance measurement by substitution
+      - name: defect_magnitude
+        min: 1.15
+        max: 1.60
+
+  - level: 5
+    archetype: ARC-0002
+    status: draft
+    justification: >-
+      At L5 the overlap is partial rather than total: the specification covers
+      some of the repeatability the Type A evaluation captured, but not all of
+      it, so neither removing the contribution nor keeping it is fully correct.
+      The defensible answer is a reasoned partial allowance with its basis
+      stated, and that irreducible judgement is exactly why this element
+      carries a ceiling of five.
+    parameterRanges:
+      - name: defect_class
+        choices: [double-counted contribution]
+      - name: defect_magnitude
+        min: 1.02
+        max: 1.12

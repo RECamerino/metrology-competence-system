@@ -62,6 +62,11 @@
         "properties": {
           "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
           "type": { "enum": ["real", "integer", "choice", "dataset"] },
+          "visibility": {
+            "enum": ["prompt", "generator"],
+            "default": "prompt",
+            "description": "Whether the candidate sees this parameter. `prompt` parameters are rendered into the prompt text and must appear there as {{name}}. `generator` parameters shape the artifact the candidate is given — which defect is injected into a budget, how large it is — and MUST NOT appear in the prompt: naming the defect hands the candidate the answer. The validator enforces both directions, because each failure is silent in a different way. An unrendered prompt parameter varies nothing; a rendered generator parameter destroys the item while leaving it looking correct."
+          },
           "unit": {
             "type": "string",
             "description": "SI or accepted unit for the drawn value. Recorded so the scorer can check units rather than only magnitude — a numerically right answer in the wrong unit is wrong."
@@ -88,7 +93,7 @@
         },
         "toleranceBand": {
           "type": "string",
-          "maxLength": 200,
+          "maxLength": 400,
           "description": "Accepted deviation for a deterministic result, and its basis. A tolerance band that merely encodes rounding is too tight; one that accepts a wrong method is worthless."
         },
         "unitChecked": { "type": "boolean", "default": true },

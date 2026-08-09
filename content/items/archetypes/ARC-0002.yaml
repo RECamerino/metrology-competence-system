@@ -1,0 +1,87 @@
+# ARC-0002 — Diagnose a defective uncertainty budget
+#
+# The highest-reuse archetype in the bank, because the defect is a parameter.
+# One shape serves every element that names a way a budget goes wrong: the
+# binding chooses which defect is injected, and that choice is what makes the
+# item about THAT element rather than about budgets in general.
+
+id: ARC-0002
+title: Diagnose a defective uncertainty budget
+itemType: error-finding
+kinds:
+  - judgment
+levels: [3, 4, 5]
+status: draft
+
+prompt: >-
+  The attached budget ({{budget}}) was produced for {{measurement_context}}
+  and reports a combined standard uncertainty the laboratory believes is
+  correct. It is not.
+
+  Identify the defect, state what it does to the reported value and in which
+  direction, and correct the budget. Where the correction requires a judgement
+  the budget does not record, make it explicitly and say what it rests on. If
+  you conclude a contribution cannot be resolved from the information given,
+  say so and state what you would need — that is a valid answer here.
+
+parameters:
+  - name: budget
+    type: dataset
+    description: >-
+      The budget itself, archived and hashed so the item can be reconstructed
+      exactly when a credential is re-reviewed years later.
+  - name: measurement_context
+    type: choice
+    description: >-
+      The measurement the budget belongs to. Varies the surface without
+      varying the defect, so a candidate who has seen the shape before still
+      has to diagnose this instance.
+  - name: defect_class
+    type: choice
+    # Never rendered. Naming the defect in the prompt hands over the answer.
+    visibility: generator
+    description: >-
+      Which defect is injected — ignored correlation, double-counted
+      contribution, wrong divisor, missing influence quantity, degrees of
+      freedom mishandled, resolution omitted. THE BINDING SETS THIS, and it is
+      what ties the item to its element.
+    constraint: >-
+      Must be a defect the bound element actually concerns. A binding that
+      leaves this unset is testing budget-reading in general and should be
+      rejected in review.
+  - name: defect_magnitude
+    type: real
+    visibility: generator
+    description: >-
+      How far the defect moves the reported result. Small values make a
+      genuinely hard item; large ones make an obvious one. This is the main
+      difficulty knob across L3 to L5.
+    constraint: >-
+      At L5 should sit near the threshold where the defect is arguable rather
+      than plainly wrong, since the competence being tested is noticing it.
+
+scoring:
+  method: rubric
+  rubricRef: content/items/rubrics/ARC-0002.md
+
+lookupResistance: >-
+  The budget is generated per candidate and has never existed before, so there
+  is nothing to look up and no answer key to share. An AI assistant is
+  genuinely useful here and is expected to be used — it will often spot an
+  arithmetic slip. What it cannot reliably do is decide which of several
+  defensible readings the laboratory's own context supports, or recognise that
+  the honest answer is that a contribution is unresolvable from what was
+  recorded. The rubric credits that judgement and gives no marks for a
+  correctly recomputed number attached to the wrong diagnosis.
+
+citations:
+  - source: JCGM-100-2008
+    clause: "5.2"
+    relevance: >-
+      Covers combined standard uncertainty and correlated inputs, the two
+      places the injected defects most often bite.
+
+exposureLimit: 4
+
+authoring:
+  createdOn: "2026-08-09"

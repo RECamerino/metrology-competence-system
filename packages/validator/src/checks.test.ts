@@ -428,3 +428,53 @@ test('duplicate archetype IDs are rejected', () => {
   );
   assert.ok(errors.some((e) => e.includes('also defined in')));
 });
+
+test('a generator parameter rendered into the prompt is rejected, since it gives the answer away', () => {
+  // The failure this catches is silent: an archetype whose prompt announces
+  // which defect was injected looks perfectly well-formed.
+  const errors = errorsOf(
+    withItems(
+      [
+        archetypeFile({
+          prompt: 'Given {{u_a}}, find the {{defect_class}} in the attached budget.',
+          parameters: [
+            { name: 'u_a', type: 'real' },
+            { name: 'defect_class', type: 'choice', visibility: 'generator' },
+          ],
+        }),
+      ],
+      [],
+    ),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('generator parameter') && e.includes('destroys the item')),
+    `expected a leaked-generator error, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('a generator parameter absent from the prompt is accepted', () => {
+  const errors = errorsOf(
+    withItems(
+      [
+        archetypeFile({
+          parameters: [
+            { name: 'u_a', type: 'real' },
+            { name: 'defect_class', type: 'choice', visibility: 'generator' },
+          ],
+        }),
+      ],
+      [],
+    ),
+  );
+  assert.deepEqual(errors, []);
+});
+
+test('a rubricRef pointing at a nonexistent file is rejected', () => {
+  const errors = errorsOf(
+    withItems(
+      [archetypeFile({ scoring: { method: 'rubric', rubricRef: 'content/items/rubrics/NOPE.md' } })],
+      [],
+    ),
+  );
+  assert.ok(errors.some((e) => e.includes('does not exist')));
+});

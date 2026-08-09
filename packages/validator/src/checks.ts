@@ -7,9 +7,12 @@
  * prerequisite graph traversable.
  */
 
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import {
   type Corpus,
   type ElementFile,
+  REPO_ROOT,
   allTaxonomyIds,
   indexArchetypes,
   indexSources,
@@ -391,15 +394,20 @@ function checkItemBank(corpus: Corpus): Finding[] {
     }
     seenArchetypes.set(d.id, file.path);
 
-    // Every {{placeholder}} must be declared, and every declared parameter
-    // must be used. An undeclared placeholder renders literally to the
-    // candidate; an unused parameter is a draw nobody sees, which usually
-    // means the prompt was edited and the parameter list was not.
-    const declared = new Set(
-      ((d.parameters ?? []) as Array<Record<string, any>>).map((p) => p?.name).filter(Boolean),
+    // Parameters divide into two kinds and each fails silently in its own way.
+    // A `prompt` parameter that never renders varies nothing. A `generator`
+    // parameter that DOES render hands the candidate the answer — an item
+    // whose prompt announces which defect was injected into the budget still
+    // looks perfectly well-formed, which is why this is checked rather than
+    // left to review.
+    const params = (d.parameters ?? []) as Array<Record<string, any>>;
+    const declared = new Map<string, string>(
+      params.filter((p) => p?.name).map((p) => [p.name as string, (p.visibility ?? 'prompt') as string]),
     );
     const used = new Set(
-      [...String(d.prompt ?? '').matchAll(/\{\{\s*([a-z][a-z0-9_]*)\s*\}\}/g)].map((m) => m[1]),
+      [...String(d.prompt ?? '').matchAll(/\{\{\s*([a-z][a-z0-9_]*)\s*\}\}/g)]
+        .map((m) => m[1])
+        .filter((name): name is string => Boolean(name)),
     );
 
     for (const name of used) {
@@ -409,10 +417,15 @@ function checkItemBank(corpus: Corpus): Finding[] {
         );
       }
     }
-    for (const name of declared) {
-      if (!used.has(name)) {
+    for (const [name, visibility] of declared) {
+      if (visibility === 'prompt' && !used.has(name)) {
         findings.push(
-          err(at(`parameter '${name}' is declared but never used in the prompt. A parameter nobody sees does not vary the item.`)),
+          err(at(`parameter '${name}' is declared but never used in the prompt. A parameter nobody sees does not vary the item — mark it visibility 'generator' if it is meant to shape the artifact instead.`)),
+        );
+      }
+      if (visibility === 'generator' && used.has(name)) {
+        findings.push(
+          err(at(`parameter '${name}' is a generator parameter but appears in the prompt as {{${name}}}. It shapes the artifact the candidate is given; rendering it tells them what to look for and destroys the item.`)),
         );
       }
     }
@@ -421,10 +434,16 @@ function checkItemBank(corpus: Corpus): Finding[] {
     // reviewers, and inter-rater reliability is what makes the credential
     // survive an accreditation audit.
     const method: string | undefined = d.scoring?.method;
-    if ((method === 'rubric' || method === 'hybrid') && !String(d.scoring?.rubricRef ?? '').trim()) {
+    const rubricRef = String(d.scoring?.rubricRef ?? '').trim();
+    if ((method === 'rubric' || method === 'hybrid') && !rubricRef) {
       findings.push(
         err(at(`scoring method is '${method}' but no rubricRef is given. Every non-auto-scored item ships with its rubric in the same commit.`)),
       );
+    }
+    // A dangling rubricRef satisfies the schema and still leaves an item no
+    // reviewer can score consistently.
+    if (rubricRef && !existsSync(join(REPO_ROOT, rubricRef))) {
+      findings.push(err(at(`rubricRef '${rubricRef}' does not exist`)));
     }
   }
 

@@ -1,0 +1,63 @@
+# ARC-0003 — Defend a choice against a stated alternative
+#
+# The L4-L5 judgment shape. There is deliberately no correct answer: both
+# positions are defensible, and the item tests whether the candidate can hold
+# one against informed pressure. Reserved for elements where the field itself
+# has not settled, which is the honest test of an L5 ceiling.
+
+id: ARC-0003
+title: Defend a choice against a stated alternative
+itemType: position-and-defend
+kinds:
+  - judgment
+levels: [4, 5]
+status: draft
+
+prompt: >-
+  In {{scenario}}, you chose {{position}}. A competent colleague reviewing
+  your work argues for {{counter_position}} instead, on the grounds that
+  {{counter_argument}}.
+
+  Defend your choice, or concede it. Both are acceptable outcomes and neither
+  is scored more highly than the other. What is scored is whether you engage
+  the strongest form of the opposing argument rather than a weaker version of
+  it, state the conditions under which you would change your position, and
+  identify what evidence would settle the question.
+
+parameters:
+  - name: scenario
+    type: choice
+    description: The measurement situation, drawn per candidate.
+  - name: position
+    type: choice
+    description: The position the candidate is placed in, so they cannot simply pick the easier side.
+  - name: counter_position
+    type: choice
+    description: The opposing position, which must be genuinely defensible rather than a straw man.
+    constraint: >-
+      Must be a position a competent practitioner actually holds. If the
+      counter-position is indefensible the item collapses into a compliance
+      check and stops testing judgement.
+  - name: counter_argument
+    type: choice
+    description: >-
+      The strongest available argument for the counter-position — drawn from
+      the real disagreement in the literature where one exists.
+
+scoring:
+  method: rubric
+  rubricRef: content/items/rubrics/ARC-0003.md
+
+lookupResistance: >-
+  This is the shape most resistant to lookup and most resistant to an AI
+  assistant, and for the same reason: the question has no settled answer to
+  retrieve. An assistant will readily produce a fluent survey of both
+  positions, and a fluent survey scores poorly here — the rubric credits
+  committing to a position, engaging the strongest opposing form of it, and
+  naming what would change the candidate's mind. A response that declines to
+  commit fails regardless of how well it describes the disagreement.
+
+exposureLimit: 2
+
+authoring:
+  createdOn: "2026-08-09"
