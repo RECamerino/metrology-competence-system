@@ -18,58 +18,58 @@ domains:
         title: Additive Manufacturing Measurement
         status: draft
         elements:
-          - { id: DP-19-001, title: "Additive processes and their measurement implications", levelCeiling: 4, status: draft }
-          - { id: DP-19-002, title: "Why additive parts defeat conventional inspection", levelCeiling: 5, status: draft }
-          - { id: DP-19-003, title: "Internal geometry and inaccessible feature measurement", levelCeiling: 4, status: draft }
-          - { id: DP-19-004, title: "Computed tomography for additive part inspection", levelCeiling: 4, status: draft }
-          - { id: DP-19-005, title: "CT calibration, artefacts and dimensional traceability", levelCeiling: 5, status: draft }
-          - { id: DP-19-006, title: "Surface texture of as-built additive surfaces", levelCeiling: 4, status: draft }
-          - { id: DP-19-007, title: "Porosity, density and defect characterisation", levelCeiling: 4, status: draft }
-          - { id: DP-19-008, title: "Residual stress measurement in additive parts", levelCeiling: 4, status: draft }
-          - { id: DP-19-009, title: "Distortion, warping and datum instability", levelCeiling: 4, status: draft }
-          - { id: DP-19-010, title: "Test artefacts and machine qualification for additive processes", levelCeiling: 4, status: draft }
-          - { id: DP-19-011, title: "Feedstock powder characterisation", levelCeiling: 4, status: draft }
-          - { id: DP-19-012, title: "Qualification of additive parts for critical applications", levelCeiling: 5, status: draft }
+          - { id: DP-19-001, title: "Additive processes and their measurement implications", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-19-002, title: "Why additive parts defeat conventional inspection", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-19-003, title: "Internal geometry and inaccessible feature measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-004, title: "Computed tomography for additive part inspection", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-005, title: "CT calibration, artefacts and dimensional traceability", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-19-006, title: "Surface texture of as-built additive surfaces", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-007, title: "Porosity, density and defect characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-008, title: "Residual stress measurement in additive parts", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-009, title: "Distortion, warping and datum instability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-010, title: "Test artefacts and machine qualification for additive processes", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-011, title: "Feedstock powder characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-012, title: "Qualification of additive parts for critical applications", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: DP-19-A02
         title: In-Process and In-Line Measurement
         status: draft
         elements:
-          - { id: DP-19-013, title: "In-process monitoring principles and their limits", levelCeiling: 4, status: draft }
-          - { id: DP-19-014, title: "Melt pool and thermal monitoring", levelCeiling: 4, status: draft }
-          - { id: DP-19-015, title: "Layer-wise optical inspection", levelCeiling: 4, status: draft }
-          - { id: DP-19-016, title: "Traceability of an in-process measurement", levelCeiling: 5, status: draft }
-          - { id: DP-19-017, title: "In-line dimensional measurement in production", levelCeiling: 4, status: draft }
-          - { id: DP-19-018, title: "On-machine probing and machine tool measurement", levelCeiling: 4, status: draft }
-          - { id: DP-19-019, title: "Relating in-process signals to part quality", levelCeiling: 4, status: draft }
-          - { id: DP-19-020, title: "Measurement-driven process control and closed loop correction", levelCeiling: 5, status: draft }
+          - { id: DP-19-013, title: "In-process monitoring principles and their limits", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-19-014, title: "Melt pool and thermal monitoring", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-015, title: "Layer-wise optical inspection", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-016, title: "Traceability of an in-process measurement", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-19-017, title: "In-line dimensional measurement in production", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-018, title: "On-machine probing and machine tool measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-019, title: "Relating in-process signals to part quality", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-19-020, title: "Measurement-driven process control and closed loop correction", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: DP-19-A03
         title: Advanced Materials and Joining
         status: draft
         elements:
-          - { id: DP-19-021, title: "Composite material inspection and defect detection", levelCeiling: 4, status: draft }
-          - { id: DP-19-022, title: "Adhesive and bonded joint evaluation", levelCeiling: 4, status: draft }
-          - { id: DP-19-023, title: "Weld inspection and measurement", levelCeiling: 4, status: draft }
-          - { id: DP-19-024, title: "Coating thickness measurement", levelCeiling: 4, status: draft }
-          - { id: DP-19-025, title: "Non-destructive testing methods and their measurement basis", levelCeiling: 4, status: draft }
-          - { id: DP-19-026, title: "Ultrasonic thickness and flaw measurement", levelCeiling: 4, status: draft }
-          - { id: DP-19-027, title: "Eddy current and electromagnetic inspection", levelCeiling: 4, status: draft }
-          - { id: DP-19-028, title: "Mechanical property testing and its measurement uncertainty", levelCeiling: 4, status: draft }
+          - { id: DP-19-021, title: "Composite material inspection and defect detection", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-022, title: "Adhesive and bonded joint evaluation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-023, title: "Weld inspection and measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-024, title: "Coating thickness measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-025, title: "Non-destructive testing methods and their measurement basis", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-19-026, title: "Ultrasonic thickness and flaw measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-027, title: "Eddy current and electromagnetic inspection", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-028, title: "Mechanical property testing and its measurement uncertainty", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-19-A04
         title: Production Systems and Integration
         status: draft
         elements:
-          - { id: DP-19-029, title: "Designing an inspection strategy for a production line", levelCeiling: 4, status: draft }
-          - { id: DP-19-030, title: "First article inspection and production part approval", levelCeiling: 4, status: draft }
-          - { id: DP-19-031, title: "Automated inspection cells and robot-mounted metrology", levelCeiling: 4, status: draft }
-          - { id: DP-19-032, title: "Machine vision inspection systems", levelCeiling: 4, status: draft }
-          - { id: DP-19-033, title: "Sampling plans and inspection frequency", levelCeiling: 4, status: draft }
-          - { id: DP-19-034, title: "Fixturing, repeatability and part presentation", levelCeiling: 4, status: draft }
-          - { id: DP-19-035, title: "Traceability and identification through a production process", levelCeiling: 4, status: draft }
-          - { id: DP-19-036, title: "Reverse engineering and as-built model generation", levelCeiling: 4, status: draft }
-          - { id: DP-19-037, title: "Measurement planning from a model-based definition", levelCeiling: 5, status: draft }
+          - { id: DP-19-029, title: "Designing an inspection strategy for a production line", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-19-030, title: "First article inspection and production part approval", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-031, title: "Automated inspection cells and robot-mounted metrology", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-032, title: "Machine vision inspection systems", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-033, title: "Sampling plans and inspection frequency", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-19-034, title: "Fixturing, repeatability and part presentation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-035, title: "Traceability and identification through a production process", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-036, title: "Reverse engineering and as-built model generation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-037, title: "Measurement planning from a model-based definition", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: DP-19-A05
         title: Nondestructive Measurement and Inspection
@@ -84,20 +84,20 @@ domains:
           eddy current in DP-08, radiography in DP-15, thermography in DP-05 —
           and this area is where they are treated as inspection methods.
         elements:
-          - { id: DP-19-038, title: "NDT as measurement: what is being measured and what is being claimed", levelCeiling: 4, status: draft }
-          - { id: DP-19-039, title: "Probability of detection and its determination", levelCeiling: 5, status: draft }
-          - { id: DP-19-040, title: "Flaw sizing and sizing uncertainty", levelCeiling: 5, status: draft }
-          - { id: DP-19-041, title: "What a negative NDT result does and does not assert", levelCeiling: 5, status: draft }
-          - { id: DP-19-042, title: "Reference blocks, calibration standards and artificial defects", levelCeiling: 4, status: draft }
-          - { id: DP-19-043, title: "Ultrasonic testing: pulse-echo and through-transmission", levelCeiling: 4, status: draft }
-          - { id: DP-19-044, title: "Phased array ultrasonics and time-of-flight diffraction", levelCeiling: 5, status: draft }
-          - { id: DP-19-045, title: "Guided wave and long-range screening techniques", levelCeiling: 4, status: draft }
-          - { id: DP-19-046, title: "Radiographic testing and digital radiography", levelCeiling: 4, status: draft }
-          - { id: DP-19-047, title: "Industrial computed tomography for defect detection", levelCeiling: 5, status: draft }
-          - { id: DP-19-048, title: "Magnetic particle and liquid penetrant inspection", levelCeiling: 3, status: draft }
-          - { id: DP-19-049, title: "Eddy current inspection and depth of penetration", levelCeiling: 4, status: draft }
-          - { id: DP-19-050, title: "Infrared thermography and shearography", levelCeiling: 4, status: draft }
-          - { id: DP-19-051, title: "Acoustic emission monitoring", levelCeiling: 4, status: draft }
-          - { id: DP-19-052, title: "Acceptance criteria and their origin in fitness for service", levelCeiling: 5, status: draft }
-          - { id: DP-19-053, title: "Operator effects and inspector qualification schemes", levelCeiling: 4, status: draft }
-          - { id: DP-19-054, title: "Automated and robotic NDT with machine interpretation", levelCeiling: 5, status: draft }
+          - { id: DP-19-038, title: "NDT as measurement: what is being measured and what is being claimed", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-19-039, title: "Probability of detection and its determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-19-040, title: "Flaw sizing and sizing uncertainty", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-19-041, title: "What a negative NDT result does and does not assert", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: DP-19-042, title: "Reference blocks, calibration standards and artificial defects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-043, title: "Ultrasonic testing: pulse-echo and through-transmission", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-044, title: "Phased array ultrasonics and time-of-flight diffraction", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-19-045, title: "Guided wave and long-range screening techniques", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-046, title: "Radiographic testing and digital radiography", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-047, title: "Industrial computed tomography for defect detection", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-19-048, title: "Magnetic particle and liquid penetrant inspection", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-19-049, title: "Eddy current inspection and depth of penetration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-050, title: "Infrared thermography and shearography", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-051, title: "Acoustic emission monitoring", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-052, title: "Acceptance criteria and their origin in fitness for service", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: DP-19-053, title: "Operator effects and inspector qualification schemes", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-19-054, title: "Automated and robotic NDT with machine interpretation", kind: skill, levelCeiling: 5, status: draft }

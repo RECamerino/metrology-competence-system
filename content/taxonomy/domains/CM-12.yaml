@@ -17,55 +17,55 @@ domains:
         title: Environmental Control
         status: draft
         elements:
-          - { id: CM-12-001, title: "Deriving environmental requirements from a measurement capability", levelCeiling: 5, status: draft }
-          - { id: CM-12-002, title: "Temperature control, gradients and stability", levelCeiling: 4, status: draft }
-          - { id: CM-12-003, title: "The 20 degree Celsius reference condition and thermal expansion", levelCeiling: 3, status: draft }
-          - { id: CM-12-004, title: "Humidity control and its measurement effects", levelCeiling: 3, status: draft }
-          - { id: CM-12-005, title: "Barometric pressure and air density effects", levelCeiling: 3, status: draft }
-          - { id: CM-12-006, title: "Cleanliness, particulates and contamination control", levelCeiling: 3, status: draft }
-          - { id: CM-12-007, title: "Vibration isolation and seismic considerations", levelCeiling: 4, status: draft }
-          - { id: CM-12-008, title: "Electromagnetic environment and interference control", levelCeiling: 4, status: draft }
-          - { id: CM-12-009, title: "Lighting, acoustics and human working conditions", levelCeiling: 3, status: draft }
-          - { id: CM-12-010, title: "Environmental monitoring, alarming and record keeping", levelCeiling: 4, status: draft }
-          - { id: CM-12-011, title: "Demonstrating that conditions were adequate at time of measurement", levelCeiling: 4, status: draft }
+          - { id: CM-12-001, title: "Deriving environmental requirements from a measurement capability", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-12-002, title: "Temperature control, gradients and stability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-003, title: "The 20 degree Celsius reference condition and thermal expansion", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-12-004, title: "Humidity control and its measurement effects", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-005, title: "Barometric pressure and air density effects", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-006, title: "Cleanliness, particulates and contamination control", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-007, title: "Vibration isolation and seismic considerations", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-008, title: "Electromagnetic environment and interference control", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-009, title: "Lighting, acoustics and human working conditions", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-010, title: "Environmental monitoring, alarming and record keeping", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-011, title: "Demonstrating that conditions were adequate at time of measurement", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-12-A02
         title: Facility Design and Infrastructure
         status: draft
         elements:
-          - { id: CM-12-012, title: "Laboratory layout and workflow design", levelCeiling: 4, status: draft }
-          - { id: CM-12-013, title: "Foundations, mass blocks and mechanical isolation", levelCeiling: 4, status: draft }
-          - { id: CM-12-014, title: "Power quality, grounding and earthing", levelCeiling: 4, status: draft }
-          - { id: CM-12-015, title: "Shielded rooms, screened enclosures and Faraday cages", levelCeiling: 4, status: draft }
-          - { id: CM-12-016, title: "Gas, vacuum, water and utility services", levelCeiling: 3, status: draft }
-          - { id: CM-12-017, title: "Access control and segregation of activities", levelCeiling: 3, status: draft }
-          - { id: CM-12-018, title: "Specifying and commissioning a new laboratory", levelCeiling: 5, status: draft }
-          - { id: CM-12-019, title: "Working within an inadequate facility and documenting the limits", levelCeiling: 4, status: draft }
+          - { id: CM-12-012, title: "Laboratory layout and workflow design", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-12-013, title: "Foundations, mass blocks and mechanical isolation", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-12-014, title: "Power quality, grounding and earthing", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-12-015, title: "Shielded rooms, screened enclosures and Faraday cages", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-12-016, title: "Gas, vacuum, water and utility services", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-12-017, title: "Access control and segregation of activities", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-018, title: "Specifying and commissioning a new laboratory", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-12-019, title: "Working within an inadequate facility and documenting the limits", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-12-A03
         title: Operational Workflow
         status: draft
         elements:
-          - { id: CM-12-020, title: "Job intake, scheduling and prioritisation", levelCeiling: 4, status: draft }
-          - { id: CM-12-021, title: "Item receipt, identification and condition recording", levelCeiling: 3, status: draft }
-          - { id: CM-12-022, title: "Work in progress tracking and turnaround", levelCeiling: 4, status: draft }
-          - { id: CM-12-023, title: "Capacity planning and bottleneck management", levelCeiling: 5, status: draft }
-          - { id: CM-12-024, title: "Return, packing and delivery of items", levelCeiling: 3, status: draft }
-          - { id: CM-12-025, title: "Laboratory information management systems", levelCeiling: 4, status: draft }
-          - { id: CM-12-026, title: "Business continuity and disaster recovery for a laboratory", levelCeiling: 4, status: draft }
-          - { id: CM-12-027, title: "Mobile, field and on-site measurement operations", levelCeiling: 4, status: draft }
+          - { id: CM-12-020, title: "Job intake, scheduling and prioritisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-021, title: "Item receipt, identification and condition recording", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-022, title: "Work in progress tracking and turnaround", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-023, title: "Capacity planning and bottleneck management", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-12-024, title: "Return, packing and delivery of items", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-025, title: "Laboratory information management systems", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-026, title: "Business continuity and disaster recovery for a laboratory", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-12-027, title: "Mobile, field and on-site measurement operations", kind: skill, levelCeiling: 4, status: draft }
 
       - id: CM-12-A04
         title: Asset and Consumable Management
         status: draft
         elements:
-          - { id: CM-12-028, title: "Asset lifecycle from specification to disposal", levelCeiling: 4, status: draft }
-          - { id: CM-12-029, title: "Justifying and specifying a capital purchase", levelCeiling: 4, status: draft }
-          - { id: CM-12-030, title: "Acceptance testing of new equipment", levelCeiling: 4, status: draft }
-          - { id: CM-12-031, title: "Preventive maintenance programmes", levelCeiling: 4, status: draft }
-          - { id: CM-12-032, title: "Spares, obsolescence and end-of-support equipment", levelCeiling: 4, status: draft }
-          - { id: CM-12-033, title: "Consumables, reference materials and shelf life", levelCeiling: 3, status: draft }
-          - { id: CM-12-034, title: "Decommissioning and disposal with data and traceability implications", levelCeiling: 4, status: draft }
+          - { id: CM-12-028, title: "Asset lifecycle from specification to disposal", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-029, title: "Justifying and specifying a capital purchase", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-12-030, title: "Acceptance testing of new equipment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-031, title: "Preventive maintenance programmes", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-032, title: "Spares, obsolescence and end-of-support equipment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-033, title: "Consumables, reference materials and shelf life", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-034, title: "Decommissioning and disposal with data and traceability implications", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-12-A05
         title: Laboratory Practice and Technique
@@ -74,10 +74,10 @@ domains:
           The hand skills and habits that separate reliable technicians from
           unreliable ones, and which are almost never written down.
         elements:
-          - { id: CM-12-035, title: "Cleanliness, gloving and avoiding contamination of standards", levelCeiling: 3, status: draft }
-          - { id: CM-12-036, title: "Thermal effects of the operator on the measurement", levelCeiling: 4, status: draft }
-          - { id: CM-12-037, title: "Setup, alignment and seating of artefacts", levelCeiling: 4, status: draft }
-          - { id: CM-12-038, title: "Repeatable technique and eliminating operator-dependent variation", levelCeiling: 5, status: draft }
-          - { id: CM-12-039, title: "Recognising when something is wrong before the numbers say so", levelCeiling: 3, status: draft }
-          - { id: CM-12-040, title: "Contemporaneous recording and notebook discipline", levelCeiling: 4, status: draft }
-          - { id: CM-12-041, title: "Housekeeping as a metrological control", levelCeiling: 3, status: draft }
+          - { id: CM-12-035, title: "Cleanliness, gloving and avoiding contamination of standards", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-036, title: "Thermal effects of the operator on the measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-037, title: "Setup, alignment and seating of artefacts", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-038, title: "Repeatable technique and eliminating operator-dependent variation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: CM-12-039, title: "Recognising when something is wrong before the numbers say so", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-12-040, title: "Contemporaneous recording and notebook discipline", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-041, title: "Housekeeping as a metrological control", kind: skill, levelCeiling: 3, status: draft }

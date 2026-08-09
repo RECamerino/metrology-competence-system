@@ -17,30 +17,30 @@ domains:
         title: Principles of Visual Encoding
         status: draft
         elements:
-          - { id: CM-16-001, title: "What a chart is for and when a table is better", levelCeiling: 3, status: draft }
-          - { id: CM-16-002, title: "Visual encoding channels and their relative accuracy", levelCeiling: 4, status: draft }
-          - { id: CM-16-003, title: "Data-ink, decoration and the cost of visual noise", levelCeiling: 3, status: draft }
-          - { id: CM-16-004, title: "Scale, axis choice and the zero-baseline question", levelCeiling: 4, status: draft }
-          - { id: CM-16-005, title: "Logarithmic and nonlinear scales", levelCeiling: 3, status: draft }
-          - { id: CM-16-006, title: "Aspect ratio and perceived slope", levelCeiling: 3, status: draft }
-          - { id: CM-16-007, title: "Colour use, ordering and semantic meaning", levelCeiling: 3, status: draft }
-          - { id: CM-16-008, title: "Accessibility: colour vision deficiency, contrast and redundant encoding", levelCeiling: 3, status: draft }
-          - { id: CM-16-009, title: "Small multiples and comparison design", levelCeiling: 4, status: draft }
+          - { id: CM-16-001, title: "What a chart is for and when a table is better", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-16-002, title: "Visual encoding channels and their relative accuracy", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-16-003, title: "Data-ink, decoration and the cost of visual noise", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-16-004, title: "Scale, axis choice and the zero-baseline question", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-16-005, title: "Logarithmic and nonlinear scales", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-16-006, title: "Aspect ratio and perceived slope", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-16-007, title: "Colour use, ordering and semantic meaning", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-16-008, title: "Accessibility: colour vision deficiency, contrast and redundant encoding", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-16-009, title: "Small multiples and comparison design", kind: knowledge, levelCeiling: 4, status: draft }
 
       - id: CM-16-A02
         title: Displaying Measurement Data
         status: draft
         elements:
-          - { id: CM-16-010, title: "Showing uncertainty on a chart", levelCeiling: 5, status: draft }
-          - { id: CM-16-011, title: "Error bars and the ambiguity of what they represent", levelCeiling: 5, status: draft }
-          - { id: CM-16-012, title: "Displaying distributions rather than summaries", levelCeiling: 4, status: draft }
-          - { id: CM-16-013, title: "Residual plots and diagnostic graphics", levelCeiling: 4, status: draft }
-          - { id: CM-16-014, title: "Calibration curves and fitted relationships", levelCeiling: 3, status: draft }
-          - { id: CM-16-015, title: "Control charts as a communication tool", levelCeiling: 4, status: draft }
-          - { id: CM-16-016, title: "Time series, drift and trend presentation", levelCeiling: 3, status: draft }
-          - { id: CM-16-017, title: "Comparing results against a specification limit visually", levelCeiling: 4, status: draft }
-          - { id: CM-16-018, title: "Interlaboratory comparison and performance score graphics", levelCeiling: 3, status: draft }
-          - { id: CM-16-019, title: "Uncertainty budget presentation and contribution charts", levelCeiling: 4, status: draft }
+          - { id: CM-16-010, title: "Showing uncertainty on a chart", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-16-011, title: "Error bars and the ambiguity of what they represent", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-16-012, title: "Displaying distributions rather than summaries", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-16-013, title: "Residual plots and diagnostic graphics", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-16-014, title: "Calibration curves and fitted relationships", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-16-015, title: "Control charts as a communication tool", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-16-016, title: "Time series, drift and trend presentation", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-16-017, title: "Comparing results against a specification limit visually", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-16-018, title: "Interlaboratory comparison and performance score graphics", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-16-019, title: "Uncertainty budget presentation and contribution charts", kind: skill, levelCeiling: 4, status: draft }
 
       - id: CM-16-A03
         title: Honesty and Misleading Graphics
@@ -50,31 +50,31 @@ domains:
           unintentional, and because a metrologist has a professional obligation
           not to mislead even accidentally.
         elements:
-          - { id: CM-16-020, title: "Common ways a chart misleads without containing a false number", levelCeiling: 5, status: draft }
-          - { id: CM-16-021, title: "Truncated axes, dual axes and manufactured correlation", levelCeiling: 4, status: draft }
-          - { id: CM-16-022, title: "Selective ranges, cherry-picked windows and survivorship", levelCeiling: 4, status: draft }
-          - { id: CM-16-023, title: "Implying precision the data does not support", levelCeiling: 4, status: draft }
-          - { id: CM-16-024, title: "Critiquing a graphic someone else produced", levelCeiling: 5, status: draft }
-          - { id: CM-16-025, title: "Ethical obligations in visual presentation of results", levelCeiling: 4, status: draft }
+          - { id: CM-16-020, title: "Common ways a chart misleads without containing a false number", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: CM-16-021, title: "Truncated axes, dual axes and manufactured correlation", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-16-022, title: "Selective ranges, cherry-picked windows and survivorship", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-16-023, title: "Implying precision the data does not support", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-16-024, title: "Critiquing a graphic someone else produced", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-16-025, title: "Ethical obligations in visual presentation of results", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-16-A04
         title: Tables, Dashboards and Reporting Interfaces
         status: draft
         elements:
-          - { id: CM-16-026, title: "Table design for readability and comparison", levelCeiling: 3, status: draft }
-          - { id: CM-16-027, title: "Numeric formatting, alignment and significant figures in tables", levelCeiling: 3, status: draft }
-          - { id: CM-16-028, title: "Dashboard design and the metric that gets gamed", levelCeiling: 4, status: draft }
-          - { id: CM-16-029, title: "Choosing indicators that reflect measurement quality", levelCeiling: 4, status: draft }
-          - { id: CM-16-030, title: "Progressive disclosure: summary to detail", levelCeiling: 3, status: draft }
-          - { id: CM-16-031, title: "Interactive graphics and their appropriate use", levelCeiling: 4, status: draft }
-          - { id: CM-16-032, title: "Print, screen and projection constraints", levelCeiling: 3, status: draft }
+          - { id: CM-16-026, title: "Table design for readability and comparison", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-16-027, title: "Numeric formatting, alignment and significant figures in tables", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-16-028, title: "Dashboard design and the metric that gets gamed", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-16-029, title: "Choosing indicators that reflect measurement quality", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-16-030, title: "Progressive disclosure: summary to detail", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-16-031, title: "Interactive graphics and their appropriate use", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-16-032, title: "Print, screen and projection constraints", kind: skill, levelCeiling: 3, status: draft }
 
       - id: CM-16-A05
         title: Tooling and Reproducible Graphics
         status: draft
         elements:
-          - { id: CM-16-033, title: "Producing charts reproducibly from source data", levelCeiling: 3, status: draft }
-          - { id: CM-16-034, title: "Plotting libraries and tool selection", levelCeiling: 3, status: draft }
-          - { id: CM-16-035, title: "Templates, house style and visual consistency", levelCeiling: 3, status: draft }
-          - { id: CM-16-036, title: "Vector versus raster output and publication requirements", levelCeiling: 3, status: draft }
-          - { id: CM-16-037, title: "Technical diagrams: setups, schematics and traceability chains", levelCeiling: 4, status: draft }
+          - { id: CM-16-033, title: "Producing charts reproducibly from source data", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-16-034, title: "Plotting libraries and tool selection", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-16-035, title: "Templates, house style and visual consistency", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-16-036, title: "Vector versus raster output and publication requirements", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-16-037, title: "Technical diagrams: setups, schematics and traceability chains", kind: skill, levelCeiling: 4, status: draft }

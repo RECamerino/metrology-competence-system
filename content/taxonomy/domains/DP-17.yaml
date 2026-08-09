@@ -20,69 +20,69 @@ domains:
         title: Foundations of Clinical Measurement
         status: draft
         elements:
-          - { id: DP-17-001, title: "Measurand definition in laboratory medicine", levelCeiling: 4, status: draft }
-          - { id: DP-17-002, title: "Traceability in laboratory medicine and reference measurement systems", levelCeiling: 5, status: draft }
-          - { id: DP-17-003, title: "Reference measurement procedures and reference laboratories", levelCeiling: 4, status: draft }
-          - { id: DP-17-004, title: "The JCTLM database and listed reference materials", levelCeiling: 4, status: draft }
-          - { id: DP-17-005, title: "Commutability in clinical reference materials", levelCeiling: 5, status: draft }
-          - { id: DP-17-006, title: "International units and conventionally defined biological activity", levelCeiling: 5, status: draft }
-          - { id: DP-17-007, title: "Standardisation and harmonisation of clinical assays", levelCeiling: 4, status: draft }
-          - { id: DP-17-008, title: "Biological variation and its effect on interpretation", levelCeiling: 4, status: draft }
+          - { id: DP-17-001, title: "Measurand definition in laboratory medicine", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-17-002, title: "Traceability in laboratory medicine and reference measurement systems", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-17-003, title: "Reference measurement procedures and reference laboratories", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-17-004, title: "The JCTLM database and listed reference materials", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-17-005, title: "Commutability in clinical reference materials", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: DP-17-006, title: "International units and conventionally defined biological activity", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-17-007, title: "Standardisation and harmonisation of clinical assays", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-17-008, title: "Biological variation and its effect on interpretation", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: DP-17-A02
         title: Clinical Laboratory Measurement
         status: draft
         elements:
-          - { id: DP-17-009, title: "Clinical chemistry analysers and their calibration", levelCeiling: 4, status: draft }
-          - { id: DP-17-010, title: "Immunoassay principles and calibration challenges", levelCeiling: 4, status: draft }
-          - { id: DP-17-011, title: "Haematology and cell counting measurement", levelCeiling: 4, status: draft }
-          - { id: DP-17-012, title: "Blood gas, electrolyte and point of care measurement", levelCeiling: 4, status: draft }
-          - { id: DP-17-013, title: "Molecular diagnostics and nucleic acid quantification", levelCeiling: 4, status: draft }
-          - { id: DP-17-014, title: "Digital PCR as a counting-based reference method", levelCeiling: 5, status: draft }
-          - { id: DP-17-015, title: "Flow cytometry measurement", levelCeiling: 4, status: draft }
-          - { id: DP-17-016, title: "Microbiological enumeration and its uncertainty", levelCeiling: 4, status: draft }
-          - { id: DP-17-017, title: "Internal quality control and external quality assessment", levelCeiling: 4, status: draft }
-          - { id: DP-17-018, title: "Reference intervals and decision limits", levelCeiling: 4, status: draft }
-          - { id: DP-17-019, title: "Measurement uncertainty in laboratory medicine", levelCeiling: 5, status: draft }
-          - { id: DP-17-020, title: "ISO 15189 requirements and their difference from 17025", levelCeiling: 4, status: draft }
+          - { id: DP-17-009, title: "Clinical chemistry analysers and their calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-010, title: "Immunoassay principles and calibration challenges", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-17-011, title: "Haematology and cell counting measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-012, title: "Blood gas, electrolyte and point of care measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-013, title: "Molecular diagnostics and nucleic acid quantification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-014, title: "Digital PCR as a counting-based reference method", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-17-015, title: "Flow cytometry measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-016, title: "Microbiological enumeration and its uncertainty", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-017, title: "Internal quality control and external quality assessment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-018, title: "Reference intervals and decision limits", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-17-019, title: "Measurement uncertainty in laboratory medicine", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-17-020, title: "ISO 15189 requirements and their difference from 17025", kind: knowledge, levelCeiling: 4, status: draft }
 
       - id: DP-17-A03
         title: Medical Device and Equipment Metrology
         status: draft
         elements:
-          - { id: DP-17-021, title: "Medical equipment calibration programmes", levelCeiling: 4, status: draft }
-          - { id: DP-17-022, title: "Patient monitor and vital signs measurement", levelCeiling: 4, status: draft }
-          - { id: DP-17-023, title: "Non-invasive blood pressure measurement and its verification", levelCeiling: 4, status: draft }
-          - { id: DP-17-024, title: "Pulse oximetry measurement and calibration", levelCeiling: 4, status: draft }
-          - { id: DP-17-025, title: "Infusion pump and syringe driver flow verification", levelCeiling: 4, status: draft }
-          - { id: DP-17-026, title: "Ventilator and respiratory measurement", levelCeiling: 4, status: draft }
-          - { id: DP-17-027, title: "Defibrillator and electrosurgical output measurement", levelCeiling: 4, status: draft }
-          - { id: DP-17-028, title: "Clinical thermometry", levelCeiling: 4, status: draft }
-          - { id: DP-17-029, title: "Medical imaging equipment quality assurance", levelCeiling: 4, status: draft }
-          - { id: DP-17-030, title: "Electrical safety testing of medical equipment", levelCeiling: 4, status: draft }
-          - { id: DP-17-031, title: "Regulatory framework for medical device measurement", levelCeiling: 4, status: draft }
+          - { id: DP-17-021, title: "Medical equipment calibration programmes", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-022, title: "Patient monitor and vital signs measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-023, title: "Non-invasive blood pressure measurement and its verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-024, title: "Pulse oximetry measurement and calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-025, title: "Infusion pump and syringe driver flow verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-026, title: "Ventilator and respiratory measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-027, title: "Defibrillator and electrosurgical output measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-028, title: "Clinical thermometry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-029, title: "Medical imaging equipment quality assurance", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-030, title: "Electrical safety testing of medical equipment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-031, title: "Regulatory framework for medical device measurement", kind: knowledge, levelCeiling: 4, status: draft }
 
       - id: DP-17-A04
         title: Biological and Biotechnology Measurement
         status: draft
         elements:
-          - { id: DP-17-032, title: "Protein quantification and its method dependence", levelCeiling: 4, status: draft }
-          - { id: DP-17-033, title: "Enzyme activity measurement and unit conventions", levelCeiling: 4, status: draft }
-          - { id: DP-17-034, title: "Cell counting and viability measurement", levelCeiling: 4, status: draft }
-          - { id: DP-17-035, title: "Bioassay design and potency determination", levelCeiling: 4, status: draft }
-          - { id: DP-17-036, title: "Biological reference preparations and international standards", levelCeiling: 5, status: draft }
-          - { id: DP-17-037, title: "Genomic and sequencing measurement quality", levelCeiling: 4, status: draft }
-          - { id: DP-17-038, title: "Biomanufacturing process measurement", levelCeiling: 4, status: draft }
-          - { id: DP-17-039, title: "Uncertainty in biological measurement", levelCeiling: 5, status: draft }
+          - { id: DP-17-032, title: "Protein quantification and its method dependence", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-033, title: "Enzyme activity measurement and unit conventions", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-17-034, title: "Cell counting and viability measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-035, title: "Bioassay design and potency determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-036, title: "Biological reference preparations and international standards", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-17-037, title: "Genomic and sequencing measurement quality", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-038, title: "Biomanufacturing process measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-039, title: "Uncertainty in biological measurement", kind: skill, levelCeiling: 5, status: draft }
 
       - id: DP-17-A05
         title: Human, Environmental and Food Measurement
         status: draft
         elements:
-          - { id: DP-17-040, title: "Anthropometric and body composition measurement", levelCeiling: 3, status: draft }
-          - { id: DP-17-041, title: "Sensory measurement and panel calibration", levelCeiling: 4, status: draft }
-          - { id: DP-17-042, title: "Food composition and nutritional labelling measurement", levelCeiling: 4, status: draft }
-          - { id: DP-17-043, title: "Food safety, contaminant and residue measurement", levelCeiling: 4, status: draft }
-          - { id: DP-17-044, title: "Allergen and authenticity testing", levelCeiling: 4, status: draft }
-          - { id: DP-17-045, title: "Environmental and ecological monitoring measurement", levelCeiling: 4, status: draft }
-          - { id: DP-17-046, title: "Forensic measurement and evidential standards", levelCeiling: 5, status: draft }
+          - { id: DP-17-040, title: "Anthropometric and body composition measurement", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-17-041, title: "Sensory measurement and panel calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-042, title: "Food composition and nutritional labelling measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-043, title: "Food safety, contaminant and residue measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-044, title: "Allergen and authenticity testing", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-045, title: "Environmental and ecological monitoring measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-046, title: "Forensic measurement and evidential standards", kind: judgment, levelCeiling: 5, status: draft }

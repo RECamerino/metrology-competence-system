@@ -17,61 +17,61 @@ domains:
         title: Mass Standards and Realisation
         status: draft
         elements:
-          - { id: DP-02-001, title: "Definition of the kilogram from the Planck constant", levelCeiling: 5, status: draft }
-          - { id: DP-02-002, title: "Kibble balance realisation", levelCeiling: 4, status: draft }
-          - { id: DP-02-003, title: "X-ray crystal density realisation", levelCeiling: 4, status: draft }
-          - { id: DP-02-004, title: "Dissemination of the kilogram after the redefinition", levelCeiling: 4, status: draft }
-          - { id: DP-02-005, title: "Mass standards: classes, materials and construction", levelCeiling: 4, status: draft }
-          - { id: DP-02-006, title: "Weight class specifications and their selection", levelCeiling: 4, status: draft }
-          - { id: DP-02-007, title: "Surface effects, adsorption and mass stability", levelCeiling: 5, status: draft }
-          - { id: DP-02-008, title: "Cleaning, handling and storage of mass standards", levelCeiling: 4, status: draft }
-          - { id: DP-02-009, title: "Mass, weight and conventional mass distinguished", levelCeiling: 3, status: draft }
-          - { id: DP-02-010, title: "Air buoyancy correction and air density determination", levelCeiling: 4, status: draft }
+          - { id: DP-02-001, title: "Definition of the kilogram from the Planck constant", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-02-002, title: "Kibble balance realisation", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-02-003, title: "X-ray crystal density realisation", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-02-004, title: "Dissemination of the kilogram after the redefinition", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-02-005, title: "Mass standards: classes, materials and construction", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-02-006, title: "Weight class specifications and their selection", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-02-007, title: "Surface effects, adsorption and mass stability", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-02-008, title: "Cleaning, handling and storage of mass standards", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-009, title: "Mass, weight and conventional mass distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-02-010, title: "Air buoyancy correction and air density determination", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-02-A02
         title: Mass Comparison and Balances
         status: draft
         elements:
-          - { id: DP-02-011, title: "Balance principles: electromagnetic force compensation and others", levelCeiling: 4, status: draft }
-          - { id: DP-02-012, title: "Mass comparators and their characterisation", levelCeiling: 4, status: draft }
-          - { id: DP-02-013, title: "Weighing designs and subdivision schemes", levelCeiling: 5, status: draft }
-          - { id: DP-02-014, title: "Substitution weighing and Borda method", levelCeiling: 4, status: draft }
-          - { id: DP-02-015, title: "Least squares analysis of a weighing design", levelCeiling: 4, status: draft }
-          - { id: DP-02-016, title: "Uncertainty budget for mass calibration", levelCeiling: 5, status: draft }
-          - { id: DP-02-017, title: "Environmental effects: convection, draughts, magnetism, static", levelCeiling: 4, status: draft }
-          - { id: DP-02-018, title: "Magnetic susceptibility of weights and its testing", levelCeiling: 4, status: draft }
-          - { id: DP-02-019, title: "Non-automatic weighing instruments and their verification", levelCeiling: 3, status: draft }
-          - { id: DP-02-020, title: "Eccentricity, repeatability and linearity testing of balances", levelCeiling: 4, status: draft }
-          - { id: DP-02-021, title: "Automatic weighing and dynamic weighing systems", levelCeiling: 4, status: draft }
-          - { id: DP-02-022, title: "Large-capacity and industrial scale calibration", levelCeiling: 4, status: draft }
+          - { id: DP-02-011, title: "Balance principles: electromagnetic force compensation and others", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-02-012, title: "Mass comparators and their characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-013, title: "Weighing designs and subdivision schemes", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-02-014, title: "Substitution weighing and Borda method", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-015, title: "Least squares analysis of a weighing design", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-016, title: "Uncertainty budget for mass calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-02-017, title: "Environmental effects: convection, draughts, magnetism, static", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-018, title: "Magnetic susceptibility of weights and its testing", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-019, title: "Non-automatic weighing instruments and their verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-02-020, title: "Eccentricity, repeatability and linearity testing of balances", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-021, title: "Automatic weighing and dynamic weighing systems", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-022, title: "Large-capacity and industrial scale calibration", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-02-A03
         title: Force
         status: draft
         elements:
-          - { id: DP-02-023, title: "Force realisation by deadweight machines", levelCeiling: 5, status: draft }
-          - { id: DP-02-024, title: "Local gravity determination and its uncertainty", levelCeiling: 4, status: draft }
-          - { id: DP-02-025, title: "Lever, hydraulic and build-up force machines", levelCeiling: 4, status: draft }
-          - { id: DP-02-026, title: "Force transducers: strain gauge and other principles", levelCeiling: 4, status: draft }
-          - { id: DP-02-027, title: "Force transducer calibration and classification", levelCeiling: 4, status: draft }
-          - { id: DP-02-028, title: "Creep, hysteresis and rotational effects in force measurement", levelCeiling: 4, status: draft }
-          - { id: DP-02-029, title: "Loading conditions, adapters and parasitic components", levelCeiling: 4, status: draft }
-          - { id: DP-02-030, title: "Materials testing machine verification", levelCeiling: 4, status: draft }
-          - { id: DP-02-031, title: "Dynamic and impact force measurement", levelCeiling: 4, status: draft }
-          - { id: DP-02-032, title: "Uncertainty budget for force calibration", levelCeiling: 5, status: draft }
+          - { id: DP-02-023, title: "Force realisation by deadweight machines", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-02-024, title: "Local gravity determination and its uncertainty", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-025, title: "Lever, hydraulic and build-up force machines", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-026, title: "Force transducers: strain gauge and other principles", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-02-027, title: "Force transducer calibration and classification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-028, title: "Creep, hysteresis and rotational effects in force measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-029, title: "Loading conditions, adapters and parasitic components", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-030, title: "Materials testing machine verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-031, title: "Dynamic and impact force measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-032, title: "Uncertainty budget for force calibration", kind: skill, levelCeiling: 5, status: draft }
 
       - id: DP-02-A04
         title: Torque
         status: draft
         elements:
-          - { id: DP-02-033, title: "Torque realisation by lever and mass", levelCeiling: 4, status: draft }
-          - { id: DP-02-034, title: "Reference torque transducers", levelCeiling: 4, status: draft }
-          - { id: DP-02-035, title: "Torque calibration machines and their verification", levelCeiling: 4, status: draft }
-          - { id: DP-02-036, title: "Torque wrench and torque tool calibration", levelCeiling: 4, status: draft }
-          - { id: DP-02-037, title: "Static and dynamic torque distinguished", levelCeiling: 4, status: draft }
-          - { id: DP-02-038, title: "Torque-tension relationships and joint behaviour", levelCeiling: 4, status: draft }
-          - { id: DP-02-039, title: "Mounting, alignment and parasitic loads in torque measurement", levelCeiling: 4, status: draft }
-          - { id: DP-02-040, title: "Uncertainty budget for torque calibration", levelCeiling: 5, status: draft }
+          - { id: DP-02-033, title: "Torque realisation by lever and mass", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-034, title: "Reference torque transducers", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-035, title: "Torque calibration machines and their verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-036, title: "Torque wrench and torque tool calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-037, title: "Static and dynamic torque distinguished", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-02-038, title: "Torque-tension relationships and joint behaviour", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-02-039, title: "Mounting, alignment and parasitic loads in torque measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-040, title: "Uncertainty budget for torque calibration", kind: skill, levelCeiling: 5, status: draft }
 
       - id: DP-02-A05
         title: Hardness
@@ -81,18 +81,18 @@ domains:
           a physical property in the ordinary sense is more important than
           memorising the scales.
         elements:
-          - { id: DP-02-041, title: "Hardness as a method-defined ordinal quantity", levelCeiling: 5, status: draft }
-          - { id: DP-02-042, title: "Rockwell scales and test principles", levelCeiling: 3, status: draft }
-          - { id: DP-02-043, title: "Brinell test and indentation measurement", levelCeiling: 3, status: draft }
-          - { id: DP-02-044, title: "Vickers and Knoop microhardness", levelCeiling: 3, status: draft }
-          - { id: DP-02-045, title: "Shore, Leeb and portable hardness methods", levelCeiling: 4, status: draft }
-          - { id: DP-02-046, title: "Direct and indirect verification of hardness machines", levelCeiling: 4, status: draft }
-          - { id: DP-02-047, title: "Hardness reference blocks and their traceability", levelCeiling: 4, status: draft }
-          - { id: DP-02-048, title: "Indenter geometry, condition and its effect on results", levelCeiling: 4, status: draft }
-          - { id: DP-02-049, title: "Surface preparation and specimen effects", levelCeiling: 4, status: draft }
-          - { id: DP-02-050, title: "Hardness scale conversion and why it is unreliable", levelCeiling: 5, status: draft }
-          - { id: DP-02-051, title: "Uncertainty evaluation for hardness measurement", levelCeiling: 4, status: draft }
-          - { id: DP-02-052, title: "Instrumented indentation testing", levelCeiling: 4, status: draft }
+          - { id: DP-02-041, title: "Hardness as a method-defined ordinal quantity", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-02-042, title: "Rockwell scales and test principles", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-02-043, title: "Brinell test and indentation measurement", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-02-044, title: "Vickers and Knoop microhardness", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-02-045, title: "Shore, Leeb and portable hardness methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-046, title: "Direct and indirect verification of hardness machines", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-047, title: "Hardness reference blocks and their traceability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-048, title: "Indenter geometry, condition and its effect on results", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-049, title: "Surface preparation and specimen effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-050, title: "Hardness scale conversion and why it is unreliable", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: DP-02-051, title: "Uncertainty evaluation for hardness measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-052, title: "Instrumented indentation testing", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-02-A06
         title: Gravity and Gravimetry
@@ -106,15 +106,15 @@ domains:
           gravimetry shares apparatus and traceability routes with mass and
           force; it is a candidate for its own discipline pack if it grows.
         elements:
-          - { id: DP-02-053, title: "Gravitational acceleration as a measurand", levelCeiling: 4, status: draft }
-          - { id: DP-02-054, title: "Absolute gravimeters and free-fall methods", levelCeiling: 5, status: draft }
-          - { id: DP-02-055, title: "Atom interferometric gravimetry", levelCeiling: 5, status: draft }
-          - { id: DP-02-056, title: "Relative gravimeters and their drift behaviour", levelCeiling: 4, status: draft }
-          - { id: DP-02-057, title: "Gravity gradients and vertical transfer to the measurement height", levelCeiling: 5, status: draft }
-          - { id: DP-02-058, title: "Earth tide, ocean loading and atmospheric corrections", levelCeiling: 5, status: draft }
-          - { id: DP-02-059, title: "Polar motion and length-of-day corrections", levelCeiling: 4, status: draft }
-          - { id: DP-02-060, title: "Gravity reference networks and international comparisons", levelCeiling: 4, status: draft }
-          - { id: DP-02-061, title: "Obtaining a defensible local g value for a laboratory", levelCeiling: 5, status: draft }
-          - { id: DP-02-062, title: "Consequences of an inadequate g value in force and pressure work", levelCeiling: 4, status: draft }
-          - { id: DP-02-063, title: "Uncertainty evaluation in gravimetry", levelCeiling: 5, status: draft }
-          - { id: DP-02-064, title: "Site stability, microseismic noise and gravimeter environments", levelCeiling: 4, status: draft }
+          - { id: DP-02-053, title: "Gravitational acceleration as a measurand", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-02-054, title: "Absolute gravimeters and free-fall methods", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-02-055, title: "Atom interferometric gravimetry", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-02-056, title: "Relative gravimeters and their drift behaviour", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-057, title: "Gravity gradients and vertical transfer to the measurement height", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-02-058, title: "Earth tide, ocean loading and atmospheric corrections", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-02-059, title: "Polar motion and length-of-day corrections", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-060, title: "Gravity reference networks and international comparisons", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-061, title: "Obtaining a defensible local g value for a laboratory", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: DP-02-062, title: "Consequences of an inadequate g value in force and pressure work", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-02-063, title: "Uncertainty evaluation in gravimetry", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-02-064, title: "Site stability, microseismic noise and gravimeter environments", kind: skill, levelCeiling: 4, status: draft }

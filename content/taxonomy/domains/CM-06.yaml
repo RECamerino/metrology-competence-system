@@ -17,41 +17,41 @@ domains:
         title: Calibration Fundamentals
         status: draft
         elements:
-          - { id: CM-06-001, title: "What calibration is, and why it is not adjustment", levelCeiling: 3, status: draft }
-          - { id: CM-06-002, title: "Calibration, verification and validation distinguished", levelCeiling: 3, status: draft }
-          - { id: CM-06-003, title: "The calibration relation and the calibration function", levelCeiling: 4, status: draft }
-          - { id: CM-06-004, title: "Calibration points, ranges and coverage of use", levelCeiling: 3, status: draft }
-          - { id: CM-06-005, title: "Reference standard selection and adequacy", levelCeiling: 4, status: draft }
-          - { id: CM-06-006, title: "Instrument specifications and how to read them critically", levelCeiling: 5, status: draft }
-          - { id: CM-06-007, title: "Tolerance, specification limit and maximum permissible error", levelCeiling: 4, status: draft }
-          - { id: CM-06-008, title: "Calibration in situ versus in a controlled laboratory", levelCeiling: 4, status: draft }
+          - { id: CM-06-001, title: "What calibration is, and why it is not adjustment", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-06-002, title: "Calibration, verification and validation distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-06-003, title: "The calibration relation and the calibration function", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-06-004, title: "Calibration points, ranges and coverage of use", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-06-005, title: "Reference standard selection and adequacy", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-06-006, title: "Instrument specifications and how to read them critically", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-06-007, title: "Tolerance, specification limit and maximum permissible error", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-06-008, title: "Calibration in situ versus in a controlled laboratory", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-06-A02
         title: Procedure Design and Method Development
         status: draft
         elements:
-          - { id: CM-06-009, title: "Anatomy of a calibration procedure", levelCeiling: 4, status: draft }
-          - { id: CM-06-010, title: "Writing a procedure that a competent stranger can execute", levelCeiling: 5, status: draft }
-          - { id: CM-06-011, title: "Selecting a measurement method for the required capability", levelCeiling: 5, status: draft }
-          - { id: CM-06-012, title: "Number and placement of calibration points", levelCeiling: 4, status: draft }
-          - { id: CM-06-013, title: "Repetition, ordering and randomisation within a procedure", levelCeiling: 4, status: draft }
-          - { id: CM-06-014, title: "Hysteresis, loading sequence and directional effects", levelCeiling: 4, status: draft }
-          - { id: CM-06-015, title: "Stabilisation, soak time and thermal equilibrium", levelCeiling: 4, status: draft }
-          - { id: CM-06-016, title: "Environmental control and monitoring within a procedure", levelCeiling: 4, status: draft }
-          - { id: CM-06-017, title: "Adapting a published method to local conditions", levelCeiling: 4, status: draft }
-          - { id: CM-06-018, title: "Procedure review, approval and version control", levelCeiling: 4, status: draft }
+          - { id: CM-06-009, title: "Anatomy of a calibration procedure", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-010, title: "Writing a procedure that a competent stranger can execute", kind: skill, levelCeiling: 5, status: draft }
+          - { id: CM-06-011, title: "Selecting a measurement method for the required capability", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-06-012, title: "Number and placement of calibration points", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-013, title: "Repetition, ordering and randomisation within a procedure", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-014, title: "Hysteresis, loading sequence and directional effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-015, title: "Stabilisation, soak time and thermal equilibrium", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-016, title: "Environmental control and monitoring within a procedure", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-017, title: "Adapting a published method to local conditions", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-06-018, title: "Procedure review, approval and version control", kind: skill, levelCeiling: 4, status: draft }
 
       - id: CM-06-A03
         title: Method Validation and Verification
         status: draft
         elements:
-          - { id: CM-06-019, title: "Why a method must be validated before use", levelCeiling: 4, status: draft }
-          - { id: CM-06-020, title: "Validation parameters and acceptance criteria", levelCeiling: 4, status: draft }
-          - { id: CM-06-021, title: "Verifying a standard method in your own hands", levelCeiling: 4, status: draft }
-          - { id: CM-06-022, title: "Validating a non-standard or in-house method", levelCeiling: 5, status: draft }
-          - { id: CM-06-023, title: "Demonstrating that a method achieves its claimed capability", levelCeiling: 4, status: draft }
-          - { id: CM-06-024, title: "Revalidation triggers", levelCeiling: 4, status: draft }
-          - { id: CM-06-025, title: "Validation records and their evidentiary value", levelCeiling: 4, status: draft }
+          - { id: CM-06-019, title: "Why a method must be validated before use", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-06-020, title: "Validation parameters and acceptance criteria", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-021, title: "Verifying a standard method in your own hands", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-022, title: "Validating a non-standard or in-house method", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-06-023, title: "Demonstrating that a method achieves its claimed capability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-024, title: "Revalidation triggers", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-025, title: "Validation records and their evidentiary value", kind: skill, levelCeiling: 4, status: draft }
 
       - id: CM-06-A04
         title: Execution, Adjustment and As-Found Data
@@ -60,28 +60,28 @@ domains:
           As-found data is the single most valuable dataset a calibration
           laboratory generates, and the most commonly discarded.
         elements:
-          - { id: CM-06-026, title: "As-found and as-left data and why both are recorded", levelCeiling: 4, status: draft }
-          - { id: CM-06-027, title: "Deciding whether to adjust", levelCeiling: 5, status: draft }
-          - { id: CM-06-028, title: "Adjustment technique and its own uncertainty", levelCeiling: 4, status: draft }
-          - { id: CM-06-029, title: "Limited calibration and restricted-range calibration", levelCeiling: 4, status: draft }
-          - { id: CM-06-030, title: "Handling an out-of-tolerance finding", levelCeiling: 4, status: draft }
-          - { id: CM-06-031, title: "Reverse traceability and impact assessment after an OOT", levelCeiling: 4, status: draft }
-          - { id: CM-06-032, title: "Customer notification obligations", levelCeiling: 4, status: draft }
-          - { id: CM-06-033, title: "Repair, refurbishment and their effect on calibration history", levelCeiling: 4, status: draft }
-          - { id: CM-06-034, title: "Recognising a failing instrument from its calibration history", levelCeiling: 5, status: draft }
+          - { id: CM-06-026, title: "As-found and as-left data and why both are recorded", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-06-027, title: "Deciding whether to adjust", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-06-028, title: "Adjustment technique and its own uncertainty", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-029, title: "Limited calibration and restricted-range calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-06-030, title: "Handling an out-of-tolerance finding", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-06-031, title: "Reverse traceability and impact assessment after an OOT", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-06-032, title: "Customer notification obligations", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-06-033, title: "Repair, refurbishment and their effect on calibration history", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-06-034, title: "Recognising a failing instrument from its calibration history", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: CM-06-A05
         title: Comparison and Transfer Techniques
         status: draft
         elements:
-          - { id: CM-06-035, title: "Direct comparison methods", levelCeiling: 4, status: draft }
-          - { id: CM-06-036, title: "Substitution and transposition methods", levelCeiling: 4, status: draft }
-          - { id: CM-06-037, title: "Null and balance methods", levelCeiling: 4, status: draft }
-          - { id: CM-06-038, title: "Ratio and bridge techniques", levelCeiling: 4, status: draft }
-          - { id: CM-06-039, title: "Designed comparison schemes for artefact intercomparison", levelCeiling: 4, status: draft }
-          - { id: CM-06-040, title: "Round-robin and circulating artefact studies", levelCeiling: 4, status: draft }
-          - { id: CM-06-041, title: "Self-calibration and closure techniques", levelCeiling: 4, status: draft }
-          - { id: CM-06-042, title: "Cancelling systematic effects by experimental design", levelCeiling: 5, status: draft }
+          - { id: CM-06-035, title: "Direct comparison methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-036, title: "Substitution and transposition methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-037, title: "Null and balance methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-038, title: "Ratio and bridge techniques", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-039, title: "Designed comparison schemes for artefact intercomparison", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-040, title: "Round-robin and circulating artefact studies", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-041, title: "Self-calibration and closure techniques", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-042, title: "Cancelling systematic effects by experimental design", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: CM-06-A06
         title: Certificates, Records and Reporting
@@ -91,14 +91,14 @@ domains:
           a certificate under accreditation is CM-10; this area is the
           calibration-specific craft.
         elements:
-          - { id: CM-06-043, title: "Required content of a calibration certificate", levelCeiling: 4, status: draft }
-          - { id: CM-06-044, title: "Reporting results, corrections and uncertainties clearly", levelCeiling: 4, status: draft }
-          - { id: CM-06-045, title: "Statements of conformity on a certificate", levelCeiling: 4, status: draft }
-          - { id: CM-06-046, title: "Opinions and interpretations and when they may be given", levelCeiling: 5, status: draft }
-          - { id: CM-06-047, title: "Amending or withdrawing an issued certificate", levelCeiling: 4, status: draft }
-          - { id: CM-06-048, title: "Raw data retention and reconstructability of a result", levelCeiling: 4, status: draft }
-          - { id: CM-06-049, title: "Reviewing a certificate you have received from a supplier", levelCeiling: 4, status: draft }
-          - { id: CM-06-050, title: "Accreditation body marks and their correct use", levelCeiling: 3, status: draft }
+          - { id: CM-06-043, title: "Required content of a calibration certificate", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-06-044, title: "Reporting results, corrections and uncertainties clearly", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-045, title: "Statements of conformity on a certificate", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-046, title: "Opinions and interpretations and when they may be given", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-06-047, title: "Amending or withdrawing an issued certificate", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-048, title: "Raw data retention and reconstructability of a result", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-049, title: "Reviewing a certificate you have received from a supplier", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-06-050, title: "Accreditation body marks and their correct use", kind: knowledge, levelCeiling: 3, status: draft }
 
       - id: CM-06-A07
         title: Handling, Storage and Transport of Standards
@@ -106,12 +106,12 @@ domains:
         summary: >-
           Unglamorous and frequently the actual cause of a failed comparison.
         elements:
-          - { id: CM-06-051, title: "Handling practices that preserve a standard's value", levelCeiling: 3, status: draft }
-          - { id: CM-06-052, title: "Storage environment and its monitoring", levelCeiling: 3, status: draft }
-          - { id: CM-06-053, title: "Transport, shock and the case for re-verification on arrival", levelCeiling: 4, status: draft }
-          - { id: CM-06-054, title: "Cleaning, surface condition and contamination", levelCeiling: 4, status: draft }
-          - { id: CM-06-055, title: "Identification, labelling and status marking", levelCeiling: 3, status: draft }
-          - { id: CM-06-056, title: "Managing standards that leave the laboratory", levelCeiling: 4, status: draft }
+          - { id: CM-06-051, title: "Handling practices that preserve a standard's value", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-052, title: "Storage environment and its monitoring", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-053, title: "Transport, shock and the case for re-verification on arrival", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-054, title: "Cleaning, surface condition and contamination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-055, title: "Identification, labelling and status marking", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-056, title: "Managing standards that leave the laboratory", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-06-A08
         title: Sourcing, Insourcing and Programme Management
@@ -120,12 +120,12 @@ domains:
           Boundary: the business case and budgeting sit in CM-18; this area is
           the metrological judgement behind the decision.
         elements:
-          - { id: CM-06-057, title: "Deciding what to calibrate in house and what to send out", levelCeiling: 5, status: draft }
-          - { id: CM-06-058, title: "Qualifying and monitoring an external calibration supplier", levelCeiling: 4, status: draft }
-          - { id: CM-06-059, title: "Building a calibration programme from a measurement requirement", levelCeiling: 5, status: draft }
-          - { id: CM-06-060, title: "Equipment identification, inventory and status control", levelCeiling: 4, status: draft }
-          - { id: CM-06-061, title: "Recall systems and preventing use of overdue equipment", levelCeiling: 4, status: draft }
-          - { id: CM-06-062, title: "Equipment criticality classification", levelCeiling: 4, status: draft }
+          - { id: CM-06-057, title: "Deciding what to calibrate in house and what to send out", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-06-058, title: "Qualifying and monitoring an external calibration supplier", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-06-059, title: "Building a calibration programme from a measurement requirement", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-06-060, title: "Equipment identification, inventory and status control", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-061, title: "Recall systems and preventing use of overdue equipment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-062, title: "Equipment criticality classification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-06-A09
         title: Metrological Confirmation and Fitness for Intended Use
@@ -141,14 +141,14 @@ domains:
           requirement is CM-10; the risk mathematics behind the decision is
           CM-08.
         elements:
-          - { id: CM-06-063, title: "Calibration, verification and metrological confirmation distinguished", levelCeiling: 4, status: draft }
-          - { id: CM-06-064, title: "Deriving metrological requirements from a measurement process", levelCeiling: 5, status: draft }
-          - { id: CM-06-065, title: "Comparing instrument capability against metrological requirements", levelCeiling: 5, status: draft }
-          - { id: CM-06-066, title: "Confirmation criteria and how they are set", levelCeiling: 4, status: draft }
-          - { id: CM-06-067, title: "Confirmation status, labelling and its meaning to a user", levelCeiling: 4, status: draft }
-          - { id: CM-06-068, title: "Confirmation intervals and their relationship to calibration intervals", levelCeiling: 4, status: draft }
-          - { id: CM-06-069, title: "Handling a confirmation failure", levelCeiling: 5, status: draft }
-          - { id: CM-06-070, title: "Reconfirmation after repair, adjustment or relocation", levelCeiling: 4, status: draft }
-          - { id: CM-06-071, title: "The same instrument confirmed for one process and not another", levelCeiling: 5, status: draft }
-          - { id: CM-06-072, title: "Confirmation records and their evidentiary role", levelCeiling: 4, status: draft }
-          - { id: CM-06-073, title: "Designing a metrological confirmation system", levelCeiling: 5, status: draft }
+          - { id: CM-06-063, title: "Calibration, verification and metrological confirmation distinguished", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-06-064, title: "Deriving metrological requirements from a measurement process", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-06-065, title: "Comparing instrument capability against metrological requirements", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-06-066, title: "Confirmation criteria and how they are set", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-06-067, title: "Confirmation status, labelling and its meaning to a user", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-068, title: "Confirmation intervals and their relationship to calibration intervals", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-06-069, title: "Handling a confirmation failure", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-06-070, title: "Reconfirmation after repair, adjustment or relocation", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-06-071, title: "The same instrument confirmed for one process and not another", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-06-072, title: "Confirmation records and their evidentiary role", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-073, title: "Designing a metrological confirmation system", kind: judgment, levelCeiling: 5, status: draft }

@@ -17,27 +17,27 @@ domains:
         title: Time and Frequency Fundamentals
         status: draft
         elements:
-          - { id: DP-14-001, title: "The second, its definition and realisation", levelCeiling: 5, status: draft }
-          - { id: DP-14-002, title: "Time scales: TAI, UTC, UT1 and GPS time", levelCeiling: 3, status: draft }
-          - { id: DP-14-003, title: "Leap seconds and their operational consequences", levelCeiling: 3, status: draft }
-          - { id: DP-14-004, title: "Frequency, phase and time interval relationships", levelCeiling: 4, status: draft }
-          - { id: DP-14-005, title: "Accuracy, stability and reproducibility in frequency metrology", levelCeiling: 4, status: draft }
-          - { id: DP-14-006, title: "Relativistic effects on timekeeping", levelCeiling: 5, status: draft }
-          - { id: DP-14-007, title: "Coordinated time and the role of BIPM", levelCeiling: 4, status: draft }
+          - { id: DP-14-001, title: "The second, its definition and realisation", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-14-002, title: "Time scales: TAI, UTC, UT1 and GPS time", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-14-003, title: "Leap seconds and their operational consequences", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-14-004, title: "Frequency, phase and time interval relationships", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-14-005, title: "Accuracy, stability and reproducibility in frequency metrology", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-14-006, title: "Relativistic effects on timekeeping", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-14-007, title: "Coordinated time and the role of BIPM", kind: knowledge, levelCeiling: 4, status: draft }
 
       - id: DP-14-A02
         title: Oscillators and Clocks
         status: draft
         elements:
-          - { id: DP-14-008, title: "Quartz oscillators: TCXO, OCXO and their behaviour", levelCeiling: 4, status: draft }
-          - { id: DP-14-009, title: "Rubidium frequency standards", levelCeiling: 4, status: draft }
-          - { id: DP-14-010, title: "Caesium beam and fountain clocks", levelCeiling: 5, status: draft }
-          - { id: DP-14-011, title: "Hydrogen masers", levelCeiling: 4, status: draft }
-          - { id: DP-14-012, title: "Optical clocks and optical frequency standards", levelCeiling: 5, status: draft }
-          - { id: DP-14-013, title: "Chip scale atomic clocks", levelCeiling: 4, status: draft }
-          - { id: DP-14-014, title: "Ageing, drift, retrace and warm-up behaviour", levelCeiling: 4, status: draft }
-          - { id: DP-14-015, title: "Environmental sensitivity of oscillators", levelCeiling: 4, status: draft }
-          - { id: DP-14-016, title: "Selecting an oscillator for an application", levelCeiling: 4, status: draft }
+          - { id: DP-14-008, title: "Quartz oscillators: TCXO, OCXO and their behaviour", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-14-009, title: "Rubidium frequency standards", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-14-010, title: "Caesium beam and fountain clocks", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-14-011, title: "Hydrogen masers", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-14-012, title: "Optical clocks and optical frequency standards", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-14-013, title: "Chip scale atomic clocks", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-14-014, title: "Ageing, drift, retrace and warm-up behaviour", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-015, title: "Environmental sensitivity of oscillators", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-14-016, title: "Selecting an oscillator for an application", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: DP-14-A03
         title: Frequency Stability and Its Statistics
@@ -47,50 +47,50 @@ domains:
           statistics is CM-05; these methods exist because ordinary variance
           does not converge for the noise processes involved.
         elements:
-          - { id: DP-14-017, title: "Noise types in oscillators and their power law spectra", levelCeiling: 4, status: draft }
-          - { id: DP-14-018, title: "Why standard deviation fails for oscillator noise", levelCeiling: 5, status: draft }
-          - { id: DP-14-019, title: "Allan variance and Allan deviation", levelCeiling: 5, status: draft }
-          - { id: DP-14-020, title: "Modified Allan, Hadamard and total variance", levelCeiling: 4, status: draft }
-          - { id: DP-14-021, title: "Time deviation and time interval error", levelCeiling: 4, status: draft }
-          - { id: DP-14-022, title: "Confidence intervals for stability estimates", levelCeiling: 4, status: draft }
-          - { id: DP-14-023, title: "Dead time, bandwidth and measurement system effects", levelCeiling: 4, status: draft }
-          - { id: DP-14-024, title: "Phase noise and its relationship to time domain stability", levelCeiling: 4, status: draft }
-          - { id: DP-14-025, title: "Reading and interpreting a stability plot", levelCeiling: 5, status: draft }
+          - { id: DP-14-017, title: "Noise types in oscillators and their power law spectra", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-14-018, title: "Why standard deviation fails for oscillator noise", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-14-019, title: "Allan variance and Allan deviation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-14-020, title: "Modified Allan, Hadamard and total variance", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-021, title: "Time deviation and time interval error", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-022, title: "Confidence intervals for stability estimates", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-023, title: "Dead time, bandwidth and measurement system effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-024, title: "Phase noise and its relationship to time domain stability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-025, title: "Reading and interpreting a stability plot", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: DP-14-A04
         title: Frequency and Time Interval Measurement
         status: draft
         elements:
-          - { id: DP-14-026, title: "Frequency counters and their architectures", levelCeiling: 4, status: draft }
-          - { id: DP-14-027, title: "Reciprocal counting and interpolation", levelCeiling: 4, status: draft }
-          - { id: DP-14-028, title: "Time interval measurement and time stamping", levelCeiling: 4, status: draft }
-          - { id: DP-14-029, title: "Phase comparison and heterodyne techniques", levelCeiling: 4, status: draft }
-          - { id: DP-14-030, title: "Dual mixer time difference measurement", levelCeiling: 4, status: draft }
-          - { id: DP-14-031, title: "Counter calibration and verification", levelCeiling: 4, status: draft }
-          - { id: DP-14-032, title: "Trigger error, resolution and systematic effects", levelCeiling: 4, status: draft }
-          - { id: DP-14-033, title: "Uncertainty budget for frequency calibration", levelCeiling: 5, status: draft }
+          - { id: DP-14-026, title: "Frequency counters and their architectures", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-14-027, title: "Reciprocal counting and interpolation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-028, title: "Time interval measurement and time stamping", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-029, title: "Phase comparison and heterodyne techniques", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-030, title: "Dual mixer time difference measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-031, title: "Counter calibration and verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-032, title: "Trigger error, resolution and systematic effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-033, title: "Uncertainty budget for frequency calibration", kind: skill, levelCeiling: 5, status: draft }
 
       - id: DP-14-A05
         title: Time Transfer and Dissemination
         status: draft
         elements:
-          - { id: DP-14-034, title: "GNSS constellations and their timing signals", levelCeiling: 4, status: draft }
-          - { id: DP-14-035, title: "GPS disciplined oscillators and their behaviour", levelCeiling: 4, status: draft }
-          - { id: DP-14-036, title: "Common view and all-in-view time transfer", levelCeiling: 4, status: draft }
-          - { id: DP-14-037, title: "Two-way satellite time and frequency transfer", levelCeiling: 4, status: draft }
-          - { id: DP-14-038, title: "Optical fibre time and frequency transfer", levelCeiling: 4, status: draft }
-          - { id: DP-14-039, title: "Antenna, cable and receiver delay calibration", levelCeiling: 5, status: draft }
-          - { id: DP-14-040, title: "GNSS vulnerabilities: jamming, spoofing and holdover", levelCeiling: 4, status: draft }
-          - { id: DP-14-041, title: "Radio time signals and legacy dissemination", levelCeiling: 3, status: draft }
+          - { id: DP-14-034, title: "GNSS constellations and their timing signals", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-14-035, title: "GPS disciplined oscillators and their behaviour", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-036, title: "Common view and all-in-view time transfer", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-037, title: "Two-way satellite time and frequency transfer", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-038, title: "Optical fibre time and frequency transfer", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-039, title: "Antenna, cable and receiver delay calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-14-040, title: "GNSS vulnerabilities: jamming, spoofing and holdover", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-14-041, title: "Radio time signals and legacy dissemination", kind: skill, levelCeiling: 3, status: draft }
 
       - id: DP-14-A06
         title: Network and Applied Timing
         status: draft
         elements:
-          - { id: DP-14-042, title: "Network Time Protocol and its accuracy limits", levelCeiling: 4, status: draft }
-          - { id: DP-14-043, title: "Precision Time Protocol and hardware timestamping", levelCeiling: 4, status: draft }
-          - { id: DP-14-044, title: "Timing in telecommunications and synchronisation networks", levelCeiling: 4, status: draft }
-          - { id: DP-14-045, title: "Timing for power grids and synchrophasors", levelCeiling: 4, status: draft }
-          - { id: DP-14-046, title: "Timing in financial transaction records and regulatory traceability", levelCeiling: 4, status: draft }
-          - { id: DP-14-047, title: "Timing for scientific instrumentation and data acquisition", levelCeiling: 4, status: draft }
-          - { id: DP-14-048, title: "Demonstrating traceability of a timestamp", levelCeiling: 5, status: draft }
+          - { id: DP-14-042, title: "Network Time Protocol and its accuracy limits", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-14-043, title: "Precision Time Protocol and hardware timestamping", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-044, title: "Timing in telecommunications and synchronisation networks", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-045, title: "Timing for power grids and synchrophasors", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-046, title: "Timing in financial transaction records and regulatory traceability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-047, title: "Timing for scientific instrumentation and data acquisition", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-048, title: "Demonstrating traceability of a timestamp", kind: judgment, levelCeiling: 5, status: draft }

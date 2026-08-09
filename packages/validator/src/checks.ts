@@ -164,6 +164,11 @@ function checkElementIntegrity(corpus: Corpus): Finding[] {
           err(at(`levelCeiling ${d.levelCeiling} disagrees with the skeleton's ${stub.levelCeiling}`)),
         );
       }
+      if (d.kind !== stub.kind) {
+        findings.push(
+          err(at(`kind '${d.kind}' disagrees with the skeleton's '${stub.kind}'. Kind determines what evidence proves attainment, so a mismatch means the anchors and the assessment are describing different things.`)),
+        );
+      }
       if (d.domain !== stub.domain) {
         findings.push(err(at(`domain '${d.domain}' disagrees with the skeleton's '${stub.domain}'`)));
       }

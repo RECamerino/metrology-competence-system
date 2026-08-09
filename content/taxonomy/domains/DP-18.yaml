@@ -17,62 +17,62 @@ domains:
         title: Foundations at the Nanoscale
         status: draft
         elements:
-          - { id: DP-18-001, title: "What changes about measurement below one hundred nanometres", levelCeiling: 5, status: draft }
-          - { id: DP-18-002, title: "Surface forces, adhesion and their effect on probing", levelCeiling: 4, status: draft }
-          - { id: DP-18-003, title: "Tip-sample convolution and dilation", levelCeiling: 5, status: draft }
-          - { id: DP-18-004, title: "Traceability of nanoscale dimensional measurement", levelCeiling: 4, status: draft }
-          - { id: DP-18-005, title: "Nanoscale transfer standards and calibration artefacts", levelCeiling: 4, status: draft }
-          - { id: DP-18-006, title: "Contamination, oxidation and surface condition", levelCeiling: 4, status: draft }
-          - { id: DP-18-007, title: "Uncertainty evaluation at the nanoscale", levelCeiling: 5, status: draft }
+          - { id: DP-18-001, title: "What changes about measurement below one hundred nanometres", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-18-002, title: "Surface forces, adhesion and their effect on probing", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-18-003, title: "Tip-sample convolution and dilation", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-18-004, title: "Traceability of nanoscale dimensional measurement", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-18-005, title: "Nanoscale transfer standards and calibration artefacts", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-18-006, title: "Contamination, oxidation and surface condition", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-18-007, title: "Uncertainty evaluation at the nanoscale", kind: skill, levelCeiling: 5, status: draft }
 
       - id: DP-18-A02
         title: Scanning Probe Microscopy
         status: draft
         elements:
-          - { id: DP-18-008, title: "Atomic force microscopy principles and modes", levelCeiling: 4, status: draft }
-          - { id: DP-18-009, title: "Cantilever calibration: spring constant and sensitivity", levelCeiling: 4, status: draft }
-          - { id: DP-18-010, title: "Scanner calibration, nonlinearity, creep and hysteresis", levelCeiling: 4, status: draft }
-          - { id: DP-18-011, title: "Metrological AFM with interferometric position feedback", levelCeiling: 5, status: draft }
-          - { id: DP-18-012, title: "Scanning tunnelling microscopy", levelCeiling: 4, status: draft }
-          - { id: DP-18-013, title: "Tip characterisation, wear and artefact recognition", levelCeiling: 4, status: draft }
-          - { id: DP-18-014, title: "Force spectroscopy and nanomechanical measurement", levelCeiling: 4, status: draft }
-          - { id: DP-18-015, title: "Image processing, levelling and the risk of creating features", levelCeiling: 5, status: draft }
+          - { id: DP-18-008, title: "Atomic force microscopy principles and modes", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-18-009, title: "Cantilever calibration: spring constant and sensitivity", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-010, title: "Scanner calibration, nonlinearity, creep and hysteresis", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-011, title: "Metrological AFM with interferometric position feedback", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-18-012, title: "Scanning tunnelling microscopy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-013, title: "Tip characterisation, wear and artefact recognition", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-014, title: "Force spectroscopy and nanomechanical measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-015, title: "Image processing, levelling and the risk of creating features", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: DP-18-A03
         title: Electron and Ion Microscopy
         status: draft
         elements:
-          - { id: DP-18-016, title: "Scanning electron microscopy for dimensional measurement", levelCeiling: 4, status: draft }
-          - { id: DP-18-017, title: "SEM magnification calibration and edge definition", levelCeiling: 4, status: draft }
-          - { id: DP-18-018, title: "Transmission electron microscopy and lattice references", levelCeiling: 4, status: draft }
-          - { id: DP-18-019, title: "Critical dimension metrology in semiconductor manufacture", levelCeiling: 5, status: draft }
-          - { id: DP-18-020, title: "Focused ion beam and destructive cross-sectioning", levelCeiling: 4, status: draft }
-          - { id: DP-18-021, title: "Charging, beam damage and sample preparation artefacts", levelCeiling: 4, status: draft }
-          - { id: DP-18-022, title: "Electron backscatter diffraction and crystallography", levelCeiling: 4, status: draft }
+          - { id: DP-18-016, title: "Scanning electron microscopy for dimensional measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-017, title: "SEM magnification calibration and edge definition", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-018, title: "Transmission electron microscopy and lattice references", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-019, title: "Critical dimension metrology in semiconductor manufacture", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-18-020, title: "Focused ion beam and destructive cross-sectioning", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-021, title: "Charging, beam damage and sample preparation artefacts", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-18-022, title: "Electron backscatter diffraction and crystallography", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-18-A04
         title: Surface Analysis and Composition
         status: draft
         elements:
-          - { id: DP-18-023, title: "X-ray photoelectron spectroscopy", levelCeiling: 4, status: draft }
-          - { id: DP-18-024, title: "Auger electron spectroscopy", levelCeiling: 4, status: draft }
-          - { id: DP-18-025, title: "Secondary ion mass spectrometry", levelCeiling: 4, status: draft }
-          - { id: DP-18-026, title: "Depth profiling and sputter rate calibration", levelCeiling: 4, status: draft }
-          - { id: DP-18-027, title: "Quantification in surface analysis and sensitivity factors", levelCeiling: 5, status: draft }
-          - { id: DP-18-028, title: "Ellipsometry and thin film thickness measurement", levelCeiling: 4, status: draft }
-          - { id: DP-18-029, title: "X-ray reflectometry and diffraction for thin films", levelCeiling: 4, status: draft }
-          - { id: DP-18-030, title: "Contact angle and surface energy at small scales", levelCeiling: 4, status: draft }
+          - { id: DP-18-023, title: "X-ray photoelectron spectroscopy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-024, title: "Auger electron spectroscopy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-025, title: "Secondary ion mass spectrometry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-026, title: "Depth profiling and sputter rate calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-027, title: "Quantification in surface analysis and sensitivity factors", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: DP-18-028, title: "Ellipsometry and thin film thickness measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-029, title: "X-ray reflectometry and diffraction for thin films", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-030, title: "Contact angle and surface energy at small scales", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-18-A05
         title: Nanoparticles and Nanomaterials
         status: draft
         elements:
-          - { id: DP-18-031, title: "Particle size definitions and the equivalent sphere problem", levelCeiling: 5, status: draft }
-          - { id: DP-18-032, title: "Dynamic light scattering", levelCeiling: 4, status: draft }
-          - { id: DP-18-033, title: "Particle tracking and single particle techniques", levelCeiling: 4, status: draft }
-          - { id: DP-18-034, title: "Electron microscopy for particle size distribution", levelCeiling: 4, status: draft }
-          - { id: DP-18-035, title: "Specific surface area and porosity measurement", levelCeiling: 4, status: draft }
-          - { id: DP-18-036, title: "Zeta potential and colloidal stability measurement", levelCeiling: 4, status: draft }
-          - { id: DP-18-037, title: "Nanoparticle reference materials", levelCeiling: 4, status: draft }
-          - { id: DP-18-038, title: "Method comparability for particle size and its disagreements", levelCeiling: 5, status: draft }
-          - { id: DP-18-039, title: "Regulatory definitions of nanomaterial and their measurement basis", levelCeiling: 4, status: draft }
+          - { id: DP-18-031, title: "Particle size definitions and the equivalent sphere problem", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-18-032, title: "Dynamic light scattering", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-033, title: "Particle tracking and single particle techniques", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-034, title: "Electron microscopy for particle size distribution", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-035, title: "Specific surface area and porosity measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-036, title: "Zeta potential and colloidal stability measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-037, title: "Nanoparticle reference materials", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-038, title: "Method comparability for particle size and its disagreements", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: DP-18-039, title: "Regulatory definitions of nanomaterial and their measurement basis", kind: knowledge, levelCeiling: 4, status: draft }

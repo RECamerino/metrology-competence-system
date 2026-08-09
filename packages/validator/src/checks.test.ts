@@ -32,8 +32,8 @@ const taxonomy = {
           title: 'Test Area',
           status: 'draft',
           elements: [
-            { id: 'CM-01-001', title: 'First', levelCeiling: 3, status: 'draft' },
-            { id: 'CM-01-002', title: 'Second', levelCeiling: 2, status: 'draft' },
+            { id: 'CM-01-001', title: 'First', kind: 'knowledge', levelCeiling: 3, status: 'draft' },
+            { id: 'CM-01-002', title: 'Second', kind: 'skill', levelCeiling: 2, status: 'draft' },
           ],
         },
       ],
@@ -91,6 +91,7 @@ function element(overrides: Record<string, unknown> = {}): ElementFile {
       title: 'First',
       domain: 'CM-01',
       competencyArea: 'CM-01-A01',
+      kind: 'knowledge',
       status: 'draft',
       summary: LONG,
       levelCeiling: 3,
@@ -253,6 +254,16 @@ test('an element whose ceiling disagrees with the skeleton is rejected', () => {
   assert.ok(errors.some((e) => e.includes("disagrees with the skeleton's 3")));
 });
 
+test('an element whose kind disagrees with the skeleton is rejected', () => {
+  // Kind decides what evidence proves attainment, so a mismatch means the
+  // anchors and the assessment would be describing different things.
+  const errors = errorsOf(corpus([element({ kind: 'judgment' })]));
+  assert.ok(
+    errors.some((e) => e.includes("kind 'judgment'") && e.includes("skeleton's 'knowledge'")),
+    `expected a kind mismatch error, got: ${JSON.stringify(errors)}`,
+  );
+});
+
 test('an element file with no skeleton entry is rejected', () => {
   const errors = errorsOf(corpus([element({ id: 'CM-01-404' })]));
   assert.ok(errors.some((e) => e.includes('no entry in the taxonomy skeleton')));
@@ -264,6 +275,7 @@ test('a prerequisite cycle is reported with the actual cycle', () => {
   const a = element({ id: 'CM-01-001', prerequisites: ['CM-01-002'] });
   const b = element({
     id: 'CM-01-002',
+    kind: 'skill',
     levelCeiling: 2,
     anchors: { '1': LONG, '2': LONG },
     roleTargets: { 'test-technician': 2, 'test-engineer': 2 },

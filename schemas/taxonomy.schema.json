@@ -65,11 +65,12 @@
     "elementStub": {
       "type": "object",
       "description": "The skeleton entry for a leaf element: identity and shape only. The element's substance lives in content/elements/<domain>/<id>.md. The stub is what the registry guarantees is stable.",
-      "required": ["id", "title", "levelCeiling", "status"],
+      "required": ["id", "title", "kind", "levelCeiling", "status"],
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
         "title": { "type": "string", "minLength": 1 },
+        "kind": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementKind" },
         "levelCeiling": {
           "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel",
           "description": "Highest attainable level for this element. Not every element supports all five — many knowledge items genuinely top out at Competent, and claiming otherwise would manufacture depth that isn't there. Only elements with real expert-level practice reach 5."

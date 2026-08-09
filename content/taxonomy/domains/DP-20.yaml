@@ -18,62 +18,62 @@ domains:
         title: Machine-Readable Measurement Information
         status: draft
         elements:
-          - { id: DP-20-001, title: "Why a PDF certificate is not machine-readable measurement data", levelCeiling: 3, status: draft }
-          - { id: DP-20-002, title: "Digital calibration certificate structure and content", levelCeiling: 5, status: draft }
-          - { id: DP-20-003, title: "Implementing DCC issuance in a laboratory", levelCeiling: 4, status: draft }
-          - { id: DP-20-004, title: "Consuming and validating a received DCC", levelCeiling: 4, status: draft }
-          - { id: DP-20-005, title: "Digital SI and machine-readable quantity representation", levelCeiling: 4, status: draft }
-          - { id: DP-20-006, title: "Representing units, quantities and uncertainty in a schema", levelCeiling: 5, status: draft }
-          - { id: DP-20-007, title: "Ontologies and vocabularies for measurement data", levelCeiling: 4, status: draft }
-          - { id: DP-20-008, title: "Identifiers, persistence and resolvability", levelCeiling: 4, status: draft }
-          - { id: DP-20-009, title: "Migration from document-based to data-based certificates", levelCeiling: 4, status: draft }
+          - { id: DP-20-001, title: "Why a PDF certificate is not machine-readable measurement data", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-20-002, title: "Digital calibration certificate structure and content", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-20-003, title: "Implementing DCC issuance in a laboratory", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-004, title: "Consuming and validating a received DCC", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-005, title: "Digital SI and machine-readable quantity representation", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-20-006, title: "Representing units, quantities and uncertainty in a schema", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-20-007, title: "Ontologies and vocabularies for measurement data", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-20-008, title: "Identifiers, persistence and resolvability", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-20-009, title: "Migration from document-based to data-based certificates", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: DP-20-A02
         title: Integrity, Provenance and Trust
         status: draft
         elements:
-          - { id: DP-20-010, title: "Digital signatures applied to measurement results", levelCeiling: 4, status: draft }
-          - { id: DP-20-011, title: "Public key infrastructure and trust models for laboratories", levelCeiling: 5, status: draft }
-          - { id: DP-20-012, title: "Long-term signature validity and archival", levelCeiling: 4, status: draft }
-          - { id: DP-20-013, title: "Verifiable credentials for competence and accreditation", levelCeiling: 4, status: draft }
-          - { id: DP-20-014, title: "Offline verification and air-gapped trust distribution", levelCeiling: 4, status: draft }
-          - { id: DP-20-015, title: "Tamper evidence and hash chains for measurement records", levelCeiling: 4, status: draft }
-          - { id: DP-20-016, title: "Machine-readable traceability chains", levelCeiling: 5, status: draft }
-          - { id: DP-20-017, title: "Why distributed ledgers are usually the wrong answer here", levelCeiling: 4, status: draft }
+          - { id: DP-20-010, title: "Digital signatures applied to measurement results", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-011, title: "Public key infrastructure and trust models for laboratories", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-20-012, title: "Long-term signature validity and archival", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-20-013, title: "Verifiable credentials for competence and accreditation", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-20-014, title: "Offline verification and air-gapped trust distribution", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-20-015, title: "Tamper evidence and hash chains for measurement records", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-20-016, title: "Machine-readable traceability chains", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-20-017, title: "Why distributed ledgers are usually the wrong answer here", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: DP-20-A03
         title: Connected Instruments and Sensor Systems
         status: draft
         elements:
-          - { id: DP-20-018, title: "Industrial communication protocols for measurement", levelCeiling: 4, status: draft }
-          - { id: DP-20-019, title: "OPC UA and information modelling for instruments", levelCeiling: 5, status: draft }
-          - { id: DP-20-020, title: "Smart sensors and self-describing devices", levelCeiling: 4, status: draft }
-          - { id: DP-20-021, title: "Sensor networks and distributed measurement architecture", levelCeiling: 4, status: draft }
-          - { id: DP-20-022, title: "Edge processing and where the calculation happens", levelCeiling: 4, status: draft }
-          - { id: DP-20-023, title: "Time synchronisation across a measurement network", levelCeiling: 4, status: draft }
-          - { id: DP-20-024, title: "Metrological confirmation of a networked measurement system", levelCeiling: 4, status: draft }
-          - { id: DP-20-025, title: "Legacy instrument integration and protocol translation", levelCeiling: 4, status: draft }
+          - { id: DP-20-018, title: "Industrial communication protocols for measurement", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-20-019, title: "OPC UA and information modelling for instruments", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-20-020, title: "Smart sensors and self-describing devices", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-021, title: "Sensor networks and distributed measurement architecture", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-022, title: "Edge processing and where the calculation happens", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-20-023, title: "Time synchronisation across a measurement network", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-024, title: "Metrological confirmation of a networked measurement system", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-025, title: "Legacy instrument integration and protocol translation", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-20-A04
         title: Digital Twins and Simulation
         status: draft
         elements:
-          - { id: DP-20-026, title: "Digital twin concepts applied to measurement systems", levelCeiling: 4, status: draft }
-          - { id: DP-20-027, title: "Virtual instruments and simulated measurement", levelCeiling: 4, status: draft }
-          - { id: DP-20-028, title: "Virtual CMM and simulation-based task-specific uncertainty", levelCeiling: 5, status: draft }
-          - { id: DP-20-029, title: "Model validation against physical measurement", levelCeiling: 4, status: draft }
-          - { id: DP-20-030, title: "Uncertainty propagation through a simulation model", levelCeiling: 4, status: draft }
-          - { id: DP-20-031, title: "When simulation may substitute for measurement, and when it may not", levelCeiling: 5, status: draft }
+          - { id: DP-20-026, title: "Digital twin concepts applied to measurement systems", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-20-027, title: "Virtual instruments and simulated measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-028, title: "Virtual CMM and simulation-based task-specific uncertainty", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-20-029, title: "Model validation against physical measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-030, title: "Uncertainty propagation through a simulation model", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-031, title: "When simulation may substitute for measurement, and when it may not", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: DP-20-A05
         title: Data Platforms and Laboratory Systems
         status: draft
         elements:
-          - { id: DP-20-032, title: "Laboratory information management system selection and deployment", levelCeiling: 4, status: draft }
-          - { id: DP-20-033, title: "Calibration management system data models", levelCeiling: 4, status: draft }
-          - { id: DP-20-034, title: "Integration between laboratory, quality and enterprise systems", levelCeiling: 4, status: draft }
-          - { id: DP-20-035, title: "Automated data capture and elimination of transcription", levelCeiling: 4, status: draft }
-          - { id: DP-20-036, title: "Analytics over historical calibration data", levelCeiling: 4, status: draft }
-          - { id: DP-20-037, title: "Data retention, archival formats and long-term readability", levelCeiling: 4, status: draft }
-          - { id: DP-20-038, title: "Deployment in air-gapped and regulated environments", levelCeiling: 4, status: draft }
-          - { id: DP-20-039, title: "Open standards, vendor lock-in and interoperability strategy", levelCeiling: 5, status: draft }
+          - { id: DP-20-032, title: "Laboratory information management system selection and deployment", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-20-033, title: "Calibration management system data models", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-034, title: "Integration between laboratory, quality and enterprise systems", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-035, title: "Automated data capture and elimination of transcription", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-036, title: "Analytics over historical calibration data", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-037, title: "Data retention, archival formats and long-term readability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-038, title: "Deployment in air-gapped and regulated environments", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-039, title: "Open standards, vendor lock-in and interoperability strategy", kind: judgment, levelCeiling: 5, status: draft }

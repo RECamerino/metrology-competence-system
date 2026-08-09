@@ -17,59 +17,59 @@ domains:
         title: Sensing and Transduction
         status: draft
         elements:
-          - { id: CM-13-001, title: "Transducer principles and energy conversion", levelCeiling: 3, status: draft }
-          - { id: CM-13-002, title: "Resistive, capacitive and inductive sensing", levelCeiling: 3, status: draft }
-          - { id: CM-13-003, title: "Piezoelectric and piezoresistive sensing", levelCeiling: 4, status: draft }
-          - { id: CM-13-004, title: "Optical and interferometric sensing", levelCeiling: 4, status: draft }
-          - { id: CM-13-005, title: "Thermal and thermoelectric sensing", levelCeiling: 4, status: draft }
-          - { id: CM-13-006, title: "Electrochemical and ion-selective sensing", levelCeiling: 4, status: draft }
-          - { id: CM-13-007, title: "Resonant and frequency-output sensors", levelCeiling: 4, status: draft }
-          - { id: CM-13-008, title: "Sensor characteristics: sensitivity, range, linearity, hysteresis", levelCeiling: 4, status: draft }
-          - { id: CM-13-009, title: "Cross-sensitivity and unwanted responses", levelCeiling: 5, status: draft }
-          - { id: CM-13-010, title: "Sensor loading and disturbance of the measurand", levelCeiling: 4, status: draft }
+          - { id: CM-13-001, title: "Transducer principles and energy conversion", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-13-002, title: "Resistive, capacitive and inductive sensing", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-13-003, title: "Piezoelectric and piezoresistive sensing", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-004, title: "Optical and interferometric sensing", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-005, title: "Thermal and thermoelectric sensing", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-006, title: "Electrochemical and ion-selective sensing", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-007, title: "Resonant and frequency-output sensors", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-008, title: "Sensor characteristics: sensitivity, range, linearity, hysteresis", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-009, title: "Cross-sensitivity and unwanted responses", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-13-010, title: "Sensor loading and disturbance of the measurand", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-13-A02
         title: Signal Conditioning and Conversion
         status: draft
         elements:
-          - { id: CM-13-011, title: "Amplification, gain error and offset", levelCeiling: 4, status: draft }
-          - { id: CM-13-012, title: "Bridge circuits and their excitation", levelCeiling: 4, status: draft }
-          - { id: CM-13-013, title: "Filtering and its effect on a measurement result", levelCeiling: 4, status: draft }
-          - { id: CM-13-014, title: "Analogue-to-digital conversion architectures", levelCeiling: 3, status: draft }
-          - { id: CM-13-015, title: "Quantisation, resolution and effective number of bits", levelCeiling: 3, status: draft }
-          - { id: CM-13-016, title: "Sampling, aliasing and the Nyquist criterion", levelCeiling: 5, status: draft }
-          - { id: CM-13-017, title: "Integrating converters and normal-mode rejection", levelCeiling: 4, status: draft }
-          - { id: CM-13-018, title: "Multiplexing, settling and channel crosstalk", levelCeiling: 4, status: draft }
-          - { id: CM-13-019, title: "Digital signal processing effects on measured values", levelCeiling: 4, status: draft }
+          - { id: CM-13-011, title: "Amplification, gain error and offset", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-012, title: "Bridge circuits and their excitation", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-013, title: "Filtering and its effect on a measurement result", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-13-014, title: "Analogue-to-digital conversion architectures", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-13-015, title: "Quantisation, resolution and effective number of bits", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-13-016, title: "Sampling, aliasing and the Nyquist criterion", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: CM-13-017, title: "Integrating converters and normal-mode rejection", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-018, title: "Multiplexing, settling and channel crosstalk", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-019, title: "Digital signal processing effects on measured values", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-13-A03
         title: Noise, Interference and Signal Integrity
         status: draft
         elements:
-          - { id: CM-13-020, title: "Noise sources: thermal, shot, flicker", levelCeiling: 4, status: draft }
-          - { id: CM-13-021, title: "Signal-to-noise ratio and detection limits", levelCeiling: 3, status: draft }
-          - { id: CM-13-022, title: "Grounding, shielding and ground loops", levelCeiling: 4, status: draft }
-          - { id: CM-13-023, title: "Common-mode and differential-mode interference", levelCeiling: 4, status: draft }
-          - { id: CM-13-024, title: "Thermal EMFs in low-level measurement", levelCeiling: 4, status: draft }
-          - { id: CM-13-025, title: "Guarding and driven shields", levelCeiling: 4, status: draft }
-          - { id: CM-13-026, title: "Cable, connector and contact effects", levelCeiling: 3, status: draft }
-          - { id: CM-13-027, title: "Averaging, integration and noise reduction techniques", levelCeiling: 3, status: draft }
-          - { id: CM-13-028, title: "Lock-in detection and correlation techniques", levelCeiling: 4, status: draft }
-          - { id: CM-13-029, title: "Diagnosing an intermittent or noisy measurement", levelCeiling: 5, status: draft }
+          - { id: CM-13-020, title: "Noise sources: thermal, shot, flicker", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-021, title: "Signal-to-noise ratio and detection limits", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-13-022, title: "Grounding, shielding and ground loops", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-13-023, title: "Common-mode and differential-mode interference", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-13-024, title: "Thermal EMFs in low-level measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-13-025, title: "Guarding and driven shields", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-13-026, title: "Cable, connector and contact effects", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-13-027, title: "Averaging, integration and noise reduction techniques", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-13-028, title: "Lock-in detection and correlation techniques", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-13-029, title: "Diagnosing an intermittent or noisy measurement", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: CM-13-A04
         title: Instrument Behaviour and Characterisation
         status: draft
         elements:
-          - { id: CM-13-030, title: "Static and dynamic instrument characteristics", levelCeiling: 4, status: draft }
-          - { id: CM-13-031, title: "Time constant, bandwidth and dynamic response", levelCeiling: 4, status: draft }
-          - { id: CM-13-032, title: "Warm-up, settling and short-term stability", levelCeiling: 3, status: draft }
-          - { id: CM-13-033, title: "Long-term drift and ageing mechanisms", levelCeiling: 4, status: draft }
-          - { id: CM-13-034, title: "Temperature coefficients and environmental sensitivity", levelCeiling: 3, status: draft }
-          - { id: CM-13-035, title: "Loading, impedance matching and source effects", levelCeiling: 4, status: draft }
-          - { id: CM-13-036, title: "Nonlinearity and its characterisation", levelCeiling: 4, status: draft }
-          - { id: CM-13-037, title: "Interpreting a manufacturer specification sheet", levelCeiling: 4, status: draft }
-          - { id: CM-13-038, title: "Characterising an instrument beyond its specification", levelCeiling: 5, status: draft }
+          - { id: CM-13-030, title: "Static and dynamic instrument characteristics", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-031, title: "Time constant, bandwidth and dynamic response", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-13-032, title: "Warm-up, settling and short-term stability", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-13-033, title: "Long-term drift and ageing mechanisms", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-13-034, title: "Temperature coefficients and environmental sensitivity", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-13-035, title: "Loading, impedance matching and source effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-13-036, title: "Nonlinearity and its characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-13-037, title: "Interpreting a manufacturer specification sheet", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-13-038, title: "Characterising an instrument beyond its specification", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: CM-13-A05
         title: Underlying Physics for Metrologists
@@ -79,16 +79,16 @@ domains:
           the specific principles that explain instrument behaviour and limit
           measurement capability.
         elements:
-          - { id: CM-13-039, title: "Thermal expansion and dimensional stability of materials", levelCeiling: 3, status: draft }
-          - { id: CM-13-040, title: "Heat transfer: conduction, convection, radiation", levelCeiling: 3, status: draft }
-          - { id: CM-13-041, title: "Elasticity, deflection and Hertzian contact", levelCeiling: 4, status: draft }
-          - { id: CM-13-042, title: "Fluid statics, buoyancy and air density", levelCeiling: 4, status: draft }
-          - { id: CM-13-043, title: "Wave optics, interference and diffraction", levelCeiling: 4, status: draft }
-          - { id: CM-13-044, title: "Refractive index of air and its correction", levelCeiling: 4, status: draft }
-          - { id: CM-13-045, title: "Electromagnetics for measurement: fields, coupling, propagation", levelCeiling: 4, status: draft }
-          - { id: CM-13-046, title: "Quantum effects underpinning modern standards", levelCeiling: 5, status: draft }
-          - { id: CM-13-047, title: "Material properties, stability and creep in artefacts", levelCeiling: 4, status: draft }
-          - { id: CM-13-048, title: "Surface effects, adsorption and cleanliness at the physical level", levelCeiling: 4, status: draft }
+          - { id: CM-13-039, title: "Thermal expansion and dimensional stability of materials", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-13-040, title: "Heat transfer: conduction, convection, radiation", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-13-041, title: "Elasticity, deflection and Hertzian contact", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-042, title: "Fluid statics, buoyancy and air density", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-043, title: "Wave optics, interference and diffraction", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-044, title: "Refractive index of air and its correction", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-045, title: "Electromagnetics for measurement: fields, coupling, propagation", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-046, title: "Quantum effects underpinning modern standards", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: CM-13-047, title: "Material properties, stability and creep in artefacts", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-13-048, title: "Surface effects, adsorption and cleanliness at the physical level", kind: knowledge, levelCeiling: 4, status: draft }
 
       - id: CM-13-A06
         title: Automation and Instrument Control
@@ -97,9 +97,9 @@ domains:
           Boundary: software engineering practice is CM-14; this area is the
           metrological consequences of automating a measurement.
         elements:
-          - { id: CM-13-049, title: "Instrument interfaces and communication standards", levelCeiling: 3, status: draft }
-          - { id: CM-13-050, title: "Automated measurement sequences and their validation", levelCeiling: 4, status: draft }
-          - { id: CM-13-051, title: "Timing, synchronisation and latency in automated systems", levelCeiling: 4, status: draft }
-          - { id: CM-13-052, title: "What automation removes and what it hides", levelCeiling: 5, status: draft }
-          - { id: CM-13-053, title: "Automated systems and the loss of operator intuition", levelCeiling: 4, status: draft }
-          - { id: CM-13-054, title: "Verification of an automated measurement against a manual one", levelCeiling: 4, status: draft }
+          - { id: CM-13-049, title: "Instrument interfaces and communication standards", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-13-050, title: "Automated measurement sequences and their validation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-13-051, title: "Timing, synchronisation and latency in automated systems", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-13-052, title: "What automation removes and what it hides", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-13-053, title: "Automated systems and the loss of operator intuition", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-13-054, title: "Verification of an automated measurement against a manual one", kind: skill, levelCeiling: 4, status: draft }

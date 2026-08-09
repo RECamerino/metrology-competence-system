@@ -111,6 +111,41 @@ This is expensive to reverse: every credential already issued is signed with the
 
 ---
 
+## Competence is not authorization
+
+Added at the Phase 1 gate. Every element declares a `kind` — **knowledge**, **skill** or **judgment** — because those determine what evidence proves attainment:
+
+| Kind | The claim | What proves it |
+|---|---|---|
+| `knowledge` | I understand this | Explanation, relation, analysis |
+| `skill` | I can perform this | A witnessed work product. A written answer cannot substitute. |
+| `judgment` | I can decide about this and defend it | A defence. There is often no single right answer. |
+
+A uniform evidence ladder across all three tests the wrong thing for at least two of them, which is why the classification has to exist before Phase 2 designs the ladder. **If an element genuinely needs two kinds of evidence, that is a sign it should be two elements.**
+
+**Authority is deliberately not a fourth kind, and the distinction is load-bearing.**
+
+Knowledge, skill and judgment are *earned*, and they are properties of a person. Authority is *granted*, and it is a relationship between a person, an organization and a scope of work. An element cannot *be* an authority, so putting it in the same enum would be a category error.
+
+The consequence that matters most for this project:
+
+> **Competency credentials are portable. Authorizations are not.**
+
+An approved signatory who leaves a laboratory keeps every competency they demonstrated. They do not keep signatory authority, because the laboratory granted it and the accreditation body recognized it *at that laboratory, for that scope*. A wallet that treated the two identically would let someone arrive at a new employer holding what looks like signing authority — a defect in the credential model, not in the taxonomy.
+
+So a person can hold verified L4 judgment in CMM task-specific uncertainty and still not be authorized to release a CMM result, and both statements are true and non-contradictory. Competence is a necessary input to authorization; it is never sufficient, because authorization also depends on appointment, current scope, organizational policy and continued employment.
+
+**Authorization becomes a first-class object in Phase 2**, distinct from a competency credential:
+
+- granted by an organization, not earned by assessment
+- scoped to specific activities, ranges or methods
+- revocable immediately and unilaterally, with no appeal to competence
+- expiring on departure, reorganization or scope change
+- requiring competence as evidence, and recording which elements it relied on
+- never exported into the portable wallet as though it travelled
+
+`CM-11-A05` (Approved Signatory Competence) and the `authorities` field already on the role registry both anticipated this. Phase 2 makes it explicit.
+
 ## The one rule that cannot be waived
 
 **IDs are append-only.** `content/taxonomy/skeleton.yaml` and `content/taxonomy/id-registry.lock` may grow. Nothing in them may ever be renamed or removed.

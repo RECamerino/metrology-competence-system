@@ -324,7 +324,7 @@
 
   .el {
     display: grid;
-    grid-template-columns: 92px 1fr 26px;
+    grid-template-columns: 92px 1fr 18px 26px;
     align-items: baseline;
     gap: 12px;
     padding: 5px 0;
@@ -346,6 +346,21 @@
     border-radius: 2px;
     padding: 0 1px;
   }
+
+  /* Competence kind. Deliberately quieter than the ceiling badge: it is a
+     category, not a magnitude, so it gets a letter rather than a filled chip. */
+  .kind {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--faint);
+    justify-self: end;
+    cursor: default;
+  }
+  .kind.k-k { color: var(--l3); }
+  .kind.k-s { color: var(--accent); }
+  .kind.k-j { color: var(--l5); }
 
   .ceil {
     font-family: var(--mono);
@@ -414,6 +429,11 @@
       <button class="chip l4" data-ceil="4" aria-pressed="false">L4</button>
       <button class="chip l5" data-ceil="5" aria-pressed="false">L5</button>
     </div>
+    <div class="chips" role="group" aria-label="Filter by competence kind">
+      <button class="chip ek" data-ekind="k" aria-pressed="false">Knowledge</button>
+      <button class="chip ek" data-ekind="s" aria-pressed="false">Skill</button>
+      <button class="chip ek" data-ekind="j" aria-pressed="false">Judgment</button>
+    </div>
     <div class="chips" role="group" aria-label="Filter by domain kind">
       <button class="chip" data-kind="core" aria-pressed="false">Core</button>
       <button class="chip" data-kind="discipline" aria-pressed="false">Discipline</button>
@@ -437,7 +457,13 @@
   const showingEl = document.getElementById('showing');
   const toggleAllBtn = document.getElementById('toggle-all');
 
-  const state = { q: '', ceilings: new Set(), kinds: new Set() };
+  const state = { q: '', ceilings: new Set(), kinds: new Set(), ekinds: new Set() };
+
+  const KINDS = {
+    k: 'Knowledge — can explain, relate and analyse it. Evidence is explanation.',
+    s: 'Skill — can perform it. Evidence is a witnessed work product.',
+    j: 'Judgment — can decide under ambiguity and defend it. Evidence is a defence.',
+  };
 
   /* -- Build the DOM once; filtering only toggles [hidden]. ------------- */
 
@@ -468,9 +494,10 @@
         ${a.summary ? `<p class="asummary">${esc(a.summary)}</p>` : ''}
         <ul class="elements">
           ${a.elements.map((e) => `
-            <li class="el" data-el data-ceil="${e.c}" data-text="${esc((e.id + ' ' + e.title).toLowerCase())}">
+            <li class="el" data-el data-ceil="${e.c}" data-ekind="${e.k}" data-text="${esc((e.id + ' ' + e.title).toLowerCase())}">
               <span class="eid">${esc(e.id)}</span>
               <span class="etitle">${esc(e.title)}</span>
+              <span class="kind k-${e.k}" title="${KINDS[e.k] ?? ''}">${e.k.toUpperCase()}</span>
               <span class="ceil c${e.c}" title="Attainable level ceiling ${e.c}">${e.c}</span>
             </li>`).join('')}
         </ul>
@@ -525,12 +552,13 @@
 
         for (const el of area.querySelectorAll('[data-el]')) {
           const ceilOk = state.ceilings.size === 0 || state.ceilings.has(el.dataset.ceil);
+          const ekindOk = state.ekinds.size === 0 || state.ekinds.has(el.dataset.ekind);
           // Match against the element only. Matching the domain title too would
           // mean searching "guardband" returns all 46 elements of CM-08 just
           // because the domain is called Guardbanding. Searching a domain still
           // works, because every element ID carries the domain prefix.
           const textOk = q === '' || el.dataset.text.includes(q);
-          const visible = kindOk && ceilOk && textOk;
+          const visible = kindOk && ceilOk && ekindOk && textOk;
           el.hidden = !visible;
           if (visible) { areaHasVisible = true; shownElements++; }
         }
@@ -569,12 +597,12 @@
     debounce = setTimeout(() => { state.q = qEl.value; apply(); }, 120);
   });
 
-  for (const chip of document.querySelectorAll('.chip[data-ceil], .chip[data-kind]')) {
+  for (const chip of document.querySelectorAll('.chip[data-ceil], .chip[data-kind], .chip[data-ekind]')) {
     chip.addEventListener('click', () => {
       const on = chip.getAttribute('aria-pressed') !== 'true';
       chip.setAttribute('aria-pressed', String(on));
-      const set = chip.dataset.ceil ? state.ceilings : state.kinds;
-      const key = chip.dataset.ceil || chip.dataset.kind;
+      const set = chip.dataset.ceil ? state.ceilings : chip.dataset.ekind ? state.ekinds : state.kinds;
+      const key = chip.dataset.ceil || chip.dataset.ekind || chip.dataset.kind;
       on ? set.add(key) : set.delete(key);
       apply();
     });

@@ -186,6 +186,7 @@ export function loadCorpus(): { corpus: Corpus; parseErrors: string[] } {
 export interface ElementStub {
   id: string;
   title: string;
+  kind: string;
   levelCeiling: number;
   status: string;
   supersededBy?: string;
@@ -217,6 +218,7 @@ export function indexStubs(taxonomy: Record<string, unknown> | null): Map<string
         index.set(el.id, {
           id: el.id,
           title: el.title,
+          kind: el.kind,
           levelCeiling: el.levelCeiling,
           status: el.status,
           supersededBy: el.supersededBy,

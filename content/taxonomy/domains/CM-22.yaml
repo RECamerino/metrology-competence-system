@@ -17,63 +17,63 @@ domains:
         title: Human Performance in Measurement
         status: draft
         elements:
-          - { id: CM-22-001, title: "The operator as a component of the measurement system", levelCeiling: 4, status: draft }
-          - { id: CM-22-002, title: "Perception, reading error and parallax", levelCeiling: 3, status: draft }
-          - { id: CM-22-003, title: "Attention, vigilance and repetitive task degradation", levelCeiling: 4, status: draft }
-          - { id: CM-22-004, title: "Fatigue, shift work and circadian effects on performance", levelCeiling: 4, status: draft }
-          - { id: CM-22-005, title: "Expectation bias and reading what you expect to see", levelCeiling: 5, status: draft }
-          - { id: CM-22-006, title: "Anchoring, rounding habits and digit preference", levelCeiling: 4, status: draft }
-          - { id: CM-22-007, title: "Blinding and masking to control observer bias", levelCeiling: 4, status: draft }
-          - { id: CM-22-008, title: "Quantifying operator contribution to uncertainty", levelCeiling: 5, status: draft }
+          - { id: CM-22-001, title: "The operator as a component of the measurement system", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-22-002, title: "Perception, reading error and parallax", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-22-003, title: "Attention, vigilance and repetitive task degradation", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-22-004, title: "Fatigue, shift work and circadian effects on performance", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-22-005, title: "Expectation bias and reading what you expect to see", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: CM-22-006, title: "Anchoring, rounding habits and digit preference", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-22-007, title: "Blinding and masking to control observer bias", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-22-008, title: "Quantifying operator contribution to uncertainty", kind: skill, levelCeiling: 5, status: draft }
 
       - id: CM-22-A02
         title: Error, Violation and System Design
         status: draft
         elements:
-          - { id: CM-22-009, title: "Slips, lapses, mistakes and violations distinguished", levelCeiling: 4, status: draft }
-          - { id: CM-22-010, title: "Latent conditions and the systemic origin of human error", levelCeiling: 5, status: draft }
-          - { id: CM-22-011, title: "Error-tolerant procedure and interface design", levelCeiling: 4, status: draft }
-          - { id: CM-22-012, title: "Checklists, independent verification and double-checking", levelCeiling: 4, status: draft }
-          - { id: CM-22-013, title: "Automation surprise and mode confusion", levelCeiling: 4, status: draft }
-          - { id: CM-22-014, title: "Just culture and reporting without blame", levelCeiling: 4, status: draft }
-          - { id: CM-22-015, title: "Investigating an error without stopping at operator fault", levelCeiling: 4, status: draft }
-          - { id: CM-22-016, title: "Workload, time pressure and their effect on measurement quality", levelCeiling: 4, status: draft }
+          - { id: CM-22-009, title: "Slips, lapses, mistakes and violations distinguished", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-22-010, title: "Latent conditions and the systemic origin of human error", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-22-011, title: "Error-tolerant procedure and interface design", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-22-012, title: "Checklists, independent verification and double-checking", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-22-013, title: "Automation surprise and mode confusion", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-22-014, title: "Just culture and reporting without blame", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-22-015, title: "Investigating an error without stopping at operator fault", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-22-016, title: "Workload, time pressure and their effect on measurement quality", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-22-A03
         title: Ergonomics and the Working Environment
         status: draft
         elements:
-          - { id: CM-22-017, title: "Workstation design for precision manual tasks", levelCeiling: 3, status: draft }
-          - { id: CM-22-018, title: "Lighting, magnification and visual ergonomics", levelCeiling: 3, status: draft }
-          - { id: CM-22-019, title: "Manual handling of heavy standards and artefacts", levelCeiling: 3, status: draft }
-          - { id: CM-22-020, title: "Repetitive strain and long-duration measurement tasks", levelCeiling: 3, status: draft }
-          - { id: CM-22-021, title: "Display, alarm and interface design in the laboratory", levelCeiling: 4, status: draft }
-          - { id: CM-22-022, title: "Accessibility and inclusive laboratory design", levelCeiling: 4, status: draft }
+          - { id: CM-22-017, title: "Workstation design for precision manual tasks", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-22-018, title: "Lighting, magnification and visual ergonomics", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-22-019, title: "Manual handling of heavy standards and artefacts", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-22-020, title: "Repetitive strain and long-duration measurement tasks", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-22-021, title: "Display, alarm and interface design in the laboratory", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-22-022, title: "Accessibility and inclusive laboratory design", kind: knowledge, levelCeiling: 4, status: draft }
 
       - id: CM-22-A04
         title: Laboratory Safety
         status: draft
         elements:
-          - { id: CM-22-023, title: "Hazard identification and risk assessment for measurement work", levelCeiling: 4, status: draft }
-          - { id: CM-22-024, title: "Electrical safety and high voltage work", levelCeiling: 4, status: draft }
-          - { id: CM-22-025, title: "Pressure, vacuum and stored energy hazards", levelCeiling: 4, status: draft }
-          - { id: CM-22-026, title: "Mechanical, lifting and crush hazards", levelCeiling: 4, status: draft }
-          - { id: CM-22-027, title: "Chemical hazards and safe handling", levelCeiling: 4, status: draft }
-          - { id: CM-22-028, title: "Laser and optical radiation safety", levelCeiling: 4, status: draft }
-          - { id: CM-22-029, title: "Ionising radiation safety and dose control", levelCeiling: 4, status: draft }
-          - { id: CM-22-030, title: "Cryogenic, thermal and asphyxiation hazards", levelCeiling: 4, status: draft }
-          - { id: CM-22-031, title: "Magnetic field and RF exposure hazards", levelCeiling: 4, status: draft }
-          - { id: CM-22-032, title: "Permit to work, isolation and lockout", levelCeiling: 4, status: draft }
-          - { id: CM-22-033, title: "Emergency response and incident reporting", levelCeiling: 3, status: draft }
-          - { id: CM-22-034, title: "Safety on customer sites and in the field", levelCeiling: 4, status: draft }
+          - { id: CM-22-023, title: "Hazard identification and risk assessment for measurement work", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-22-024, title: "Electrical safety and high voltage work", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-22-025, title: "Pressure, vacuum and stored energy hazards", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-22-026, title: "Mechanical, lifting and crush hazards", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-22-027, title: "Chemical hazards and safe handling", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-22-028, title: "Laser and optical radiation safety", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-22-029, title: "Ionising radiation safety and dose control", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-22-030, title: "Cryogenic, thermal and asphyxiation hazards", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-22-031, title: "Magnetic field and RF exposure hazards", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-22-032, title: "Permit to work, isolation and lockout", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-22-033, title: "Emergency response and incident reporting", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-22-034, title: "Safety on customer sites and in the field", kind: skill, levelCeiling: 4, status: draft }
 
       - id: CM-22-A05
         title: Teams, Culture and Wellbeing
         status: draft
         elements:
-          - { id: CM-22-035, title: "Psychological safety and willingness to report a doubtful result", levelCeiling: 5, status: draft }
-          - { id: CM-22-036, title: "Handover and communication between shifts and teams", levelCeiling: 4, status: draft }
-          - { id: CM-22-037, title: "Speaking up across a hierarchy", levelCeiling: 4, status: draft }
-          - { id: CM-22-038, title: "Isolation and lone working in specialist roles", levelCeiling: 3, status: draft }
-          - { id: CM-22-039, title: "Sustained pressure, burnout and technical judgement", levelCeiling: 4, status: draft }
-          - { id: CM-22-040, title: "Building a measurement culture that values being right over being fast", levelCeiling: 4, status: draft }
+          - { id: CM-22-035, title: "Psychological safety and willingness to report a doubtful result", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-22-036, title: "Handover and communication between shifts and teams", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-22-037, title: "Speaking up across a hierarchy", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-22-038, title: "Isolation and lone working in specialist roles", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-22-039, title: "Sustained pressure, burnout and technical judgement", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-22-040, title: "Building a measurement culture that values being right over being fast", kind: judgment, levelCeiling: 4, status: draft }

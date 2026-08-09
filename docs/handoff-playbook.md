@@ -176,6 +176,28 @@ Every non-auto-scored item ships with its rubric in the same commit.
 
 ---
 
+## Write the anchors to match the element's kind
+
+Every element declares a `kind`. It is not decoration — it says what evidence proves attainment, so it governs how the anchors must be written.
+
+| Kind | Anchors describe | Anchors must not describe |
+|---|---|---|
+| `knowledge` | What the person can explain, relate, analyse, or distinguish | Performing a task |
+| `skill` | What the person can be observed producing or doing | Understanding the theory behind it |
+| `judgment` | What decision the person makes under ambiguity, and how they defend it | Recalling the rule that decides it for them |
+
+The commonest error is writing knowledge anchors for a skill element. "Understands the effect of stylus geometry on a measured form error" is a knowledge anchor. If the element is `skill`, the anchor must be closer to "selects and qualifies a stylus for a given feature, and demonstrates that the result is insensitive to the choice."
+
+If you cannot write an anchor of the declared kind, the kind is wrong — fix `tools/kind-plan.json` rather than bending the anchor.
+
+## Competence is not authorization
+
+Nothing in this corpus grants anyone permission to do anything.
+
+An element attests that a person knows, can do, or can judge something. It never attests that they are *allowed* to. Authorization — signing a certificate, releasing a result, approving a method — is granted by an organization, scoped to specific work, and revocable at will. It requires competence as evidence and is never implied by it.
+
+Write elements accordingly. `CM-11-A05` covers what an approved signatory must be competent in; it does not make anyone a signatory. Where an element touches an authority, say plainly that the authority is conferred elsewhere.
+
 ## Knowledge currency
 
 Every element declares what kind of claim it makes and how fast that claim ages, in a `currency` block. This is what stops the corpus rotting silently.

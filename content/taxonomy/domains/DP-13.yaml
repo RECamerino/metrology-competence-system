@@ -17,76 +17,76 @@ domains:
         title: Spectroscopic Fundamentals
         status: draft
         elements:
-          - { id: DP-13-001, title: "Wavelength, wavenumber, frequency and energy relationships", levelCeiling: 3, status: draft }
-          - { id: DP-13-002, title: "Absorption, emission and scattering processes", levelCeiling: 4, status: draft }
-          - { id: DP-13-003, title: "Spectral resolution, bandpass and slit function", levelCeiling: 5, status: draft }
-          - { id: DP-13-004, title: "Line shapes and broadening mechanisms", levelCeiling: 4, status: draft }
-          - { id: DP-13-005, title: "Beer-Lambert law and its limits of validity", levelCeiling: 4, status: draft }
-          - { id: DP-13-006, title: "Signal to noise and detection limits in spectroscopy", levelCeiling: 4, status: draft }
+          - { id: DP-13-001, title: "Wavelength, wavenumber, frequency and energy relationships", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-13-002, title: "Absorption, emission and scattering processes", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-13-003, title: "Spectral resolution, bandpass and slit function", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-13-004, title: "Line shapes and broadening mechanisms", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-13-005, title: "Beer-Lambert law and its limits of validity", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-13-006, title: "Signal to noise and detection limits in spectroscopy", kind: knowledge, levelCeiling: 4, status: draft }
 
       - id: DP-13-A02
         title: Spectrometers and Their Calibration
         status: draft
         elements:
-          - { id: DP-13-007, title: "Dispersive spectrometer architectures", levelCeiling: 4, status: draft }
-          - { id: DP-13-008, title: "Fourier transform spectrometers", levelCeiling: 4, status: draft }
-          - { id: DP-13-009, title: "Array detectors and their characterisation", levelCeiling: 4, status: draft }
-          - { id: DP-13-010, title: "Wavelength calibration and reference standards", levelCeiling: 5, status: draft }
-          - { id: DP-13-011, title: "Photometric and absorbance scale calibration", levelCeiling: 4, status: draft }
-          - { id: DP-13-012, title: "Stray light characterisation and correction", levelCeiling: 4, status: draft }
-          - { id: DP-13-013, title: "Bandwidth effects on measured absorbance", levelCeiling: 4, status: draft }
-          - { id: DP-13-014, title: "Spectrometer verification standards and filters", levelCeiling: 4, status: draft }
-          - { id: DP-13-015, title: "Uncertainty evaluation in spectrophotometry", levelCeiling: 5, status: draft }
+          - { id: DP-13-007, title: "Dispersive spectrometer architectures", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-13-008, title: "Fourier transform spectrometers", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-13-009, title: "Array detectors and their characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-010, title: "Wavelength calibration and reference standards", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-13-011, title: "Photometric and absorbance scale calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-012, title: "Stray light characterisation and correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-013, title: "Bandwidth effects on measured absorbance", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-014, title: "Spectrometer verification standards and filters", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-015, title: "Uncertainty evaluation in spectrophotometry", kind: skill, levelCeiling: 5, status: draft }
 
       - id: DP-13-A03
         title: Spectroscopic Techniques
         status: draft
         elements:
-          - { id: DP-13-016, title: "UV-visible absorption spectroscopy", levelCeiling: 4, status: draft }
-          - { id: DP-13-017, title: "Infrared and FTIR spectroscopy", levelCeiling: 4, status: draft }
-          - { id: DP-13-018, title: "Raman spectroscopy", levelCeiling: 4, status: draft }
-          - { id: DP-13-019, title: "Fluorescence and luminescence spectroscopy", levelCeiling: 4, status: draft }
-          - { id: DP-13-020, title: "Atomic absorption and emission spectroscopy", levelCeiling: 4, status: draft }
-          - { id: DP-13-021, title: "Laser-based absorption and cavity enhanced techniques", levelCeiling: 4, status: draft }
-          - { id: DP-13-022, title: "Frequency comb spectroscopy", levelCeiling: 4, status: draft }
-          - { id: DP-13-023, title: "Hyperspectral imaging", levelCeiling: 4, status: draft }
-          - { id: DP-13-024, title: "Chemometrics and multivariate spectral calibration", levelCeiling: 5, status: draft }
+          - { id: DP-13-016, title: "UV-visible absorption spectroscopy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-017, title: "Infrared and FTIR spectroscopy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-018, title: "Raman spectroscopy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-019, title: "Fluorescence and luminescence spectroscopy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-020, title: "Atomic absorption and emission spectroscopy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-021, title: "Laser-based absorption and cavity enhanced techniques", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-022, title: "Frequency comb spectroscopy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-023, title: "Hyperspectral imaging", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-024, title: "Chemometrics and multivariate spectral calibration", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: DP-13-A04
         title: Lasers and Coherent Sources
         status: draft
         elements:
-          - { id: DP-13-025, title: "Laser principles and beam characteristics", levelCeiling: 4, status: draft }
-          - { id: DP-13-026, title: "Beam quality, M-squared and beam profiling", levelCeiling: 4, status: draft }
-          - { id: DP-13-027, title: "Laser power and energy measurement", levelCeiling: 4, status: draft }
-          - { id: DP-13-028, title: "Wavelength and frequency stabilisation", levelCeiling: 4, status: draft }
-          - { id: DP-13-029, title: "Stabilised lasers as length and frequency standards", levelCeiling: 5, status: draft }
-          - { id: DP-13-030, title: "Optical frequency combs", levelCeiling: 4, status: draft }
-          - { id: DP-13-031, title: "Linewidth and coherence measurement", levelCeiling: 4, status: draft }
-          - { id: DP-13-032, title: "Pulsed laser characterisation", levelCeiling: 4, status: draft }
-          - { id: DP-13-033, title: "Laser safety classification and control measures", levelCeiling: 4, status: draft }
+          - { id: DP-13-025, title: "Laser principles and beam characteristics", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-13-026, title: "Beam quality, M-squared and beam profiling", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-027, title: "Laser power and energy measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-028, title: "Wavelength and frequency stabilisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-029, title: "Stabilised lasers as length and frequency standards", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-13-030, title: "Optical frequency combs", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-031, title: "Linewidth and coherence measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-032, title: "Pulsed laser characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-033, title: "Laser safety classification and control measures", kind: knowledge, levelCeiling: 4, status: draft }
 
       - id: DP-13-A05
         title: Interferometry
         status: draft
         elements:
-          - { id: DP-13-034, title: "Interferometer configurations and their applications", levelCeiling: 4, status: draft }
-          - { id: DP-13-035, title: "Fringe counting and phase interpolation", levelCeiling: 4, status: draft }
-          - { id: DP-13-036, title: "Environmental compensation in interferometry", levelCeiling: 4, status: draft }
-          - { id: DP-13-037, title: "Surface form interferometry", levelCeiling: 4, status: draft }
-          - { id: DP-13-038, title: "White light and low coherence interferometry", levelCeiling: 4, status: draft }
-          - { id: DP-13-039, title: "Error sources in interferometric measurement", levelCeiling: 5, status: draft }
+          - { id: DP-13-034, title: "Interferometer configurations and their applications", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-13-035, title: "Fringe counting and phase interpolation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-036, title: "Environmental compensation in interferometry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-037, title: "Surface form interferometry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-038, title: "White light and low coherence interferometry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-039, title: "Error sources in interferometric measurement", kind: skill, levelCeiling: 5, status: draft }
 
       - id: DP-13-A06
         title: Fibre Optics and Optical Communications
         status: draft
         elements:
-          - { id: DP-13-040, title: "Optical fibre types and propagation", levelCeiling: 4, status: draft }
-          - { id: DP-13-041, title: "Attenuation measurement and cutback technique", levelCeiling: 4, status: draft }
-          - { id: DP-13-042, title: "Optical time domain reflectometry", levelCeiling: 4, status: draft }
-          - { id: DP-13-043, title: "Optical power meter calibration", levelCeiling: 4, status: draft }
-          - { id: DP-13-044, title: "Connector loss, return loss and end face quality", levelCeiling: 4, status: draft }
-          - { id: DP-13-045, title: "Dispersion measurement: chromatic and polarisation mode", levelCeiling: 4, status: draft }
-          - { id: DP-13-046, title: "Optical spectrum analysis for communications", levelCeiling: 4, status: draft }
-          - { id: DP-13-047, title: "Fibre optic sensing and distributed measurement", levelCeiling: 4, status: draft }
-          - { id: DP-13-048, title: "Uncertainty in optical fibre measurement", levelCeiling: 5, status: draft }
+          - { id: DP-13-040, title: "Optical fibre types and propagation", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-13-041, title: "Attenuation measurement and cutback technique", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-042, title: "Optical time domain reflectometry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-043, title: "Optical power meter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-044, title: "Connector loss, return loss and end face quality", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-045, title: "Dispersion measurement: chromatic and polarisation mode", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-046, title: "Optical spectrum analysis for communications", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-047, title: "Fibre optic sensing and distributed measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-13-048, title: "Uncertainty in optical fibre measurement", kind: skill, levelCeiling: 5, status: draft }

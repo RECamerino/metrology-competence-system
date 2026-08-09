@@ -16,71 +16,71 @@ domains:
         title: Flow Fundamentals
         status: draft
         elements:
-          - { id: DP-07-001, title: "Volumetric and mass flow rate and their relationship", levelCeiling: 3, status: draft }
-          - { id: DP-07-002, title: "Reynolds number and flow regimes", levelCeiling: 4, status: draft }
-          - { id: DP-07-003, title: "Velocity profile development and fully developed flow", levelCeiling: 5, status: draft }
-          - { id: DP-07-004, title: "Swirl, asymmetry and flow disturbance", levelCeiling: 4, status: draft }
-          - { id: DP-07-005, title: "Compressibility and expansibility in gas flow", levelCeiling: 4, status: draft }
-          - { id: DP-07-006, title: "Reference conditions for gas volume", levelCeiling: 4, status: draft }
-          - { id: DP-07-007, title: "Conservation principles applied to flow measurement", levelCeiling: 4, status: draft }
-          - { id: DP-07-008, title: "Pulsating and unsteady flow effects", levelCeiling: 4, status: draft }
+          - { id: DP-07-001, title: "Volumetric and mass flow rate and their relationship", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-07-002, title: "Reynolds number and flow regimes", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-003, title: "Velocity profile development and fully developed flow", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-07-004, title: "Swirl, asymmetry and flow disturbance", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-005, title: "Compressibility and expansibility in gas flow", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-006, title: "Reference conditions for gas volume", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-007, title: "Conservation principles applied to flow measurement", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-008, title: "Pulsating and unsteady flow effects", kind: knowledge, levelCeiling: 4, status: draft }
 
       - id: DP-07-A02
         title: Flow Meter Technologies
         status: draft
         elements:
-          - { id: DP-07-009, title: "Differential pressure meters: orifice, nozzle, venturi", levelCeiling: 4, status: draft }
-          - { id: DP-07-010, title: "Discharge coefficient and its determination", levelCeiling: 5, status: draft }
-          - { id: DP-07-011, title: "Positive displacement meters", levelCeiling: 4, status: draft }
-          - { id: DP-07-012, title: "Turbine meters", levelCeiling: 4, status: draft }
-          - { id: DP-07-013, title: "Electromagnetic flow meters", levelCeiling: 4, status: draft }
-          - { id: DP-07-014, title: "Ultrasonic flow meters: transit time and Doppler", levelCeiling: 4, status: draft }
-          - { id: DP-07-015, title: "Coriolis mass flow meters", levelCeiling: 4, status: draft }
-          - { id: DP-07-016, title: "Vortex shedding meters", levelCeiling: 4, status: draft }
-          - { id: DP-07-017, title: "Thermal mass flow meters", levelCeiling: 4, status: draft }
-          - { id: DP-07-018, title: "Variable area and rotameter devices", levelCeiling: 3, status: draft }
-          - { id: DP-07-019, title: "Laminar flow elements", levelCeiling: 4, status: draft }
-          - { id: DP-07-020, title: "Open channel and weir flow measurement", levelCeiling: 4, status: draft }
-          - { id: DP-07-021, title: "Meter selection for an application", levelCeiling: 5, status: draft }
+          - { id: DP-07-009, title: "Differential pressure meters: orifice, nozzle, venturi", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-010, title: "Discharge coefficient and its determination", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-07-011, title: "Positive displacement meters", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-012, title: "Turbine meters", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-013, title: "Electromagnetic flow meters", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-014, title: "Ultrasonic flow meters: transit time and Doppler", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-015, title: "Coriolis mass flow meters", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-016, title: "Vortex shedding meters", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-017, title: "Thermal mass flow meters", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-018, title: "Variable area and rotameter devices", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-07-019, title: "Laminar flow elements", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-020, title: "Open channel and weir flow measurement", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-021, title: "Meter selection for an application", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: DP-07-A03
         title: Flow Standards and Calibration Facilities
         status: draft
         elements:
-          - { id: DP-07-022, title: "Gravimetric flow standards", levelCeiling: 4, status: draft }
-          - { id: DP-07-023, title: "Volumetric provers and pipe provers", levelCeiling: 4, status: draft }
-          - { id: DP-07-024, title: "Piston provers and syringe standards", levelCeiling: 4, status: draft }
-          - { id: DP-07-025, title: "Bell provers and gas volume standards", levelCeiling: 4, status: draft }
-          - { id: DP-07-026, title: "Critical flow venturi nozzles", levelCeiling: 4, status: draft }
-          - { id: DP-07-027, title: "Master meter and transfer standard methods", levelCeiling: 4, status: draft }
-          - { id: DP-07-028, title: "PVTt gas flow standards", levelCeiling: 4, status: draft }
-          - { id: DP-07-029, title: "Traceability of flow measurement and its chain", levelCeiling: 5, status: draft }
-          - { id: DP-07-030, title: "Uncertainty budget for flow calibration", levelCeiling: 5, status: draft }
-          - { id: DP-07-031, title: "Calibration at conditions other than those of use", levelCeiling: 4, status: draft }
+          - { id: DP-07-022, title: "Gravimetric flow standards", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-07-023, title: "Volumetric provers and pipe provers", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-07-024, title: "Piston provers and syringe standards", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-07-025, title: "Bell provers and gas volume standards", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-07-026, title: "Critical flow venturi nozzles", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-07-027, title: "Master meter and transfer standard methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-07-028, title: "PVTt gas flow standards", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-07-029, title: "Traceability of flow measurement and its chain", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-07-030, title: "Uncertainty budget for flow calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-07-031, title: "Calibration at conditions other than those of use", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: DP-07-A04
         title: Installation and In-Service Performance
         status: draft
         elements:
-          - { id: DP-07-032, title: "Upstream and downstream straight length requirements", levelCeiling: 4, status: draft }
-          - { id: DP-07-033, title: "Flow conditioners and their effect", levelCeiling: 4, status: draft }
-          - { id: DP-07-034, title: "Installation effects and the gap between laboratory and field", levelCeiling: 5, status: draft }
-          - { id: DP-07-035, title: "Orientation, cavitation and two-phase intrusion", levelCeiling: 4, status: draft }
-          - { id: DP-07-036, title: "Fluid property effects: viscosity, density, temperature", levelCeiling: 4, status: draft }
-          - { id: DP-07-037, title: "Contamination, erosion, deposition and meter drift", levelCeiling: 4, status: draft }
-          - { id: DP-07-038, title: "In-situ verification and proving", levelCeiling: 4, status: draft }
-          - { id: DP-07-039, title: "Diagnostics and self-checking flow meters", levelCeiling: 4, status: draft }
+          - { id: DP-07-032, title: "Upstream and downstream straight length requirements", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-033, title: "Flow conditioners and their effect", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-07-034, title: "Installation effects and the gap between laboratory and field", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: DP-07-035, title: "Orientation, cavitation and two-phase intrusion", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-07-036, title: "Fluid property effects: viscosity, density, temperature", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-07-037, title: "Contamination, erosion, deposition and meter drift", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-07-038, title: "In-situ verification and proving", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-07-039, title: "Diagnostics and self-checking flow meters", kind: knowledge, levelCeiling: 4, status: draft }
 
       - id: DP-07-A05
         title: Custody Transfer and Specialised Flow
         status: draft
         elements:
-          - { id: DP-07-040, title: "Custody transfer measurement and its commercial stakes", levelCeiling: 4, status: draft }
-          - { id: DP-07-041, title: "Metering systems, computers and volume correction", levelCeiling: 4, status: draft }
-          - { id: DP-07-042, title: "Multiphase and wet gas flow measurement", levelCeiling: 5, status: draft }
-          - { id: DP-07-043, title: "Cryogenic and liquefied gas flow", levelCeiling: 4, status: draft }
-          - { id: DP-07-044, title: "Low flow and micro flow measurement", levelCeiling: 4, status: draft }
-          - { id: DP-07-045, title: "Medical and infusion flow measurement", levelCeiling: 4, status: draft }
-          - { id: DP-07-046, title: "Air velocity and anemometry", levelCeiling: 4, status: draft }
-          - { id: DP-07-047, title: "Water and wastewater flow measurement", levelCeiling: 4, status: draft }
-          - { id: DP-07-048, title: "Hydrogen and alternative fuel flow measurement", levelCeiling: 4, status: draft }
+          - { id: DP-07-040, title: "Custody transfer measurement and its commercial stakes", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-07-041, title: "Metering systems, computers and volume correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-07-042, title: "Multiphase and wet gas flow measurement", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-07-043, title: "Cryogenic and liquefied gas flow", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-07-044, title: "Low flow and micro flow measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-07-045, title: "Medical and infusion flow measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-07-046, title: "Air velocity and anemometry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-07-047, title: "Water and wastewater flow measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-07-048, title: "Hydrogen and alternative fuel flow measurement", kind: skill, levelCeiling: 4, status: draft }

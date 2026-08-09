@@ -16,71 +16,71 @@ domains:
         title: Dynamic Measurement Foundations
         status: draft
         elements:
-          - { id: DP-04-001, title: "Time domain and frequency domain representations", levelCeiling: 4, status: draft }
-          - { id: DP-04-002, title: "Fourier analysis and the discrete Fourier transform", levelCeiling: 4, status: draft }
-          - { id: DP-04-003, title: "Windowing, leakage and resolution", levelCeiling: 5, status: draft }
-          - { id: DP-04-004, title: "Sampling, aliasing and anti-alias filtering", levelCeiling: 4, status: draft }
-          - { id: DP-04-005, title: "Amplitude conventions: peak, RMS, peak-to-peak", levelCeiling: 4, status: draft }
-          - { id: DP-04-006, title: "Frequency response functions and coherence", levelCeiling: 5, status: draft }
-          - { id: DP-04-007, title: "Phase measurement and its pitfalls", levelCeiling: 4, status: draft }
-          - { id: DP-04-008, title: "Random, periodic and transient signal characterisation", levelCeiling: 4, status: draft }
+          - { id: DP-04-001, title: "Time domain and frequency domain representations", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-04-002, title: "Fourier analysis and the discrete Fourier transform", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-003, title: "Windowing, leakage and resolution", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-04-004, title: "Sampling, aliasing and anti-alias filtering", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-04-005, title: "Amplitude conventions: peak, RMS, peak-to-peak", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-04-006, title: "Frequency response functions and coherence", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-04-007, title: "Phase measurement and its pitfalls", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-04-008, title: "Random, periodic and transient signal characterisation", kind: knowledge, levelCeiling: 4, status: draft }
 
       - id: DP-04-A02
         title: Vibration Measurement and Calibration
         status: draft
         elements:
-          - { id: DP-04-009, title: "Acceleration, velocity and displacement relationships", levelCeiling: 4, status: draft }
-          - { id: DP-04-010, title: "Accelerometer types and their characteristics", levelCeiling: 4, status: draft }
-          - { id: DP-04-011, title: "Mounting effects and mounted resonance", levelCeiling: 4, status: draft }
-          - { id: DP-04-012, title: "Primary calibration by laser interferometry", levelCeiling: 5, status: draft }
-          - { id: DP-04-013, title: "Comparison calibration against a reference accelerometer", levelCeiling: 4, status: draft }
-          - { id: DP-04-014, title: "Vibration exciters and their characterisation", levelCeiling: 4, status: draft }
-          - { id: DP-04-015, title: "Transverse sensitivity and cross-axis response", levelCeiling: 4, status: draft }
-          - { id: DP-04-016, title: "Charge amplifiers, signal conditioning and cable effects", levelCeiling: 4, status: draft }
-          - { id: DP-04-017, title: "Low frequency and high frequency calibration challenges", levelCeiling: 4, status: draft }
-          - { id: DP-04-018, title: "Uncertainty budget for accelerometer calibration", levelCeiling: 5, status: draft }
-          - { id: DP-04-019, title: "Velocity transducers and laser vibrometry", levelCeiling: 4, status: draft }
-          - { id: DP-04-020, title: "Proximity probes and shaft vibration measurement", levelCeiling: 4, status: draft }
+          - { id: DP-04-009, title: "Acceleration, velocity and displacement relationships", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-04-010, title: "Accelerometer types and their characteristics", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-011, title: "Mounting effects and mounted resonance", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-012, title: "Primary calibration by laser interferometry", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-04-013, title: "Comparison calibration against a reference accelerometer", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-014, title: "Vibration exciters and their characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-015, title: "Transverse sensitivity and cross-axis response", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-016, title: "Charge amplifiers, signal conditioning and cable effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-017, title: "Low frequency and high frequency calibration challenges", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-018, title: "Uncertainty budget for accelerometer calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-04-019, title: "Velocity transducers and laser vibrometry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-020, title: "Proximity probes and shaft vibration measurement", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-04-A03
         title: Shock and Transient Measurement
         status: draft
         elements:
-          - { id: DP-04-021, title: "Shock pulse characterisation and shock response spectrum", levelCeiling: 5, status: draft }
-          - { id: DP-04-022, title: "Shock calibration methods", levelCeiling: 4, status: draft }
-          - { id: DP-04-023, title: "High-g and pyroshock measurement", levelCeiling: 4, status: draft }
-          - { id: DP-04-024, title: "Zero shift and transducer damage in shock events", levelCeiling: 4, status: draft }
-          - { id: DP-04-025, title: "Drop testing and impact measurement", levelCeiling: 4, status: draft }
+          - { id: DP-04-021, title: "Shock pulse characterisation and shock response spectrum", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-04-022, title: "Shock calibration methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-023, title: "High-g and pyroshock measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-024, title: "Zero shift and transducer damage in shock events", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-025, title: "Drop testing and impact measurement", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-04-A04
         title: Condition Monitoring and Machinery Vibration
         status: draft
         elements:
-          - { id: DP-04-026, title: "Machinery vibration standards and severity criteria", levelCeiling: 4, status: draft }
-          - { id: DP-04-027, title: "Fault signatures: imbalance, misalignment, looseness", levelCeiling: 4, status: draft }
-          - { id: DP-04-028, title: "Bearing and gear fault detection", levelCeiling: 4, status: draft }
-          - { id: DP-04-029, title: "Envelope analysis and demodulation", levelCeiling: 4, status: draft }
-          - { id: DP-04-030, title: "Order tracking and variable speed machinery", levelCeiling: 4, status: draft }
-          - { id: DP-04-031, title: "Balancing: field and workshop", levelCeiling: 4, status: draft }
-          - { id: DP-04-032, title: "Modal testing and structural dynamics", levelCeiling: 5, status: draft }
-          - { id: DP-04-033, title: "Human vibration exposure measurement", levelCeiling: 4, status: draft }
+          - { id: DP-04-026, title: "Machinery vibration standards and severity criteria", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-027, title: "Fault signatures: imbalance, misalignment, looseness", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-04-028, title: "Bearing and gear fault detection", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-029, title: "Envelope analysis and demodulation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-030, title: "Order tracking and variable speed machinery", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-031, title: "Balancing: field and workshop", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-032, title: "Modal testing and structural dynamics", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-04-033, title: "Human vibration exposure measurement", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-04-A05
         title: Acoustics and Sound Measurement
         status: draft
         elements:
-          - { id: DP-04-034, title: "Sound pressure, sound power and sound intensity distinguished", levelCeiling: 4, status: draft }
-          - { id: DP-04-035, title: "Decibel scales and reference quantities in acoustics", levelCeiling: 3, status: draft }
-          - { id: DP-04-036, title: "Frequency weighting and time weighting", levelCeiling: 3, status: draft }
-          - { id: DP-04-037, title: "Octave and fractional octave band analysis", levelCeiling: 4, status: draft }
-          - { id: DP-04-038, title: "Microphone types and their characteristics", levelCeiling: 4, status: draft }
-          - { id: DP-04-039, title: "Reciprocity calibration of microphones", levelCeiling: 5, status: draft }
-          - { id: DP-04-040, title: "Comparison calibration and acoustic calibrators", levelCeiling: 4, status: draft }
-          - { id: DP-04-041, title: "Free-field, pressure-field and diffuse-field responses", levelCeiling: 4, status: draft }
-          - { id: DP-04-042, title: "Sound level meter verification and periodic testing", levelCeiling: 4, status: draft }
-          - { id: DP-04-043, title: "Anechoic and reverberation chambers", levelCeiling: 4, status: draft }
-          - { id: DP-04-044, title: "Environmental and occupational noise measurement", levelCeiling: 4, status: draft }
-          - { id: DP-04-045, title: "Sound power determination methods", levelCeiling: 4, status: draft }
-          - { id: DP-04-046, title: "Audiometric equipment calibration", levelCeiling: 4, status: draft }
-          - { id: DP-04-047, title: "Ultrasound measurement and its applications", levelCeiling: 4, status: draft }
-          - { id: DP-04-048, title: "Uncertainty evaluation in acoustic measurement", levelCeiling: 5, status: draft }
+          - { id: DP-04-034, title: "Sound pressure, sound power and sound intensity distinguished", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-04-035, title: "Decibel scales and reference quantities in acoustics", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-04-036, title: "Frequency weighting and time weighting", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-04-037, title: "Octave and fractional octave band analysis", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-038, title: "Microphone types and their characteristics", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-039, title: "Reciprocity calibration of microphones", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-04-040, title: "Comparison calibration and acoustic calibrators", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-041, title: "Free-field, pressure-field and diffuse-field responses", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-04-042, title: "Sound level meter verification and periodic testing", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-043, title: "Anechoic and reverberation chambers", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-044, title: "Environmental and occupational noise measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-045, title: "Sound power determination methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-046, title: "Audiometric equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-047, title: "Ultrasound measurement and its applications", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-048, title: "Uncertainty evaluation in acoustic measurement", kind: skill, levelCeiling: 5, status: draft }

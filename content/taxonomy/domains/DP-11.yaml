@@ -17,64 +17,64 @@ domains:
         title: Magnetic Quantities and Standards
         status: draft
         elements:
-          - { id: DP-11-001, title: "Magnetic field strength, flux density and magnetisation", levelCeiling: 3, status: draft }
-          - { id: DP-11-002, title: "Magnetic units and the persistence of CGS in the field", levelCeiling: 3, status: draft }
-          - { id: DP-11-003, title: "Nuclear magnetic resonance magnetometry", levelCeiling: 5, status: draft }
-          - { id: DP-11-004, title: "Helmholtz coils and calculable field sources", levelCeiling: 4, status: draft }
-          - { id: DP-11-005, title: "Magnetic flux standards and the volt-second", levelCeiling: 4, status: draft }
-          - { id: DP-11-006, title: "Reference magnets and their stability", levelCeiling: 4, status: draft }
-          - { id: DP-11-007, title: "Traceability for magnetic measurement", levelCeiling: 4, status: draft }
+          - { id: DP-11-001, title: "Magnetic field strength, flux density and magnetisation", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-11-002, title: "Magnetic units and the persistence of CGS in the field", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-11-003, title: "Nuclear magnetic resonance magnetometry", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-11-004, title: "Helmholtz coils and calculable field sources", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-005, title: "Magnetic flux standards and the volt-second", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-11-006, title: "Reference magnets and their stability", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-11-007, title: "Traceability for magnetic measurement", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: DP-11-A02
         title: Magnetic Measurement Instruments
         status: draft
         elements:
-          - { id: DP-11-008, title: "Hall effect sensors and gaussmeters", levelCeiling: 4, status: draft }
-          - { id: DP-11-009, title: "Fluxgate magnetometers", levelCeiling: 4, status: draft }
-          - { id: DP-11-010, title: "Search coils and induction methods", levelCeiling: 4, status: draft }
-          - { id: DP-11-011, title: "SQUID magnetometry", levelCeiling: 5, status: draft }
-          - { id: DP-11-012, title: "Optically pumped and atomic magnetometers", levelCeiling: 4, status: draft }
-          - { id: DP-11-013, title: "Probe positioning, orientation and gradient effects", levelCeiling: 4, status: draft }
-          - { id: DP-11-014, title: "Calibration of magnetic field instruments", levelCeiling: 4, status: draft }
-          - { id: DP-11-015, title: "Magnetic shielding and zero-field environments", levelCeiling: 4, status: draft }
-          - { id: DP-11-016, title: "Uncertainty evaluation in magnetic measurement", levelCeiling: 5, status: draft }
+          - { id: DP-11-008, title: "Hall effect sensors and gaussmeters", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-009, title: "Fluxgate magnetometers", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-010, title: "Search coils and induction methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-011, title: "SQUID magnetometry", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-11-012, title: "Optically pumped and atomic magnetometers", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-013, title: "Probe positioning, orientation and gradient effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-014, title: "Calibration of magnetic field instruments", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-015, title: "Magnetic shielding and zero-field environments", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-11-016, title: "Uncertainty evaluation in magnetic measurement", kind: skill, levelCeiling: 5, status: draft }
 
       - id: DP-11-A03
         title: Magnetic Materials Characterisation
         status: draft
         elements:
-          - { id: DP-11-017, title: "Hysteresis loops and magnetic material parameters", levelCeiling: 4, status: draft }
-          - { id: DP-11-018, title: "Permeability and susceptibility measurement", levelCeiling: 4, status: draft }
-          - { id: DP-11-019, title: "Core loss and power loss measurement", levelCeiling: 4, status: draft }
-          - { id: DP-11-020, title: "Epstein frame and single sheet testers", levelCeiling: 4, status: draft }
-          - { id: DP-11-021, title: "Vibrating sample and SQUID magnetometry for materials", levelCeiling: 4, status: draft }
-          - { id: DP-11-022, title: "Permanent magnet characterisation", levelCeiling: 4, status: draft }
-          - { id: DP-11-023, title: "Demagnetising factors and specimen geometry", levelCeiling: 5, status: draft }
-          - { id: DP-11-024, title: "Magnetic measurement for motors and transformers", levelCeiling: 4, status: draft }
+          - { id: DP-11-017, title: "Hysteresis loops and magnetic material parameters", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-11-018, title: "Permeability and susceptibility measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-019, title: "Core loss and power loss measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-020, title: "Epstein frame and single sheet testers", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-021, title: "Vibrating sample and SQUID magnetometry for materials", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-022, title: "Permanent magnet characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-023, title: "Demagnetising factors and specimen geometry", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-11-024, title: "Magnetic measurement for motors and transformers", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-11-A04
         title: High Voltage Measurement
         status: draft
         elements:
-          - { id: DP-11-025, title: "High voltage measurement principles and hazards", levelCeiling: 4, status: draft }
-          - { id: DP-11-026, title: "Resistive, capacitive and mixed dividers", levelCeiling: 4, status: draft }
-          - { id: DP-11-027, title: "Divider response, step response and scale factor", levelCeiling: 5, status: draft }
-          - { id: DP-11-028, title: "Sphere gaps and reference measuring systems", levelCeiling: 4, status: draft }
-          - { id: DP-11-029, title: "Impulse voltage generation and measurement", levelCeiling: 4, status: draft }
-          - { id: DP-11-030, title: "Lightning and switching impulse waveform evaluation", levelCeiling: 4, status: draft }
-          - { id: DP-11-031, title: "AC and DC high voltage measurement", levelCeiling: 4, status: draft }
-          - { id: DP-11-032, title: "Field distortion, proximity and stray capacitance effects", levelCeiling: 4, status: draft }
-          - { id: DP-11-033, title: "Calibration of high voltage measuring systems", levelCeiling: 4, status: draft }
-          - { id: DP-11-034, title: "Uncertainty evaluation in high voltage measurement", levelCeiling: 5, status: draft }
+          - { id: DP-11-025, title: "High voltage measurement principles and hazards", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-11-026, title: "Resistive, capacitive and mixed dividers", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-027, title: "Divider response, step response and scale factor", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-11-028, title: "Sphere gaps and reference measuring systems", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-029, title: "Impulse voltage generation and measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-030, title: "Lightning and switching impulse waveform evaluation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-031, title: "AC and DC high voltage measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-032, title: "Field distortion, proximity and stray capacitance effects", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-11-033, title: "Calibration of high voltage measuring systems", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-034, title: "Uncertainty evaluation in high voltage measurement", kind: skill, levelCeiling: 5, status: draft }
 
       - id: DP-11-A05
         title: High Voltage Testing and Diagnostics
         status: draft
         elements:
-          - { id: DP-11-035, title: "Dielectric withstand and insulation testing", levelCeiling: 4, status: draft }
-          - { id: DP-11-036, title: "Partial discharge measurement", levelCeiling: 5, status: draft }
-          - { id: DP-11-037, title: "Insulation resistance and polarisation index", levelCeiling: 4, status: draft }
-          - { id: DP-11-038, title: "Dissipation factor and dielectric loss measurement", levelCeiling: 4, status: draft }
-          - { id: DP-11-039, title: "High current impulse and short circuit testing", levelCeiling: 4, status: draft }
-          - { id: DP-11-040, title: "Safety systems, interlocks and earthing practice", levelCeiling: 4, status: draft }
-          - { id: DP-11-041, title: "High voltage laboratory design and clearances", levelCeiling: 4, status: draft }
+          - { id: DP-11-035, title: "Dielectric withstand and insulation testing", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-036, title: "Partial discharge measurement", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-11-037, title: "Insulation resistance and polarisation index", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-038, title: "Dissipation factor and dielectric loss measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-039, title: "High current impulse and short circuit testing", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-040, title: "Safety systems, interlocks and earthing practice", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-11-041, title: "High voltage laboratory design and clearances", kind: judgment, levelCeiling: 4, status: draft }

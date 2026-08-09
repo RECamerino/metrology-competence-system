@@ -49,6 +49,8 @@ const domains = readdirSync(DOMAINS_DIR)
         id: e.id,
         title: e.title,
         c: e.levelCeiling,
+        // knowledge | skill | judgment, abbreviated to keep the payload small.
+        k: String(e.kind ?? '').charAt(0),
       })),
     })),
   }));

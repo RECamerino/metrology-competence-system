@@ -18,55 +18,55 @@ domains:
         title: Quantum Electrical Standards
         status: draft
         elements:
-          - { id: DP-08-001, title: "The ampere definition from the elementary charge", levelCeiling: 4, status: draft }
-          - { id: DP-08-002, title: "Josephson effect and voltage standards", levelCeiling: 5, status: draft }
-          - { id: DP-08-003, title: "Programmable and pulse-driven Josephson arrays", levelCeiling: 4, status: draft }
-          - { id: DP-08-004, title: "Quantum Hall effect and resistance standards", levelCeiling: 5, status: draft }
-          - { id: DP-08-005, title: "Graphene quantum Hall devices", levelCeiling: 4, status: draft }
-          - { id: DP-08-006, title: "Single electron transport and current standards", levelCeiling: 4, status: draft }
-          - { id: DP-08-007, title: "The quantum metrology triangle", levelCeiling: 4, status: draft }
-          - { id: DP-08-008, title: "Dissemination from quantum standards to working standards", levelCeiling: 5, status: draft }
+          - { id: DP-08-001, title: "The ampere definition from the elementary charge", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-08-002, title: "Josephson effect and voltage standards", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-08-003, title: "Programmable and pulse-driven Josephson arrays", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-08-004, title: "Quantum Hall effect and resistance standards", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-08-005, title: "Graphene quantum Hall devices", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-08-006, title: "Single electron transport and current standards", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-08-007, title: "The quantum metrology triangle", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-08-008, title: "Dissemination from quantum standards to working standards", kind: knowledge, levelCeiling: 5, status: draft }
 
       - id: DP-08-A02
         title: DC Voltage
         status: draft
         elements:
-          - { id: DP-08-009, title: "Zener reference standards and their behaviour", levelCeiling: 4, status: draft }
-          - { id: DP-08-010, title: "Standard cells and their historical role", levelCeiling: 3, status: draft }
-          - { id: DP-08-011, title: "Voltage divider techniques", levelCeiling: 4, status: draft }
-          - { id: DP-08-012, title: "Potentiometric and null measurement methods", levelCeiling: 4, status: draft }
-          - { id: DP-08-013, title: "Digital multimeter architecture and DC voltage performance", levelCeiling: 4, status: draft }
-          - { id: DP-08-014, title: "DC voltage calibration procedures", levelCeiling: 4, status: draft }
-          - { id: DP-08-015, title: "Low-level voltage measurement and nanovolt techniques", levelCeiling: 5, status: draft }
-          - { id: DP-08-016, title: "High voltage DC measurement and dividers", levelCeiling: 4, status: draft }
-          - { id: DP-08-017, title: "Uncertainty budget for DC voltage calibration", levelCeiling: 5, status: draft }
+          - { id: DP-08-009, title: "Zener reference standards and their behaviour", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-08-010, title: "Standard cells and their historical role", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-011, title: "Voltage divider techniques", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-012, title: "Potentiometric and null measurement methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-013, title: "Digital multimeter architecture and DC voltage performance", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-014, title: "DC voltage calibration procedures", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-015, title: "Low-level voltage measurement and nanovolt techniques", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-08-016, title: "High voltage DC measurement and dividers", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-017, title: "Uncertainty budget for DC voltage calibration", kind: skill, levelCeiling: 5, status: draft }
 
       - id: DP-08-A03
         title: Resistance
         status: draft
         elements:
-          - { id: DP-08-018, title: "Standard resistors: construction, stability and care", levelCeiling: 4, status: draft }
-          - { id: DP-08-019, title: "Temperature and power coefficients of resistance standards", levelCeiling: 4, status: draft }
-          - { id: DP-08-020, title: "Two, three and four terminal resistance definitions", levelCeiling: 4, status: draft }
-          - { id: DP-08-021, title: "Wheatstone and Kelvin bridge techniques", levelCeiling: 4, status: draft }
-          - { id: DP-08-022, title: "Cryogenic current comparator bridges", levelCeiling: 5, status: draft }
-          - { id: DP-08-023, title: "Direct current comparator resistance bridges", levelCeiling: 4, status: draft }
-          - { id: DP-08-024, title: "Hamon transfer devices and resistance scaling", levelCeiling: 4, status: draft }
-          - { id: DP-08-025, title: "High resistance and insulation measurement", levelCeiling: 4, status: draft }
-          - { id: DP-08-026, title: "Low resistance and contact resistance measurement", levelCeiling: 4, status: draft }
-          - { id: DP-08-027, title: "Uncertainty budget for resistance calibration", levelCeiling: 5, status: draft }
+          - { id: DP-08-018, title: "Standard resistors: construction, stability and care", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-08-019, title: "Temperature and power coefficients of resistance standards", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-020, title: "Two, three and four terminal resistance definitions", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-08-021, title: "Wheatstone and Kelvin bridge techniques", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-022, title: "Cryogenic current comparator bridges", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-08-023, title: "Direct current comparator resistance bridges", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-024, title: "Hamon transfer devices and resistance scaling", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-025, title: "High resistance and insulation measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-026, title: "Low resistance and contact resistance measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-027, title: "Uncertainty budget for resistance calibration", kind: skill, levelCeiling: 5, status: draft }
 
       - id: DP-08-A04
         title: DC Current and Charge
         status: draft
         elements:
-          - { id: DP-08-028, title: "DC current measurement by shunt and by transfer", levelCeiling: 4, status: draft }
-          - { id: DP-08-029, title: "Current shunts and their characterisation", levelCeiling: 4, status: draft }
-          - { id: DP-08-030, title: "Current comparators", levelCeiling: 4, status: draft }
-          - { id: DP-08-031, title: "Low current and femtoamp measurement", levelCeiling: 5, status: draft }
-          - { id: DP-08-032, title: "High current measurement techniques", levelCeiling: 4, status: draft }
-          - { id: DP-08-033, title: "Charge measurement and electrometers", levelCeiling: 4, status: draft }
-          - { id: DP-08-034, title: "Capacitance at DC and charge-based methods", levelCeiling: 4, status: draft }
+          - { id: DP-08-028, title: "DC current measurement by shunt and by transfer", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-029, title: "Current shunts and their characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-030, title: "Current comparators", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-031, title: "Low current and femtoamp measurement", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-08-032, title: "High current measurement techniques", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-033, title: "Charge measurement and electrometers", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-034, title: "Capacitance at DC and charge-based methods", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-08-A05
         title: Error Sources and Technique
@@ -76,26 +76,26 @@ domains:
           someone who reads a display. Frequently the actual cause of an
           unexplained discrepancy.
         elements:
-          - { id: DP-08-035, title: "Thermal EMFs and their control", levelCeiling: 5, status: draft }
-          - { id: DP-08-036, title: "Offset compensation and reversal techniques", levelCeiling: 4, status: draft }
-          - { id: DP-08-037, title: "Leakage currents and insulation effects", levelCeiling: 4, status: draft }
-          - { id: DP-08-038, title: "Guarding and driven shields in practice", levelCeiling: 5, status: draft }
-          - { id: DP-08-039, title: "Grounding, ground loops and common-mode rejection", levelCeiling: 4, status: draft }
-          - { id: DP-08-040, title: "Cable, connector and thermal gradient effects", levelCeiling: 4, status: draft }
-          - { id: DP-08-041, title: "Loading and input impedance effects", levelCeiling: 4, status: draft }
-          - { id: DP-08-042, title: "Noise, filtering and integration time trade-offs", levelCeiling: 4, status: draft }
-          - { id: DP-08-043, title: "Self-heating in resistance and voltage measurement", levelCeiling: 4, status: draft }
-          - { id: DP-08-044, title: "Electrostatic discharge and instrument protection", levelCeiling: 3, status: draft }
+          - { id: DP-08-035, title: "Thermal EMFs and their control", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-08-036, title: "Offset compensation and reversal techniques", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-037, title: "Leakage currents and insulation effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-038, title: "Guarding and driven shields in practice", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-08-039, title: "Grounding, ground loops and common-mode rejection", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-040, title: "Cable, connector and thermal gradient effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-041, title: "Loading and input impedance effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-042, title: "Noise, filtering and integration time trade-offs", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-043, title: "Self-heating in resistance and voltage measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-044, title: "Electrostatic discharge and instrument protection", kind: skill, levelCeiling: 3, status: draft }
 
       - id: DP-08-A06
         title: Multifunction Instruments and Calibrators
         status: draft
         elements:
-          - { id: DP-08-045, title: "Digital multimeter calibration and verification", levelCeiling: 4, status: draft }
-          - { id: DP-08-046, title: "Multifunction calibrators and their traceability", levelCeiling: 4, status: draft }
-          - { id: DP-08-047, title: "Artefact calibration and internal self-adjustment", levelCeiling: 5, status: draft }
-          - { id: DP-08-048, title: "Specification interpretation for electrical instruments", levelCeiling: 4, status: draft }
-          - { id: DP-08-049, title: "Automated electrical calibration systems", levelCeiling: 4, status: draft }
-          - { id: DP-08-050, title: "Data acquisition system and scanner calibration", levelCeiling: 4, status: draft }
-          - { id: DP-08-051, title: "Process calibrators and loop calibration", levelCeiling: 4, status: draft }
-          - { id: DP-08-052, title: "Oscilloscope DC and timebase calibration", levelCeiling: 4, status: draft }
+          - { id: DP-08-045, title: "Digital multimeter calibration and verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-046, title: "Multifunction calibrators and their traceability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-047, title: "Artefact calibration and internal self-adjustment", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-08-048, title: "Specification interpretation for electrical instruments", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-08-049, title: "Automated electrical calibration systems", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-050, title: "Data acquisition system and scanner calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-051, title: "Process calibrators and loop calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-052, title: "Oscilloscope DC and timebase calibration", kind: skill, levelCeiling: 4, status: draft }

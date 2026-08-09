@@ -17,77 +17,77 @@ domains:
         title: Temperature Scales and Realisation
         status: draft
         elements:
-          - { id: DP-05-001, title: "Thermodynamic temperature and the Boltzmann constant definition", levelCeiling: 5, status: draft }
-          - { id: DP-05-002, title: "ITS-90 structure and defining fixed points", levelCeiling: 5, status: draft }
-          - { id: DP-05-003, title: "Interpolating instruments and sub-ranges of ITS-90", levelCeiling: 4, status: draft }
-          - { id: DP-05-004, title: "Differences between ITS-90 and thermodynamic temperature", levelCeiling: 4, status: draft }
-          - { id: DP-05-005, title: "PLTS-2000 and low temperature scales", levelCeiling: 4, status: draft }
-          - { id: DP-05-006, title: "Fixed point cells: construction, realisation and maintenance", levelCeiling: 4, status: draft }
-          - { id: DP-05-007, title: "Triple point of water cells and their care", levelCeiling: 4, status: draft }
-          - { id: DP-05-008, title: "Freezing and melting plateaux and their interpretation", levelCeiling: 4, status: draft }
-          - { id: DP-05-009, title: "Primary thermometry methods", levelCeiling: 4, status: draft }
-          - { id: DP-05-010, title: "Temperature units, scales and conversion between them", levelCeiling: 3, status: draft }
+          - { id: DP-05-001, title: "Thermodynamic temperature and the Boltzmann constant definition", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-05-002, title: "ITS-90 structure and defining fixed points", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-05-003, title: "Interpolating instruments and sub-ranges of ITS-90", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-05-004, title: "Differences between ITS-90 and thermodynamic temperature", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-05-005, title: "PLTS-2000 and low temperature scales", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-05-006, title: "Fixed point cells: construction, realisation and maintenance", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-007, title: "Triple point of water cells and their care", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-008, title: "Freezing and melting plateaux and their interpretation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-009, title: "Primary thermometry methods", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-05-010, title: "Temperature units, scales and conversion between them", kind: knowledge, levelCeiling: 3, status: draft }
 
       - id: DP-05-A02
         title: Contact Thermometry
         status: draft
         elements:
-          - { id: DP-05-011, title: "Standard platinum resistance thermometers", levelCeiling: 5, status: draft }
-          - { id: DP-05-012, title: "Industrial platinum resistance thermometers", levelCeiling: 4, status: draft }
-          - { id: DP-05-013, title: "Resistance measurement bridges and their use in thermometry", levelCeiling: 4, status: draft }
-          - { id: DP-05-014, title: "Self-heating and its correction", levelCeiling: 4, status: draft }
-          - { id: DP-05-015, title: "Lead resistance, three-wire and four-wire connection", levelCeiling: 4, status: draft }
-          - { id: DP-05-016, title: "Thermocouple types, principles and Seebeck effect", levelCeiling: 4, status: draft }
-          - { id: DP-05-017, title: "Reference junction compensation", levelCeiling: 4, status: draft }
-          - { id: DP-05-018, title: "Thermocouple inhomogeneity and drift", levelCeiling: 4, status: draft }
-          - { id: DP-05-019, title: "Thermocouple calibration methods", levelCeiling: 4, status: draft }
-          - { id: DP-05-020, title: "Thermistors and semiconductor sensors", levelCeiling: 4, status: draft }
-          - { id: DP-05-021, title: "Liquid-in-glass thermometers and their calibration", levelCeiling: 4, status: draft }
-          - { id: DP-05-022, title: "Immersion depth, stem conduction and thermal contact", levelCeiling: 4, status: draft }
-          - { id: DP-05-023, title: "Calibration baths, furnaces and dry blocks", levelCeiling: 4, status: draft }
-          - { id: DP-05-024, title: "Comparison calibration technique and uniformity assessment", levelCeiling: 4, status: draft }
-          - { id: DP-05-025, title: "Interpolation equations and calibration coefficients", levelCeiling: 4, status: draft }
-          - { id: DP-05-026, title: "Uncertainty budget for contact thermometry", levelCeiling: 5, status: draft }
-          - { id: DP-05-027, title: "Fibre optic and distributed temperature sensing", levelCeiling: 4, status: draft }
+          - { id: DP-05-011, title: "Standard platinum resistance thermometers", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-05-012, title: "Industrial platinum resistance thermometers", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-013, title: "Resistance measurement bridges and their use in thermometry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-014, title: "Self-heating and its correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-015, title: "Lead resistance, three-wire and four-wire connection", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-016, title: "Thermocouple types, principles and Seebeck effect", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-05-017, title: "Reference junction compensation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-018, title: "Thermocouple inhomogeneity and drift", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-05-019, title: "Thermocouple calibration methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-020, title: "Thermistors and semiconductor sensors", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-021, title: "Liquid-in-glass thermometers and their calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-022, title: "Immersion depth, stem conduction and thermal contact", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-023, title: "Calibration baths, furnaces and dry blocks", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-024, title: "Comparison calibration technique and uniformity assessment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-025, title: "Interpolation equations and calibration coefficients", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-026, title: "Uncertainty budget for contact thermometry", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-05-027, title: "Fibre optic and distributed temperature sensing", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-05-A03
         title: Radiation Thermometry
         status: draft
         elements:
-          - { id: DP-05-028, title: "Planck radiation law and radiation thermometry principles", levelCeiling: 4, status: draft }
-          - { id: DP-05-029, title: "Emissivity and its measurement", levelCeiling: 5, status: draft }
-          - { id: DP-05-030, title: "Blackbody sources and cavity design", levelCeiling: 4, status: draft }
-          - { id: DP-05-031, title: "Radiation thermometer types and spectral bands", levelCeiling: 4, status: draft }
-          - { id: DP-05-032, title: "Size of source effect", levelCeiling: 4, status: draft }
-          - { id: DP-05-033, title: "Reflected radiation and background compensation", levelCeiling: 4, status: draft }
-          - { id: DP-05-034, title: "Atmospheric absorption and path effects", levelCeiling: 4, status: draft }
-          - { id: DP-05-035, title: "Ratio and multi-wavelength thermometry", levelCeiling: 4, status: draft }
-          - { id: DP-05-036, title: "Thermal imaging cameras and their calibration", levelCeiling: 4, status: draft }
-          - { id: DP-05-037, title: "Uncertainty budget for radiation thermometry", levelCeiling: 5, status: draft }
+          - { id: DP-05-028, title: "Planck radiation law and radiation thermometry principles", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-05-029, title: "Emissivity and its measurement", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-05-030, title: "Blackbody sources and cavity design", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-031, title: "Radiation thermometer types and spectral bands", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-032, title: "Size of source effect", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-05-033, title: "Reflected radiation and background compensation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-034, title: "Atmospheric absorption and path effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-035, title: "Ratio and multi-wavelength thermometry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-036, title: "Thermal imaging cameras and their calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-037, title: "Uncertainty budget for radiation thermometry", kind: skill, levelCeiling: 5, status: draft }
 
       - id: DP-05-A04
         title: Applied Temperature Measurement
         status: draft
         elements:
-          - { id: DP-05-038, title: "Sensor selection for an application", levelCeiling: 4, status: draft }
-          - { id: DP-05-039, title: "Installation effects and measuring what you intend to measure", levelCeiling: 5, status: draft }
-          - { id: DP-05-040, title: "Dynamic response and time constants in thermometry", levelCeiling: 4, status: draft }
-          - { id: DP-05-041, title: "Surface temperature measurement and its difficulty", levelCeiling: 4, status: draft }
-          - { id: DP-05-042, title: "Temperature mapping of chambers, ovens and autoclaves", levelCeiling: 4, status: draft }
-          - { id: DP-05-043, title: "Thermal uniformity surveys and heat treatment qualification", levelCeiling: 4, status: draft }
-          - { id: DP-05-044, title: "Cryogenic temperature measurement", levelCeiling: 4, status: draft }
-          - { id: DP-05-045, title: "High temperature measurement above the silver point", levelCeiling: 4, status: draft }
-          - { id: DP-05-046, title: "Temperature measurement in process and safety-critical systems", levelCeiling: 4, status: draft }
+          - { id: DP-05-038, title: "Sensor selection for an application", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-05-039, title: "Installation effects and measuring what you intend to measure", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: DP-05-040, title: "Dynamic response and time constants in thermometry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-041, title: "Surface temperature measurement and its difficulty", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-042, title: "Temperature mapping of chambers, ovens and autoclaves", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-043, title: "Thermal uniformity surveys and heat treatment qualification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-044, title: "Cryogenic temperature measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-045, title: "High temperature measurement above the silver point", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-046, title: "Temperature measurement in process and safety-critical systems", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-05-A05
         title: Thermophysical Properties
         status: draft
         elements:
-          - { id: DP-05-047, title: "Thermal conductivity measurement methods", levelCeiling: 5, status: draft }
-          - { id: DP-05-048, title: "Thermal diffusivity and laser flash technique", levelCeiling: 4, status: draft }
-          - { id: DP-05-049, title: "Specific heat capacity and calorimetry", levelCeiling: 4, status: draft }
-          - { id: DP-05-050, title: "Differential scanning calorimetry", levelCeiling: 4, status: draft }
-          - { id: DP-05-051, title: "Thermal expansion measurement and dilatometry", levelCeiling: 4, status: draft }
-          - { id: DP-05-052, title: "Enthalpy, latent heat and phase transitions", levelCeiling: 4, status: draft }
-          - { id: DP-05-053, title: "Heat flux measurement", levelCeiling: 4, status: draft }
-          - { id: DP-05-054, title: "Emissivity and optical property measurement of materials", levelCeiling: 4, status: draft }
+          - { id: DP-05-047, title: "Thermal conductivity measurement methods", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-05-048, title: "Thermal diffusivity and laser flash technique", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-049, title: "Specific heat capacity and calorimetry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-050, title: "Differential scanning calorimetry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-051, title: "Thermal expansion measurement and dilatometry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-052, title: "Enthalpy, latent heat and phase transitions", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-053, title: "Heat flux measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-054, title: "Emissivity and optical property measurement of materials", kind: skill, levelCeiling: 4, status: draft }

@@ -21,28 +21,28 @@ domains:
           misunderstood, and one of the most common sources of accreditation
           findings.
         elements:
-          - { id: CM-04-001, title: "The VIM definition of metrological traceability and each of its conditions", levelCeiling: 4, status: draft }
-          - { id: CM-04-002, title: "Why a calibration sticker is not evidence of traceability", levelCeiling: 4, status: draft }
-          - { id: CM-04-003, title: "The stated reference and what may serve as one", levelCeiling: 4, status: draft }
-          - { id: CM-04-004, title: "Unbroken chain of calibrations", levelCeiling: 4, status: draft }
-          - { id: CM-04-005, title: "Documented uncertainty at each link", levelCeiling: 4, status: draft }
-          - { id: CM-04-006, title: "Traceability to a unit, to a reference procedure, and to a reference material", levelCeiling: 5, status: draft }
-          - { id: CM-04-007, title: "Metrological traceability chain versus supply chain provenance", levelCeiling: 4, status: draft }
-          - { id: CM-04-008, title: "Traceability for quantities with no SI realisation", levelCeiling: 5, status: draft }
+          - { id: CM-04-001, title: "The VIM definition of metrological traceability and each of its conditions", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-002, title: "Why a calibration sticker is not evidence of traceability", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-003, title: "The stated reference and what may serve as one", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-004, title: "Unbroken chain of calibrations", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-005, title: "Documented uncertainty at each link", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-006, title: "Traceability to a unit, to a reference procedure, and to a reference material", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-04-007, title: "Metrological traceability chain versus supply chain provenance", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-008, title: "Traceability for quantities with no SI realisation", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: CM-04-A02
         title: Calibration Hierarchies and Dissemination
         status: draft
         summary: How the unit travels from a primary realisation to a working instrument.
         elements:
-          - { id: CM-04-009, title: "Primary, reference, transfer and working standards", levelCeiling: 3, status: draft }
-          - { id: CM-04-010, title: "Structure of a calibration hierarchy", levelCeiling: 4, status: draft }
-          - { id: CM-04-011, title: "Uncertainty accumulation down a hierarchy", levelCeiling: 5, status: draft }
-          - { id: CM-04-012, title: "Choosing the right level of the hierarchy for a given need", levelCeiling: 4, status: draft }
-          - { id: CM-04-013, title: "Echelon and its consequences for cost and capability", levelCeiling: 4, status: draft }
-          - { id: CM-04-014, title: "Transfer standards and their special handling", levelCeiling: 4, status: draft }
-          - { id: CM-04-015, title: "Check standards and continuous verification of a hierarchy", levelCeiling: 4, status: draft }
-          - { id: CM-04-016, title: "Designing an internal traceability architecture for an organization", levelCeiling: 5, status: draft }
+          - { id: CM-04-009, title: "Primary, reference, transfer and working standards", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-04-010, title: "Structure of a calibration hierarchy", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-011, title: "Uncertainty accumulation down a hierarchy", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: CM-04-012, title: "Choosing the right level of the hierarchy for a given need", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-04-013, title: "Echelon and its consequences for cost and capability", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-014, title: "Transfer standards and their special handling", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-015, title: "Check standards and continuous verification of a hierarchy", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-016, title: "Designing an internal traceability architecture for an organization", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: CM-04-A03
         title: The CIPM MRA, KCDB and CMCs
@@ -51,15 +51,15 @@ domains:
           The mechanism by which a national measurement is recognised
           internationally, and how a laboratory reads and uses it.
         elements:
-          - { id: CM-04-017, title: "Purpose and structure of the CIPM MRA", levelCeiling: 4, status: draft }
-          - { id: CM-04-018, title: "Key comparisons and supplementary comparisons", levelCeiling: 3, status: draft }
-          - { id: CM-04-019, title: "Key comparison reference values and degrees of equivalence", levelCeiling: 5, status: draft }
-          - { id: CM-04-020, title: "The BIPM Key Comparison Database and how to search it", levelCeiling: 3, status: draft }
-          - { id: CM-04-021, title: "Calibration and Measurement Capabilities: what a CMC asserts", levelCeiling: 5, status: draft }
-          - { id: CM-04-022, title: "CMC review and approval process", levelCeiling: 4, status: draft }
-          - { id: CM-04-023, title: "Reading a CMC entry and judging whether it meets your need", levelCeiling: 4, status: draft }
-          - { id: CM-04-024, title: "Mutual recognition and the acceptance of foreign certificates", levelCeiling: 4, status: draft }
-          - { id: CM-04-025, title: "Limits of the MRA and what it does not guarantee", levelCeiling: 4, status: draft }
+          - { id: CM-04-017, title: "Purpose and structure of the CIPM MRA", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-018, title: "Key comparisons and supplementary comparisons", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-04-019, title: "Key comparison reference values and degrees of equivalence", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: CM-04-020, title: "The BIPM Key Comparison Database and how to search it", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-04-021, title: "Calibration and Measurement Capabilities: what a CMC asserts", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: CM-04-022, title: "CMC review and approval process", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-023, title: "Reading a CMC entry and judging whether it meets your need", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-04-024, title: "Mutual recognition and the acceptance of foreign certificates", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-025, title: "Limits of the MRA and what it does not guarantee", kind: knowledge, levelCeiling: 4, status: draft }
 
       - id: CM-04-A04
         title: Reference Materials
@@ -69,13 +69,13 @@ domains:
           covered in depth in DP-16 and DP-17; this area covers the concepts
           every metrologist needs.
         elements:
-          - { id: CM-04-026, title: "Reference materials and certified reference materials distinguished", levelCeiling: 3, status: draft }
-          - { id: CM-04-027, title: "Certified values, property values and their uncertainties", levelCeiling: 4, status: draft }
-          - { id: CM-04-028, title: "Commutability and matrix effects", levelCeiling: 5, status: draft }
-          - { id: CM-04-029, title: "Homogeneity and stability assessment", levelCeiling: 5, status: draft }
-          - { id: CM-04-030, title: "Reading a reference material certificate", levelCeiling: 4, status: draft }
-          - { id: CM-04-031, title: "Traceability through a certified reference material", levelCeiling: 4, status: draft }
-          - { id: CM-04-032, title: "Selecting, storing and using reference materials correctly", levelCeiling: 4, status: draft }
+          - { id: CM-04-026, title: "Reference materials and certified reference materials distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-04-027, title: "Certified values, property values and their uncertainties", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-028, title: "Commutability and matrix effects", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: CM-04-029, title: "Homogeneity and stability assessment", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: CM-04-030, title: "Reading a reference material certificate", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-04-031, title: "Traceability through a certified reference material", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-032, title: "Selecting, storing and using reference materials correctly", kind: skill, levelCeiling: 4, status: draft }
 
       - id: CM-04-A05
         title: Intrinsic Standards and Primary Realisations
@@ -84,14 +84,14 @@ domains:
           Standards whose value derives from a physical phenomenon rather than
           from calibration against something else.
         elements:
-          - { id: CM-04-033, title: "What makes a standard intrinsic", levelCeiling: 4, status: draft }
-          - { id: CM-04-034, title: "Josephson voltage standards", levelCeiling: 5, status: draft }
-          - { id: CM-04-035, title: "Quantum Hall resistance standards", levelCeiling: 5, status: draft }
-          - { id: CM-04-036, title: "Atomic frequency standards as intrinsic references", levelCeiling: 4, status: draft }
-          - { id: CM-04-037, title: "Fixed points and thermometric intrinsic standards", levelCeiling: 4, status: draft }
-          - { id: CM-04-038, title: "Stabilised lasers and optical frequency references", levelCeiling: 4, status: draft }
-          - { id: CM-04-039, title: "Traceability claims for an intrinsic standard and their evidence", levelCeiling: 4, status: draft }
-          - { id: CM-04-040, title: "Quantum-based dissemination and the changing role of NMIs", levelCeiling: 5, status: draft }
+          - { id: CM-04-033, title: "What makes a standard intrinsic", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-034, title: "Josephson voltage standards", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: CM-04-035, title: "Quantum Hall resistance standards", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: CM-04-036, title: "Atomic frequency standards as intrinsic references", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-037, title: "Fixed points and thermometric intrinsic standards", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-038, title: "Stabilised lasers and optical frequency references", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-039, title: "Traceability claims for an intrinsic standard and their evidence", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-04-040, title: "Quantum-based dissemination and the changing role of NMIs", kind: knowledge, levelCeiling: 5, status: draft }
 
       - id: CM-04-A06
         title: Traceability in Practice and Its Failure Modes
@@ -100,12 +100,12 @@ domains:
           What actually goes wrong. High-value content: most traceability
           failures are administrative rather than technical.
         elements:
-          - { id: CM-04-041, title: "Evaluating whether an external calibration supplier delivers traceability", levelCeiling: 5, status: draft }
-          - { id: CM-04-042, title: "Accredited versus non-accredited calibration and what each provides", levelCeiling: 4, status: draft }
-          - { id: CM-04-043, title: "Scope of accreditation: reading it and confirming it covers your work", levelCeiling: 4, status: draft }
-          - { id: CM-04-044, title: "Broken chains: expired, out-of-scope and out-of-tolerance links", levelCeiling: 4, status: draft }
-          - { id: CM-04-045, title: "Impact analysis when a link is found to have been invalid", levelCeiling: 5, status: draft }
-          - { id: CM-04-046, title: "Traceability records and retention requirements", levelCeiling: 4, status: draft }
-          - { id: CM-04-047, title: "Traceability for software, algorithms and derived quantities", levelCeiling: 5, status: draft }
-          - { id: CM-04-048, title: "Traceability in field, mobile and in-situ measurement", levelCeiling: 4, status: draft }
-          - { id: CM-04-049, title: "Common traceability findings raised by assessors", levelCeiling: 4, status: draft }
+          - { id: CM-04-041, title: "Evaluating whether an external calibration supplier delivers traceability", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-04-042, title: "Accredited versus non-accredited calibration and what each provides", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-04-043, title: "Scope of accreditation: reading it and confirming it covers your work", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-04-044, title: "Broken chains: expired, out-of-scope and out-of-tolerance links", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-04-045, title: "Impact analysis when a link is found to have been invalid", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-04-046, title: "Traceability records and retention requirements", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-04-047, title: "Traceability for software, algorithms and derived quantities", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-04-048, title: "Traceability in field, mobile and in-situ measurement", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-04-049, title: "Common traceability findings raised by assessors", kind: knowledge, levelCeiling: 4, status: draft }

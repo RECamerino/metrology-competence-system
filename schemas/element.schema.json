@@ -10,6 +10,7 @@
     "title",
     "domain",
     "competencyArea",
+    "kind",
     "status",
     "summary",
     "levelCeiling",
@@ -30,6 +31,11 @@
     },
 
     "competencyArea": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/competencyAreaId" },
+
+    "kind": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementKind",
+      "description": "Must equal the kind recorded in the taxonomy skeleton. The validator cross-checks. Write the anchors to match: a skill element's anchors describe performance, not understanding."
+    },
 
     "status": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/lifecycleStatus" },
 

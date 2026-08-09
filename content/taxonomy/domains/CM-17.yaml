@@ -18,27 +18,27 @@ domains:
         title: How Adults Learn Technical Skill
         status: draft
         elements:
-          - { id: CM-17-001, title: "Adult learning principles relevant to technical training", levelCeiling: 3, status: draft }
-          - { id: CM-17-002, title: "Novice and expert cognition and why experts teach badly", levelCeiling: 5, status: draft }
-          - { id: CM-17-003, title: "The expert blind spot and recovering forgotten difficulty", levelCeiling: 4, status: draft }
-          - { id: CM-17-004, title: "Cognitive load and sequencing of instruction", levelCeiling: 4, status: draft }
-          - { id: CM-17-005, title: "Deliberate practice and skill acquisition", levelCeiling: 3, status: draft }
-          - { id: CM-17-006, title: "Retrieval, spacing and durable retention", levelCeiling: 3, status: draft }
-          - { id: CM-17-007, title: "Motivation, confidence and fear of getting it wrong", levelCeiling: 3, status: draft }
-          - { id: CM-17-008, title: "Psychomotor skill development at the bench", levelCeiling: 3, status: draft }
+          - { id: CM-17-001, title: "Adult learning principles relevant to technical training", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-17-002, title: "Novice and expert cognition and why experts teach badly", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-17-003, title: "The expert blind spot and recovering forgotten difficulty", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-17-004, title: "Cognitive load and sequencing of instruction", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-17-005, title: "Deliberate practice and skill acquisition", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-17-006, title: "Retrieval, spacing and durable retention", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-17-007, title: "Motivation, confidence and fear of getting it wrong", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-17-008, title: "Psychomotor skill development at the bench", kind: knowledge, levelCeiling: 3, status: draft }
 
       - id: CM-17-A02
         title: Designing Training
         status: draft
         elements:
-          - { id: CM-17-009, title: "Training needs analysis", levelCeiling: 3, status: draft }
-          - { id: CM-17-010, title: "Writing learning objectives that can be observed", levelCeiling: 5, status: draft }
-          - { id: CM-17-011, title: "Sequencing a curriculum from prerequisites", levelCeiling: 4, status: draft }
-          - { id: CM-17-012, title: "Selecting a delivery mode for the competence being built", levelCeiling: 3, status: draft }
-          - { id: CM-17-013, title: "Designing practical exercises that build judgement", levelCeiling: 4, status: draft }
-          - { id: CM-17-014, title: "Worked examples, scaffolding and fading support", levelCeiling: 4, status: draft }
-          - { id: CM-17-015, title: "Designing training materials that outlive their author", levelCeiling: 4, status: draft }
-          - { id: CM-17-016, title: "Evaluating whether training actually worked", levelCeiling: 4, status: draft }
+          - { id: CM-17-009, title: "Training needs analysis", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-17-010, title: "Writing learning objectives that can be observed", kind: skill, levelCeiling: 5, status: draft }
+          - { id: CM-17-011, title: "Sequencing a curriculum from prerequisites", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-17-012, title: "Selecting a delivery mode for the competence being built", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-17-013, title: "Designing practical exercises that build judgement", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-17-014, title: "Worked examples, scaffolding and fading support", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-17-015, title: "Designing training materials that outlive their author", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-17-016, title: "Evaluating whether training actually worked", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-17-A03
         title: Assessment for Learning
@@ -47,25 +47,25 @@ domains:
           Boundary: formal competence assessment and signoff is CM-11; this area
           is assessment used to develop rather than to certify.
         elements:
-          - { id: CM-17-017, title: "Formative and summative assessment distinguished", levelCeiling: 3, status: draft }
-          - { id: CM-17-018, title: "Writing questions that test understanding rather than recall", levelCeiling: 4, status: draft }
-          - { id: CM-17-019, title: "Assessment when the learner has references and AI available", levelCeiling: 5, status: draft }
-          - { id: CM-17-020, title: "Rubric design and consistent judgement", levelCeiling: 4, status: draft }
-          - { id: CM-17-021, title: "Practical and observational assessment", levelCeiling: 4, status: draft }
-          - { id: CM-17-022, title: "Giving feedback that changes behaviour", levelCeiling: 4, status: draft }
-          - { id: CM-17-023, title: "Diagnosing the misconception behind a wrong answer", levelCeiling: 4, status: draft }
+          - { id: CM-17-017, title: "Formative and summative assessment distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-17-018, title: "Writing questions that test understanding rather than recall", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-17-019, title: "Assessment when the learner has references and AI available", kind: skill, levelCeiling: 5, status: draft }
+          - { id: CM-17-020, title: "Rubric design and consistent judgement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-17-021, title: "Practical and observational assessment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-17-022, title: "Giving feedback that changes behaviour", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-17-023, title: "Diagnosing the misconception behind a wrong answer", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-17-A04
         title: Mentoring and On-the-Job Development
         status: draft
         elements:
-          - { id: CM-17-024, title: "Mentoring relationships and their structure", levelCeiling: 4, status: draft }
-          - { id: CM-17-025, title: "Coaching at the bench without taking over", levelCeiling: 4, status: draft }
-          - { id: CM-17-026, title: "Graduated release of responsibility", levelCeiling: 5, status: draft }
-          - { id: CM-17-027, title: "Supervising work you remain accountable for", levelCeiling: 4, status: draft }
-          - { id: CM-17-028, title: "Developing someone whose specialism exceeds your own", levelCeiling: 5, status: draft }
-          - { id: CM-17-029, title: "Recognising and developing potential", levelCeiling: 4, status: draft }
-          - { id: CM-17-030, title: "Sponsorship, visibility and career advocacy", levelCeiling: 4, status: draft }
+          - { id: CM-17-024, title: "Mentoring relationships and their structure", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-17-025, title: "Coaching at the bench without taking over", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-17-026, title: "Graduated release of responsibility", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-17-027, title: "Supervising work you remain accountable for", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-17-028, title: "Developing someone whose specialism exceeds your own", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-17-029, title: "Recognising and developing potential", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-17-030, title: "Sponsorship, visibility and career advocacy", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-17-A05
         title: Organisational Knowledge and Succession
@@ -74,12 +74,12 @@ domains:
           The field's demographic problem. Much metrology competence is
           undocumented and held by people approaching retirement.
         elements:
-          - { id: CM-17-031, title: "Tacit knowledge and why it resists documentation", levelCeiling: 4, status: draft }
-          - { id: CM-17-032, title: "Capturing expertise before it walks out of the building", levelCeiling: 5, status: draft }
-          - { id: CM-17-033, title: "Competence matrices and skills gap analysis", levelCeiling: 4, status: draft }
-          - { id: CM-17-034, title: "Succession planning for critical measurement capability", levelCeiling: 4, status: draft }
-          - { id: CM-17-035, title: "Cross-training and single points of failure in people", levelCeiling: 4, status: draft }
-          - { id: CM-17-036, title: "Communities of practice and peer learning", levelCeiling: 3, status: draft }
-          - { id: CM-17-037, title: "Onboarding a new metrologist", levelCeiling: 3, status: draft }
-          - { id: CM-17-038, title: "Attracting people into metrology", levelCeiling: 3, status: draft }
-          - { id: CM-17-039, title: "Apprenticeship and formal qualification pathways", levelCeiling: 3, status: draft }
+          - { id: CM-17-031, title: "Tacit knowledge and why it resists documentation", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-17-032, title: "Capturing expertise before it walks out of the building", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-17-033, title: "Competence matrices and skills gap analysis", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-17-034, title: "Succession planning for critical measurement capability", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-17-035, title: "Cross-training and single points of failure in people", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-17-036, title: "Communities of practice and peer learning", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-17-037, title: "Onboarding a new metrologist", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-17-038, title: "Attracting people into metrology", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-17-039, title: "Apprenticeship and formal qualification pathways", kind: knowledge, levelCeiling: 3, status: draft }
