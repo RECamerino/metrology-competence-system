@@ -1,0 +1,32 @@
+# Normalise line endings in the repository to LF.
+#
+# Content files are hashed as evidence and diffed across platforms; a CRLF/LF
+# difference must never register as a content change. Contributors work on
+# Windows, macOS, and Linux, and the corpus must diff identically on all three.
+
+* text=auto eol=lf
+
+# Explicit, so a misconfigured local core.autocrlf cannot override them.
+*.md      text eol=lf
+*.yaml    text eol=lf
+*.yml     text eol=lf
+*.json    text eol=lf
+*.ts      text eol=lf
+*.tsx     text eol=lf
+*.js      text eol=lf
+*.css     text eol=lf
+*.html    text eol=lf
+*.lock    text eol=lf
+LICENSE*  text eol=lf
+NOTICE    text eol=lf
+
+# Binary — never touched, never diffed as text.
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.pdf     binary
+*.woff    binary
+*.woff2   binary
+*.sqlite  binary
+*.wasm    binary
