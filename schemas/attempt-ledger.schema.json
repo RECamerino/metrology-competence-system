@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/attempt-ledger.schema.json",
+  "title": "Attempt ledger — the record that makes 'one attempt' mean anything",
+  "description": "An append-only, hash-linked record of every assessment served to one person. It carries two loads: the no-retake rule for challenge exams (decision 31), and exposure control, since it is the only place that knows which archetypes a candidate has already met.\n\nTHE HONEST LIMIT, STATED UP FRONT. In the Personal edition the ledger lives on the candidate's own machine and is signed with the candidate's own key. Hash-linking makes edits to the MIDDLE of the chain detectable, but nothing local can stop a holder truncating the tail and continuing from an earlier point — they hold every key involved. The chain is therefore trustworthy only as far as its most recent EXTERNAL anchor: a head countersigned by someone who is not the holder. Every signoff produces one, because there is no self-signoff anywhere in this system, so any credential above self-study carries an anchor with it. An unanchored ledger supports self-study claims and nothing more, which is exactly what the self-study provenance tier already means. This is not a weakness patched over; it is the reason the provenance tiers exist.",
+
+  "type": "object",
+  "required": ["schemaVersion", "subject", "entries"],
+  "additionalProperties": false,
+
+  "properties": {
+    "schemaVersion": { "const": 1 },
+
+    "subject": {
+      "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did",
+      "description": "Whose ledger this is. One ledger per person, never per organization: the record has to follow the person between employers or the no-retake rule resets every time they change jobs."
+    },
+
+    "entries": {
+      "type": "array",
+      "description": "Ordered, append-only, hash-linked. Index 0 has prevHash null; every later entry chains to the one before it.",
+      "items": { "$ref": "#/$defs/attempt" }
+    },
+
+    "anchors": {
+      "type": "array",
+      "description": "External attestations of a chain head. Each one fixes history up to that point: anything at or before an anchored head cannot be rewritten without invalidating an attestation somebody else signed. Produced naturally at every signoff, and optionally by publishing a head to a Commons instance.",
+      "items": {
+        "type": "object",
+        "required": ["head", "attestedBy", "attestedOn"],
+        "additionalProperties": false,
+        "properties": {
+          "head": {
+            "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/contentRef",
+            "description": "The entry hash being attested."
+          },
+          "attestedBy": {
+            "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did",
+            "description": "MUST NOT be the ledger's own subject. A holder attesting their own history anchors nothing, and the validator rejects it."
+          },
+          "attestedOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+          "context": {
+            "enum": ["signoff", "reviewer-check", "commons-publication", "organization-custody"],
+            "description": "Why this anchor exists. `organization-custody` covers the dual-custody copy an ISO/IEC 17025 laboratory holds for audit, which anchors the chain as a side effect of a record-keeping obligation the laboratory already has."
+          },
+          "signature": { "type": "string" }
+        }
+      }
+    }
+  },
+
+  "$defs": {
+    "attempt": {
+      "type": "object",
+      "required": ["sequence", "element", "level", "mode", "servedOn", "outcome", "prevHash", "hash"],
+      "additionalProperties": false,
+
+      "properties": {
+        "sequence": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Position in the chain, strictly increasing by one. Redundant with array order and checked against it — a ledger whose sequence and order disagree has been edited."
+        },
+
+        "element": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
+
+        "level": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel" },
+
+        "mode": {
+          "enum": ["practice", "assessment", "challenge-exam"],
+          "description": "`practice` is unlimited and carries no consequence — learning must not be rationed. `assessment` is the ordinary route and may be reattempted subject to waiting periods. `challenge-exam` is ONE attempt per element and level, ever, with no retake: it lets an experienced hire skip content without pretending they need it, and that offer is only credible if it cannot be farmed."
+        },
+
+        "archetype": {
+          "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/archetypeId",
+          "description": "Which shape was served. This is what makes the ledger the exposure-control record as well as the attempt record."
+        },
+
+        "exposureGroup": {
+          "type": "string",
+          "description": "Copied from the binding. Bindings sharing a group count as one exposure, so near-identical items drawn from one archetype across adjacent elements cannot be served repeatedly."
+        },
+
+        "drawHash": {
+          "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/contentRef",
+          "description": "Hash of the exact parameter draw served. Lets an item be reconstructed years later when a credential is re-reviewed, and proves two candidates did not receive the same numbers."
+        },
+
+        "servedOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+
+        "outcome": {
+          "enum": ["passed", "failed", "abandoned", "voided"],
+          "description": "`abandoned` counts as an attempt for challenge-exam purposes — otherwise a candidate reads the paper, walks away, and returns prepared. `voided` does not, and exists for a defective item or a platform fault; voiding requires a reason and is the only outcome an organization can apply retrospectively."
+        },
+
+        "voidReason": {
+          "type": "string",
+          "description": "Required when outcome is `voided`. A void with no stated reason is indistinguishable from a quietly erased failure."
+        },
+
+        "score": { "type": "number" },
+
+        "prevHash": {
+          "oneOf": [
+            { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/contentRef" },
+            { "type": "null" }
+          ],
+          "description": "Hash of the previous entry; null only at sequence 0."
+        },
+
+        "hash": {
+          "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/contentRef",
+          "description": "Hash over this entry's content together with prevHash. Recomputed on verification; a mismatch anywhere invalidates everything after it."
+        }
+      },
+
+      "allOf": [
+        {
+          "if": { "properties": { "outcome": { "const": "voided" } }, "required": ["outcome"] },
+          "then": { "required": ["voidReason"] }
+        }
+      ]
+    }
+  }
+}

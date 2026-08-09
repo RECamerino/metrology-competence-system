@@ -33,7 +33,7 @@ import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = resolve(fileURLToPath(import.meta.url), '../..');
-const DOMAINS_DIR = join(REPO_ROOT, 'content', 'taxonomy', 'domains');
+const DOMAINS_DIR = join(REPO_ROOT, 'content', 'competence', 'taxonomy', 'domains');
 const PLAN_PATH = join(REPO_ROOT, 'tools', 'kind-plan.json');
 
 type Kind = 'knowledge' | 'skill' | 'judgment';

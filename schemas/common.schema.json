@@ -35,6 +35,28 @@
       "description": "Kebab-case role identifier. Example: metrology-technician-ii."
     },
 
+    "bokArticleId": {
+      "type": "string",
+      "pattern": "^BOK-[0-9]{4}$",
+      "description": "A Body of Knowledge article. Append-only, like every other identifier here: the BOK is meant to be cited by outside work, and a citation that stops resolving is worse than no citation. Deliberately NOT derived from the domain — an article's subject may span domains, and its id must survive being reorganised."
+    },
+
+    "knowledgeRef": {
+      "type": "object",
+      "description": "A pointer from a competence element to the reference material covering it. Section-level rather than article-level, because the person following it is usually looking for one forgotten detail rather than a topic.",
+      "required": ["article", "section"],
+      "additionalProperties": false,
+      "properties": {
+        "article": { "$ref": "#/$defs/bokArticleId" },
+        "section": { "type": "string", "pattern": "^s[0-9]{2}$" },
+        "relevance": {
+          "type": "string",
+          "maxLength": 300,
+          "description": "What this section gives the reader of this element. Useful when an element points at several sections across articles."
+        }
+      }
+    },
+
     "archetypeId": {
       "type": "string",
       "pattern": "^ARC-[0-9]{4}$",

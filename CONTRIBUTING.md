@@ -41,7 +41,7 @@ Shows where the corpus is thin.
 
 ### The ID registry is append-only
 
-The taxonomy in `content/taxonomy/domains/*.yaml` is an immutable ID registry. **IDs may be added. IDs may never be renamed or removed.** CI fails on either.
+The taxonomy in `content/competence/taxonomy/domains/*.yaml` is an immutable ID registry. **IDs may be added. IDs may never be renamed or removed.** CI fails on either.
 
 This is not bureaucracy. Once a credential has been issued attesting competence in `CM-03-014`, that identifier must mean the same thing forever, or the credential becomes unverifiable. Deprecate, supersede, and cross-reference — never rename.
 

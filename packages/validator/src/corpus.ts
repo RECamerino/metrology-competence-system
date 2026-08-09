@@ -24,20 +24,34 @@ export const PATHS = {
    * schema, and the loader merges them into one view for everything
    * downstream.
    */
-  taxonomyDir: join(REPO_ROOT, 'content', 'taxonomy', 'domains'),
-  proficiency: join(REPO_ROOT, 'content', 'taxonomy', 'proficiency.yaml'),
-  idLock: join(REPO_ROOT, 'content', 'taxonomy', 'id-registry.lock'),
-  roles: join(REPO_ROOT, 'content', 'roles', 'registry.yaml'),
+  /*
+   * Two trees, deliberately.
+   *
+   * content/bok/ is the Body of Knowledge: encyclopedic reference material,
+   * organised by SUBJECT, freely licensed and meant to be published and cited
+   * on its own terms. content/competence/ is the system that assesses people:
+   * taxonomy, elements, items, roles, training, signoff. They answer different
+   * questions and age on different triggers — knowledge ages when a standard
+   * is revised, competence expectations age when practice moves — and merging
+   * them produced neither a usable encyclopedia nor a clean assessment model.
+   *
+   * content/sources/ sits outside both because both cite it.
+   */
+  bok: join(REPO_ROOT, 'content', 'bok'),
+  taxonomyDir: join(REPO_ROOT, 'content', 'competence', 'taxonomy', 'domains'),
+  proficiency: join(REPO_ROOT, 'content', 'competence', 'taxonomy', 'proficiency.yaml'),
+  idLock: join(REPO_ROOT, 'content', 'competence', 'taxonomy', 'id-registry.lock'),
+  roles: join(REPO_ROOT, 'content', 'competence', 'roles', 'registry.yaml'),
   sources: join(REPO_ROOT, 'content', 'sources', 'registry.yaml'),
-  elements: join(REPO_ROOT, 'content', 'elements'),
+  elements: join(REPO_ROOT, 'content', 'competence', 'elements'),
   /**
    * The item bank, split the way its economics are split: few expensive
    * archetypes, many cheap bindings. An archetype is a reusable assessment
    * shape; a binding attaches one to a specific (element × level). See
    * decision 36 in docs/00-context.md.
    */
-  archetypes: join(REPO_ROOT, 'content', 'items', 'archetypes'),
-  bindings: join(REPO_ROOT, 'content', 'items', 'bindings'),
+  archetypes: join(REPO_ROOT, 'content', 'competence', 'items', 'archetypes'),
+  bindings: join(REPO_ROOT, 'content', 'competence', 'items', 'bindings'),
 } as const;
 
 /** A parsed element file: frontmatter plus the Markdown body beneath it. */
@@ -69,6 +83,8 @@ export interface Corpus {
   roles: Record<string, unknown> | null;
   sources: Record<string, unknown> | null;
   elements: ElementFile[];
+  /** BOK articles. Same frontmatter-plus-body shape as an element, different purpose. */
+  bok: ElementFile[];
   archetypes: ItemFile[];
   bindings: ItemFile[];
   /** Every ID recorded in the lock file, or null when the lock does not exist yet. */
@@ -159,6 +175,17 @@ export function loadCorpus(): { corpus: Corpus; parseErrors: string[] } {
     }
   }
 
+  const bok: ElementFile[] = [];
+  for (const file of walkFiles(PATHS.bok, isMarkdown)) {
+    const rel = repoRelative(file);
+    try {
+      const { data, body } = parseFrontmatter(readFileSync(file, 'utf8'), rel);
+      bok.push({ path: rel, data, body });
+    } catch (err) {
+      parseErrors.push((err as Error).message);
+    }
+  }
+
   const taxonomyFiles: TaxonomyFile[] = [];
   if (existsSync(PATHS.taxonomyDir)) {
     for (const entry of readdirSync(PATHS.taxonomyDir).sort()) {
@@ -207,6 +234,7 @@ export function loadCorpus(): { corpus: Corpus; parseErrors: string[] } {
       roles: safe(() => loadYamlFile(PATHS.roles), null),
       sources: safe(() => loadYamlFile(PATHS.sources), null),
       elements,
+      bok,
       archetypes,
       bindings,
       lockedIds,
@@ -282,6 +310,21 @@ export function allTaxonomyIds(taxonomy: Record<string, unknown> | null): string
     }
   }
   return ids.filter(Boolean).sort();
+}
+
+/**
+ * Every identifier the corpus issues, taxonomy and BOK alike.
+ *
+ * BOK article IDs are append-only for the same reason element IDs are, one
+ * layer out: the BOK exists to be cited by work outside this project, and a
+ * citation that stops resolving is worse than no citation at all.
+ */
+export function allCorpusIds(corpus: Corpus): string[] {
+  const bokIds = corpus.bok
+    .map((a) => (a.data as Record<string, any>).id as string | undefined)
+    .filter((id): id is string => Boolean(id));
+
+  return [...allTaxonomyIds(corpus.taxonomy), ...bokIds].sort();
 }
 
 export function indexSources(sources: Record<string, unknown> | null): Map<string, SourceEntry> {

@@ -57,7 +57,11 @@ export type SchemaName =
   | 'source-registry'
   | 'proficiency'
   | 'item-archetype'
-  | 'item-binding';
+  | 'item-binding'
+  | 'credential'
+  | 'authorization'
+  | 'attempt-ledger'
+  | 'bok-article';
 
 let cached: AjvInstance | null = null;
 

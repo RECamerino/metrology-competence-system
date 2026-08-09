@@ -62,7 +62,7 @@ parameters:
 
 scoring:
   method: rubric
-  rubricRef: content/items/rubrics/ARC-0002.md
+  rubricRef: content/competence/items/rubrics/ARC-0002.md
 
 lookupResistance: >-
   The budget is generated per candidate and has never existed before, so there

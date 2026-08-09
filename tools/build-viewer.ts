@@ -26,7 +26,7 @@ import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
 
 const REPO_ROOT = resolve(fileURLToPath(import.meta.url), '../..');
-const DOMAINS_DIR = join(REPO_ROOT, 'content', 'taxonomy', 'domains');
+const DOMAINS_DIR = join(REPO_ROOT, 'content', 'competence', 'taxonomy', 'domains');
 const VIEWER_DIR = join(REPO_ROOT, 'apps', 'viewer');
 
 const domains = readdirSync(DOMAINS_DIR)

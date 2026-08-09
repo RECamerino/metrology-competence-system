@@ -12,7 +12,7 @@ An open, organization-agnostic body of knowledge for metrology — and a platfor
 | **[Markdown documents](docs/taxonomy/)** | Reading linearly, reviewing a change, diffing two versions, printing |
 | **[`taxonomy.csv`](docs/taxonomy/taxonomy.csv)** | Spreadsheet analysis, filtering, importing elsewhere |
 
-All three are generated from [`content/taxonomy/domains/`](content/taxonomy/domains/) and regenerated in CI, so none of them can drift from the source.
+All three are generated from [`content/competence/taxonomy/domains/`](content/competence/taxonomy/domains/) and regenerated in CI, so none of them can drift from the source.
 
 > **Status: pre-alpha.** The taxonomy skeleton is complete (Phase 1). No content is authored against it yet and there is no usable application. See [Roadmap](#roadmap).
 

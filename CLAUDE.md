@@ -26,7 +26,7 @@ Three principles held in tension deliberately:
 
 ## Status
 
-**Phase 1 complete and revised. Phase 2 not started.**
+**Phase 1 complete and revised. Phase 2 under way.**
 
 | | |
 |---|---|
@@ -34,8 +34,9 @@ Three principles held in tension deliberately:
 | Assessable units | 9096 |
 | Ceilings — L3 / L4 / L5 | 13.1% / 66.2% / 20.7% |
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
-| Content authored | **0 elements** — skeleton only, no prose yet |
-| Checks | 0 errors · 20/20 tests · typecheck clean |
+| Content authored | **0 elements** · **1 BOK article** (`BOK-0001`) |
+| Item bank | 3 archetypes · 10 bindings · **0.1%** of units covered |
+| Checks | 0 errors · 74/74 tests · typecheck clean |
 
 ### Phases
 
@@ -43,10 +44,10 @@ Three principles held in tension deliberately:
 |---|---|---|
 | 0 | Foundation — scaffold, licences, schemas, CI, source register | Done |
 | 1 | Taxonomy skeleton + gate review + revision | **Done** |
-| 2 | Proficiency rubric, roles, evidence model, credential + exchange + authorization design | **Next** |
+| 2 | Proficiency rubric, roles, evidence model, credential + exchange + authorization design | **In progress** |
 | 3 | Guardrail kit, gold reference elements, schema freeze | Not started |
-| 4 | Cross-cutting core content `CM-01`…`CM-22` | Not started |
-| 5 | Discipline packs `DP-01`…`DP-21` | Not started |
+| 4 | Cross-cutting core `CM-01`…`CM-22` — BOK articles first, then the elements that reference them | Not started |
+| 5 | Discipline packs `DP-01`…`DP-21` — same order | Not started |
 | 6 | Credential and exchange engine | Not started |
 | 7 | Assessment engine | Not started |
 | 8 | Personal edition | Not started |
@@ -61,7 +62,7 @@ Three principles held in tension deliberately:
 
 ## Rules that must not be broken
 
-**1. IDs are append-only.** `content/taxonomy/domains/*.yaml` and `content/taxonomy/id-registry.lock` may grow. Nothing may ever be renamed or removed. A credential attesting `CM-03-014` must resolve to the same element forever — rename it and you have silently invalidated somebody's evidence of their own competence. Deprecate and supersede; never delete. CI enforces this and it cannot be waived.
+**1. IDs are append-only.** `content/competence/taxonomy/domains/*.yaml` and `content/competence/taxonomy/id-registry.lock` may grow. Nothing may ever be renamed or removed. A credential attesting `CM-03-014` must resolve to the same element forever — rename it and you have silently invalidated somebody's evidence of their own competence. Deprecate and supersede; never delete. CI enforces this and it cannot be waived.
 
 **2. Every element carries a clause-level citation.** `ISO/IEC 17025:2017 §7.6.1`, not "see the standard". Referenceability is universal. CI rejects an element without one.
 
@@ -77,23 +78,40 @@ Three principles held in tension deliberately:
 
 ## Layout
 
+**Two content trees, and the distinction is load-bearing.** `content/bok/` explains a SUBJECT. `content/competence/` assesses a PERSON. They were one file until decision 38 and that produced neither a usable encyclopedia nor a clean assessment model.
+
 ```
-content/taxonomy/domains/*.yaml   43 files, one per domain. THE taxonomy.
-content/taxonomy/id-registry.lock Every ID ever issued. Append-only.
-content/sources/registry.yaml     Source licence register, Tier 1/2/3.
-content/elements/                 Element prose. EMPTY until Phase 4.
+content/bok/<domain>/*.md         THE BODY OF KNOWLEDGE. Encyclopedic reference,
+                                  organised by subject, public and redistributable.
+                                  BOK-nnnn, append-only. Declares stable section
+                                  ids; elements link to sections, not articles.
+
+content/competence/
+  taxonomy/domains/*.yaml         43 files, one per domain. THE taxonomy.
+  taxonomy/id-registry.lock       Every ID ever issued, BOK and taxonomy. Append-only.
+  taxonomy/proficiency.yaml       The 5-level ladder. Steward-controlled.
+  roles/registry.yaml             12 reference roles. Every element needs a
+                                  roleTarget for EVERY role — each one added is
+                                  2232 more authored ratings.
+  elements/                       ASSESSABLE CLAIMS, not prose. Empty until Phase 4.
+  items/archetypes/               Reusable parameterized item SHAPES. ARC-nnnn.
+  items/bindings/                 One archetype × one (element×level). Scales here.
+  items/rubrics/                  Ships in the same commit as its item.
+  modules/                        Training. Empty until Phase 11.
+
+content/sources/registry.yaml     Source licence register. Outside both trees,
+                                  because both cite it.
+
 schemas/                          JSON Schema. Frozen at Phase 3.
-packages/validator/               Integrity checks + 20 guardrail tests.
+packages/validator/               Integrity checks + 74 guardrail tests.
 apps/viewer/                      Viewer SOURCE (template + build script).
-                                  template.html has a __TAXONOMY__ placeholder
-                                  and is not readable on its own — data is
-                                  injected at build time.
-docs/taxonomy/                    GENERATED. Markdown + CSV for reading and
-                                  auditing. Never hand-edit; CI fails if stale.
+docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/ceiling-plan.json           Level-ceiling judgement, per area + overrides.
 tools/kind-plan.json              Knowledge/skill/judgment classification.
 docs/                             Decision record, playbook, licence policy.
 ```
+
+**Every element must carry at least one `knowledgeRefs` entry**, pointing at an article AND a section. This is the refresher path: someone credentialed eight months ago who has forgotten one detail will not retrain, they will look it up, and that link has to land on the passage covering *that detail*. Section ids are append-only for the same reason element IDs are. It also means the article must be written before the element — knowledge before the claim that someone has mastered it.
 
 **Three generated views of the taxonomy, all from the same YAML.** `docs/taxonomy/*.md` for linear reading and diffing, `docs/taxonomy/taxonomy.csv` for spreadsheets, and the [published viewer](https://recamerino.github.io/metrology-competence-system/) for search and filter. Regenerate with `npm run build:docs` and `npm run build:viewer`. The Markdown and CSV are committed because their diffs *are* the audit record; the 270 KB built HTML is not.
 
@@ -123,15 +141,30 @@ Changing ceilings or kinds: edit `tools/ceiling-plan.json` or `tools/kind-plan.j
 ## Open decisions
 
 1. **Legal review of the source register.** Priority order: ISO/IEC 17025, the JCGM copyright statement, ASME Y14.5, then ILAC/UKAS/EURAMET/OIML. Blocks Phase 4 quotation authoring only — citations and all other work are unaffected. No quotations exist yet, so nothing is currently exposed.
-2. **L5 ceiling review.** Deferred to Phase 2, folded into anchor writing: if no observable expert behaviour can be written for an element, it is not L5 and gets demoted there.
+2. **L5 ceiling review.** Still open, and now has a second test alongside anchor writing: if no *item* can be bound to an element at L5 that a competent practitioner could genuinely fail, it is not L5. `ARC-0003` exists for exactly this shape — an element that cannot support a defensible disagreement probably does not have expert practice in it.
 3. **Commons operation.** The software will be built; whether the project *operates* a public instance (PII custody, moderation, funding) is deferred governance.
 4. **Authority-tier issuer.** A neutral foundation as issuer of last resort would be the strongest long-term credential. Needs people and funding. Roadmap, not a dependency.
 5. **Reviewer supply for thin domains.** `DP-21-A05` (relativistic geodesy) may have a few dozen qualified reviewers worldwide. The peer-review network needs an answer for domains that thin.
+6. **Reviewer scoring load.** Rubric-scoring is turning out to be the norm rather than the exception, which raises the human cost of the bank. Not blocking, but it feeds the reviewer programme design and the Phase 7 estimate.
 
 ---
 
 ## What Phase 2 has to produce
 
-Proficiency rubric with the per-element anchor template · the 12 reference roles · full evidence and assessment model (item parameterization format, rubric format, blueprint weighting, exposure control, challenge-exam and attempt-ledger rules, experience hours, waiting periods, recertification) · credential schema, DID method, trust registry, provenance tiers · **authorization as a first-class object, distinct from a competency credential** · reviewer programme · exchange protocol · accreditation-body dossier and scope-matching model.
+**Done:** proficiency ladder · 12 reference roles · item parameterization format (archetypes + bindings, decision 36) · rubric format · experience hours and waiting periods (decision 37) · recertification defaults per level.
 
-**The largest single risk in Phase 2** is the item bank. At 9096 assessable units it is a bigger body of work than the BOK prose itself. The parameterization format decides whether one authored item template covers one unit or fifty. Bring options rather than picking silently.
+**Also done:** credential schema and provenance tiers · **authorization as a first-class object** · attempt ledger, challenge-exam no-retake rule, and exposure control.
+
+**Remaining:** per-element anchor template · blueprint weighting · DID method and trust registry · reviewer programme · exchange protocol · accreditation-body dossier and scope-matching model.
+
+**The attempt ledger's limit is deliberate and must not be "fixed" naively.** In the Personal edition the holder owns the machine, the ledger and the key, so they can truncate their own chain and it will verify clean — there is a test asserting exactly that. Hash-linking catches edits to the middle; only an *external* anchor fixes history, and every signoff produces one because there is no self-signoff anywhere. An unanchored ledger supports self-study claims and nothing more, which is what that provenance tier already means. Truncation becomes detectable the moment a counterparty holds a reference, which is why the credential carries `assessment.attemptRef`.
+
+### What the first real archetypes taught
+
+Authored against `CM-03` and validated. Two findings that change downstream estimates:
+
+**Rubric-scoring is the norm, not the exception.** Writing `lookupResistance` honestly forces it — for a Type B assignment item the arithmetic *is* lookupable and an AI produces it instantly, so the numeric part carries 20% and the justification carries the item. Two of three archetypes are rubric-scored. Human reviewer effort across the bank is therefore higher than the phase plan assumed. This is a real cost of abolishing proctoring, and it lands in Phase 7.
+
+**Watch the reuse ratio.** `npm run report:coverage` prints mean units per archetype. Decision 36 rests on 20–50; it currently reads **3.3** across five elements, which is far too small a sample to conclude anything. If it stays near 3 as `CM-03` fills in, the economics of the archetype approach do not hold — and that is much cheaper to discover now than after 9096 bindings.
+
+Parameters carry `visibility: prompt | generator`. A generator parameter rendered into the prompt destroys the item *while leaving the file looking perfectly well-formed*; that is why it is validated rather than left to review.

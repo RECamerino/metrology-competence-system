@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/bok-article.schema.json",
+  "title": "BOK article — reference knowledge about a subject",
+  "description": "Governs the YAML frontmatter of content/bok/<domain>/<slug>.md. An article explains a SUBJECT. It carries no proficiency levels, no role targets and no anchors, because those are claims about a PERSON and belong to the competence system. The two were originally one file and that produced neither a usable encyclopedia nor a clean assessment model — see decision 38 in docs/00-context.md.\n\nArticles are sized by subject coherence, not by the taxonomy: one article may serve five elements and one element may draw on three articles. What makes that mapping precise is the SECTION. Every section carries a stable id, an element points at the specific section covering it, and the validator checks the link resolves.\n\nTHE USE CASE THIS EXISTS FOR: someone who demonstrated competence eight months ago and has forgotten a specific detail must be able to land on the documentation covering THAT detail, not on an article vaguely about the area with it buried inside. Retraining is not a realistic answer for a working practitioner.\n\nSection ids therefore inherit the append-only discipline. Rename one and the refresher path silently dies for exactly the person who most needs it — the same failure mode as renaming an element ID, one layer down.",
+
+  "type": "object",
+  "required": ["id", "title", "subjects", "status", "summary", "sections", "citations"],
+  "additionalProperties": false,
+
+  "properties": {
+    "id": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/bokArticleId" },
+
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Names the subject, not the competence. 'Correlation and covariance in uncertainty budgets', not 'Constructing a budget with a correlated pair'."
+    },
+
+    "subjects": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/domainId" },
+      "description": "Which domains this article informs. An array because subject matter does not respect the taxonomy: correlation belongs to uncertainty and to statistics at once, and duplicating the explanation into both would guarantee they diverge."
+    },
+
+    "status": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/lifecycleStatus" },
+
+    "summary": {
+      "type": "string",
+      "minLength": 40,
+      "maxLength": 1200,
+      "description": "What the article covers and what it is for. Shown in search results and at the top of the rendered page."
+    },
+
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "description": "The article's addressable structure. Declared here rather than inferred from the Markdown so the ids are explicit, reviewable in a diff, and cannot drift when someone rewords a heading. The validator checks every declared section has a matching {#id} anchor in the body and that nothing in the body is undeclared.",
+      "items": {
+        "type": "object",
+        "required": ["id", "heading"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^s[0-9]{2}$",
+            "description": "Stable within the article, and APPEND-ONLY. Sections may be added; an id already published must never be reused for different content, because an element's knowledgeRef and a reader's bookmark both resolve through it."
+          },
+          "heading": { "type": "string", "minLength": 1 },
+          "covers": {
+            "type": "string",
+            "maxLength": 400,
+            "description": "What a reader will actually find here, in one line. Written for the person arriving cold from a credential eight months later, not for the author."
+          },
+          "deprecated": {
+            "type": "boolean",
+            "default": false,
+            "description": "The section is superseded but retained, because content is created and not destroyed. A reader following an old reference must still land somewhere that tells them what changed."
+          },
+          "supersededBy": {
+            "type": "string",
+            "pattern": "^s[0-9]{2}$",
+            "description": "Where the reader should go instead."
+          }
+        }
+      }
+    },
+
+    "citations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/citation" },
+      "description": "Referenceability is universal and applies to the BOK exactly as it applies to elements. An article with no clause-level citation is an opinion."
+    },
+
+    "quotes": {
+      "type": "array",
+      "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/quote" },
+      "description": "Tier-gated exactly as on an element. The BOK is the redistributable half of the project, so quotation limits matter MORE here than anywhere else."
+    },
+
+    "currency": {
+      "type": "object",
+      "required": ["authorityStatus", "volatility"],
+      "additionalProperties": false,
+      "description": "Knowledge ages on a different trigger from competence expectations, which is one of the reasons the two are now separate files. A revised edition of a standard should wake up every article tracking it without touching a single element.",
+      "properties": {
+        "authorityStatus": {
+          "enum": ["normative", "authoritative", "accepted-practice", "emerging", "historical", "research", "interpretation"]
+        },
+        "volatility": { "enum": ["static", "stable", "controlled", "volatile"] },
+        "sourceRevision": { "type": "string" },
+        "lastVerified": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+        "reviewDue": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+        "note": { "type": "string" }
+      }
+    },
+
+    "relatedArticles": {
+      "type": "array",
+      "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/bokArticleId" }
+    },
+
+    "authoring": { "type": "object", "additionalProperties": true }
+  }
+}

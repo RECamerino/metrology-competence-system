@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://metrology-bok.org/schemas/proficiency.schema.json",
   "title": "Proficiency scale and evidence ladder",
-  "description": "Governs content/taxonomy/proficiency.yaml. Defines what each of the five levels means generically, and what evidence is required to attain it. Per-element observable anchors live on the element itself; this file is the frame those anchors are written into. Changing the meaning of a level retroactively changes what every existing credential asserts, so this file is steward-controlled (see GOVERNANCE.md).",
+  "description": "Governs content/competence/taxonomy/proficiency.yaml. Defines what each of the five levels means generically, and what evidence is required to attain it. Per-element observable anchors live on the element itself; this file is the frame those anchors are written into. Changing the meaning of a level retroactively changes what every existing credential asserts, so this file is steward-controlled (see GOVERNANCE.md).",
 
   "type": "object",
   "required": ["schemaVersion", "levels"],

@@ -36,10 +36,33 @@ The tension between the second and third principles is real and is not resolved 
 |---|---|---|
 | 6 | Three-tier source register. **Referenceability mandatory for all tiers; quotability tier-gated.** | A BOK that cannot mention ISO/IEC 17025 is useless; a repository that reproduces it cannot be redistributed. Separating citation from quotation resolves both. See [`source-license-register.md`](source-license-register.md). |
 | 11 | Encyclopedic — 2000+ leaf elements, 3-level hierarchy, full per-discipline depth | The discipline list is a floor, not a ceiling. Comprehensiveness is the point, not a stretch goal. Demonstrated at the Phase 1 gate: `DP-21` Geodetic and Gravitational Metrology was added because optical clocks now resolve centimetre elevation change, which makes the gravity potential a quantity a time and frequency laboratory measures — the boundary between geodesy and metrology moved, and the taxonomy followed it. |
-| 13 | One file per element: YAML frontmatter + Markdown body | Structured facts must be validatable and queryable; prose must be readable and diffable. Neither format does both well alone. |
+| 13 | One file per element: YAML frontmatter + Markdown body | Structured facts must be validatable and queryable; prose must be readable and diffable. Neither format does both well alone. **Refined by decision 38** — the format stands, but the encyclopedic prose moved out of the element and into a BOK article. |
+| **38** | **The BOK and the competence system are separate trees** | See below. The single most consequential structural decision since the Phase 1 gate, and taken while zero prose existed. |
 | 16 | Skeleton approved first, then domain-by-domain checkpoints | Restructuring a taxonomy is cheap before 2000 elements are written against it and ruinous after. |
 | 19 | Cross-cutting core to full depth first, then discipline packs | The ~800 domain-independent elements are what every role shares and what makes the gap dashboard useful. Discipline depth is the differentiator but not the foundation. |
 | 10 | Code Apache-2.0, content CC BY-SA 4.0 | Apache-2.0 carries a patent grant and is on essentially every government and corporate approved-licence list. CC BY-SA keeps improvements to shared knowledge open. |
+
+#### Why the BOK and the competence system are separate
+
+Until this point one file did two jobs. An element carried frontmatter that was an *assessable claim about a person* — `kind`, `levelCeiling`, `anchors`, `roleTargets` — and a Markdown body that was *knowledge about a subject*. Both at competence granularity, one file per element.
+
+That produces neither thing well:
+
+- **It is not an encyclopedia.** 2232 elements become 2232 assessment-shaped fragments. "Definitional uncertainty within the model" is a reasonable thing to assess and a poor thing to look up.
+- **Knowledge serving several elements has nowhere to live.** It gets duplicated, and the copies diverge, or it gets assigned arbitrarily to one element and is invisible from the others.
+- **The BOK cannot be cited on its own terms.** An outside author citing this work would be citing a claim about a person's competence, not a statement about the subject.
+- **The lifecycles collide.** Knowledge ages when a standard is revised. Competence expectations age when professional practice moves. One file cannot carry two review triggers.
+- **Publication is all-or-nothing.** The BOK is meant to be public and redistributable; item internals are not, because a rubric naming the defect classes injected into a budget tells a candidate exactly what to look for.
+
+So: `content/bok/` holds articles organised by **subject**, and `content/competence/` holds the taxonomy, elements, items, roles and training. `content/sources/` sits outside both, because both cite it.
+
+**The join is section-level, and that is the whole design.** Articles are sized by subject coherence — one article may serve five elements, one element may draw on three articles. Each article declares stable section ids; each element carries `knowledgeRefs` pointing at the specific sections covering it, and at least one is required.
+
+The requirement driving section granularity rather than article granularity is concrete: **someone who demonstrated competence eight months ago and has forgotten one detail will not retrain.** They will look it up. They have to land on the passage covering that detail, not on an article vaguely about the area with it buried inside. A `knowledgeRef` that resolves to the wrong altitude is a broken refresher path, and it fails silently for exactly the person who most needs it.
+
+Section ids therefore inherit the append-only discipline, one layer below element IDs, and BOK article ids share the same lock file.
+
+Taken now because **zero element prose existed.** After Phase 4 this restructure would have been ruinous; at 0 authored elements it cost a directory move and a schema field. It does impose an ordering on authoring, deliberately: the reference material must exist before the claim that somebody has mastered it.
 
 ### Proficiency and assessment
 
@@ -166,7 +189,7 @@ So a person can hold verified L4 judgment in CMM task-specific uncertainty and s
 
 ## The one rule that cannot be waived
 
-**IDs are append-only.** `content/taxonomy/domains/*.yaml` and `content/taxonomy/id-registry.lock` may grow. Nothing in them may ever be renamed or removed.
+**IDs are append-only.** `content/competence/taxonomy/domains/*.yaml` and `content/competence/taxonomy/id-registry.lock` may grow. Nothing in them may ever be renamed or removed.
 
 Once a credential attests competence in `CM-03-014`, that identifier must resolve to the same element permanently. Rename it and you have silently invalidated somebody's evidence of their own competence, with no way to repair it. Elements that turn out to be wrong, redundant, or badly scoped are **deprecated and superseded**, never deleted.
 
@@ -180,6 +203,6 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 2. **Public GitHub remote** — created at `RECamerino/metrology-competence-system`, with the taxonomy viewer published to Pages. Each push remains a separately authorised action.
 3. **Commons operation** — the software will be built; whether the project *operates* a public instance (PII custody, moderation, funding) is deferred governance.
 4. **Authority-tier issuer** — a neutral foundation as issuer of last resort is the strongest long-term credential but needs people and funding. Roadmap, not a dependency.
-5. **Recertification defaults** — per-level defaults proposed in `content/taxonomy/proficiency.yaml` (L3 60 months, L4 48, L5 36; none below L3). Per-domain overrides remain open: a `CM-21` element ages far faster than a `CM-02` one, and `volatility` is the field that should drive it.
-6. **Experience-hour thresholds and waiting periods** — proposed per level in `content/taxonomy/proficiency.yaml` (L3 40h/30d, L4 200h/180d, L5 1000h/365d). The attribution rule is settled as decision 37; the numbers themselves are a steward judgement and have not been tested against a real career history.
+5. **Recertification defaults** — per-level defaults proposed in `content/competence/taxonomy/proficiency.yaml` (L3 60 months, L4 48, L5 36; none below L3). Per-domain overrides remain open: a `CM-21` element ages far faster than a `CM-02` one, and `volatility` is the field that should drive it.
+6. **Experience-hour thresholds and waiting periods** — proposed per level in `content/competence/taxonomy/proficiency.yaml` (L3 40h/30d, L4 200h/180d, L5 1000h/365d). The attribution rule is settled as decision 37; the numbers themselves are a steward judgement and have not been tested against a real career history.
 7. **Skeleton scale** — resolved. Landed at 2232 elements across 257 areas and 43 domains, against a 2000+ target.

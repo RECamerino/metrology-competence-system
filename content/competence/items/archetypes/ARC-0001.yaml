@@ -61,7 +61,7 @@ scoring:
     result is accepted and the justification carries the mark — which is the
     whole reason this is not deterministic.
   unitChecked: true
-  rubricRef: content/items/rubrics/ARC-0001.md
+  rubricRef: content/competence/items/rubrics/ARC-0001.md
 
 lookupResistance: >-
   The arithmetic here is lookupable and an AI assistant will produce it
