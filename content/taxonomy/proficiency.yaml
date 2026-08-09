@@ -1,0 +1,137 @@
+# Proficiency scale and evidence ladder
+#
+# The frame that every per-element anchor is written into. This file says what
+# a level MEANS and what it COSTS; the element's own anchors say what it looks
+# like for that specific competence.
+#
+# Steward-controlled. Changing the meaning of a level retroactively changes
+# what every credential already issued asserts — see GOVERNANCE.md.
+#
+# Two properties hold at every level:
+#
+#   Open-resource. The candidate may use references, the internet, and AI
+#   assistance, because a working metrologist has all three. There is no
+#   proctoring anywhere in this system. Integrity is carried by item design.
+#
+#   No self-signoff, ever. The signer is always a distinct natural person.
+
+schemaVersion: 1
+
+levels:
+  - level: 1
+    name: Novice
+    descriptor: >-
+      Recognises the concept and can apply it by following a rule that someone
+      else supplied, in a situation someone else framed. Depends on explicit
+      instruction and does not yet distinguish the cases where the rule stops
+      holding.
+    assessedAt: element
+    assessment:
+      modality:
+        - open-resource-parameterized
+        - challenge-exam
+      requiresCapstone: false
+      minExperienceHours: 0
+      minDaysSincePreviousLevel: 0
+    signoff:
+      signerCount: 1
+      # Null deliberately: a witness attests that they saw the work, which does
+      # not require them to be more expert than the candidate.
+      witnessMustHoldLevel: null
+
+  - level: 2
+    name: Advanced Beginner
+    descriptor: >-
+      Applies the concept to familiar situations without step-by-step
+      direction, and recognises when a situation is NOT the familiar one — but
+      escalates at that point rather than resolving it independently.
+    assessedAt: element
+    assessment:
+      modality:
+        - open-resource-parameterized
+        - challenge-exam
+      requiresCapstone: false
+      minExperienceHours: 0
+      minDaysSincePreviousLevel: 0
+    signoff:
+      signerCount: 1
+      witnessMustHoldLevel: null
+
+  - level: 3
+    name: Competent
+    descriptor: >-
+      Works unsupervised on routine cases and produces a defensible result,
+      including in situations not seen before. Recognises the limits of their
+      own competence and can say what would change their approach. This is the
+      level at which independent laboratory work is normally entrusted.
+    assessedAt: element
+    assessment:
+      modality:
+        - open-resource-parameterized
+        - challenge-exam
+      requiresCapstone: false
+      # A real deliverable, archived and hashed — not an exam answer. From here
+      # up, the evidence is work, not response.
+      requiresWorkProduct: true
+      minExperienceHours: 40
+      minDaysSincePreviousLevel: 30
+    signoff:
+      signerCount: 1
+      # From L3 the signer judges quality rather than merely observing, so they
+      # must hold the level above the one being attested.
+      witnessMustHoldLevel: 4
+      requiresCredentialedReviewer: true
+    defaultRecertificationMonths: 60
+
+  - level: 4
+    name: Proficient
+    descriptor: >-
+      Handles the non-routine case, and sees the situation as a whole rather
+      than as a set of rules to apply in turn. Diagnoses why an approach is
+      failing, adapts it, and defends the adaptation against a peer who is
+      actively looking for its weaknesses.
+    assessedAt: element
+    assessment:
+      modality:
+        - reviewer-conducted-defense
+        - capstone-with-review
+      requiresCapstone: true
+      requiresWorkProduct: true
+      doubleScored: true
+      minExperienceHours: 200
+      minDaysSincePreviousLevel: 180
+    signoff:
+      signerCount: 2
+      witnessMustHoldLevel: 5
+      requiresCredentialedReviewer: true
+    defaultRecertificationMonths: 48
+
+  - level: 5
+    name: Expert
+    descriptor: >-
+      Advances the practice rather than only executing it: resolves cases where
+      the established approach gives no answer, and can bring another person to
+      competence in the same element. Expected to know where the field's own
+      position is contested, and to hold a defensible view on it.
+    assessedAt: element
+    assessment:
+      modality:
+        - reviewer-conducted-defense
+        - capstone-with-review
+      requiresCapstone: true
+      requiresWorkProduct: true
+      # At expert level the field's judgement is that you have not mastered
+      # something until you can bring someone else to competence in it.
+      requiresMentoring: true
+      doubleScored: true
+      minExperienceHours: 1000
+      minDaysSincePreviousLevel: 365
+    signoff:
+      signerCount: 2
+      # Cannot escalate past 5; the additional rigour at this level comes from
+      # the cross-organizational requirement instead.
+      witnessMustHoldLevel: 5
+      requiresCredentialedReviewer: true
+      # Prevents a closed group from certifying its own experts.
+      requiresCrossOrganizational: true
+    defaultRecertificationMonths: 36

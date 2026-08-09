@@ -35,6 +35,12 @@
       "description": "Kebab-case role identifier. Example: metrology-technician-ii."
     },
 
+    "archetypeId": {
+      "type": "string",
+      "pattern": "^ARC-[0-9]{4}$",
+      "description": "An assessment archetype — a reusable, parameterized item SHAPE, bound to many assessable units. Example: ARC-0007. Archetype IDs are append-only for the same reason element IDs are: a credential records the archetype an item came from, so the provenance of an assessment must stay resolvable after the archetype is retired."
+    },
+
     "elementKind": {
       "enum": ["knowledge", "skill", "judgment"],
       "description": "What kind of competence this element is, and therefore what evidence proves attainment. knowledge: the person can explain, relate and analyse it — evidence is explanation. skill: the person can perform it — evidence is a witnessed work product, and a written answer cannot substitute. judgment: the person can decide under ambiguity and defend the decision — evidence is a defence, and there is often no single right answer. The distinction drives assessment design: an L3 knowledge element and an L3 skill element require different evidence, and a uniform ladder across both would test the wrong thing for one of them. RULE: if an element genuinely needs two kinds of evidence, that is a sign it should be two elements. NOTE: authority is deliberately absent from this list. Knowledge, skill and judgment are earned and are properties of a person; authority is granted, and is a relationship between a person, an organization and a scope of work. See docs/00-context.md on competence versus authorization."

@@ -52,6 +52,8 @@ The tension between the second and third principles is real and is not resolved 
 | 30 | Hybrid scoring: deterministic auto-scoring where possible, rubric-scored by credentialed reviewers otherwise; calibration and double-scoring at L4–L5 | Human effort concentrated where judgment is genuinely required. Inter-rater reliability at the top levels is what makes a credential defensible in an audit. |
 | 31 | Challenge exam: comprehensive, open-resource, one attempt per element-level, no retakes | Lets an experienced hire skip content without pretending they need it. The attempt ledger is what makes "one attempt" mean anything. |
 | 21 | Escalating evidence ladder + time-in-grade + recertification | Time cannot be shortcut. This is the mechanism that makes the corpus a lifetime's pursuit. |
+| **36** | **Item bank is an archetype library plus bindings**, not one item per assessable unit | Decided in Phase 2, and it is the decision that determines whether the item bank is finishable at all. See below. |
+| **37** | **One logged activity credits every element it genuinely exercises** | Experience hours are per element, and there are 2232 of them. Apportioning each hour to exactly one element would make deep coverage arithmetically absurd — L5 across ten elements would demand ten thousand unshared hours — and would misdescribe practice, where a single calibration exercises uncertainty evaluation, traceability, and documentation at once. The candidate declares which elements an activity touched, and that declaration is itself reviewable evidence: an implausible claim is a reviewable defect, which puts the control on scrutiny rather than on arithmetic. |
 
 #### Why assessment is open-resource, and why proctoring is gone
 
@@ -67,6 +69,22 @@ That is what makes abolishing proctoring coherent rather than lax. Two further r
 **Consequence, stated honestly:** organizations whose own quality system mandates proctored testing will not find that feature here. They can record their own supervision attestation as an ordinary evidence artifact through the overlay. No proctoring modality enters the core schema.
 
 At L4–L5 the signer is a credentialed reviewer conducting a substantive defense — a peer interrogating the work, not an invigilator watching a screen.
+
+#### Why the item bank is archetypes and bindings
+
+This was the largest single risk in Phase 2. At 9096 assessable units, the authoring unit decides whether the item bank is a season of work or a decade of it, and the naive choice — one purpose-built item per unit — produces a body of work larger than the entire corpus and almost certainly unfinishable.
+
+The alternatives were weighed explicitly:
+
+| Approach | Cost | Why not |
+|---|---|---|
+| One item per assessable unit | 9096 items | Nothing reused, so nothing compromised — and not finishable by a small team. |
+| One template per element | 2232 templates | Comparable in scale to the BOK prose itself, duplicated. |
+| Generic `kind` × level frames | 15 frames | Drifts straight toward items answerable by lookup, which are defective by definition here. |
+
+**Chosen: a library of parameterized archetypes, bound to many units through a cheap binding manifest.** An archetype is a reusable assessment *shape* — construct a budget containing a correlated pair; diagnose a defective certificate; defend a decision rule against a stated alternative. A binding attaches one archetype to one assessable unit, supplying the element's own parameters, tolerances, and rubric pointers. One archetype may serve twenty to fifty units.
+
+The cost is real and lands in a specific place: **a badly bound archetype tests the archetype rather than the element.** That failure is invisible in the archetype, which may be excellent, and invisible in the binding, which may be well-formed. So binding review is a distinct quality gate with its own reviewers, not a rubber stamp on top of archetype review. The `kind` classification is what makes bindings tractable — a `skill` element cannot be bound to a knowledge archetype, and the validator can enforce that mechanically.
 
 ### Credentials and trust
 
@@ -159,9 +177,9 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 ## Open items
 
 1. **Tier-2 quotation limits** — set at ≤25 words, ≤2 per source per element. Requires confirmation by counsel before Phase 4 authoring. Entries needing review are flagged `CONFIRM-WITH-COUNSEL` in the source register. Citations are unaffected.
-2. **Public GitHub remote** — repository is local. Creating the remote and the first push each need explicit authorisation.
+2. **Public GitHub remote** — created at `RECamerino/metrology-competence-system`, with the taxonomy viewer published to Pages. Each push remains a separately authorised action.
 3. **Commons operation** — the software will be built; whether the project *operates* a public instance (PII custody, moderation, funding) is deferred governance.
 4. **Authority-tier issuer** — a neutral foundation as issuer of last resort is the strongest long-term credential but needs people and funding. Roadmap, not a dependency.
-5. **Recertification defaults** — proposed per domain in Phase 2.
-6. **Experience-hour thresholds and waiting periods** — proposed per level in Phase 2.
-7. **Skeleton scale** — 2000+ is the target; the Phase 1 coverage report shows where it actually lands.
+5. **Recertification defaults** — per-level defaults proposed in `content/taxonomy/proficiency.yaml` (L3 60 months, L4 48, L5 36; none below L3). Per-domain overrides remain open: a `CM-21` element ages far faster than a `CM-02` one, and `volatility` is the field that should drive it.
+6. **Experience-hour thresholds and waiting periods** — proposed per level in `content/taxonomy/proficiency.yaml` (L3 40h/30d, L4 200h/180d, L5 1000h/365d). The attribution rule is settled as decision 37; the numbers themselves are a steward judgement and have not been tested against a real career history.
+7. **Skeleton scale** — resolved. Landed at 2232 elements across 257 areas and 43 domains, against a 2000+ target.

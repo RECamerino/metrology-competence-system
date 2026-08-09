@@ -1,0 +1,214 @@
+# Reference role registry
+#
+# These are REFERENCE roles, not prescriptions. Roles are data, never code: an
+# organization may edit, delete, add, or replace this set entirely through its
+# local overlay, and its own job titles will drive gap analysis exactly as
+# these do. This set exists so the platform is useful on first run, not because
+# these are the correct roles for anyone in particular.
+#
+# COST OF ADDING A ROLE: every element must carry a roleTarget for every role
+# in this registry — the validator rejects silence, because "not rated" and
+# "not applicable" are different claims. At 2232 elements, each role here is
+# 2232 more authored ratings. Twelve is a deliberate ceiling, not an accident.
+#
+# `authorities` records what a role is commonly PERMITTED to do. It is recorded
+# separately from competence on purpose: a person may understand a method
+# thoroughly and still not be authorised to sign for it. Nothing in this file
+# grants anyone anything.
+
+schemaVersion: 1
+
+roles:
+  # -- Technician -----------------------------------------------------------
+
+  - id: metrology-technician-i
+    title: Metrology Technician I
+    family: technician
+    seniority: 1
+    summary: >-
+      Performs routine calibrations against documented procedures, under
+      supervision, on a defined set of instruments. Records results and flags
+      anything that departs from the expected. Does not select methods or
+      evaluate uncertainty independently.
+    typicalScope: A defined instrument set within one discipline.
+    authorities: []
+
+  - id: metrology-technician-ii
+    title: Metrology Technician II
+    family: technician
+    seniority: 3
+    summary: >-
+      Works unsupervised across a broader instrument set, including
+      non-routine cases that the procedure does not fully cover. Applies
+      existing uncertainty budgets, recognises when one does not fit, and
+      escalates rather than improvising.
+    typicalScope: Multiple instrument families within one or two disciplines.
+    authorities:
+      - Release of routine calibration results within a defined scope
+
+  - id: senior-metrology-technician
+    title: Senior Metrology Technician
+    family: technician
+    seniority: 5
+    summary: >-
+      The senior bench practitioner. Handles the hardest routine work, trains
+      and checks junior technicians, and is usually the first person to notice
+      that a method is drifting. Contributes to procedure revision without
+      owning method validation.
+    typicalScope: A discipline's bench operations across a laboratory.
+    authorities:
+      - Release of calibration results within a defined scope
+      - Witness signoff for technician-level competence
+
+  # -- Engineering ----------------------------------------------------------
+
+  - id: calibration-engineer
+    title: Calibration Engineer
+    family: engineering
+    seniority: 4
+    summary: >-
+      Owns calibration methods for a discipline: writes and validates
+      procedures, constructs uncertainty budgets, and sets intervals. Bridges
+      the bench and the quality system, and is usually who answers an
+      assessor's technical questions about a method.
+    typicalScope: Methods and budgets for one discipline in a laboratory.
+    authorities:
+      - Approval of calibration procedures within a discipline
+      - Setting and adjusting calibration intervals
+
+  - id: metrology-engineer
+    title: Metrology Engineer
+    family: engineering
+    seniority: 5
+    summary: >-
+      Applies measurement science to problems the laboratory has not solved
+      before: new measurands, unusual ranges, contested results. Evaluates
+      uncertainty from first principles rather than from a template, and
+      supports production and design functions outside the laboratory.
+    typicalScope: Cross-discipline technical problems at a site.
+    authorities:
+      - Approval of calibration procedures
+      - Approval of measurement uncertainty budgets
+
+  # -- Scientific -----------------------------------------------------------
+
+  - id: research-metrologist
+    title: Research Metrologist
+    family: scientific
+    seniority: 7
+    summary: >-
+      Develops new measurement capability rather than applying existing
+      capability. Realises or maintains standards, characterises novel
+      artefacts, and publishes. Typically found at a national metrology
+      institute, a primary standards laboratory, or a research group.
+    typicalScope: A measurement capability, often at national level.
+    authorities:
+      - Approval of primary standard realisations
+    notes: >-
+      The role most likely to work in elements where the field's own position
+      is still contested, which is where L5 anchors actually apply.
+
+  - id: principal-metrologist
+    title: Principal Metrologist
+    family: scientific
+    seniority: 9
+    summary: >-
+      The deepest technical authority in an organization, without necessarily
+      managing anyone. Resolves the disputes nobody else can, sets technical
+      direction across disciplines, and represents the organization to
+      standards bodies and accreditation bodies.
+    typicalScope: Enterprise or national technical authority.
+    authorities:
+      - Final technical authority on disputed results
+      - Approval of measurement uncertainty budgets
+
+  # -- Leadership -----------------------------------------------------------
+
+  - id: laboratory-manager
+    title: Laboratory Manager
+    family: leadership
+    seniority: 7
+    summary: >-
+      Accountable for the laboratory as a whole: competence of personnel,
+      capacity, equipment, and the accreditation the laboratory holds. Needs
+      enough technical depth to judge whether a technical argument is sound,
+      without being the person who constructs it.
+    typicalScope: One laboratory or a group of laboratories.
+    authorities:
+      - Appointment of approved signatories
+      - Granting and revoking authorization to perform defined work
+    notes: >-
+      The role that most often GRANTS authority, which is exactly why
+      authorization is modelled separately from competence.
+
+  # -- Quality --------------------------------------------------------------
+
+  - id: quality-manager
+    title: Quality Manager
+    family: quality
+    seniority: 6
+    summary: >-
+      Owns the management system against ISO/IEC 17025: document control,
+      nonconformity and corrective action, internal audit, management review,
+      and the competence records themselves. Judged on whether the system
+      survives contact with an assessor.
+    typicalScope: The management system of one laboratory or site.
+    authorities:
+      - Approval of management system documentation
+      - Acceptance and closure of corrective actions
+
+  - id: approved-signatory
+    title: Approved Signatory
+    family: quality
+    seniority: 6
+    summary: >-
+      Signs calibration certificates and test reports, taking personal
+      responsibility for the validity of results released under an
+      accreditation. A position of granted authority attached to a named
+      scope, not a rank — commonly held alongside another role.
+    typicalScope: A named scope of accredited activity.
+    authorities:
+      - Signing accredited calibration certificates and test reports within a named scope
+    notes: >-
+      The type case for competence versus authorization. The competence this
+      role requires is portable and travels with the person; the signatory
+      authority does not, because the laboratory granted it and the
+      accreditation body recognised it AT THAT LABORATORY, FOR THAT SCOPE.
+      See CM-11-A05 and docs/00-context.md.
+
+  # -- Assessment -----------------------------------------------------------
+
+  - id: technical-assessor
+    title: Technical Assessor
+    family: assessment
+    seniority: 8
+    summary: >-
+      Assesses laboratories against ISO/IEC 17025 on behalf of an
+      accreditation body, judging technical competence within a declared
+      scope. Must be competent in the discipline being assessed and in
+      assessment practice itself; the two are separate competencies.
+    typicalScope: A declared scope of accreditation, across many laboratories.
+    authorities:
+      - Recommending grant, maintenance, or withdrawal of accreditation within a scope
+    notes: >-
+      The role the assessor competence dossier and scope-matching model exist
+      to serve — see decision 34.
+
+  # -- Education ------------------------------------------------------------
+
+  - id: metrology-trainer
+    title: Metrology Trainer
+    family: education
+    seniority: 5
+    summary: >-
+      Brings others to competence: designs and delivers training, builds
+      assessments, and judges whether a learner has actually attained a level.
+      Requires genuine depth in the subject plus instructional competence,
+      which is a distinct body of knowledge and is why CM-20 exists.
+    typicalScope: A training programme across a site or an enterprise.
+    authorities:
+      - Attesting completion of training, distinct from attesting competence
+    notes: >-
+      Attesting that someone attended training is not attesting that they are
+      competent. The distinction is deliberate and the wording here is load
+      bearing.

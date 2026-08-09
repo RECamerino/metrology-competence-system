@@ -104,6 +104,45 @@ export function coverageReport(corpus: Corpus): string {
   }
   lines.push('');
 
+  /* -- Item bank coverage ------------------------------------------------- */
+  // The number that decides whether a level is actually attainable. An element
+  // with a ceiling of 4 but items only to L2 cannot be credentialed at L4 — and
+  // a candidate must not be the one who discovers that.
+
+  const bound = new Set<string>();
+  const archetypeUse = new Map<string, number>();
+
+  for (const file of corpus.bindings) {
+    const d = file.data as Record<string, any>;
+    if (!d.element) continue;
+    for (const binding of (d.bindings ?? []) as Array<Record<string, any>>) {
+      bound.add(`${d.element}@${binding?.level}`);
+      const archetype = binding?.archetype;
+      if (archetype) archetypeUse.set(archetype, (archetypeUse.get(archetype) ?? 0) + 1);
+    }
+  }
+
+  lines.push('ITEM BANK COVERAGE');
+  lines.push('-'.repeat(78));
+  lines.push(
+    `  Archetypes ${padLeft(corpus.archetypes.length, 6)}   Bindings ${padLeft(bound.size, 6)}   Units ${padLeft(assessableUnits, 6)}   Covered ${padLeft(((bound.size / (assessableUnits || 1)) * 100).toFixed(1), 5)}%`,
+  );
+
+  if (archetypeUse.size > 0) {
+    // The ratio the whole approach rests on. An archetype serving one unit is a
+    // binding wearing the wrong hat, and the bank stops being finishable.
+    const reuse = bound.size / archetypeUse.size;
+    lines.push(`  Mean units per archetype: ${reuse.toFixed(1)}`);
+
+    const singletons = [...archetypeUse.entries()].filter(([, n]) => n === 1).map(([id]) => id);
+    if (singletons.length > 0) {
+      lines.push(
+        `  Archetypes bound to exactly one unit (${singletons.length}): ${singletons.slice(0, 10).join(', ')}${singletons.length > 10 ? ', …' : ''}`,
+      );
+    }
+  }
+  lines.push('');
+
   /* -- Gaps worth acting on ---------------------------------------------- */
 
   const orphans = [...authored.keys()].filter((id) => !stubs.has(id));

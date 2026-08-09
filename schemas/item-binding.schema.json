@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/item-binding.schema.json",
+  "title": "Item binding — one archetype attached to one assessable unit",
+  "description": "Governs content/items/bindings/<domain>/<element-id>.yaml. A binding attaches an archetype to a specific (element x level) assessable unit and supplies what the archetype could not know: this element's parameter ranges, its tolerance, and why this shape tests this competence. Bindings are the cheap half of the item bank and there are roughly 9096 of them — hours of work each, not days. THE FAILURE MODE THIS SCHEMA EXISTS TO CATCH: a binding that is well-formed and an archetype that is excellent can still combine into an item that tests the archetype rather than the element. That defect is invisible in either artifact alone, which is why `justification` is required prose and why binding review is a separate quality gate rather than a rubber stamp on archetype review.",
+
+  "type": "object",
+  "required": ["schemaVersion", "element", "bindings"],
+  "additionalProperties": false,
+
+  "properties": {
+    "schemaVersion": { "const": 1 },
+
+    "element": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
+
+    "bindings": {
+      "type": "array",
+      "minItems": 1,
+      "description": "One entry per level of this element that has an item. The validator's coverage report treats an assessable unit with no binding as a gap: an element attainable at L4 with items only to L2 cannot actually be credentialed at L4, and that must be visible rather than discovered by a candidate.",
+      "items": { "$ref": "#/$defs/binding" }
+    }
+  },
+
+  "$defs": {
+    "binding": {
+      "type": "object",
+      "required": ["level", "archetype", "status", "justification"],
+      "additionalProperties": false,
+
+      "properties": {
+        "level": {
+          "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel",
+          "description": "Must not exceed the element's levelCeiling, and must be a level the archetype declares it can serve. Both are validator-enforced."
+        },
+
+        "archetype": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/archetypeId" },
+
+        "status": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/lifecycleStatus" },
+
+        "justification": {
+          "type": "string",
+          "minLength": 80,
+          "description": "REQUIRED. Why this archetype, bound this way, tests THIS element rather than the archetype's generic shape. This is the binding-review gate in one field. A justification that would read identically for a dozen other elements is itself the evidence that the binding is generic — reviewers are instructed to reject on exactly that signal. Name what the candidate has to know or decide that is specific to this element."
+        },
+
+        "parameterRanges": {
+          "type": "array",
+          "description": "Concrete draw ranges for the archetype's declared parameters, chosen for this element and level. Difficulty lives here: the same archetype serves L2 and L4 by what it is allowed to draw, not by being a different item.",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+              "min": { "type": "number" },
+              "max": { "type": "number" },
+              "choices": { "type": "array", "items": {} },
+              "datasetRef": {
+                "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/contentRef",
+                "description": "Content-addressed reference to an archived dataset. Hashed so an item can be reconstructed exactly years later when a credential is re-reviewed."
+              }
+            }
+          }
+        },
+
+        "toleranceOverride": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Replaces the archetype's tolerance band where this element demands something different. A tighter band at L4 than L2 on the same archetype is normal and expected."
+        },
+
+        "rubricRef": {
+          "type": "string",
+          "description": "Rubric for this binding, where the archetype's generic rubric is not specific enough. Ships in the same commit as the binding."
+        },
+
+        "exposureGroup": {
+          "type": "string",
+          "maxLength": 60,
+          "description": "Bindings sharing a group are treated as the same exposure for control purposes, so a candidate cannot be served three near-identical items drawn from one archetype across adjacent elements."
+        },
+
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
