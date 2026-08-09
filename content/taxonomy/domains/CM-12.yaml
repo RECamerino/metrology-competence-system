@@ -1,0 +1,83 @@
+schemaVersion: 1
+domains:
+  - id: CM-12
+    title: Laboratory Operations, Environment and Facilities
+    kind: core
+    status: draft
+    summary: >-
+      The physical and operational conditions that make good measurement
+      possible. Frequently treated as facilities management and therefore
+      delegated away from metrology, which is how laboratories end up with
+      capability limited by their own building. Boundary: the accreditation
+      clause requirements are CM-10; safety is CM-22.
+
+    competencyAreas:
+
+      - id: CM-12-A01
+        title: Environmental Control
+        status: draft
+        elements:
+          - { id: CM-12-001, title: "Deriving environmental requirements from a measurement capability", levelCeiling: 5, status: draft }
+          - { id: CM-12-002, title: "Temperature control, gradients and stability", levelCeiling: 5, status: draft }
+          - { id: CM-12-003, title: "The 20 degree Celsius reference condition and thermal expansion", levelCeiling: 4, status: draft }
+          - { id: CM-12-004, title: "Humidity control and its measurement effects", levelCeiling: 4, status: draft }
+          - { id: CM-12-005, title: "Barometric pressure and air density effects", levelCeiling: 4, status: draft }
+          - { id: CM-12-006, title: "Cleanliness, particulates and contamination control", levelCeiling: 4, status: draft }
+          - { id: CM-12-007, title: "Vibration isolation and seismic considerations", levelCeiling: 5, status: draft }
+          - { id: CM-12-008, title: "Electromagnetic environment and interference control", levelCeiling: 5, status: draft }
+          - { id: CM-12-009, title: "Lighting, acoustics and human working conditions", levelCeiling: 3, status: draft }
+          - { id: CM-12-010, title: "Environmental monitoring, alarming and record keeping", levelCeiling: 4, status: draft }
+          - { id: CM-12-011, title: "Demonstrating that conditions were adequate at time of measurement", levelCeiling: 4, status: draft }
+
+      - id: CM-12-A02
+        title: Facility Design and Infrastructure
+        status: draft
+        elements:
+          - { id: CM-12-012, title: "Laboratory layout and workflow design", levelCeiling: 5, status: draft }
+          - { id: CM-12-013, title: "Foundations, mass blocks and mechanical isolation", levelCeiling: 5, status: draft }
+          - { id: CM-12-014, title: "Power quality, grounding and earthing", levelCeiling: 5, status: draft }
+          - { id: CM-12-015, title: "Shielded rooms, screened enclosures and Faraday cages", levelCeiling: 5, status: draft }
+          - { id: CM-12-016, title: "Gas, vacuum, water and utility services", levelCeiling: 4, status: draft }
+          - { id: CM-12-017, title: "Access control and segregation of activities", levelCeiling: 4, status: draft }
+          - { id: CM-12-018, title: "Specifying and commissioning a new laboratory", levelCeiling: 5, status: draft }
+          - { id: CM-12-019, title: "Working within an inadequate facility and documenting the limits", levelCeiling: 5, status: draft }
+
+      - id: CM-12-A03
+        title: Operational Workflow
+        status: draft
+        elements:
+          - { id: CM-12-020, title: "Job intake, scheduling and prioritisation", levelCeiling: 4, status: draft }
+          - { id: CM-12-021, title: "Item receipt, identification and condition recording", levelCeiling: 3, status: draft }
+          - { id: CM-12-022, title: "Work in progress tracking and turnaround", levelCeiling: 4, status: draft }
+          - { id: CM-12-023, title: "Capacity planning and bottleneck management", levelCeiling: 5, status: draft }
+          - { id: CM-12-024, title: "Return, packing and delivery of items", levelCeiling: 3, status: draft }
+          - { id: CM-12-025, title: "Laboratory information management systems", levelCeiling: 4, status: draft }
+          - { id: CM-12-026, title: "Business continuity and disaster recovery for a laboratory", levelCeiling: 5, status: draft }
+          - { id: CM-12-027, title: "Mobile, field and on-site measurement operations", levelCeiling: 4, status: draft }
+
+      - id: CM-12-A04
+        title: Asset and Consumable Management
+        status: draft
+        elements:
+          - { id: CM-12-028, title: "Asset lifecycle from specification to disposal", levelCeiling: 4, status: draft }
+          - { id: CM-12-029, title: "Justifying and specifying a capital purchase", levelCeiling: 5, status: draft }
+          - { id: CM-12-030, title: "Acceptance testing of new equipment", levelCeiling: 4, status: draft }
+          - { id: CM-12-031, title: "Preventive maintenance programmes", levelCeiling: 4, status: draft }
+          - { id: CM-12-032, title: "Spares, obsolescence and end-of-support equipment", levelCeiling: 4, status: draft }
+          - { id: CM-12-033, title: "Consumables, reference materials and shelf life", levelCeiling: 3, status: draft }
+          - { id: CM-12-034, title: "Decommissioning and disposal with data and traceability implications", levelCeiling: 4, status: draft }
+
+      - id: CM-12-A05
+        title: Laboratory Practice and Technique
+        status: draft
+        summary: >-
+          The hand skills and habits that separate reliable technicians from
+          unreliable ones, and which are almost never written down.
+        elements:
+          - { id: CM-12-035, title: "Cleanliness, gloving and avoiding contamination of standards", levelCeiling: 3, status: draft }
+          - { id: CM-12-036, title: "Thermal effects of the operator on the measurement", levelCeiling: 4, status: draft }
+          - { id: CM-12-037, title: "Setup, alignment and seating of artefacts", levelCeiling: 4, status: draft }
+          - { id: CM-12-038, title: "Repeatable technique and eliminating operator-dependent variation", levelCeiling: 5, status: draft }
+          - { id: CM-12-039, title: "Recognising when something is wrong before the numbers say so", levelCeiling: 5, status: draft }
+          - { id: CM-12-040, title: "Contemporaneous recording and notebook discipline", levelCeiling: 4, status: draft }
+          - { id: CM-12-041, title: "Housekeeping as a metrological control", levelCeiling: 3, status: draft }

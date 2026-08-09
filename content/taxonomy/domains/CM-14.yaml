@@ -1,0 +1,106 @@
+schemaVersion: 1
+domains:
+  - id: CM-14
+    title: Software, Data and Digital Metrology
+    kind: core
+    status: draft
+    summary: >-
+      Software is now part of almost every measurement chain, and is the least
+      controlled part of most of them. Covers software as a measurement
+      component, the engineering practice needed to build it responsibly, data
+      management, and the emerging digital infrastructure. Boundary: machine
+      learning is CM-21; visual presentation is CM-16.
+
+    competencyAreas:
+
+      - id: CM-14-A01
+        title: Software as Part of the Measurement Chain
+        status: draft
+        elements:
+          - { id: CM-14-001, title: "Where software enters a measurement result", levelCeiling: 4, status: draft }
+          - { id: CM-14-002, title: "Software as an uncertainty source", levelCeiling: 5, status: draft }
+          - { id: CM-14-003, title: "Floating-point arithmetic and numerical error", levelCeiling: 5, status: draft }
+          - { id: CM-14-004, title: "Numerical conditioning, cancellation and algorithm choice", levelCeiling: 5, status: draft }
+          - { id: CM-14-005, title: "Rounding, truncation and display precision", levelCeiling: 4, status: draft }
+          - { id: CM-14-006, title: "Unit handling and unit errors in software", levelCeiling: 4, status: draft }
+          - { id: CM-14-007, title: "Firmware, embedded processing and the hidden calculation", levelCeiling: 5, status: draft }
+          - { id: CM-14-008, title: "Spreadsheets as measurement software and why they fail", levelCeiling: 5, status: draft }
+
+      - id: CM-14-A02
+        title: Software Validation and Control
+        status: draft
+        elements:
+          - { id: CM-14-009, title: "Software validation requirements under ISO/IEC 17025", levelCeiling: 4, status: draft }
+          - { id: CM-14-010, title: "Risk-based scoping of software validation", levelCeiling: 5, status: draft }
+          - { id: CM-14-011, title: "Validating commercial off-the-shelf software", levelCeiling: 4, status: draft }
+          - { id: CM-14-012, title: "Validating in-house developed software", levelCeiling: 5, status: draft }
+          - { id: CM-14-013, title: "Reference data sets and numerical benchmarks", levelCeiling: 5, status: draft }
+          - { id: CM-14-014, title: "Regression testing after a software change", levelCeiling: 4, status: draft }
+          - { id: CM-14-015, title: "Configuration control and software version records", levelCeiling: 4, status: draft }
+          - { id: CM-14-016, title: "Revalidation triggers including operating system changes", levelCeiling: 4, status: draft }
+          - { id: CM-14-017, title: "Documenting validation so an assessor can follow it", levelCeiling: 4, status: draft }
+
+      - id: CM-14-A03
+        title: Software Development Practice
+        status: draft
+        summary: >-
+          Genuinely adjacent competence. Metrologists increasingly write code
+          that produces results; most were never taught how to do it safely.
+        elements:
+          - { id: CM-14-018, title: "Programming fundamentals for measurement work", levelCeiling: 4, status: draft }
+          - { id: CM-14-019, title: "Version control and why every analysis needs it", levelCeiling: 4, status: draft }
+          - { id: CM-14-020, title: "Automated testing and test design for numerical code", levelCeiling: 5, status: draft }
+          - { id: CM-14-021, title: "Code review as a technical control", levelCeiling: 4, status: draft }
+          - { id: CM-14-022, title: "Requirements, specification and traceable software design", levelCeiling: 5, status: draft }
+          - { id: CM-14-023, title: "Error handling and failing loudly rather than silently", levelCeiling: 5, status: draft }
+          - { id: CM-14-024, title: "Reproducible computational environments", levelCeiling: 5, status: draft }
+          - { id: CM-14-025, title: "Documentation and maintainability of analysis code", levelCeiling: 4, status: draft }
+          - { id: CM-14-026, title: "Dependency management and supply chain considerations", levelCeiling: 4, status: draft }
+          - { id: CM-14-027, title: "Working effectively with professional software teams", levelCeiling: 5, status: draft }
+          - { id: CM-14-028, title: "Open source in a laboratory: licensing, support and risk", levelCeiling: 4, status: draft }
+
+      - id: CM-14-A04
+        title: Data Management and Integrity
+        status: draft
+        elements:
+          - { id: CM-14-029, title: "Data integrity principles and their regulatory framing", levelCeiling: 5, status: draft }
+          - { id: CM-14-030, title: "Raw data, derived data and reconstructability of a result", levelCeiling: 5, status: draft }
+          - { id: CM-14-031, title: "Audit trails and tamper evidence", levelCeiling: 5, status: draft }
+          - { id: CM-14-032, title: "Electronic records and electronic signatures", levelCeiling: 4, status: draft }
+          - { id: CM-14-033, title: "Database fundamentals for measurement data", levelCeiling: 4, status: draft }
+          - { id: CM-14-034, title: "Data modelling for calibration and measurement records", levelCeiling: 5, status: draft }
+          - { id: CM-14-035, title: "Backup, retention and long-term readability", levelCeiling: 4, status: draft }
+          - { id: CM-14-036, title: "Data migration without loss of meaning", levelCeiling: 5, status: draft }
+          - { id: CM-14-037, title: "Metadata and why a number without context is worthless", levelCeiling: 5, status: draft }
+          - { id: CM-14-038, title: "FAIR data principles in a metrology setting", levelCeiling: 4, status: draft }
+          - { id: CM-14-039, title: "Data cleaning and its documentation", levelCeiling: 4, status: draft }
+
+      - id: CM-14-A05
+        title: Digital Metrology Infrastructure
+        status: draft
+        summary: >-
+          Boundary: DP-20 covers this material in depth for practitioners
+          implementing it; these elements are what every metrologist should know.
+        elements:
+          - { id: CM-14-040, title: "Digital calibration certificates and machine-readable results", levelCeiling: 4, status: draft }
+          - { id: CM-14-041, title: "Digital SI and machine-readable units and quantities", levelCeiling: 4, status: draft }
+          - { id: CM-14-042, title: "Interoperability, schemas and data exchange formats", levelCeiling: 4, status: draft }
+          - { id: CM-14-043, title: "Digital signatures, integrity and provenance of results", levelCeiling: 5, status: draft }
+          - { id: CM-14-044, title: "Sensor networks and distributed measurement systems", levelCeiling: 5, status: draft }
+          - { id: CM-14-045, title: "Digital twins and simulation-based measurement", levelCeiling: 5, status: draft }
+          - { id: CM-14-046, title: "Cloud, on-premises and air-gapped deployment considerations", levelCeiling: 4, status: draft }
+
+      - id: CM-14-A06
+        title: Cybersecurity for Measurement Systems
+        status: draft
+        summary: >-
+          A measurement result that can be altered is not a measurement result.
+          Increasingly an accreditation and regulatory expectation.
+        elements:
+          - { id: CM-14-047, title: "Threat model for a measurement system", levelCeiling: 5, status: draft }
+          - { id: CM-14-048, title: "Access control and least privilege in laboratory systems", levelCeiling: 4, status: draft }
+          - { id: CM-14-049, title: "Protecting instrument firmware and configuration", levelCeiling: 5, status: draft }
+          - { id: CM-14-050, title: "Network segmentation and legacy instrument exposure", levelCeiling: 5, status: draft }
+          - { id: CM-14-051, title: "Integrity protection of stored and transmitted results", levelCeiling: 5, status: draft }
+          - { id: CM-14-052, title: "Incident response when data integrity is in question", levelCeiling: 5, status: draft }
+          - { id: CM-14-053, title: "Operating in regulated and classified environments", levelCeiling: 5, status: draft }

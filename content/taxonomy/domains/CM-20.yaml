@@ -1,0 +1,73 @@
+schemaVersion: 1
+domains:
+  - id: CM-20
+    title: Research, Development and Innovation in Metrology
+    kind: core
+    status: draft
+    summary: >-
+      Advancing measurement capability rather than applying it. The competence
+      of NMI scientists and principal metrologists, and the route by which the
+      field improves. Boundary: routine method development is CM-06; publication
+      craft is CM-15-A06; the statistics of experimentation are CM-05-A06.
+
+    competencyAreas:
+
+      - id: CM-20-A01
+        title: Framing a Research Problem
+        status: draft
+        elements:
+          - { id: CM-20-001, title: "Identifying a measurement capability gap worth closing", levelCeiling: 5, status: draft }
+          - { id: CM-20-002, title: "Literature review and establishing the state of the art", levelCeiling: 4, status: draft }
+          - { id: CM-20-003, title: "Formulating a tractable research question", levelCeiling: 5, status: draft }
+          - { id: CM-20-004, title: "Feasibility assessment and early termination", levelCeiling: 5, status: draft }
+          - { id: CM-20-005, title: "Distinguishing incremental improvement from a genuine advance", levelCeiling: 5, status: draft }
+          - { id: CM-20-006, title: "Research roadmaps and long-horizon capability planning", levelCeiling: 5, status: draft }
+
+      - id: CM-20-A02
+        title: Developing New Measurement Capability
+        status: draft
+        elements:
+          - { id: CM-20-007, title: "Designing a new measurement method from first principles", levelCeiling: 5, status: draft }
+          - { id: CM-20-008, title: "Prototype apparatus design and iteration", levelCeiling: 5, status: draft }
+          - { id: CM-20-009, title: "Establishing a new primary realisation", levelCeiling: 5, status: draft }
+          - { id: CM-20-010, title: "Characterising a novel instrument with no reference to compare against", levelCeiling: 5, status: draft }
+          - { id: CM-20-011, title: "Uncertainty evaluation for a method that has never been evaluated", levelCeiling: 5, status: draft }
+          - { id: CM-20-012, title: "Validating a new capability by independent route", levelCeiling: 5, status: draft }
+          - { id: CM-20-013, title: "Transitioning a research method into routine service", levelCeiling: 5, status: draft }
+          - { id: CM-20-014, title: "Technology readiness assessment for measurement capability", levelCeiling: 4, status: draft }
+
+      - id: CM-20-A03
+        title: Research Practice and Rigour
+        status: draft
+        elements:
+          - { id: CM-20-015, title: "Experimental design for research rather than routine work", levelCeiling: 5, status: draft }
+          - { id: CM-20-016, title: "Controlling and documenting variables in a developing experiment", levelCeiling: 5, status: draft }
+          - { id: CM-20-017, title: "Recognising and pursuing an anomalous result", levelCeiling: 5, status: draft }
+          - { id: CM-20-018, title: "Guarding against confirmation bias in your own work", levelCeiling: 5, status: draft }
+          - { id: CM-20-019, title: "Reproducibility and the replication of measurement research", levelCeiling: 5, status: draft }
+          - { id: CM-20-020, title: "Laboratory notebooks and research record keeping", levelCeiling: 4, status: draft }
+          - { id: CM-20-021, title: "Modelling and simulation as research tools", levelCeiling: 5, status: draft }
+          - { id: CM-20-022, title: "Knowing when a result is ready to publish", levelCeiling: 5, status: draft }
+
+      - id: CM-20-A04
+        title: Collaboration and Comparison
+        status: draft
+        elements:
+          - { id: CM-20-023, title: "Designing and running an international comparison", levelCeiling: 5, status: draft }
+          - { id: CM-20-024, title: "Piloting a key comparison", levelCeiling: 5, status: draft }
+          - { id: CM-20-025, title: "Collaborative research across institutions", levelCeiling: 5, status: draft }
+          - { id: CM-20-026, title: "Industry and academic partnership in measurement research", levelCeiling: 5, status: draft }
+          - { id: CM-20-027, title: "Working within consultative committees and technical working groups", levelCeiling: 5, status: draft }
+          - { id: CM-20-028, title: "Contributing to standards development", levelCeiling: 5, status: draft }
+
+      - id: CM-20-A05
+        title: Funding, Impact and Innovation Management
+        status: draft
+        elements:
+          - { id: CM-20-029, title: "Research funding landscapes for metrology", levelCeiling: 4, status: draft }
+          - { id: CM-20-030, title: "Writing a research proposal", levelCeiling: 5, status: draft }
+          - { id: CM-20-031, title: "Demonstrating impact of measurement research", levelCeiling: 5, status: draft }
+          - { id: CM-20-032, title: "Intellectual property, patents and disclosure", levelCeiling: 4, status: draft }
+          - { id: CM-20-033, title: "Technology transfer and commercialisation", levelCeiling: 4, status: draft }
+          - { id: CM-20-034, title: "Managing a research portfolio and balancing risk", levelCeiling: 5, status: draft }
+          - { id: CM-20-035, title: "Emerging measurement needs and horizon scanning", levelCeiling: 5, status: draft }

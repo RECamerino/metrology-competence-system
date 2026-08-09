@@ -1,0 +1,102 @@
+schemaVersion: 1
+domains:
+  - id: CM-21
+    title: Artificial Intelligence and Machine Learning in Metrology
+    kind: core
+    status: draft
+    summary: >-
+      Using, building and critically evaluating AI and ML systems where they
+      touch measurement. Present as a KNOWLEDGE DOMAIN only — this project ships
+      no AI in its own product, deliberately, because hallucinated guidance must
+      never reach a user whose output becomes accreditation evidence. That
+      decision does not excuse practitioners from understanding these systems:
+      they are already embedded in instruments, inspection systems and the
+      workflows of every metrologist. Boundary: the statistics are CM-05;
+      software practice is CM-14; uncertainty of ML-derived results is CM-03-103.
+
+    competencyAreas:
+
+      - id: CM-21-A01
+        title: Foundations
+        status: draft
+        elements:
+          - { id: CM-21-001, title: "What machine learning is, in terms a metrologist can audit", levelCeiling: 4, status: draft }
+          - { id: CM-21-002, title: "Supervised, unsupervised and reinforcement learning distinguished", levelCeiling: 3, status: draft }
+          - { id: CM-21-003, title: "Training, validation and test data and the discipline of separation", levelCeiling: 4, status: draft }
+          - { id: CM-21-004, title: "Overfitting, generalisation and the limits of a fitted model", levelCeiling: 5, status: draft }
+          - { id: CM-21-005, title: "Regression and classification as measurement-adjacent tasks", levelCeiling: 4, status: draft }
+          - { id: CM-21-006, title: "Neural networks and deep learning at a working level", levelCeiling: 4, status: draft }
+          - { id: CM-21-007, title: "Large language models: capabilities and failure modes", levelCeiling: 4, status: draft }
+          - { id: CM-21-008, title: "Where statistical modelling ends and machine learning begins", levelCeiling: 5, status: draft }
+
+      - id: CM-21-A02
+        title: Using AI Tools as a Practitioner
+        status: draft
+        summary: >-
+          Assessment throughout this corpus assumes the candidate has AI
+          assistance, because working metrologists do. Using it well is itself a
+          competence.
+        elements:
+          - { id: CM-21-009, title: "Effective use of AI assistants for technical work", levelCeiling: 4, status: draft }
+          - { id: CM-21-010, title: "Verifying AI output against authoritative sources", levelCeiling: 5, status: draft }
+          - { id: CM-21-011, title: "Recognising plausible-sounding but wrong technical content", levelCeiling: 5, status: draft }
+          - { id: CM-21-012, title: "Fabricated citations, clauses and standards references", levelCeiling: 5, status: draft }
+          - { id: CM-21-013, title: "AI for literature search, drafting and code generation", levelCeiling: 4, status: draft }
+          - { id: CM-21-014, title: "Confidentiality and data exposure when using external AI services", levelCeiling: 5, status: draft }
+          - { id: CM-21-015, title: "Disclosing AI assistance in technical work", levelCeiling: 4, status: draft }
+          - { id: CM-21-016, title: "Deskilling risk and maintaining competence alongside AI use", levelCeiling: 5, status: draft }
+
+      - id: CM-21-A03
+        title: AI Inside the Measurement Chain
+        status: draft
+        elements:
+          - { id: CM-21-017, title: "Where ML already appears in instruments and inspection systems", levelCeiling: 4, status: draft }
+          - { id: CM-21-018, title: "Machine vision for dimensional and surface inspection", levelCeiling: 5, status: draft }
+          - { id: CM-21-019, title: "Anomaly detection in measurement data", levelCeiling: 5, status: draft }
+          - { id: CM-21-020, title: "Predictive maintenance and interval optimisation using ML", levelCeiling: 5, status: draft }
+          - { id: CM-21-021, title: "Soft sensors and inferential measurement", levelCeiling: 5, status: draft }
+          - { id: CM-21-022, title: "Sensor fusion and learned calibration models", levelCeiling: 5, status: draft }
+          - { id: CM-21-023, title: "Traceability of a result produced by a learned model", levelCeiling: 5, status: draft }
+          - { id: CM-21-024, title: "Validating an ML component in a measurement system", levelCeiling: 5, status: draft }
+
+      - id: CM-21-A04
+        title: Trustworthiness, Assurance and Governance
+        status: draft
+        elements:
+          - { id: CM-21-025, title: "Uncertainty quantification for machine learning predictions", levelCeiling: 5, status: draft }
+          - { id: CM-21-026, title: "Calibration of predicted probabilities", levelCeiling: 5, status: draft }
+          - { id: CM-21-027, title: "Explainability and interpretability requirements", levelCeiling: 5, status: draft }
+          - { id: CM-21-028, title: "Bias, dataset representativeness and distribution shift", levelCeiling: 5, status: draft }
+          - { id: CM-21-029, title: "Out-of-distribution detection and knowing when a model is out of scope", levelCeiling: 5, status: draft }
+          - { id: CM-21-030, title: "Model drift, monitoring and retraining governance", levelCeiling: 5, status: draft }
+          - { id: CM-21-031, title: "Reproducibility of a trained model", levelCeiling: 5, status: draft }
+          - { id: CM-21-032, title: "Adversarial robustness and input manipulation", levelCeiling: 5, status: draft }
+          - { id: CM-21-033, title: "Regulatory and standards landscape for AI assurance", levelCeiling: 4, status: draft }
+          - { id: CM-21-034, title: "Auditing an AI system in a regulated measurement context", levelCeiling: 5, status: draft }
+
+      - id: CM-21-A05
+        title: Building ML Systems Responsibly
+        status: draft
+        elements:
+          - { id: CM-21-035, title: "Problem framing and deciding whether ML is the right tool", levelCeiling: 5, status: draft }
+          - { id: CM-21-036, title: "Dataset construction, labelling and label uncertainty", levelCeiling: 5, status: draft }
+          - { id: CM-21-037, title: "Feature engineering informed by measurement physics", levelCeiling: 5, status: draft }
+          - { id: CM-21-038, title: "Model selection and honest evaluation", levelCeiling: 5, status: draft }
+          - { id: CM-21-039, title: "Cross-validation and leakage in measurement data", levelCeiling: 5, status: draft }
+          - { id: CM-21-040, title: "Physics-informed and constrained models", levelCeiling: 5, status: draft }
+          - { id: CM-21-041, title: "Documentation: model cards, datasheets and intended use", levelCeiling: 4, status: draft }
+          - { id: CM-21-042, title: "Deployment, versioning and rollback of models", levelCeiling: 5, status: draft }
+
+      - id: CM-21-A06
+        title: Metrology for AI
+        status: draft
+        summary: >-
+          The inverse problem: applying measurement science to AI systems
+          themselves. An emerging area where metrologists have distinctive
+          standing.
+        elements:
+          - { id: CM-21-043, title: "Measuring the performance of an AI system rigorously", levelCeiling: 5, status: draft }
+          - { id: CM-21-044, title: "Benchmark design, contamination and gaming", levelCeiling: 5, status: draft }
+          - { id: CM-21-045, title: "Uncertainty in AI evaluation results", levelCeiling: 5, status: draft }
+          - { id: CM-21-046, title: "Reference datasets and traceability for AI evaluation", levelCeiling: 5, status: draft }
+          - { id: CM-21-047, title: "The metrologist's contribution to AI standards and assurance", levelCeiling: 5, status: draft }

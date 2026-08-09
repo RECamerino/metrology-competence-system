@@ -1,0 +1,96 @@
+schemaVersion: 1
+domains:
+  - id: CM-15
+    title: Technical Communication and Documentation
+    kind: core
+    status: draft
+    summary: >-
+      Writing and speaking about measurement so that the right people act
+      correctly on it. One of the most commonly missed competencies: a
+      metrologist whose analysis is right and whose report is unreadable has not
+      finished the job. Includes adapting technical content to an audience,
+      which is a distinct and teachable skill. Boundary: visual presentation is
+      CM-16; teaching is CM-17.
+
+    competencyAreas:
+
+      - id: CM-15-A01
+        title: Foundations of Technical Writing
+        status: draft
+        elements:
+          - { id: CM-15-001, title: "Purpose, audience and scope before writing", levelCeiling: 4, status: draft }
+          - { id: CM-15-002, title: "Structure: leading with the conclusion", levelCeiling: 4, status: draft }
+          - { id: CM-15-003, title: "Precision of language and avoidable ambiguity", levelCeiling: 5, status: draft }
+          - { id: CM-15-004, title: "Concision and removing what does not carry information", levelCeiling: 4, status: draft }
+          - { id: CM-15-005, title: "Objectivity, hedging and overclaiming", levelCeiling: 5, status: draft }
+          - { id: CM-15-006, title: "Numbers in prose: significant figures, units and consistency", levelCeiling: 4, status: draft }
+          - { id: CM-15-007, title: "Editing your own work and the value of distance", levelCeiling: 4, status: draft }
+          - { id: CM-15-008, title: "Giving and receiving written review", levelCeiling: 4, status: draft }
+
+      - id: CM-15-A02
+        title: Measurement Reports and Certificates
+        status: draft
+        summary: >-
+          Boundary: the required content of a calibration certificate is
+          CM-06-A06 and CM-10; this area is how to write it well.
+        elements:
+          - { id: CM-15-009, title: "Anatomy of a technical measurement report", levelCeiling: 4, status: draft }
+          - { id: CM-15-010, title: "Stating what was measured, how, and under what conditions", levelCeiling: 4, status: draft }
+          - { id: CM-15-011, title: "Presenting results with uncertainty without burying the answer", levelCeiling: 5, status: draft }
+          - { id: CM-15-012, title: "Writing conclusions that follow from the evidence presented", levelCeiling: 5, status: draft }
+          - { id: CM-15-013, title: "Limitations, caveats and stating what the result does not show", levelCeiling: 5, status: draft }
+          - { id: CM-15-014, title: "Traceability statements and their wording", levelCeiling: 4, status: draft }
+          - { id: CM-15-015, title: "Writing for a reader who will act without reading it all", levelCeiling: 5, status: draft }
+
+      - id: CM-15-A03
+        title: Procedures, Instructions and Standards
+        status: draft
+        elements:
+          - { id: CM-15-016, title: "Writing a procedure that survives contact with a real operator", levelCeiling: 5, status: draft }
+          - { id: CM-15-017, title: "Step granularity and assumed knowledge", levelCeiling: 5, status: draft }
+          - { id: CM-15-018, title: "Warnings, cautions and safety-critical instruction", levelCeiling: 4, status: draft }
+          - { id: CM-15-019, title: "Writing to be translated", levelCeiling: 4, status: draft }
+          - { id: CM-15-020, title: "Quality manual and policy writing", levelCeiling: 4, status: draft }
+          - { id: CM-15-021, title: "Drafting and reviewing standards and specifications", levelCeiling: 5, status: draft }
+          - { id: CM-15-022, title: "Requirements language: shall, should, may and must", levelCeiling: 4, status: draft }
+          - { id: CM-15-023, title: "Maintaining documents over time without incoherence", levelCeiling: 4, status: draft }
+
+      - id: CM-15-A04
+        title: Adapting Technical Content to an Audience
+        status: draft
+        summary: >-
+          The competence that determines whether metrology influences decisions
+          or is merely consulted. Deliberately its own area.
+        elements:
+          - { id: CM-15-024, title: "Diagnosing what an audience already knows and needs", levelCeiling: 5, status: draft }
+          - { id: CM-15-025, title: "Writing for executives and non-technical decision makers", levelCeiling: 5, status: draft }
+          - { id: CM-15-026, title: "Writing for production and operations audiences", levelCeiling: 5, status: draft }
+          - { id: CM-15-027, title: "Writing for auditors, assessors and regulators", levelCeiling: 5, status: draft }
+          - { id: CM-15-028, title: "Writing for other metrologists and technical peers", levelCeiling: 4, status: draft }
+          - { id: CM-15-029, title: "Explaining uncertainty and risk to people who want a yes or no", levelCeiling: 5, status: draft }
+          - { id: CM-15-030, title: "Analogy and simplification without distortion", levelCeiling: 5, status: draft }
+          - { id: CM-15-031, title: "Knowing when simplification has become misrepresentation", levelCeiling: 5, status: draft }
+          - { id: CM-15-032, title: "Delivering unwelcome technical findings", levelCeiling: 5, status: draft }
+
+      - id: CM-15-A05
+        title: Presentation and Spoken Communication
+        status: draft
+        elements:
+          - { id: CM-15-033, title: "Structuring a technical talk", levelCeiling: 4, status: draft }
+          - { id: CM-15-034, title: "Slide design that supports rather than replaces the speaker", levelCeiling: 4, status: draft }
+          - { id: CM-15-035, title: "Presenting to a hostile or sceptical audience", levelCeiling: 5, status: draft }
+          - { id: CM-15-036, title: "Handling questions, including ones you cannot answer", levelCeiling: 5, status: draft }
+          - { id: CM-15-037, title: "Explaining a measurement at the bench, informally", levelCeiling: 4, status: draft }
+          - { id: CM-15-038, title: "Meeting facilitation and technical decision making", levelCeiling: 5, status: draft }
+
+      - id: CM-15-A06
+        title: Scholarly and Professional Publication
+        status: draft
+        elements:
+          - { id: CM-15-039, title: "Structure and conventions of a technical paper", levelCeiling: 5, status: draft }
+          - { id: CM-15-040, title: "Literature search and staying current", levelCeiling: 4, status: draft }
+          - { id: CM-15-041, title: "Citation, attribution and avoiding plagiarism", levelCeiling: 4, status: draft }
+          - { id: CM-15-042, title: "Peer review: submitting to it and performing it", levelCeiling: 5, status: draft }
+          - { id: CM-15-043, title: "Conference papers, posters and technical presentations", levelCeiling: 4, status: draft }
+          - { id: CM-15-044, title: "Writing for a professional society audience", levelCeiling: 4, status: draft }
+          - { id: CM-15-045, title: "Publishing negative and null results", levelCeiling: 5, status: draft }
