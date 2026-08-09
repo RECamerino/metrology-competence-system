@@ -1,0 +1,83 @@
+schemaVersion: 1
+domains:
+  - id: CM-09
+    title: Calibration Intervals and Measurement Reliability
+    kind: core
+    status: draft
+    summary: >-
+      Deciding how often an instrument must be recalibrated, on evidence rather
+      than habit. Governed principally by NCSLI RP-1. A domain where most
+      organizations operate on inherited defaults they cannot justify, which is
+      both a compliance exposure and an avoidable cost. Boundary: the underlying
+      statistics are CM-05; the risk consequences are CM-08.
+
+    competencyAreas:
+
+      - id: CM-09-A01
+        title: Interval Fundamentals
+        status: draft
+        elements:
+          - { id: CM-09-001, title: "What a calibration interval is meant to control", levelCeiling: 4, status: draft }
+          - { id: CM-09-002, title: "Measurement reliability and the reliability target", levelCeiling: 5, status: draft }
+          - { id: CM-09-003, title: "End-of-period reliability and average-over-period reliability", levelCeiling: 5, status: draft }
+          - { id: CM-09-004, title: "Choosing a reliability target from the consequences of failure", levelCeiling: 5, status: draft }
+          - { id: CM-09-005, title: "Interval by time, by usage, by event, and hybrid schemes", levelCeiling: 4, status: draft }
+          - { id: CM-09-006, title: "Why inherited default intervals are indefensible", levelCeiling: 4, status: draft }
+          - { id: CM-09-007, title: "Initial interval assignment for a new instrument type", levelCeiling: 4, status: draft }
+
+      - id: CM-09-A02
+        title: Data Foundations
+        status: draft
+        summary: >-
+          Interval analysis is only as good as the as-found record behind it,
+          which is why CM-06-A04 is a prerequisite in practice.
+        elements:
+          - { id: CM-09-008, title: "As-found data as the raw material of interval analysis", levelCeiling: 4, status: draft }
+          - { id: CM-09-009, title: "In-tolerance and out-of-tolerance classification and its ambiguities", levelCeiling: 5, status: draft }
+          - { id: CM-09-010, title: "Homogeneous groupings of instruments", levelCeiling: 5, status: draft }
+          - { id: CM-09-011, title: "Data sufficiency and how much history is enough", levelCeiling: 5, status: draft }
+          - { id: CM-09-012, title: "Censoring, truncation and missing observations in interval data", levelCeiling: 5, status: draft }
+          - { id: CM-09-013, title: "Data quality problems that invalidate an analysis", levelCeiling: 5, status: draft }
+          - { id: CM-09-014, title: "Recording renewal, repair and adjustment events correctly", levelCeiling: 4, status: draft }
+
+      - id: CM-09-A03
+        title: Interval Analysis Methods
+        status: draft
+        elements:
+          - { id: CM-09-015, title: "Reactive methods: simple response to observed failures", levelCeiling: 4, status: draft }
+          - { id: CM-09-016, title: "Method A1 and A2 style incremental adjustment", levelCeiling: 4, status: draft }
+          - { id: CM-09-017, title: "Binomial and attribute-based interval methods", levelCeiling: 5, status: draft }
+          - { id: CM-09-018, title: "Reliability modelling and the choice of a reliability function", levelCeiling: 5, status: draft }
+          - { id: CM-09-019, title: "Exponential, Weibull and other reliability models", levelCeiling: 5, status: draft }
+          - { id: CM-09-020, title: "Maximum likelihood fitting of a reliability model", levelCeiling: 5, status: draft }
+          - { id: CM-09-021, title: "Variables-data methods using observed drift", levelCeiling: 5, status: draft }
+          - { id: CM-09-022, title: "Drift modelling and projection to a tolerance limit", levelCeiling: 5, status: draft }
+          - { id: CM-09-023, title: "Bayesian interval estimation with sparse data", levelCeiling: 5, status: draft }
+          - { id: CM-09-024, title: "Selecting a method appropriate to the data available", levelCeiling: 5, status: draft }
+
+      - id: CM-09-A04
+        title: Programme Operation and Governance
+        status: draft
+        elements:
+          - { id: CM-09-025, title: "Establishing an interval analysis programme", levelCeiling: 5, status: draft }
+          - { id: CM-09-026, title: "Review cadence and adjustment governance", levelCeiling: 4, status: draft }
+          - { id: CM-09-027, title: "Extending an interval and the evidence required", levelCeiling: 5, status: draft }
+          - { id: CM-09-028, title: "Shortening an interval and responding to a failure cluster", levelCeiling: 5, status: draft }
+          - { id: CM-09-029, title: "Instrument-specific intervals versus group intervals", levelCeiling: 5, status: draft }
+          - { id: CM-09-030, title: "Interval requirements imposed by customers and regulators", levelCeiling: 4, status: draft }
+          - { id: CM-09-031, title: "Defending an interval decision to an assessor", levelCeiling: 5, status: draft }
+          - { id: CM-09-032, title: "Cost and availability consequences of interval policy", levelCeiling: 5, status: draft }
+
+      - id: CM-09-A05
+        title: Adjacent Reliability Concepts
+        status: draft
+        summary: >-
+          Concepts borrowed from reliability engineering that interval analysis
+          depends on but rarely teaches explicitly.
+        elements:
+          - { id: CM-09-033, title: "Failure rate, hazard function and the bathtub curve", levelCeiling: 5, status: draft }
+          - { id: CM-09-034, title: "Mean time between failures and its misuse", levelCeiling: 4, status: draft }
+          - { id: CM-09-035, title: "Stress, usage and environment as accelerating factors", levelCeiling: 5, status: draft }
+          - { id: CM-09-036, title: "Condition monitoring and predictive maintenance applied to standards", levelCeiling: 5, status: draft }
+          - { id: CM-09-037, title: "Intermediate checks between calibrations", levelCeiling: 4, status: draft }
+          - { id: CM-09-038, title: "Designing an intermediate check that would actually detect drift", levelCeiling: 5, status: draft }

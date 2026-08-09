@@ -1,0 +1,113 @@
+schemaVersion: 1
+domains:
+  - id: CM-01
+    title: Foundations of Measurement Science
+    kind: core
+    status: draft
+    summary: >-
+      What measurement is, what a measurement result claims, and how the global
+      infrastructure that underwrites those claims fits together. Everything
+      else in the corpus assumes this. Boundary: terminology and units belong to
+      CM-02; uncertainty evaluation belongs to CM-03; this domain covers the
+      concepts those two operationalise.
+
+    competencyAreas:
+
+      - id: CM-01-A01
+        title: Nature and Purpose of Measurement
+        status: draft
+        summary: >-
+          Why measurement exists and what it is for. The most commonly skipped
+          material in metrology training, and the source of a surprising share
+          of downstream error.
+        elements:
+          - { id: CM-01-001, title: "What measurement is, and what it is not", levelCeiling: 3, status: draft }
+          - { id: CM-01-002, title: "Measurement as an input to decisions and its consequences", levelCeiling: 4, status: draft }
+          - { id: CM-01-003, title: "The measurand and why its definition governs everything downstream", levelCeiling: 5, status: draft }
+          - { id: CM-01-004, title: "Definitional uncertainty: the floor you cannot measure below", levelCeiling: 5, status: draft }
+          - { id: CM-01-005, title: "Measurement as a modelling activity rather than an observation", levelCeiling: 4, status: draft }
+          - { id: CM-01-006, title: "Fitness for purpose and the cost of measuring better than needed", levelCeiling: 4, status: draft }
+          - { id: CM-01-007, title: "Nominal properties and qualitative examination", levelCeiling: 3, status: draft }
+          - { id: CM-01-008, title: "Measurement, testing, inspection and calibration distinguished", levelCeiling: 3, status: draft }
+
+      - id: CM-01-A02
+        title: Measurement Models and Methods
+        status: draft
+        summary: >-
+          The structural vocabulary for describing how a result was obtained.
+          Prerequisite to constructing any uncertainty model in CM-03.
+        elements:
+          - { id: CM-01-009, title: "Measurement function and measurement model", levelCeiling: 4, status: draft }
+          - { id: CM-01-010, title: "Input quantities and output quantities", levelCeiling: 3, status: draft }
+          - { id: CM-01-011, title: "Indication, correction, and the measured quantity value", levelCeiling: 4, status: draft }
+          - { id: CM-01-012, title: "Influence quantities and their identification", levelCeiling: 4, status: draft }
+          - { id: CM-01-013, title: "Direct and indirect measurement methods", levelCeiling: 3, status: draft }
+          - { id: CM-01-014, title: "Comparison methods: substitution, differential and null", levelCeiling: 4, status: draft }
+          - { id: CM-01-015, title: "Measurement principle, method and procedure distinguished", levelCeiling: 3, status: draft }
+          - { id: CM-01-016, title: "Measurement systems: sensing, conditioning, conversion, presentation", levelCeiling: 3, status: draft }
+
+      - id: CM-01-A03
+        title: Scales, Quantities and Quantity Calculus
+        status: draft
+        summary: >-
+          What kind of arithmetic a given measurement supports. Confusing an
+          ordinal scale for a ratio scale produces analyses that look rigorous
+          and mean nothing.
+        elements:
+          - { id: CM-01-017, title: "Nominal, ordinal, interval and ratio scales", levelCeiling: 3, status: draft }
+          - { id: CM-01-018, title: "Which operations each scale type permits", levelCeiling: 4, status: draft }
+          - { id: CM-01-019, title: "Conventional reference scales and their limits", levelCeiling: 3, status: draft }
+          - { id: CM-01-020, title: "Quantity calculus and the value-times-unit convention", levelCeiling: 4, status: draft }
+          - { id: CM-01-021, title: "Dimensional homogeneity as an error check", levelCeiling: 3, status: draft }
+          - { id: CM-01-022, title: "Ordinal quantities in practice: hardness, pH, octane", levelCeiling: 4, status: draft }
+          - { id: CM-01-023, title: "Quantities of dimension one and their pitfalls", levelCeiling: 4, status: draft }
+
+      - id: CM-01-A04
+        title: Error, Uncertainty and the Measurement Result
+        status: draft
+        summary: >-
+          The conceptual shift from the error approach to the uncertainty
+          approach. Practitioners trained before this shift, and documentation
+          written before it, remain in circulation — recognising both is
+          necessary.
+        elements:
+          - { id: CM-01-024, title: "Error and uncertainty: the conceptual break between them", levelCeiling: 5, status: draft }
+          - { id: CM-01-025, title: "Random and systematic effects", levelCeiling: 4, status: draft }
+          - { id: CM-01-026, title: "Bias, correction, and the uncertainty of the correction", levelCeiling: 4, status: draft }
+          - { id: CM-01-027, title: "True value, conventional value, and what the uncertainty approach abandons", levelCeiling: 5, status: draft }
+          - { id: CM-01-028, title: "Accuracy, trueness and precision", levelCeiling: 3, status: draft }
+          - { id: CM-01-029, title: "Repeatability, intermediate precision and reproducibility conditions", levelCeiling: 4, status: draft }
+          - { id: CM-01-030, title: "Resolution, discrimination threshold and dead band", levelCeiling: 3, status: draft }
+          - { id: CM-01-031, title: "Metrological compatibility of measurement results", levelCeiling: 4, status: draft }
+          - { id: CM-01-032, title: "Reading a result someone else produced and knowing what it asserts", levelCeiling: 5, status: draft }
+
+      - id: CM-01-A05
+        title: History and Philosophy of Metrology
+        status: draft
+        summary: >-
+          Why the system looks the way it does. Useful less as heritage than as
+          explanation for conventions that otherwise appear arbitrary.
+        elements:
+          - { id: CM-01-033, title: "Origins of standardised measurement in trade and law", levelCeiling: 2, status: draft }
+          - { id: CM-01-034, title: "The Metre Convention and the founding of international metrology", levelCeiling: 3, status: draft }
+          - { id: CM-01-035, title: "From artefact standards to constant-based definitions", levelCeiling: 4, status: draft }
+          - { id: CM-01-036, title: "Measurement as a social contract: trust, trade and enforcement", levelCeiling: 3, status: draft }
+          - { id: CM-01-037, title: "What a measurement claims: realism, operationalism and representation", levelCeiling: 5, status: draft }
+          - { id: CM-01-038, title: "Historical measurement disputes and what they cost", levelCeiling: 3, status: draft }
+
+      - id: CM-01-A06
+        title: The Global Metrology Infrastructure
+        status: draft
+        summary: >-
+          The institutional map. Boundary: the mechanics of traceability through
+          this structure belong to CM-04; this area covers who the actors are
+          and what each is responsible for.
+        elements:
+          - { id: CM-01-039, title: "BIPM, CGPM, CIPM and the Consultative Committees", levelCeiling: 3, status: draft }
+          - { id: CM-01-040, title: "National Metrology Institutes and Designated Institutes", levelCeiling: 3, status: draft }
+          - { id: CM-01-041, title: "Regional Metrology Organizations", levelCeiling: 3, status: draft }
+          - { id: CM-01-042, title: "OIML and the legal metrology infrastructure", levelCeiling: 3, status: draft }
+          - { id: CM-01-043, title: "Accreditation bodies, ILAC and IAF", levelCeiling: 3, status: draft }
+          - { id: CM-01-044, title: "Standards development organizations and how a standard is made", levelCeiling: 3, status: draft }
+          - { id: CM-01-045, title: "Professional bodies and the metrology community", levelCeiling: 2, status: draft }
+          - { id: CM-01-046, title: "How a measurement on a factory floor connects to the SI", levelCeiling: 4, status: draft }

@@ -16,7 +16,15 @@ export const REPO_ROOT = resolve(fileURLToPath(import.meta.url), '../../../..');
 export const PATHS = {
   schemas: join(REPO_ROOT, 'schemas'),
   content: join(REPO_ROOT, 'content'),
-  taxonomy: join(REPO_ROOT, 'content', 'taxonomy', 'skeleton.yaml'),
+  /**
+   * One file per domain. A single skeleton file at 2000+ elements would be
+   * ten thousand lines and effectively unreviewable; split per domain, each
+   * one diffs and reviews on its own. Each file is a complete taxonomy
+   * document containing exactly one domain, so it validates against the same
+   * schema, and the loader merges them into one view for everything
+   * downstream.
+   */
+  taxonomyDir: join(REPO_ROOT, 'content', 'taxonomy', 'domains'),
   proficiency: join(REPO_ROOT, 'content', 'taxonomy', 'proficiency.yaml'),
   idLock: join(REPO_ROOT, 'content', 'taxonomy', 'id-registry.lock'),
   roles: join(REPO_ROOT, 'content', 'roles', 'registry.yaml'),
@@ -32,8 +40,17 @@ export interface ElementFile {
   body: string;
 }
 
+/** One per-domain taxonomy file, kept separate so diagnostics name the file. */
+export interface TaxonomyFile {
+  path: string;
+  data: Record<string, unknown>;
+}
+
 export interface Corpus {
+  /** All per-domain files merged into a single taxonomy document. */
   taxonomy: Record<string, unknown> | null;
+  /** The same content unmerged, so schema errors can be attributed to a file. */
+  taxonomyFiles: TaxonomyFile[];
   proficiency: Record<string, unknown> | null;
   roles: Record<string, unknown> | null;
   sources: Record<string, unknown> | null;
@@ -123,6 +140,24 @@ export function loadCorpus(): { corpus: Corpus; parseErrors: string[] } {
     }
   }
 
+  const taxonomyFiles: TaxonomyFile[] = [];
+  if (existsSync(PATHS.taxonomyDir)) {
+    for (const entry of readdirSync(PATHS.taxonomyDir).sort()) {
+      if (!entry.endsWith('.yaml') && !entry.endsWith('.yml')) continue;
+      const full = join(PATHS.taxonomyDir, entry);
+      try {
+        taxonomyFiles.push({ path: repoRelative(full), data: loadYamlFile(full) ?? {} });
+      } catch (err) {
+        parseErrors.push((err as Error).message);
+      }
+    }
+  }
+
+  const mergedDomains = taxonomyFiles.flatMap(
+    (file) => (file.data.domains ?? []) as Array<Record<string, unknown>>,
+  );
+  const taxonomy = taxonomyFiles.length > 0 ? { schemaVersion: 1, domains: mergedDomains } : null;
+
   const lockedIds = existsSync(PATHS.idLock)
     ? readFileSync(PATHS.idLock, 'utf8')
         .split('\n')
@@ -132,7 +167,8 @@ export function loadCorpus(): { corpus: Corpus; parseErrors: string[] } {
 
   return {
     corpus: {
-      taxonomy: safe(() => loadYamlFile(PATHS.taxonomy), null),
+      taxonomy,
+      taxonomyFiles,
       proficiency: safe(() => loadYamlFile(PATHS.proficiency), null),
       roles: safe(() => loadYamlFile(PATHS.roles), null),
       sources: safe(() => loadYamlFile(PATHS.sources), null),

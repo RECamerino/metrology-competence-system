@@ -34,8 +34,19 @@ function wordCount(text: string): number {
 function checkSchemas(corpus: Corpus): Finding[] {
   const findings: Finding[] = [];
 
+  // Each per-domain file is validated separately so an error names the file
+  // that caused it rather than the merged view.
+  const validateTaxonomy = validatorFor('taxonomy');
+  if (corpus.taxonomyFiles.length === 0) {
+    findings.push(warn('content/taxonomy/domains/ contains no domain files yet — skipped'));
+  }
+  for (const file of corpus.taxonomyFiles) {
+    if (!validateTaxonomy(file.data)) {
+      findings.push(...formatErrors(file.path, validateTaxonomy.errors).map(err));
+    }
+  }
+
   const registryFiles = [
-    ['taxonomy', corpus.taxonomy, 'content/taxonomy/skeleton.yaml'],
     ['proficiency', corpus.proficiency, 'content/taxonomy/proficiency.yaml'],
     ['role-registry', corpus.roles, 'content/roles/registry.yaml'],
     ['source-registry', corpus.sources, 'content/sources/registry.yaml'],
@@ -77,7 +88,15 @@ function checkIdRegistry(corpus: Corpus): Finding[] {
   const findings: Finding[] = [];
   if (!corpus.taxonomy) return findings;
 
-  const current = new Set(allTaxonomyIds(corpus.taxonomy));
+  const declared = allTaxonomyIds(corpus.taxonomy);
+  const current = new Set(declared);
+
+  // Splitting the taxonomy across per-domain files makes a collision possible
+  // in a way a single file did not, so check for it explicitly.
+  const duplicates = declared.filter((id, i) => i > 0 && declared[i - 1] === id);
+  for (const id of new Set(duplicates)) {
+    findings.push(err(`ID '${id}' is declared more than once across content/taxonomy/domains/`));
+  }
 
   if (corpus.lockedIds === null) {
     findings.push(

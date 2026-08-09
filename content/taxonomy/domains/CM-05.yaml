@@ -1,0 +1,165 @@
+schemaVersion: 1
+domains:
+  - id: CM-05
+    title: Statistics and Data Analysis for Metrology
+    kind: core
+    status: draft
+    summary: >-
+      The statistical competence a metrologist actually needs, taught for
+      measurement rather than in general. Deliberately deep: statistical
+      weakness is one of the most common limiting factors in a metrologist's
+      career, and it is rarely diagnosed as such. Boundary: applying these
+      methods to uncertainty evaluation is CM-03; to gauge studies is CM-07; to
+      interval analysis is CM-09.
+
+    competencyAreas:
+
+      - id: CM-05-A01
+        title: Descriptive Statistics and Data Summaries
+        status: draft
+        elements:
+          - { id: CM-05-001, title: "Measures of location and their behaviour under contamination", levelCeiling: 3, status: draft }
+          - { id: CM-05-002, title: "Measures of dispersion", levelCeiling: 3, status: draft }
+          - { id: CM-05-003, title: "Sample versus population statistics", levelCeiling: 4, status: draft }
+          - { id: CM-05-004, title: "Skewness, kurtosis and shape", levelCeiling: 4, status: draft }
+          - { id: CM-05-005, title: "Quantiles, order statistics and empirical distributions", levelCeiling: 4, status: draft }
+          - { id: CM-05-006, title: "Summarising data without misleading the reader", levelCeiling: 4, status: draft }
+
+      - id: CM-05-A02
+        title: Probability and Distributions
+        status: draft
+        elements:
+          - { id: CM-05-007, title: "Probability axioms and interpretation", levelCeiling: 4, status: draft }
+          - { id: CM-05-008, title: "Random variables, PDFs and CDFs", levelCeiling: 4, status: draft }
+          - { id: CM-05-009, title: "The normal distribution and why it is assumed so often", levelCeiling: 4, status: draft }
+          - { id: CM-05-010, title: "Rectangular, triangular and trapezoidal distributions", levelCeiling: 4, status: draft }
+          - { id: CM-05-011, title: "Student t distribution and its role in metrology", levelCeiling: 4, status: draft }
+          - { id: CM-05-012, title: "Chi-squared and F distributions", levelCeiling: 4, status: draft }
+          - { id: CM-05-013, title: "Poisson and binomial distributions for counting", levelCeiling: 4, status: draft }
+          - { id: CM-05-014, title: "Lognormal, Weibull and extreme value distributions", levelCeiling: 5, status: draft }
+          - { id: CM-05-015, title: "The central limit theorem and its practical limits", levelCeiling: 5, status: draft }
+          - { id: CM-05-016, title: "Joint, marginal and conditional distributions", levelCeiling: 5, status: draft }
+          - { id: CM-05-017, title: "Covariance, correlation and independence", levelCeiling: 5, status: draft }
+          - { id: CM-05-018, title: "Transformations of random variables", levelCeiling: 5, status: draft }
+
+      - id: CM-05-A03
+        title: Estimation and Interval Construction
+        status: draft
+        elements:
+          - { id: CM-05-019, title: "Point estimation and estimator properties", levelCeiling: 4, status: draft }
+          - { id: CM-05-020, title: "Maximum likelihood estimation", levelCeiling: 5, status: draft }
+          - { id: CM-05-021, title: "Method of moments and least squares as estimators", levelCeiling: 4, status: draft }
+          - { id: CM-05-022, title: "Confidence intervals and what they actually claim", levelCeiling: 5, status: draft }
+          - { id: CM-05-023, title: "Prediction intervals and tolerance intervals distinguished", levelCeiling: 5, status: draft }
+          - { id: CM-05-024, title: "Degrees of freedom as a concept", levelCeiling: 4, status: draft }
+          - { id: CM-05-025, title: "Sample size determination", levelCeiling: 4, status: draft }
+          - { id: CM-05-026, title: "Interval estimation for proportions and rates", levelCeiling: 4, status: draft }
+
+      - id: CM-05-A04
+        title: Hypothesis Testing and Inference
+        status: draft
+        summary: >-
+          Includes the widespread misuse of significance testing, which matters
+          because metrology reports feed decisions.
+        elements:
+          - { id: CM-05-027, title: "Null and alternative hypotheses", levelCeiling: 4, status: draft }
+          - { id: CM-05-028, title: "Type I and Type II error, significance and power", levelCeiling: 4, status: draft }
+          - { id: CM-05-029, title: "What a p-value is and what it is not", levelCeiling: 5, status: draft }
+          - { id: CM-05-030, title: "t-tests and their assumptions", levelCeiling: 4, status: draft }
+          - { id: CM-05-031, title: "Analysis of variance", levelCeiling: 5, status: draft }
+          - { id: CM-05-032, title: "Tests for variance and distributional form", levelCeiling: 4, status: draft }
+          - { id: CM-05-033, title: "Nonparametric alternatives", levelCeiling: 4, status: draft }
+          - { id: CM-05-034, title: "Multiple comparisons and the cost of looking repeatedly", levelCeiling: 5, status: draft }
+          - { id: CM-05-035, title: "Equivalence testing and why it often fits metrology better", levelCeiling: 5, status: draft }
+          - { id: CM-05-036, title: "Statistical significance contrasted with metrological significance", levelCeiling: 5, status: draft }
+
+      - id: CM-05-A05
+        title: Regression, Curve Fitting and Calibration Functions
+        status: draft
+        elements:
+          - { id: CM-05-037, title: "Simple linear regression and its assumptions", levelCeiling: 4, status: draft }
+          - { id: CM-05-038, title: "Residual analysis and diagnostics", levelCeiling: 5, status: draft }
+          - { id: CM-05-039, title: "Weighted least squares", levelCeiling: 5, status: draft }
+          - { id: CM-05-040, title: "Errors-in-variables and total least squares", levelCeiling: 5, status: draft }
+          - { id: CM-05-041, title: "Polynomial and nonlinear fitting", levelCeiling: 5, status: draft }
+          - { id: CM-05-042, title: "Multiple regression and collinearity", levelCeiling: 5, status: draft }
+          - { id: CM-05-043, title: "Uncertainty of fitted parameters and of predictions", levelCeiling: 5, status: draft }
+          - { id: CM-05-044, title: "Inverse prediction and the calibration problem", levelCeiling: 5, status: draft }
+          - { id: CM-05-045, title: "Interpolation methods and their uncertainty", levelCeiling: 5, status: draft }
+          - { id: CM-05-046, title: "Extrapolation and why it is usually indefensible", levelCeiling: 4, status: draft }
+          - { id: CM-05-047, title: "Model selection and overfitting", levelCeiling: 5, status: draft }
+          - { id: CM-05-048, title: "Smoothing, splines and filtering", levelCeiling: 5, status: draft }
+
+      - id: CM-05-A06
+        title: Design of Experiments
+        status: draft
+        elements:
+          - { id: CM-05-049, title: "Principles of experimental design: randomisation, replication, blocking", levelCeiling: 5, status: draft }
+          - { id: CM-05-050, title: "Factorial designs", levelCeiling: 5, status: draft }
+          - { id: CM-05-051, title: "Fractional factorial and screening designs", levelCeiling: 5, status: draft }
+          - { id: CM-05-052, title: "Response surface methodology", levelCeiling: 5, status: draft }
+          - { id: CM-05-053, title: "Nested and hierarchical designs for variance components", levelCeiling: 5, status: draft }
+          - { id: CM-05-054, title: "Designed experiments for uncertainty evaluation", levelCeiling: 5, status: draft }
+          - { id: CM-05-055, title: "Sequential and adaptive experimentation", levelCeiling: 5, status: draft }
+
+      - id: CM-05-A07
+        title: Statistical Process Control and Monitoring
+        status: draft
+        elements:
+          - { id: CM-05-056, title: "Control chart fundamentals and the logic of control limits", levelCeiling: 4, status: draft }
+          - { id: CM-05-057, title: "Variables charts: X-bar, R, S and individuals", levelCeiling: 4, status: draft }
+          - { id: CM-05-058, title: "Attribute charts", levelCeiling: 3, status: draft }
+          - { id: CM-05-059, title: "CUSUM and EWMA charts", levelCeiling: 5, status: draft }
+          - { id: CM-05-060, title: "Run rules and out-of-control signals", levelCeiling: 4, status: draft }
+          - { id: CM-05-061, title: "Control charting a check standard", levelCeiling: 5, status: draft }
+          - { id: CM-05-062, title: "Distinguishing common-cause from special-cause variation", levelCeiling: 4, status: draft }
+          - { id: CM-05-063, title: "Autocorrelated processes and why standard charts mislead", levelCeiling: 5, status: draft }
+
+      - id: CM-05-A08
+        title: Outliers, Robustness and Data Screening
+        status: draft
+        elements:
+          - { id: CM-05-064, title: "What an outlier is and the danger of the label", levelCeiling: 4, status: draft }
+          - { id: CM-05-065, title: "Outlier tests and their assumptions", levelCeiling: 4, status: draft }
+          - { id: CM-05-066, title: "Robust estimators of location and scale", levelCeiling: 5, status: draft }
+          - { id: CM-05-067, title: "When discarding data is defensible and when it is misconduct", levelCeiling: 5, status: draft }
+          - { id: CM-05-068, title: "Missing data and censored observations", levelCeiling: 5, status: draft }
+          - { id: CM-05-069, title: "Data screening, plausibility checks and audit trails", levelCeiling: 4, status: draft }
+
+      - id: CM-05-A09
+        title: Bayesian Methods
+        status: draft
+        elements:
+          - { id: CM-05-070, title: "Bayes theorem and its metrological interpretation", levelCeiling: 5, status: draft }
+          - { id: CM-05-071, title: "Priors: informative, non-informative and their defensibility", levelCeiling: 5, status: draft }
+          - { id: CM-05-072, title: "Posterior distributions and credible intervals", levelCeiling: 5, status: draft }
+          - { id: CM-05-073, title: "Bayesian updating with successive measurements", levelCeiling: 5, status: draft }
+          - { id: CM-05-074, title: "Markov chain Monte Carlo in practice", levelCeiling: 5, status: draft }
+          - { id: CM-05-075, title: "Choosing between Bayesian and frequentist treatment", levelCeiling: 5, status: draft }
+
+      - id: CM-05-A10
+        title: Computational and Resampling Methods
+        status: draft
+        elements:
+          - { id: CM-05-076, title: "Bootstrap methods", levelCeiling: 5, status: draft }
+          - { id: CM-05-077, title: "Jackknife and cross-validation", levelCeiling: 5, status: draft }
+          - { id: CM-05-078, title: "Permutation tests", levelCeiling: 5, status: draft }
+          - { id: CM-05-079, title: "Simulation study design", levelCeiling: 5, status: draft }
+          - { id: CM-05-080, title: "Numerical accuracy, conditioning and floating-point pitfalls", levelCeiling: 5, status: draft }
+          - { id: CM-05-081, title: "Reproducibility of a statistical analysis", levelCeiling: 4, status: draft }
+
+      - id: CM-05-A11
+        title: Interlaboratory Studies and Proficiency Testing
+        status: draft
+        summary: >-
+          Boundary: the accreditation requirement to participate is CM-10; the
+          statistics of doing so are here.
+        elements:
+          - { id: CM-05-082, title: "Purposes of interlaboratory comparison", levelCeiling: 4, status: draft }
+          - { id: CM-05-083, title: "Assigned values and their uncertainty", levelCeiling: 5, status: draft }
+          - { id: CM-05-084, title: "z-scores, zeta-scores and En numbers", levelCeiling: 4, status: draft }
+          - { id: CM-05-085, title: "Robust statistics for consensus values", levelCeiling: 5, status: draft }
+          - { id: CM-05-086, title: "Interpreting your own proficiency testing result", levelCeiling: 4, status: draft }
+          - { id: CM-05-087, title: "Investigating and responding to an unsatisfactory result", levelCeiling: 5, status: draft }
+          - { id: CM-05-088, title: "Designing an interlaboratory comparison", levelCeiling: 5, status: draft }
+          - { id: CM-05-089, title: "Method validation studies across laboratories", levelCeiling: 5, status: draft }

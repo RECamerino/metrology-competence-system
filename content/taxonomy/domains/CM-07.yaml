@@ -1,0 +1,84 @@
+schemaVersion: 1
+domains:
+  - id: CM-07
+    title: Measurement Systems Analysis and Process Capability
+    kind: core
+    status: draft
+    summary: >-
+      Evaluating whether a measurement system is adequate for the process it
+      monitors — the production-facing counterpart to laboratory uncertainty
+      evaluation. Two communities have solved the same problem in different
+      vocabularies; a metrologist working across both must be able to translate.
+      Boundary: the underlying statistics are CM-05; GUM uncertainty is CM-03.
+
+    competencyAreas:
+
+      - id: CM-07-A01
+        title: MSA Fundamentals
+        status: draft
+        elements:
+          - { id: CM-07-001, title: "What measurement systems analysis is for", levelCeiling: 3, status: draft }
+          - { id: CM-07-002, title: "Measurement system variation as a component of observed variation", levelCeiling: 4, status: draft }
+          - { id: CM-07-003, title: "Discrimination, resolution and the number of distinct categories", levelCeiling: 4, status: draft }
+          - { id: CM-07-004, title: "MSA vocabulary mapped onto VIM and GUM vocabulary", levelCeiling: 5, status: draft }
+          - { id: CM-07-005, title: "Relationship between an MSA result and an uncertainty budget", levelCeiling: 5, status: draft }
+          - { id: CM-07-006, title: "Choosing which MSA study a situation calls for", levelCeiling: 4, status: draft }
+          - { id: CM-07-007, title: "Planning a study: parts, appraisers, trials and randomisation", levelCeiling: 4, status: draft }
+
+      - id: CM-07-A02
+        title: Gauge Repeatability and Reproducibility
+        status: draft
+        elements:
+          - { id: CM-07-008, title: "Repeatability and reproducibility in the MSA sense", levelCeiling: 4, status: draft }
+          - { id: CM-07-009, title: "Range-and-average method", levelCeiling: 4, status: draft }
+          - { id: CM-07-010, title: "ANOVA method for gauge R and R", levelCeiling: 5, status: draft }
+          - { id: CM-07-011, title: "Appraiser-by-part interaction", levelCeiling: 5, status: draft }
+          - { id: CM-07-012, title: "Percentage study variation, percentage tolerance and which to use", levelCeiling: 5, status: draft }
+          - { id: CM-07-013, title: "Acceptance criteria and their origins", levelCeiling: 4, status: draft }
+          - { id: CM-07-014, title: "Part selection and the danger of an unrepresentative sample", levelCeiling: 5, status: draft }
+          - { id: CM-07-015, title: "Destructive and non-repeatable measurement studies", levelCeiling: 5, status: draft }
+          - { id: CM-07-016, title: "Nested designs for gauge studies", levelCeiling: 5, status: draft }
+          - { id: CM-07-017, title: "Interpreting and acting on a failing study", levelCeiling: 5, status: draft }
+
+      - id: CM-07-A03
+        title: Bias, Linearity and Stability Studies
+        status: draft
+        elements:
+          - { id: CM-07-018, title: "Bias studies and reference value selection", levelCeiling: 4, status: draft }
+          - { id: CM-07-019, title: "Linearity across the operating range", levelCeiling: 4, status: draft }
+          - { id: CM-07-020, title: "Stability studies over time", levelCeiling: 4, status: draft }
+          - { id: CM-07-021, title: "Distinguishing gauge drift from process drift", levelCeiling: 5, status: draft }
+          - { id: CM-07-022, title: "Statistical significance of a measured bias", levelCeiling: 4, status: draft }
+          - { id: CM-07-023, title: "Correcting for bias versus tolerating it", levelCeiling: 5, status: draft }
+
+      - id: CM-07-A04
+        title: Attribute and Categorical Measurement Systems
+        status: draft
+        elements:
+          - { id: CM-07-024, title: "Attribute measurement systems and where they arise", levelCeiling: 4, status: draft }
+          - { id: CM-07-025, title: "Attribute agreement analysis", levelCeiling: 4, status: draft }
+          - { id: CM-07-026, title: "Kappa statistics and agreement measures", levelCeiling: 5, status: draft }
+          - { id: CM-07-027, title: "Signal detection and the gray zone near a limit", levelCeiling: 5, status: draft }
+          - { id: CM-07-028, title: "Visual inspection as a measurement system", levelCeiling: 4, status: draft }
+
+      - id: CM-07-A05
+        title: Process Capability
+        status: draft
+        elements:
+          - { id: CM-07-029, title: "Capability indices and their assumptions", levelCeiling: 4, status: draft }
+          - { id: CM-07-030, title: "Cp, Cpk, Pp and Ppk distinguished", levelCeiling: 4, status: draft }
+          - { id: CM-07-031, title: "Capability for non-normal processes", levelCeiling: 5, status: draft }
+          - { id: CM-07-032, title: "The effect of measurement variation on an apparent capability", levelCeiling: 5, status: draft }
+          - { id: CM-07-033, title: "Capability, tolerance and specification setting", levelCeiling: 5, status: draft }
+          - { id: CM-07-034, title: "Short-run and small-sample capability estimation", levelCeiling: 5, status: draft }
+
+      - id: CM-07-A06
+        title: MSA in Regulated and Sector Contexts
+        status: draft
+        elements:
+          - { id: CM-07-035, title: "Automotive sector expectations for MSA", levelCeiling: 4, status: draft }
+          - { id: CM-07-036, title: "Aerospace and defence expectations", levelCeiling: 4, status: draft }
+          - { id: CM-07-037, title: "Medical device and pharmaceutical expectations", levelCeiling: 4, status: draft }
+          - { id: CM-07-038, title: "Reconciling a customer-mandated MSA method with sound practice", levelCeiling: 5, status: draft }
+          - { id: CM-07-039, title: "Automated and in-line measurement system evaluation", levelCeiling: 5, status: draft }
+          - { id: CM-07-040, title: "Presenting MSA results to a production audience", levelCeiling: 4, status: draft }

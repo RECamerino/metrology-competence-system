@@ -1,0 +1,104 @@
+schemaVersion: 1
+domains:
+  - id: CM-02
+    title: Terminology and the International System of Units
+    kind: core
+    status: draft
+    summary: >-
+      The controlled vocabulary of metrology (VIM3) and the SI itself. This
+      domain is where precision of language is the competence. Where VIM3 and
+      everyday laboratory usage diverge, elements must say so explicitly —
+      that divergence causes real disputes on certificates and in audits.
+
+    competencyAreas:
+
+      - id: CM-02-A01
+        title: VIM Concepts and Terminological Discipline
+        status: draft
+        summary: >-
+          Using the controlled vocabulary correctly, and recognising when a
+          colleague, a supplier, or a standard is not.
+        elements:
+          - { id: CM-02-001, title: "Purpose and structure of the VIM", levelCeiling: 3, status: draft }
+          - { id: CM-02-002, title: "Concept systems and why definitions are ordered as they are", levelCeiling: 4, status: draft }
+          - { id: CM-02-003, title: "Core VIM terms for quantities and units", levelCeiling: 4, status: draft }
+          - { id: CM-02-004, title: "Core VIM terms for measurement and its results", levelCeiling: 4, status: draft }
+          - { id: CM-02-005, title: "Core VIM terms for measuring instruments and their properties", levelCeiling: 4, status: draft }
+          - { id: CM-02-006, title: "Core VIM terms for measurement standards and traceability", levelCeiling: 4, status: draft }
+          - { id: CM-02-007, title: "Terms commonly misused in laboratory practice", levelCeiling: 4, status: draft }
+          - { id: CM-02-008, title: "Deprecated terminology still found in circulation", levelCeiling: 4, status: draft }
+          - { id: CM-02-009, title: "Reconciling VIM3 with sector-specific vocabularies", levelCeiling: 5, status: draft }
+          - { id: CM-02-010, title: "Translation and terminology across languages and jurisdictions", levelCeiling: 4, status: draft }
+
+      - id: CM-02-A02
+        title: Structure of the SI
+        status: draft
+        summary: The system itself — how it is constructed and why.
+        elements:
+          - { id: CM-02-011, title: "Base quantities and base units", levelCeiling: 3, status: draft }
+          - { id: CM-02-012, title: "Derived quantities and coherent derived units", levelCeiling: 3, status: draft }
+          - { id: CM-02-013, title: "Coherence and why it matters computationally", levelCeiling: 4, status: draft }
+          - { id: CM-02-014, title: "SI prefixes and their correct application", levelCeiling: 3, status: draft }
+          - { id: CM-02-015, title: "Units outside the SI accepted for use with it", levelCeiling: 3, status: draft }
+          - { id: CM-02-016, title: "Special names and units with the same dimension", levelCeiling: 4, status: draft }
+          - { id: CM-02-017, title: "The mole and quantities of amount of substance", levelCeiling: 4, status: draft }
+          - { id: CM-02-018, title: "Photometric units and the human observer in the SI", levelCeiling: 4, status: draft }
+
+      - id: CM-02-A03
+        title: The 2019 Redefinition and the Defining Constants
+        status: draft
+        summary: >-
+          The single largest change to the SI in a century, and its practical
+          consequences — most of which are smaller than commonly assumed, but
+          not zero.
+        elements:
+          - { id: CM-02-019, title: "The seven defining constants", levelCeiling: 4, status: draft }
+          - { id: CM-02-020, title: "Why the kilogram artefact was abandoned", levelCeiling: 3, status: draft }
+          - { id: CM-02-021, title: "Realisation of the kilogram: Kibble balance and X-ray crystal density", levelCeiling: 5, status: draft }
+          - { id: CM-02-022, title: "Realisation of the ampere from the elementary charge", levelCeiling: 5, status: draft }
+          - { id: CM-02-023, title: "Realisation of the kelvin from the Boltzmann constant", levelCeiling: 5, status: draft }
+          - { id: CM-02-024, title: "Mise en pratique documents and their status", levelCeiling: 4, status: draft }
+          - { id: CM-02-025, title: "Practical consequences of the redefinition for working laboratories", levelCeiling: 4, status: draft }
+          - { id: CM-02-026, title: "Continuity of dissemination across the redefinition", levelCeiling: 4, status: draft }
+
+      - id: CM-02-A04
+        title: Expression, Style and Notation
+        status: draft
+        summary: >-
+          The rules that make a certificate defensible and machine-readable.
+          Low glamour, high audit-finding frequency.
+        elements:
+          - { id: CM-02-027, title: "Writing unit symbols and names correctly", levelCeiling: 3, status: draft }
+          - { id: CM-02-028, title: "Number formatting, decimal markers and digit grouping", levelCeiling: 3, status: draft }
+          - { id: CM-02-029, title: "Significant figures and rounding conventions", levelCeiling: 4, status: draft }
+          - { id: CM-02-030, title: "Expressing quantity values with uncertainty", levelCeiling: 4, status: draft }
+          - { id: CM-02-031, title: "Quantity symbols, subscripts and typographic conventions", levelCeiling: 3, status: draft }
+          - { id: CM-02-032, title: "Expressing ratios, percentages and parts-per notations", levelCeiling: 4, status: draft }
+          - { id: CM-02-033, title: "Logarithmic quantities: decibel, neper and reference levels", levelCeiling: 4, status: draft }
+          - { id: CM-02-034, title: "Common style errors found on calibration certificates", levelCeiling: 4, status: draft }
+
+      - id: CM-02-A05
+        title: Dimensional Analysis and Unit Conversion
+        status: draft
+        summary: Practical arithmetic with units, and where it goes wrong.
+        elements:
+          - { id: CM-02-035, title: "Dimensional analysis as a verification technique", levelCeiling: 4, status: draft }
+          - { id: CM-02-036, title: "Unit conversion and exact versus approximate conversion factors", levelCeiling: 3, status: draft }
+          - { id: CM-02-037, title: "Uncertainty propagation through unit conversion", levelCeiling: 4, status: draft }
+          - { id: CM-02-038, title: "Temperature scales and the difference between interval and point conversion", levelCeiling: 4, status: draft }
+          - { id: CM-02-039, title: "Gauge, absolute and differential quantities", levelCeiling: 4, status: draft }
+          - { id: CM-02-040, title: "Conversion errors that have caused documented failures", levelCeiling: 3, status: draft }
+
+      - id: CM-02-A06
+        title: Legacy, Customary and Sector Unit Systems
+        status: draft
+        summary: >-
+          What practitioners actually encounter. Boundary: legal enforcement of
+          units belongs to CM-19.
+        elements:
+          - { id: CM-02-041, title: "US customary and imperial systems", levelCeiling: 3, status: draft }
+          - { id: CM-02-042, title: "CGS systems and where they persist", levelCeiling: 3, status: draft }
+          - { id: CM-02-043, title: "Sector-specific units in pressure, vacuum and flow", levelCeiling: 3, status: draft }
+          - { id: CM-02-044, title: "Sector-specific units in radiation and dosimetry", levelCeiling: 3, status: draft }
+          - { id: CM-02-045, title: "Units in clinical and laboratory medicine", levelCeiling: 3, status: draft }
+          - { id: CM-02-046, title: "Managing mixed-unit environments without error", levelCeiling: 4, status: draft }

@@ -105,6 +105,7 @@ function element(overrides: Record<string, unknown> = {}): ElementFile {
 function corpus(elements: ElementFile[], lockedIds?: string[] | null): Corpus {
   return {
     taxonomy,
+    taxonomyFiles: [{ path: 'content/taxonomy/domains/CM-01.yaml', data: taxonomy }],
     proficiency: null,
     roles,
     sources,
