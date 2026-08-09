@@ -1,0 +1,148 @@
+schemaVersion: 1
+domains:
+  - id: DP-01
+    title: Dimensional and Geometric Metrology
+    kind: discipline
+    status: draft
+    summary: >-
+      Length, form, orientation, location and surface texture. The largest
+      discipline pack, reflecting both its breadth and the fact that geometric
+      specification (ASME Y14.5 and ISO GPS) is a language in its own right that
+      takes years to read fluently. Note the ASME and ISO treatments diverge in
+      ways that cause real inspection disputes; elements must name those
+      divergences rather than pick a side.
+
+    competencyAreas:
+
+      - id: DP-01-A01
+        title: Length Standards and Realisation
+        status: draft
+        elements:
+          - { id: DP-01-001, title: "Definition and practical realisation of the metre", levelCeiling: 5, status: draft }
+          - { id: DP-01-002, title: "Iodine-stabilised lasers and recommended radiations", levelCeiling: 5, status: draft }
+          - { id: DP-01-003, title: "Gauge blocks: construction, grades and wringing", levelCeiling: 4, status: draft }
+          - { id: DP-01-004, title: "Interferometric calibration of gauge blocks", levelCeiling: 5, status: draft }
+          - { id: DP-01-005, title: "Mechanical comparison of gauge blocks", levelCeiling: 4, status: draft }
+          - { id: DP-01-006, title: "Length bars, step gauges and long-length artefacts", levelCeiling: 4, status: draft }
+          - { id: DP-01-007, title: "Line scales and graduated standards", levelCeiling: 4, status: draft }
+          - { id: DP-01-008, title: "Ball and sphere artefacts", levelCeiling: 4, status: draft }
+          - { id: DP-01-009, title: "Ring and plug gauges", levelCeiling: 4, status: draft }
+          - { id: DP-01-010, title: "Thermal expansion correction and the 20 degree reference", levelCeiling: 5, status: draft }
+          - { id: DP-01-011, title: "Refractive index of air and the Edlen equation", levelCeiling: 5, status: draft }
+
+      - id: DP-01-A02
+        title: Hand Tools and Shop-Floor Instruments
+        status: draft
+        elements:
+          - { id: DP-01-012, title: "Micrometers: principle, error sources and calibration", levelCeiling: 4, status: draft }
+          - { id: DP-01-013, title: "Vernier and digital calipers", levelCeiling: 4, status: draft }
+          - { id: DP-01-014, title: "Dial and digital indicators", levelCeiling: 4, status: draft }
+          - { id: DP-01-015, title: "Height gauges and surface plates", levelCeiling: 4, status: draft }
+          - { id: DP-01-016, title: "Bore gauges and internal measurement", levelCeiling: 4, status: draft }
+          - { id: DP-01-017, title: "Depth gauges and step measurement", levelCeiling: 3, status: draft }
+          - { id: DP-01-018, title: "Squares, straightedges and angle plates", levelCeiling: 4, status: draft }
+          - { id: DP-01-019, title: "Measuring force, feel and operator-dependent error", levelCeiling: 5, status: draft }
+          - { id: DP-01-020, title: "Abbe error and cosine error", levelCeiling: 5, status: draft }
+          - { id: DP-01-021, title: "Elastic deformation and contact effects in measurement", levelCeiling: 5, status: draft }
+
+      - id: DP-01-A03
+        title: Angle and Alignment
+        status: draft
+        elements:
+          - { id: DP-01-022, title: "Angle units, standards and the closure principle", levelCeiling: 4, status: draft }
+          - { id: DP-01-023, title: "Angle gauge blocks and polygons", levelCeiling: 4, status: draft }
+          - { id: DP-01-024, title: "Autocollimators", levelCeiling: 5, status: draft }
+          - { id: DP-01-025, title: "Sine bars and sine plates", levelCeiling: 4, status: draft }
+          - { id: DP-01-026, title: "Levels, clinometers and inclination measurement", levelCeiling: 4, status: draft }
+          - { id: DP-01-027, title: "Rotary tables and indexing devices", levelCeiling: 4, status: draft }
+          - { id: DP-01-028, title: "Straightness, flatness and squareness measurement", levelCeiling: 5, status: draft }
+          - { id: DP-01-029, title: "Machine tool alignment and geometric testing", levelCeiling: 5, status: draft }
+
+      - id: DP-01-A04
+        title: Geometric Specification and Tolerancing
+        status: draft
+        summary: >-
+          GD&T as a specification language. Figure-dependent material: figures
+          from ASME Y14.5 and ISO GPS may not be reproduced under any tier, so
+          elements must describe callouts in original prose and cite the figure.
+        elements:
+          - { id: DP-01-030, title: "Purpose of geometric tolerancing and its advantage over coordinate tolerancing", levelCeiling: 4, status: draft }
+          - { id: DP-01-031, title: "Feature of size, feature and derived elements", levelCeiling: 5, status: draft }
+          - { id: DP-01-032, title: "Datums, datum features and datum reference frames", levelCeiling: 5, status: draft }
+          - { id: DP-01-033, title: "Datum precedence and constraint of degrees of freedom", levelCeiling: 5, status: draft }
+          - { id: DP-01-034, title: "Form tolerances: flatness, straightness, circularity, cylindricity", levelCeiling: 4, status: draft }
+          - { id: DP-01-035, title: "Orientation tolerances: parallelism, perpendicularity, angularity", levelCeiling: 4, status: draft }
+          - { id: DP-01-036, title: "Location tolerances: position, concentricity, symmetry", levelCeiling: 5, status: draft }
+          - { id: DP-01-037, title: "Profile tolerances of a line and of a surface", levelCeiling: 5, status: draft }
+          - { id: DP-01-038, title: "Runout and total runout", levelCeiling: 4, status: draft }
+          - { id: DP-01-039, title: "Material condition modifiers and bonus tolerance", levelCeiling: 5, status: draft }
+          - { id: DP-01-040, title: "Composite and multiple single-segment position tolerances", levelCeiling: 5, status: draft }
+          - { id: DP-01-041, title: "Envelope principle, independency and Rule 1", levelCeiling: 5, status: draft }
+          - { id: DP-01-042, title: "Maximum and least material boundaries and virtual condition", levelCeiling: 5, status: draft }
+          - { id: DP-01-043, title: "Tolerance stack-up analysis", levelCeiling: 5, status: draft }
+          - { id: DP-01-044, title: "Statistical tolerancing", levelCeiling: 5, status: draft }
+          - { id: DP-01-045, title: "Divergences between ASME Y14.5 and ISO GPS treatment", levelCeiling: 5, status: draft }
+          - { id: DP-01-046, title: "Reading a drawing and inferring the designer's functional intent", levelCeiling: 5, status: draft }
+          - { id: DP-01-047, title: "Specifying a tolerance that can actually be verified", levelCeiling: 5, status: draft }
+          - { id: DP-01-048, title: "Model-based definition and annotated 3D models", levelCeiling: 4, status: draft }
+
+      - id: DP-01-A05
+        title: Coordinate Measuring Systems
+        status: draft
+        elements:
+          - { id: DP-01-049, title: "CMM architectures and their error characteristics", levelCeiling: 4, status: draft }
+          - { id: DP-01-050, title: "Probing systems: touch trigger, scanning and analogue", levelCeiling: 5, status: draft }
+          - { id: DP-01-051, title: "Probe qualification and stylus effects", levelCeiling: 5, status: draft }
+          - { id: DP-01-052, title: "Part alignment and datum establishment on a CMM", levelCeiling: 5, status: draft }
+          - { id: DP-01-053, title: "Sampling strategy and point density", levelCeiling: 5, status: draft }
+          - { id: DP-01-054, title: "Fitting algorithms and the substitute geometry problem", levelCeiling: 5, status: draft }
+          - { id: DP-01-055, title: "Evaluating GD&T callouts from measured points", levelCeiling: 5, status: draft }
+          - { id: DP-01-056, title: "CMM performance verification and acceptance testing", levelCeiling: 5, status: draft }
+          - { id: DP-01-057, title: "Task-specific measurement uncertainty for coordinate measurement", levelCeiling: 5, status: draft }
+          - { id: DP-01-058, title: "Thermal effects and environmental compensation on CMMs", levelCeiling: 5, status: draft }
+          - { id: DP-01-059, title: "Articulated arms and portable coordinate systems", levelCeiling: 4, status: draft }
+          - { id: DP-01-060, title: "Laser trackers and large-volume metrology", levelCeiling: 5, status: draft }
+          - { id: DP-01-061, title: "Photogrammetry and structured light systems", levelCeiling: 5, status: draft }
+          - { id: DP-01-062, title: "Computed tomography for dimensional measurement", levelCeiling: 5, status: draft }
+          - { id: DP-01-063, title: "Comparing results between different measurement systems", levelCeiling: 5, status: draft }
+
+      - id: DP-01-A06
+        title: Optical and Non-Contact Dimensional Measurement
+        status: draft
+        elements:
+          - { id: DP-01-064, title: "Optical comparators and profile projection", levelCeiling: 3, status: draft }
+          - { id: DP-01-065, title: "Measuring microscopes and vision systems", levelCeiling: 4, status: draft }
+          - { id: DP-01-066, title: "Edge detection, illumination and apparent size", levelCeiling: 5, status: draft }
+          - { id: DP-01-067, title: "Laser scanning and triangulation sensors", levelCeiling: 4, status: draft }
+          - { id: DP-01-068, title: "Confocal and focus-variation techniques", levelCeiling: 5, status: draft }
+          - { id: DP-01-069, title: "Interferometric displacement measurement", levelCeiling: 5, status: draft }
+          - { id: DP-01-070, title: "Optical flats and flatness by interference", levelCeiling: 4, status: draft }
+          - { id: DP-01-071, title: "Limitations of non-contact measurement on real surfaces", levelCeiling: 5, status: draft }
+
+      - id: DP-01-A07
+        title: Surface Texture
+        status: draft
+        elements:
+          - { id: DP-01-072, title: "Surface texture concepts: roughness, waviness, form", levelCeiling: 4, status: draft }
+          - { id: DP-01-073, title: "Filtering, cut-off wavelength and its consequences", levelCeiling: 5, status: draft }
+          - { id: DP-01-074, title: "Amplitude parameters and their interpretation", levelCeiling: 4, status: draft }
+          - { id: DP-01-075, title: "Spacing, hybrid and functional parameters", levelCeiling: 5, status: draft }
+          - { id: DP-01-076, title: "Areal surface texture parameters", levelCeiling: 5, status: draft }
+          - { id: DP-01-077, title: "Stylus instruments: principle, calibration and stylus effects", levelCeiling: 5, status: draft }
+          - { id: DP-01-078, title: "Optical surface texture instruments", levelCeiling: 5, status: draft }
+          - { id: DP-01-079, title: "Surface texture specification on drawings", levelCeiling: 4, status: draft }
+          - { id: DP-01-080, title: "Relating surface texture to function", levelCeiling: 5, status: draft }
+
+      - id: DP-01-A08
+        title: Threads, Gears and Complex Geometry
+        status: draft
+        elements:
+          - { id: DP-01-081, title: "Screw thread geometry and terminology", levelCeiling: 4, status: draft }
+          - { id: DP-01-082, title: "Thread measurement by three-wire and other methods", levelCeiling: 5, status: draft }
+          - { id: DP-01-083, title: "Thread gauging and functional acceptance", levelCeiling: 4, status: draft }
+          - { id: DP-01-084, title: "Gear geometry and terminology", levelCeiling: 4, status: draft }
+          - { id: DP-01-085, title: "Gear measurement: profile, lead, pitch and runout", levelCeiling: 5, status: draft }
+          - { id: DP-01-086, title: "Splines, keyways and form features", levelCeiling: 4, status: draft }
+          - { id: DP-01-087, title: "Freeform and sculptured surface measurement", levelCeiling: 5, status: draft }
+          - { id: DP-01-088, title: "Bearing, roundness and cylindricity measurement", levelCeiling: 5, status: draft }
+          - { id: DP-01-089, title: "Roundness instrument principles and spindle error separation", levelCeiling: 5, status: draft }
