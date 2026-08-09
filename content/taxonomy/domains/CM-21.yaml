@@ -100,3 +100,28 @@ domains:
           - { id: CM-21-045, title: "Uncertainty in AI evaluation results", levelCeiling: 4, status: draft }
           - { id: CM-21-046, title: "Reference datasets and traceability for AI evaluation", levelCeiling: 4, status: draft }
           - { id: CM-21-047, title: "The metrologist's contribution to AI standards and assurance", levelCeiling: 4, status: draft }
+
+      - id: CM-21-A07
+        title: Generative AI, Assisted Engineering and Model Provenance
+        status: draft
+        summary: >-
+          Generative systems break assumptions that the rest of this domain
+          relies on: the same input does not give the same output, the model
+          behind an interface changes without notice, and a fluent answer
+          carries no signal about whether it is grounded. A measurement result
+          touched by such a system needs to record which model produced it,
+          not merely which software version — a distinction that does not yet
+          exist in most provenance models and will have to.
+        elements:
+          - { id: CM-21-048, title: "Evaluating a generative system: what can and cannot be measured", levelCeiling: 5, status: draft }
+          - { id: CM-21-049, title: "Grounding, retrieval quality and factuality assessment", levelCeiling: 5, status: draft }
+          - { id: CM-21-050, title: "Verifying citations and detecting fabricated references at scale", levelCeiling: 4, status: draft }
+          - { id: CM-21-051, title: "Prompt sensitivity and the instability of generative results", levelCeiling: 5, status: draft }
+          - { id: CM-21-052, title: "Nondeterminism, temperature and reproducibility of generated output", levelCeiling: 5, status: draft }
+          - { id: CM-21-053, title: "Model and version dependence of a result", levelCeiling: 5, status: draft }
+          - { id: CM-21-054, title: "AI-generated code in measurement software", levelCeiling: 5, status: draft }
+          - { id: CM-21-055, title: "Reviewing generated code for numerical correctness", levelCeiling: 5, status: draft }
+          - { id: CM-21-056, title: "AI-generated tests and the risk of tests that confirm the bug", levelCeiling: 5, status: draft }
+          - { id: CM-21-057, title: "Hidden dependencies and supply chain risk in generated code", levelCeiling: 4, status: draft }
+          - { id: CM-21-058, title: "Recording which model produced a result", levelCeiling: 5, status: draft }
+          - { id: CM-21-059, title: "Model provenance as part of the measurement result record", levelCeiling: 5, status: draft }

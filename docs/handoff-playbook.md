@@ -176,6 +176,39 @@ Every non-auto-scored item ships with its rubric in the same commit.
 
 ---
 
+## Knowledge currency
+
+Every element declares what kind of claim it makes and how fast that claim ages, in a `currency` block. This is what stops the corpus rotting silently.
+
+```yaml
+currency:
+  authorityStatus: historical      # see the schema for all seven values
+  volatility: controlled
+  sourceRevision: "Z540.3-2006 (R2013)"
+  lastVerified: "2026-08-09"
+  note: >-
+    Withdrawn as an active standard in October 2020. Retained because it is
+    still invoked by contract in US defence and aerospace work.
+```
+
+**The distinction that matters most is `normative` versus `historical`.** A withdrawn standard reads exactly like a live one unless something says otherwise, and a reader who cannot tell them apart will comply with the wrong thing. Where an element covers a withdrawn requirement, it must keep three things visibly separate:
+
+1. what the standard historically required,
+2. where it still binds — usually through a contract that names it,
+3. what the current framework asks for instead.
+
+`ANSI/NCSLI Z540.3` is the type case: withdrawn in 2020, superseded in general by the ISO/IEC 17025 decision-rule framework, and still contractually mandatory in a great deal of defence work. All three of those are true at once.
+
+**Historical content is never deleted.** Content is created, not destroyed. Someone credentialed against an element must always be able to see what they were assessed on — deprecate, mark, and point forward with `supersedes` / `supersededBy`.
+
+`volatility` drives review cadence, so set it honestly. `controlled` means review is triggered by a published revision rather than by a calendar; a new edition of ISO/IEC 17025 should wake up every element that tracks it.
+
+## Vocabulary belongs to its framework
+
+Sector vocabularies are not metrology vocabulary and must never be presented as though they were. Repeatability, reproducibility, bias, linearity, stability and resolution all mean different things in AIAG, VDA, ISO and laboratory practice.
+
+Name the framework you are speaking in — "in the AIAG sense" — and where it diverges from VIM and GUM usage, say so explicitly. An organization-agnostic BOK that quietly adopts one sector's dialect as the truth has failed at its own premise. `CM-07` carries this constraint in its area summary; it applies everywhere.
+
 ## Things that will get a change rejected
 
 - An element with no citation.

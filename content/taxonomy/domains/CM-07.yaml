@@ -16,6 +16,16 @@ domains:
       - id: CM-07-A01
         title: MSA Fundamentals
         status: draft
+        summary: >-
+          Authoring constraint for this whole domain: MSA vocabulary is NOT
+          metrology vocabulary and must never be presented as though it were.
+          Repeatability, reproducibility, bias, linearity, stability and
+          resolution all carry meanings in AIAG, VDA, ISO and laboratory
+          practice that do not coincide. Every element here states which
+          framework it is speaking in — "in the AIAG sense" — and where that
+          framework diverges from VIM and GUM usage, the element says so. An
+          organization-agnostic BOK that quietly adopts one sector's dialect as
+          the truth has failed at its own premise.
         elements:
           - { id: CM-07-001, title: "What measurement systems analysis is for", levelCeiling: 3, status: draft }
           - { id: CM-07-002, title: "Measurement system variation as a component of observed variation", levelCeiling: 4, status: draft }
@@ -82,3 +92,33 @@ domains:
           - { id: CM-07-038, title: "Reconciling a customer-mandated MSA method with sound practice", levelCeiling: 4, status: draft }
           - { id: CM-07-039, title: "Automated and in-line measurement system evaluation", levelCeiling: 4, status: draft }
           - { id: CM-07-040, title: "Presenting MSA results to a production audience", levelCeiling: 4, status: draft }
+
+      - id: CM-07-A07
+        title: Measurement Assurance and Measurement Process Control
+        status: draft
+        summary: >-
+          Ongoing demonstration that a measurement system remains capable of
+          producing trustworthy results between calibrations. Distinct from
+          calibration, which is a point in time, and from MSA, which
+          characterises a system once. Components of assurance appear across
+          CM-06, CM-09, CM-10 and CM-12; this area is the discipline that
+          composes them into a programme, and it is what an assessor is
+          actually probing when they ask how you know your results are still
+          good.
+        elements:
+          - { id: CM-07-041, title: "Purpose and principles of measurement assurance", levelCeiling: 4, status: draft }
+          - { id: CM-07-042, title: "Measurement assurance contrasted with calibration", levelCeiling: 4, status: draft }
+          - { id: CM-07-043, title: "Measurement assurance contrasted with measurement systems analysis", levelCeiling: 4, status: draft }
+          - { id: CM-07-044, title: "Check standards and reference artefacts as assurance instruments", levelCeiling: 4, status: draft }
+          - { id: CM-07-045, title: "Selecting a check standard sensitive to the failure modes that matter", levelCeiling: 5, status: draft }
+          - { id: CM-07-046, title: "Control charting a measurement process", levelCeiling: 4, status: draft }
+          - { id: CM-07-047, title: "Establishing control limits for measurement assurance", levelCeiling: 5, status: draft }
+          - { id: CM-07-048, title: "Measurement assurance frequency and interval", levelCeiling: 4, status: draft }
+          - { id: CM-07-049, title: "Trend and drift detection from assurance data", levelCeiling: 4, status: draft }
+          - { id: CM-07-050, title: "Environmental and operator contributions to assurance data", levelCeiling: 4, status: draft }
+          - { id: CM-07-051, title: "Responding to an out-of-control measurement process", levelCeiling: 5, status: draft }
+          - { id: CM-07-052, title: "Impact assessment on results produced while out of control", levelCeiling: 5, status: draft }
+          - { id: CM-07-053, title: "Designing a measurement assurance programme", levelCeiling: 5, status: draft }
+          - { id: CM-07-054, title: "Measurement assurance for automated and continuous systems", levelCeiling: 4, status: draft }
+          - { id: CM-07-055, title: "Assurance evidence for an accreditation assessment", levelCeiling: 4, status: draft }
+          - { id: CM-07-056, title: "Interlaboratory comparison as an assurance mechanism", levelCeiling: 4, status: draft }

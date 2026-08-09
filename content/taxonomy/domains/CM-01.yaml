@@ -24,7 +24,7 @@ domains:
           - { id: CM-01-001, title: "What measurement is, and what it is not", levelCeiling: 3, status: draft }
           - { id: CM-01-002, title: "Measurement as an input to decisions and its consequences", levelCeiling: 3, status: draft }
           - { id: CM-01-003, title: "The measurand and why its definition governs everything downstream", levelCeiling: 5, status: draft }
-          - { id: CM-01-004, title: "Definitional uncertainty: the floor you cannot measure below", levelCeiling: 4, status: draft }
+          - { id: CM-01-004, title: "Definitional uncertainty and the effect of measurand definition on the result", levelCeiling: 4, status: draft }
           - { id: CM-01-005, title: "Measurement as a modelling activity rather than an observation", levelCeiling: 4, status: draft }
           - { id: CM-01-006, title: "Fitness for purpose and the cost of measuring better than needed", levelCeiling: 4, status: draft }
           - { id: CM-01-007, title: "Nominal properties and qualitative examination", levelCeiling: 3, status: draft }

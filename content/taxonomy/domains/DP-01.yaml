@@ -57,6 +57,11 @@ domains:
           - { id: DP-01-027, title: "Rotary tables and indexing devices", levelCeiling: 4, status: draft }
           - { id: DP-01-028, title: "Straightness, flatness and squareness measurement", levelCeiling: 5, status: draft }
           - { id: DP-01-029, title: "Machine tool alignment and geometric testing", levelCeiling: 4, status: draft }
+          - { id: DP-01-090, title: "Error separation: measuring an instrument and an artefact simultaneously", levelCeiling: 5, status: draft }
+          - { id: DP-01-091, title: "Reversal methods", levelCeiling: 5, status: draft }
+          - { id: DP-01-092, title: "Multi-position and multi-probe separation techniques", levelCeiling: 5, status: draft }
+          - { id: DP-01-093, title: "Straightness and flatness measurement by error separation", levelCeiling: 5, status: draft }
+          - { id: DP-01-094, title: "Volumetric error mapping and compensation of machine geometry", levelCeiling: 5, status: draft }
 
       - id: DP-01-A04
         title: Geometric Specification and Tolerancing

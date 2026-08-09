@@ -126,3 +126,29 @@ domains:
           - { id: CM-06-060, title: "Equipment identification, inventory and status control", levelCeiling: 4, status: draft }
           - { id: CM-06-061, title: "Recall systems and preventing use of overdue equipment", levelCeiling: 4, status: draft }
           - { id: CM-06-062, title: "Equipment criticality classification", levelCeiling: 4, status: draft }
+
+      - id: CM-06-A09
+        title: Metrological Confirmation and Fitness for Intended Use
+        status: draft
+        summary: >-
+          Confirming that a specific item of equipment is fit for a specific
+          measurement process, which is a different question from whether it
+          was calibrated. A calibration reports what an instrument does; a
+          confirmation decides whether that is good enough for the job it is
+          about to do. The central concept of ISO 10012 and the step most
+          often skipped, because a calibration certificate is mistaken for an
+          answer to a question it never asked. Boundary: the management-system
+          requirement is CM-10; the risk mathematics behind the decision is
+          CM-08.
+        elements:
+          - { id: CM-06-063, title: "Calibration, verification and metrological confirmation distinguished", levelCeiling: 4, status: draft }
+          - { id: CM-06-064, title: "Deriving metrological requirements from a measurement process", levelCeiling: 5, status: draft }
+          - { id: CM-06-065, title: "Comparing instrument capability against metrological requirements", levelCeiling: 5, status: draft }
+          - { id: CM-06-066, title: "Confirmation criteria and how they are set", levelCeiling: 4, status: draft }
+          - { id: CM-06-067, title: "Confirmation status, labelling and its meaning to a user", levelCeiling: 4, status: draft }
+          - { id: CM-06-068, title: "Confirmation intervals and their relationship to calibration intervals", levelCeiling: 4, status: draft }
+          - { id: CM-06-069, title: "Handling a confirmation failure", levelCeiling: 5, status: draft }
+          - { id: CM-06-070, title: "Reconfirmation after repair, adjustment or relocation", levelCeiling: 4, status: draft }
+          - { id: CM-06-071, title: "The same instrument confirmed for one process and not another", levelCeiling: 5, status: draft }
+          - { id: CM-06-072, title: "Confirmation records and their evidentiary role", levelCeiling: 4, status: draft }
+          - { id: CM-06-073, title: "Designing a metrological confirmation system", levelCeiling: 5, status: draft }

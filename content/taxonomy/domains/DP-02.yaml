@@ -93,3 +93,28 @@ domains:
           - { id: DP-02-050, title: "Hardness scale conversion and why it is unreliable", levelCeiling: 5, status: draft }
           - { id: DP-02-051, title: "Uncertainty evaluation for hardness measurement", levelCeiling: 4, status: draft }
           - { id: DP-02-052, title: "Instrumented indentation testing", levelCeiling: 4, status: draft }
+
+      - id: DP-02-A06
+        title: Gravity and Gravimetry
+        status: draft
+        summary: >-
+          Measurement of gravitational acceleration as a discipline in its own
+          right, not merely as a correction term. Local g enters force
+          realisation, pressure realisation and mass comparison, and a
+          metrologist who treats it as a looked-up constant has an
+          unacknowledged uncertainty contribution. Included here because
+          gravimetry shares apparatus and traceability routes with mass and
+          force; it is a candidate for its own discipline pack if it grows.
+        elements:
+          - { id: DP-02-053, title: "Gravitational acceleration as a measurand", levelCeiling: 4, status: draft }
+          - { id: DP-02-054, title: "Absolute gravimeters and free-fall methods", levelCeiling: 5, status: draft }
+          - { id: DP-02-055, title: "Atom interferometric gravimetry", levelCeiling: 5, status: draft }
+          - { id: DP-02-056, title: "Relative gravimeters and their drift behaviour", levelCeiling: 4, status: draft }
+          - { id: DP-02-057, title: "Gravity gradients and vertical transfer to the measurement height", levelCeiling: 5, status: draft }
+          - { id: DP-02-058, title: "Earth tide, ocean loading and atmospheric corrections", levelCeiling: 5, status: draft }
+          - { id: DP-02-059, title: "Polar motion and length-of-day corrections", levelCeiling: 4, status: draft }
+          - { id: DP-02-060, title: "Gravity reference networks and international comparisons", levelCeiling: 4, status: draft }
+          - { id: DP-02-061, title: "Obtaining a defensible local g value for a laboratory", levelCeiling: 5, status: draft }
+          - { id: DP-02-062, title: "Consequences of an inadequate g value in force and pressure work", levelCeiling: 4, status: draft }
+          - { id: DP-02-063, title: "Uncertainty evaluation in gravimetry", levelCeiling: 5, status: draft }
+          - { id: DP-02-064, title: "Site stability, microseismic noise and gravimeter environments", levelCeiling: 4, status: draft }

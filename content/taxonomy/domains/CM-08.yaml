@@ -71,14 +71,19 @@ domains:
         status: draft
         summary: >-
           Ratio rules remain contractually mandated in much defence and
-          aerospace work. Practitioners must understand both what they do and
-          why the risk-based approach replaced them.
+          aerospace work. Practitioners must understand what they do and why
+          the risk-based approach replaced them. Authoring constraint: Z540-1
+          and Z540.3 are both withdrawn as active standards yet still invoked
+          by contract. Elements must state that status and keep three things
+          separate — what the standard historically required, where it still
+          binds contractually, and what ISO/IEC 17025 asks instead. Teaching a
+          withdrawn requirement as a live one is the failure mode to avoid.
         elements:
           - { id: CM-08-034, title: "Test uncertainty ratio and test accuracy ratio", levelCeiling: 4, status: draft }
           - { id: CM-08-035, title: "The 4:1 ratio requirement and its origins", levelCeiling: 4, status: draft }
           - { id: CM-08-036, title: "What a ratio rule assumes and when those assumptions fail", levelCeiling: 4, status: draft }
-          - { id: CM-08-037, title: "ANSI/NCSL Z540-1 requirements and their continuing contractual use", levelCeiling: 4, status: draft }
-          - { id: CM-08-038, title: "ANSI/NCSLI Z540.3 and the 2 percent false accept requirement", levelCeiling: 5, status: draft }
+          - { id: CM-08-037, title: "ANSI/NCSL Z540-1: withdrawn status and continuing contractual use", levelCeiling: 4, status: draft }
+          - { id: CM-08-038, title: "ANSI/NCSLI Z540.3 false accept risk: the requirement, its withdrawal, and where it still binds", levelCeiling: 5, status: draft }
           - { id: CM-08-039, title: "Migrating a programme from a ratio rule to a risk-based rule", levelCeiling: 4, status: draft }
           - { id: CM-08-040, title: "Demonstrating compliance when the ratio cannot be met", levelCeiling: 4, status: draft }
 

@@ -70,3 +70,34 @@ domains:
           - { id: DP-19-035, title: "Traceability and identification through a production process", levelCeiling: 4, status: draft }
           - { id: DP-19-036, title: "Reverse engineering and as-built model generation", levelCeiling: 4, status: draft }
           - { id: DP-19-037, title: "Measurement planning from a model-based definition", levelCeiling: 5, status: draft }
+
+      - id: DP-19-A05
+        title: Nondestructive Measurement and Inspection
+        status: draft
+        summary: >-
+          NDT treated as measurement science rather than as a set of trades.
+          The distinctive competence is that the measurand is usually a defect
+          that may not be there, so detection probability and sizing
+          uncertainty matter more than instrument accuracy, and a negative
+          result carries a claim that must be quantified. Individual physical
+          techniques also appear in their own packs — ultrasonics in DP-04,
+          eddy current in DP-08, radiography in DP-15, thermography in DP-05 —
+          and this area is where they are treated as inspection methods.
+        elements:
+          - { id: DP-19-038, title: "NDT as measurement: what is being measured and what is being claimed", levelCeiling: 4, status: draft }
+          - { id: DP-19-039, title: "Probability of detection and its determination", levelCeiling: 5, status: draft }
+          - { id: DP-19-040, title: "Flaw sizing and sizing uncertainty", levelCeiling: 5, status: draft }
+          - { id: DP-19-041, title: "What a negative NDT result does and does not assert", levelCeiling: 5, status: draft }
+          - { id: DP-19-042, title: "Reference blocks, calibration standards and artificial defects", levelCeiling: 4, status: draft }
+          - { id: DP-19-043, title: "Ultrasonic testing: pulse-echo and through-transmission", levelCeiling: 4, status: draft }
+          - { id: DP-19-044, title: "Phased array ultrasonics and time-of-flight diffraction", levelCeiling: 5, status: draft }
+          - { id: DP-19-045, title: "Guided wave and long-range screening techniques", levelCeiling: 4, status: draft }
+          - { id: DP-19-046, title: "Radiographic testing and digital radiography", levelCeiling: 4, status: draft }
+          - { id: DP-19-047, title: "Industrial computed tomography for defect detection", levelCeiling: 5, status: draft }
+          - { id: DP-19-048, title: "Magnetic particle and liquid penetrant inspection", levelCeiling: 3, status: draft }
+          - { id: DP-19-049, title: "Eddy current inspection and depth of penetration", levelCeiling: 4, status: draft }
+          - { id: DP-19-050, title: "Infrared thermography and shearography", levelCeiling: 4, status: draft }
+          - { id: DP-19-051, title: "Acoustic emission monitoring", levelCeiling: 4, status: draft }
+          - { id: DP-19-052, title: "Acceptance criteria and their origin in fitness for service", levelCeiling: 5, status: draft }
+          - { id: DP-19-053, title: "Operator effects and inspector qualification schemes", levelCeiling: 4, status: draft }
+          - { id: DP-19-054, title: "Automated and robotic NDT with machine interpretation", levelCeiling: 5, status: draft }

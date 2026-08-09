@@ -547,6 +547,14 @@ sources:
       central to measurement decision risk (CM-08). The Handbook is a separate
       document and must be registered separately if cited.
 
+      STATUS: withdrawn as an active standard by NCSL International in October
+      2020, with ISO/IEC 17025:2017 identified as covering the same ground
+      through its decision-rule requirements. It nonetheless remains binding
+      wherever a contract invokes it by name, which is common in US defence and
+      aerospace work. Elements citing this document MUST state that status and
+      must not present its requirements as currently mandated in general. See
+      CM-08-038, whose title carries the distinction deliberately.
+
   - id: NCSLI-RP-1-2010
     designation: NCSLI RP-1 (2010)
     title: "Establishment and Adjustment of Calibration Intervals"

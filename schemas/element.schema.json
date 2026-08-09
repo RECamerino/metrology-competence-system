@@ -107,6 +107,51 @@
       "description": "How long a credential in this element stays current before recertification. Competence decays, and it decays at different rates — a regulatory element changes with the standard; a fundamental physical principle does not. Omit to inherit the domain default."
     },
 
+    "currency": {
+      "type": "object",
+      "description": "Knowledge currency. Separates what an element ASSERTS from how far that assertion can be trusted over time. Without this the corpus silently rots: a withdrawn standard reads exactly like a live one, and a reader cannot tell an emerging practice from a settled requirement. Required on every element from Phase 4 onward; the validator escalates a missing block to an error once authoring begins.",
+      "required": ["authorityStatus", "volatility"],
+      "additionalProperties": false,
+      "properties": {
+        "authorityStatus": {
+          "enum": ["normative", "authoritative", "accepted-practice", "emerging", "historical", "research", "interpretation"],
+          "description": "What kind of claim this element makes. normative: a current published requirement a laboratory can be held to. authoritative: settled measurement science, not a requirement — the SI, the GUM framework. accepted-practice: what competent practitioners do, without a standard mandating it. emerging: real and worth knowing but not yet settled. historical: was normative, has been withdrawn or superseded, and is retained because practitioners still encounter it — ANSI/NCSLI Z540.3 is the type case. research: active investigation, no consensus. interpretation: this project's own reading, clearly the author's view rather than anyone's requirement."
+        },
+
+        "volatility": {
+          "enum": ["static", "stable", "controlled", "volatile"],
+          "description": "How fast this can go out of date, which drives review cadence rather than merely describing it. static: the physics does not change. stable: decade-scale drift. controlled: changes on a published revision cycle, so review is event-driven — a new edition of ISO/IEC 17025 should trigger it, not a calendar. volatile: months, and CM-21 is largely this."
+        },
+
+        "sourceRevision": {
+          "type": "string",
+          "description": "The specific edition or revision the content was written against, when it tracks one. Distinct from the citation's edition: the citation says which clause was consulted, this says which revision the prose currently reflects, and the two diverge exactly when a standard is updated and the content has not caught up."
+        },
+
+        "lastVerified": {
+          "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate",
+          "description": "When a competent person last confirmed this is still true. Not when the file was edited — a typo fix is not verification."
+        },
+
+        "reviewDue": {
+          "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate",
+          "description": "When it must be looked at again. Derived from volatility unless set explicitly."
+        },
+
+        "supersedes": {
+          "type": "array",
+          "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
+          "description": "Elements this one replaces. The superseded elements remain in the corpus, deprecated, because content is created and never destroyed — a person credentialed against the old element must still be able to see what they were assessed on."
+        },
+
+        "note": {
+          "type": "string",
+          "maxLength": 600,
+          "description": "Anything a reader needs to know about the standing of this content — a withdrawal, a pending revision, a known disagreement in the field."
+        }
+      }
+    },
+
     "authoring": {
       "type": "object",
       "description": "Provenance of the content itself, distinct from the metrology sources it cites.",
