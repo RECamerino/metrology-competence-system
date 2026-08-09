@@ -1,0 +1,44 @@
+schemaVersion: 1
+element: CM-03-036
+
+bindings:
+  - level: 2
+    archetype: ARC-0001
+    status: draft
+    justification: >-
+      The element is assigning a RECTANGULAR distribution specifically, so the
+      draws are restricted to statements that express a limit without a
+      distribution — maximum permissible error, a tolerance band, a
+      manufacturer's stated accuracy. At L2 the wording points clearly at a
+      limit, and the competence is recognising it and dividing by root three
+      rather than by two.
+    parameterRanges:
+      - name: statement
+        choices:
+          - "maximum permissible error ±{{v}}"
+          - "accuracy ±{{v}} over the working range"
+          - "tolerance band ±{{v}}"
+      - name: source_kind
+        choices: [manufacturer datasheet, published limit]
+      - name: stated_value
+        min: 0.01
+        max: 5.0
+
+  - level: 3
+    archetype: ARC-0001
+    status: draft
+    justification: >-
+      At L3 the draws include statements where rectangular is defensible but
+      not obviously right — a stated limit that the source also describes as
+      typical, which pulls toward a normal reading. The element's competence is
+      assigning rectangular and DEFENDING it, so the item has to present a
+      genuine alternative rather than a clear-cut limit.
+    parameterRanges:
+      - name: statement
+        choices:
+          - "typical variation within ±{{v}}"
+          - "specified limits ±{{v}}, typical performance better"
+          - "guaranteed not to exceed ±{{v}}"
+      - name: stated_value
+        min: 0.005
+        max: 2.0

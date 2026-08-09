@@ -1,0 +1,41 @@
+schemaVersion: 1
+element: CM-03-019
+
+bindings:
+  - level: 4
+    archetype: ARC-0002
+    status: draft
+    justification: >-
+      Completeness is an absence, which makes it the hardest thing to find in a
+      budget: everything present is correct, and the defect is that something
+      is missing. The injected class is fixed to a missing influence quantity,
+      and the draws are chosen so the omission is discoverable only by
+      reasoning about the physical measurement rather than by inspecting the
+      table — which is precisely the competence this element names.
+    parameterRanges:
+      - name: defect_class
+        choices: [missing influence quantity]
+      - name: measurement_context
+        choices:
+          - long gauge block comparison with a thermal gradient
+          - mass comparison without an air buoyancy term
+          - four-wire resistance with unaccounted thermal EMF
+      - name: defect_magnitude
+        min: 1.20
+        max: 2.00
+
+  - level: 5
+    archetype: ARC-0002
+    status: draft
+    justification: >-
+      At L5 the missing quantity is one a competent laboratory could reasonably
+      have judged negligible, so the honest answer may be that the budget is
+      defensible as written provided the judgement is recorded. The candidate
+      has to decide whether the omission matters at the stated target
+      uncertainty and defend that call in either direction.
+    parameterRanges:
+      - name: defect_class
+        choices: [missing influence quantity]
+      - name: defect_magnitude
+        min: 1.03
+        max: 1.15

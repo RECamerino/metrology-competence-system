@@ -1,0 +1,57 @@
+schemaVersion: 1
+element: CM-03-040
+
+bindings:
+  - level: 4
+    archetype: ARC-0003
+    status: draft
+    justification: >-
+      The element is choosing between distributions AND defending the choice,
+      so a position-and-defend shape tests it directly where a computation
+      would not. Draws pit rectangular against normal for a source statement
+      that genuinely admits both readings, and the candidate is assigned a
+      side so they cannot retreat to the easier one.
+    parameterRanges:
+      - name: scenario
+        choices:
+          - a manufacturer limit used across the full working range
+          - a certificate value reused at a different operating point
+      - name: position
+        choices: [rectangular, normal]
+      - name: counter_position
+        choices: [normal, rectangular]
+
+  - level: 5
+    archetype: ARC-0003
+    status: draft
+    justification: >-
+      At L5 the draw moves to arcsine against rectangular for a cyclic
+      influence, where practice is genuinely divided and the literature does
+      not settle it. The competence is holding a position under informed
+      pressure while naming what evidence would decide it — which is the
+      observable behaviour that justifies this element's L5 ceiling.
+    parameterRanges:
+      - name: scenario
+        choices:
+          - a cyclic thermal influence over a long measurement
+          - a sinusoidal mains-borne interference term
+      - name: position
+        choices: [arcsine, rectangular]
+      - name: counter_position
+        choices: [rectangular, arcsine]
+
+  - level: 4
+    archetype: ARC-0002
+    status: draft
+    justification: >-
+      A second shape for the same unit, bound deliberately: distribution choice
+      shows up differently when the candidate meets it as a defect already
+      committed in someone else's budget rather than as a decision they are
+      making themselves. Recognising a wrong assignment is a distinct
+      observable from defending a right one.
+    parameterRanges:
+      - name: defect_class
+        choices: [wrong divisor]
+      - name: defect_magnitude
+        min: 1.10
+        max: 1.45

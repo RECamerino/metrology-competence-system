@@ -1,0 +1,42 @@
+schemaVersion: 1
+element: CM-03-038
+
+bindings:
+  - level: 3
+    archetype: ARC-0001
+    status: draft
+    justification: >-
+      This element is the inverse operation of CM-03-036: recovering a standard
+      uncertainty from a stated confidence rather than from a limit. Draws are
+      restricted to statements carrying an explicit coverage claim, and the
+      competence tested is knowing which divisor a stated confidence implies
+      and noticing when the coverage factor is stated but the level is not.
+    parameterRanges:
+      - name: statement
+        choices:
+          - "expanded uncertainty {{v}}, k = 2"
+          - "uncertainty {{v}} at 95 % confidence"
+          - "expanded uncertainty {{v}} (coverage factor not stated)"
+      - name: source_kind
+        choices: [calibration certificate]
+      - name: stated_value
+        min: 0.001
+        max: 1.0
+
+  - level: 4
+    archetype: ARC-0001
+    status: draft
+    justification: >-
+      At L4 the draw includes the case the element exists for: a certificate
+      stating expanded uncertainty with no coverage factor and no confidence
+      level. The defensible answer is to state the assumption being made and
+      its consequence, not to assume k equals two silently — which is what most
+      practitioners do and why this sits at the element's ceiling.
+    parameterRanges:
+      - name: statement
+        choices:
+          - "expanded uncertainty {{v}} (coverage factor not stated)"
+          - "uncertainty {{v}}, confidence level not specified"
+      - name: operating_point
+        min: 0.1
+        max: 100.0
