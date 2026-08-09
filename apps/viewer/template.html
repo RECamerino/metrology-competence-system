@@ -451,11 +451,11 @@
     const elCount = d.areas.reduce((n, a) => n + a.elements.length, 0);
     totalAreas += areaCount;
     totalElements += elCount;
-    // L1-L2 are assessed once per competency area; L3 and above per element.
-    totalUnits += areaCount * 2;
+    // Every level of every element is assessed at element scope, so a
+    // credential names exactly what was tested. One unit per attainable level.
     for (const a of d.areas) for (const e of a.elements) {
       ceilCount[e.c] = (ceilCount[e.c] || 0) + 1;
-      totalUnits += Math.max(0, e.c - 2);
+      totalUnits += e.c;
     }
 
     const areas = d.areas.map((a) => `

@@ -1,0 +1,120 @@
+schemaVersion: 1
+domains:
+  - id: DP-21
+    title: Geodetic and Gravitational Metrology
+    kind: discipline
+    status: draft
+    summary: >-
+      Measurement of position, height and the Earth's gravity field, treated as
+      metrology rather than as surveying. In scope because optical clocks now
+      resolve elevation change at the centimetre level, which makes the gravity
+      potential a quantity a time and frequency laboratory measures — the
+      boundary between geodesy and metrology has moved. Boundary: gravimetry
+      serving mass and force realisation is DP-02-A06; GNSS timing is DP-14;
+      large-volume dimensional work is DP-01-A05.
+
+    competencyAreas:
+
+      - id: DP-21-A01
+        title: Reference Frames and Coordinate Systems
+        status: draft
+        summary: >-
+          A coordinate is meaningless without the frame it is expressed in, and
+          frames move. The most common failure in applied geodetic work is
+          combining coordinates from different realisations or epochs.
+        elements:
+          - { id: DP-21-001, title: "Terrestrial reference systems and their realisations", levelCeiling: 4, status: draft }
+          - { id: DP-21-002, title: "ITRF and its successive realisations", levelCeiling: 5, status: draft }
+          - { id: DP-21-003, title: "Datums, epochs and why a coordinate needs both", levelCeiling: 5, status: draft }
+          - { id: DP-21-004, title: "Plate motion and time-dependent coordinates", levelCeiling: 4, status: draft }
+          - { id: DP-21-005, title: "Regional and national reference frames", levelCeiling: 4, status: draft }
+          - { id: DP-21-006, title: "Transformations between frames and their uncertainty", levelCeiling: 5, status: draft }
+          - { id: DP-21-007, title: "Celestial reference frames and Earth orientation parameters", levelCeiling: 5, status: draft }
+          - { id: DP-21-008, title: "Map projections and the distortion they introduce", levelCeiling: 3, status: draft }
+          - { id: DP-21-009, title: "Errors caused by mixing frames, realisations or epochs", levelCeiling: 4, status: draft }
+
+      - id: DP-21-A02
+        title: Positioning and Geodetic Networks
+        status: draft
+        elements:
+          - { id: DP-21-010, title: "GNSS positioning principles and error sources", levelCeiling: 4, status: draft }
+          - { id: DP-21-011, title: "Differential and real-time kinematic positioning", levelCeiling: 4, status: draft }
+          - { id: DP-21-012, title: "Precise point positioning", levelCeiling: 5, status: draft }
+          - { id: DP-21-013, title: "Carrier phase ambiguity resolution", levelCeiling: 5, status: draft }
+          - { id: DP-21-014, title: "Atmospheric delay: ionospheric and tropospheric modelling", levelCeiling: 5, status: draft }
+          - { id: DP-21-015, title: "Multipath, antenna phase centre and site effects", levelCeiling: 5, status: draft }
+          - { id: DP-21-016, title: "Very long baseline interferometry", levelCeiling: 5, status: draft }
+          - { id: DP-21-017, title: "Satellite and lunar laser ranging", levelCeiling: 5, status: draft }
+          - { id: DP-21-018, title: "Geodetic network design and adjustment", levelCeiling: 5, status: draft }
+          - { id: DP-21-019, title: "Least squares adjustment and reliability of a network", levelCeiling: 5, status: draft }
+          - { id: DP-21-020, title: "Uncertainty evaluation for geodetic positions", levelCeiling: 5, status: draft }
+          - { id: DP-21-021, title: "Terrestrial surveying instruments and their calibration", levelCeiling: 4, status: draft }
+          - { id: DP-21-022, title: "EDM calibration baselines", levelCeiling: 4, status: draft }
+
+      - id: DP-21-A03
+        title: Height Systems and Vertical Datums
+        status: draft
+        summary: >-
+          Height is the quantity where geodesy and metrology disagree most
+          quietly: three different heights over the same point are all correct
+          and all different, and the difference is the gravity field.
+        elements:
+          - { id: DP-21-023, title: "Ellipsoidal, orthometric and normal heights distinguished", levelCeiling: 5, status: draft }
+          - { id: DP-21-024, title: "Geoid, quasigeoid and reference surfaces", levelCeiling: 5, status: draft }
+          - { id: DP-21-025, title: "Vertical datums and their realisation", levelCeiling: 4, status: draft }
+          - { id: DP-21-026, title: "Spirit levelling and its error accumulation", levelCeiling: 4, status: draft }
+          - { id: DP-21-027, title: "Geopotential numbers and dynamic heights", levelCeiling: 5, status: draft }
+          - { id: DP-21-028, title: "Tide gauges and mean sea level determination", levelCeiling: 4, status: draft }
+          - { id: DP-21-029, title: "International height reference systems", levelCeiling: 4, status: draft }
+          - { id: DP-21-030, title: "Converting between height types and the uncertainty incurred", levelCeiling: 5, status: draft }
+
+      - id: DP-21-A04
+        title: The Gravity Field and the Geoid
+        status: draft
+        summary: >-
+          Boundary: absolute and relative gravimeter operation for laboratory
+          use is DP-02-A06. This area is the field itself — its modelling,
+          its spatial structure and its variation in time.
+        elements:
+          - { id: DP-21-031, title: "The Earth's gravity field and its representation", levelCeiling: 5, status: draft }
+          - { id: DP-21-032, title: "Spherical harmonic models and global gravity fields", levelCeiling: 5, status: draft }
+          - { id: DP-21-033, title: "Satellite gravimetry missions and their products", levelCeiling: 4, status: draft }
+          - { id: DP-21-034, title: "Terrestrial gravity surveys and network densification", levelCeiling: 4, status: draft }
+          - { id: DP-21-035, title: "Geoid determination and computation", levelCeiling: 5, status: draft }
+          - { id: DP-21-036, title: "Gravity anomalies, disturbances and reductions", levelCeiling: 5, status: draft }
+          - { id: DP-21-037, title: "Temporal gravity variation: hydrology, ice mass and tectonics", levelCeiling: 5, status: draft }
+          - { id: DP-21-038, title: "Absolute gravity reference networks and international comparisons", levelCeiling: 4, status: draft }
+          - { id: DP-21-039, title: "Gravity gradiometry", levelCeiling: 5, status: draft }
+
+      - id: DP-21-A05
+        title: Relativistic Geodesy and Chronometric Levelling
+        status: draft
+        summary: >-
+          The reason this pack is in scope. A clock's rate depends on the
+          gravity potential at its location, so comparing two optical clocks
+          measures the potential difference between them — height determined by
+          frequency rather than by levelling. Metrology and geodesy are becoming
+          the same measurement here, and this area is deliberately weighted
+          toward expert level because the field is still being built.
+        elements:
+          - { id: DP-21-040, title: "Gravitational redshift and clock rate as a function of potential", levelCeiling: 5, status: draft }
+          - { id: DP-21-041, title: "Chronometric levelling: height from frequency comparison", levelCeiling: 5, status: draft }
+          - { id: DP-21-042, title: "Optical clock comparison over fibre links for geodesy", levelCeiling: 5, status: draft }
+          - { id: DP-21-043, title: "Relativistic corrections in time transfer and positioning", levelCeiling: 5, status: draft }
+          - { id: DP-21-044, title: "Uncertainty budget for a chronometric height determination", levelCeiling: 5, status: draft }
+          - { id: DP-21-045, title: "Comparing chronometric and conventional height results", levelCeiling: 5, status: draft }
+          - { id: DP-21-046, title: "Relativistic definition of a reference surface and its consequences", levelCeiling: 5, status: draft }
+          - { id: DP-21-047, title: "Transportable clocks for field geodesy", levelCeiling: 5, status: draft }
+
+      - id: DP-21-A06
+        title: Deformation, Monitoring and Applied Geodetic Measurement
+        status: draft
+        elements:
+          - { id: DP-21-048, title: "Deformation monitoring and change detection", levelCeiling: 4, status: draft }
+          - { id: DP-21-049, title: "Structural and infrastructure monitoring", levelCeiling: 4, status: draft }
+          - { id: DP-21-050, title: "Subsidence, uplift and groundwater-driven motion", levelCeiling: 4, status: draft }
+          - { id: DP-21-051, title: "InSAR and satellite deformation measurement", levelCeiling: 5, status: draft }
+          - { id: DP-21-052, title: "Distinguishing real motion from measurement artefact", levelCeiling: 5, status: draft }
+          - { id: DP-21-053, title: "Engineering geodesy for large facilities and accelerators", levelCeiling: 5, status: draft }
+          - { id: DP-21-054, title: "Geodetic input to sea level and climate records", levelCeiling: 4, status: draft }
+          - { id: DP-21-055, title: "Legal and cadastral measurement", levelCeiling: 3, status: draft }

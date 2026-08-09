@@ -58,10 +58,10 @@ export function coverageReport(corpus: Corpus): string {
       (s) => (authored.get(s.id)?.data as Record<string, any> | undefined)?.status === 'stable',
     ).length;
 
-    // L1 and L2 are assessed once per competency area; L3 and above per element.
-    assessableUnits += areas.length * 2;
+    // Every level of every element is assessed at element scope, so a
+    // credential names exactly what was tested. One unit per attainable level.
     for (const stub of stubList) {
-      assessableUnits += Math.max(0, (stub.levelCeiling ?? 0) - 2);
+      assessableUnits += stub.levelCeiling ?? 0;
     }
 
     totalElements += stubList.length;
@@ -78,7 +78,7 @@ export function coverageReport(corpus: Corpus): string {
     `${pad('TOTAL', 22)}${padLeft(domains.reduce((n, d) => n + (d.competencyAreas?.length ?? 0), 0), 6)}${padLeft(totalElements, 7)}${padLeft(totalWritten, 9)}${padLeft(totalStable, 8)}`,
   );
   lines.push('');
-  lines.push(`Assessable units (element × level, L1–L2 bundled per area): ${assessableUnits}`);
+  lines.push(`Assessable units (element × level, all levels element-scoped): ${assessableUnits}`);
   lines.push('');
 
   /* -- Level ceiling distribution ---------------------------------------- */

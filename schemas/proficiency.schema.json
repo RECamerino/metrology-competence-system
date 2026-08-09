@@ -40,7 +40,7 @@
 
         "assessedAt": {
           "enum": ["competency-area", "element"],
-          "description": "L1 and L2 are assessed across a whole competency area — one assessment covering a cluster of related elements, because testing foundational knowledge element by element over-decomposes it. L3 and above are assessed per element, where the distinctions genuinely matter."
+          "description": "Scope at which this level is assessed. The shipped rubric uses `element` at every level, so a credential names exactly what was tested: 'CM-03-048 at L2' means that element was assessed, not that some cluster containing it was. An earlier design assessed L1 and L2 across a whole competency area, which was cheaper to author but produced an ambiguous claim — and a credential's meaning cannot be renegotiated once it has been issued. The `competency-area` value is retained so a fork or an organization overlay can make the opposite trade deliberately, but anything using it must say so on the credential."
         },
 
         "assessment": {

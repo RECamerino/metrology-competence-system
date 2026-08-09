@@ -53,9 +53,9 @@ const domains = readdirSync(DOMAINS_DIR)
     })),
   }));
 
-const areaCount = domains.reduce((n, d) => n + d.areas.length, 0);
+const areaCount = domains.reduce((n: number, d) => n + d.areas.length, 0);
 const elementCount = domains.reduce(
-  (n, d) => n + d.areas.reduce((m, a) => m + a.elements.length, 0),
+  (n: number, d) => n + d.areas.reduce((m: number, a: { elements: unknown[] }) => m + a.elements.length, 0),
   0,
 );
 
