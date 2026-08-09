@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build output
+dist/
+build/
+out/
+*.tsbuildinfo
+.vite/
+src-tauri/target/
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# Generated BOK bundles — always rebuilt from content/
+bundles/
+*.bok.json
+
+# Local databases and wallets — NEVER commit; may contain PII or private keys
+*.sqlite
+*.sqlite3
+*.db
+wallets/
+keys/
+*.pem
+*.p12
+*.pfx
+*.jwk
+
+# Organization overlay data — proprietary by definition, never upstream
+overlays/
+content/**/local/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Logs
+*.log
+npm-debug.log*

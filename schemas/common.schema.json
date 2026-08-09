@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/common.schema.json",
+  "title": "Common definitions",
+  "description": "Shared primitives referenced by every other schema. Resolved locally; the $id is a stable identifier, not a network location. Nothing in this project fetches a schema at runtime.",
+
+  "$defs": {
+    "domainId": {
+      "type": "string",
+      "pattern": "^(CM|DP)-[0-9]{2}$",
+      "description": "Top-level domain. CM = cross-cutting core, DP = discipline pack. Example: CM-03."
+    },
+
+    "competencyAreaId": {
+      "type": "string",
+      "pattern": "^(CM|DP)-[0-9]{2}-A[0-9]{2}$",
+      "description": "Competency area within a domain. Example: CM-03-A02."
+    },
+
+    "elementId": {
+      "type": "string",
+      "pattern": "^(CM|DP)-[0-9]{2}-[0-9]{3}$",
+      "description": "Leaf element — the unit of rating, evidence, and credentialing. Example: CM-03-014. IMPORTANT: the domain prefix records where the element was FIRST created and is historical. The authoritative domain and competency area are the `domain` and `competencyArea` fields on the element. If an element is later reassigned, those fields change and the ID does not, because IDs are immutable — a credential attesting CM-03-014 must resolve to the same element forever."
+    },
+
+    "sourceId": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]+(-[A-Z0-9]+)*$",
+      "description": "Key into content/sources/registry.yaml. Example: JCGM-100-2008, ISO-IEC-17025-2017, ASME-Y14-5-2018."
+    },
+
+    "roleId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Kebab-case role identifier. Example: metrology-technician-ii."
+    },
+
+    "proficiencyLevel": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "1 Novice, 2 Advanced Beginner, 3 Competent, 4 Proficient, 5 Expert."
+    },
+
+    "lifecycleStatus": {
+      "enum": ["draft", "review", "stable", "deprecated"],
+      "description": "draft: being written. review: awaiting checkpoint approval. stable: approved, safe to assess against. deprecated: superseded, never deleted — see supersededBy."
+    },
+
+    "isoDate": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "description": "Absolute date, YYYY-MM-DD. Never relative."
+    },
+
+    "clauseRef": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 60,
+      "description": "Clause, section, table, or figure within the cited document, as the document itself numbers it. Example: 5.1.2, 7.6.1, Annex F.2.4.5, Table 1. Do not prefix with a section symbol."
+    },
+
+    "citation": {
+      "type": "object",
+      "description": "A precise normative reference. Referenceability is universal: every element must carry at least one of these regardless of the source's licence tier. A citation is a fact and is always permitted; quoting is a separate, tier-gated capability.",
+      "required": ["source", "clause"],
+      "additionalProperties": false,
+      "properties": {
+        "source": { "$ref": "#/$defs/sourceId" },
+        "clause": { "$ref": "#/$defs/clauseRef" },
+        "edition": {
+          "type": "string",
+          "description": "Edition or year actually consulted, when it differs from the registry default. Omit to inherit the registry entry's edition."
+        },
+        "relevance": {
+          "type": "string",
+          "maxLength": 400,
+          "description": "Why this clause matters to this element, in the author's own words. Never a paraphrase so close to the source that it functions as a copy."
+        }
+      }
+    },
+
+    "quote": {
+      "type": "object",
+      "description": "A typed, attributed quotation — never prose baked into a paragraph. Storing quotes as data is what allows a --strip-tier2 build to remove restricted text mechanically while leaving every citation intact, and what allows `npm run report:quotes` to produce a complete legal-review manifest.",
+      "required": ["source", "clause", "text"],
+      "additionalProperties": false,
+      "properties": {
+        "source": { "$ref": "#/$defs/sourceId" },
+        "clause": { "$ref": "#/$defs/clauseRef" },
+        "edition": { "type": "string" },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The quoted words, verbatim and unaltered. Word-count and per-source limits are enforced by the validator against the tier recorded in the source registry, not by this schema — the limits live with the source, so changing a source's terms does not require a schema change."
+        },
+        "commentary": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The author's own analysis of the quoted text. Required by the validator for restricted-tier quotations: a quotation must accompany commentary, never substitute for the clause."
+        }
+      }
+    },
+
+    "contentRef": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "description": "Content-addressed reference to an archived artifact. Hashing is what makes a credential re-reviewable years later."
+    }
+  }
+}

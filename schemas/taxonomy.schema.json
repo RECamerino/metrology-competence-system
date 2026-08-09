@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/taxonomy.schema.json",
+  "title": "Taxonomy skeleton — the immutable ID registry",
+  "description": "Governs content/taxonomy/skeleton.yaml. This file is APPEND-ONLY. IDs may be added; IDs may never be renamed or removed, and the validator fails the build on either. The reason is not tidiness: once a credential attests competence in an element, that identifier must resolve to the same element permanently or the credential becomes unverifiable and its holder is harmed. Elements that prove wrong, redundant, or badly scoped are deprecated and superseded, never deleted.",
+
+  "type": "object",
+  "required": ["schemaVersion", "domains"],
+  "additionalProperties": false,
+
+  "properties": {
+    "schemaVersion": { "const": 1 },
+
+    "domains": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/domain" }
+    }
+  },
+
+  "$defs": {
+    "domain": {
+      "type": "object",
+      "required": ["id", "title", "kind", "status", "competencyAreas"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/domainId" },
+        "title": { "type": "string", "minLength": 1 },
+        "kind": {
+          "enum": ["core", "discipline"],
+          "description": "core = cross-cutting competency every role shares to some degree (CM-*). discipline = measurement-discipline depth, shipped as a separately versioned pack (DP-*)."
+        },
+        "status": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/lifecycleStatus" },
+        "summary": {
+          "type": "string",
+          "maxLength": 600,
+          "description": "What this domain covers and, more usefully, where its boundary with neighbouring domains falls."
+        },
+        "competencyAreas": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/competencyArea" }
+        }
+      }
+    },
+
+    "competencyArea": {
+      "type": "object",
+      "description": "The unit at which L1 and L2 are assessed. A single assessment covers the whole area at those levels; L3 and above are assessed per element.",
+      "required": ["id", "title", "status", "elements"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/competencyAreaId" },
+        "title": { "type": "string", "minLength": 1 },
+        "status": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/lifecycleStatus" },
+        "summary": { "type": "string", "maxLength": 600 },
+        "elements": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/elementStub" }
+        }
+      }
+    },
+
+    "elementStub": {
+      "type": "object",
+      "description": "The skeleton entry for a leaf element: identity and shape only. The element's substance lives in content/elements/<domain>/<id>.md. The stub is what the registry guarantees is stable.",
+      "required": ["id", "title", "levelCeiling", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
+        "title": { "type": "string", "minLength": 1 },
+        "levelCeiling": {
+          "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel",
+          "description": "Highest attainable level for this element. Not every element supports all five — many knowledge items genuinely top out at Competent, and claiming otherwise would manufacture depth that isn't there. Only elements with real expert-level practice reach 5."
+        },
+        "status": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/lifecycleStatus" },
+        "supersededBy": {
+          "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId",
+          "description": "Required when status is deprecated. Points to the element that replaces this one so existing credentials remain interpretable."
+        },
+        "addedIn": {
+          "type": "string",
+          "description": "Corpus version in which this ID first appeared. Append-only history."
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "deprecated" } }, "required": ["status"] },
+          "then": { "required": ["supersededBy"] }
+        }
+      ]
+    }
+  }
+}

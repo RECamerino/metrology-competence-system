@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  corpus:
+    name: Corpus integrity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18'
+          cache: npm
+
+      - run: npm ci
+
+      # The gate. Schema conformance, ID-registry immutability, citation
+      # presence, quotation limits, prerequisite-graph integrity. An element
+      # without a citation, or a quotation over its licensed limit, fails here
+      # and does not merge.
+      - name: Validate corpus
+        run: npm run validate
+
+      - name: Coverage report
+        run: npm run report:coverage
+
+      # Published on every run so the quotation footprint is always visible in
+      # review, not something anyone has to remember to check.
+      - name: Quotation manifest
+        run: npm run report:quotes
+
+  code:
+    name: Types and tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18'
+          cache: npm
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+
+  airgap:
+    name: Air-gap egress scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18'
+          cache: npm
+
+      - run: npm ci
+
+      # No egress in the default build. Not a style preference: these
+      # deployments include enclaves where an unexpected outbound request is an
+      # incident, not a bug report.
+      - name: Scan build output
+        run: npm run check:airgap

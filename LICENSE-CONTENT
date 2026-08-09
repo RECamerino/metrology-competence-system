@@ -1,0 +1,77 @@
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+========================================================================
+
+This license applies to the BODY OF KNOWLEDGE CONTENT in this repository,
+which is a different license from the one covering the software. See
+SCOPE below for exactly which files each license governs.
+
+Human-readable summary (not a substitute for the license):
+    https://creativecommons.org/licenses/by-sa/4.0/
+
+Full legal code:
+    https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+A verbatim copy of the full legal code is distributed with release
+artifacts at docs/legal/cc-by-sa-4.0.txt. It is referenced here by
+canonical URL rather than inlined so that the authoritative text is never
+paraphrased or transcribed inaccurately in this file.
+
+
+SCOPE
+-----
+
+CC BY-SA 4.0 governs:
+    content/**            The BOK corpus: elements, taxonomy, roles,
+                          training modules, assessment items, rubrics,
+                          blueprints, capstone specifications.
+    docs/**               Project documentation.
+
+Apache License 2.0 (see LICENSE) governs:
+    packages/**           Software.
+    apps/**               Software.
+    tools/**              Software.
+    schemas/**            JSON Schema definitions.
+    Build, CI, and configuration files anywhere in the tree.
+
+Where a single file mixes both — for example a schema containing
+illustrative content examples — the Apache-2.0 license governs the file,
+and any BOK content quoted within it remains available under CC BY-SA 4.0
+from its canonical location under content/.
+
+
+THIRD-PARTY NORMATIVE SOURCES ARE NOT COVERED BY THIS LICENSE
+-------------------------------------------------------------
+
+This repository cites external standards and guidance documents
+extensively. Those documents remain the property of their publishers and
+are NOT licensed under CC BY-SA 4.0 by this project.
+
+  * All BOK content carries precise normative references (document,
+    edition, clause). References are facts and are freely usable.
+
+  * Where this repository reproduces short quotations, each is recorded as
+    a typed, attributed data object governed by the tier policy in
+    content/sources/registry.yaml and documented in
+    docs/source-license-register.md.
+
+  * A distribution built with `--strip-tier2` contains no quoted text from
+    restricted sources. All references remain intact in both builds.
+
+  * Nothing in this license grants you any right in ISO, IEC, ANSI, NCSLI,
+    ASME, ASTM, or any other publisher's copyrighted material. To read the
+    standards themselves, obtain licensed copies from the publisher.
+
+
+ATTRIBUTION
+-----------
+
+When reusing BOK content, attribute as:
+
+    "Metrology Body of Knowledge, <element or section identifier>,
+     <version>, available under CC BY-SA 4.0."
+
+ShareAlike means adaptations of the BOK content must be distributed under
+CC BY-SA 4.0 or a compatible license. This obligation attaches to
+derivative works of the content you distribute. It does not attach to an
+organization's own separate proprietary data held in a local overlay and
+not distributed — see docs/org-data-integration.md.

@@ -1,0 +1,701 @@
+# Source Licence Register
+# ============================================================================
+# Every source cited anywhere in the corpus MUST appear here. This file — not
+# the schema, not the author — decides what may be quoted from a given
+# document. The validator reads these limits and enforces them mechanically.
+#
+# TIERS
+#   1  Verbatim quotation permitted, within the recorded limits.
+#   2  Fully referenceable; bounded quotation only. Quote text is removed by
+#      the --strip-tier2 redistributable build; citations always survive.
+#   3  Reference only. No quotation. The reader consults their own licensed
+#      copy; organizations may inject licensed text via a local overlay.
+#
+# DEFAULT POSTURE IS CONSERVATIVE. When a publisher's terms are unclear, the
+# source is Tier 3. Promoting a source to a higher tier requires a documented
+# basis in `termsBasis` and steward approval (GOVERNANCE.md).
+#
+# ---------------------------------------------------------------------------
+# STATUS OF THIS FILE: PRELIMINARY — PENDING LEGAL REVIEW
+# ---------------------------------------------------------------------------
+# Tier assignments below are a good-faith first classification made by reading
+# each publisher's stated terms. They are NOT legal advice and have NOT been
+# reviewed by counsel. Entries whose classification rests on an interpretation
+# rather than an explicit licence grant are flagged in `notes` with
+# CONFIRM-WITH-COUNSEL. No Tier 1 or Tier 2 quotation should be authored
+# against a flagged entry until that review is complete. Citations are
+# unaffected — referencing a document by clause is always safe.
+# ============================================================================
+
+schemaVersion: 1
+
+sources:
+
+  # ==========================================================================
+  # TIER 1 — Public domain (US Government works, 17 U.S.C. 105)
+  # These are the most solid entries in the register.
+  # ==========================================================================
+
+  - id: NIST-SP-811-2008
+    designation: NIST SP 811 (2008)
+    title: "Guide for the Use of the International System of Units (SI)"
+    publisher: National Institute of Standards and Technology (USA)
+    edition: "2008 (Special Publication 811, 2008 Edition)"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 150
+      maxQuotesPerElement: 5
+      requiresCommentary: false
+      strippedInRedistributable: false
+    access:
+      freelyAvailable: true
+      url: https://www.nist.gov/pml/special-publication-811
+    termsBasis: >-
+      Work of the United States Government prepared by officers or employees
+      as part of their official duties; not subject to copyright protection in
+      the United States under 17 U.S.C. 105. Freely reproducible.
+    termsReviewedOn: "2026-08-08"
+
+  - id: NIST-TN-1297-1994
+    designation: NIST TN 1297 (1994)
+    title: "Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results"
+    publisher: National Institute of Standards and Technology (USA)
+    edition: "1994 Edition"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 150
+      maxQuotesPerElement: 5
+      requiresCommentary: false
+      strippedInRedistributable: false
+    access:
+      freelyAvailable: true
+      url: https://www.nist.gov/pml/nist-technical-note-1297
+    termsBasis: >-
+      US Government work, not subject to copyright in the United States under
+      17 U.S.C. 105. Widely reproduced. Note this predates and differs in
+      places from current GUM practice; cite it as historical context, not as
+      current normative guidance.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      Superseded in practice by JCGM 100 for uncertainty evaluation. Retained
+      because a great deal of US laboratory documentation still references it,
+      and practitioners need to recognise the differences.
+
+  - id: NIST-HB-143-2019
+    designation: NIST Handbook 143 (2019)
+    title: "State Weights and Measures Laboratories Program Handbook"
+    publisher: National Institute of Standards and Technology (USA)
+    edition: "2019"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 150
+      maxQuotesPerElement: 5
+      requiresCommentary: false
+    access:
+      freelyAvailable: true
+      url: https://www.nist.gov/pml/owm/nist-handbook-143
+    termsBasis: >-
+      US Government work, not subject to copyright in the United States under
+      17 U.S.C. 105.
+    termsReviewedOn: "2026-08-08"
+
+  - id: NIST-SEMATECH-EHB
+    designation: NIST/SEMATECH e-Handbook of Statistical Methods
+    title: "NIST/SEMATECH e-Handbook of Statistical Methods"
+    publisher: National Institute of Standards and Technology (USA)
+    edition: "current online edition"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 150
+      maxQuotesPerElement: 5
+      requiresCommentary: false
+    access:
+      freelyAvailable: true
+      url: https://www.itl.nist.gov/div898/handbook/
+    termsBasis: >-
+      US Government work, not subject to copyright in the United States under
+      17 U.S.C. 105.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      Principal open reference for the statistics domain (CM-05). Cite by
+      section path, e.g. 2.5.5, since it has no clause numbering.
+
+  # ==========================================================================
+  # TIER 1 — Freely licensed international guidance
+  # ==========================================================================
+
+  - id: BIPM-SI-BROCHURE-9
+    designation: SI Brochure, 9th edition (2019)
+    title: "The International System of Units (SI)"
+    publisher: Bureau International des Poids et Mesures (BIPM)
+    edition: "9th edition, 2019 (with 2022 corrections)"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 100
+      maxQuotesPerElement: 4
+      requiresCommentary: false
+    access:
+      freelyAvailable: true
+      url: https://www.bipm.org/en/publications/si-brochure
+    termsBasis: >-
+      Published by BIPM under a Creative Commons Attribution licence
+      (CC BY 3.0 IGO) permitting reproduction with attribution.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL — verify the licence statement on the specific
+      edition and printing before authoring quotations. The definitive
+      authority for SI units, prefixes, and the defining constants (CM-02).
+
+  - id: JCGM-100-2008
+    designation: JCGM 100:2008 (GUM)
+    title: "Evaluation of measurement data — Guide to the expression of uncertainty in measurement"
+    publisher: Joint Committee for Guides in Metrology (BIPM, IEC, IFCC, ILAC, ISO, IUPAC, IUPAP, OIML)
+    edition: "2008 (GUM 1995 with minor corrections)"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 80
+      maxQuotesPerElement: 4
+      requiresCommentary: true
+    access:
+      freelyAvailable: true
+      url: https://www.bipm.org/en/committees/jc/jcgm/publications
+    termsBasis: >-
+      JCGM guidance documents are published free of charge and their copyright
+      statement permits reproduction with attribution and without alteration.
+      Copyright is held jointly by the JCGM member organizations.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL — the JCGM copyright statement should be read in
+      full and the permitted scope of reproduction confirmed before authoring.
+      Limits are set deliberately below what the statement appears to allow.
+      The foundational source for CM-03.
+
+  - id: JCGM-101-2008
+    designation: JCGM 101:2008 (GUM Supplement 1)
+    title: "Supplement 1 to the GUM — Propagation of distributions using a Monte Carlo method"
+    publisher: Joint Committee for Guides in Metrology
+    edition: "2008"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 80
+      maxQuotesPerElement: 4
+      requiresCommentary: true
+    access:
+      freelyAvailable: true
+      url: https://www.bipm.org/en/committees/jc/jcgm/publications
+    termsBasis: >-
+      Same JCGM publication terms as JCGM-100-2008.
+    termsReviewedOn: "2026-08-08"
+    notes: CONFIRM-WITH-COUNSEL — see JCGM-100-2008.
+
+  - id: JCGM-102-2011
+    designation: JCGM 102:2011 (GUM Supplement 2)
+    title: "Supplement 2 to the GUM — Extension to any number of output quantities"
+    publisher: Joint Committee for Guides in Metrology
+    edition: "2011"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 80
+      maxQuotesPerElement: 4
+      requiresCommentary: true
+    access:
+      freelyAvailable: true
+      url: https://www.bipm.org/en/committees/jc/jcgm/publications
+    termsBasis: Same JCGM publication terms as JCGM-100-2008.
+    termsReviewedOn: "2026-08-08"
+    notes: CONFIRM-WITH-COUNSEL — see JCGM-100-2008.
+
+  - id: JCGM-104-2009
+    designation: JCGM 104:2009
+    title: "Evaluation of measurement data — An introduction to the GUM and related documents"
+    publisher: Joint Committee for Guides in Metrology
+    edition: "2009"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 80
+      maxQuotesPerElement: 4
+      requiresCommentary: true
+    access:
+      freelyAvailable: true
+      url: https://www.bipm.org/en/committees/jc/jcgm/publications
+    termsBasis: Same JCGM publication terms as JCGM-100-2008.
+    termsReviewedOn: "2026-08-08"
+    notes: CONFIRM-WITH-COUNSEL — see JCGM-100-2008.
+
+  - id: JCGM-106-2012
+    designation: JCGM 106:2012
+    title: "Evaluation of measurement data — The role of measurement uncertainty in conformity assessment"
+    publisher: Joint Committee for Guides in Metrology
+    edition: "2012"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 80
+      maxQuotesPerElement: 4
+      requiresCommentary: true
+    access:
+      freelyAvailable: true
+      url: https://www.bipm.org/en/committees/jc/jcgm/publications
+    termsBasis: Same JCGM publication terms as JCGM-100-2008.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL — see JCGM-100-2008. Primary source for
+      measurement decision risk and guardbanding (CM-08), alongside Z540.3.
+
+  - id: JCGM-200-2012
+    designation: JCGM 200:2012 (VIM3)
+    title: "International vocabulary of metrology — Basic and general concepts and associated terms (VIM)"
+    publisher: Joint Committee for Guides in Metrology
+    edition: "3rd edition, 2008 version with 2012 minor corrections"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 60
+      maxQuotesPerElement: 6
+      requiresCommentary: true
+    access:
+      freelyAvailable: true
+      url: https://www.bipm.org/en/committees/jc/jcgm/publications
+    termsBasis: Same JCGM publication terms as JCGM-100-2008.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL — see JCGM-100-2008. The controlling authority for
+      terminology throughout the corpus (CM-02). Where VIM3 and colloquial
+      laboratory usage diverge, the element must say so explicitly — that
+      divergence is itself a common source of error.
+
+  - id: ILAC-P14-2020
+    designation: ILAC P14:09/2020
+    title: "ILAC Policy for Measurement Uncertainty in Calibration"
+    publisher: International Laboratory Accreditation Cooperation (ILAC)
+    edition: "09/2020"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 60
+      maxQuotesPerElement: 3
+      requiresCommentary: true
+    access:
+      freelyAvailable: true
+      url: https://ilac.org/publications-and-resources/ilac-documents/
+    termsBasis: >-
+      ILAC publishes its policy documents free of charge and permits copying
+      and reproduction with acknowledgement of ILAC as the source.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL — verify the current ILAC copyright statement.
+      Governs CMC statements and reported uncertainty (CM-03, CM-04).
+
+  - id: ILAC-G8-2019
+    designation: ILAC-G8:09/2019
+    title: "Guidelines on Decision Rules and Statements of Conformity"
+    publisher: International Laboratory Accreditation Cooperation (ILAC)
+    edition: "09/2019"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 60
+      maxQuotesPerElement: 3
+      requiresCommentary: true
+    access:
+      freelyAvailable: true
+      url: https://ilac.org/publications-and-resources/ilac-documents/
+    termsBasis: Same ILAC publication terms as ILAC-P14-2020.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. Core source for decision rules and guardbanding
+      (CM-08), read together with JCGM 106 and ISO/IEC 17025 §7.8.6.
+
+  - id: ILAC-P10-2020
+    designation: ILAC P10:07/2020
+    title: "ILAC Policy on Metrological Traceability of Measurement Results"
+    publisher: International Laboratory Accreditation Cooperation (ILAC)
+    edition: "07/2020"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 60
+      maxQuotesPerElement: 3
+      requiresCommentary: true
+    access:
+      freelyAvailable: true
+      url: https://ilac.org/publications-and-resources/ilac-documents/
+    termsBasis: Same ILAC publication terms as ILAC-P14-2020.
+    termsReviewedOn: "2026-08-08"
+    notes: CONFIRM-WITH-COUNSEL. Controlling policy for CM-04.
+
+  - id: BIPM-CIPM-MRA
+    designation: CIPM MRA
+    title: "Mutual Recognition Arrangement of the International Committee for Weights and Measures"
+    publisher: Bureau International des Poids et Mesures (BIPM)
+    edition: "1999, as revised"
+    tier: 1
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 60
+      maxQuotesPerElement: 3
+      requiresCommentary: true
+    access:
+      freelyAvailable: true
+      url: https://www.bipm.org/en/cipm-mra
+    termsBasis: >-
+      Published free of charge by BIPM as the constitutive arrangement of the
+      international measurement system.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. Cite alongside the KCDB when explaining how a
+      traceability chain reaches international equivalence (CM-04).
+
+  # ==========================================================================
+  # TIER 2 — Freely downloadable but publisher-copyright; bounded quotation
+  # ==========================================================================
+
+  - id: UKAS-M3003-2019
+    designation: UKAS M3003, Edition 4 (2019)
+    title: "The Expression of Uncertainty and Confidence in Measurement"
+    publisher: United Kingdom Accreditation Service (UKAS)
+    edition: "Edition 4, 2019"
+    tier: 2
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 40
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: true
+      url: https://www.ukas.com/resources/
+    termsBasis: >-
+      Published free of charge by UKAS, but UKAS retains copyright and does not
+      grant a general reproduction licence. Classified Tier 2: cite freely,
+      quote only briefly and with commentary.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. The most accessible worked treatment of uncertainty
+      budgets in practice; heavily used across CM-03. Free availability is not
+      the same as a reproduction licence, hence Tier 2 rather than Tier 1.
+
+  - id: EURAMET-CG-18
+    designation: EURAMET cg-18
+    title: "Guidelines on the Calibration of Non-Automatic Weighing Instruments"
+    publisher: EURAMET e.V.
+    edition: "current version"
+    tier: 2
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 40
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: true
+      url: https://www.euramet.org/publications-media-centre/calibration-guidelines
+    termsBasis: >-
+      EURAMET calibration guides are published free of charge; EURAMET retains
+      copyright. Cite freely; quote briefly with commentary.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. Representative entry — the remaining EURAMET cg
+      series will be registered individually as the discipline packs
+      (DP-02 and others) are authored.
+
+  # ==========================================================================
+  # TIER 2 — Restricted standards: fully referenceable, bounded quotation
+  # Quotation limits are the project-wide restricted defaults:
+  #   <=25 words per quote, <=2 quotes per source per element,
+  #   mandatory commentary, stripped from the redistributable build.
+  # ==========================================================================
+
+  - id: ISO-IEC-17025-2017
+    designation: ISO/IEC 17025:2017
+    title: "General requirements for the competence of testing and calibration laboratories"
+    publisher: International Organization for Standardization / International Electrotechnical Commission
+    edition: "2017 (third edition)"
+    tier: 2
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "ISO, IEC, or a national standards body (ANSI, BSI, DIN, SAI Global and others)"
+    termsBasis: >-
+      Copyright ISO/IEC. No reproduction licence held. Classified Tier 2 on the
+      basis that clause-level citation is a factual reference requiring no
+      permission, and that brief attributed quotation accompanying original
+      commentary is a bounded use. This classification is an interpretation and
+      requires legal confirmation before any quotation is authored.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL — highest priority for review, as this is the most
+      frequently cited restricted source in the corpus. Clause 6.2 (personnel
+      competence) is the normative hook for the entire credentialing model;
+      7.6 covers uncertainty; 7.8.6 covers decision rules.
+
+  - id: ISO-IEC-17011-2017
+    designation: ISO/IEC 17011:2017
+    title: "Conformity assessment — Requirements for accreditation bodies accrediting conformity assessment bodies"
+    publisher: ISO / IEC
+    edition: "2017 (second edition)"
+    tier: 2
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "ISO, IEC, or a national standards body"
+    termsBasis: Same basis as ISO-IEC-17025-2017.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. Governs assessor competence obligations, which the
+      Assessor Competence Dossier is designed to evidence (CM-11).
+
+  - id: ISO-9001-2015
+    designation: ISO 9001:2015
+    title: "Quality management systems — Requirements"
+    publisher: International Organization for Standardization
+    edition: "2015 (fifth edition)"
+    tier: 2
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "ISO or a national standards body"
+    termsBasis: Same basis as ISO-IEC-17025-2017.
+    termsReviewedOn: "2026-08-08"
+    notes: CONFIRM-WITH-COUNSEL.
+
+  - id: ISO-10012-2003
+    designation: ISO 10012:2003
+    title: "Measurement management systems — Requirements for measurement processes and measuring equipment"
+    publisher: International Organization for Standardization
+    edition: "2003"
+    tier: 2
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "ISO or a national standards body"
+    termsBasis: Same basis as ISO-IEC-17025-2017.
+    termsReviewedOn: "2026-08-08"
+    notes: CONFIRM-WITH-COUNSEL.
+
+  - id: ANSI-NCSL-Z540-1-1994
+    designation: ANSI/NCSL Z540-1-1994 (R2002)
+    title: "Calibration Laboratories and Measuring and Test Equipment — General Requirements"
+    publisher: NCSL International / American National Standards Institute
+    edition: "1994, reaffirmed 2002"
+    tier: 2
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "NCSL International"
+    termsBasis: Same basis as ISO-IEC-17025-2017.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. Withdrawn as an active standard but still invoked
+      contractually, particularly in US defence work — practitioners encounter
+      it and must understand it, including its 4:1 accuracy-ratio provision and
+      how that differs from the risk-based approach in Z540.3.
+
+  - id: ANSI-NCSLI-Z540-3-2006
+    designation: ANSI/NCSLI Z540.3-2006 (R2013)
+    title: "Requirements for the Calibration of Measuring and Test Equipment"
+    publisher: NCSL International / American National Standards Institute
+    edition: "2006, reaffirmed 2013"
+    tier: 2
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "NCSL International"
+    termsBasis: Same basis as ISO-IEC-17025-2017.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. Source of the 2% false-accept-risk requirement
+      central to measurement decision risk (CM-08). The Handbook is a separate
+      document and must be registered separately if cited.
+
+  - id: NCSLI-RP-1-2010
+    designation: NCSLI RP-1 (2010)
+    title: "Establishment and Adjustment of Calibration Intervals"
+    publisher: NCSL International
+    edition: "2010"
+    tier: 2
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "NCSL International"
+    termsBasis: Same basis as ISO-IEC-17025-2017.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. The controlling reference for CM-09, including the
+      reliability-target and interval-adjustment methods.
+
+  - id: ASME-Y14-5-2018
+    designation: ASME Y14.5-2018
+    title: "Dimensioning and Tolerancing"
+    publisher: American Society of Mechanical Engineers
+    edition: "2018"
+    tier: 2
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "ASME"
+    termsBasis: Same basis as ISO-IEC-17025-2017.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. Foundational to DP-01. Note that GD&T content
+      depends heavily on figures, which may NOT be reproduced under any tier —
+      describe them in original prose and cite the figure number. Where the
+      ASME and ISO GPS treatments diverge, the element must say so; that
+      divergence causes real inspection disputes.
+
+  - id: ISO-1101-2017
+    designation: ISO 1101:2017
+    title: "Geometrical product specifications (GPS) — Geometrical tolerancing"
+    publisher: International Organization for Standardization
+    edition: "2017"
+    tier: 2
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "ISO or a national standards body"
+    termsBasis: Same basis as ISO-IEC-17025-2017.
+    termsReviewedOn: "2026-08-08"
+    notes: CONFIRM-WITH-COUNSEL. The ISO GPS counterpart to ASME Y14.5 (DP-01).
+
+  - id: ISO-14253-1-2017
+    designation: ISO 14253-1:2017
+    title: "Geometrical product specifications (GPS) — Inspection by measurement of workpieces and measuring equipment — Part 1: Decision rules"
+    publisher: International Organization for Standardization
+    edition: "2017"
+    tier: 2
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "ISO or a national standards body"
+    termsBasis: Same basis as ISO-IEC-17025-2017.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. Decision rules for dimensional conformity; read
+      against ILAC-G8 and JCGM 106 (CM-08, DP-01).
+
+  - id: ISO-IEC-GUIDE-99-2007
+    designation: ISO/IEC Guide 99:2007
+    title: "International vocabulary of metrology — Basic and general concepts and associated terms (VIM)"
+    publisher: ISO / IEC
+    edition: "2007"
+    tier: 2
+    quotation:
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "ISO or a national standards body"
+    termsBasis: Same basis as ISO-IEC-17025-2017.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. Technically identical in content to JCGM 200:2012
+      but published under ISO/IEC copyright rather than JCGM terms. PREFER
+      CITING JCGM-200-2012 — same text, freer terms. This entry exists so that
+      documents referencing the Guide 99 designation can be resolved.
+
+  # ==========================================================================
+  # TIER 3 — Reference only, no quotation
+  # ==========================================================================
+
+  - id: OIML-D-1-2012
+    designation: OIML D 1:2012
+    title: "Considerations for a Law on Metrology"
+    publisher: International Organization of Legal Metrology (OIML)
+    edition: "2012"
+    tier: 3
+    quotation:
+      permitted: false
+    access:
+      freelyAvailable: true
+      url: https://www.oiml.org/en/publications
+    termsBasis: >-
+      Freely downloadable, but OIML's reproduction terms have not been
+      established for this project. Default conservative classification applies
+      until reviewed: cite by clause, do not quote.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      Candidate for promotion to Tier 1 or 2 once OIML's terms are confirmed.
+      Primary source for legal metrology (CM-19).
+
+  - id: ASTM-E2655-2021
+    designation: ASTM E2655-21
+    title: "Standard Guide for Reporting Uncertainty of Test Results and Use of the Term Measurement Uncertainty in ASTM Test Methods"
+    publisher: ASTM International
+    edition: "2021"
+    tier: 3
+    quotation:
+      permitted: false
+    access:
+      freelyAvailable: false
+      obtainFrom: "ASTM International"
+    termsBasis: >-
+      Copyright ASTM International. ASTM's licensing terms are more restrictive
+      than the ISO/IEC posture assumed for Tier 2, and no basis for quotation
+      has been established. Reference only.
+    termsReviewedOn: "2026-08-08"
+    notes: >-
+      Representative ASTM entry. Additional ASTM standards will be registered
+      individually as discipline packs are authored. Treat all ASTM material as
+      Tier 3 unless a specific basis is documented.

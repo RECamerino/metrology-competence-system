@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/role-registry.schema.json",
+  "title": "Role registry",
+  "description": "Governs content/roles/registry.yaml. These are REFERENCE roles, not prescriptions. Roles are data, never code: an organization may edit, delete, add, or entirely replace this set through its local overlay without touching the corpus, and its own job titles will drive gap analysis exactly as the shipped ones do. The shipped set exists so the platform is useful on first run, not because these are the correct roles for anyone in particular.",
+
+  "type": "object",
+  "required": ["schemaVersion", "roles"],
+  "additionalProperties": false,
+
+  "properties": {
+    "schemaVersion": { "const": 1 },
+
+    "roles": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/role" }
+    }
+  },
+
+  "$defs": {
+    "role": {
+      "type": "object",
+      "required": ["id", "title", "family", "summary"],
+      "additionalProperties": false,
+
+      "properties": {
+        "id": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/roleId" },
+
+        "title": { "type": "string", "minLength": 1 },
+
+        "family": {
+          "enum": ["technician", "engineering", "scientific", "leadership", "quality", "assessment", "education"],
+          "description": "Broad grouping used for dashboard rollups and for suggesting adjacent career paths. A role belongs to exactly one family; cross-family movement is normal and is precisely what the gap analysis is meant to illuminate."
+        },
+
+        "summary": {
+          "type": "string",
+          "minLength": 40,
+          "maxLength": 800,
+          "description": "What the role actually does day to day, and what distinguishes it from its neighbours. Vague summaries produce meaningless role targets."
+        },
+
+        "seniority": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Relative ordering hint within a family, used only for display. Deliberately not a hierarchy of worth — an Approved Signatory and a Principal Metrologist are not comparable on one axis."
+        },
+
+        "typicalScope": {
+          "type": "string",
+          "maxLength": 600,
+          "description": "The breadth of responsibility typical for the role: single instrument, discipline, laboratory, site, enterprise, national."
+        },
+
+        "authorities": {
+          "type": "array",
+          "description": "Formal authorities the role commonly carries — approving calibration certificates, acting as an approved signatory, conducting assessments. Recorded because authority and knowledge are different things: a person may understand a method thoroughly and still not be authorised to sign for it.",
+          "items": { "type": "string" }
+        },
+
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

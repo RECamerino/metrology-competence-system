@@ -1,0 +1,14 @@
+{
+  "name": "@metrology-bok/validator",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Corpus integrity checks. The load-bearing guardrail: schema conformance, ID registry immutability, citation presence, quotation limits, and graph integrity.",
+  "license": "Apache-2.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "yaml": "^2.6.1"
+  }
+}

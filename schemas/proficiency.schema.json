@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/proficiency.schema.json",
+  "title": "Proficiency scale and evidence ladder",
+  "description": "Governs content/taxonomy/proficiency.yaml. Defines what each of the five levels means generically, and what evidence is required to attain it. Per-element observable anchors live on the element itself; this file is the frame those anchors are written into. Changing the meaning of a level retroactively changes what every existing credential asserts, so this file is steward-controlled (see GOVERNANCE.md).",
+
+  "type": "object",
+  "required": ["schemaVersion", "levels"],
+  "additionalProperties": false,
+
+  "properties": {
+    "schemaVersion": { "const": 1 },
+
+    "levels": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/level" }
+    }
+  },
+
+  "$defs": {
+    "level": {
+      "type": "object",
+      "required": ["level", "name", "descriptor", "assessment", "signoff"],
+      "additionalProperties": false,
+
+      "properties": {
+        "level": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel" },
+
+        "name": {
+          "enum": ["Novice", "Advanced Beginner", "Competent", "Proficient", "Expert"]
+        },
+
+        "descriptor": {
+          "type": "string",
+          "minLength": 60,
+          "description": "What this level means across all elements, in behavioural terms. The element's own anchor makes it concrete."
+        },
+
+        "assessedAt": {
+          "enum": ["competency-area", "element"],
+          "description": "L1 and L2 are assessed across a whole competency area — one assessment covering a cluster of related elements, because testing foundational knowledge element by element over-decomposes it. L3 and above are assessed per element, where the distinctions genuinely matter."
+        },
+
+        "assessment": {
+          "type": "object",
+          "description": "How competence at this level is demonstrated. Every assessment in this system is OPEN-RESOURCE: the candidate may use references, the internet, and AI assistance, because a working metrologist has all three. There is no proctoring anywhere. Integrity is carried by item design — parameterized problems give every candidate different numbers, so a shared answer key is worthless, and an item answerable by lookup is a defective item.",
+          "required": ["modality", "requiresCapstone"],
+          "additionalProperties": false,
+          "properties": {
+            "modality": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "enum": [
+                  "open-resource-parameterized",
+                  "reviewer-conducted-defense",
+                  "capstone-with-review",
+                  "challenge-exam"
+                ]
+              },
+              "description": "Recorded as visible provenance on the resulting credential, so a reader sees how it was earned rather than having to assume."
+            },
+            "requiresCapstone": { "type": "boolean" },
+            "requiresWorkProduct": {
+              "type": "boolean",
+              "default": false,
+              "description": "An independent work product short of a full capstone — a real deliverable, archived and hashed."
+            },
+            "requiresMentoring": {
+              "type": "boolean",
+              "default": false,
+              "description": "Demonstrated development of others at L3 or above. Reserved for L5: at expert level, the field's judgement is that you have not mastered something until you can bring someone else to competence in it."
+            },
+            "doubleScored": {
+              "type": "boolean",
+              "default": false,
+              "description": "Independent scoring by two reviewers with a documented disagreement-resolution path. Applied at L4 and L5 — inter-rater reliability is what makes a credential defensible in an accreditation audit."
+            },
+            "minExperienceHours": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Minimum recorded practice before the level may be claimed. Time cannot be shortcut; this is one of the mechanisms that makes the corpus a lifetime's pursuit rather than a checkbox."
+            },
+            "minDaysSincePreviousLevel": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Mandatory interval after attaining the level below."
+            }
+          }
+        },
+
+        "signoff": {
+          "type": "object",
+          "description": "Who attests. NO SELF-SIGNOFF EVER, at any level: the signer must be a distinct natural person who witnessed the output.",
+          "required": ["signerCount", "witnessMustHoldLevel"],
+          "additionalProperties": false,
+          "properties": {
+            "signerCount": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Number of independent signers required."
+            },
+            "witnessMustHoldLevel": {
+              "oneOf": [
+                { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel" },
+                { "type": "null" }
+              ],
+              "description": "Minimum level the signer must hold in this same element. Null at L1 and L2 — a witness attests that they saw the work, which does not require them to be more expert than the candidate. From L3 the signer must be a credentialed reviewer holding at least this level, because they are now judging quality rather than merely observing."
+            },
+            "requiresCredentialedReviewer": {
+              "type": "boolean",
+              "default": false,
+              "description": "Signer must additionally hold the reviewer-competence credential covering review methodology, rubric calibration, and bias."
+            },
+            "requiresCrossOrganizational": {
+              "type": "boolean",
+              "default": false,
+              "description": "At least one signer must be outside the candidate's own organization. Applied at L5 to prevent a closed group from certifying its own experts."
+            }
+          }
+        },
+
+        "defaultRecertificationMonths": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Default currency period at this level, overridable per element."
+        }
+      }
+    }
+  }
+}

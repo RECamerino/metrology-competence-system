@@ -1,0 +1,31 @@
+{
+  "name": "metrology-bok",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Open Metrology Body of Knowledge and portable competency credentialing platform",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "validate": "node packages/validator/src/cli.ts validate",
+    "report:coverage": "node packages/validator/src/cli.ts coverage",
+    "report:quotes": "node packages/validator/src/cli.ts quotes",
+    "registry:sync": "node packages/validator/src/cli.ts registry-sync",
+    "build:bok": "node packages/compiler/src/cli.ts",
+    "check:airgap": "node tools/check-airgap.ts",
+    "test": "node --test \"packages/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "typescript": "^5.7.2",
+    "yaml": "^2.6.1"
+  }
+}

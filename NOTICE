@@ -1,0 +1,48 @@
+Metrology Body of Knowledge & Credentialing Platform
+
+Copyright (c) 2026 Metrology BOK contributors
+
+This product includes software developed by the Metrology BOK project
+contributors, licensed under the Apache License, Version 2.0 (see LICENSE).
+
+The Body of Knowledge content in content/ and the documentation in docs/
+are licensed under Creative Commons Attribution-ShareAlike 4.0
+International (see LICENSE-CONTENT).
+
+--------------------------------------------------------------------------
+NORMATIVE SOURCES
+--------------------------------------------------------------------------
+
+This project cites standards, guides, and recommendations published by
+third parties, including but not limited to:
+
+  BIPM / JCGM     Guide to the Expression of Uncertainty in Measurement
+                  (JCGM 100 and supplements), the International Vocabulary
+                  of Metrology (JCGM 200 / VIM), the SI Brochure
+  NIST            Special Publications, Technical Notes, Handbooks
+  OIML            International Recommendations and Documents
+  ILAC / IAF      Policy and guidance documents
+  EURAMET         Calibration guides
+  UKAS            M3003
+  ISO / IEC       ISO/IEC 17025, ISO/IEC 17011, ISO 9001, ISO 10012, and others
+  ANSI / NCSLI    Z540-1, Z540.3, RP-1
+  ASME            Y14.5
+  ASTM            Various standards
+
+All such documents remain the copyright of their respective publishers.
+This project claims no ownership of them. Their titles, designations, and
+clause numbers are used for identification and citation only, which does
+not imply endorsement of this project by any publisher.
+
+Every quotation reproduced in this repository is recorded as an attributed
+data object subject to the tier policy in content/sources/registry.yaml.
+Run `npm run report:quotes` to produce a complete manifest of every
+quotation in the corpus with its source, edition, clause, and word count.
+
+--------------------------------------------------------------------------
+NOT LEGAL ADVICE
+--------------------------------------------------------------------------
+
+Nothing in this repository is legal advice. Organizations deploying this
+software, and contributors adding content, are responsible for their own
+compliance with the licensing terms of any standards they hold.

@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/source-registry.schema.json",
+  "title": "Source licence register",
+  "description": "Governs content/sources/registry.yaml. Every source cited anywhere in the corpus must appear here. The register — not the schema and not the author — decides what may be quoted from a given document, so a change in a publisher's terms is a data change rather than a code change. Changes to this file require steward approval (see GOVERNANCE.md).",
+
+  "type": "object",
+  "required": ["schemaVersion", "sources"],
+  "additionalProperties": false,
+
+  "properties": {
+    "schemaVersion": { "const": 1 },
+
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/source" }
+    }
+  },
+
+  "$defs": {
+    "source": {
+      "type": "object",
+      "required": [
+        "id",
+        "designation",
+        "title",
+        "publisher",
+        "edition",
+        "tier",
+        "quotation",
+        "termsBasis",
+        "termsReviewedOn"
+      ],
+      "additionalProperties": false,
+
+      "properties": {
+        "id": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/sourceId" },
+
+        "designation": {
+          "type": "string",
+          "description": "How practitioners refer to it. Example: ISO/IEC 17025:2017, JCGM 100:2008, ASME Y14.5-2018."
+        },
+
+        "title": { "type": "string", "minLength": 1 },
+
+        "publisher": { "type": "string", "minLength": 1 },
+
+        "edition": {
+          "type": "string",
+          "description": "Default edition assumed by citations that do not override it. Cite against a specific edition always — clause numbering moves between editions."
+        },
+
+        "tier": {
+          "enum": [1, 2, 3],
+          "description": "1 = verbatim quotation permitted (freely licensed or public-domain sources). 2 = fully referenceable, bounded quotation only. 3 = reference only, no quotation whatsoever; the reader consults their own licensed copy. When a source's terms are unclear, it is Tier 3 — the project's default posture is conservative."
+        },
+
+        "quotation": {
+          "type": "object",
+          "description": "Machine-enforced quotation limits. The validator reads these; nothing else may relax them.",
+          "required": ["permitted"],
+          "additionalProperties": false,
+          "properties": {
+            "permitted": { "type": "boolean" },
+            "maxWordsPerQuote": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Hard cap per individual quotation. Omit only when permitted is false."
+            },
+            "maxQuotesPerElement": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Hard cap on quotations from this source within a single element."
+            },
+            "requiresCommentary": {
+              "type": "boolean",
+              "default": true,
+              "description": "When true, a quotation must be accompanied by the author's own commentary. Enforces quotation-for-commentary rather than quotation-as-substitute."
+            },
+            "strippedInRedistributable": {
+              "type": "boolean",
+              "default": false,
+              "description": "When true, quote text from this source is removed by `npm run build:bok --strip-tier2` and replaced with a pointer to the clause. Citations are never stripped."
+            }
+          },
+          "allOf": [
+            {
+              "if": { "properties": { "permitted": { "const": true } }, "required": ["permitted"] },
+              "then": { "required": ["maxWordsPerQuote", "maxQuotesPerElement"] }
+            }
+          ]
+        },
+
+        "access": {
+          "type": "object",
+          "description": "How a reader obtains the document. Recorded so that a Tier 3 citation can tell someone where to go.",
+          "additionalProperties": false,
+          "properties": {
+            "freelyAvailable": { "type": "boolean" },
+            "url": { "type": "string", "format": "uri" },
+            "obtainFrom": { "type": "string" }
+          }
+        },
+
+        "termsBasis": {
+          "type": "string",
+          "minLength": 10,
+          "description": "The documented reason for this tier classification: publisher terms of use, licence text, statutory status such as a US Government work, or recorded legal advice. A tier assignment without a stated basis is not reviewable and will be rejected."
+        },
+
+        "termsReviewedOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+
+        "supersedes": {
+          "type": "array",
+          "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/sourceId" },
+          "description": "Earlier editions this entry replaces. Superseded editions remain in the register — existing citations against them must keep resolving."
+        },
+
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
