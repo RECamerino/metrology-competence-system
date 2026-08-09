@@ -42,11 +42,11 @@ Add the stub to the domain's file in `content/taxonomy/domains/` — one file pe
 `content/taxonomy/domains/CM-03.yaml`:
 
 ```yaml
-      - id: CM-03-A02
-        title: Modelling the Measurement
+      - id: CM-03-A05
+        title: Combining and Propagating Uncertainty
         elements:
           # …
-          - { id: CM-03-014, title: "Correlated input quantities in an uncertainty budget", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-03-053, title: "Correlated input quantities and covariance terms", kind: skill, levelCeiling: 5, status: draft }
 ```
 
 `kind` and `levelCeiling` are governed by `tools/kind-plan.json` and `tools/ceiling-plan.json` and applied across files by `node tools/apply-kinds.ts` / `node tools/apply-ceilings.ts`. Set them there, not by hand — the tools refuse to run if an area is unplanned, which is how a forgotten element gets caught.
@@ -63,14 +63,15 @@ Commit the lock-file change alongside the skeleton change, so the ID addition is
 
 ### 2. Write the file
 
-`content/elements/CM-03/CM-03-014.md`:
+`content/elements/CM-03/CM-03-053.md`:
 
 ```markdown
 ---
-id: CM-03-014
-title: Correlated input quantities in an uncertainty budget
+id: CM-03-053
+title: Correlated input quantities and covariance terms
 domain: CM-03
-competencyArea: CM-03-A02
+competencyArea: CM-03-A05
+kind: skill
 status: draft
 summary: >-
   Why input correlations matter, when they are safe to ignore, and what
@@ -80,14 +81,16 @@ summary: >-
 levelCeiling: 5
 anchors:
   1: >-
-    Recognises that inputs may be correlated and can name a concrete example,
-    such as two instruments calibrated against the same reference standard.
+    Given a budget in which two inputs are traceable to the same reference
+    standard, flags the pair as correlated rather than carrying them as
+    independent.
   2: >-
-    Identifies likely correlations in a budget they have been given, and can
-    explain why the standard independence assumption does not hold there.
+    Adds a covariance term to a supplied budget for an identified pair, using
+    a correlation coefficient they have been given, and shows what it does to
+    the combined standard uncertainty.
   3: >-
-    Constructs a budget including a covariance term, selects an appropriate
-    correlation coefficient, and states the basis for that selection.
+    Constructs a budget containing a covariance term, selects the correlation
+    coefficient, and states the basis for that selection.
   # … through levelCeiling
 roleTargets:
   metrology-technician-i: null
@@ -102,17 +105,24 @@ citations:
       correlated inputs, which the whole element builds on.
   - source: ISO-IEC-17025-2017
     clause: "7.6.1"
+currency:
+  authorityStatus: normative
+  volatility: controlled
+  sourceRevision: "JCGM 100:2008"
+  lastVerified: "2026-08-09"
 prerequisites:
-  - CM-03-008
+  - CM-03-048
 relatedElements:
-  - CM-05-021
-  - CM-15-004
+  - CM-03-054
+  - CM-03-055
 authoring:
-  createdOn: "2026-08-08"
+  createdOn: "2026-08-09"
 ---
 
 Prose body: the explanation, worked examples, equations, failure modes.
 ```
+
+**The anchors above are performance, not understanding, because `kind` is `skill`.** "Recognises that inputs may be correlated" would be a knowledge anchor and wrong for this element — see [Write the anchors to match the element's kind](#write-the-anchors-to-match-the-elements-kind).
 
 ### 3. Validate
 
