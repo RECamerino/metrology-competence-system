@@ -1,0 +1,594 @@
+<style>
+  /* ---------------------------------------------------------------------
+     Metrology BOK — taxonomy review viewer
+
+     A review instrument. The ceiling ramp (slate -> teal -> brass) is
+     semantic and deliberately separate from the interaction accent, so
+     "how deep does this element go" reads at a glance without competing
+     with what is clickable.
+     --------------------------------------------------------------------- */
+
+  :root {
+    --paper:    #F3F6F6;
+    --surface:  #FFFFFF;
+    --sunken:   #EAF0F0;
+    --ink:      #0F1618;
+    --muted:    #566A70;
+    --faint:    #7E9096;
+    --rule:     #D9E3E4;
+    --rule-soft:#E7EEEE;
+
+    --accent:   #0B6E6E;
+    --accent-w: #E2F0EF;
+
+    --l3: #6B7C82;
+    --l4: #0B6E6E;
+    --l5: #96661C;
+
+    --l3-w: #EDF1F2;
+    --l4-w: #E2F0EF;
+    --l5-w: #F6EEDF;
+
+    --shadow: 0 1px 2px rgba(15, 22, 24, .05), 0 8px 24px -18px rgba(15, 22, 24, .35);
+
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --serif: ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:    #0C1112;
+      --surface:  #141B1D;
+      --sunken:   #101718;
+      --ink:      #E4ECEE;
+      --muted:    #93A5AA;
+      --faint:    #6E8085;
+      --rule:     #263235;
+      --rule-soft:#1D2729;
+
+      --accent:   #57C0B8;
+      --accent-w: #16302F;
+
+      --l3: #8698A0;
+      --l4: #57C0B8;
+      --l5: #D3A257;
+
+      --l3-w: #1B2426;
+      --l4-w: #142E2D;
+      --l5-w: #2C2417;
+
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -18px rgba(0, 0, 0, .8);
+    }
+  }
+
+  /* The viewer's toggle stamps data-theme on :root and must win both ways. */
+  :root[data-theme="light"] {
+    --paper: #F3F6F6; --surface: #FFFFFF; --sunken: #EAF0F0;
+    --ink: #0F1618; --muted: #566A70; --faint: #7E9096;
+    --rule: #D9E3E4; --rule-soft: #E7EEEE;
+    --accent: #0B6E6E; --accent-w: #E2F0EF;
+    --l3: #6B7C82; --l4: #0B6E6E; --l5: #96661C;
+    --l3-w: #EDF1F2; --l4-w: #E2F0EF; --l5-w: #F6EEDF;
+    --shadow: 0 1px 2px rgba(15, 22, 24, .05), 0 8px 24px -18px rgba(15, 22, 24, .35);
+  }
+  :root[data-theme="dark"] {
+    --paper: #0C1112; --surface: #141B1D; --sunken: #101718;
+    --ink: #E4ECEE; --muted: #93A5AA; --faint: #6E8085;
+    --rule: #263235; --rule-soft: #1D2729;
+    --accent: #57C0B8; --accent-w: #16302F;
+    --l3: #8698A0; --l4: #57C0B8; --l5: #D3A257;
+    --l3-w: #1B2426; --l4-w: #142E2D; --l5-w: #2C2417;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -18px rgba(0, 0, 0, .8);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px 96px; }
+
+  /* ---- Masthead ------------------------------------------------------ */
+
+  .masthead { padding: 40px 0 22px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 10px;
+  }
+
+  h1 {
+    font-size: 27px;
+    line-height: 1.15;
+    letter-spacing: -.015em;
+    font-weight: 620;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+
+  .standfirst {
+    font-family: var(--serif);
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  /* ---- Totals + distribution meter ----------------------------------- */
+
+  .totals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    align-items: flex-end;
+    padding: 22px 0 18px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin-top: 26px;
+  }
+
+  .stat { display: flex; flex-direction: column; gap: 2px; }
+  .stat b {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -.02em;
+  }
+  .stat span {
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  .meter { flex: 1 1 260px; min-width: 240px; display: flex; flex-direction: column; gap: 7px; }
+  .meter-bar { display: flex; height: 9px; border-radius: 2px; overflow: hidden; background: var(--sunken); }
+  .meter-bar i { display: block; }
+  .meter-key { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11.5px; color: var(--muted); }
+  .meter-key span { display: inline-flex; align-items: center; gap: 6px; }
+  .meter-key u { width: 8px; height: 8px; border-radius: 2px; text-decoration: none; }
+  .meter-key b { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink); }
+
+  /* ---- Control bar --------------------------------------------------- */
+
+  .controls {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+    margin: 0 -20px 22px;
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .search {
+    flex: 1 1 260px;
+    min-width: 200px;
+    font: inherit;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 7px;
+    padding: 8px 11px;
+  }
+  .search::placeholder { color: var(--faint); }
+  .search:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .chip {
+    font: inherit;
+    font-size: 12.5px;
+    line-height: 1;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 7px 12px;
+    cursor: pointer;
+  }
+  .chip:hover { border-color: var(--faint); }
+  .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .chip[aria-pressed="true"] { color: var(--surface); background: var(--ink); border-color: var(--ink); }
+  .chip.l3[aria-pressed="true"] { background: var(--l3); border-color: var(--l3); color: #fff; }
+  .chip.l4[aria-pressed="true"] { background: var(--l4); border-color: var(--l4); color: #fff; }
+  .chip.l5[aria-pressed="true"] { background: var(--l5); border-color: var(--l5); color: #fff; }
+
+  .spacer { flex: 1 1 auto; }
+
+  .showing {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+    color: var(--faint);
+    white-space: nowrap;
+  }
+
+  /* ---- Domain panels -------------------------------------------------- */
+
+  .domains { display: flex; flex-direction: column; gap: 10px; }
+
+  .domain {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .domain[hidden] { display: none; }
+
+  .domain-head {
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 18px;
+  }
+  .domain-head:hover { background: var(--sunken); }
+  .domain-head:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  .did {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    color: var(--surface);
+    background: var(--ink);
+    padding: 4px 7px;
+    border-radius: 4px;
+  }
+  .domain.is-discipline .did { background: var(--muted); }
+
+  .dtitle { font-size: 15.5px; font-weight: 560; letter-spacing: -.01em; }
+  .dmeta {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 11.5px;
+    color: var(--faint);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .caret { color: var(--faint); transition: transform .18s ease; }
+  .domain.open .caret { transform: rotate(90deg); }
+
+  .domain-body { display: none; border-top: 1px solid var(--rule-soft); padding: 4px 18px 18px; }
+  .domain.open .domain-body { display: block; }
+
+  .dsummary {
+    font-family: var(--serif);
+    font-size: 14.5px;
+    line-height: 1.62;
+    color: var(--muted);
+    max-width: 68ch;
+    margin: 14px 0 18px;
+  }
+
+  /* ---- Competency areas ---------------------------------------------- */
+
+  .area { border-left: 2px solid var(--rule); padding-left: 15px; margin-bottom: 20px; }
+  .area[hidden] { display: none; }
+  .area:last-child { margin-bottom: 4px; }
+
+  .area-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+  .aid {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+  }
+  .atitle { font-size: 13.5px; font-weight: 560; letter-spacing: -.005em; }
+  .acount {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 11px;
+    color: var(--faint);
+  }
+  .asummary {
+    font-family: var(--serif);
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 66ch;
+    margin: 4px 0 10px;
+  }
+
+  /* ---- Element rows --------------------------------------------------- */
+
+  .elements { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+
+  .el {
+    display: grid;
+    grid-template-columns: 92px 1fr 26px;
+    align-items: baseline;
+    gap: 12px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .el:last-child { border-bottom: 0; }
+  .el[hidden] { display: none; }
+
+  .eid {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 11.5px;
+    color: var(--faint);
+  }
+  .etitle { font-size: 13.5px; line-height: 1.45; }
+  .etitle mark {
+    background: var(--accent-w);
+    color: inherit;
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+
+  .ceil {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 3px;
+    padding: 2px 0;
+    justify-self: end;
+    width: 24px;
+  }
+  .ceil.c3 { color: var(--l3); background: var(--l3-w); }
+  .ceil.c4 { color: var(--l4); background: var(--l4-w); }
+  .ceil.c5 { color: var(--l5); background: var(--l5-w); }
+
+  .empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--faint);
+    font-family: var(--serif);
+    font-size: 15px;
+  }
+  .empty[hidden] { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+
+  @media (max-width: 640px) {
+    .domain-head { grid-template-columns: auto 1fr; row-gap: 6px; }
+    .dmeta { grid-column: 1 / -1; }
+    .caret { display: none; }
+    .el { grid-template-columns: 82px 1fr 26px; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Phase 1 · Review gate</p>
+    <h1>Metrology Body of Knowledge — taxonomy skeleton</h1>
+    <p class="standfirst">
+      Every domain, competency area and element identifier in the corpus, with its
+      attainable level ceiling. Structure and coverage only — no content is authored
+      against this yet, and nothing here is expensive to change until it is.
+    </p>
+
+    <div class="totals">
+      <div class="stat"><b id="t-domains">0</b><span>Domains</span></div>
+      <div class="stat"><b id="t-areas">0</b><span>Competency areas</span></div>
+      <div class="stat"><b id="t-elements">0</b><span>Elements</span></div>
+      <div class="stat"><b id="t-units">0</b><span>Assessable units</span></div>
+
+      <div class="meter">
+        <div class="meter-bar" id="meter"></div>
+        <div class="meter-key" id="meter-key"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="controls">
+    <input class="search" id="q" type="search" placeholder="Search elements, areas, domains, or IDs…" autocomplete="off" aria-label="Search the taxonomy">
+    <div class="chips" role="group" aria-label="Filter by level ceiling">
+      <button class="chip l3" data-ceil="3" aria-pressed="false">L3</button>
+      <button class="chip l4" data-ceil="4" aria-pressed="false">L4</button>
+      <button class="chip l5" data-ceil="5" aria-pressed="false">L5</button>
+    </div>
+    <div class="chips" role="group" aria-label="Filter by domain kind">
+      <button class="chip" data-kind="core" aria-pressed="false">Core</button>
+      <button class="chip" data-kind="discipline" aria-pressed="false">Discipline</button>
+    </div>
+    <span class="spacer"></span>
+    <button class="chip" id="toggle-all" aria-pressed="false">Expand all</button>
+    <span class="showing" id="showing"></span>
+  </div>
+
+  <div class="domains" id="domains"></div>
+  <p class="empty" id="empty" hidden>Nothing matches those filters.</p>
+
+</div>
+
+<script>
+  const DATA = __TAXONOMY__;
+
+  const domainsEl = document.getElementById('domains');
+  const emptyEl = document.getElementById('empty');
+  const qEl = document.getElementById('q');
+  const showingEl = document.getElementById('showing');
+  const toggleAllBtn = document.getElementById('toggle-all');
+
+  const state = { q: '', ceilings: new Set(), kinds: new Set() };
+
+  /* -- Build the DOM once; filtering only toggles [hidden]. ------------- */
+
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  let totalElements = 0, totalAreas = 0, totalUnits = 0;
+  const ceilCount = { 3: 0, 4: 0, 5: 0 };
+
+  const html = DATA.domains.map((d) => {
+    const areaCount = d.areas.length;
+    const elCount = d.areas.reduce((n, a) => n + a.elements.length, 0);
+    totalAreas += areaCount;
+    totalElements += elCount;
+    // L1-L2 are assessed once per competency area; L3 and above per element.
+    totalUnits += areaCount * 2;
+    for (const a of d.areas) for (const e of a.elements) {
+      ceilCount[e.c] = (ceilCount[e.c] || 0) + 1;
+      totalUnits += Math.max(0, e.c - 2);
+    }
+
+    const areas = d.areas.map((a) => `
+      <section class="area" data-area>
+        <div class="area-head">
+          <span class="aid">${esc(a.id)}</span>
+          <span class="atitle">${esc(a.title)}</span>
+          <span class="acount">${a.elements.length}</span>
+        </div>
+        ${a.summary ? `<p class="asummary">${esc(a.summary)}</p>` : ''}
+        <ul class="elements">
+          ${a.elements.map((e) => `
+            <li class="el" data-el data-ceil="${e.c}" data-text="${esc((e.id + ' ' + e.title).toLowerCase())}">
+              <span class="eid">${esc(e.id)}</span>
+              <span class="etitle">${esc(e.title)}</span>
+              <span class="ceil c${e.c}" title="Attainable level ceiling ${e.c}">${e.c}</span>
+            </li>`).join('')}
+        </ul>
+      </section>`).join('');
+
+    return `
+      <article class="domain is-${d.kind}" data-domain data-kind="${d.kind}" data-text="${esc((d.id + ' ' + d.title).toLowerCase())}">
+        <button class="domain-head" type="button" aria-expanded="false">
+          <span class="did">${esc(d.id)}</span>
+          <span class="dtitle">${esc(d.title)}</span>
+          <span class="dmeta"><span>${areaCount} areas</span><span>${elCount} elements</span><span class="caret">›</span></span>
+        </button>
+        <div class="domain-body">
+          ${d.summary ? `<p class="dsummary">${esc(d.summary)}</p>` : ''}
+          ${areas}
+        </div>
+      </article>`;
+  }).join('');
+
+  domainsEl.innerHTML = html;
+
+  document.getElementById('t-domains').textContent = DATA.domains.length;
+  document.getElementById('t-areas').textContent = totalAreas;
+  document.getElementById('t-elements').textContent = totalElements.toLocaleString();
+  document.getElementById('t-units').textContent = totalUnits.toLocaleString();
+
+  /* -- Distribution meter ---------------------------------------------- */
+
+  const ramp = { 3: 'var(--l3)', 4: 'var(--l4)', 5: 'var(--l5)' };
+  const names = { 3: 'Competent', 4: 'Proficient', 5: 'Expert' };
+  document.getElementById('meter').innerHTML = [3, 4, 5]
+    .map((c) => `<i style="width:${(ceilCount[c] / totalElements) * 100}%;background:${ramp[c]}"></i>`)
+    .join('');
+  document.getElementById('meter-key').innerHTML = [3, 4, 5]
+    .map((c) => `<span><u style="background:${ramp[c]}"></u>L${c} ${names[c]} <b>${((ceilCount[c] / totalElements) * 100).toFixed(1)}%</b></span>`)
+    .join('');
+
+  /* -- Filtering -------------------------------------------------------- */
+
+  const domainNodes = [...domainsEl.querySelectorAll('[data-domain]')];
+
+  function apply() {
+    const q = state.q.trim().toLowerCase();
+    let shownElements = 0, shownDomains = 0;
+
+    for (const domain of domainNodes) {
+      const kindOk = state.kinds.size === 0 || state.kinds.has(domain.dataset.kind);
+      let domainHasVisible = false;
+
+      for (const area of domain.querySelectorAll('[data-area]')) {
+        let areaHasVisible = false;
+
+        for (const el of area.querySelectorAll('[data-el]')) {
+          const ceilOk = state.ceilings.size === 0 || state.ceilings.has(el.dataset.ceil);
+          // Match against the element only. Matching the domain title too would
+          // mean searching "guardband" returns all 46 elements of CM-08 just
+          // because the domain is called Guardbanding. Searching a domain still
+          // works, because every element ID carries the domain prefix.
+          const textOk = q === '' || el.dataset.text.includes(q);
+          const visible = kindOk && ceilOk && textOk;
+          el.hidden = !visible;
+          if (visible) { areaHasVisible = true; shownElements++; }
+        }
+
+        area.hidden = !areaHasVisible;
+        if (areaHasVisible) domainHasVisible = true;
+      }
+
+      domain.hidden = !domainHasVisible;
+      if (domainHasVisible) {
+        shownDomains++;
+        // A search should reveal its own hits rather than making you hunt.
+        if (q !== '') domain.classList.add('open');
+      }
+    }
+
+    emptyEl.hidden = shownElements > 0;
+    showingEl.textContent = shownElements === totalElements
+      ? `${totalElements.toLocaleString()} elements`
+      : `${shownElements.toLocaleString()} of ${totalElements.toLocaleString()} · ${shownDomains} domains`;
+  }
+
+  /* -- Interaction ------------------------------------------------------ */
+
+  domainsEl.addEventListener('click', (event) => {
+    const head = event.target.closest('.domain-head');
+    if (!head) return;
+    const domain = head.closest('.domain');
+    const open = domain.classList.toggle('open');
+    head.setAttribute('aria-expanded', String(open));
+  });
+
+  let debounce;
+  qEl.addEventListener('input', () => {
+    clearTimeout(debounce);
+    debounce = setTimeout(() => { state.q = qEl.value; apply(); }, 120);
+  });
+
+  for (const chip of document.querySelectorAll('.chip[data-ceil], .chip[data-kind]')) {
+    chip.addEventListener('click', () => {
+      const on = chip.getAttribute('aria-pressed') !== 'true';
+      chip.setAttribute('aria-pressed', String(on));
+      const set = chip.dataset.ceil ? state.ceilings : state.kinds;
+      const key = chip.dataset.ceil || chip.dataset.kind;
+      on ? set.add(key) : set.delete(key);
+      apply();
+    });
+  }
+
+  toggleAllBtn.addEventListener('click', () => {
+    const expand = toggleAllBtn.getAttribute('aria-pressed') !== 'true';
+    toggleAllBtn.setAttribute('aria-pressed', String(expand));
+    toggleAllBtn.textContent = expand ? 'Collapse all' : 'Expand all';
+    for (const domain of domainNodes) {
+      domain.classList.toggle('open', expand);
+      domain.querySelector('.domain-head').setAttribute('aria-expanded', String(expand));
+    }
+  });
+
+  apply();
+</script>

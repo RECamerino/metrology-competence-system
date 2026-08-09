@@ -17,6 +17,7 @@
     "report:quotes": "node packages/validator/src/cli.ts quotes",
     "registry:sync": "node packages/validator/src/cli.ts registry-sync",
     "build:bok": "node packages/compiler/src/cli.ts",
+    "build:viewer": "node tools/build-viewer.ts",
     "check:airgap": "node tools/check-airgap.ts",
     "test": "node --test \"packages/**/*.test.ts\"",
     "typecheck": "tsc --noEmit"
