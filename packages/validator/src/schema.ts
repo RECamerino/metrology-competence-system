@@ -63,7 +63,8 @@ export type SchemaName =
   | 'attempt-ledger'
   | 'bok-article'
   | 'training-module'
-  | 'training-record';
+  | 'training-record'
+  | 'deployment-scope';
 
 let cached: AjvInstance | null = null;
 

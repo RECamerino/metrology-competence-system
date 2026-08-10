@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/deployment-scope.schema.json",
+  "title": "Deployment scope — which elements apply to this person in this role",
+  "description": "The missing half of `roleTargets`. A roleTarget states the MINIMUM level a role requires for an element, once that element applies. It does not state that the element applies. This does.\n\nWithout it, gap analysis is nonsense: a calibration engineer would be shown a deficiency in relativistic geodesy, CMM metrology, mass and forty other domains simultaneously, because the corpus rates the role against every element it could ever touch. Scope is what makes the requirement addressable to a person.\n\nWHY SCOPE LIVES HERE AND NOT IN THE CORPUS. The corpus is organization-agnostic. What a 'calibration engineer' covers differs between a dimensional house and a national institute, and baking one answer into the taxonomy would impose a view the project has no business imposing. Scope is a property of an appointment (Organization edition) or of a person's own declaration (Personal edition). The corpus states the requirement; the deployment states applicability; gap analysis is their intersection.\n\nNOT TO BE CONFUSED WITH AN AUTHORIZATION SCOPE. `authorization.schema.json` has a `scope` too, and it answers a different question: what a person is PERMITTED to do. This answers which competences are EXPECTED of them. A person can be in scope for an element and hold no authorization touching it, and the reverse. Competence is not authorization.",
+
+  "type": "object",
+  "required": ["schemaVersion", "subject", "role", "includes"],
+  "additionalProperties": false,
+
+  "properties": {
+    "schemaVersion": { "const": 1 },
+
+    "subject": { "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did" },
+
+    "role": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/roleId",
+      "description": "Which role's targets apply. A person holding two roles has two scopes; the gap for an element is the strictest requirement among the scopes that contain it."
+    },
+
+    "includes": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "description": "What is in scope, resolved against the taxonomy. Selectors are unioned. Machine-resolvable by construction: every value names a domain, an area or an element that the taxonomy either contains or does not.",
+      "properties": {
+        "domains": {
+          "type": "array",
+          "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/domainId" }
+        },
+        "areas": {
+          "type": "array",
+          "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/competencyAreaId" }
+        },
+        "elements": {
+          "type": "array",
+          "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
+          "description": "Individually named elements, for the case a person's work crosses a boundary the taxonomy draws elsewhere."
+        }
+      }
+    },
+
+    "excludes": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Removed after the includes are unioned. For the common case of 'this whole domain except the part we send out to a subcontractor'.",
+      "properties": {
+        "areas": {
+          "type": "array",
+          "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/competencyAreaId" }
+        },
+        "elements": {
+          "type": "array",
+          "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" }
+        }
+      }
+    },
+
+    "assignedBy": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Who set the scope. Absent means self-declared, which is what the Personal edition produces and is legitimate — a person deciding what they intend to be competent in. Self-declared scope produces a personal development plan; it does not produce evidence of anything.",
+      "properties": {
+        "organization": { "type": "string" },
+        "assignedByPerson": { "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did" }
+      }
+    },
+
+    "effectiveFrom": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+    "effectiveTo": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate",
+      "description": "Scope changes when the job changes. A gap computed against a scope that has ended is a historical statement, not a current one."
+    },
+
+    "notes": { "type": "string" }
+  }
+}
