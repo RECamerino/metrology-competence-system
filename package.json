@@ -1,5 +1,5 @@
 {
-  "name": "metrology-bok",
+  "name": "metrology-competence-system",
   "version": "0.0.0",
   "private": true,
   "description": "Metrology Competence System — an open body of knowledge for metrology and a portable competency credentialing platform",
@@ -16,7 +16,6 @@
     "report:coverage": "node packages/validator/src/cli.ts coverage",
     "report:quotes": "node packages/validator/src/cli.ts quotes",
     "registry:sync": "node packages/validator/src/cli.ts registry-sync",
-    "build:bok": "node packages/compiler/src/cli.ts",
     "build:viewer": "node tools/build-viewer.ts",
     "build:docs": "node tools/build-docs.ts",
     "check:docs": "node tools/build-docs.ts --check",

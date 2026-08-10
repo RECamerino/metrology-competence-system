@@ -18,11 +18,18 @@ import type { Finding } from './checks.ts';
 const err = (message: string): Finding => ({ level: 'error', message });
 const warn = (message: string): Finding => ({ level: 'warn', message });
 
+export interface BootstrapAuthority {
+  basis: string;
+  cohort?: string;
+  admittedOn?: string;
+}
+
 export interface Signer {
   did: string;
   heldLevel: number | null;
   credentialedReviewer?: boolean;
   organization?: string;
+  bootstrapAuthority?: BootstrapAuthority;
 }
 
 export interface Credential {
@@ -95,9 +102,18 @@ export function checkCredential(
     const qualified = credential.signers.filter(
       (s) => typeof s.heldLevel === 'number' && s.heldLevel >= required,
     );
-    if (qualified.length === 0) {
+    const bootstrapped = credential.signers.filter((s) => s.bootstrapAuthority);
+
+    if (qualified.length === 0 && bootstrapped.length === 0) {
       findings.push(
         err(at(`no signer held level ${required} or above in ${credential.element}. From L3 the signer judges quality rather than merely observing, so they must be at least this competent in the same element.`)),
+      );
+    } else if (qualified.length === 0) {
+      // Accepted, and never silent. The founding cohort exists because the
+      // ladder cannot otherwise start, but a bootstrap-signed credential is a
+      // weaker claim than a peer-signed one and a reader must be told.
+      findings.push(
+        warn(at(`signed under founding-cohort authority — no signer held level ${required} in ${credential.element}. Legitimate while the cohort is open; the credential must display this permanently and must not be presented as peer-signed.`)),
       );
     }
   }
@@ -118,6 +134,50 @@ export function checkCredential(
   }
 
   return findings;
+}
+
+/**
+ * Whether this credential rests on founding-cohort authority.
+ *
+ * Derived from the signers rather than stored separately, so the two can never
+ * disagree. Every renderer must call this: a bootstrap-signed credential
+ * displayed as though it were peer-signed misrepresents the strongest claim
+ * the system makes.
+ */
+export function isBootstrapSigned(credential: Credential): boolean {
+  return credential.signers.some((s) => s.bootstrapAuthority !== undefined);
+}
+
+/**
+ * Whether an element may be attested at this level given its lifecycle status.
+ *
+ * L1 and L2 are witnessed observation and carry little weight, so a draft
+ * element is acceptable. L3 is where independent laboratory work is entrusted,
+ * and a badly scoped element does real damage to the person holding the
+ * credential — draft means the wording is still being argued about.
+ *
+ * This also creates the pressure that gets elements promoted out of draft
+ * before serious credentials come to depend on them.
+ */
+export function checkAttestableStatus(
+  credential: Pick<Credential, 'id' | 'element' | 'level'>,
+  elementStatus: string,
+): Finding[] {
+  if (credential.level <= 2 || elementStatus === 'stable') return [];
+
+  if (elementStatus === 'deprecated') {
+    return [
+      err(
+        `${credential.id}: ${credential.element} is deprecated and cannot be newly attested. Existing credentials against it stay valid; issue against its successor.`,
+      ),
+    ];
+  }
+
+  return [
+    err(
+      `${credential.id}: ${credential.element} is '${elementStatus}', and L${credential.level} may only be attested against a 'stable' element. L1 and L2 are witnessed observation and may rest on a draft; from L3 the definition must have stopped moving.`,
+    ),
+  ];
 }
 
 /**

@@ -17,8 +17,10 @@ import { validatorFor } from './schema.ts';
 import {
   type Authorization,
   type Credential,
+  checkAttestableStatus,
   checkCredential,
   checkReciprocity,
+  isBootstrapSigned,
   walletExport,
 } from './credentials.ts';
 
@@ -224,4 +226,85 @@ test('reciprocal review inside the window is flagged, not silently allowed', () 
     findings.some((f) => f.level === 'warn' && f.message.includes('reciprocal review')),
     `expected a reciprocity warning, got: ${JSON.stringify(findings)}`,
   );
+});
+
+/* -- Bootstrapping the ladder ---------------------------------------------- */
+
+const FOUNDER = {
+  did: 'did:key:z6MkfrQabcTHRVNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsd',
+  heldLevel: null,
+  credentialedReviewer: true,
+  organization: 'National Physical Standards',
+  bootstrapAuthority: {
+    basis: 'Primary standards laboratory appointment and UKAS technical assessor for dimensional scope.',
+    cohort: 'founding-2026',
+    admittedOn: '2026-09-01',
+  },
+};
+
+test('with no holders, an ordinary L5 signoff is impossible — this is the deadlock', () => {
+  // L3 needs L4, L4 needs L5, L5 needs L5. At launch nobody holds anything, so
+  // without a bootstrap rule only L1 and L2 are ever reachable.
+  const findings = checkCredential(
+    { ...credential, signers: credential.signers.map((s) => ({ ...s, heldLevel: null })) },
+    L5_POLICY,
+  );
+  assert.ok(findings.some((f) => f.level === 'error' && f.message.includes('level 5 or above')));
+});
+
+test('a founding-cohort signer breaks the deadlock', () => {
+  const findings = checkCredential(
+    { ...credential, signers: [FOUNDER, { ...credential.signers[1]!, heldLevel: null }] },
+    L5_POLICY,
+  );
+  assert.equal(findings.filter((f) => f.level === 'error').length, 0);
+});
+
+test('but a bootstrap-signed credential is never silent about it', () => {
+  // A bootstrap-signed L5 is a weaker claim than a peer-signed one, and a
+  // reader who cannot tell them apart has been misled.
+  const findings = checkCredential(
+    { ...credential, signers: [FOUNDER, { ...credential.signers[1]!, heldLevel: null }] },
+    L5_POLICY,
+  );
+  assert.ok(
+    findings.some((f) => f.level === 'warn' && f.message.includes('founding-cohort authority')),
+    `expected a bootstrap warning, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('bootstrap authority is visible from the credential without parsing policy', () => {
+  assert.equal(isBootstrapSigned(credential), false);
+  assert.equal(isBootstrapSigned({ ...credential, signers: [FOUNDER] }), true);
+});
+
+test('bootstrap authority with no stated basis is rejected by the schema', () => {
+  const validate = validatorFor('credential');
+  assert.equal(
+    validate({
+      ...credential,
+      signers: [{ ...FOUNDER, bootstrapAuthority: { cohort: 'founding-2026' } }],
+    }),
+    false,
+  );
+});
+
+/* -- Draft elements -------------------------------------------------------- */
+
+test('L3 and above cannot be attested against a draft element', () => {
+  const findings = checkAttestableStatus({ id: 'urn:x', element: 'CM-03-046', level: 4 }, 'draft');
+  assert.ok(findings.some((f) => f.message.includes("may only be attested against a 'stable' element")));
+});
+
+test('L2 may rest on a draft element, because it is witnessed observation', () => {
+  assert.deepEqual(checkAttestableStatus({ id: 'urn:x', element: 'CM-03-046', level: 2 }, 'draft'), []);
+});
+
+test('a stable element is attestable at any level', () => {
+  assert.deepEqual(checkAttestableStatus({ id: 'urn:x', element: 'CM-03-046', level: 5 }, 'stable'), []);
+});
+
+test('a deprecated element cannot be newly attested at all', () => {
+  const findings = checkAttestableStatus({ id: 'urn:x', element: 'CM-03-046', level: 4 }, 'deprecated');
+  assert.ok(findings.some((f) => f.message.includes('issue against its successor')));
 });
