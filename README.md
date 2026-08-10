@@ -14,7 +14,11 @@ An open, organization-agnostic body of knowledge for metrology — and a platfor
 
 All three are generated from [`content/competence/taxonomy/domains/`](content/competence/taxonomy/domains/) and regenerated in CI, so none of them can drift from the source.
 
-> **Status: pre-alpha.** The taxonomy skeleton is complete (Phase 1). No content is authored against it yet and there is no usable application. See [Roadmap](#roadmap).
+> **Status: pre-alpha, and the gap between design and code is wide on purpose.**
+>
+> The taxonomy skeleton is complete (Phase 1) and Phase 2 is under way: the proficiency ladder, reference roles, credential and authorization schemas, the attempt ledger and the item-bank format are designed, schema-backed and tested. **What exists is architecture, not an application.** There is one BOK article, no authored elements, and no engine — `packages/validator` is the only implemented package. Nobody can earn a credential from this yet.
+>
+> See [Roadmap](#roadmap), and [`CLAUDE.md`](CLAUDE.md) for the current working state.
 
 ---
 
@@ -64,14 +68,20 @@ All three run the **same core engine**. A wallet moves between them intact.
 
 ## Repository layout
 
+**Two content trees.** `content/bok/` explains a subject; `content/competence/` assesses a person. They were one tree until decision 38, and merging them produced neither a usable encyclopedia nor a clean assessment model.
+
 ```
 docs/          Design documents, handoff playbook, compliance mapping
-schemas/       JSON Schema — the frozen contracts everything validates against
-content/       The BOK corpus: taxonomy, elements, roles, modules, assessments
-packages/      core, assessment, credentials, exchange, compiler, validator
-apps/          viewer, personal, desktop, web, server, commons
+schemas/       JSON Schema — the contracts everything validates against
+content/bok/           THE BODY OF KNOWLEDGE. Encyclopedic, by subject. ✅ 1 article
+content/competence/    Taxonomy, elements, roles, items, training. ✅ taxonomy, ⬜ elements
+content/sources/       Source licence register — outside both, because both cite it
+packages/      validator ✅  ·  core, assessment, credentials, exchange, compiler ⬜ empty
+apps/          viewer ✅  ·  personal, desktop, web, server, commons ⬜ not started
 tools/         Build and maintenance scripts
 ```
+
+✅ implemented · ⬜ scaffolded directory only, no code yet. The empty package and app directories describe the intended architecture, not what is built. Today `packages/validator` and `apps/viewer` are the whole of the working software.
 
 Start with [`docs/00-context.md`](docs/00-context.md) for the design rationale, and [`docs/handoff-playbook.md`](docs/handoff-playbook.md) if you intend to author content.
 
@@ -81,10 +91,10 @@ Start with [`docs/00-context.md`](docs/00-context.md) for the design rationale, 
 |---|---|---|
 | 0 | Foundation — scaffold, licenses, schemas, CI, source register | **Done** |
 | 1 | Taxonomy skeleton — all domains, competency areas, element IDs | **Done** |
-| 2 | Proficiency rubric, evidence model, credential and protocol design | Next |
+| 2 | Proficiency rubric, evidence model, credential and protocol design | **In progress** |
 | 3 | Guardrail kit — frozen schemas, validators, gold reference set | Not started |
-| 4 | Cross-cutting core content (`CM-01`…`CM-22`) | Not started |
-| 5 | Discipline packs (`DP-01`…`DP-20`) | Not started |
+| 4 | Cross-cutting core (`CM-01`…`CM-22`) — BOK articles first, then elements | Not started |
+| 5 | Discipline packs (`DP-01`…`DP-21`) | Not started |
 | 6 | Credential and exchange engine | Not started |
 | 7 | Assessment engine | Not started |
 | 8 | Personal edition | Not started |

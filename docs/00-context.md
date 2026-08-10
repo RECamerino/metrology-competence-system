@@ -121,6 +121,28 @@ The cost is real and lands in a specific place: **a badly bound archetype tests 
 | 33 | Transport-agnostic signed exchange protocol + optional Commons | The network is a *protocol*, not a service. Review requests and signed reviews are portable signed documents; they move over a public website, an intranet, email, or a USB stick, and the cryptography makes them equally valid. Nothing about earning a credential requires internet. |
 | 34 | Assessor competence dossier + scope-matching engine | Lets an accreditation body answer "is this assessor competent for this job" from verifiable evidence rather than a CV. Consented, scoped disclosure; every view audit-logged and visible to the assessor. |
 
+#### The ladder cannot start on its own
+
+Decision 43, from external review. A deadlock in shipped configuration, not a documentation problem.
+
+L3 requires a signer holding L4. L4 requires L5. L5 requires L5. At launch nobody holds anything, so **L3, L4 and L5 were all permanently unreachable and the system could only ever issue L1 and L2.** A second lock sat inside it: L3 and above also require a credentialed reviewer, and reviewer authority is itself a credential needing signers.
+
+The answer is a **closed, time-limited founding cohort**, admitted on demonstrated *external* standing — a primary-laboratory or NMI appointment, accreditation assessor status, a publication record — who may sign L3 to L5 without holding those levels.
+
+The rule that keeps it from being corrosive: **a bootstrap signature is permanently visible on every credential it produces.** `signers[].bootstrapAuthority` carries the basis for that specific signer, stated per person rather than assumed from cohort membership, and `isBootstrapSigned()` derives the flag from the signers so the two can never disagree. The marker is never cleared when the cohort closes, because the credential was still signed that way.
+
+This is the same move as the provenance tiers. The project does not pretend a self-study credential and an accredited-body credential are equivalent; it makes the difference legible. A bootstrap-signed L5 is a weaker claim than a peer-signed L5, and a reader who cannot tell them apart has been misled about the strongest assertion the system makes.
+
+The alternatives were weighed. An authority-tier issuer would be the cleanest story but needs funding and legal existence, blocking the ladder for years. A mutual peer cohort needs nobody's permission but is structurally the reciprocal-review pattern the anti-collusion controls exist to detect — a poor founding act for a trust network. Relaxing the witness level temporarily would silently change what L3 and L4 mean for everyone credentialed during the window.
+
+#### Draft elements cannot carry serious credentials
+
+Decision 44. Every element is `status: draft` today, and nothing prevented a credential being issued against one.
+
+**L1 and L2 may rest on a draft element; L3 and above require `stable`.** L1–L2 are witnessed observation and carry little weight. L3 is where independent laboratory work is entrusted, and a badly scoped element does real damage to the person holding the credential — draft means the wording is still being argued about. A deprecated element cannot be newly attested at any level; existing credentials against it stay valid and new ones go to its successor.
+
+The useful side effect is pressure in the right direction: elements have to be promoted out of draft before the serious credentials come to depend on them.
+
 #### The publication boundary: the BOK ships, the answer key does not
 
 Decision 42. The BOK/competence split made this possible; this decides it.
