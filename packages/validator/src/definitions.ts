@@ -64,6 +64,45 @@ export function elementDefinitionHash(element: ElementLike, level: number): stri
 }
 
 /**
+ * Hash of the assessment policy in force for one level.
+ *
+ * `definitionRef` pins what the ELEMENT meant. This pins what the LEVEL meant,
+ * and without it decision 39 is only half applied.
+ *
+ * `content/competence/taxonomy/proficiency.yaml` controls the signer count, the
+ * level a witness must hold, whether a credentialed reviewer and a
+ * cross-organizational signer are required, double scoring, capstone and work
+ * product, mentoring, minimum experience hours, the waiting period, and the
+ * recertification default. Its own schema says changing a level's meaning
+ * retroactively changes what every existing credential asserts — and yet none
+ * of it was captured on the credential.
+ *
+ * Concretely: if L4 requires 200 hours and two reviewers today, and in three
+ * years requires 500 hours and three, an old credential still reads
+ * `CM-03-014 @ L4` with a definitionRef that still matches. The element did not
+ * move; the bar did. A verifier could not tell.
+ *
+ * The whole level entry is hashed rather than a projection. Every field in it
+ * is a rule that had to be satisfied, and `descriptor` carries the level's
+ * generic meaning exactly as an anchor carries the element's. proficiency.yaml
+ * is steward-controlled and rarely edited, so drift here should be rare — and
+ * when a steward does edit it, being made to think about the effect on existing
+ * credentials is the correct outcome rather than an inconvenience.
+ */
+export function assessmentPolicyHash(levelDefinition: Record<string, unknown>): string {
+  return sha256Of(levelDefinition);
+}
+
+/** The level entry for one level, from a loaded proficiency document. */
+export function levelDefinition(
+  proficiency: Record<string, unknown> | null,
+  level: number,
+): Record<string, unknown> | undefined {
+  const levels = (proficiency?.levels ?? []) as Array<Record<string, unknown>>;
+  return levels.find((l) => l.level === level);
+}
+
+/**
  * Pull one section's text out of an article body, from its {#id} anchor to the
  * next heading of the same or higher rank.
  *
@@ -107,6 +146,7 @@ export interface PinnedCredential {
   element: string;
   level: number;
   definitionRef?: string;
+  assessmentPolicyRef?: string;
   knowledgeSnapshot?: KnowledgeSnapshotEntry[];
   [key: string]: unknown;
 }
@@ -126,9 +166,26 @@ export function checkDefinitionDrift(
   credential: PinnedCredential,
   element: ElementLike | undefined,
   articles: ArticleLike[] = [],
+  proficiency: Record<string, unknown> | null = null,
 ): Finding[] {
   const findings: Finding[] = [];
   const at = (msg: string) => `${credential.id}: ${msg}`;
+
+  // -- What the LEVEL meant, alongside what the element meant --------------
+  if (!credential.assessmentPolicyRef) {
+    findings.push(
+      err(at('carries no assessmentPolicyRef. Without it there is no record of what had to be satisfied to earn this level — signer count, reviewer requirements, experience hours, waiting period — and a reader will silently apply whatever the ladder demands today.')),
+    );
+  } else if (proficiency) {
+    const definition = levelDefinition(proficiency, credential.level);
+    if (!definition) {
+      findings.push(warn(at(`the proficiency document presented has no level ${credential.level}, so the policy pin cannot be checked.`)));
+    } else if (assessmentPolicyHash(definition) !== credential.assessmentPolicyRef) {
+      findings.push(
+        warn(at(`the assessment policy for L${credential.level} has changed since this credential was issued. It was earned under the rules in force at the time; do not represent it as meeting today's.`)),
+      );
+    }
+  }
 
   if (!credential.definitionRef) {
     findings.push(

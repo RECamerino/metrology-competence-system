@@ -210,6 +210,26 @@ That combination — normative and contested at once — is common in metrology 
 
 `consensus` sits on the **section**, because disagreement attaches to a specific claim rather than a whole subject. And a section marked contested must record `alternativeViews`, stated in their strongest form with the basis on which they are held. **A disputed flag with no alternative recorded is worse than no flag**: it tells a reader there is controversy without telling them what it is, leaving them less able to act than before. The validator rejects it.
 
+#### A credential must pin the bar, not only the definition
+
+Decision 46, from a second external review. Decision 39 was **half applied**, and the missing half was the one its own reasoning most obviously demanded.
+
+`definitionRef` pinned what the ELEMENT meant. Nothing pinned what the LEVEL meant. But `proficiency.yaml` controls signer count, the level a witness must hold, credentialed-reviewer and cross-organizational requirements, double scoring, capstone, work product, mentoring, minimum experience hours, the waiting period and recertification — and its own schema says, in as many words, that changing a level's meaning retroactively changes what every existing credential asserts.
+
+The failure is concrete. If L4 requires 200 hours and two reviewers today and 500 hours and three in three years, an old credential still reads `CM-03-014 @ L4` and its `definitionRef` still matches — because the element did not move, the bar did. A verifier had no way to tell.
+
+`assessmentPolicyRef` now hashes the whole level entry. Not a projection: every field in it is a rule that had to be satisfied, and `descriptor` carries the level's generic meaning exactly as an anchor carries the element's. proficiency.yaml is steward-controlled and rarely edited, so drift should be rare — and when a steward does edit it, being made to confront the effect on existing credentials is the correct outcome rather than an inconvenience.
+
+The question a credential now answers is the stronger one: not merely *what did L4 mean*, but **what rules had to be satisfied for this to be issued**.
+
+#### A signer's own standing must be evidenced too
+
+Decision 47, same review. `heldLevel: 4` and `credentialedReviewer: true` were assertions. In a system whose entire premise is replacing an unevidenced claim about a candidate, resting on an unevidenced claim about the signer is the same failure wearing a lab coat — "trust me, I'm an L4 reviewer" is not better than "trust me, he's competent".
+
+A signer may now carry `authority`: references to their own credentials, by id and content hash, distinguishing `held-level` from `reviewer-authority`. A verifier can then establish offline that the DID holds the credential, that it covers this element at or above the required level, that it was valid at signing, and that the signer had reviewer standing.
+
+Warned rather than rejected today, because no credentials exist to reference and a founding-cohort signer holds none by definition — the warning names the gap on every credential until the engine can close it. It becomes an error at Phase 6.
+
 #### Append-only IDs guarantee resolution, not meaning
 
 Decision 39, added after external architectural review.
@@ -229,7 +249,9 @@ Every credential therefore pins, at issue:
 
 #### Why ECDSA P-256 and not Ed25519
 
-Ed25519 is the Verifiable Credentials ecosystem default and is a better curve by most engineering measures. **FIPS 140-3 validation is required for the DoD deployments this must support**, and P-256 (FIPS 186-5) is the approved choice.
+Ed25519 is the Verifiable Credentials ecosystem default and is a better curve by most engineering measures. The deployments this must support require **FIPS-validated cryptographic modules**, and ECDSA over P-256 is specified in FIPS 186-5 with the curve in SP 800-186, so it is supported by validated modules in a way Ed25519 generally is not.
+
+**The wording matters and was previously wrong here.** FIPS 140-3 is a *cryptographic module* validation standard, administered through the CMVP; it does not designate an algorithm or a curve as approved. Choosing P-256 does not make this application FIPS-validated. What it does is keep the signing operation inside the set of algorithms a validated module can perform, which is the necessary condition. **The project must still name the validated module or library that performs the signing** — that remains open, and it belongs in the compliance package rather than in a curve choice.
 
 This is expensive to reverse: every credential already issued is signed with the suite in force at the time. Decided deliberately, at the start, rather than discovered later.
 

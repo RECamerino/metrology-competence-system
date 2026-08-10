@@ -216,7 +216,13 @@ test('a holder cannot anchor their own history', () => {
 test('an external anchor fixes history up to that point', () => {
   const ledger = build();
   ledger.anchors = [
-    { head: ledger.entries[1]!.hash, attestedBy: REVIEWER, attestedOn: '2026-04-02', context: 'signoff' },
+    {
+      head: ledger.entries[1]!.hash,
+      attestedBy: REVIEWER,
+      attestedOn: '2026-04-02',
+      context: 'signoff',
+      signature: 'z3MqUZ8kExampleSignatureOverTheHead',
+    },
   ];
   assert.equal(trustHorizon(ledger), 1);
   assert.deepEqual(errorsOf(verifyLedger(ledger)), []);
@@ -245,4 +251,13 @@ test('but truncation is caught the moment somebody else holds a reference', () =
       e.includes('truncated'),
     ),
   );
+});
+
+test('an unsigned anchor fixes nothing, because the holder controls the file', () => {
+  const ledger = build();
+  ledger.anchors = [
+    { head: ledger.entries[1]!.hash, attestedBy: REVIEWER, attestedOn: '2026-04-02' },
+  ];
+  assert.equal(trustHorizon(ledger), -1, 'an unsigned anchor must not move the horizon');
+  assert.ok(errorsOf(verifyLedger(ledger)).some((e) => e.includes('no signature')));
 });

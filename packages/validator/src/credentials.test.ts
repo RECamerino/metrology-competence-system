@@ -50,6 +50,9 @@ const credential: Credential = {
   // What this element MEANT on the day it was issued. Append-only IDs keep
   // 'CM-03-046' resolving; only this keeps it meaning the same thing.
   definitionRef: 'sha256:60303ae22b998861bce3b28f33eec1be758a213c86c93c076dbe9f558c11c752',
+  // What the LEVEL meant — signer counts, hours, waiting period, reviewer
+  // requirements. definitionRef pins the element; this pins the bar.
+  assessmentPolicyRef: 'sha256:2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3',
   knowledgeSnapshot: [
     {
       article: 'BOK-0001',
@@ -59,8 +62,28 @@ const credential: Credential = {
   ],
   evidence: [{ type: 'capstone', ref: HASH, archivedOn: '2026-07-30' }],
   signers: [
-    { did: REVIEWER_A, heldLevel: 5, credentialedReviewer: true, organization: 'Northfield Calibration' },
-    { did: REVIEWER_B, heldLevel: 5, credentialedReviewer: true, organization: 'Ardleigh Metrology' },
+    {
+      did: REVIEWER_A,
+      heldLevel: 5,
+      credentialedReviewer: true,
+      organization: 'Northfield Calibration',
+      // Without these the signer's own standing is an assertion, which is the
+      // "trust me" this system exists to eliminate, one level up.
+      authority: [
+        { basis: 'held-level', credentialId: 'urn:uuid:11111111-1111-4111-8111-111111111111', credentialRef: HASH },
+        { basis: 'reviewer-authority', credentialId: 'urn:uuid:22222222-2222-4222-8222-222222222222', credentialRef: HASH },
+      ],
+    },
+    {
+      did: REVIEWER_B,
+      heldLevel: 5,
+      credentialedReviewer: true,
+      organization: 'Ardleigh Metrology',
+      authority: [
+        { basis: 'held-level', credentialId: 'urn:uuid:33333333-3333-4333-8333-333333333333', credentialRef: HASH },
+        { basis: 'reviewer-authority', credentialId: 'urn:uuid:44444444-4444-4444-8444-444444444444', credentialRef: HASH },
+      ],
+    },
   ],
   issuer: { did: REVIEWER_A, name: 'Northfield Calibration', trustRegistryEntry: 'northfield-cal-2026' },
   portable: true,
@@ -307,4 +330,27 @@ test('a stable element is attestable at any level', () => {
 test('a deprecated element cannot be newly attested at all', () => {
   const findings = checkAttestableStatus({ id: 'urn:x', element: 'CM-03-046', level: 4 }, 'deprecated');
   assert.ok(findings.some((f) => f.message.includes('issue against its successor')));
+});
+
+test('a signer whose own standing is unbacked is flagged as asserted, not proven', () => {
+  const findings = checkCredential(
+    {
+      ...credential,
+      signers: credential.signers.map(({ authority, ...rest }) => rest),
+    },
+    L5_POLICY,
+  );
+  assert.ok(
+    findings.some((f) => f.level === 'warn' && f.message.includes('Asserted, not proven')),
+    `expected an unbacked-signer warning, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('a founding-cohort signer is not expected to carry a held-level credential', () => {
+  // They hold none by definition; that is what bootstrapAuthority records.
+  const findings = checkCredential(
+    { ...credential, signers: [FOUNDER, credential.signers[1]!] },
+    L5_POLICY,
+  );
+  assert.ok(!findings.some((f) => f.message.includes('Asserted, not proven')));
 });

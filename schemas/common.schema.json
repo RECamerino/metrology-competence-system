@@ -102,7 +102,7 @@
 
     "citation": {
       "type": "object",
-      "description": "A precise normative reference. Referenceability is universal: every element must carry at least one of these regardless of the source's licence tier. A citation is a fact and is always permitted; quoting is a separate, tier-gated capability.",
+      "description": "A precise source reference. Referenceability is universal: every element and every BOK article carries at least one, regardless of the source's licence tier. NOT necessarily a NORMATIVE reference — the corpus covers accepted practice, emerging technique, research and interpretation, and adjacent competencies where no clause requires anything of anybody. What is required is a reference appropriate to the kind of claim; its standing is recorded separately in `currency.authorityStatus`. A citation is a fact and is always permitted; quoting is a separate, tier-gated capability.",
       "required": ["source", "clause"],
       "additionalProperties": false,
       "properties": {
