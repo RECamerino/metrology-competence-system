@@ -22,7 +22,9 @@
     "check:docs": "node tools/build-docs.ts --check",
     "check:airgap": "node tools/check-airgap.ts",
     "test": "node --test \"packages/**/*.test.ts\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build:public": "node tools/build-public.ts",
+    "check:leak": "node tools/check-leak.ts"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

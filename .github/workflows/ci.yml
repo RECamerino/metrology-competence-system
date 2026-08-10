@@ -80,3 +80,26 @@ jobs:
       # incident, not a bug report.
       - name: Scan build output
         run: npm run check:airgap
+
+  publication:
+    name: Publication boundary
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18'
+          cache: npm
+
+      - run: npm ci
+
+      # The BOK is published; item internals are not. Publication is one-way —
+      # a leaked scoring key cannot be recalled from anyone who already has it —
+      # so the distribution is rebuilt and rescanned on every change rather than
+      # trusted to have been checked by whoever last touched the projection.
+      - name: Build the public distribution
+        run: npm run build:public
+
+      - name: Scan it for restricted content
+        run: npm run check:leak
