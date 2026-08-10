@@ -68,7 +68,7 @@
 
     "roleTargets": {
       "type": "object",
-      "description": "Target proficiency for each reference role. Every role in content/roles must have an entry; use null where the element is genuinely not applicable to that role. Silence is not the same as N/A, and the validator will not accept a missing role.",
+      "description": "The MINIMUM proficiency this element requires of each reference role, once the element is within that person's deployment scope. Normative, not descriptive and not aspirational: it states what the role requires, not what holders of it typically reach or would like to reach.\n\nA roleTarget DOES NOT IMPLY APPLICABILITY. It says nothing about whether this element is part of any particular person's work. Applicability comes from a deployment scope (see deployment-scope.schema.json), supplied by an appointment or by the person's own declaration, and AN ELEMENT OUTSIDE SCOPE CANNOT PRODUCE A COMPETENCE GAP. Rate the level the role would need if the element applied; do not try to guess whose job it is.\n\nThat separation is what keeps the corpus organization-agnostic. What a 'calibration engineer' covers differs between a dimensional house and a national institute, and the taxonomy has no business deciding.\n\nUse null only where the element could never be part of that role's work IN ANY DEPLOYMENT — a stronger claim than 'not in this person's scope today'. Silence is not the same as null, and the validator will not accept a missing role.\n\nThis is also not authorization. What a person is permitted to do is granted by an organization and lives in authorization.schema.json.",
       "propertyNames": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/roleId" },
       "additionalProperties": {
         "oneOf": [
@@ -81,7 +81,7 @@
     "citations": {
       "type": "array",
       "minItems": 1,
-      "description": "At least one precise, clause-level normative reference is mandatory for every element, whatever the source's licence tier. This is what makes the corpus auditable.",
+      "description": "At least one precise, clause-level source reference is mandatory for every element, whatever the source's licence tier. This is what makes the corpus auditable. NOT necessarily a normative one: accepted practice, emerging technique, research and interpretation are all legitimate, as are adjacent competencies where no clause requires anything of anybody. The standing of the claim is recorded in `currency.authorityStatus`.",
       "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/citation" }
     },
 

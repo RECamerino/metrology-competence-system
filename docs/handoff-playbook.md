@@ -115,6 +115,16 @@ npm run registry:sync
 
 Commit the lock-file change alongside the skeleton change, so the ID addition is visible in review.
 
+**Rating `roleTargets` — the question is narrower than it looks.**
+
+A roleTarget is the **minimum level that role needs, IF this element is part of their work**. It is not a claim that the element *is* part of their work. Applicability comes from the person's deployment scope, and an element outside scope produces no gap at all.
+
+So rate it conditionally. "What would a calibration engineer need here, supposing this were in their scope?" — not "do calibration engineers usually do this?" The second question is not yours to answer and the answer differs by employer.
+
+Use `null` only where the element could **never** be part of that role's work in any deployment. `metrology-technician-i` on uncertainty-budget construction is null, because that role does not evaluate uncertainty independently anywhere. `calibration-engineer` on relativistic geodesy is **not** null — it is a genuine requirement for an engineer whose scope includes it, and irrelevant to everyone else, which scope already handles.
+
+The commonest error will be using null as a soft "probably not relevant". That silently removes the requirement for everyone, including the person for whom it was the whole job.
+
 **Choosing `levelCeiling` honestly.** Most elements top out at 3. Reserve 4 for elements with real practitioner-level depth, and 5 for elements where genuine expert practice exists — where a person could plausibly spend a career and still be learning. Inflating ceilings manufactures depth that is not there and creates assessable units nobody can write items for.
 
 ### 2. Write the file

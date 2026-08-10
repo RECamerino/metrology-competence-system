@@ -210,6 +210,26 @@ That combination — normative and contested at once — is common in metrology 
 
 `consensus` sits on the **section**, because disagreement attaches to a specific claim rather than a whole subject. And a section marked contested must record `alternativeViews`, stated in their strongest form with the basis on which they are held. **A disputed flag with no alternative recorded is worse than no flag**: it tells a reader there is controversy without telling them what it is, leaving them less able to act than before. The validator rejects it.
 
+#### A roleTarget is a scoped minimum requirement
+
+Decision 48. Found by authoring the first real element, which is the third time that exercise has surfaced a design flaw fixtures had hidden.
+
+`roleTargets` said "target proficiency for each reference role" and never defined *target*. Requirement, typical, or aspiration are three different claims producing three different dashboards, and **26,784 ratings were about to be authored against whichever one an author assumed**.
+
+The damage is not theoretical. Every element carries a rating for every role, so a naive gap analysis demands a calibration engineer hold L4 in relativistic geodesy, CMM metrology, mass and forty other domains at once. At 200 hours and 180 days per L4, ten percent of the corpus is roughly twenty-one working years — for one role. The Phase 10 dashboard would have been unusable, and by then the ratings would all have been written.
+
+**Settled as follows:**
+
+- A roleTarget is the **minimum proficiency required** for that role when the element falls within the person's deployment scope. **Normative**, not descriptive and not aspirational.
+- **It does not imply applicability.** Deployment scope determines applicability; the roleTarget determines the level once applicable.
+- **An element outside scope cannot produce a competence gap.** Not a small one, not a deprioritised one — none.
+- **Scope must be machine-resolvable** from taxonomy and deployment data, which is why `deployment-scope.schema.json` exists and resolves domains, areas and named elements rather than describing scope in prose.
+- Personal aspirations are not roleTargets. Organizational authorization is not a roleTarget.
+
+**Scope lives outside the corpus, deliberately.** What a "calibration engineer" covers differs between a dimensional house and a national institute, and the taxonomy has no business deciding. The corpus states the requirement; an appointment — or the person's own declaration in the Personal edition — states applicability; gap analysis is the intersection. That keeps roles organization-agnostic, which they already had to be.
+
+It also sharpens what `null` means. Null is now the strong claim that the element could **never** be part of that role's work in any deployment, which is different from "not in this person's scope today" — and the latter is exactly what scope is for. An author who reaches for null to mean "most people in this role wouldn't do this" is answering the wrong question.
+
 #### A credential must pin the bar, not only the definition
 
 Decision 46, from a second external review. Decision 39 was **half applied**, and the missing half was the one its own reasoning most obviously demanded.
