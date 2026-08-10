@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
 | Content authored | **0 elements** · **1 BOK article** · **1 module** |
 | Item bank | 3 archetypes · 10 bindings · **0.1%** of units covered |
-| Checks | 0 errors · 113/113 tests · typecheck clean |
+| Checks | 0 errors · 119/119 tests · typecheck clean |
 
 ### Phases
 
@@ -64,7 +64,7 @@ Three principles held in tension deliberately:
 
 **1. IDs are append-only.** `content/competence/taxonomy/domains/*.yaml` and `content/competence/taxonomy/id-registry.lock` may grow. Nothing may ever be renamed or removed. A credential attesting `CM-03-014` must resolve to the same element forever — rename it and you have silently invalidated somebody's evidence of their own competence. Deprecate and supersede; never delete. CI enforces this and it cannot be waived.
 
-**1b. …but resolution is not meaning.** An immutable ID does not stop an anchor being rewritten, and a rewritten anchor changes what the credential asserts. Every credential therefore pins `definitionRef` (the element definition, projected to `kind`, `levelCeiling` and the attested level's anchor) and `knowledgeSnapshot` (the BOK sections it rested on), both by content hash. **Drift is not invalidity** — an old credential stays true of the definition in force when it was earned, and the correct response is to show a reader *that* definition, never today's. See decision 39.
+**1b. …but resolution is not meaning.** An immutable ID does not stop an anchor being rewritten, nor the bar being raised, and either changes what the credential asserts. Every credential therefore pins **three** things by content hash: `definitionRef` (the element definition), `assessmentPolicyRef` (the whole proficiency level entry — signer counts, hours, waiting period, reviewer requirements) and `knowledgeSnapshot` (the BOK sections it rested on). Pinning the element without the level leaves the hole half open: the element does not move, the bar does. **Drift is not invalidity** — an old credential stays true of the definition in force when it was earned, and the correct response is to show a reader *that* definition, never today's. See decision 39.
 
 **2. Every element carries a clause-level citation.** `ISO/IEC 17025:2017 §7.6.1`, not "see the standard". Referenceability is universal. CI rejects an element without one.
 
@@ -111,7 +111,7 @@ content/sources/registry.yaml     Source licence register. Outside both trees,
                                   because both cite it.
 
 schemas/                          JSON Schema. Frozen at Phase 3.
-packages/validator/               Integrity checks + 113 guardrail tests.
+packages/validator/               Integrity checks + 119 guardrail tests.
 apps/viewer/                      Viewer SOURCE (template + build script).
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/ceiling-plan.json           Level-ceiling judgement, per area + overrides.
@@ -131,7 +131,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 113 guardrail tests
+npm test                  # 119 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, gaps
 npm run report:quotes     # complete quotation manifest for legal review
@@ -166,7 +166,11 @@ From external architectural review, August 2026. Not a new phase — scope that 
 **Done:** knowledge-version provenance (decision 39) · BOK review provenance (decision 40) · disagreement and consensus (decision 41).
 
 7. **Many paths to competence.** `BOK → module → assessment` must never harden into a mandatory linear course. Self-study, mentoring, a commercial course and prior practice are all legitimate routes to the same assessment, and the competence definition stays independent of any learning provider. Learning resources are plural and vendor-neutral by construction — this is what makes the corpus disruptive without attacking anyone. Needs a schema before Phase 11, and a stated principle now.
-8. **Standards-revision review triggers.** `currency.volatility: controlled` means review is woken by a published revision rather than a calendar. The field exists on articles and elements; the tooling that actually wakes them does not. Tooling, not schema, so it can follow the freeze.
+8. **Trust registry and status lifecycle.** Offline verification promises that a 2028 credential still verifies in 2031. That needs issuer key rotation, compromise and retirement with effective dates, plus a signed status list a verifier can obtain without contacting the issuer. Deleting a compromised key must not invalidate credentials legitimately signed with it earlier.
+9. **Evidence sufficiency.** Hashing an artifact proves it has not changed; it does not record why it was *sufficient*. The reviewer's sufficiency decision and its rationale need a home, or a credential ends up carrying `sha256:…` with nothing saying why that satisfied anything.
+10. **Exposure-group semantics and a binding-review record.** When do two differently parameterized items count as the same exposure? And who decided a binding was professionally valid — CI can only prove it is structurally possible. Both need rules before thousands of bindings exist, or the engine will decide by accident.
+11. **Validity evidence.** CI proves integrity of the representation. Expert review proves technical validity. Neither proves the assessment measures the competence it claims to. That is empirical work — inter-rater reliability, whether items discriminate knowledge from skill from judgment, whether the five-level ladder matches how the profession actually reads competence. Research, not code, and the strongest thing the project could take to NCSL.
+12. **Standards-revision review triggers.** `currency.volatility: controlled` means review is woken by a published revision rather than a calendar. The field exists on articles and elements; the tooling that actually wakes them does not. Tooling, not schema, so it can follow the freeze.
 
 ---
 

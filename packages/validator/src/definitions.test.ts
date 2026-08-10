@@ -13,6 +13,7 @@ import assert from 'node:assert/strict';
 import {
   type ArticleLike,
   type ElementLike,
+  assessmentPolicyHash,
   checkDefinitionDrift,
   elementDefinitionHash,
   extractSection,
@@ -48,12 +49,23 @@ const article: ArticleLike = {
 
 const REFS = [{ article: 'BOK-0001', section: 's03' }];
 
+/** One level entry, as it appears in proficiency.yaml. */
+const LEVEL_4_POLICY = {
+  level: 4,
+  name: 'Proficient',
+  descriptor: 'Handles the non-routine case and defends the adaptation.',
+  assessment: { modality: ['reviewer-conducted-defense'], requiresCapstone: true, minExperienceHours: 200 },
+  signoff: { signerCount: 2, witnessMustHoldLevel: 5 },
+};
+const PROFICIENCY = { schemaVersion: 1, levels: [LEVEL_4_POLICY] };
+
 function credential(overrides: Record<string, unknown> = {}) {
   const pins = pinDefinition(element, 4, REFS, [article]);
   return {
     id: 'urn:uuid:3f2b8c1a-5d4e-4f6a-9b2c-7e1d0a3f5b8c',
     element: 'CM-03-014',
     level: 4,
+    assessmentPolicyRef: assessmentPolicyHash(LEVEL_4_POLICY),
     ...pins,
     ...overrides,
   };
@@ -157,4 +169,46 @@ test('a corpus that does not contain the element warns without calling the crede
   const findings = checkDefinitionDrift(credential(), undefined, [article]);
   assert.ok(findings.some((f) => f.message.includes('not thereby false')));
   assert.equal(findings.filter((f) => f.level === 'error').length, 0);
+});
+
+/* -- What the LEVEL meant, not just what the element meant ----------------- */
+
+test('a credential with no assessmentPolicyRef is an error', () => {
+  const findings = checkDefinitionDrift(
+    { ...credential(), assessmentPolicyRef: undefined },
+    element,
+    [article],
+    PROFICIENCY,
+  );
+  assert.ok(
+    findings.some((f) => f.level === 'error' && f.message.includes('no assessmentPolicyRef')),
+    `expected a missing-policy error, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('raising the bar for a level is drift the credential can detect', () => {
+  // The failure decision 39 half-fixed: the element does not move, the bar
+  // does, and definitionRef still matches.
+  const tougher = {
+    ...PROFICIENCY,
+    levels: [
+      {
+        ...LEVEL_4_POLICY,
+        assessment: { ...LEVEL_4_POLICY.assessment, minExperienceHours: 500 },
+        signoff: { signerCount: 3, witnessMustHoldLevel: 5 },
+      },
+    ],
+  };
+  const findings = checkDefinitionDrift(credential(), element, [article], tougher);
+
+  assert.ok(
+    findings.some((f) => f.message.includes('assessment policy for L4 has changed')),
+    `expected policy drift, got: ${JSON.stringify(findings)}`,
+  );
+  // Still not invalidity — it was earned under the rules of its time.
+  assert.equal(findings.filter((f) => f.level === 'error').length, 0);
+});
+
+test('an unchanged policy produces no findings', () => {
+  assert.deepEqual(checkDefinitionDrift(credential(), element, [article], PROFICIENCY), []);
 });

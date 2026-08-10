@@ -165,6 +165,13 @@ export function trustHorizon(ledger: Ledger): number {
   for (const anchor of ledger.anchors ?? []) {
     // A holder attesting their own history anchors nothing.
     if (anchor.attestedBy === ledger.subject) continue;
+
+    // Nor does an unsigned one. An anchor exists to convert "the holder says
+    // this was the head" into something a third party stands behind; without a
+    // signature it is another assertion by whoever holds the file, and the
+    // holder is the one who can edit it.
+    if (!String(anchor.signature ?? '').trim()) continue;
+
     const index = ledger.entries.findIndex((e) => e.hash === anchor.head);
     if (index > horizon) horizon = index;
   }
@@ -255,6 +262,15 @@ export function verifyLedger(ledger: Ledger): Finding[] {
   if (selfAnchors.length > 0) {
     findings.push(
       err(at(`${selfAnchors.length} anchor(s) are attested by the ledger's own subject. Attesting your own history anchors nothing.`)),
+    );
+  }
+
+  const unsigned = (ledger.anchors ?? []).filter(
+    (a) => a.attestedBy !== ledger.subject && !String(a.signature ?? '').trim(),
+  );
+  if (unsigned.length > 0) {
+    findings.push(
+      err(at(`${unsigned.length} anchor(s) carry no signature. An unsigned anchor fixes nothing — it is an assertion inside a file the holder controls — and it does not move the trust horizon.`)),
     );
   }
 

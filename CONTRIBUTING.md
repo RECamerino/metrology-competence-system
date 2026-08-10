@@ -4,8 +4,10 @@ Thank you for considering a contribution. This project has an unusually strict c
 
 ## The two hard rules
 
-**1. Every element must carry a precise, clause-level normative reference.**
-Not "see ISO/IEC 17025" — `ISO/IEC 17025:2017 §7.6.1`. CI rejects an element without at least one citation. Referenceability is universal and non-negotiable; it is what makes the corpus auditable and what lets a reader go verify you.
+**1. Every element and every BOK article must carry a precise, clause-level source reference.**
+Not "see ISO/IEC 17025" — `ISO/IEC 17025:2017 §7.6.1`. CI rejects one without at least one citation. Referenceability is universal and non-negotiable; it is what makes the corpus auditable and what lets a reader go verify you.
+
+**A reference need not be *normative*.** The corpus deliberately covers accepted practice, emerging technique, research findings and interpretation, plus adjacent competencies — technical writing, software, teaching, ethics — where no clause requires anything of anybody. Demanding a normative clause for those would push authors toward citing something that does not really say what they need it to say. What is required is a precise, reviewable reference *appropriate to the kind of claim being made*; the standing of that claim is recorded separately in `currency.authorityStatus`, and whether practitioners agree is recorded in a section's `consensus`.
 
 **2. Never paste text from a standard you do not have the right to redistribute.**
 Quotation is a separate, tier-gated capability layered on top of citation. It is governed by [`content/sources/registry.yaml`](content/sources/registry.yaml) and explained in [`docs/source-license-register.md`](docs/source-license-register.md). CI enforces the limits mechanically, but CI cannot catch a paraphrase so close to the source that it is effectively a copy. Write your own prose.
@@ -16,7 +18,8 @@ If you are unsure whether something may be quoted, cite it instead. A citation i
 
 | Contribution | Start here |
 |---|---|
-| Author or correct a BOK element | [`docs/handoff-playbook.md`](docs/handoff-playbook.md) |
+| Author or correct a BOK article | [`docs/handoff-playbook.md`](docs/handoff-playbook.md) |
+| Author or correct a competence element | [`docs/handoff-playbook.md`](docs/handoff-playbook.md) |
 | Write an assessment item or rubric | `docs/03-evidence-and-assessment.md` |
 | Write a training module | `docs/handoff-playbook.md` |
 | Report a factual error | Open an issue with the element ID and the citation that contradicts it |
@@ -25,7 +28,12 @@ If you are unsure whether something may be quoted, cite it instead. A citation i
 
 ## Content contributions
 
-Content lives in `content/`, one file per element: YAML frontmatter for structured fields, Markdown below for prose.
+**Know which tree you are writing in.** They are different documents with different jobs:
+
+- **`content/bok/`** — the Body of Knowledge. Explains a SUBJECT, encyclopedically, for a reader looking something up. Carries no levels, no roles, no anchors. Markdown with YAML frontmatter declaring stable section ids.
+- **`content/competence/elements/`** — an assessable claim about a PERSON: `kind`, `levelCeiling`, `anchors`, `roleTargets`. Short body, for assessors and item authors. **Not** where the subject is explained.
+
+The bridge is `knowledgeRefs`, which points from an element at the specific BOK *sections* covering it. Write the article first: CI requires at least one reference, and an element nobody can prepare for is not assessable.
 
 ```bash
 npm run validate
@@ -73,7 +81,7 @@ Every non-auto-scored item ships with its rubric in the same commit. An item wit
 - TypeScript throughout. One language, deliberately — it keeps the contributor pool wide.
 - **`packages/core` must have zero server assumptions.** It runs identically in a browser and on a server; that constraint is what makes the Personal edition a full platform rather than a stripped-down viewer. No `fs`, no `process`, no Node-only APIs. Storage goes through the adapter interface.
 - **No external runtime calls in the default build.** No CDN links, no fonts fetched at runtime, no telemetry, no analytics, no license check-in. CI scans build output and fails on any external reference. Features requiring egress are separate modules that are *absent* from the build when unconfigured, not merely disabled.
-- **Crypto is ECDSA P-256.** Not Ed25519, despite it being the ecosystem default — FIPS 140-3 validation is required for the environments this must run in, and the signature suite cannot be changed after credentials exist.
+- **Crypto is ECDSA P-256.** Not Ed25519, despite it being the ecosystem default — the target environments require FIPS-validated cryptographic modules, and ECDSA/P-256 (FIPS 186-5, SP 800-186) is what such modules perform. Note that FIPS 140-3 validates *modules*, not curves: choosing P-256 is necessary, not sufficient. The signature suite cannot be changed after credentials exist.
 
 ```bash
 npm install

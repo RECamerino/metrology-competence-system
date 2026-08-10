@@ -24,12 +24,19 @@ export interface BootstrapAuthority {
   admittedOn?: string;
 }
 
+export interface SignerAuthority {
+  basis: 'held-level' | 'reviewer-authority';
+  credentialId: string;
+  credentialRef: string;
+}
+
 export interface Signer {
   did: string;
   heldLevel: number | null;
   credentialedReviewer?: boolean;
   organization?: string;
   bootstrapAuthority?: BootstrapAuthority;
+  authority?: SignerAuthority[];
 }
 
 export interface Credential {
@@ -87,6 +94,27 @@ export function checkCredential(
   const dids = credential.signers.map((s) => s.did);
   if (new Set(dids).size !== dids.length) {
     findings.push(err(at('the same signer appears more than once. Independent signers must be distinct people.')));
+  }
+
+  // -- Is the signer's own standing evidenced, or merely stated? -----------
+  // A system built to replace "trust me, he's competent" should not rest on
+  // "trust me, I'm an L4 reviewer". Warned rather than rejected because no
+  // credentials exist yet to reference, and a founding-cohort signer holds
+  // none by definition — this becomes an error once chains can be resolved.
+  for (const signer of credential.signers) {
+    if (signer.bootstrapAuthority) continue;
+    const backed = new Set((signer.authority ?? []).map((a) => a.basis));
+
+    if (typeof signer.heldLevel === 'number' && !backed.has('held-level')) {
+      findings.push(
+        warn(at(`signer ${signer.did} claims level ${signer.heldLevel} in ${credential.element} with no credential backing it. Asserted, not proven.`)),
+      );
+    }
+    if (signer.credentialedReviewer && !backed.has('reviewer-authority')) {
+      findings.push(
+        warn(at(`signer ${signer.did} is marked a credentialed reviewer with no reviewer-authority credential referenced. Asserted, not proven.`)),
+      );
+    }
   }
 
   if (!policy) return findings;
