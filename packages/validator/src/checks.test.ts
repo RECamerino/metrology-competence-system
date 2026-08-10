@@ -587,3 +587,100 @@ test('an article no element references warns rather than fails', () => {
   assert.ok(findings.some((f) => f.level === 'warn' && f.message.includes('BOK-0002')));
   assert.ok(!findings.some((f) => f.level === 'error' && f.message.includes('BOK-0002')));
 });
+
+/* -- BOK review provenance and disagreement -------------------------------- */
+
+const REVIEWED_BODY = 'Prose.\n\n## First {#s01}\n\nMore prose.\n';
+
+test('a review covering a section the article does not declare is rejected', () => {
+  const errors = errorsOf(
+    corpus([element()], undefined, {
+      bok: [
+        article({
+          reviews: [
+            {
+              reviewer: { name: 'A Reviewer' },
+              reviewType: 'technical',
+              reviewedOn: '2026-11-01',
+              disposition: 'accepted',
+              covers: [{ section: 's09', sectionRef: `sha256:${'a'.repeat(64)}` }],
+            },
+          ],
+        }),
+      ],
+    }),
+  );
+  assert.ok(errors.some((e) => e.includes("covers section 's09'")));
+});
+
+test('a review stops vouching for prose that has been rewritten since', () => {
+  // Otherwise a named practitioner's endorsement silently transfers to words
+  // they never read.
+  const findings = runAllChecks(
+    corpus([element()], undefined, {
+      bok: [
+        article(
+          {
+            reviews: [
+              {
+                reviewer: { name: 'A Reviewer' },
+                reviewType: 'technical',
+                reviewedOn: '2026-11-01',
+                disposition: 'accepted',
+                covers: [{ section: 's01', sectionRef: `sha256:${'b'.repeat(64)}` }],
+              },
+            ],
+          },
+          REVIEWED_BODY,
+        ),
+      ],
+    }),
+  );
+  assert.ok(
+    findings.some((f) => f.level === 'warn' && f.message.includes('rewritten since A Reviewer')),
+    `expected a stale-review warning, got: ${JSON.stringify(findings.map((f) => f.message))}`,
+  );
+});
+
+test('a contested section with no alternative view is rejected', () => {
+  // Flagging controversy without describing it leaves a reader knowing not to
+  // trust the passage and still unable to act.
+  const errors = errorsOf(
+    corpus([element()], undefined, {
+      bok: [article({ sections: [{ id: 's01', heading: 'First', consensus: 'contested' }] })],
+    }),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('records no alternativeViews')),
+    `expected a contested-without-alternatives error, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('a contested section that records the other position is accepted', () => {
+  const errors = errorsOf(
+    corpus([element()], undefined, {
+      bok: [
+        article({
+          sections: [
+            {
+              id: 's01',
+              heading: 'First',
+              consensus: 'contested',
+              alternativeViews: [
+                {
+                  position: 'The opposing reading, stated in its strongest form.',
+                  basis: 'Why competent practitioners hold it.',
+                },
+              ],
+            },
+          ],
+        }),
+      ],
+    }),
+  );
+  assert.deepEqual(errors, []);
+});
+
+test('an established section needs no alternatives', () => {
+  assert.deepEqual(errorsOf(corpus([element()], undefined, { bok: [article()] })), []);
+});

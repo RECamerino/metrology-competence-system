@@ -53,6 +53,40 @@
             "maxLength": 400,
             "description": "What a reader will actually find here, in one line. Written for the person arriving cold from a credential eight months later, not for the author."
           },
+          "consensus": {
+            "enum": ["established", "broadly-accepted", "contested", "jurisdiction-dependent", "organization-specific"],
+            "default": "established",
+            "description": "Do competent practitioners AGREE about this? A separate axis from `currency.authorityStatus`, which answers what STANDING a claim has — where it comes from and whether it binds. The two are genuinely orthogonal and must not be collapsed: an ISO clause can be fully normative and its interpretation still contested, which in metrology is common rather than exotic.\n\nRecorded per section rather than per article because disagreement attaches to a specific claim, not to a whole subject. Most sections are `established` and the field can be omitted.\n\nThe purpose is intellectual honesty. An encyclopedia that silently picks one side of a live professional disagreement and presents it as settled has overstated what the field knows, and has quietly substituted its authors' judgement for the profession's."
+          },
+          "alternativeViews": {
+            "type": "array",
+            "description": "The other readings, stated in their strongest form. REQUIRED by the validator whenever consensus is contested, jurisdiction-dependent or organization-specific: a section flagged as disputed with no alternative recorded is worse than no flag at all, because it tells a reader there is controversy without telling them what it is, and leaves them less able to act than before.",
+            "items": {
+              "type": "object",
+              "required": ["position", "basis"],
+              "additionalProperties": false,
+              "properties": {
+                "position": {
+                  "type": "string",
+                  "minLength": 20,
+                  "description": "What the alternative view holds. Write it as its holders would, not as a straw man — the same standard the L4/L5 assessment rubrics apply to a candidate."
+                },
+                "basis": {
+                  "type": "string",
+                  "minLength": 20,
+                  "description": "Why it is held. A position with no reasoning is a rumour."
+                },
+                "heldBy": {
+                  "type": "string",
+                  "description": "Where this view is found — a sector, a national practice, a school of thought. Not usually a named individual."
+                },
+                "citations": {
+                  "type": "array",
+                  "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/citation" }
+                }
+              }
+            }
+          },
           "deprecated": {
             "type": "boolean",
             "default": false,
@@ -87,7 +121,8 @@
       "description": "Knowledge ages on a different trigger from competence expectations, which is one of the reasons the two are now separate files. A revised edition of a standard should wake up every article tracking it without touching a single element.",
       "properties": {
         "authorityStatus": {
-          "enum": ["normative", "authoritative", "accepted-practice", "emerging", "historical", "research", "interpretation"]
+          "enum": ["normative", "authoritative", "accepted-practice", "emerging", "historical", "research", "interpretation"],
+          "description": "What STANDING this content has: where it comes from and whether it binds. Distinct from a section's `consensus`, which answers whether practitioners agree. Do not use one to express the other — a normative clause whose reading is contested is `authorityStatus: normative` with a contested section, not `authorityStatus: interpretation`."
         },
         "volatility": { "enum": ["static", "stable", "controlled", "volatile"] },
         "sourceRevision": { "type": "string" },
@@ -102,6 +137,87 @@
       "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/bokArticleId" }
     },
 
-    "authoring": { "type": "object", "additionalProperties": true }
+    "authoring": {
+      "type": "object",
+      "required": ["createdOn"],
+      "additionalProperties": false,
+      "description": "Who made this and who looks after it. Structured rather than free-form because an encyclopedia that looks authoritative must be able to say where its content came from.",
+      "properties": {
+        "createdOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+        "lastUpdated": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+        "authors": { "type": "array", "items": { "$ref": "#/$defs/person" } },
+        "maintainer": {
+          "$ref": "#/$defs/person",
+          "description": "Who is responsible for keeping it current. An article with a volatility of `volatile` and no maintainer is a liability."
+        }
+      }
+    },
+
+    "reviews": {
+      "type": "array",
+      "description": "Technical review provenance. NOT a status flag — there is deliberately no `authoritative: true` field anywhere, because an article asserting its own authority is exactly the 'trust me' problem this project exists to solve. Authority is DERIVED from who reviewed the article, in what capacity, and what they concluded. A reader weighs the reviewers, as they would weigh the signers on a credential.\n\nThis also exists so that named external review does not disappear into git history. 'Reviewed by X, technical scope, accepted with changes, 2026-11' is auditable knowledge infrastructure; a commit log is not.",
+      "items": {
+        "type": "object",
+        "required": ["reviewer", "reviewType", "reviewedOn", "disposition", "covers"],
+        "additionalProperties": false,
+        "properties": {
+          "reviewer": { "$ref": "#/$defs/person" },
+          "reviewType": {
+            "enum": ["technical", "educational", "editorial"],
+            "description": "Technical review says the metrology is right. Educational review says it can be learned from. Editorial says it reads well. They are different competencies and conflating them lets a copy-edit masquerade as a technical endorsement."
+          },
+          "reviewedOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+          "disposition": {
+            "enum": ["accepted", "accepted-with-changes", "disputed", "rejected"],
+            "description": "`disputed` is a legitimate and valuable outcome, not a failure state: a reviewer who disagrees on substance has told a reader something worth knowing, and suppressing it would make the encyclopedia less honest than the field it documents."
+          },
+          "covers": {
+            "type": "array",
+            "minItems": 1,
+            "description": "WHICH SECTIONS WERE ACTUALLY REVIEWED, pinned by content. Scoped rather than whole-article because articles grow: a reviewer who read four sections in 2026 has not endorsed a fifth added in 2028, and an unscoped review would silently claim they had. The content pin makes a later rewrite detectable, so a review cannot keep vouching for prose its reviewer never saw.",
+            "items": {
+              "type": "object",
+              "required": ["section", "sectionRef"],
+              "additionalProperties": false,
+              "properties": {
+                "section": { "type": "string", "pattern": "^s[0-9]{2}$" },
+                "sectionRef": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/contentRef" }
+              }
+            }
+          },
+          "note": {
+            "type": "string",
+            "description": "Required when the disposition is `disputed` or `rejected`. A disagreement with no stated substance is unusable to a reader and unfair to the author."
+          },
+          "conflictDisclosed": {
+            "type": "string",
+            "description": "Any commercial or professional interest the reviewer disclosed, per GOVERNANCE.md. Recorded on the article rather than in a side channel, because a reader weighing the review needs it."
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": { "disposition": { "enum": ["disputed", "rejected"] } },
+              "required": ["disposition"]
+            },
+            "then": { "required": ["note"] }
+          }
+        ]
+      }
+    }
+  },
+
+  "$defs": {
+    "person": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "description": "A named human. `name` rather than only a DID because the BOK's reviewers are practitioners whose names carry weight in the field, and a bare identifier tells a reader nothing. The DID is optional and links the person to their own credentials where they hold them.",
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "did": { "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did" },
+        "affiliation": { "type": "string" }
+      }
+    }
   }
 }

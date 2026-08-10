@@ -34,9 +34,9 @@ Three principles held in tension deliberately:
 | Assessable units | 9096 |
 | Ceilings — L3 / L4 / L5 | 13.1% / 66.2% / 20.7% |
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
-| Content authored | **0 elements** · **1 BOK article** (`BOK-0001`) |
+| Content authored | **0 elements** · **1 BOK article** (`BOK-0001`, unreviewed) |
 | Item bank | 3 archetypes · 10 bindings · **0.1%** of units covered |
-| Checks | 0 errors · 74/74 tests · typecheck clean |
+| Checks | 0 errors · 91/91 tests · typecheck clean |
 
 ### Phases
 
@@ -63,6 +63,8 @@ Three principles held in tension deliberately:
 ## Rules that must not be broken
 
 **1. IDs are append-only.** `content/competence/taxonomy/domains/*.yaml` and `content/competence/taxonomy/id-registry.lock` may grow. Nothing may ever be renamed or removed. A credential attesting `CM-03-014` must resolve to the same element forever — rename it and you have silently invalidated somebody's evidence of their own competence. Deprecate and supersede; never delete. CI enforces this and it cannot be waived.
+
+**1b. …but resolution is not meaning.** An immutable ID does not stop an anchor being rewritten, and a rewritten anchor changes what the credential asserts. Every credential therefore pins `definitionRef` (the element definition, projected to `kind`, `levelCeiling` and the attested level's anchor) and `knowledgeSnapshot` (the BOK sections it rested on), both by content hash. **Drift is not invalidity** — an old credential stays true of the definition in force when it was earned, and the correct response is to show a reader *that* definition, never today's. See decision 39.
 
 **2. Every element carries a clause-level citation.** `ISO/IEC 17025:2017 §7.6.1`, not "see the standard". Referenceability is universal. CI rejects an element without one.
 
@@ -103,7 +105,7 @@ content/sources/registry.yaml     Source licence register. Outside both trees,
                                   because both cite it.
 
 schemas/                          JSON Schema. Frozen at Phase 3.
-packages/validator/               Integrity checks + 74 guardrail tests.
+packages/validator/               Integrity checks + 91 guardrail tests.
 apps/viewer/                      Viewer SOURCE (template + build script).
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/ceiling-plan.json           Level-ceiling judgement, per area + overrides.
@@ -123,7 +125,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 20 guardrail tests
+npm test                  # 91 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, gaps
 npm run report:quotes     # complete quotation manifest for legal review
@@ -146,6 +148,15 @@ Changing ceilings or kinds: edit `tools/ceiling-plan.json` or `tools/kind-plan.j
 4. **Authority-tier issuer.** A neutral foundation as issuer of last resort would be the strongest long-term credential. Needs people and funding. Roadmap, not a dependency.
 5. **Reviewer supply for thin domains.** `DP-21-A05` (relativistic geodesy) may have a few dozen qualified reviewers worldwide. The peer-review network needs an answer for domains that thin.
 6. **Reviewer scoring load.** Rubric-scoring is turning out to be the norm rather than the exception, which raises the human cost of the bank. Not blocking, but it feeds the reviewer programme design and the Phase 7 estimate.
+
+### Must land before the Phase 3 schema freeze
+
+From external architectural review, August 2026. Not a new phase — scope that has to be inside the freeze, because changing it after thousands of articles exist is the same mistake the BOK split avoided by two weeks.
+
+**Done:** knowledge-version provenance (decision 39) · BOK review provenance (decision 40) · disagreement and consensus (decision 41).
+
+7. **Many paths to competence.** `BOK → module → assessment` must never harden into a mandatory linear course. Self-study, mentoring, a commercial course and prior practice are all legitimate routes to the same assessment, and the competence definition stays independent of any learning provider. Learning resources are plural and vendor-neutral by construction — this is what makes the corpus disruptive without attacking anyone. Needs a schema before Phase 11, and a stated principle now.
+8. **Standards-revision review triggers.** `currency.volatility: controlled` means review is woken by a published revision rather than a calendar. The field exists on articles and elements; the tooling that actually wakes them does not. Tooling, not schema, so it can follow the freeze.
 
 ---
 

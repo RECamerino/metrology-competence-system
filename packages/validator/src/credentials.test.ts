@@ -45,6 +45,16 @@ const credential: Credential = {
     archetypes: ['ARC-0002'],
     experienceHours: 260,
   },
+  // What this element MEANT on the day it was issued. Append-only IDs keep
+  // 'CM-03-046' resolving; only this keeps it meaning the same thing.
+  definitionRef: 'sha256:60303ae22b998861bce3b28f33eec1be758a213c86c93c076dbe9f558c11c752',
+  knowledgeSnapshot: [
+    {
+      article: 'BOK-0001',
+      section: 's03',
+      sectionRef: 'sha256:fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9',
+    },
+  ],
   evidence: [{ type: 'capstone', ref: HASH, archivedOn: '2026-07-30' }],
   signers: [
     { did: REVIEWER_A, heldLevel: 5, credentialedReviewer: true, organization: 'Northfield Calibration' },

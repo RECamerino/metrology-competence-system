@@ -121,6 +121,50 @@ The cost is real and lands in a specific place: **a badly bound archetype tests 
 | 33 | Transport-agnostic signed exchange protocol + optional Commons | The network is a *protocol*, not a service. Review requests and signed reviews are portable signed documents; they move over a public website, an intranet, email, or a USB stick, and the cryptography makes them equally valid. Nothing about earning a credential requires internet. |
 | 34 | Assessor competence dossier + scope-matching engine | Lets an accreditation body answer "is this assessor competent for this job" from verifiable evidence rather than a CV. Consented, scoped disclosure; every view audit-logged and visible to the assessor. |
 
+#### Authority is evidenced, never declared
+
+Decision 40. The BOK carries no `authoritative: true` field and never will. An article asserting its own authority is precisely the "trust me" problem the whole project exists to replace, and it would be inconsistent to demand artifact-backed evidence from a person while accepting a self-declaration from a document.
+
+Authority is instead **derived** from review provenance: who reviewed the article, in what capacity, on what date, covering which sections, and what they concluded. A reader weighs the reviewers exactly as they weigh the signers on a credential.
+
+Three properties make it work:
+
+- **Review type is separated.** Technical review says the metrology is right; educational review says it can be learned from; editorial says it reads well. Conflating them lets a copy-edit masquerade as a technical endorsement.
+- **Review is scoped to sections and pinned by content.** Articles grow. A reviewer who read four sections in 2026 has not endorsed a fifth added in 2028, and an unscoped review would silently claim they had. The content pin means a later rewrite is detected and the review stops vouching for prose its reviewer never saw.
+- **`disputed` is a legitimate disposition**, not a failure state. A reviewer who disagrees on substance has told a reader something worth knowing.
+
+#### Disagreement is a first-class concept, on its own axis
+
+Decision 41. Where competent practitioners differ, the BOK must not silently pick one side and present it as settled — that overstates what the field knows and substitutes the authors' judgement for the profession's.
+
+The trap avoided here is worth recording, because it was nearly walked into. `currency.authorityStatus` already looked like the place to express disagreement. It is not, and using it that way would have produced two fields meaning roughly the same thing and used interchangeably. The axes are orthogonal:
+
+| | Answers | Example |
+|---|---|---|
+| `authorityStatus` | What standing does this claim have? Where is it from, does it bind? | An ISO clause is `normative` |
+| `consensus` | Do competent practitioners agree about it? | …and its interpretation is `contested` |
+
+That combination — normative and contested at once — is common in metrology rather than exotic, and neither field alone can express it.
+
+`consensus` sits on the **section**, because disagreement attaches to a specific claim rather than a whole subject. And a section marked contested must record `alternativeViews`, stated in their strongest form with the basis on which they are held. **A disputed flag with no alternative recorded is worse than no flag**: it tells a reader there is controversy without telling them what it is, leaving them less able to act than before. The validator rejects it.
+
+#### Append-only IDs guarantee resolution, not meaning
+
+Decision 39, added after external architectural review.
+
+Rule 1 has always said that IDs are append-only, and it has always been read as though that made a credential permanently interpretable. It does not. **An immutable identifier guarantees that `CM-03-014` always RESOLVES. Nothing in it guarantees that `CM-03-014` always MEANS the same thing.**
+
+Anchors get rewritten as practice moves. Ceilings get revised. A BOK section gets substantially rewritten when a standard changes. None of that is prevented by an append-only ID, none of it was recorded, and the consequence is concrete: `CM-03-014 @ L4` earned in 2027 and the identical string earned in 2030 could attest materially different competence, with no artifact anywhere capturing the difference. A verifier reading the older credential would silently apply the newer meaning.
+
+Every credential therefore pins, at issue:
+
+- **`definitionRef`** — a hash of the element definition projected to the fields that carry meaning for the attested level: `kind`, `levelCeiling`, and the anchor for that level. Editorial fields are excluded deliberately, because if a typo fix produced a drift warning the signal would become noise and reviewers would learn to ignore it.
+- **`knowledgeSnapshot`** — the BOK sections the element pointed at, pinned by content, so a reader knows what the claim rested on and not merely what was claimed.
+
+**Hashes rather than version numbers**, because a version number depends on somebody remembering to increment it, and the failure mode of forgetting is silent.
+
+**Drift is not invalidity, and this is the part most likely to be implemented wrongly.** A credential whose pin no longer matches the current corpus is not false. It remains exactly true of the definition in force when it was earned. What drift means is that a reader must be shown the definition *of that time* rather than today's. It is reported as a warning for that reason — treating it as an error would punish a holder for a change somebody else made years later, which is precisely the harm the append-only rule exists to prevent.
+
 #### Why ECDSA P-256 and not Ed25519
 
 Ed25519 is the Verifiable Credentials ecosystem default and is a better curve by most engineering measures. **FIPS 140-3 validation is required for the DoD deployments this must support**, and P-256 (FIPS 186-5) is the approved choice.
