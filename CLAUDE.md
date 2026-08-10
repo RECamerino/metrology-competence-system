@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
 | Content authored | **0 elements** · **1 BOK article** (`BOK-0001`, unreviewed) |
 | Item bank | 3 archetypes · 10 bindings · **0.1%** of units covered |
-| Checks | 0 errors · 91/91 tests · typecheck clean |
+| Checks | 0 errors · 96/96 tests · typecheck clean |
 
 ### Phases
 
@@ -105,7 +105,7 @@ content/sources/registry.yaml     Source licence register. Outside both trees,
                                   because both cite it.
 
 schemas/                          JSON Schema. Frozen at Phase 3.
-packages/validator/               Integrity checks + 91 guardrail tests.
+packages/validator/               Integrity checks + 96 guardrail tests.
 apps/viewer/                      Viewer SOURCE (template + build script).
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/ceiling-plan.json           Level-ceiling judgement, per area + overrides.
@@ -125,7 +125,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 91 guardrail tests
+npm test                  # 96 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, gaps
 npm run report:quotes     # complete quotation manifest for legal review
@@ -134,7 +134,11 @@ npm run build:docs        # regenerate docs/taxonomy/ — commit the result
 npm run check:docs        # fail if docs/taxonomy/ is stale (CI runs this)
 npm run build:viewer      # regenerate apps/viewer/index.html
 npm run check:airgap      # scan build output for external references
+npm run build:public      # public distribution — BOK ships, item internals do not
+npm run check:leak        # fail if restricted content reached dist/public/ (CI runs this)
 ```
+
+**The publication boundary.** `content/bok/`, the taxonomy, the roles and the elements are published — a person must be able to see what competence *means* and what they will be assessed against. Item internals are not: prompts, generator parameters, scoring, rubrics and binding rationale. Archetypes are published as a *projection* (identity and shape only) because a credential names the archetype it was served from and that has to resolve offline. The projection is an **allowlist** in `tools/public-projection.ts`, so a field added later defaults to withheld — publication cannot be undone. See decision 42.
 
 Changing ceilings or kinds: edit `tools/ceiling-plan.json` or `tools/kind-plan.json`, then `node tools/apply-ceilings.ts` / `node tools/apply-kinds.ts`. Both refuse to run if an area is unplanned or an override names a nonexistent element. Never hand-edit those fields across files.
 

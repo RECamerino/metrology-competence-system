@@ -121,6 +121,24 @@ The cost is real and lands in a specific place: **a badly bound archetype tests 
 | 33 | Transport-agnostic signed exchange protocol + optional Commons | The network is a *protocol*, not a service. Review requests and signed reviews are portable signed documents; they move over a public website, an intranet, email, or a USB stick, and the cryptography makes them equally valid. Nothing about earning a credential requires internet. |
 | 34 | Assessor competence dossier + scope-matching engine | Lets an accreditation body answer "is this assessor competent for this job" from verifiable evidence rather than a CV. Consented, scoped disclosure; every view audit-logged and visible to the assessor. |
 
+#### The publication boundary: the BOK ships, the answer key does not
+
+Decision 42. The BOK/competence split made this possible; this decides it.
+
+**What is restricted is narrower than it sounds.** The taxonomy, the proficiency ladder, the roles, the elements and their anchors are all published. A person must be able to see what competence *means* and exactly what they will be assessed against — hiding that would gate entry, which is the one thing this project refuses to do. What is withheld is the operational content of a live item bank: prompts, generator parameters, scoring bands, rubrics, and binding rationale.
+
+**This is not proctoring by another name.** Assessment stays open-resource; a candidate may use references, the internet and an AI assistant. An item defeated by knowing the general design was already defective and gets rejected in review. What withholding protects is narrower: `ARC-0002` injects a defect into a budget, and its `defect_class` parameter is `visibility: generator` precisely because naming the defect hands over the answer. A published rubric listing the defect classes does the same thing more slowly.
+
+**Nor is it secrecy from collaborators.** Reviewers, stewards and anyone evaluating the methodology get the whole repository. The boundary is on the published artifact, not on scrutiny.
+
+Two design choices carry the weight:
+
+**Per-field, not per-file.** A credential records the archetypes an assessment was served from, and verification is offline against a distributed file. So `ARC-0002` must resolve to *something* for a reader holding only the public distribution. Withholding archetypes wholesale would break verification in order to protect content that is not sensitive. Identity and shape are published; content is not.
+
+**An allowlist, not a denylist.** Fields are published only if named. When somebody adds a field to the archetype schema in two years and has never heard of `tools/public-projection.ts`, it defaults to withheld. A denylist would default it to published, and that failure is silent and irreversible — there is no unpublishing.
+
+The leak scan is deliberately independent of the builder. The builder does what it was told; the scan reads the artifact that would actually be distributed and asks what must not be there. It also refuses any non-YAML file under `items/`, because a path-based rubric rule misses a rubric that has been renamed — which is exactly the mistake a well-meaning script makes.
+
 #### Authority is evidenced, never declared
 
 Decision 40. The BOK carries no `authoritative: true` field and never will. An article asserting its own authority is precisely the "trust me" problem the whole project exists to replace, and it would be inconsistent to demand artifact-backed evidence from a person while accepting a self-declaration from a document.
