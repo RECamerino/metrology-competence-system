@@ -34,9 +34,9 @@ Three principles held in tension deliberately:
 | Assessable units | 9096 |
 | Ceilings — L3 / L4 / L5 | 13.1% / 66.2% / 20.7% |
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
-| Content authored | **0 elements** · **1 BOK article** (`BOK-0001`, unreviewed) |
+| Content authored | **0 elements** · **1 BOK article** · **1 module** |
 | Item bank | 3 archetypes · 10 bindings · **0.1%** of units covered |
-| Checks | 0 errors · 105/105 tests · typecheck clean |
+| Checks | 0 errors · 113/113 tests · typecheck clean |
 
 ### Phases
 
@@ -80,6 +80,8 @@ Three principles held in tension deliberately:
 
 **8. The ladder is bootstrapped, and it says so.** L3 needs an L4 signer, L4 needs L5, L5 needs L5 — so with no holders the ladder cannot start. A closed founding cohort admitted on external standing may sign L3–L5 without holding them, and **every credential they sign carries a permanent visible marker**. A bootstrap-signed L5 is not a peer-signed L5; never render them alike. See decision 43.
 
+**9. Training teaches; it never proves.** A module produces a training record, not a credential — `attestsCompetence` is `const false`. A module preparing for a `skill` element must declare `requiresPhysicalDemonstration`, because a simulation never substitutes for witnessed work on real equipment; completing it leaves that element `pending-demonstration`. Every module states in `cannotConvey` what its format cannot teach. See decision 45.
+
 ---
 
 ## Layout
@@ -103,13 +105,13 @@ content/competence/
   items/archetypes/               Reusable parameterized item SHAPES. ARC-nnnn.
   items/bindings/                 One archetype × one (element×level). Scales here.
   items/rubrics/                  Ships in the same commit as its item.
-  modules/                        Training. Empty until Phase 11.
+  modules/                        Training. MOD-nnnn. Teaches, never proves.
 
 content/sources/registry.yaml     Source licence register. Outside both trees,
                                   because both cite it.
 
 schemas/                          JSON Schema. Frozen at Phase 3.
-packages/validator/               Integrity checks + 105 guardrail tests.
+packages/validator/               Integrity checks + 113 guardrail tests.
 apps/viewer/                      Viewer SOURCE (template + build script).
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/ceiling-plan.json           Level-ceiling judgement, per area + overrides.
@@ -129,7 +131,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 105 guardrail tests
+npm test                  # 113 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, gaps
 npm run report:quotes     # complete quotation manifest for legal review

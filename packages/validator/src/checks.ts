@@ -82,6 +82,13 @@ function checkSchemas(corpus: Corpus): Finding[] {
     }
   }
 
+  const validateModule = validatorFor('training-module');
+  for (const file of corpus.modules) {
+    if (!validateModule(file.data)) {
+      findings.push(...formatErrors(file.path, validateModule.errors).map(err));
+    }
+  }
+
   const validateArchetype = validatorFor('item-archetype');
   for (const file of corpus.archetypes) {
     if (!validateArchetype(file.data)) {
@@ -503,6 +510,94 @@ function checkBok(corpus: Corpus): Finding[] {
 /* ------------------------------------------------------------------------ */
 
 /**
+ * Training modules.
+ *
+ * The rule doing the work here: a module that prepares for a `skill` element
+ * must declare that the element still needs physical demonstration. A skill is
+ * evidenced by witnessed work on real equipment, so a module claiming to finish
+ * one by simulation is asserting that a simulation substitutes for the bench.
+ * It does not — and the failure would be invisible, because the module would
+ * look complete and the learner would believe they had finished something they
+ * have never actually done.
+ *
+ * What the learner gets instead is `pending-demonstration`: the knowledge is
+ * done, the demonstration is not. The requirement to perform the work on real
+ * equipment is a property of the competence, not a barrier to be dissolved —
+ * this state just records position honestly, so nobody mistakes preparation
+ * for attainment.
+ */
+function checkModules(corpus: Corpus): Finding[] {
+  const findings: Finding[] = [];
+  const stubs = indexStubs(corpus.taxonomy);
+  const seen = new Map<string, string>();
+
+  const articles = new Map<string, Set<string>>();
+  for (const article of corpus.bok) {
+    const d = article.data as Record<string, any>;
+    if (!d.id) continue;
+    articles.set(
+      d.id,
+      new Set(((d.sections ?? []) as Array<Record<string, any>>).map((s) => s?.id).filter(Boolean)),
+    );
+  }
+
+  for (const file of corpus.modules) {
+    const d = file.data as Record<string, any>;
+    const at = (msg: string) => `${file.path}: ${msg}`;
+    if (!d.id) continue;
+
+    const duplicate = seen.get(d.id);
+    if (duplicate) findings.push(err(at(`module ID '${d.id}' is also defined in ${duplicate}`)));
+    seen.set(d.id, file.path);
+
+    // A module teaches the BOK. Teaching material that exists only inside a
+    // module is knowledge the corpus has lost.
+    for (const ref of (d.knowledgeRefs ?? []) as Array<Record<string, any>>) {
+      const sections = articles.get(ref?.article);
+      if (!sections) {
+        findings.push(err(at(`knowledgeRef points at unknown article '${ref?.article}'`)));
+      } else if (!sections.has(ref?.section)) {
+        findings.push(err(at(`knowledgeRef points at '${ref.article}#${ref?.section}', which that article does not declare`)));
+      }
+    }
+
+    const physical = new Set((d.requiresPhysicalDemonstration ?? []) as string[]);
+
+    for (const target of (d.preparesFor ?? []) as Array<Record<string, any>>) {
+      const stub = stubs.get(target?.element);
+      if (!stub) {
+        findings.push(err(at(`preparesFor names unknown element '${target?.element}'`)));
+        continue;
+      }
+
+      if (typeof target.level === 'number' && target.level > stub.levelCeiling) {
+        findings.push(
+          err(at(`preparesFor ${target.element} at L${target.level}, above its ceiling of ${stub.levelCeiling}`)),
+        );
+      }
+
+      if (stub.kind === 'skill' && !physical.has(target.element)) {
+        findings.push(
+          err(at(`prepares for '${target.element}', which is a skill element, without listing it in requiresPhysicalDemonstration. A skill is evidenced by witnessed work on real equipment; training toward one leaves it pending demonstration, not complete.`)),
+        );
+      }
+    }
+
+    for (const element of physical) {
+      if (!((d.preparesFor ?? []) as Array<Record<string, any>>).some((t) => t?.element === element)) {
+        findings.push(
+          err(at(`requiresPhysicalDemonstration lists '${element}', which this module does not prepare for`)),
+        );
+      }
+    }
+  }
+
+  return findings;
+}
+
+/* ------------------------------------------------------------------------ */
+
+/**
  * Item bank integrity.
  *
  * The economics of the bank — few archetypes, many bindings — are what make
@@ -669,6 +764,7 @@ export function runAllChecks(corpus: Corpus): Finding[] {
     ...checkElementIntegrity(corpus),
     ...checkPrerequisiteGraph(corpus),
     ...checkBok(corpus),
+    ...checkModules(corpus),
     ...checkItemBank(corpus),
   ];
 }

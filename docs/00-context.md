@@ -121,6 +121,28 @@ The cost is real and lands in a specific place: **a badly bound archetype tests 
 | 33 | Transport-agnostic signed exchange protocol + optional Commons | The network is a *protocol*, not a service. Review requests and signed reviews are portable signed documents; they move over a public website, an intranet, email, or a USB stick, and the cryptography makes them equally valid. Nothing about earning a credential requires internet. |
 | 34 | Assessor competence dossier + scope-matching engine | Lets an accreditation body answer "is this assessor competent for this job" from verifiable evidence rather than a CV. Consented, scoped disclosure; every view audit-logged and visible to the assessor. |
 
+#### Training teaches; it never proves
+
+Decision 45. The training layer was an empty directory and a phase number until now, which meant the most obvious way to reintroduce the project's founding objection had no guard on it at all.
+
+**A module produces a training record, not a credential.** `attestsCompetence` is `const false` and cannot be authored otherwise. "Completed Advanced Metrology Training" is precisely the claim this system exists to replace, and a training layer that quietly issued competence claims would have rebuilt the problem inside the solution.
+
+**What "nothing gates entry" does and does not mean.** It means the *system* imposes no gate: no employer, no budget, no professional network is required to learn, to be assessed, or to hold what you earn. It does **not** mean the system removes the requirement to do the work.
+
+A person can read everything ever written about a CMM and still be unable to run one. That is a fact about the competence, not a defect in the software, and it is a defensible line to hold. Softening skill evidence so a simulation counts would not be inclusive — it would issue an attestation that somebody can operate equipment they have never touched, and the person most harmed by that is the holder, standing in front of the machine on their first day.
+
+So training modules are **not** a workaround for equipment access. They are preparation, so that when access does come — bought, borrowed, or on the job — the bench time is spent well rather than spent learning what a book could have taught. Whether somebody obtains equipment and finds a credentialed witness is their business and their route; the system's job is to define the competence, supply the knowledge freely, and verify the demonstration honestly. It is not to procure hardware.
+
+So the validator requires that a module preparing for a `skill` element declares it in `requiresPhysicalDemonstration`. A module claiming to complete a skill by simulation is asserting that a simulation substitutes for the bench, and the failure would otherwise be invisible: the module would look complete and the learner would believe they had finished something they have never done.
+
+**`pending-demonstration` is an accurate statement of position, not a consolation prize.** Completing the module leaves those elements saying: the knowledge is done, the demonstration is not. It is precise rather than encouraging, which is why it is useful — a mentor or a laboratory reading it knows exactly what is being asked for, and the holder is never under the impression that the training finished the job.
+
+**`cannotConvey` is required on every module**, and is the training-layer counterpart of `lookupResistance` on an archetype: an unfakeable sentence forcing the author to confront what they have not built. Some competences are perceptual and no simulation reaches them. Dimensional work is the type case — measuring force, the feel of a correctly wrung stack, the point at which a thimble slips. A module that pretends otherwise produces somebody who believes they can do something they have never done, which is worse than no training at all.
+
+**Scope is deliberately limited to procedural simulation** — interactive diagrams, parametric widgets, guided worked examples. Not virtual instrumentation. A 3D instrument handled with a mouse teaches the handling of a mouse, becomes a toy rather than a competency module, and does not fit a serverless USB-distributable build with no external calls.
+
+Training records may be **self-attested**, unlike credentials. Completing a module is a fact about participation; competence is a claim about ability, and claims about ability need somebody else to stand behind them. Requiring a witness to learn would punish exactly the person with no employer and no professional network. Self-attested records carry correspondingly little weight, and both facts are visible.
+
 #### The ladder cannot start on its own
 
 Decision 43, from external review. A deadlock in shipped configuration, not a documentation problem.

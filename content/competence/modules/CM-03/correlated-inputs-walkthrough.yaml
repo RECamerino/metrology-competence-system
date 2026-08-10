@@ -1,0 +1,59 @@
+# MOD-0001 — Correlation in a budget, worked interactively
+#
+# A procedural simulation, not virtual instrumentation. The candidate
+# manipulates a budget and watches the arithmetic respond; nothing here
+# pretends to be an instrument.
+
+id: MOD-0001
+title: What correlation does to a combined standard uncertainty
+status: draft
+format: procedural-simulation
+
+summary: >-
+  An interactive budget with two inputs traceable to the same reference
+  standard. The learner varies the correlation coefficient and the sensitivity
+  coefficients and watches the combined standard uncertainty respond, including
+  the case where the coefficients carry opposite signs and the correlation
+  helps rather than harms. Ends with a budget presented as independent, which
+  the learner has to notice is not.
+
+knowledgeRefs:
+  - article: BOK-0001
+    section: s02
+    relevance: >-
+      Why the independence assumption is not a conservative simplification —
+      the direction of the error is the thing the simulation makes visible.
+  - article: BOK-0001
+    section: s03
+    relevance: The covariance term the widget is manipulating.
+
+preparesFor:
+  - element: CM-03-053
+    level: 2
+  - element: CM-03-053
+    level: 3
+
+# CM-03-053 is a `skill` element. Watching a covariance term move on a screen
+# is not evidence of constructing a budget, and the validator will not let this
+# module claim otherwise.
+requiresPhysicalDemonstration:
+  - CM-03-053
+
+cannotConvey: >-
+  This teaches the arithmetic and the direction of the error. It does not teach
+  the part that is actually hard: noticing that two lines in somebody else's
+  budget describe one physical effect under two names, in a laboratory where
+  nothing is labelled as correlated and the certificate does not say so. That
+  is learned by reading real budgets with somebody who has seen the failure
+  before. The simulation hands the learner a correlation the real world makes
+  them find.
+
+estimatedMinutes: 25
+
+alternativeRoutes: >-
+  JCGM 100:2008 §5.2 and Annex F.1.2 cover this directly and are freely
+  available. Many laboratories teach it by walking a new starter through their
+  own budgets, which is better than this module if such a person is available.
+
+authoring:
+  createdOn: "2026-08-10"

@@ -61,7 +61,9 @@ export type SchemaName =
   | 'credential'
   | 'authorization'
   | 'attempt-ledger'
-  | 'bok-article';
+  | 'bok-article'
+  | 'training-module'
+  | 'training-record';
 
 let cached: AjvInstance | null = null;
 

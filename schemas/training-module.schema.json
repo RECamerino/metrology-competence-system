@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/training-module.schema.json",
+  "title": "Training module — a way to learn something, never a way to prove it",
+  "description": "Governs content/competence/modules/<domain>/<id>.yaml. A module helps a person LEARN. It is one route among many and never a gate: self-study, mentoring, a commercial course and prior practice are equally legitimate ways to arrive at the same assessment, and the competence definition stays independent of any learning provider.\n\nCompleting a module produces a TRAINING RECORD, not a credential. Training completed is not competence demonstrated — that equation is the failure this whole project exists to reject, and it would be perverse to reintroduce it in the training layer. See training-record.schema.json, where `attestsCompetence` is const false.\n\nWHAT A MODULE IS NOT FOR. It is not a workaround for equipment access. A person can read everything ever written about a CMM and still be unable to run one; that is a fact about the competence, not a defect to engineer around. `skill` elements are evidenced by witnessed work on real equipment and that requirement stands. A module's job is to make the eventual bench time count, not to replace it.\n\nSCOPE, DELIBERATELY LIMITED. Procedural simulation: interactive diagrams, parametric widgets, guided worked examples, walkthroughs. NOT virtual instrumentation — a 3D instrument you handle with a mouse teaches the handling of a mouse, becomes a toy rather than a competency module, and does not fit a serverless USB-distributable build anyway.",
+
+  "type": "object",
+  "required": ["id", "title", "status", "format", "summary", "knowledgeRefs", "cannotConvey"],
+  "additionalProperties": false,
+
+  "properties": {
+    "id": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/moduleId" },
+
+    "title": { "type": "string", "minLength": 1 },
+
+    "status": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/lifecycleStatus" },
+
+    "format": {
+      "enum": [
+        "procedural-simulation",
+        "guided-worked-example",
+        "reading-path",
+        "problem-set",
+        "checklist-walkthrough"
+      ],
+      "description": "Everything here must run bundled, offline and deterministically: the default build makes no external calls, the Personal edition is serverless and USB-distributable, and no AI ships. That rules out streamed video, hosted simulators and adaptive tutors, and it favours small parametric SVG or canvas work over heavy assets.\n\n`virtual-instrumentation` is deliberately absent from this list."
+    },
+
+    "summary": { "type": "string", "minLength": 40, "maxLength": 1200 },
+
+    "knowledgeRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/knowledgeRef" },
+      "description": "The BOK sections this module teaches. REQUIRED: a module is a route through the corpus, not a parallel corpus. Teaching material that exists only inside a module is knowledge the BOK has lost, and a person who did not take the module cannot reach it."
+    },
+
+    "preparesFor": {
+      "type": "array",
+      "description": "The assessable units this module helps someone approach. PREPARES FOR, not qualifies for, and not a prerequisite — nothing here may be required before an assessment. Someone who learned it on the bench twenty years ago sits the same assessment without ever opening this.",
+      "items": {
+        "type": "object",
+        "required": ["element", "level"],
+        "additionalProperties": false,
+        "properties": {
+          "element": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
+          "level": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel" }
+        }
+      }
+    },
+
+    "requiresPhysicalDemonstration": {
+      "type": "array",
+      "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
+      "description": "Elements in `preparesFor` that this module cannot finish, because they are `skill` and skill is evidenced by witnessed work on real equipment. The validator REQUIRES every skill element in `preparesFor` to appear here — a module claiming to complete a skill element by simulation is asserting that a simulation substitutes for the bench, and it does not.\n\nCompleting the module puts those elements into `pending-demonstration` on the person's training record: the knowledge is done, the demonstration is not. That is an accurate statement of position rather than an encouraging one, which is what makes it useful — a mentor or a laboratory reading it knows exactly what is being asked for, and the holder is never left believing the training finished the job."
+    },
+
+    "cannotConvey": {
+      "type": "string",
+      "minLength": 60,
+      "description": "REQUIRED, and the field most likely to get a module rejected. State plainly what this format cannot teach.\n\nSome competences are perceptual and no simulation reaches them. Dimensional work is the type case: measuring force, the feel of a correctly wrung gauge block stack, the point at which a thimble slips, the moment an anvil is not square to the work. A module that pretends otherwise produces a candidate who believes they can do something they have never done, which is worse than no training at all.\n\nThis is the training-layer counterpart of `lookupResistance` on an archetype: a required, unfakeable sentence that forces the author to confront the limit of what they have built."
+    },
+
+    "estimatedMinutes": { "type": "integer", "minimum": 1 },
+
+    "assets": {
+      "type": "array",
+      "description": "Bundled files the module needs. Paths inside the repository — anything fetched at runtime fails the air-gap check.",
+      "items": { "type": "string" }
+    },
+
+    "alternativeRoutes": {
+      "type": "string",
+      "maxLength": 600,
+      "description": "Other legitimate ways to learn this — a textbook, a standard, a mentor, a commercial course, prior practice. Named generically and never as an endorsement: the corpus is vendor-neutral and content steering readers toward a particular provider is rejected. Recorded so the module reads as one option rather than the path."
+    },
+
+    "authoring": { "type": "object", "additionalProperties": true }
+  }
+}

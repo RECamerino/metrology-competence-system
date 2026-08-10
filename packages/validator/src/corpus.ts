@@ -52,6 +52,13 @@ export const PATHS = {
    */
   archetypes: join(REPO_ROOT, 'content', 'competence', 'items', 'archetypes'),
   bindings: join(REPO_ROOT, 'content', 'competence', 'items', 'bindings'),
+  /**
+   * Training. A route through the BOK toward an assessment, never a gate in
+   * front of one — self-study, mentoring and prior practice reach the same
+   * assessment. Completing a module produces a training record, which is
+   * evidence of training and never of competence.
+   */
+  modules: join(REPO_ROOT, 'content', 'competence', 'modules'),
 } as const;
 
 /** A parsed element file: frontmatter plus the Markdown body beneath it. */
@@ -85,6 +92,8 @@ export interface Corpus {
   elements: ElementFile[];
   /** BOK articles. Same frontmatter-plus-body shape as an element, different purpose. */
   bok: ElementFile[];
+  /** Training modules — how to learn, never how to prove. */
+  modules: ItemFile[];
   archetypes: ItemFile[];
   bindings: ItemFile[];
   /** Every ID recorded in the lock file, or null when the lock does not exist yet. */
@@ -216,6 +225,7 @@ export function loadCorpus(): { corpus: Corpus; parseErrors: string[] } {
     return files;
   };
 
+  const modules = loadItems(PATHS.modules);
   const archetypes = loadItems(PATHS.archetypes);
   const bindings = loadItems(PATHS.bindings);
 
@@ -235,6 +245,7 @@ export function loadCorpus(): { corpus: Corpus; parseErrors: string[] } {
       sources: safe(() => loadYamlFile(PATHS.sources), null),
       elements,
       bok,
+      modules,
       archetypes,
       bindings,
       lockedIds,
@@ -320,11 +331,12 @@ export function allTaxonomyIds(taxonomy: Record<string, unknown> | null): string
  * citation that stops resolving is worse than no citation at all.
  */
 export function allCorpusIds(corpus: Corpus): string[] {
-  const bokIds = corpus.bok
-    .map((a) => (a.data as Record<string, any>).id as string | undefined)
-    .filter((id): id is string => Boolean(id));
+  const idsOf = (files: Array<{ data: Record<string, unknown> }>): string[] =>
+    files
+      .map((f) => (f.data as Record<string, any>).id as string | undefined)
+      .filter((id): id is string => Boolean(id));
 
-  return [...allTaxonomyIds(corpus.taxonomy), ...bokIds].sort();
+  return [...allTaxonomyIds(corpus.taxonomy), ...idsOf(corpus.bok), ...idsOf(corpus.modules)].sort();
 }
 
 export function indexSources(sources: Record<string, unknown> | null): Map<string, SourceEntry> {
