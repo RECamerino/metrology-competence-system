@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/training-record.schema.json",
+  "title": "Training record — objective evidence that somebody learned, not that they can do",
+  "description": "What completing a training module produces. It is deliberately NOT a credential, and `attestsCompetence` is const false so it cannot be made into one.\n\nThe distinction is the project's founding objection. 'Completed Advanced Metrology Training' is the claim this system exists to replace, and a training layer that quietly issued competence claims would rebuild the problem inside the solution. A training record says one thing honestly: this person did this work on this date.\n\nWHY IT MAY BE SELF-ATTESTED, WHEN A CREDENTIAL MAY NOT. Completing a module is a fact about participation. Demonstrating competence is a claim about ability, and claims about ability need somebody else to stand behind them — hence no self-signoff anywhere on a credential. Applying that rigour here would gate learning behind a witness, which punishes exactly the person with no employer and no professional network. So training records may be self-attested, and they carry correspondingly little weight, and both of those facts are visible.\n\nTHE USEFUL PART IS `pending-demonstration`. A skill element cannot be finished by simulation, and the requirement to perform the work on real equipment is not a barrier the system should be trying to dissolve. This state records position precisely: the knowledge is done, the demonstration is not. A mentor or a laboratory reading it knows exactly what is being asked for, and the holder is never left believing the training finished the job.",
+
+  "type": "object",
+  "required": ["schemaVersion", "id", "subject", "module", "moduleRef", "completedOn", "attestsCompetence"],
+  "additionalProperties": false,
+
+  "properties": {
+    "schemaVersion": { "const": 1 },
+
+    "id": {
+      "type": "string",
+      "pattern": "^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+
+    "subject": { "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did" },
+
+    "module": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/moduleId" },
+
+    "moduleRef": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/contentRef",
+      "description": "Hash of the module as it stood when completed. Same reasoning as `definitionRef` on a credential: an append-only ID keeps `MOD-0001` resolving, and only a content pin keeps it MEANING what it meant. A module rewritten in 2030 does not retrospectively change what somebody did in 2027."
+    },
+
+    "completedOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+
+    "attestsCompetence": {
+      "const": false,
+      "description": "Cannot be authored otherwise. A training record is evidence of training and never of competence, however much a holder, an employer or a training provider might prefer otherwise."
+    },
+
+    "attestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Who says the module was completed. Absent means self-attested, which is legitimate here and weak, and a reader should treat it accordingly.",
+      "properties": {
+        "attestedBy": { "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did" },
+        "name": { "type": "string" },
+        "organization": { "type": "string" },
+        "role": {
+          "enum": ["self", "trainer", "mentor", "organization"],
+          "description": "`trainer` is the metrology-trainer role, whose authority is explicitly to attest completion of training and explicitly NOT to attest competence."
+        }
+      }
+    },
+
+    "preparedFor": {
+      "type": "array",
+      "description": "The assessable units this module prepared the person for, and where each now stands. Never an attainment — the credential is the only thing that attests attainment.",
+      "items": {
+        "type": "object",
+        "required": ["element", "level", "state"],
+        "additionalProperties": false,
+        "properties": {
+          "element": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
+          "level": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel" },
+          "state": {
+            "enum": ["prepared", "pending-demonstration"],
+            "description": "`prepared` — the person has done the training and may sit the assessment. `pending-demonstration` — this is a skill element, the training is done, and witnessed performance on real equipment has not happened. Why it has not happened is not recorded and is not the system's business: equipment may be unavailable, or simply not yet used. The state asserts one thing only, which is that preparation is not attainment."
+          },
+          "note": { "type": "string" }
+        }
+      }
+    },
+
+    "evidence": {
+      "type": "array",
+      "description": "Anything the module produced that is worth keeping — a completed worked example, a simulation transcript. Hashed like any other artifact so it can be looked at again.",
+      "items": {
+        "type": "object",
+        "required": ["ref"],
+        "additionalProperties": false,
+        "properties": {
+          "ref": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/contentRef" },
+          "description": { "type": "string" }
+        }
+      }
+    }
+  }
+}

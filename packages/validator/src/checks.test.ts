@@ -13,6 +13,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import type { Corpus, ElementFile, ItemFile } from './corpus.ts';
 import { runAllChecks } from './checks.ts';
+import { validatorFor } from './schema.ts';
 
 /* -- Fixtures ------------------------------------------------------------ */
 
@@ -170,7 +171,12 @@ function bindingFile(binding: Record<string, unknown> = {}, element = 'CM-01-001
 function corpus(
   elements: ElementFile[],
   lockedIds?: string[] | null,
-  items: { archetypes?: ItemFile[]; bindings?: ItemFile[]; bok?: ElementFile[] } = {},
+  items: {
+    archetypes?: ItemFile[];
+    bindings?: ItemFile[];
+    bok?: ElementFile[];
+    modules?: ItemFile[];
+  } = {},
 ): Corpus {
   return {
     taxonomy,
@@ -180,6 +186,7 @@ function corpus(
     sources,
     elements,
     bok: items.bok ?? [article()],
+    modules: items.modules ?? [],
     archetypes: items.archetypes ?? [],
     bindings: items.bindings ?? [],
     // BOK article IDs share the append-only registry with taxonomy IDs, so the
@@ -683,4 +690,122 @@ test('a contested section that records the other position is accepted', () => {
 
 test('an established section needs no alternatives', () => {
   assert.deepEqual(errorsOf(corpus([element()], undefined, { bok: [article()] })), []);
+});
+
+/* -- Training modules ------------------------------------------------------ */
+
+function moduleFile(overrides: Record<string, unknown> = {}): ItemFile {
+  return {
+    path: 'content/competence/modules/CM-01/test-module.yaml',
+    data: {
+      id: 'MOD-0001',
+      title: 'Test module',
+      status: 'draft',
+      format: 'procedural-simulation',
+      summary: LONG,
+      knowledgeRefs: [{ article: 'BOK-0001', section: 's01' }],
+      cannotConvey: LONG,
+      ...overrides,
+    },
+  };
+}
+
+const LOCK_WITH_MODULE = ['CM-01', 'CM-01-A01', 'CM-01-001', 'CM-01-002', 'BOK-0001', 'MOD-0001'];
+
+test('a well-formed module produces no errors', () => {
+  assert.deepEqual(errorsOf(corpus([element()], LOCK_WITH_MODULE, { modules: [moduleFile()] })), []);
+});
+
+test('a module preparing for a skill element must declare it still needs the bench', () => {
+  // CM-01-002 is `skill`. Training toward it leaves it pending demonstration,
+  // never complete — a simulation does not substitute for witnessed work.
+  const errors = errorsOf(
+    corpus([element()], LOCK_WITH_MODULE, {
+      modules: [moduleFile({ preparesFor: [{ element: 'CM-01-002', level: 2 }] })],
+    }),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('requiresPhysicalDemonstration') && e.includes('CM-01-002')),
+    `expected a skill-demonstration error, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('declaring the physical demonstration makes it acceptable', () => {
+  const errors = errorsOf(
+    corpus([element()], LOCK_WITH_MODULE, {
+      modules: [
+        moduleFile({
+          preparesFor: [{ element: 'CM-01-002', level: 2 }],
+          requiresPhysicalDemonstration: ['CM-01-002'],
+        }),
+      ],
+    }),
+  );
+  assert.deepEqual(errors, []);
+});
+
+test('a knowledge element needs no physical demonstration', () => {
+  const errors = errorsOf(
+    corpus([element()], LOCK_WITH_MODULE, {
+      modules: [moduleFile({ preparesFor: [{ element: 'CM-01-001', level: 2 }] })],
+    }),
+  );
+  assert.deepEqual(errors, []);
+});
+
+test('a module teaching outside the BOK is rejected', () => {
+  // Teaching material that exists only inside a module is knowledge the corpus
+  // has lost — unreachable by anyone who did not take the module.
+  const errors = errorsOf(
+    corpus([element()], LOCK_WITH_MODULE, {
+      modules: [moduleFile({ knowledgeRefs: [{ article: 'BOK-0001', section: 's44' }] })],
+    }),
+  );
+  assert.ok(errors.some((e) => e.includes('BOK-0001#s44')));
+});
+
+test('a module preparing above an element ceiling is rejected', () => {
+  const errors = errorsOf(
+    corpus([element()], LOCK_WITH_MODULE, {
+      modules: [
+        moduleFile({
+          preparesFor: [{ element: 'CM-01-002', level: 4 }],
+          requiresPhysicalDemonstration: ['CM-01-002'],
+        }),
+      ],
+    }),
+  );
+  assert.ok(errors.some((e) => e.includes('above its ceiling of 2')));
+});
+
+test('a training record cannot be made to attest competence', () => {
+  const validate = validatorFor('training-record');
+  const record = {
+    schemaVersion: 1,
+    id: 'urn:uuid:7a1b2c3d-4e5f-4a6b-8c9d-0e1f2a3b4c5d',
+    subject: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
+    module: 'MOD-0001',
+    moduleRef: `sha256:${'a'.repeat(64)}`,
+    completedOn: '2026-08-10',
+    attestsCompetence: false,
+  };
+  assert.ok(validate(record), JSON.stringify(validate.errors, null, 2));
+  assert.equal(validate({ ...record, attestsCompetence: true }), false);
+});
+
+test('a training record can carry pending-demonstration for a skill element', () => {
+  // The state that turns "I have no employer" into a specific request.
+  const validate = validatorFor('training-record');
+  assert.ok(
+    validate({
+      schemaVersion: 1,
+      id: 'urn:uuid:7a1b2c3d-4e5f-4a6b-8c9d-0e1f2a3b4c5d',
+      subject: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
+      module: 'MOD-0001',
+      moduleRef: `sha256:${'a'.repeat(64)}`,
+      completedOn: '2026-08-10',
+      attestsCompetence: false,
+      preparedFor: [{ element: 'CM-01-002', level: 2, state: 'pending-demonstration' }],
+    }),
+  );
 });

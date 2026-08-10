@@ -93,6 +93,10 @@ function main(): number {
   const roles = copyTree(join(CONTENT, 'competence', 'roles'), join(OUT, 'competence', 'roles'));
   const elements = copyTree(join(CONTENT, 'competence', 'elements'), join(OUT, 'competence', 'elements'));
   const sources = copyTree(join(CONTENT, 'sources'), join(OUT, 'sources'));
+  // Training modules publish in full. They are learning material and contain
+  // no answer key — a module that needed withholding would be teaching the
+  // assessment rather than the subject, which is a defect in the module.
+  const modules = copyTree(join(CONTENT, 'competence', 'modules'), join(OUT, 'competence', 'modules'));
 
   // -- Published as a projection -------------------------------------------
   const archetypeDir = join(OUT, 'competence', 'items', 'archetypes');
@@ -137,6 +141,7 @@ function main(): number {
   console.log(`  Role registries         ${roles}`);
   console.log(`  Element files           ${elements}`);
   console.log(`  Source register         ${sources}`);
+  console.log(`  Training modules        ${modules}`);
   console.log(`  Archetypes (projected)  ${archetypes}`);
   console.log(`  Bindings  (projected)   ${bindings}`);
   console.log(`  Rubrics                 0  — withheld entirely`);

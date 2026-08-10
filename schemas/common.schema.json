@@ -35,6 +35,12 @@
       "description": "Kebab-case role identifier. Example: metrology-technician-ii."
     },
 
+    "moduleId": {
+      "type": "string",
+      "pattern": "^MOD-[0-9]{4}$",
+      "description": "A training module. Append-only like every other identifier here, because a training record names the module it came from and that has to stay resolvable after the module is retired."
+    },
+
     "bokArticleId": {
       "type": "string",
       "pattern": "^BOK-[0-9]{4}$",
