@@ -18,7 +18,7 @@
  * tier already means.
  */
 
-import { createHash } from 'node:crypto';
+import { sha256Of } from './canonical.ts';
 import type { Finding } from './checks.ts';
 
 const err = (message: string): Finding => ({ level: 'error', message });
@@ -58,28 +58,9 @@ export interface Ledger {
   anchors?: Anchor[];
 }
 
-/**
- * Canonical serialisation: keys sorted, undefined dropped.
- *
- * Two implementations must agree byte for byte or every hash diverges, so this
- * is deliberately boring and must not be "improved" without a migration —
- * changing it invalidates every ledger in existence.
- */
-function canonical(value: unknown): string {
-  if (value === null || typeof value !== 'object') return JSON.stringify(value) ?? 'null';
-  if (Array.isArray(value)) return `[${value.map(canonical).join(',')}]`;
-
-  const entries = Object.entries(value as Record<string, unknown>)
-    .filter(([, v]) => v !== undefined)
-    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0));
-
-  return `{${entries.map(([k, v]) => `${JSON.stringify(k)}:${canonical(v)}`).join(',')}}`;
-}
-
 /** The hash covers the entry's content AND its prevHash, which is what links the chain. */
 export function attemptHash(attempt: Omit<Attempt, 'hash'>): string {
-  const digest = createHash('sha256').update(canonical(attempt), 'utf8').digest('hex');
-  return `sha256:${digest}`;
+  return sha256Of(attempt);
 }
 
 export function head(ledger: Ledger): string | null {

@@ -19,6 +19,7 @@ import {
   indexStubs,
   roleIds,
 } from './corpus.ts';
+import { sectionHash } from './definitions.ts';
 import { formatErrors, validatorFor } from './schema.ts';
 
 export interface Finding {
@@ -418,10 +419,45 @@ function checkBok(corpus: Corpus): Finding[] {
     }
 
     for (const section of (d.sections ?? []) as Array<Record<string, any>>) {
+      // Flagging controversy without describing it leaves a reader worse off
+      // than saying nothing: they know not to trust the passage, and still
+      // cannot act.
+      const contested = ['contested', 'jurisdiction-dependent', 'organization-specific'];
+      if (contested.includes(section?.consensus) && (section?.alternativeViews ?? []).length === 0) {
+        findings.push(
+          err(at(`section '${section.id}' is marked '${section.consensus}' but records no alternativeViews. Say what the other position is and why it is held, or do not flag it.`)),
+        );
+      }
+
       if (section?.deprecated && !section?.supersededBy) {
         findings.push(
           err(at(`section '${section.id}' is deprecated with no supersededBy. A reader following an old reference must land somewhere that tells them what changed.`)),
         );
+      }
+    }
+
+    // -- Review provenance -------------------------------------------------
+    // A review is an attestation about specific prose at a specific moment.
+    // Once the prose changes, the attestation no longer covers what is there,
+    // and letting it stand would put a named practitioner's endorsement on
+    // words they never read.
+    for (const review of (d.reviews ?? []) as Array<Record<string, any>>) {
+      const who = review?.reviewer?.name ?? 'unknown reviewer';
+
+      for (const covered of (review?.covers ?? []) as Array<Record<string, any>>) {
+        if (!declared.has(covered?.section)) {
+          findings.push(
+            err(at(`review by ${who} covers section '${covered?.section}', which this article does not declare`)),
+          );
+          continue;
+        }
+
+        const current = sectionHash(article.body, covered.section);
+        if (current !== null && current !== covered.sectionRef) {
+          findings.push(
+            warn(at(`section '${covered.section}' has been rewritten since ${who} reviewed it on ${review.reviewedOn}. That review no longer covers what is there — re-review, or narrow its scope.`)),
+          );
+        }
       }
     }
 

@@ -32,6 +32,31 @@ sections:
     covers: >-
       Estimating from repeated observations, deriving from a shared calibration
       path, and the bounding argument to use when neither is available.
+    consensus: contested
+    alternativeViews:
+      - position: >-
+          Where a correlation cannot be estimated from data, the budget should
+          carry the bounding case rather than an assumed coefficient, and the
+          report should state that a bound was used rather than a measurement.
+        basis: >-
+          An assumed coefficient carries an unquantified judgement into a figure
+          that is then treated as though it were measured. A stated bound is
+          honest about what is not known, and is defensible to an assessor who
+          asks where the number came from.
+        heldBy: >-
+          Common in accredited calibration practice, particularly where the
+          budget must survive external assessment.
+      - position: >-
+          A reasoned estimate of the coefficient, with its basis recorded, gives
+          a more useful uncertainty than a bound that is known to be pessimistic.
+        basis: >-
+          Bounding at full correlation can inflate the reported uncertainty
+          enough to make a capable measurement look incapable, which has real
+          commercial and engineering consequences and is not a conservative
+          choice so much as a different error.
+        heldBy: >-
+          Common where the measurement supports a conformity decision with a
+          tight tolerance.
   - id: s05
     heading: Where this bites in practice
     covers: >-
