@@ -135,3 +135,19 @@ test('a level above the ceiling is not counted as a missing item', () => {
   const report = coverageReport(corpus([element('CM-01-002', 2)], [bindings('CM-01-002', [1, 2])]));
   assert.doesNotMatch(report, /CM-01-002 — no items/);
 });
+
+test('partial coverage is reported even when the element is not authored', () => {
+  // Items exist, so somebody intends this to be assessable. The levels without
+  // one cannot be credentialed, and that is true whether or not the definition
+  // has been written yet.
+  const report = coverageReport(corpus([], [bindings('CM-01-001', [3])]));
+  assert.match(report, /CM-01-001 — no items at L1, L2/);
+});
+
+test('per-archetype reuse is printed, not only the mean', () => {
+  // The mean averages a shape built to span a family with narrow ones, and
+  // decision 36's 20-50 target was never about an average.
+  const report = coverageReport(corpus([], [bindings('CM-01-001', [1, 2, 3])]));
+  assert.match(report, /Units per archetype:/);
+  assert.match(report, /ARC-0001\s+3/);
+});

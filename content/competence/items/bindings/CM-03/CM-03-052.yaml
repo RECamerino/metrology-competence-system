@@ -1,0 +1,70 @@
+schemaVersion: 1
+element: CM-03-052
+
+# ARC-0004's home ground: this element IS budget construction and combination,
+# so the archetype needs no stretching to serve it at every attainable level.
+
+bindings:
+  - level: 1
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      Combining independent contributions with every value supplied and the
+      model already stated. The candidate's job is the root-sum-square and the
+      coverage factor, correctly and with units — nothing about selection or
+      modelling, which is what makes it L1 for this element rather than for
+      CM-03-053.
+    parameterRanges:
+      - name: structural_feature
+        choices: [independent contributions only, model stated in the brief]
+      - name: inputs_supplied
+        choices: [all values supplied]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 2
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      Values still supplied, but the candidate assembles the table themselves
+      and states what the combined figure means at the given coverage factor.
+      The step from L1 is that nobody hands them the layout.
+    parameterRanges:
+      - name: structural_feature
+        choices: [independent contributions only]
+      - name: inputs_supplied
+        choices: [all values supplied, layout not given]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 3
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      Records only. The candidate derives each standard uncertainty from the
+      certificates and observations, combines them, and records the basis for
+      what was included. This is the competence threshold for the element: a
+      budget somebody else could rely on, produced unaided.
+    parameterRanges:
+      - name: structural_feature
+        choices: [independent contributions only]
+      - name: inputs_supplied
+        choices: [raw records only]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 4
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      The drawn target makes a contribution significant that would ordinarily
+      be dropped, so the combination is only right if the selection was. The
+      candidate has to defend why a term they might have discarded stays in,
+      which is the non-routine case for this element.
+    parameterRanges:
+      - name: structural_feature
+        choices: [a normally negligible term made significant by the target]
+      - name: inputs_supplied
+        choices: [raw records only]
+      - name: resolvable
+        choices: [yes]

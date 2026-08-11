@@ -190,7 +190,9 @@ function corpus(
     archetypes: items.archetypes ?? [],
     bindings: items.bindings ?? [],
     // BOK article IDs share the append-only registry with taxonomy IDs, so the
-    // baseline lock has to carry the fixture article.
+    // baseline lock has to carry the fixture article. Archetype and module IDs
+    // do too, but only the corpora that supply them lock them — a locked ID
+    // absent from the corpus is itself an error.
     lockedIds:
       lockedIds === undefined
         ? ['CM-01', 'CM-01-A01', 'CM-01-001', 'CM-01-002', 'BOK-0001']
@@ -200,7 +202,10 @@ function corpus(
 
 /** Standard element set plus an item bank, for the item-bank tests. */
 const withItems = (archetypes: ItemFile[], bindings: ItemFile[]): Corpus =>
-  corpus([element()], undefined, { archetypes, bindings });
+  corpus([element()], ['CM-01', 'CM-01-A01', 'CM-01-001', 'CM-01-002', 'BOK-0001', 'ARC-0001'], {
+    archetypes,
+    bindings,
+  });
 
 const errorsOf = (c: Corpus): string[] =>
   runAllChecks(c)
@@ -853,4 +858,19 @@ test('an observable anchor passes', () => {
     ]),
   );
   assert.deepEqual(errors, []);
+});
+
+test('an archetype ID missing from the lock is an error, like any other identifier', () => {
+  // A credential records the archetype it was served from. Retiring or
+  // renumbering one breaks the provenance of every assessment citing it, which
+  // is the same harm as renaming an element.
+  const errors = errorsOf(
+    corpus([element()], ['CM-01', 'CM-01-A01', 'CM-01-001', 'CM-01-002', 'BOK-0001'], {
+      archetypes: [archetypeFile()],
+    }),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('ARC-0001') && e.includes('registry:sync')),
+    `expected an unlocked archetype error, got: ${JSON.stringify(errors)}`,
+  );
 });

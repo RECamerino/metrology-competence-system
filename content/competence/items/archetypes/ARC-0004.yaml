@@ -1,0 +1,118 @@
+# ARC-0004 — Construct a budget from records
+#
+# The workhorse SKILL archetype, and the one the bank was missing: every
+# existing archetype was either judgment-kind or covered a single narrow
+# subject, so the first authored element could not be bound to anything.
+#
+# The structural feature the budget must handle is a generator parameter, which
+# is what lets one shape serve correlated inputs, nonlinearity, resolution,
+# pooled variance and the rest of CM-03-A05 without becoming generic.
+
+id: ARC-0004
+title: Construct an uncertainty budget from a pack of records
+itemType: parameterized-worked-problem
+kinds:
+  - skill
+levels: [1, 2, 3, 4, 5]
+status: draft
+
+prompt: >-
+  Produce an uncertainty budget for {{measurement_context}}, supporting a stated
+  target expanded uncertainty of {{target_uncertainty}}.
+
+  Everything you have is in {{data_pack}}: calibration certificates, observation
+  records, equipment specifications and the procedure as written. Some of it is
+  relevant and some of it is not.
+
+  Give the budget as a table a reviewer could follow, state the combined
+  standard uncertainty and the coverage factor, and record the basis for every
+  judgement you made that the records do not make for you. Where a contribution
+  cannot be resolved from what you have been given, say so and say what you
+  would need — that is a valid answer here.
+
+parameters:
+  - name: measurement_context
+    type: choice
+    description: >-
+      The measurement the budget is for. Varies the surface across candidates
+      without varying what is being assessed.
+  - name: target_uncertainty
+    type: real
+    unit: relative or absolute, per the drawn context
+    description: >-
+      The target the budget has to support. Tight targets make otherwise
+      negligible contributions matter, which is where the judgement lives.
+    constraint: >-
+      Must be reachable with the records supplied, or the item tests whether the
+      candidate will say the target is unachievable — a legitimate draw at L4
+      and above, and unfair below it.
+  - name: data_pack
+    type: dataset
+    description: >-
+      The records themselves, archived and hashed so the item can be
+      reconstructed exactly when a credential is re-reviewed years later.
+
+  - name: structural_feature
+    type: choice
+    visibility: generator
+    description: >-
+      What the budget must handle correctly — a correlated pair traceable to a
+      shared standard, a significant nonlinearity, a resolution or quantisation
+      term, a pooled variance, a drift contribution between calibrations. THE
+      BINDING SETS THIS, and it is what ties this shape to a specific element
+      rather than to budget-building in general.
+    constraint: >-
+      Must be the feature the bound element actually concerns. A binding leaving
+      it unset is assessing general budget construction and should be rejected
+      in review.
+  - name: inputs_supplied
+    type: choice
+    visibility: generator
+    description: >-
+      How much is handed over rather than derived — every value given, some
+      given, or nothing but raw records. This is the main difficulty knob from
+      L1 to L3 and it maps directly onto the anchor progression: at L1 the
+      values are supplied and the feature is pointed out, by L3 the candidate
+      works from records alone.
+  - name: resolvable
+    type: choice
+    visibility: generator
+    description: >-
+      Whether the structural feature can actually be quantified from the records
+      supplied. Setting this to `no` produces the L5 case, where the defensible
+      answer is a reasoned treatment with the residual assumption stated rather
+      than a number.
+
+scoring:
+  method: hybrid
+  toleranceBand: >-
+    Numeric part: the combined standard uncertainty within 5% of the value
+    implied by the candidate's own declared model, checked for internal
+    consistency rather than against a single expected answer. Two defensible
+    models give two different numbers and both are correct; scoring against one
+    would assess agreement with the author rather than competence.
+  unitChecked: true
+  rubricRef: content/competence/items/rubrics/ARC-0004.md
+
+lookupResistance: >-
+  The arithmetic of combining contributions is lookupable and an AI assistant
+  will do it correctly, which is accepted and is why the numeric part is
+  weighted low. What cannot be looked up is deciding which of the supplied
+  records belong in the model at all: the pack contains material that is
+  irrelevant, and the omission that matters is never labelled. Nor can an
+  assistant judge whether the drawn target makes a contribution significant that
+  would otherwise be ignored, because that depends on the pack in front of this
+  candidate. A response that budgets everything supplied, correctly, scores
+  poorly — inclusion is not the skill.
+
+citations:
+  - source: JCGM-100-2008
+    clause: "8"
+    relevance: >-
+      Sets out the steps of an uncertainty evaluation end to end, which is the
+      sequence this archetype asks the candidate to carry out.
+
+exposureLimit: 5
+
+authoring:
+  createdOn: "2026-08-10"

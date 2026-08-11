@@ -1,0 +1,62 @@
+schemaVersion: 1
+element: CM-03-050
+
+# NOT BOUND AT L1, deliberately.
+#
+# At L1 the archetype supplies every value, and for this element that includes
+# the sensitivity coefficients — so a budget-construction item would test
+# nothing about deriving them. The coverage report will show L1 as a gap, which
+# is accurate: this element needs a narrower shape at that level, and padding
+# ARC-0004 into the slot would inflate the reuse figure while assessing nothing.
+
+bindings:
+  - level: 2
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      The draw gives a measurement model the candidate must differentiate to
+      populate the budget, with a function simple enough that the derivation is
+      the only obstacle. What ties this to CM-03-050 rather than to budget
+      construction generally is that the sensitivity coefficients are the one
+      thing not supplied.
+    parameterRanges:
+      - name: structural_feature
+        choices: [sensitivity coefficients obtainable only by analytic differentiation]
+      - name: inputs_supplied
+        choices: [values supplied except sensitivity coefficients]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 3
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      A model with a product or quotient structure, where the partial
+      derivatives are where the relative contributions actually come from. The
+      candidate derives them from records and shows the working, so a reviewer
+      can see whether the result was derived or recalled.
+    parameterRanges:
+      - name: structural_feature
+        choices: [multiplicative model requiring derived sensitivity coefficients]
+      - name: inputs_supplied
+        choices: [raw records only]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 4
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      A model where careless differentiation gives a plausible but wrong
+      coefficient — a term appearing in two places, or a correction whose
+      derivative changes sign across the operating range. The candidate has to
+      notice the trap, and defending the derivation is the assessable part.
+    parameterRanges:
+      - name: structural_feature
+        choices:
+          - a quantity appearing in more than one place in the model
+          - a derivative changing sign across the operating range
+      - name: inputs_supplied
+        choices: [raw records only]
+      - name: resolvable
+        choices: [yes]

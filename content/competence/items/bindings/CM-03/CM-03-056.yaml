@@ -1,0 +1,62 @@
+schemaVersion: 1
+element: CM-03-056
+
+# NOT BOUND AT L1 OR L2, deliberately.
+#
+# This element is about judging when linearisation stops being adequate. At L1
+# and L2 the archetype supplies the values and the model, which leaves nothing
+# of that judgement to observe — the candidate would be applying a higher-order
+# term they were told to apply. Those two levels want a different shape, and
+# the coverage report will say so rather than being quietly satisfied.
+
+bindings:
+  - level: 3
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      A model with curvature large enough that first-order propagation
+      understates the combined uncertainty by a margin that matters at the
+      stated target. The candidate works from records, notices the first-order
+      result is not adequate, and carries the higher-order term — noticing is
+      the competence, not the algebra.
+    parameterRanges:
+      - name: structural_feature
+        choices: [curvature significant at the stated target]
+      - name: inputs_supplied
+        choices: [raw records only]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 4
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      Curvature near the threshold of mattering, where a defensible case exists
+      for either treatment. The candidate must decide and defend, and a
+      first-order budget with the reasoning recorded scores as well as a
+      higher-order one — which is what stops this becoming a test of whether
+      they remembered the higher-order formula.
+    parameterRanges:
+      - name: structural_feature
+        choices: [curvature near the threshold of significance]
+      - name: inputs_supplied
+        choices: [raw records only]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 5
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      A model where the higher-order treatment is itself unreliable because the
+      input distributions are not well enough known to justify it, so neither
+      first-order nor higher-order is defensible on the records alone. The
+      element's L5 sits exactly here: no established approach settles it, and
+      the answer is a reasoned treatment with the residual assumption stated.
+    parameterRanges:
+      - name: structural_feature
+        choices: [curvature significant but input distributions insufficiently characterised]
+      - name: inputs_supplied
+        choices: [raw records only]
+      - name: resolvable
+        choices: [no]
