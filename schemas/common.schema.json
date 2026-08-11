@@ -142,6 +142,25 @@
       }
     },
 
+    "organizationRef": {
+      "type": "object",
+      "description": "An organization, named and where possible identified. Used wherever the difference between two organizations has to be DECIDED rather than displayed — the cross-organizational signer rule at L5, and reciprocal-review detection.\n\nWHY THIS IS NOT A STRING. It was one, and the rule that rests on it — 'at least one signer outside the candidate's own organization, so that a closed group cannot certify its own experts' — was therefore only as strong as string inequality. Two colleagues at one laboratory writing 'Northfield Calibration' and 'Northfield Calibration Ltd' satisfied it. That is a defect with plausible deniability: it looks like a formatting difference and works like an evasion.\n\n`id` settles identity; `name` is compared after normalisation when no id is present. Normalisation collapses case, punctuation and trailing legal suffixes, which catches the accidental variant. It does NOT catch an abbreviation or a deliberate rename, and the validator says which comparison it used rather than claiming more than it proved.",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The organization as it calls itself. Always present, because a reader needs something legible even when no identifier exists."
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A stable identifier — a trust-registry key, or the organization's DID. Optional on purpose: requiring one would mean a signer whose laboratory has never issued anything could not sign, which gates participation behind registration and is the barrier this project refuses. Supplying one is what turns a nominal comparison into an identity comparison."
+        }
+      }
+    },
+
     "contentRef": {
       "type": "string",
       "pattern": "^sha256:[a-f0-9]{64}$",

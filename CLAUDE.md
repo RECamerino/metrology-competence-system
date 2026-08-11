@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
 | Content authored | **1 element** · **1 BOK article** · **1 module** |
 | Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
-| Checks | 0 errors · 221/221 tests · typecheck clean |
+| Checks | 0 errors · 229/229 tests · typecheck clean |
 
 ### Phases
 
@@ -130,7 +130,7 @@ content/sources/registry.yaml     Source licence register. Outside both trees,
                                   because both cite it.
 
 schemas/                          16 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 221 tests.
+packages/validator/               The ONLY implemented package. 229 tests.
 apps/viewer/                      The only implemented app (template + build script).
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/                            Build scripts, ceiling-plan.json, kind-plan.json,
@@ -154,7 +154,7 @@ Sixteen schemas, and the ones that are not obvious from their names:
 | `attempt-ledger` | No-retake rule and exposure control |
 | `deployment-scope` | Which elements apply to a person — pairs with `roleTargets` |
 | `training-module`, `training-record` | Learning, and the record that may never claim competence |
-| `common` | Shared `$defs` — every ID pattern lives here |
+| `common` | Shared `$defs` — every ID pattern lives here, plus `organizationRef`, because deciding whether two organizations differ is a rule and not a display concern |
 
 Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
 
@@ -180,7 +180,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 221 guardrail tests
+npm test                  # 229 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:quotes     # complete quotation manifest for legal review
