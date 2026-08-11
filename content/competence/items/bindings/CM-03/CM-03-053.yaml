@@ -1,0 +1,97 @@
+schemaVersion: 1
+element: CM-03-053
+
+# Five bindings, one per attainable level. The element's anchors move along four
+# axes — what is supplied, who spots the feature, whether the case is covered,
+# what the candidate answers for — and the archetype's generator parameters
+# implement exactly those, so difficulty comes from the draw rather than from a
+# different item at each level.
+
+bindings:
+  - level: 1
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      The L1 anchor has the pair pointed out and the values supplied, so the
+      candidate's only job is to carry the correlation through rather than treat
+      the inputs as independent. The draw fixes the structural feature to a
+      correlated pair and supplies every value, which is what makes this an L1
+      item rather than a search task.
+    parameterRanges:
+      - name: structural_feature
+        choices: [correlated pair traceable to a shared reference standard]
+      - name: inputs_supplied
+        choices: [all values supplied, correlation identified in the brief]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 2
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      At L2 the values are still supplied but the correlation is no longer
+      flagged: the candidate must notice that two lines trace to the same
+      standard. That is precisely the step between the element's L1 and L2
+      anchors, and it is set here by withdrawing the hint rather than by
+      changing the task.
+    parameterRanges:
+      - name: structural_feature
+        choices: [correlated pair traceable to a shared reference standard]
+      - name: inputs_supplied
+        choices: [all values supplied, correlation not flagged]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 3
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      L3 is the element's competence threshold: a measurement not seen before,
+      records only, and the basis for the correlation coefficient recorded so a
+      reviewer can follow it. The draw supplies raw certificates rather than
+      values, which forces the candidate to derive the shared contribution
+      rather than be told it.
+    parameterRanges:
+      - name: structural_feature
+        choices: [correlated pair traceable to a shared reference standard]
+      - name: inputs_supplied
+        choices: [raw records only]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 4
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      The L4 anchor is the case the template does not cover. The draw uses
+      opposite-signed sensitivity coefficients, where the covariance term
+      reduces the combined uncertainty rather than raising it — the situation
+      that runs against the intuition every other example builds, and where a
+      candidate applying a remembered rule gets it backwards.
+    parameterRanges:
+      - name: structural_feature
+        choices:
+          - correlated pair with opposite-signed sensitivity coefficients
+          - correlated pair interacting with a resolution term at the target
+      - name: inputs_supplied
+        choices: [raw records only]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 5
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      L5 requires that no established approach settles it. The draw makes the
+      correlation structure unresolvable from the records while a full bound at
+      unity inflates the result past the stated target, so neither estimating
+      nor bounding is simply correct. The defensible answer is a reasoned
+      treatment with the residual assumption and its cost stated — which is the
+      element's L5 anchor almost word for word.
+    parameterRanges:
+      - name: structural_feature
+        choices: [correlated pair whose coefficient cannot be estimated from the records]
+      - name: inputs_supplied
+        choices: [raw records only]
+      - name: resolvable
+        choices: [no]

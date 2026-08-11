@@ -142,6 +142,16 @@ export function coverageReport(corpus: Corpus): string {
     const reuse = bound.size / archetypeUse.size;
     lines.push(`  Mean units per archetype: ${reuse.toFixed(1)}`);
 
+    // The mean is the wrong statistic on its own and gets more wrong as the
+    // bank grows: it averages a shape built to span a family with shapes that
+    // cover one narrow subject, and decision 36's 20-50 target was never about
+    // an average. What tests the hypothesis is whether ANY archetype reaches
+    // that range, so the distribution is printed.
+    lines.push('  Units per archetype:');
+    for (const [id, n] of [...archetypeUse.entries()].sort((a, b) => b[1] - a[1])) {
+      lines.push(`    ${pad(id, 12)}${padLeft(n, 4)}`);
+    }
+
     const singletons = [...archetypeUse.entries()].filter(([, n]) => n === 1).map(([id]) => id);
     if (singletons.length > 0) {
       lines.push(
@@ -157,15 +167,18 @@ export function coverageReport(corpus: Corpus): string {
   // L4, and a candidate must not be the one who discovers that. Reported per
   // element rather than as a total, because "0.1% covered" is not actionable
   // and "CM-03-053 has no items at all" is.
-  //
-  // Restricted to AUTHORED elements. A stub with no items is expected and not
-  // news; an element somebody has written and nobody can be assessed against
-  // is a different thing.
 
   const unbound: string[] = [];
   const partiallyBound: string[] = [];
 
-  for (const id of authored.keys()) {
+  // Partial coverage is news whether or not the element is authored: items
+  // exist, so somebody intends this to be assessable, and the levels without
+  // one cannot be credentialed. "No items at all" is only news for an authored
+  // element — an untouched stub having none is the expected state of 2231 of
+  // them.
+  const considered = new Set<string>([...authored.keys(), ...levelsByElement.keys()]);
+
+  for (const id of [...considered].sort()) {
     const stub = stubs.get(id);
     if (!stub) continue;
 
@@ -176,8 +189,8 @@ export function coverageReport(corpus: Corpus): string {
     }
     if (missing.length === 0) continue;
 
-    if (levels.size === 0) unbound.push(`${id} (ceiling L${stub.levelCeiling})`);
-    else partiallyBound.push(`${id} — no items at L${missing.join(', L')}`);
+    if (levels.size > 0) partiallyBound.push(`${id} — no items at L${missing.join(', L')}`);
+    else if (authored.has(id)) unbound.push(`${id} (ceiling L${stub.levelCeiling})`);
   }
 
   // The inverse defect: an item bound to an element whose definition nobody has
@@ -189,7 +202,7 @@ export function coverageReport(corpus: Corpus): string {
     `${items.slice(0, limit).join('; ')}${items.length > limit ? `; … and ${items.length - limit} more` : ''}`;
 
   if (unbound.length + partiallyBound.length + boundButUnauthored.length > 0) {
-    lines.push('ITEM GAPS ON AUTHORED ELEMENTS');
+    lines.push('ITEM GAPS');
     lines.push('-'.repeat(78));
 
     if (partiallyBound.length > 0) {

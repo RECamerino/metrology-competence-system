@@ -14,6 +14,14 @@
 #   proctoring anywhere in this system. Integrity is carried by item design.
 #
 #   No self-signoff, ever. The signer is always a distinct natural person.
+#
+# PROVISIONAL: the experience-hour thresholds and waiting periods below are a
+# steward judgement that has never been tested against a real career history.
+# They are the numbers most likely to move once practising metrologists review
+# them, and they are blocked on that review with no timetable. Treat them as a
+# starting position, not a settled requirement — and note that every credential
+# pins the policy in force when it was issued (assessmentPolicyRef, decision
+# 46), so revising them later does not silently rewrite what anybody earned.
 
 schemaVersion: 1
 

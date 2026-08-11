@@ -336,7 +336,16 @@ export function allCorpusIds(corpus: Corpus): string[] {
       .map((f) => (f.data as Record<string, any>).id as string | undefined)
       .filter((id): id is string => Boolean(id));
 
-  return [...allTaxonomyIds(corpus.taxonomy), ...idsOf(corpus.bok), ...idsOf(corpus.modules)].sort();
+  // Archetypes belong here too. A credential records the archetype it was
+  // served from, so retiring or renumbering one breaks the provenance of every
+  // assessment that cites it — the same harm as renaming an element, and the
+  // schema has always claimed the guarantee without anything enforcing it.
+  return [
+    ...allTaxonomyIds(corpus.taxonomy),
+    ...idsOf(corpus.bok),
+    ...idsOf(corpus.modules),
+    ...idsOf(corpus.archetypes),
+  ].sort();
 }
 
 export function indexSources(sources: Record<string, unknown> | null): Map<string, SourceEntry> {

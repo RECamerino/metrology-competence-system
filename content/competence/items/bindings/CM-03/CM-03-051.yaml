@@ -1,0 +1,60 @@
+schemaVersion: 1
+element: CM-03-051
+
+# The mirror of CM-03-050, and the pair is what makes both bindings honest: the
+# generator decides whether the model admits analytic differentiation. If it
+# does, the element under test is CM-03-050; if it does not, it is this one.
+# Without that distinction both bindings would be "construct a budget" wearing
+# two different labels.
+#
+# NOT BOUND AT L1, for the same reason as CM-03-050 — with every value supplied
+# there is no estimation left to observe.
+
+bindings:
+  - level: 2
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      The model is supplied as a routine or a lookup rather than a closed-form
+      expression, so the sensitivity coefficients cannot be differentiated and
+      must be estimated by perturbing the inputs. The candidate is told the
+      step size to use, which is what keeps it at L2.
+    parameterRanges:
+      - name: structural_feature
+        choices: [model available only as a numerical routine, step size given]
+      - name: inputs_supplied
+        choices: [values supplied except sensitivity coefficients]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 3
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      The candidate chooses the perturbation themselves and records why. This
+      is the element's competence threshold, because the step size is the whole
+      judgement: too large and the estimate is not a derivative, too small and
+      it is numerical noise, and nothing in the records says which.
+    parameterRanges:
+      - name: structural_feature
+        choices: [model available only as a numerical routine, step size not given]
+      - name: inputs_supplied
+        choices: [raw records only]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 4
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      A response surface where the estimate is unstable across plausible step
+      sizes, so no single perturbation is defensible on its own. The candidate
+      must demonstrate the sensitivity of their own estimate to the choice and
+      defend the range they settled on — the non-routine case for this element.
+    parameterRanges:
+      - name: structural_feature
+        choices: [numerically unstable response across plausible step sizes]
+      - name: inputs_supplied
+        choices: [raw records only]
+      - name: resolvable
+        choices: [yes]

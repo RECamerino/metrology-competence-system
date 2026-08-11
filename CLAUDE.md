@@ -35,8 +35,8 @@ Three principles held in tension deliberately:
 | Ceilings — L3 / L4 / L5 | 13.1% / 66.2% / 20.7% |
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
 | Content authored | **1 element** · **1 BOK article** · **1 module** |
-| Item bank | 3 archetypes · 10 bindings · **0.1%** of units covered |
-| Checks | 0 errors · 139/139 tests · typecheck clean |
+| Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
+| Checks | 0 errors · 142/142 tests · typecheck clean |
 
 ### Phases
 
@@ -80,9 +80,9 @@ Three principles held in tension deliberately:
 
 **8. The ladder is bootstrapped, and it says so.** L3 needs an L4 signer, L4 needs L5, L5 needs L5 — so with no holders the ladder cannot start. A closed founding cohort admitted on external standing may sign L3–L5 without holding them, and **every credential they sign carries a permanent visible marker**. A bootstrap-signed L5 is not a peer-signed L5; never render them alike. See decision 43.
 
-**10. A roleTarget is a scoped minimum requirement.** It states the level a role needs *if* the element is in that person's deployment scope — normative, not typical, not aspirational. It does **not** imply the element applies to anyone. **An element outside scope cannot produce a gap.** `null` means the element could never be that role's work in any deployment, which is not the same as "not in this person's scope". See decision 48.
-
 **9. Training teaches; it never proves.** A module produces a training record, not a credential — `attestsCompetence` is `const false`. A module preparing for a `skill` element must declare `requiresPhysicalDemonstration`, because a simulation never substitutes for witnessed work on real equipment; completing it leaves that element `pending-demonstration`. Every module states in `cannotConvey` what its format cannot teach. See decision 45.
+
+**10. A roleTarget is a scoped minimum requirement.** It states the level a role needs *if* the element is in that person's deployment scope — normative, not typical, not aspirational. It does **not** imply the element applies to anyone. **An element outside scope cannot produce a gap.** `null` means the element could never be that role's work in any deployment, which is not the same as "not in this person's scope". See decision 48.
 
 ---
 
@@ -98,7 +98,8 @@ content/bok/<domain>/*.md         THE BODY OF KNOWLEDGE. Encyclopedic reference,
 
 content/competence/
   taxonomy/domains/*.yaml         43 files, one per domain. THE taxonomy.
-  taxonomy/id-registry.lock       Every ID ever issued, BOK and taxonomy. Append-only.
+  taxonomy/id-registry.lock       Every ID ever issued — taxonomy, BOK, modules,
+                                  archetypes. Append-only.
   taxonomy/proficiency.yaml       The 5-level ladder. Steward-controlled.
   roles/registry.yaml             12 reference roles. Every element needs a
                                   roleTarget for EVERY role — each one added is
@@ -113,7 +114,7 @@ content/sources/registry.yaml     Source licence register. Outside both trees,
                                   because both cite it.
 
 schemas/                          JSON Schema. Frozen at Phase 3.
-packages/validator/               Integrity checks + 139 guardrail tests.
+packages/validator/               Integrity checks + 142 guardrail tests.
 apps/viewer/                      Viewer SOURCE (template + build script).
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/ceiling-plan.json           Level-ceiling judgement, per area + overrides.
@@ -133,7 +134,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 139 guardrail tests
+npm test                  # 142 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:quotes     # complete quotation manifest for legal review
@@ -153,6 +154,9 @@ Changing ceilings or kinds: edit `tools/ceiling-plan.json` or `tools/kind-plan.j
 ---
 
 ## Open decisions
+
+**Blocked on people, not on work — do not raise these as next actions.** Steward appointment and validation of the experience-hour thresholds both need input the project does not yet have, with no timetable. The operating rule while that persists is in [`docs/stewards.md`](docs/stewards.md): design and authoring proceed, issuance does not. Nothing has issued a credential, so nothing decided so far has harmed anybody.
+
 
 1. **Legal review of the source register.** Priority order: ISO/IEC 17025, the JCGM copyright statement, ASME Y14.5, then ILAC/UKAS/EURAMET/OIML. Blocks Phase 4 quotation authoring only — citations and all other work are unaffected. No quotations exist yet, so nothing is currently exposed.
 2. **L5 ceiling review.** Still open, and now has a second test alongside anchor writing: if no *item* can be bound to an element at L5 that a competent practitioner could genuinely fail, it is not L5. `ARC-0003` exists for exactly this shape — an element that cannot support a defensible disagreement probably does not have expert practice in it.
@@ -192,6 +196,6 @@ Authored against `CM-03` and validated. Two findings that change downstream esti
 
 **Rubric-scoring is the norm, not the exception.** Writing `lookupResistance` honestly forces it — for a Type B assignment item the arithmetic *is* lookupable and an AI produces it instantly, so the numeric part carries 20% and the justification carries the item. Two of three archetypes are rubric-scored. Human reviewer effort across the bank is therefore higher than the phase plan assumed. This is a real cost of abolishing proctoring, and it lands in Phase 7.
 
-**Watch the reuse ratio.** `npm run report:coverage` prints mean units per archetype. Decision 36 rests on 20–50; it currently reads **3.3** across five elements, which is far too small a sample to conclude anything. If it stays near 3 as `CM-03` fills in, the economics of the archetype approach do not hold — and that is much cheaper to discover now than after 9096 bindings.
+**The reuse ratio is moving, and the mean is the wrong statistic.** `report:coverage` now prints units per archetype individually. `ARC-0004` — construct a budget from records, with the structural feature as a *generator* parameter — reaches **18 units across five elements**, while the three narrow archetypes sit at 2–5. The mean (7.0) averages those and understates the shape that matters. **Read decision 36's 20–50 target per archetype, not as a mean:** a shape built to span a family plausibly reaches it; one built for a single subject never will.
 
 Parameters carry `visibility: prompt | generator`. A generator parameter rendered into the prompt destroys the item *while leaving the file looking perfectly well-formed*; that is why it is validated rather than left to review.
