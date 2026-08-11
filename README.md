@@ -16,7 +16,7 @@ All three are generated from [`content/competence/taxonomy/domains/`](content/co
 
 > **Status: pre-alpha, and the gap between design and code is wide on purpose.**
 >
-> The taxonomy skeleton is complete (Phase 1) and Phase 2 is under way: the proficiency ladder, reference roles, credential and authorization schemas, the attempt ledger and the item-bank format are designed, schema-backed and tested. **What exists is architecture, not an application.** There is one BOK article, no authored elements, and no engine — `packages/validator` is the only implemented package. Nobody can earn a credential from this yet.
+> The taxonomy skeleton is complete (Phase 1) and Phase 2 is under way: the proficiency ladder, reference roles, credential and authorization schemas, the attempt ledger and the item-bank format are designed, schema-backed and tested. **What exists is architecture, not an application.** There is one BOK article, one authored element, one training module, four item archetypes and no engine — `packages/validator` is the only implemented package. Nobody can earn a credential from this yet.
 >
 > See [Roadmap](#roadmap), and [`CLAUDE.md`](CLAUDE.md) for the current working state.
 
@@ -42,7 +42,7 @@ This project addresses both:
 
 **Assessment mirrors practice.** A working metrologist has GUM, the internet, and an AI assistant open. Assessment here is open-resource by design and measures judgment, not recall. There is no proctoring anywhere in the system — integrity is carried by item design: every candidate gets differently-parameterized problems, so a shared answer key is worthless.
 
-**Deployable where the work actually happens.** Air-gapped is the default build. No CDN, no telemetry, no external runtime calls. FIPS 140-3 crypto, CAC/PIV adapter, and a NIST SP 800-171 / CMMC control mapping ship with it.
+**Deployable where the work actually happens.** Air-gapped is the default build. No CDN, no telemetry, no external runtime calls. ECDSA over P-256 (FIPS 186-5, SP 800-186) so the signing operation stays inside what a FIPS-validated cryptographic module performs, a CAC/PIV adapter, and a NIST SP 800-171 / CMMC control mapping. Note the precision: FIPS 140-3 validates cryptographic *modules*, not curves — the choice of P-256 is necessary but not sufficient, and naming the validated module is still open.
 
 **Knowledge is for everyone.** Content under CC BY-SA 4.0, code under Apache-2.0.
 
@@ -74,7 +74,8 @@ All three run the **same core engine**. A wallet moves between them intact.
 docs/          Design documents, handoff playbook, compliance mapping
 schemas/       JSON Schema — the contracts everything validates against
 content/bok/           THE BODY OF KNOWLEDGE. Encyclopedic, by subject. ✅ 1 article
-content/competence/    Taxonomy, elements, roles, items, training. ✅ taxonomy, ⬜ elements
+content/competence/    Taxonomy, elements, roles, items, training. ✅ taxonomy,
+                       1 element · 1 module · 4 archetypes · 28 bindings
 content/sources/       Source licence register — outside both, because both cite it
 packages/      validator ✅  ·  core, assessment, credentials, exchange, compiler ⬜ empty
 apps/          viewer ✅  ·  personal, desktop, web, server, commons ⬜ not started
@@ -100,7 +101,7 @@ Start with [`docs/00-context.md`](docs/00-context.md) for the design rationale, 
 | 8 | Personal edition | Not started |
 | 9 | Organization edition | Not started |
 | 10 | Dashboards | Not started |
-| 11 | Training modules | Not started |
+| 11 | Training modules — schema and rules done in Phase 2; the module bank is not started | Not started |
 | 12 | Commons, accreditation-body support, compliance package | Not started |
 
 ## Standards this is built on

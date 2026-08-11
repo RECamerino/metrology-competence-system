@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
 | Content authored | **1 element** · **1 BOK article** · **1 module** |
 | Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
-| Checks | 0 errors · 142/142 tests · typecheck clean |
+| Checks | 0 errors · 148/148 tests · typecheck clean |
 
 ### Phases
 
@@ -53,7 +53,7 @@ Three principles held in tension deliberately:
 | 8 | Personal edition | Not started |
 | 9 | Organization edition | Not started |
 | 10 | Dashboards | Not started |
-| 11 | Training modules | Not started |
+| 11 | Training modules — schema, rules and MOD-0001 done in Phase 2; the bank is not | Not started |
 | 12 | Commons, accreditation-body support, compliance package | Not started |
 
 **Phase 3 is the Opus → Sonnet handoff point.** Schemas freeze there, so authoring proceeds against fixed contracts with worked exemplars.
@@ -66,7 +66,7 @@ Three principles held in tension deliberately:
 
 **1b. …but resolution is not meaning.** An immutable ID does not stop an anchor being rewritten, nor the bar being raised, and either changes what the credential asserts. Every credential therefore pins **three** things by content hash: `definitionRef` (the element definition), `assessmentPolicyRef` (the whole proficiency level entry — signer counts, hours, waiting period, reviewer requirements) and `knowledgeSnapshot` (the BOK sections it rested on). Pinning the element without the level leaves the hole half open: the element does not move, the bar does. **Drift is not invalidity** — an old credential stays true of the definition in force when it was earned, and the correct response is to show a reader *that* definition, never today's. See decision 39.
 
-**2. Every element carries a clause-level citation.** `ISO/IEC 17025:2017 §7.6.1`, not "see the standard". Referenceability is universal. CI rejects an element without one.
+**2. Every element and article carries a clause-level source reference.** `ISO/IEC 17025:2017 §7.6.1`, not "see the standard". Referenceability is universal and CI rejects content without one. It need **not** be *normative*: the corpus covers accepted practice, emerging technique, research and interpretation, plus adjacent competencies — technical writing, teaching, ethics — where no clause requires anything of anybody. The standing of the claim is recorded separately in `currency.authorityStatus`, and whether practitioners agree in a section's `consensus`.
 
 **3. Never paste text from a standard you cannot redistribute.** Quotation is separate from citation and is gated by `content/sources/registry.yaml`. Tier 3 = no quotation at all. Tier 2 = ≤25 words, ≤2 per source per element, with commentary. **Do not author quotations against any source flagged `CONFIRM-WITH-COUNSEL` — legal review is not complete.** Citations are always safe.
 
@@ -104,7 +104,7 @@ content/competence/
   roles/registry.yaml             12 reference roles. Every element needs a
                                   roleTarget for EVERY role — each one added is
                                   2232 more authored ratings.
-  elements/                       ASSESSABLE CLAIMS, not prose. Empty until Phase 4.
+  elements/                       ASSESSABLE CLAIMS, not prose. 1 authored.
   items/archetypes/               Reusable parameterized item SHAPES. ARC-nnnn.
   items/bindings/                 One archetype × one (element×level). Scales here.
   items/rubrics/                  Ships in the same commit as its item.
@@ -113,14 +113,43 @@ content/competence/
 content/sources/registry.yaml     Source licence register. Outside both trees,
                                   because both cite it.
 
-schemas/                          JSON Schema. Frozen at Phase 3.
-packages/validator/               Integrity checks + 142 guardrail tests.
-apps/viewer/                      Viewer SOURCE (template + build script).
+schemas/                          15 JSON Schemas. Frozen at Phase 3.
+packages/validator/               The ONLY implemented package. 142 tests.
+apps/viewer/                      The only implemented app (template + build script).
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
-tools/ceiling-plan.json           Level-ceiling judgement, per area + overrides.
-tools/kind-plan.json              Knowledge/skill/judgment classification.
-docs/                             Decision record, playbook, anchor template, licence policy.
+tools/                            Build scripts, ceiling-plan.json, kind-plan.json,
+                                  public-projection.ts (the publication allowlist).
+docs/                             Decision record, playbook, anchor template, governance.
 ```
+
+**`packages/{core,assessment,credentials,exchange,compiler}` and `apps/{personal,desktop,web,server,commons}` are empty directories.** They describe the intended architecture; none contains code. Do not assume anything there exists.
+
+### Where the contracts and the executable rules live
+
+Fifteen schemas, and the ones that are not obvious from their names:
+
+| Schema | Governs |
+|---|---|
+| `element`, `taxonomy`, `bok-article` | The corpus itself |
+| `proficiency`, `role-registry`, `source-registry` | The frames content is written into |
+| `item-archetype`, `item-binding` | The item bank (decision 36) |
+| `credential`, `authorization` | What travels with a person, and what never does |
+| `attempt-ledger` | No-retake rule and exposure control |
+| `deployment-scope` | Which elements apply to a person — pairs with `roleTargets` |
+| `training-module`, `training-record` | Learning, and the record that may never claim competence |
+| `common` | Shared `$defs` — every ID pattern lives here |
+
+Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
+
+| Module | The rule it enforces |
+|---|---|
+| `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules |
+| `credentials.ts` | No self-signoff, signoff policy, the wallet boundary, draft-status attestability |
+| `ledger.ts` | Hash chain, no-retake, exposure count, trust horizon |
+| `definitions.ts` | Semantic pinning — `definitionRef`, `assessmentPolicyRef`, drift |
+| `scope.ts` | Gap analysis. **An element outside scope cannot produce a gap** |
+| `canonical.ts` | The one hashing function. Changing it invalidates every hash ever computed |
+| `reports.ts` | Coverage, per-element item gaps, per-archetype reuse |
 
 **Every element must carry at least one `knowledgeRefs` entry**, pointing at an article AND a section. This is the refresher path: someone credentialed eight months ago who has forgotten one detail will not retrain, they will look it up, and that link has to land on the passage covering *that detail*. Section ids are append-only for the same reason element IDs are. It also means the article must be written before the element — knowledge before the claim that someone has mastered it.
 
@@ -134,7 +163,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 142 guardrail tests
+npm test                  # 148 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:quotes     # complete quotation manifest for legal review
@@ -157,7 +186,6 @@ Changing ceilings or kinds: edit `tools/ceiling-plan.json` or `tools/kind-plan.j
 
 **Blocked on people, not on work — do not raise these as next actions.** Steward appointment and validation of the experience-hour thresholds both need input the project does not yet have, with no timetable. The operating rule while that persists is in [`docs/stewards.md`](docs/stewards.md): design and authoring proceed, issuance does not. Nothing has issued a credential, so nothing decided so far has harmed anybody.
 
-
 1. **Legal review of the source register.** Priority order: ISO/IEC 17025, the JCGM copyright statement, ASME Y14.5, then ILAC/UKAS/EURAMET/OIML. Blocks Phase 4 quotation authoring only — citations and all other work are unaffected. No quotations exist yet, so nothing is currently exposed.
 2. **L5 ceiling review.** Still open, and now has a second test alongside anchor writing: if no *item* can be bound to an element at L5 that a competent practitioner could genuinely fail, it is not L5. `ARC-0003` exists for exactly this shape — an element that cannot support a defensible disagreement probably does not have expert practice in it.
 3. **Commons operation.** The software will be built; whether the project *operates* a public instance (PII custody, moderation, funding) is deferred governance.
@@ -176,6 +204,13 @@ From external architectural review, August 2026. Not a new phase — scope that 
 9. **Evidence sufficiency.** Hashing an artifact proves it has not changed; it does not record why it was *sufficient*. The reviewer's sufficiency decision and its rationale need a home, or a credential ends up carrying `sha256:…` with nothing saying why that satisfied anything.
 10. **Exposure-group semantics and a binding-review record.** When do two differently parameterized items count as the same exposure? And who decided a binding was professionally valid — CI can only prove it is structurally possible. Both need rules before thousands of bindings exist, or the engine will decide by accident.
 11. **Validity evidence.** CI proves integrity of the representation. Expert review proves technical validity. Neither proves the assessment measures the competence it claims to. That is empirical work — inter-rater reliability, whether items discriminate knowledge from skill from judgment, whether the five-level ladder matches how the profession actually reads competence. Research, not code, and the strongest thing the project could take to NCSL.
+13. **Authorization scope must become computable.** `authorization.scope` is free-form strings — activities, methods, ranges, locations. The accreditation-body scope-matching engine (decision 34) cannot answer *does this authorization cover this method* by interpreting prose. A scope that participates in computation cannot exist only as prose; `deployment-scope.schema.json` is the model to follow.
+14. **`approved-signatory` is an authority overlay, not an occupational role.** It sits in the role registry beside calibration-engineer and laboratory-manager as though it were the same kind of thing. A person is *Calibration Engineer + Approved Signatory*; the authority does not define their occupational competence profile. Needs a `roleType` distinction, or explicit classification, before role targets are authored at volume.
+15. **BOK review pins prose, not claim state.** A section hash covers the body. Change `consensus` from `established` to `contested` and the prose hash is unchanged while the epistemic status of the section has moved — a reviewer's attestation silently survives a change to what the section claims. Decide what a technical reviewer is attesting to: content, or content plus the metadata that tells a reader how to read it.
+16. **Reviewer standing is not evidenced on BOK reviews.** `reviewer.name` is a string. The project eliminated exactly this for credential signers (decision 47) and has not applied its own rule here: the BOK can establish *X reviewed s03 on this date* but not *X had the standing to review it*.
+17. **Cryptosuite identifier needs an interoperability check.** `ecdsa-rdfc-2019-p256` is fixed as a const. Confirm it is the identifier the chosen VC Data Integrity implementation actually expects rather than one invented locally — a standards question, not a metrology one, and cheap to get wrong permanently.
+18. **Offline verification constrains the DID method.** The credential permits any DID method while promising offline verification. Those are not universally compatible: an arbitrary method may need a network resolver. A deployment claiming offline verification must use a method whose verification material is self-contained or travels with the trust registry — state it as a profile rather than leaving the schema permitting credentials the advertised verifier cannot resolve.
+19. **Experience claims need activity-to-element granularity.** Decision 37 lets one activity credit every element it exercises, which is right. The inverse risk is a claim of forty hours against seventeen elements with nothing recording which part demonstrated which. The declaration is reviewable evidence only if there is something to review.
 12. **Standards-revision review triggers.** `currency.volatility: controlled` means review is woken by a published revision rather than a calendar. The field exists on articles and elements; the tooling that actually wakes them does not. Tooling, not schema, so it can follow the freeze.
 
 ---
@@ -190,9 +225,28 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 **The attempt ledger's limit is deliberate and must not be "fixed" naively.** In the Personal edition the holder owns the machine, the ledger and the key, so they can truncate their own chain and it will verify clean — there is a test asserting exactly that. Hash-linking catches edits to the middle; only an *external* anchor fixes history, and every signoff produces one because there is no self-signoff anywhere. An unanchored ledger supports self-study claims and nothing more, which is what that provenance tier already means. Truncation becomes detectable the moment a counterparty holds a reference, which is why the credential carries `assessment.attemptRef`.
 
-### What the first real archetypes taught
+---
 
-Authored against `CM-03` and validated. Two findings that change downstream estimates:
+## Picking up cold
+
+**What actually exists as content.** Four artifacts, and they are worth reading before writing anything — each is the worked reference for its format:
+
+| | |
+|---|---|
+| `BOK-0001` | `content/bok/CM-03/correlation-and-covariance.md` — five sections, one marked `contested` with both positions recorded |
+| `CM-03-053` | The only authored element. `skill`, ceiling 5, five performance anchors, twelve role targets |
+| `MOD-0001` | The only module. Declares `requiresPhysicalDemonstration` and states what it `cannotConvey` |
+| `ARC-0001`–`0004` | `ARC-0004` is the one built to span a family; the other three are narrow |
+
+**What the corpus says about itself.** Run `npm run report:coverage` first — it names the next content work rather than requiring you to infer it. Today it reports nine elements with items but **no authored definition**, and three with items only at upper levels (`CM-03-019`, `-040`, `-046` have nothing below L3, so a candidate cannot climb to an L4 they have no L3 item for).
+
+**The highest-value engineering work is authoring something real against the design.** That exercise has found a genuine flaw four times out of four — the BOK/competence split, the generator-parameter leak, the missing level pin, and the undefined `roleTarget`. Reading the schemas has never found one. If you are choosing what to do next and nothing else is pressing, author an element or bind one and see what breaks.
+
+**Do not raise stewards or experience-hour validation as next actions.** Both are blocked on people, with no timetable. See the note under Open decisions.
+
+### What the first real archetypes and elements taught
+
+Authored against `CM-03` and validated. Findings that change downstream estimates:
 
 **Rubric-scoring is the norm, not the exception.** Writing `lookupResistance` honestly forces it — for a Type B assignment item the arithmetic *is* lookupable and an AI produces it instantly, so the numeric part carries 20% and the justification carries the item. Two of three archetypes are rubric-scored. Human reviewer effort across the bank is therefore higher than the phase plan assumed. This is a real cost of abolishing proctoring, and it lands in Phase 7.
 

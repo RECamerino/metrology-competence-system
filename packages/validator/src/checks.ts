@@ -566,6 +566,12 @@ function checkBok(corpus: Corpus): Finding[] {
 function checkModules(corpus: Corpus): Finding[] {
   const findings: Finding[] = [];
   const stubs = indexStubs(corpus.taxonomy);
+  const authoredElements = new Map<string, Record<string, unknown>>(
+    corpus.elements
+      .map((e) => e.data as Record<string, any>)
+      .filter((d) => d.id)
+      .map((d) => [d.id as string, d]),
+  );
   const seen = new Map<string, string>();
 
   const articles = new Map<string, Set<string>>();
@@ -613,9 +619,37 @@ function checkModules(corpus: Corpus): Finding[] {
         );
       }
 
-      if (stub.kind === 'skill' && !physical.has(target.element)) {
+      // Keyed off the ELEMENT's demonstration mode, not its kind. `skill`
+      // means the evidence is observable performance rather than explanation;
+      // it does not mean the performance happens at a bench. Constructing an
+      // uncertainty budget is a skill and is desk work.
+      //
+      // Getting this wrong in either direction invents or hides a barrier:
+      // omitting an equipment element tells a learner a simulation finished
+      // something it cannot, and listing a desk element tells them they are
+      // blocked on access they never needed.
+      const authored = authoredElements.get(target.element);
+      // Undefined when the element has no authored definition — and that is
+      // NOT the same as 'desk'. Defaulting an unknown to desk would silently
+      // hide a real equipment blocker on a skill element nobody has written up
+      // yet, which is the direction that harms a learner.
+      const mode = authored ? ((authored.demonstration as string | undefined) ?? 'desk') : undefined;
+
+      if (stub.kind === 'skill' && mode === undefined) {
         findings.push(
-          err(at(`prepares for '${target.element}', which is a skill element, without listing it in requiresPhysicalDemonstration. A skill is evidenced by witnessed work on real equipment; training toward one leaves it pending demonstration, not complete.`)),
+          warn(at(`prepares for skill element '${target.element}', which has no authored definition, so its demonstration mode is unknown and the physical-demonstration requirement cannot be checked.`)),
+        );
+      }
+
+      if (stub.kind === 'skill' && mode === 'equipment' && !physical.has(target.element)) {
+        findings.push(
+          err(at(`prepares for '${target.element}', whose demonstration requires equipment, without listing it in requiresPhysicalDemonstration. A simulation does not substitute for witnessed work on real apparatus; training toward it leaves the element pending demonstration, not complete.`)),
+        );
+      }
+
+      if (mode !== 'equipment' && physical.has(target.element)) {
+        findings.push(
+          err(at(`lists '${target.element}' in requiresPhysicalDemonstration, but its demonstration mode is '${mode}' — no equipment is needed. Claiming a blocker that does not exist tells a learner they are waiting for access they never required.`)),
         );
       }
     }
