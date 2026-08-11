@@ -70,6 +70,7 @@ export interface Credential {
   attainedOn?: string;
   provenanceTier?: ProvenanceTier;
   assessment?: CredentialAssessment;
+  custody?: CustodyRecord[];
   evidence?: CredentialEvidence[];
   signers: Signer[];
   issuer?: CredentialIssuer;
@@ -312,6 +313,8 @@ export function checkCredential(
   // never silently accepted on its own word.
   findings.push(...checkBootstrapAuthority(credential, cohort, bootstrapContext));
 
+  findings.push(...checkCustody(credential));
+
   // -- Is the signer's own standing evidenced, or merely stated? -----------
   // A system built to replace "trust me, he's competent" should not rest on
   // "trust me, I'm an L4 reviewer". Warned rather than rejected because no
@@ -469,6 +472,100 @@ export function checkCredential(
           err(at(`was attained ${elapsed} day(s) after the previous level; level ${credential.level} requires at least ${policy.minDaysSincePreviousLevel}. The waiting period exists because the competence at this level is partly accumulated practice, which cannot be compressed by sitting assessments faster.`)),
         );
       }
+    }
+  }
+
+  return findings;
+}
+
+/* -- Dual custody, as a record rather than a sentence --------------------- */
+
+export interface CustodyRecord {
+  custodian: string;
+  role: 'holder' | 'issuing-organization' | 'assessing-organization';
+  since: string;
+  retentionUntil?: string;
+  retentionBasis?: string;
+}
+
+/**
+ * Who holds a true copy, and under what obligation.
+ *
+ * Decision 23 said this credential is held in DUAL CUSTODY: the laboratory
+ * needs a competence record it can produce at audit under ISO/IEC 17025:2017
+ * §6.2, and the individual needs portability. That was a sentence in the schema
+ * description and nothing else — a single object with no record of who else
+ * held it, so a two-custodian arrangement was a claim the data could neither
+ * carry nor contradict.
+ *
+ * WHAT THIS CANNOT DO. It cannot stop a laboratory purging its copy. Nothing in
+ * a file held by somebody else can, and a mechanism that pretended otherwise
+ * would be worse than the gap. What it does is make the arrangement legible: a
+ * verifier reading the holder's copy after a purge can see that an organization
+ * took custody under a retention obligation running to a stated date, so the
+ * absence is a failure somebody can name rather than a silence.
+ *
+ * WHAT IT DOES DO, and it is the half that protects the person. An organization
+ * could issue a credential ABOUT somebody, retain it for its own audit file,
+ * and never deliver it — leaving a person unable to prove a competence that has
+ * been formally attested about them. A holder entry naming the subject is
+ * required, so that credential cannot be well-formed.
+ *
+ * DIVERGENCE NEEDS NOTHING HERE. Two copies that differ in content cannot both
+ * verify, because every credential is signed; the cryptography settles it, and
+ * a content hash on each custody entry would be a second and weaker answer to a
+ * question already answered. What a signature cannot detect is a copy that does
+ * not exist, which is exactly what this records.
+ */
+export function checkCustody(credential: Credential): Finding[] {
+  const findings: Finding[] = [];
+  const at = (msg: string) => `${credential.id}: ${msg}`;
+  const custody = (credential.custody ?? []) as CustodyRecord[];
+
+  const holders = custody.filter((c) => c.role === 'holder');
+
+  if (holders.length === 0) {
+    findings.push(
+      err(at('records no holder custody. A credential its own subject does not hold is one they cannot present anywhere — the organization has an audit record and the person has nothing, which inverts what this object is for.')),
+    );
+  }
+
+  for (const entry of holders) {
+    if (entry.custodian !== credential.subject) {
+      findings.push(
+        err(at(`records a holder custody entry for '${entry.custodian}', who is not the subject. The holder of a credential is the person it is about.`)),
+      );
+    }
+  }
+
+  if (holders.length > 1) {
+    findings.push(err(at('records more than one holder. There is one subject and therefore one holder.')));
+  }
+
+  // The organization side is required exactly where an organization is
+  // standing behind the credential. Below that tier there is no laboratory,
+  // no §6.2 obligation, and single custody is the honest arrangement rather
+  // than a defect — a self-study credential has nobody to retain anything.
+  const supported = highestSupportedTier(credential);
+  const organizational = supported === 'organization' || supported === 'accredited-body';
+
+  const organizations = custody.filter((c) => c.role !== 'holder');
+
+  if (organizational && organizations.length === 0) {
+    findings.push(
+      err(at(`is issued by ${credential.issuer?.name ?? 'an organization'} and records no organizational custody. ISO/IEC 17025:2017 §6.2 requires the laboratory to hold competence records it can produce at audit; if the only copy leaves with the person, the laboratory cannot.`)),
+    );
+  }
+
+  for (const entry of organizations) {
+    if (!entry.retentionUntil) {
+      findings.push(
+        warn(at(`custodian '${entry.custodian}' records no retention period. ISO/IEC 17025:2017 §8.4 requires records to be retained for a defined period, and an undefined one is a finding waiting to happen.`)),
+      );
+    } else if (credential.attainedOn && entry.retentionUntil < credential.attainedOn) {
+      findings.push(
+        err(at(`custodian '${entry.custodian}' records a retention period ending ${entry.retentionUntil}, before the credential was attained on ${credential.attainedOn}. A record retired before it existed is not a retention schedule.`)),
+      );
     }
   }
 

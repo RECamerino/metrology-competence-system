@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
 | Content authored | **1 element** · **1 BOK article** · **1 module** |
 | Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
-| Checks | 0 errors · 211/211 tests · typecheck clean |
+| Checks | 0 errors · 221/221 tests · typecheck clean |
 
 ### Phases
 
@@ -128,7 +128,7 @@ content/sources/registry.yaml     Source licence register. Outside both trees,
                                   because both cite it.
 
 schemas/                          16 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 211 tests.
+packages/validator/               The ONLY implemented package. 221 tests.
 apps/viewer/                      The only implemented app (template + build script).
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/                            Build scripts, ceiling-plan.json, kind-plan.json,
@@ -159,7 +159,7 @@ Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
 | Module | The rule it enforces |
 |---|---|
 | `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules |
-| `credentials.ts` | No self-signoff, signoff policy, the wallet boundary, draft-status attestability, evidenced provenance tier, founding-cohort authority |
+| `credentials.ts` | No self-signoff, signoff policy, the wallet boundary, draft-status attestability, evidenced provenance tier, founding-cohort authority, dual custody |
 | `ledger.ts` | Hash chain, no-retake, exposure count, trust horizon |
 | `definitions.ts` | Semantic pinning — `definitionRef`, `assessmentPolicyRef`, drift |
 | `scope.ts` | Gap analysis. **An element outside scope cannot produce a gap**, and an authority overlay is not an occupation |
@@ -178,7 +178,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 211 guardrail tests
+npm test                  # 221 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:quotes     # complete quotation manifest for legal review
