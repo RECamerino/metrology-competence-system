@@ -43,6 +43,13 @@ export const PATHS = {
   idLock: join(REPO_ROOT, 'content', 'competence', 'taxonomy', 'id-registry.lock'),
   roles: join(REPO_ROOT, 'content', 'competence', 'roles', 'registry.yaml'),
   sources: join(REPO_ROOT, 'content', 'sources', 'registry.yaml'),
+  /**
+   * Who may sign the ladder into existence, and until when. Outside taxonomy/
+   * because it is not taxonomy: it governs issuance rather than content, and
+   * it is the roster that makes decision 43's "closed, time-limited" cohort
+   * resolvable instead of asserted.
+   */
+  bootstrapCohort: join(REPO_ROOT, 'content', 'competence', 'bootstrap-cohort.yaml'),
   elements: join(REPO_ROOT, 'content', 'competence', 'elements'),
   /**
    * The item bank, split the way its economics are split: few expensive
@@ -89,6 +96,11 @@ export interface Corpus {
   proficiency: Record<string, unknown> | null;
   roles: Record<string, unknown> | null;
   sources: Record<string, unknown> | null;
+  /**
+   * The founding-cohort roster. Steward-controlled, and what turns "closed,
+   * time-limited cohort" from an adjective into something a verifier resolves.
+   */
+  bootstrapCohort: Record<string, unknown> | null;
   elements: ElementFile[];
   /** BOK articles. Same frontmatter-plus-body shape as an element, different purpose. */
   bok: ElementFile[];
@@ -243,6 +255,7 @@ export function loadCorpus(): { corpus: Corpus; parseErrors: string[] } {
       proficiency: safe(() => loadYamlFile(PATHS.proficiency), null),
       roles: safe(() => loadYamlFile(PATHS.roles), null),
       sources: safe(() => loadYamlFile(PATHS.sources), null),
+      bootstrapCohort: safe(() => loadYamlFile(PATHS.bootstrapCohort), null),
       elements,
       bok,
       modules,

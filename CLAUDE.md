@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
 | Content authored | **1 element** · **1 BOK article** · **1 module** |
 | Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
-| Checks | 0 errors · 192/192 tests · typecheck clean |
+| Checks | 0 errors · 205/205 tests · typecheck clean |
 
 ### Phases
 
@@ -80,6 +80,8 @@ Three principles held in tension deliberately:
 
 **8. The ladder is bootstrapped, and it says so.** L3 needs an L4 signer, L4 needs L5, L5 needs L5 — so with no holders the ladder cannot start. A closed founding cohort admitted on external standing may sign L3–L5 without holding them, and **every credential they sign carries a permanent visible marker**. A bootstrap-signed L5 is not a peer-signed L5; never render them alike. See decision 43.
 
+**8b. "Closed" and "time-limited" are the roster's job, not the credential's.** `bootstrapAuthority` used to be a field a signer wrote about themselves, so anyone could join a cohort with no roster, no convening and no closing date — and three people could bootstrap-sign each other across a domain in a weekend. Membership now resolves against `content/competence/bootstrap-cohort.yaml`, which **publishes**, because a verifier must resolve it offline exactly as they resolve the trust registry. Four controls: **scope** (a founder signs only in the domains their standing covers — no wildcard, because a person competent across all 43 is the person the project says should not exist); **no self-dealing** (a member may never be the *subject* of a bootstrap-signed credential — that is the mutual peer cohort decision 43 rejected); **time** (nothing after `closesOn`, nothing before the member's own `admittedOn`); and **volume** when a steward sets a ceiling. **The shipped roster convenes nobody**, so no bootstrap signature is valid today — the correct state while steward appointment is blocked.
+
 **9. Training teaches; it never proves.** A module produces a training record, not a credential — `attestsCompetence` is `const false`. Every module states in `cannotConvey` what its format cannot teach. See decision 45.
 
 **10. A roleTarget is a scoped minimum requirement.** It states the level a role needs *if* the element is in that person's deployment scope — normative, not typical, not aspirational. It does **not** imply the element applies to anyone. **An element outside scope cannot produce a gap.** `null` means the element could never be that role's work in any deployment, which is not the same as "not in this person's scope". See decision 48.
@@ -113,12 +115,17 @@ content/competence/
   items/bindings/                 One archetype × one (element×level). Scales here.
   items/rubrics/                  Ships in the same commit as its item.
   modules/                        Training. MOD-nnnn. Teaches, never proves.
+  bootstrap-cohort.yaml           Who may sign the ladder into existence, and
+                                  until when. Steward-controlled. PUBLISHES —
+                                  a verifier resolves it offline. Convenes
+                                  nobody today, so no bootstrap signature is
+                                  currently valid.
 
 content/sources/registry.yaml     Source licence register. Outside both trees,
                                   because both cite it.
 
-schemas/                          15 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 192 tests.
+schemas/                          16 JSON Schemas. Frozen at Phase 3.
+packages/validator/               The ONLY implemented package. 205 tests.
 apps/viewer/                      The only implemented app (template + build script).
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/                            Build scripts, ceiling-plan.json, kind-plan.json,
@@ -130,12 +137,13 @@ docs/                             Decision record, playbook, anchor template, go
 
 ### Where the contracts and the executable rules live
 
-Fifteen schemas, and the ones that are not obvious from their names:
+Sixteen schemas, and the ones that are not obvious from their names:
 
 | Schema | Governs |
 |---|---|
 | `element`, `taxonomy`, `bok-article` | The corpus itself |
 | `proficiency`, `role-registry`, `source-registry` | The frames content is written into |
+| `bootstrap-cohort` | The founding roster — makes "closed, time-limited" resolvable rather than asserted |
 | `item-archetype`, `item-binding` | The item bank (decision 36) |
 | `credential`, `authorization` | What travels with a person, and what never does |
 | `attempt-ledger` | No-retake rule and exposure control |
@@ -148,7 +156,7 @@ Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
 | Module | The rule it enforces |
 |---|---|
 | `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules |
-| `credentials.ts` | No self-signoff, signoff policy, the wallet boundary, draft-status attestability |
+| `credentials.ts` | No self-signoff, signoff policy, the wallet boundary, draft-status attestability, evidenced provenance tier, founding-cohort authority |
 | `ledger.ts` | Hash chain, no-retake, exposure count, trust horizon |
 | `definitions.ts` | Semantic pinning — `definitionRef`, `assessmentPolicyRef`, drift |
 | `scope.ts` | Gap analysis. **An element outside scope cannot produce a gap** |
@@ -167,7 +175,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 192 guardrail tests
+npm test                  # 205 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:quotes     # complete quotation manifest for legal review

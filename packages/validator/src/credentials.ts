@@ -279,6 +279,8 @@ function daysBetween(earlier: string, later: string): number | null {
 export function checkCredential(
   credential: Credential,
   policy?: SignoffPolicy,
+  cohort?: BootstrapCohort,
+  bootstrapContext?: BootstrapContext,
 ): Finding[] {
   const findings: Finding[] = [];
   const at = (msg: string) => `${credential.id}: ${msg}`;
@@ -304,6 +306,11 @@ export function checkCredential(
   // tier needs nothing but the credential itself, and a check that depends on
   // being invoked is how provenanceTier came to be read by nothing at all.
   findings.push(...checkProvenanceTier(credential));
+
+  // Same reasoning. Without a roster this warns rather than passing, so a
+  // caller who has one and forgets to pass it is told, and a bootstrap claim is
+  // never silently accepted on its own word.
+  findings.push(...checkBootstrapAuthority(credential, cohort, bootstrapContext));
 
   // -- Is the signer's own standing evidenced, or merely stated? -----------
   // A system built to replace "trust me, he's competent" should not rest on
@@ -462,6 +469,165 @@ export function checkCredential(
           err(at(`was attained ${elapsed} day(s) after the previous level; level ${credential.level} requires at least ${policy.minDaysSincePreviousLevel}. The waiting period exists because the competence at this level is partly accumulated practice, which cannot be compressed by sitting assessments faster.`)),
         );
       }
+    }
+  }
+
+  return findings;
+}
+
+/* -- The founding cohort, as a roster rather than an adjective ------------ */
+
+export interface CohortMember {
+  did: string;
+  name?: string;
+  admittedOn: string;
+  basis: string;
+  scope: string[];
+  maxCredentials?: number;
+}
+
+export interface BootstrapCohort {
+  schemaVersion: 1;
+  convenedOn?: string;
+  closesOn?: string;
+  members: CohortMember[];
+}
+
+export interface BootstrapContext {
+  /**
+   * The element's authoritative domain.
+   *
+   * Passed in rather than parsed from the element ID, because the ID's prefix
+   * records where the element was FIRST created and is historical — rule 1 in
+   * CLAUDE.md. Reading `CM-03` out of `CM-03-046` would silently check the
+   * wrong domain for any element that has been reorganised.
+   */
+  elementDomain?: string;
+  /** How many credentials each signer has already bootstrap-signed. */
+  signedAlready?: Record<string, number>;
+}
+
+/**
+ * Bootstrap authority, checked against the roster that defines it.
+ *
+ * DECISION 43 SAID "CLOSED, TIME-LIMITED", AND NEITHER WORD HAD A MECHANISM.
+ * `bootstrapAuthority` was a field a signer wrote about themselves: a basis
+ * string of at least forty characters, an optional cohort name nothing
+ * resolved, and an optional admission date nothing compared to anything. So
+ * any signer could join a cohort that had no roster, no convening and no
+ * closing date, and a closed cohort anybody can join is not closed.
+ *
+ * The consequence an external review put plainly: three people could
+ * bootstrap-sign each other to L5 across an entire domain in a weekend, every
+ * marker correctly displayed, and then be the only people able to sign anybody
+ * else as a peer. The markers are permanent, but a market that reads "L5" and
+ * skips the annotation is not a market the annotation protects anybody from.
+ * The ladder's peer meaning would never start.
+ *
+ * Four controls, in rough order of how much work they do:
+ *
+ *   SCOPE. A founder is admitted on standing in a field, and may sign only in
+ *   the domains that standing covers. There is no wildcard. This is also the
+ *   first principle enforced as code — no single person should hold all of it.
+ *
+ *   NO SELF-DEALING WITHIN THE COHORT. A member may not be the SUBJECT of a
+ *   bootstrap-signed credential. Founders are admitted on external standing and
+ *   do not need bootstrap-signed credentials; the authority exists to bring
+ *   OTHER people onto the ladder. Decision 43 explicitly rejected the mutual
+ *   peer cohort as "structurally the reciprocal-review pattern the
+ *   anti-collusion controls exist to detect — a poor founding act for a trust
+ *   network", and this is that rejection made executable.
+ *
+ *   TIME. A signature after `closesOn` is invalid, and one before the member's
+ *   own `admittedOn` is too, which stops a credential being backdated into a
+ *   period when its signer had no standing.
+ *
+ *   VOLUME. Enforced when a steward sets `maxCredentials`. The mechanism is
+ *   here; the number is a governance judgement this module declines to invent.
+ *
+ * Credentials signed while the cohort was open stay valid forever and keep
+ * their marker. Closing the cohort ends new bootstrap signing; it does not
+ * un-happen what was signed.
+ */
+export function checkBootstrapAuthority(
+  credential: Credential,
+  cohort?: BootstrapCohort,
+  context: BootstrapContext = {},
+): Finding[] {
+  const bootstrapped = credential.signers.filter((s) => s.bootstrapAuthority);
+  if (bootstrapped.length === 0) return [];
+
+  const findings: Finding[] = [];
+  const at = (msg: string) => `${credential.id}: ${msg}`;
+
+  if (!cohort) {
+    return [
+      warn(at('rests on founding-cohort authority, and no cohort roster was presented, so membership could not be verified. The claim is the signer\'s own until it is checked against content/competence/bootstrap-cohort.yaml.')),
+    ];
+  }
+
+  if (!cohort.closesOn) {
+    return [
+      err(at('rests on founding-cohort authority, but no cohort has been convened — the roster sets no closing date. Until a steward convenes one, no bootstrap signature is valid.')),
+    ];
+  }
+
+  const byDid = new Map(cohort.members.map((m) => [m.did, m]));
+
+  // A founder signing a founder is the reciprocal pattern decision 43 rejected
+  // when it chose this mechanism over a mutual peer cohort.
+  if (byDid.has(credential.subject)) {
+    findings.push(
+      err(at(`the subject is a founding-cohort member, and a member may not be the subject of a bootstrap-signed credential. They were admitted on external standing and need no bootstrap-signed credential; the authority exists to bring others onto the ladder, not to certify the cohort to itself.`)),
+    );
+  }
+
+  for (const signer of bootstrapped) {
+    const member = byDid.get(signer.did);
+
+    if (!member) {
+      findings.push(
+        err(at(`signer ${signer.did} claims founding-cohort authority but is not on the roster. Founding standing is resolved against the cohort file, not asserted on the credential — otherwise the cohort is open to anybody willing to write a basis string.`)),
+      );
+      continue;
+    }
+
+    if (credential.attainedOn) {
+      if (credential.attainedOn > cohort.closesOn) {
+        findings.push(
+          err(at(`was attained on ${credential.attainedOn}, after the founding cohort closed on ${cohort.closesOn}. Bootstrap signing has ended; credentials signed before that date remain valid and keep their marker.`)),
+        );
+      }
+      if (credential.attainedOn < member.admittedOn) {
+        findings.push(
+          err(at(`was attained on ${credential.attainedOn}, before ${signer.did} was admitted to the cohort on ${member.admittedOn}. A signature predating the signer's own standing is backdating.`)),
+        );
+      }
+    }
+
+    if (context.elementDomain) {
+      if (!member.scope.includes(context.elementDomain)) {
+        findings.push(
+          err(at(`signer ${signer.did} bootstrap-signed an element in ${context.elementDomain}, which is outside the scope they were admitted for (${member.scope.join(', ')}). Founding standing is standing in a field, and authority that ran across every domain would contradict the principle that no single person holds all of it.`)),
+        );
+      }
+    } else {
+      findings.push(
+        warn(at(`the element's domain was not supplied, so the scope of ${signer.did}'s founding authority could not be checked. Pass the element's \`domain\` field — never the ID prefix, which is historical.`)),
+      );
+    }
+
+    const already = context.signedAlready?.[signer.did];
+    if (typeof member.maxCredentials === 'number' && typeof already === 'number' && already >= member.maxCredentials) {
+      findings.push(
+        err(at(`signer ${signer.did} has already bootstrap-signed ${already} credential(s), reaching the ceiling of ${member.maxCredentials} set for them.`)),
+      );
+    }
+
+    if (signer.bootstrapAuthority?.basis && signer.bootstrapAuthority.basis !== member.basis) {
+      findings.push(
+        warn(at(`signer ${signer.did} states a founding basis that does not match the roster. A reader comparing the two will find them disagreeing about what this person was admitted on.`)),
+      );
     }
   }
 

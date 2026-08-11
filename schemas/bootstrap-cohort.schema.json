@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/bootstrap-cohort.schema.json",
+  "title": "Founding cohort — who may sign the ladder into existence, and until when",
+  "description": "Governs content/competence/bootstrap-cohort.yaml. Steward-controlled, like proficiency.yaml, and for the same reason: it decides what a credential means.\n\nWHY THIS FILE HAS TO EXIST. The ladder cannot start on its own — L3 requires an L4 signer, L4 requires L5, L5 requires L5 — so decision 43 admits a CLOSED, TIME-LIMITED founding cohort on demonstrated external standing, whose every signature is permanently marked. That was implemented as a field on the credential and nothing else, which left 'closed' and 'time-limited' as adjectives in a document rather than properties of the system: any signer could write `bootstrapAuthority` with a plausible basis string and be a founder, of a cohort that had no roster, no convening, and no closing date. A closed cohort anybody can join is not closed, and a time-limited one with no stated limit does not expire.\n\nWHAT THE ROSTER IS FOR. It converts founding standing from something a credential ASSERTS into something a verifier RESOLVES, offline, against a file a steward signed. The same move the trust registry makes for issuers, and the same move the project made for signer standing in general — a system built to replace 'trust me, he's competent' should not accept 'trust me, I'm a founder'.\n\nSCOPE IS THE CONTROL THAT MATTERS MOST. A founder is admitted on standing in a FIELD: a primary-laboratory appointment in dimensional metrology, an assessor role for a named scope. Bootstrap authority that ran across all 43 domains would let three people mint the entire ladder in a weekend, and it would contradict the project's first principle — no single person should hold all of it. So membership names the domains the member's standing actually covers, and a bootstrap signature outside them is an error rather than a judgement call.\n\nNOT CONVENED IS THE SAFE DEFAULT. A roster with no `closesOn` means no cohort has been convened, and NO bootstrap signature is valid. That is the correct state today: appointing stewards is blocked on people, nothing has issued a credential, and a file that permitted bootstrap signing before anybody had been appointed would be the hole this schema exists to close.",
+
+  "type": "object",
+  "required": ["schemaVersion", "members"],
+  "additionalProperties": false,
+
+  "properties": {
+    "schemaVersion": { "const": 1 },
+
+    "convenedOn": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate",
+      "description": "When the cohort was constituted. Absent until a steward convenes it."
+    },
+
+    "closesOn": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate",
+      "description": "The last date a bootstrap signature is valid. REQUIRED FOR ANY BOOTSTRAP SIGNATURE TO BE ACCEPTED — its absence means the cohort has not been convened, and the validator refuses every bootstrap signature rather than defaulting to permissive.\n\n'Time-limited' was in the decision from the start and had no mechanism. After this date the ladder must carry itself: by then the cohort has produced holders who can sign as peers, which is the entire point of the exercise. Credentials signed before it stay valid forever and keep their marker — closing the cohort ends new bootstrap signing, it does not un-happen the old.\n\nExtending this date is a steward act with a governance record, not a configuration change. Quietly extending it indefinitely is how a bootstrap becomes a permanent aristocracy."
+    },
+
+    "members": {
+      "type": "array",
+      "description": "The roster. May be empty, which means no cohort has been convened and nobody holds bootstrap authority.",
+      "items": {
+        "type": "object",
+        "required": ["did", "admittedOn", "basis", "scope"],
+        "additionalProperties": false,
+        "properties": {
+          "did": {
+            "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did",
+            "description": "The member's identifier, matched against `signers[].did` on a credential claiming their authority."
+          },
+
+          "name": {
+            "type": "string",
+            "description": "Optional, and unlike almost everywhere else in this project it is APPROPRIATE here. Minimal PII is a design constraint for credential holders, who are the people the system has power over. A founding-cohort member is exercising that power, and their accountability for it is public by design."
+          },
+
+          "admittedOn": {
+            "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate",
+            "description": "A signature dated before this is not covered by the member's authority. Prevents backdating a credential into a period when the signer had no standing."
+          },
+
+          "basis": {
+            "type": "string",
+            "minLength": 40,
+            "description": "The external standing this member was admitted on — a primary-laboratory or NMI appointment, accreditation assessor status, a publication record. Recorded here as well as on each credential so a reader can compare the two: a credential whose stated basis does not match the roster is asserting something the cohort did not grant."
+          },
+
+          "scope": {
+            "type": "array",
+            "minItems": 1,
+            "description": "The domains this member's standing covers, and therefore the only domains they may bootstrap-sign in. There is deliberately NO wildcard: a person competent to vouch across all 43 domains is exactly the person the project says should not exist.",
+            "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/domainId" }
+          },
+
+          "maxCredentials": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Optional ceiling on how many credentials this member may bootstrap-sign in total. The mechanism is here so governance CAN set a volume limit; the number itself is a steward judgement and this schema declines to invent one. Unset means no ceiling, which is honest rather than safe — scope is the control doing the real work."
+          }
+        }
+      }
+    }
+  }
+}

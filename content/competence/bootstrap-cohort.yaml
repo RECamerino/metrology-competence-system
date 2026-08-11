@@ -1,0 +1,34 @@
+# Founding cohort roster
+#
+# Steward-controlled. Governed by schemas/bootstrap-cohort.schema.json, which
+# carries the reasoning; this file carries the facts.
+#
+# THE COHORT HAS NOT BEEN CONVENED. There is no `closesOn` and there are no
+# members, which means no bootstrap signature is currently valid anywhere in
+# the system. That is the correct state, not an oversight:
+#
+#   - Appointing stewards is blocked on people, with no timetable. See
+#     docs/stewards.md. Convening a founding cohort is a steward act, and
+#     nobody has been appointed to perform it.
+#   - Nothing has issued a credential, so nothing is broken by refusing.
+#   - The operating rule while that persists is that design and authoring
+#     proceed and issuance does not. A roster that permitted bootstrap signing
+#     before anybody had been appointed would quietly reverse it.
+#
+# WHAT CONVENING IT REQUIRES. A steward sets `closesOn` and adds members, each
+# with the external standing they were admitted on and the domains that
+# standing actually covers. Both are checked: a signature outside a member's
+# scope is an error, and so is one dated after the cohort closes.
+#
+# The closing date is the part most likely to be treated as a formality. It is
+# not. Extending it is a governance act with a record, because quietly
+# extending it indefinitely is how a bootstrap becomes a permanent aristocracy
+# — and the cohort exists to produce peers who make it unnecessary, not to
+# remain the only people who can sign.
+
+schemaVersion: 1
+
+# convenedOn: unset — see above.
+# closesOn:   unset — no bootstrap signature is valid until a steward sets it.
+
+members: []

@@ -72,6 +72,7 @@ function checkSchemas(corpus: Corpus): Finding[] {
     ['proficiency', corpus.proficiency, 'content/competence/taxonomy/proficiency.yaml'],
     ['role-registry', corpus.roles, 'content/competence/roles/registry.yaml'],
     ['source-registry', corpus.sources, 'content/sources/registry.yaml'],
+    ['bootstrap-cohort', corpus.bootstrapCohort, 'content/competence/bootstrap-cohort.yaml'],
   ] as const;
 
   for (const [schemaName, data, path] of registryFiles) {
