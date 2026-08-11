@@ -13,11 +13,46 @@ Recorded in [`00-context.md`](00-context.md) and enforced in `schemas/credential
 - **ECDSA P-256**, for FIPS 140-3 environments. Adding a suite is possible; removing one effectively never is.
 - **Semantic pinning** — `definitionRef` and `knowledgeSnapshot`, decision 39. A credential records what the element meant and what knowledge it rested on at the time it was issued.
 
+## The registry, and the promise it cannot keep
+
+`content/trust-registry.yaml` is the file offline verification resolves against, and it publishes: with no registry, a signature proves internal consistency and nothing whatever about who made it.
+
+**"No network" and "fresh trust" cannot both be absolute.** A file is a snapshot; an air-gapped verifier holds whichever snapshot reached them and cannot learn what happened afterwards. The hiring manager on a closed network with last month's USB will accept a credential signed with a key compromised last week, and the signature will check out perfectly. That is a property of air-gapped operation, not a bug, and any design claiming to deliver both is lying about one of them.
+
+So the design does not attempt freshness. It makes staleness **measurable**, and refuses to let a verdict be rendered without it:
+
+> *Verified against trust registry #12, issued 2028-06-01 — 34 day(s) old, and 4 day(s) past the update it was expected to receive. A key compromised, an issuer removed, or a credential revoked since then does not appear here.*
+
+The defect was never that a registry can be stale. It was that `verified: true` was reachable with no statement of what it was verified *against*, which presents a month-old answer as a current one and puts the whole weight of the gap on a reader nobody told there was one. Every result now carries `registryAgeDays`, whether or not anything is wrong.
+
+An overdue registry still verifies. Refusing would strand exactly the deployments this design exists for; an old registry is the best available truth in an air gap, and the useful thing is to say how old.
+
+### Keys: rotation and compromise are not one status
+
+Keys are **append-only within an issuer**. Removing one breaks every credential it ever signed, including credentials signed years before anything went wrong.
+
+| Status | Effect |
+|---|---|
+| `retired` | Ordinary rotation. Signatures before `retiredOn` stay valid — that is the point of rotating rather than revoking. Signatures after it are rejected. |
+| `compromised` | Requires `compromisedFrom`. Signatures from that date onward prove nothing, because whoever held the key could produce them. **Signatures before it still stand**, since invalidating them punishes a holder for a breach that happened after they earned their credential. |
+
+Where the compromise date is genuinely unknown, the honest entry is the key's own `validFrom`, which invalidates everything it ever signed. That should be uncomfortable: it is what not knowing actually costs.
+
+### Rollback needs no forgery
+
+A signed registry cannot be altered, but a courier or a mirror can hand a verifier an *older* snapshot — discarding every revocation and compromise recorded since, with no signature broken. `sequence` is what makes that visible, and `checkRegistryReplacement` refuses the downgrade.
+
+### The DID method profile
+
+The credential schema deliberately fixes no DID method, because the Personal edition runs with no server and no registrar. That freedom collides with offline verification: a method needing a network resolver yields a credential that is schema-valid and unverifiable by the very verifier the design promises.
+
+`didMethods` states the profile a deployment can actually resolve. Shipped as `did:key` alone — the only method whose verification material is entirely self-contained.
+
 ## What this document still has to answer
 
-- **The DID method.** Constrained: the Personal edition runs with no server and no registrar, so a purely cryptographic method has to remain viable.
-- **Trust registry admission.** On what basis an issuer is admitted, who decides, and how removal works. `GOVERNANCE.md` states admission is not automatic and not for sale; the criteria themselves belong here.
-- **Registry distribution and revocation** in air-gapped deployments, where "fetch the current registry" is not available.
+- **Trust registry admission.** On what basis an issuer is admitted, who decides, and how removal works. `GOVERNANCE.md` states admission is not automatic and not for sale; the criteria themselves belong here. **The shipped registry admits nobody**, so nothing verifies today — the correct state while steward appointment is outstanding.
+- **Distribution cadence.** `nextExpectedUpdate` is the mechanism; what interval a deployment should promise, and how snapshots physically reach an air gap, is an operational question this design makes answerable rather than answers.
+- **A holder's counter-statement to revocation** — open item 21. The registry carries the issuer's revocations and nothing from the subject.
 
 ## The limit that must be stated wherever an unanchored record is described
 
