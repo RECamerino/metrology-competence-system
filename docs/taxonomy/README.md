@@ -44,7 +44,7 @@ What kind of competence an element is, and therefore what evidence proves it.
 | Kind | The claim | What proves it | Elements | Share |
 |---|---|---|---|---|
 | Knowledge | I understand this | Explanation, relation, analysis | 658 | 29.5% |
-| Skill | I can perform this | A witnessed work product | 1131 | 50.7% |
+| Skill | I can perform this | A work product they produced, not an account of it | 1131 | 50.7% |
 | Judgment | I can decide and defend it | A defence; often no single right answer | 443 | 19.8% |
 
 **Authority is deliberately not a kind.** Knowledge, skill and judgment are earned and belong to a person. Authority is granted, and is a relationship between a person, an organization and a scope of work. Competency credentials are portable; authorizations are not. See [`../00-context.md`](../00-context.md).

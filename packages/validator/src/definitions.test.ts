@@ -60,13 +60,14 @@ const LEVEL_4_POLICY = {
 const PROFICIENCY = { schemaVersion: 1, levels: [LEVEL_4_POLICY] };
 
 function credential(overrides: Record<string, unknown> = {}) {
-  const pins = pinDefinition(element, 4, REFS, [article]);
+  const { definitionRef, knowledgeSnapshot } = pinDefinition(element, 4, REFS, [article]);
   return {
     id: 'urn:uuid:3f2b8c1a-5d4e-4f6a-9b2c-7e1d0a3f5b8c',
     element: 'CM-03-014',
     level: 4,
     assessmentPolicyRef: assessmentPolicyHash(LEVEL_4_POLICY),
-    ...pins,
+    definitionRef,
+    knowledgeSnapshot,
     ...overrides,
   };
 }
@@ -116,6 +117,54 @@ test('changing kind changes the hash, because it changes what proves attainment'
     elementDefinitionHash(element, 4),
     elementDefinitionHash({ ...element, kind: 'skill' }, 4),
   );
+});
+
+test('flipping the demonstration mode changes the hash, with the anchor untouched', () => {
+  // The pathological case this closes: change `desk` to `equipment`, leave the
+  // anchor alone, and the pin still matched. A verifier read "definition
+  // unchanged" while what counts as valid evidence for the claim had inverted.
+  const desk: ElementLike = { ...element, kind: 'skill', demonstration: 'desk' };
+  const bench: ElementLike = { ...element, kind: 'skill', demonstration: 'equipment' };
+
+  assert.equal(desk.anchors['4'], bench.anchors['4'], 'the anchor must be identical for this to test anything');
+  assert.notEqual(elementDefinitionHash(desk, 4), elementDefinitionHash(bench, 4));
+});
+
+test('stating the default explicitly is not drift, because it changes nothing', () => {
+  // `demonstration` defaults to `desk`. An author who later writes it out has
+  // altered no meaning, and must not make every credential look drifted.
+  const implicit: ElementLike = { ...element, kind: 'skill' };
+  const explicit: ElementLike = { ...element, kind: 'skill', demonstration: 'desk' };
+  assert.equal(elementDefinitionHash(implicit, 4), elementDefinitionHash(explicit, 4));
+});
+
+test('drift in the demonstration mode is reported to the reader', () => {
+  const desk: ElementLike = { ...element, kind: 'skill', demonstration: 'desk' };
+  const { definitionRef } = pinDefinition(desk, 4, REFS, [article]);
+  const bench: ElementLike = { ...desk, demonstration: 'equipment' };
+
+  const findings = checkDefinitionDrift(credential({ definitionRef }), bench, [article]);
+  assert.ok(
+    findings.some((f) => f.message.includes('has changed since this credential was issued')),
+    `expected definition drift, got: ${JSON.stringify(findings)}`,
+  );
+  // Still not invalidity: the credential remains true of the definition that
+  // was in force, which was desk work.
+  assert.equal(findings.filter((f) => f.level === 'error').length, 0);
+});
+
+test('status, roleTargets and prerequisites stay OUT of the pin', () => {
+  // Each is meaning-bearing somewhere, and none of them is part of what THIS
+  // credential asserts about THIS person. Pinning status would make a routine
+  // draft-to-stable promotion — or a deprecation — read as drift on every
+  // credential below it, which punishes the holder for somebody else's edit.
+  const moved: ElementLike = {
+    ...element,
+    status: 'deprecated',
+    roleTargets: { 'calibration-engineer': 5 },
+    prerequisites: ['CM-03-048'],
+  };
+  assert.equal(elementDefinitionHash(element, 4), elementDefinitionHash(moved, 4));
 });
 
 /* -- Drift detection ------------------------------------------------------- */
@@ -211,4 +260,47 @@ test('raising the bar for a level is drift the credential can detect', () => {
 
 test('an unchanged policy produces no findings', () => {
   assert.deepEqual(checkDefinitionDrift(credential(), element, [article], PROFICIENCY), []);
+});
+
+/* -- A pin that pins nothing ----------------------------------------------- */
+
+test('pinning a fully resolvable ref produces no findings', () => {
+  const pins = pinDefinition(element, 4, REFS, [article]);
+  assert.equal(pins.knowledgeSnapshot.length, 1);
+  assert.deepEqual(pins.findings, []);
+});
+
+test('a knowledgeRef whose article was not supplied is reported, not skipped', () => {
+  // The silent version of this could hand back an empty knowledgeSnapshot while
+  // looking like it had worked, and the drift check would then iterate nothing
+  // and find nothing wrong.
+  const pins = pinDefinition(element, 4, REFS, []);
+  assert.deepEqual(pins.knowledgeSnapshot, []);
+  assert.ok(pins.findings.some((f) => f.message.includes('was not supplied')));
+});
+
+test('a knowledgeRef pointing at a section the article does not declare is reported', () => {
+  const pins = pinDefinition(element, 4, [{ article: 'BOK-0001', section: 's09' }], [article]);
+  assert.ok(pins.findings.some((f) => f.message.includes('declares no such section')));
+});
+
+test('pinning NOTHING is an error in its own right, not merely an empty result', () => {
+  const pins = pinDefinition(element, 4, REFS, []);
+  assert.ok(
+    pins.findings.some((f) => f.level === 'error' && f.message.includes('pins the knowledge in shape only')),
+    `expected an empty-pin error, got: ${JSON.stringify(pins.findings)}`,
+  );
+});
+
+test('a partial pin still reports the ref it lost', () => {
+  // The surviving pin must not make the lost one look acceptable.
+  const pins = pinDefinition(
+    element,
+    4,
+    [{ article: 'BOK-0001', section: 's03' }, { article: 'BOK-0004', section: 's01' }],
+    [article],
+  );
+  assert.equal(pins.knowledgeSnapshot.length, 1);
+  assert.equal(pins.findings.length, 1);
+  assert.ok(pins.findings[0]!.message.includes('BOK-0004'));
 });

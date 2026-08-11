@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
 | Content authored | **1 element** · **1 BOK article** · **1 module** |
 | Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
-| Checks | 0 errors · 148/148 tests · typecheck clean |
+| Checks | 0 errors · 181/181 tests · typecheck clean |
 
 ### Phases
 
@@ -80,9 +80,11 @@ Three principles held in tension deliberately:
 
 **8. The ladder is bootstrapped, and it says so.** L3 needs an L4 signer, L4 needs L5, L5 needs L5 — so with no holders the ladder cannot start. A closed founding cohort admitted on external standing may sign L3–L5 without holding them, and **every credential they sign carries a permanent visible marker**. A bootstrap-signed L5 is not a peer-signed L5; never render them alike. See decision 43.
 
-**9. Training teaches; it never proves.** A module produces a training record, not a credential — `attestsCompetence` is `const false`. A module preparing for a `skill` element must declare `requiresPhysicalDemonstration`, because a simulation never substitutes for witnessed work on real equipment; completing it leaves that element `pending-demonstration`. Every module states in `cannotConvey` what its format cannot teach. See decision 45.
+**9. Training teaches; it never proves.** A module produces a training record, not a credential — `attestsCompetence` is `const false`. Every module states in `cannotConvey` what its format cannot teach. See decision 45.
 
 **10. A roleTarget is a scoped minimum requirement.** It states the level a role needs *if* the element is in that person's deployment scope — normative, not typical, not aspirational. It does **not** imply the element applies to anyone. **An element outside scope cannot produce a gap.** `null` means the element could never be that role's work in any deployment, which is not the same as "not in this person's scope". See decision 48.
+
+**11. `skill` is not the same as bench work.** `kind: skill` means the evidence is observable *performance* rather than explanation. It does **not** mean the performance happens at a bench — constructing an uncertainty budget is a skill and is desk work. The element declares `demonstration: desk | equipment`, and a module preparing for an `equipment` element must list it in `requiresPhysicalDemonstration`, leaving it `pending-demonstration`. Listing a `desk` element there is **also** an error: it tells a learner they are waiting for access they never needed, and inventing a barrier is as wrong as hiding one.
 
 ---
 
@@ -114,7 +116,7 @@ content/sources/registry.yaml     Source licence register. Outside both trees,
                                   because both cite it.
 
 schemas/                          15 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 142 tests.
+packages/validator/               The ONLY implemented package. 181 tests.
 apps/viewer/                      The only implemented app (template + build script).
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/                            Build scripts, ceiling-plan.json, kind-plan.json,
@@ -163,7 +165,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 148 guardrail tests
+npm test                  # 181 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:quotes     # complete quotation manifest for legal review
@@ -223,7 +225,9 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 **Remaining:** blueprint weighting · DID method and trust registry · reviewer programme · exchange protocol · accreditation-body dossier and scope-matching model.
 
-**The attempt ledger's limit is deliberate and must not be "fixed" naively.** In the Personal edition the holder owns the machine, the ledger and the key, so they can truncate their own chain and it will verify clean — there is a test asserting exactly that. Hash-linking catches edits to the middle; only an *external* anchor fixes history, and every signoff produces one because there is no self-signoff anywhere. An unanchored ledger supports self-study claims and nothing more, which is what that provenance tier already means. Truncation becomes detectable the moment a counterparty holds a reference, which is why the credential carries `assessment.attemptRef`.
+**The attempt ledger's limit is deliberate and must not be "fixed" naively.** In the Personal edition the holder owns the machine, the ledger and the key, so they can truncate their own chain and it will verify clean — there is a test asserting exactly that. Hash-linking catches edits to the middle; only an *external* anchor fixes history. An unanchored ledger supports self-study claims and nothing more, which is what that provenance tier already means. Truncation becomes detectable the moment a counterparty holds a reference, which is why the credential carries `assessment.attemptRef`.
+
+**But "every signoff produces an anchor" did not cover the case that mattered.** A signoff anchors the chain *as it stands at signing time*, and a **failed** challenge produces no credential and so no anchor — so the one entry a candidate has reason to delete is the one nothing else holds a copy of, and the next signoff anchors a history the counterparty never saw intact. Fail, truncate, retake, pass, and the resulting credential is `peer-reviewed` with a false no-retake claim. Two things now close what can be closed: `checkChallengeProvenance` requires a challenge-exam credential to name an attempt anchored *independently of the signoff resting on it*, or be issued at `self-study`; and a dangling anchor — one naming a head the chain no longer contains — is an **error**, because that is positive evidence of truncation and was previously discarded in silence. Consequence to hold onto: **a challenge exam served with no counterparty present at the draw cannot back anything above self-study.** The ordinary assessment route is unaffected at every level.
 
 ---
 
@@ -234,11 +238,11 @@ From external architectural review, August 2026. Not a new phase — scope that 
 | | |
 |---|---|
 | `BOK-0001` | `content/bok/CM-03/correlation-and-covariance.md` — five sections, one marked `contested` with both positions recorded |
-| `CM-03-053` | The only authored element. `skill`, ceiling 5, five performance anchors, twelve role targets |
-| `MOD-0001` | The only module. Declares `requiresPhysicalDemonstration` and states what it `cannotConvey` |
+| `CM-03-053` | The only authored element. `skill`, ceiling 5, `demonstration: desk`, five performance anchors, twelve role targets, bound at every level |
+| `MOD-0001` | The only module. States what it `cannotConvey`; deliberately declares NO physical demonstration, because its element is desk work |
 | `ARC-0001`–`0004` | `ARC-0004` is the one built to span a family; the other three are narrow |
 
-**What the corpus says about itself.** Run `npm run report:coverage` first — it names the next content work rather than requiring you to infer it. Today it reports nine elements with items but **no authored definition**, and three with items only at upper levels (`CM-03-019`, `-040`, `-046` have nothing below L3, so a candidate cannot climb to an L4 they have no L3 item for).
+**What the corpus says about itself.** Run `npm run report:coverage` first — its `ITEM GAPS` section names the next content work rather than requiring you to infer it, and it is authoritative where this file has gone stale. Two shapes to expect: elements carrying items with **no authored definition** (a binding claims to test a competence that has no anchors to test against), and elements with items only at upper levels (a candidate cannot climb to an L4 they have no L3 item for). Both are real today.
 
 **The highest-value engineering work is authoring something real against the design.** That exercise has found a genuine flaw four times out of four — the BOK/competence split, the generator-parameter leak, the missing level pin, and the undefined `roleTarget`. Reading the schemas has never found one. If you are choosing what to do next and nothing else is pressing, author an element or bind one and see what breaks.
 

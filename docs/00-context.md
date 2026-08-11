@@ -133,7 +133,9 @@ A person can read everything ever written about a CMM and still be unable to run
 
 So training modules are **not** a workaround for equipment access. They are preparation, so that when access does come — bought, borrowed, or on the job — the bench time is spent well rather than spent learning what a book could have taught. Whether somebody obtains equipment and finds a credentialed witness is their business and their route; the system's job is to define the competence, supply the knowledge freely, and verify the demonstration honestly. It is not to procure hardware.
 
-So the validator requires that a module preparing for a `skill` element declares it in `requiresPhysicalDemonstration`. A module claiming to complete a skill by simulation is asserting that a simulation substitutes for the bench, and the failure would otherwise be invisible: the module would look complete and the learner would believe they had finished something they have never done.
+So the validator requires that a module preparing for an element whose `demonstration` is `equipment` declares it in `requiresPhysicalDemonstration`. A module claiming to complete such an element by simulation is asserting that a simulation substitutes for the bench, and the failure would otherwise be invisible: the module would look complete and the learner would believe they had finished something they have never done.
+
+**The test is `demonstration`, not `kind`, and this paragraph said otherwise until the split was made.** `skill` means the evidence is observable performance rather than explanation; it does not mean the performance happens at a bench. Constructing an uncertainty budget is a skill and is desk work, and listing it as requiring physical demonstration tells a learner they are waiting for access they never needed. The validator rejects that too — inventing a barrier is as wrong as hiding one — so a module author following the old wording here would have had their module rejected by the rule this document was describing.
 
 **`pending-demonstration` is an accurate statement of position, not a consolation prize.** Completing the module leaves those elements saying: the knowledge is done, the demonstration is not. It is precise rather than encouraging, which is why it is useful — a mentor or a laboratory reading it knows exactly what is being asked for, and the holder is never under the impression that the training finished the job.
 
@@ -260,7 +262,9 @@ Anchors get rewritten as practice moves. Ceilings get revised. A BOK section get
 
 Every credential therefore pins, at issue:
 
-- **`definitionRef`** — a hash of the element definition projected to the fields that carry meaning for the attested level: `kind`, `levelCeiling`, and the anchor for that level. Editorial fields are excluded deliberately, because if a typo fix produced a drift warning the signal would become noise and reviewers would learn to ignore it.
+- **`definitionRef`** — a hash of the element definition projected to the fields that carry meaning for the attested level: `kind`, `levelCeiling`, `demonstration`, and the anchor for that level. Editorial fields are excluded deliberately, because if a typo fix produced a drift warning the signal would become noise and reviewers would learn to ignore it.
+
+  `demonstration` was missing from the projection until an adversarial review of the pin found it. Flip an element from `desk` to `equipment` and leave the anchor alone: the hash still matched, so a verifier read *definition unchanged* while what counts as admissible evidence for that claim had inverted. `status`, `roleTargets` and `prerequisites` are still out, each for its own reason — status is checked at issue and pinning it would make a routine promotion or a deprecation read as drift on credentials already issued; role targets say what roles need rather than what this person did, and gap analysis must read today's; prerequisites are the preparation graph, and somebody who met the anchor met it whatever route was recommended.
 - **`knowledgeSnapshot`** — the BOK sections the element pointed at, pinned by content, so a reader knows what the claim rested on and not merely what was claimed.
 
 **Hashes rather than version numbers**, because a version number depends on somebody remembering to increment it, and the failure mode of forgetting is silent.
@@ -307,10 +311,12 @@ Added at the Phase 1 gate. Every element declares a `kind` — **knowledge**, **
 | Kind | The claim | What proves it |
 |---|---|---|
 | `knowledge` | I understand this | Explanation, relation, analysis |
-| `skill` | I can perform this | A witnessed work product. A written answer cannot substitute. |
+| `skill` | I can perform this | A work product they produced. An account of how it would be done cannot substitute. |
 | `judgment` | I can decide about this and defend it | A defence. There is often no single right answer. |
 
 A uniform evidence ladder across all three tests the wrong thing for at least two of them, which is why the classification has to exist before Phase 2 designs the ladder. **If an element genuinely needs two kinds of evidence, that is a sign it should be two elements.**
+
+**What cannot substitute for a skill is description, not writing.** This row said "a written answer cannot substitute" until an adversarial review of the schemas caught it, and it was over-constrained in the same direction as the `skill`/bench conflation: a written artifact is very often the performance itself. An uncertainty budget is a work product. So is a procedure, and so is a validation report. What cannot stand in is explaining how one *would* be produced — that is a knowledge claim wearing a skill's clothes. The wording mattered because the open-resource parameterized items that the Personal edition can host offline are written by construction, and a strict reading of the old sentence disqualified the only evidence modality available to somebody assessing a desk skill without a laboratory.
 
 **Authority is deliberately not a fourth kind, and the distinction is load-bearing.**
 

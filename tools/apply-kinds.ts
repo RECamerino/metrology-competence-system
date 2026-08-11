@@ -8,8 +8,12 @@
  *
  *   knowledge  the person can explain, relate and analyse it.
  *              Evidence is explanation.
- *   skill      the person can perform it. Evidence is a witnessed work
- *              product; a written answer cannot substitute.
+ *   skill      the person can perform it. Evidence is a work product they
+ *              produced; an account of how it would be done cannot
+ *              substitute. Description is what is excluded, not writing —
+ *              an uncertainty budget is a written artifact and IS the
+ *              performance. Whether it happens at a bench is the element's
+ *              `demonstration` field, not its kind.
  *   judgment   the person can decide under ambiguity and defend it.
  *              Evidence is a defence, and there is often no single right
  *              answer.
