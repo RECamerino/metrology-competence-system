@@ -30,6 +30,23 @@ export interface Finding {
 const err = (message: string): Finding => ({ level: 'error', message });
 const warn = (message: string): Finding => ({ level: 'warn', message });
 
+/**
+ * Phrasing an anchor may not contain, whatever the element's kind.
+ *
+ * Kept deliberately short. A long list would catch prose that is merely
+ * clumsy; these seven are the ones that make an anchor untestable outright,
+ * and they are exactly the failures the authoring playbook has always named.
+ */
+const UNOBSERVABLE_PHRASES = [
+  'understands',
+  'familiar with',
+  'aware of',
+  'has knowledge of',
+  'appreciates',
+  'expert in',
+  'proficient in',
+];
+
 function wordCount(text: string): number {
   return text.trim().split(/\s+/).filter(Boolean).length;
 }
@@ -225,6 +242,26 @@ function checkElementIntegrity(corpus: Corpus): Finding[] {
     for (const level of Object.keys(anchors)) {
       if (Number(level) > ceiling) {
         findings.push(err(at(`has an anchor for level ${level} but levelCeiling is ${ceiling}`)));
+      }
+    }
+
+    // Phrasing that cannot be observed, at any kind.
+    //
+    // These describe a state of mind. Two assessors will not agree on them,
+    // and no item can test them — an anchor built from them is unassessable
+    // however carefully the rest of the element is written. The last two are
+    // worse than vague: they restate the level's own name instead of saying
+    // what the person does at it.
+    //
+    // A lint, not a judgement. Passing it does not make an anchor observable;
+    // it only rules out the phrases that guarantee it is not.
+    for (const [level, text] of Object.entries(anchors)) {
+      for (const phrase of UNOBSERVABLE_PHRASES) {
+        if (new RegExp(`\\b${phrase}\\b`, 'i').test(String(text ?? ''))) {
+          findings.push(
+            err(at(`anchor for level ${level} says '${phrase}', which nobody can observe. Say what the person does — see docs/anchor-template.md.`)),
+          );
+        }
       }
     }
 

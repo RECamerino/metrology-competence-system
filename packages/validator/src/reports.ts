@@ -111,6 +111,7 @@ export function coverageReport(corpus: Corpus): string {
 
   const bound = new Set<string>();
   const archetypeUse = new Map<string, number>();
+  const levelsByElement = new Map<string, Set<number>>();
 
   for (const file of corpus.bindings) {
     const d = file.data as Record<string, any>;
@@ -119,6 +120,13 @@ export function coverageReport(corpus: Corpus): string {
       bound.add(`${d.element}@${binding?.level}`);
       const archetype = binding?.archetype;
       if (archetype) archetypeUse.set(archetype, (archetypeUse.get(archetype) ?? 0) + 1);
+
+      let levels = levelsByElement.get(d.element);
+      if (!levels) {
+        levels = new Set<number>();
+        levelsByElement.set(d.element, levels);
+      }
+      if (typeof binding?.level === 'number') levels.add(binding.level);
     }
   }
 
@@ -142,6 +150,62 @@ export function coverageReport(corpus: Corpus): string {
     }
   }
   lines.push('');
+
+  /* -- Per-element item gaps --------------------------------------------- */
+  // The aggregate percentage hides the case that actually harms somebody: an
+  // element attainable at L4 with items only to L2 cannot be credentialed at
+  // L4, and a candidate must not be the one who discovers that. Reported per
+  // element rather than as a total, because "0.1% covered" is not actionable
+  // and "CM-03-053 has no items at all" is.
+  //
+  // Restricted to AUTHORED elements. A stub with no items is expected and not
+  // news; an element somebody has written and nobody can be assessed against
+  // is a different thing.
+
+  const unbound: string[] = [];
+  const partiallyBound: string[] = [];
+
+  for (const id of authored.keys()) {
+    const stub = stubs.get(id);
+    if (!stub) continue;
+
+    const levels = levelsByElement.get(id) ?? new Set<number>();
+    const missing: number[] = [];
+    for (let level = 1; level <= (stub.levelCeiling ?? 0); level++) {
+      if (!levels.has(level)) missing.push(level);
+    }
+    if (missing.length === 0) continue;
+
+    if (levels.size === 0) unbound.push(`${id} (ceiling L${stub.levelCeiling})`);
+    else partiallyBound.push(`${id} — no items at L${missing.join(', L')}`);
+  }
+
+  // The inverse defect: an item bound to an element whose definition nobody has
+  // written. The binding's justification claims it tests that element, but
+  // there are no anchors to test against, so the claim cannot be reviewed.
+  const boundButUnauthored = [...levelsByElement.keys()].filter((id) => !authored.has(id)).sort();
+
+  const listOf = (items: string[], limit = 12): string =>
+    `${items.slice(0, limit).join('; ')}${items.length > limit ? `; … and ${items.length - limit} more` : ''}`;
+
+  if (unbound.length + partiallyBound.length + boundButUnauthored.length > 0) {
+    lines.push('ITEM GAPS ON AUTHORED ELEMENTS');
+    lines.push('-'.repeat(78));
+
+    if (partiallyBound.length > 0) {
+      lines.push(`  Attainable levels with no item (${partiallyBound.length}):`);
+      lines.push(`    ${listOf(partiallyBound)}`);
+    }
+    if (unbound.length > 0) {
+      lines.push(`  Authored but no items at any level (${unbound.length}):`);
+      lines.push(`    ${listOf(unbound)}`);
+    }
+    if (boundButUnauthored.length > 0) {
+      lines.push(`  Items bound to an element with no authored definition (${boundButUnauthored.length}):`);
+      lines.push(`    ${listOf(boundButUnauthored)}`);
+    }
+    lines.push('');
+  }
 
   /* -- Gaps worth acting on ---------------------------------------------- */
 

@@ -809,3 +809,48 @@ test('a training record can carry pending-demonstration for a skill element', ()
     }),
   );
 });
+
+/* -- Anchors must describe something observable ---------------------------- */
+
+test('an anchor that says "understands" is rejected', () => {
+  // The failure the playbook has always named, now mechanical: nobody can
+  // observe understanding, and no item can test it.
+  const errors = errorsOf(
+    corpus([element({ anchors: { '1': 'Understands why input correlation matters in a budget.', '2': LONG, '3': LONG } })]),
+  );
+  assert.ok(
+    errors.some((e) => e.includes("says 'understands'") && e.includes('nobody can observe')),
+    `expected an unobservable-anchor error, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('"familiar with" and "aware of" are rejected too', () => {
+  const errors = errorsOf(
+    corpus([element({ anchors: { '1': 'Is familiar with the GUM framework and its scope.', '2': 'Is aware of the correlation problem in shared standards.', '3': LONG } })]),
+  );
+  assert.ok(errors.some((e) => e.includes("says 'familiar with'")));
+  assert.ok(errors.some((e) => e.includes("says 'aware of'")));
+});
+
+test('an anchor restating the level name instead of a behaviour is rejected', () => {
+  // "Expert in X" says where on the ladder they sit, not what they do there.
+  const errors = errorsOf(
+    corpus([element({ anchors: { '1': LONG, '2': LONG, '3': 'Is expert in constructing correlated uncertainty budgets.' } })]),
+  );
+  assert.ok(errors.some((e) => e.includes("says 'expert in'")));
+});
+
+test('an observable anchor passes', () => {
+  const errors = errorsOf(
+    corpus([
+      element({
+        anchors: {
+          '1': 'Flags a correlated pair in a supplied budget when told what to look for.',
+          '2': 'Adds a covariance term using a coefficient they have been given and shows its effect.',
+          '3': 'Constructs a budget containing a covariance term and records the basis for the coefficient.',
+        },
+      }),
+    ]),
+  );
+  assert.deepEqual(errors, []);
+});
