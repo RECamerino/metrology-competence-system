@@ -269,6 +269,8 @@ Every non-auto-scored item ships with its rubric in the same commit.
 
 ## Write the anchors to match the element's kind
 
+**Full guidance, with the four axes a level progression actually moves along, is in [`anchor-template.md`](anchor-template.md).** Read it before writing your first set. What follows is the short form.
+
 Every element declares a `kind`. It is not decoration — it says what evidence proves attainment, so it governs how the anchors must be written.
 
 | Kind | Anchors describe | Anchors must not describe |

@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
 | Content authored | **1 element** · **1 BOK article** · **1 module** |
 | Item bank | 3 archetypes · 10 bindings · **0.1%** of units covered |
-| Checks | 0 errors · 129/129 tests · typecheck clean |
+| Checks | 0 errors · 139/139 tests · typecheck clean |
 
 ### Phases
 
@@ -113,12 +113,12 @@ content/sources/registry.yaml     Source licence register. Outside both trees,
                                   because both cite it.
 
 schemas/                          JSON Schema. Frozen at Phase 3.
-packages/validator/               Integrity checks + 129 guardrail tests.
+packages/validator/               Integrity checks + 139 guardrail tests.
 apps/viewer/                      Viewer SOURCE (template + build script).
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/ceiling-plan.json           Level-ceiling judgement, per area + overrides.
 tools/kind-plan.json              Knowledge/skill/judgment classification.
-docs/                             Decision record, playbook, licence policy.
+docs/                             Decision record, playbook, anchor template, licence policy.
 ```
 
 **Every element must carry at least one `knowledgeRefs` entry**, pointing at an article AND a section. This is the refresher path: someone credentialed eight months ago who has forgotten one detail will not retrain, they will look it up, and that link has to land on the passage covering *that detail*. Section ids are append-only for the same reason element IDs are. It also means the article must be written before the element — knowledge before the claim that someone has mastered it.
@@ -133,9 +133,9 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 129 guardrail tests
+npm test                  # 139 guardrail tests
 npm run typecheck
-npm run report:coverage   # per-domain counts, ceiling distribution, gaps
+npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:quotes     # complete quotation manifest for legal review
 npm run registry:sync     # append new IDs to the lock; commit the result
 npm run build:docs        # regenerate docs/taxonomy/ — commit the result
@@ -178,11 +178,11 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 ## What Phase 2 has to produce
 
-**Done:** proficiency ladder · 12 reference roles · item parameterization format (archetypes + bindings, decision 36) · rubric format · experience hours and waiting periods (decision 37) · recertification defaults per level.
+**Done:** proficiency ladder · 12 reference roles · **per-element anchor template** ([`docs/anchor-template.md`](docs/anchor-template.md), with a CI lint rejecting unobservable phrasing) · item parameterization format (archetypes + bindings, decision 36) · rubric format · experience hours and waiting periods (decision 37) · recertification defaults per level.
 
 **Also done:** credential schema and provenance tiers · **authorization as a first-class object** · attempt ledger, challenge-exam no-retake rule, and exposure control.
 
-**Remaining:** per-element anchor template · blueprint weighting · DID method and trust registry · reviewer programme · exchange protocol · accreditation-body dossier and scope-matching model.
+**Remaining:** blueprint weighting · DID method and trust registry · reviewer programme · exchange protocol · accreditation-body dossier and scope-matching model.
 
 **The attempt ledger's limit is deliberate and must not be "fixed" naively.** In the Personal edition the holder owns the machine, the ledger and the key, so they can truncate their own chain and it will verify clean — there is a test asserting exactly that. Hash-linking catches edits to the middle; only an *external* anchor fixes history, and every signoff produces one because there is no self-signoff anywhere. An unanchored ledger supports self-study claims and nothing more, which is what that provenance tier already means. Truncation becomes detectable the moment a counterparty holds a reference, which is why the credential carries `assessment.attemptRef`.
 
