@@ -55,15 +55,24 @@ export interface CredentialEvidence {
   archivedOn?: string;
 }
 
+export interface CredentialIssuer {
+  did: string;
+  name?: string;
+  trustRegistryEntry?: string;
+  accreditationRecognition?: string;
+}
+
 export interface Credential {
   id: string;
   subject: string;
   element: string;
   level: number;
   attainedOn?: string;
+  provenanceTier?: ProvenanceTier;
   assessment?: CredentialAssessment;
   evidence?: CredentialEvidence[];
   signers: Signer[];
+  issuer?: CredentialIssuer;
   portable: true;
   [key: string]: unknown;
 }
@@ -74,6 +83,128 @@ export interface Authorization {
   portable: false;
   walletExportable: false;
   [key: string]: unknown;
+}
+
+/* -- Provenance: who actually stood behind this --------------------------- */
+
+/**
+ * The five tiers, weakest first. Order is the whole point — see
+ * `highestSupportedTier`.
+ */
+export type ProvenanceTier =
+  | 'self-study'
+  | 'peer-reviewed'
+  | 'organization'
+  | 'accredited-body'
+  | 'authority';
+
+const TIER_ORDER: ProvenanceTier[] = [
+  'self-study',
+  'peer-reviewed',
+  'organization',
+  'accredited-body',
+  'authority',
+];
+
+/**
+ * WHAT `self-study` MEANS ON A CREDENTIAL, since it was never written down.
+ *
+ * An external review read the tier alongside "no self-signoff, ever" and
+ * concluded the tier could not be honestly issued at all: the schema demands at
+ * least one signer, the validator rejects the subject among them, so who signs
+ * a self-study credential?
+ *
+ * Somebody does. `self-study` describes the STANDING OF THE WITNESS, not their
+ * absence. A person with no employer and no professional network studies alone,
+ * does the work, and has it witnessed by whoever is available — a colleague, a
+ * mentor, a former supervisor. That person is real, is not the subject, and
+ * holds no credential and no reviewer authority. `heldLevel: null` is already
+ * legitimate at L1 and L2 for exactly this case. The tier records the truth a
+ * reader needs: somebody stood behind this, and nobody with standing did.
+ *
+ * That is issuable, honest, and consistent with the entry-barrier principle. It
+ * was only ever a contradiction because the definition lived nowhere.
+ *
+ * AND THE SEPARATE THING THE SAME WORD WAS DOING. "An unanchored ledger
+ * supports self-study claims and nothing more" is a statement about an ATTEMPT
+ * RECORD, not about a credential, and reading the two as one sentence produces
+ * a genuine confusion. Every credential has a signer; every signoff anchors the
+ * ledger. So an unanchored ledger backs no credential AT ALL — not even at this
+ * tier. What it supports is a person's own account of their own practice, which
+ * is a claim and not an attestation. See ledger.ts.
+ */
+
+/**
+ * The highest tier this credential's own evidence will carry.
+ *
+ * Each step up requires something a reader can check, offline, in the document
+ * in front of them:
+ *
+ *   self-study      a signer who is not the subject. The floor, guaranteed by
+ *                   the schema and by checkCredential.
+ *   peer-reviewed   a signer whose standing is EVIDENCED — an authority chain,
+ *                   or founding-cohort admission. An unbacked `heldLevel: 4` or
+ *                   `credentialedReviewer: true` does not count, which is what
+ *                   gives the "Asserted, not proven" warning consequences.
+ *   organization    plus an issuer that is a registered entity rather than a
+ *                   person: a name and a trust-registry key a verifier can
+ *                   resolve without contacting anybody.
+ *   accredited-body plus the issuer's own accreditation, recorded.
+ *   authority       never returned. The authority-tier issuer does not exist —
+ *                   it needs a neutral foundation with funding and legal
+ *                   existence, which is open decision 4 and a roadmap item.
+ */
+export function highestSupportedTier(credential: Credential): ProvenanceTier {
+  const standing = credential.signers.some(
+    (s) => s.bootstrapAuthority !== undefined || (s.authority ?? []).length > 0,
+  );
+  if (!standing) return 'self-study';
+
+  const issuer = credential.issuer;
+  if (!issuer?.name?.trim() || !issuer?.trustRegistryEntry?.trim()) return 'peer-reviewed';
+  if (!issuer.accreditationRecognition?.trim()) return 'organization';
+
+  return 'accredited-body';
+}
+
+/**
+ * The tier must not claim more than the document can show.
+ *
+ * `provenanceTier` was, until now, read by NOTHING. It carries the entire
+ * argument for how open entry and rigour coexist — "nothing is blocked, and the
+ * difference is legible rather than hidden" — and a credential could assert
+ * `accredited-body` with one unevidenced witness and no issuer at all. A tier
+ * nobody checks is not legibility; it is a field.
+ *
+ * Overstating is an error. UNDERSTATING IS NOT, and is deliberately silent: a
+ * holder or issuer who claims less than they could prove misleads nobody, and
+ * an organization with house rules about when it will claim its own name is
+ * making a decision this validator has no business overriding.
+ */
+export function checkProvenanceTier(credential: Credential): Finding[] {
+  const at = (msg: string) => `${credential.id}: ${msg}`;
+  const declared = credential.provenanceTier;
+  if (!declared) return [];
+
+  if (declared === 'authority') {
+    return [
+      err(at('claims the `authority` tier. No authority-tier issuer exists — it requires a neutral foundation with funding and legal existence, which is open decision 4 and unbuilt. Nothing may claim it in the meantime.')),
+    ];
+  }
+
+  const supported = highestSupportedTier(credential);
+  if (TIER_ORDER.indexOf(declared) <= TIER_ORDER.indexOf(supported)) return [];
+
+  const reason =
+    supported === 'self-study'
+      ? 'no signer has evidenced standing — every claim of a held level or reviewer authority on this credential is asserted rather than backed by a credential reference, and a founding-cohort basis is not recorded either'
+      : supported === 'peer-reviewed'
+        ? 'the issuer is not recorded as a registered entity; a name and a resolvable trust-registry entry are what distinguish an organization standing behind this from an individual'
+        : 'the issuer records no accreditation of its own';
+
+  return [
+    err(at(`claims the '${declared}' provenance tier, but its own evidence supports '${supported}': ${reason}. The tier is how a reader weighs the claim, so overstating it defeats the purpose of publishing it at all.`)),
+  ];
 }
 
 /**
@@ -168,6 +299,11 @@ export function checkCredential(
   if (new Set(dids).size !== dids.length) {
     findings.push(err(at('the same signer appears more than once. Independent signers must be distinct people.')));
   }
+
+  // Called from inside rather than exported for the caller to remember. The
+  // tier needs nothing but the credential itself, and a check that depends on
+  // being invoked is how provenanceTier came to be read by nothing at all.
+  findings.push(...checkProvenanceTier(credential));
 
   // -- Is the signer's own standing evidenced, or merely stated? -----------
   // A system built to replace "trust me, he's competent" should not rest on

@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
 | Content authored | **1 element** · **1 BOK article** · **1 module** |
 | Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
-| Checks | 0 errors · 181/181 tests · typecheck clean |
+| Checks | 0 errors · 192/192 tests · typecheck clean |
 
 ### Phases
 
@@ -86,6 +86,8 @@ Three principles held in tension deliberately:
 
 **11. `skill` is not the same as bench work.** `kind: skill` means the evidence is observable *performance* rather than explanation. It does **not** mean the performance happens at a bench — constructing an uncertainty budget is a skill and is desk work. The element declares `demonstration: desk | equipment`, and a module preparing for an `equipment` element must list it in `requiresPhysicalDemonstration`, leaving it `pending-demonstration`. Listing a `desk` element there is **also** an error: it tells a learner they are waiting for access they never needed, and inventing a barrier is as wrong as hiding one.
 
+**12. The provenance tier is evidenced, not declared.** `provenanceTier` carries the argument for how open entry and rigour coexist, and until it was checked it was read by no code at all — a credential could assert `accredited-body` with one unevidenced witness. Each step up now requires something a reader can verify offline: **self-study** a signer who is not the subject; **peer-reviewed** a signer whose standing is *evidenced*, so an unbacked `heldLevel` or `credentialedReviewer` does not lift it; **organization** an issuer registered with a name and trust-registry entry; **accredited-body** the issuer's own accreditation recorded. **`authority` cannot be issued** — no such issuer exists (open decision 4). Understating is permitted and silent. **`self-study` means the witness has no standing, not that there is no witness** — which is why it is issuable at all, and how somebody with no employer and no network holds something real.
+
 ---
 
 ## Layout
@@ -116,7 +118,7 @@ content/sources/registry.yaml     Source licence register. Outside both trees,
                                   because both cite it.
 
 schemas/                          15 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 181 tests.
+packages/validator/               The ONLY implemented package. 192 tests.
 apps/viewer/                      The only implemented app (template + build script).
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/                            Build scripts, ceiling-plan.json, kind-plan.json,
@@ -165,7 +167,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 181 guardrail tests
+npm test                  # 192 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:quotes     # complete quotation manifest for legal review
@@ -225,7 +227,9 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 **Remaining:** blueprint weighting · DID method and trust registry · reviewer programme · exchange protocol · accreditation-body dossier and scope-matching model.
 
-**The attempt ledger's limit is deliberate and must not be "fixed" naively.** In the Personal edition the holder owns the machine, the ledger and the key, so they can truncate their own chain and it will verify clean — there is a test asserting exactly that. Hash-linking catches edits to the middle; only an *external* anchor fixes history. An unanchored ledger supports self-study claims and nothing more, which is what that provenance tier already means. Truncation becomes detectable the moment a counterparty holds a reference, which is why the credential carries `assessment.attemptRef`.
+**The attempt ledger's limit is deliberate and must not be "fixed" naively.** In the Personal edition the holder owns the machine, the ledger and the key, so they can truncate their own chain and it will verify clean — there is a test asserting exactly that. Hash-linking catches edits to the middle; only an *external* anchor fixes history. An unanchored ledger supports self-asserted claims about one's own practice and nothing more. Truncation becomes detectable the moment a counterparty holds a reference, which is why the credential carries `assessment.attemptRef`.
+
+**"…and nothing more" does not mean "self-study".** That sentence used to end "which is what that provenance tier already means", and the word was doing double duty. An unanchored *ledger* is a record nobody but its owner stands behind. A self-study *credential* is signed — the tier describes the witness's **standing**, not their absence — so an unanchored ledger backs **no** credential at any tier, because every credential is signed and every signoff anchors. Read as one sentence the two produced an apparent contradiction: a named tier the no-self-signoff rule seemed to forbid. See rule 12.
 
 **But "every signoff produces an anchor" did not cover the case that mattered.** A signoff anchors the chain *as it stands at signing time*, and a **failed** challenge produces no credential and so no anchor — so the one entry a candidate has reason to delete is the one nothing else holds a copy of, and the next signoff anchors a history the counterparty never saw intact. Fail, truncate, retake, pass, and the resulting credential is `peer-reviewed` with a false no-retake claim. Two things now close what can be closed: `checkChallengeProvenance` requires a challenge-exam credential to name an attempt anchored *independently of the signoff resting on it*, or be issued at `self-study`; and a dangling anchor — one naming a head the chain no longer contains — is an **error**, because that is positive evidence of truncation and was previously discarded in silence. Consequence to hold onto: **a challenge exam served with no counterparty present at the draw cannot back anything above self-study.** The ordinary assessment route is unaffected at every level.
 

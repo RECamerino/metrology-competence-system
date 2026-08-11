@@ -115,7 +115,7 @@ The cost is real and lands in a specific place: **a badly bound archetype tests 
 |---|---|---|
 | 22 | W3C Verifiable Credentials 2.0 + Open Badges 3.0, DIDs, offline verification. **No blockchain.** | Verification is a signature check against a signed issuer trust registry distributed as a file. A ledger would add a network dependency, put immutable personal data somewhere it can never be erased, and be rejected outright by the regulated environments this must run in. |
 | 23 | Dual custody | ISO/IEC 17025 §6.2 requires the laboratory to hold competence records for audit; the individual needs portability. Both hold a true copy; neither can erase the other's. |
-| 24 | Visible provenance tiers + peer-review network | Self-study / Peer-reviewed / Organization / Accredited body / Authority. A hiring manager sees not just what was demonstrated but who stood behind it. This is how the entry-barrier principle and the rigor principle coexist: nothing is blocked, and the difference is legible rather than hidden. |
+| 24 | Visible provenance tiers + peer-review network | Self-study / Peer-reviewed / Organization / Accredited body / Authority. A hiring manager sees not just what was demonstrated but who stood behind it. This is how the entry-barrier principle and the rigor principle coexist: nothing is blocked, and the difference is legible rather than hidden. **Evidenced, not declared** — see below. |
 | 27 | Structural anti-collusion controls + archived artifacts enabling re-review | No self-signoff. Reciprocal review blocked within a window. Reviewer standing verified per element. Artifacts hashed so any credential can be independently re-reviewed years later. |
 | 32 | Reviewer authority is itself a verifiable credential, with a public service record | Reviews given to unaffiliated individuals are counted separately and displayed prominently. That count is the prestige signal, it is verifiable, and it travels onto a CV. |
 | 33 | Transport-agnostic signed exchange protocol + optional Commons | The network is a *protocol*, not a service. Review requests and signed reviews are portable signed documents; they move over a public website, an intranet, email, or a USB stick, and the cryptography makes them equally valid. Nothing about earning a credential requires internet. |
@@ -156,6 +156,28 @@ The answer is a **closed, time-limited founding cohort**, admitted on demonstrat
 The rule that keeps it from being corrosive: **a bootstrap signature is permanently visible on every credential it produces.** `signers[].bootstrapAuthority` carries the basis for that specific signer, stated per person rather than assumed from cohort membership, and `isBootstrapSigned()` derives the flag from the signers so the two can never disagree. The marker is never cleared when the cohort closes, because the credential was still signed that way.
 
 This is the same move as the provenance tiers. The project does not pretend a self-study credential and an accredited-body credential are equivalent; it makes the difference legible. A bootstrap-signed L5 is a weaker claim than a peer-signed L5, and a reader who cannot tell them apart has been misled about the strongest assertion the system makes.
+
+#### The provenance tier is evidenced, not declared
+
+An adversarial review made two findings about `provenanceTier` that turned out to be one problem. The first was that **no code read the field at all** — it carried the entire "open entry and rigour coexist" argument while a credential could assert `accredited-body` with one unevidenced witness and no issuer recorded. A tier nobody checks is not legibility; it is a string.
+
+The second was that `self-study` looked **structurally impossible to issue**: the schema demands at least one signer, the validator rejects the subject among them, so who signs a self-study credential?
+
+Somebody does, and the answer was never written down anywhere — which is why it read as a contradiction. **`self-study` describes the standing of the witness, not their absence.** A person with no employer and no professional network studies alone, does the work, and has it witnessed by whoever is available: a colleague, a mentor, a former supervisor. That person is real, is not the subject, and holds no credential and no reviewer authority — which is exactly why `heldLevel: null` was already legitimate at L1 and L2. The tier records the truth a reader needs: somebody stood behind this, and nobody with standing did. Far from a hole, that is the entry-barrier principle working.
+
+`highestSupportedTier()` now computes what a credential's own evidence will carry, and `checkCredential` rejects anything above it. Each step requires something checkable offline in the document itself:
+
+| Tier | What the document must show |
+|---|---|
+| `self-study` | A signer who is not the subject. The floor. |
+| `peer-reviewed` | A signer whose standing is **evidenced** — an authority chain, or a founding-cohort basis. An unbacked `heldLevel` or `credentialedReviewer` does not lift the tier. |
+| `organization` | Plus an issuer recorded as a registered entity: a name and a resolvable trust-registry entry, not an individual's DID. |
+| `accredited-body` | Plus the issuer's own `accreditationRecognition`. |
+| `authority` | **Cannot be issued.** The neutral-foundation issuer does not exist — open item 4. |
+
+Two consequences worth stating. Understating is permitted and silent: claiming less than you can prove misleads nobody. And the long-standing "Asserted, not proven" warning finally has teeth — an unevidenced claim about a signer now caps the tier of the credential they signed, rather than merely producing a line nobody had to act on.
+
+**And `self-study` on a credential is not the same statement as "an unanchored ledger supports self-study claims".** That sentence, which appeared in the ledger module, the ledger schema and CLAUDE.md, is about an *attempt record*. An unanchored ledger is a record nobody but its owner stands behind. A credential at any tier is signed, and every signoff anchors — so an unanchored ledger backs **no** credential at all, not even at the bottom tier. What it supports is a person's own account of their own practice: a claim, not an attestation. The two sentences read as one produced the apparent impossibility above.
 
 The alternatives were weighed. An authority-tier issuer would be the cleanest story but needs funding and legal existence, blocking the ladder for years. A mutual peer cohort needs nobody's permission but is structurally the reciprocal-review pattern the anti-collusion controls exist to detect — a poor founding act for a trust network. Relaxing the witness level temporarily would silently change what L3 and L4 mean for everyone credentialed during the window.
 
