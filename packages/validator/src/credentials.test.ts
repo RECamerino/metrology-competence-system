@@ -45,6 +45,9 @@ const credential: Credential = {
   assessment: {
     modality: ['reviewer-conducted-defense', 'capstone-with-review'],
     archetypes: ['ARC-0002'],
+    // The candidate's own laboratory. Recorded so the cross-organizational
+    // rule is applied as written rather than approximated.
+    candidateOrganization: 'Northfield Calibration',
     experienceHours: 260,
   },
   // What this element MEANT on the day it was issued. Append-only IDs keep
@@ -353,4 +356,56 @@ test('a founding-cohort signer is not expected to carry a held-level credential'
     L5_POLICY,
   );
   assert.ok(!findings.some((f) => f.message.includes('Asserted, not proven')));
+});
+
+/* -- Cross-organizational signing, as written rather than approximated ----- */
+
+test('a signer outside the candidate organization satisfies the rule', () => {
+  // Northfield is the candidate's own lab; Ardleigh is not.
+  assert.deepEqual(checkCredential(credential, L5_POLICY), []);
+});
+
+test('two signers from one EXTERNAL organization also satisfy it', () => {
+  // The old check counted distinct signer organizations, which wrongly rejected
+  // this: both signers are outside the candidate's organization, which is
+  // exactly what the rule asks for.
+  const findings = checkCredential(
+    {
+      ...credential,
+      signers: credential.signers.map((s) => ({ ...s, organization: 'Ardleigh Metrology' })),
+    },
+    L5_POLICY,
+  );
+  assert.deepEqual(findings.filter((f) => f.level === 'error'), []);
+});
+
+test('signers drawn only from the candidate organization are rejected', () => {
+  const findings = checkCredential(
+    {
+      ...credential,
+      signers: credential.signers.map((s) => ({ ...s, organization: 'Northfield Calibration' })),
+    },
+    L5_POLICY,
+  );
+  assert.ok(
+    findings.some((f) => f.message.includes("outside the candidate's organization")),
+    `expected a closed-group error, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('without the candidate organization the check says it approximated', () => {
+  const { candidateOrganization, ...assessment } = credential.assessment as Record<string, unknown>;
+  const findings = checkCredential({ ...credential, assessment }, L5_POLICY);
+  assert.ok(
+    findings.some((f) => f.level === 'warn' && f.message.includes('stricter than the rule')),
+    `expected an approximation warning, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('a credential with no knowledgeSnapshot is rejected by the schema', () => {
+  // An element must carry knowledgeRefs, so a credential against one has a
+  // knowledge basis by construction. Omitting it loses what the claim rested on.
+  const validate = validatorFor('credential');
+  const { knowledgeSnapshot, ...without } = credential as Record<string, unknown>;
+  assert.equal(validate(without), false);
 });

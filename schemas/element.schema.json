@@ -17,7 +17,8 @@
     "anchors",
     "roleTargets",
     "citations",
-    "knowledgeRefs"
+    "knowledgeRefs",
+    "currency"
   ],
   "additionalProperties": false,
 
@@ -98,6 +99,12 @@
       "description": "REQUIRED, at least one. Where a person goes to learn this, and — more importantly — where they go to REMIND themselves. Someone credentialed eight months ago who has forgotten one detail will not retrain; they will look it up, and this is the link that has to work. Section-level rather than article-level for exactly that reason.\n\nThis imposes an ordering on authoring, deliberately: the reference material must exist before the claim that someone has mastered it. An element that cannot point at an explanation is an element nobody can prepare for."
     },
 
+    "demonstration": {
+      "enum": ["desk", "equipment"],
+      "default": "desk",
+      "description": "How the person's performance is observed. `desk` — produced with ordinary working tools: a budget, a procedure, a report, an analysis. `equipment` — requires physical apparatus the learner may not have access to: a CMM, gauge blocks, a comparator, a climate chamber.\n\nTHIS IS NOT THE SAME AS `kind`, and conflating them was a real error. `skill` means the evidence is observable performance rather than explanation; it does not mean the performance happens at a bench. Constructing an uncertainty budget is a skill and is desk work. Wringing a gauge block stack is a skill and is not.\n\nThe distinction matters because it decides whether a training module leaves an element `pending-demonstration`. Telling somebody they are blocked on equipment access when they could sit the assessment tomorrow with a spreadsheet invents a barrier, and the project's position is that barriers inherent to the competence are real while invented ones are not.\n\nDefaults to `desk`. Only meaningful for `skill` elements: knowledge and judgment are evidenced by explanation and defence, which are desk work by definition."
+    },
+
     "prerequisites": {
       "type": "array",
       "description": "Elements a learner should hold before attempting this one. The validator checks the resulting graph is acyclic and every target resolves.",
@@ -123,7 +130,7 @@
 
     "currency": {
       "type": "object",
-      "description": "Knowledge currency. Separates what an element ASSERTS from how far that assertion can be trusted over time. Without this the corpus silently rots: a withdrawn standard reads exactly like a live one, and a reader cannot tell an emerging practice from a settled requirement. Required on every element from Phase 4 onward; the validator escalates a missing block to an error once authoring begins.",
+      "description": "Knowledge currency. Separates what an element ASSERTS from how far that assertion can be trusted over time. Without this the corpus silently rots: a withdrawn standard reads exactly like a live one, and a reader cannot tell an emerging practice from a settled requirement. REQUIRED. It was previously described as required from Phase 4 onward while being structurally optional, which is exactly how a corpus enters volume authoring full of elements carrying no currency metadata at all. Made structural instead, while one element exists and the cost is nil.",
       "required": ["authorityStatus", "volatility"],
       "additionalProperties": false,
       "properties": {

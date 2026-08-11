@@ -99,6 +99,7 @@ function element(overrides: Record<string, unknown> = {}): ElementFile {
       anchors: { '1': LONG, '2': LONG, '3': LONG },
       roleTargets: { 'test-technician': 2, 'test-engineer': 3 },
       citations: [{ source: 'OPEN-SOURCE-1', clause: '5.1.2' }],
+      currency: { authorityStatus: 'normative', volatility: 'controlled' },
       knowledgeRefs: [{ article: 'BOK-0001', section: 's01' }],
       ...overrides,
     },
@@ -721,23 +722,25 @@ test('a well-formed module produces no errors', () => {
   assert.deepEqual(errorsOf(corpus([element()], LOCK_WITH_MODULE, { modules: [moduleFile()] })), []);
 });
 
-test('a module preparing for a skill element must declare it still needs the bench', () => {
+test('a module preparing for an EQUIPMENT skill element must declare the bench requirement', () => {
   // CM-01-002 is `skill`. Training toward it leaves it pending demonstration,
   // never complete — a simulation does not substitute for witnessed work.
+  const bench = element({ id: 'CM-01-002', kind: 'skill', levelCeiling: 2, demonstration: 'equipment', anchors: { '1': LONG, '2': LONG }, roleTargets: { 'test-technician': 2, 'test-engineer': 2 } });
   const errors = errorsOf(
-    corpus([element()], LOCK_WITH_MODULE, {
+    corpus([bench], LOCK_WITH_MODULE, {
       modules: [moduleFile({ preparesFor: [{ element: 'CM-01-002', level: 2 }] })],
     }),
   );
   assert.ok(
-    errors.some((e) => e.includes('requiresPhysicalDemonstration') && e.includes('CM-01-002')),
+    errors.some((e) => e.includes('requires equipment') && e.includes('CM-01-002')),
     `expected a skill-demonstration error, got: ${JSON.stringify(errors)}`,
   );
 });
 
 test('declaring the physical demonstration makes it acceptable', () => {
+  const bench = element({ id: 'CM-01-002', kind: 'skill', levelCeiling: 2, demonstration: 'equipment', anchors: { '1': LONG, '2': LONG }, roleTargets: { 'test-technician': 2, 'test-engineer': 2 } });
   const errors = errorsOf(
-    corpus([element()], LOCK_WITH_MODULE, {
+    corpus([bench], LOCK_WITH_MODULE, {
       modules: [
         moduleFile({
           preparesFor: [{ element: 'CM-01-002', level: 2 }],
@@ -872,5 +875,32 @@ test('an archetype ID missing from the lock is an error, like any other identifi
   assert.ok(
     errors.some((e) => e.includes('ARC-0001') && e.includes('registry:sync')),
     `expected an unlocked archetype error, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('an equipment element must be declared, a desk element must not', () => {
+  // `skill` says the evidence is performance; it does not say the performance
+  // happens at a bench. Constructing a budget is a skill and is desk work, and
+  // claiming a bench blocker for it invents a barrier the learner never had.
+  const equipmentElement = element({ id: 'CM-01-002', kind: 'skill', levelCeiling: 2, demonstration: 'equipment', anchors: { '1': LONG, '2': LONG }, roleTargets: { 'test-technician': 2, 'test-engineer': 2 } });
+  const deskElement = element({ id: 'CM-01-002', kind: 'skill', levelCeiling: 2, demonstration: 'desk', anchors: { '1': LONG, '2': LONG }, roleTargets: { 'test-technician': 2, 'test-engineer': 2 } });
+  const prepares = { preparesFor: [{ element: 'CM-01-002', level: 2 }] };
+
+  const missing = errorsOf(
+    corpus([equipmentElement], LOCK_WITH_MODULE, { modules: [moduleFile(prepares)] }),
+  );
+  assert.ok(
+    missing.some((e) => e.includes('requires equipment')),
+    `expected an undeclared-equipment error, got: ${JSON.stringify(missing)}`,
+  );
+
+  const invented = errorsOf(
+    corpus([deskElement], LOCK_WITH_MODULE, {
+      modules: [moduleFile({ ...prepares, requiresPhysicalDemonstration: ['CM-01-002'] })],
+    }),
+  );
+  assert.ok(
+    invented.some((e) => e.includes('no equipment is needed')),
+    `expected an invented-barrier error, got: ${JSON.stringify(invented)}`,
   );
 });

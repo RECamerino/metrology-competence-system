@@ -33,11 +33,12 @@ preparesFor:
   - element: CM-03-053
     level: 3
 
-# CM-03-053 is a `skill` element. Watching a covariance term move on a screen
-# is not evidence of constructing a budget, and the validator will not let this
-# module claim otherwise.
-requiresPhysicalDemonstration:
-  - CM-03-053
+# NO requiresPhysicalDemonstration, and that is a correction rather than an
+# omission. CM-03-053 is a skill element, but its demonstration mode is
+# `desk`: a budget is produced with ordinary working tools. Listing it here
+# would tell a learner they are waiting for laboratory access they never
+# needed. The module still does not COMPLETE the element — no module ever
+# does — but what remains is sitting the assessment, not finding a bench.
 
 cannotConvey: >-
   This teaches the arithmetic and the direction of the error. It does not teach

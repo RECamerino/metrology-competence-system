@@ -153,10 +153,33 @@ export function checkCredential(
   }
 
   if (policy.requiresCrossOrganizational) {
-    const orgs = new Set(credential.signers.map((s) => s.organization).filter(Boolean));
-    if (orgs.size < 2) {
+    // The rule as written is "at least one signer outside the CANDIDATE'S
+    // organization". Checking "two distinct signer organizations" instead is
+    // sound — with two distinct signer orgs at most one can be the
+    // candidate's, so at least one is external — but it is over-strict: it
+    // rejects a candidate at A whose two signers both come from B, which
+    // satisfies the rule completely.
+    //
+    // So apply the real rule when the candidate's organization is recorded,
+    // and fall back to the approximation when it is not, saying which was
+    // used rather than quietly claiming more than was proved.
+    const candidateOrg = (credential.assessment as { candidateOrganization?: string } | undefined)
+      ?.candidateOrganization;
+    const orgs = credential.signers.map((s) => s.organization).filter(Boolean) as string[];
+
+    if (candidateOrg) {
+      if (!orgs.some((org) => org !== candidateOrg)) {
+        findings.push(
+          err(at(`no signer is outside the candidate's organization (${candidateOrg}). This level requires one, so that a closed group cannot certify its own experts.`)),
+        );
+      }
+    } else if (new Set(orgs).size < 2) {
       findings.push(
         err(at('every signer is from one organization; this level requires at least one signer outside the candidate\'s own, so that a closed group cannot certify its own experts.')),
+      );
+    } else {
+      findings.push(
+        warn(at('cross-organizational signing was checked as "two distinct signer organizations" because the candidate\'s organization is not recorded. That is sound but stricter than the rule; record assessment.candidateOrganization to apply it as written.')),
       );
     }
   }
