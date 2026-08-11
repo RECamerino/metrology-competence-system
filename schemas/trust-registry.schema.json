@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/trust-registry.schema.json",
+  "title": "Trust registry — who may issue, which keys were theirs, and when this snapshot was true",
+  "description": "Governs content/trust-registry.yaml. Steward-controlled: admitting an issuer is a reserved decision under GOVERNANCE.md §5.\n\nTHE PROMISE THIS SERVES, AND THE ONE IT CANNOT KEEP. Decision 22 says verification is a signature check against a signed issuer trust registry distributed as a FILE — no ledger, no network, no call to the issuer. Air-gapped is the default. But a file is a SNAPSHOT, and an air-gapped verifier holds whatever snapshot reached them. A hiring manager on a closed network with last month's USB cannot learn that an issuer key was compromised last week.\n\n'No network' and 'fresh trust' cannot both be absolute. That is not a defect to engineer away — it is a property of air-gapped operation, and any design claiming otherwise is lying about one of the two. So the registry does not attempt freshness. It makes STALENESS MEASURABLE: every snapshot states when it was issued and when the next was due, so a verifier can always answer 'how old is what I am trusting, and what could have happened since'. A verification result that does not carry its own age is the actual defect, and it was the one shipped.\n\nKEYS ARE APPEND-ONLY WITHIN AN ISSUER, for the same reason element IDs are. A key removed from this file breaks every credential legitimately signed with it, including ones signed years before anything went wrong. Compromise is recorded by STATUS AND DATE, never by deletion — see `status` on a key, which is what lets a compromised key invalidate the signatures that followed the compromise while leaving the ones that preceded it standing.",
+
+  "type": "object",
+  "required": ["schemaVersion", "issuedOn", "sequence", "didMethods", "issuers"],
+  "additionalProperties": false,
+
+  "properties": {
+    "schemaVersion": { "const": 1 },
+
+    "issuedOn": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate",
+      "description": "When this snapshot was cut. THE MOST IMPORTANT FIELD IN THE FILE for an air-gapped verifier: everything they conclude is a statement about the world as it stood on this date, and a verifier that does not surface it is presenting a month-old answer as a current one."
+    },
+
+    "sequence": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Monotonically increasing snapshot number. Lets a verifier holding two copies tell which is newer without comparing dates, and lets a deployment detect that it has been fed an older snapshot than one it already had — the rollback a courier or a mirror can perform without touching the signature."
+    },
+
+    "nextExpectedUpdate": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate",
+      "description": "When the next snapshot was expected. This is what converts 'old' from a feeling into a fact: past this date the verifier knows it is operating on a registry that should have been replaced, and can say by how many days. It is not an expiry — an overdue registry is still the best available truth in an air gap, and refusing to verify against it would strand exactly the deployments this design exists for."
+    },
+
+    "didMethods": {
+      "type": "array",
+      "minItems": 1,
+      "description": "The DID methods this deployment's verifiers can actually resolve, stated as a PROFILE. The credential schema deliberately does not fix a method, because the Personal edition must work with no server and no registrar. That freedom collides with offline verification: an arbitrary method may need a network resolver, so a credential could be schema-valid and unverifiable by the very verifier the design promises.\n\nA deployment claiming offline verification lists here only methods whose verification material is self-contained (`did:key`) or travels with this file. Anything else is a credential the advertised verifier cannot resolve, and the validator rejects it rather than letting the promise quietly fail at the worst moment.",
+      "items": { "type": "string", "pattern": "^did:[a-z0-9]+$" }
+    },
+
+    "issuers": {
+      "type": "array",
+      "description": "Admitted issuers. May be empty, which means no issuer has been admitted and no credential verifies — the correct state while steward appointment is outstanding.",
+      "items": {
+        "type": "object",
+        "required": ["entry", "did", "name", "admittedOn", "keys"],
+        "additionalProperties": false,
+        "properties": {
+          "entry": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The key a credential names in `issuer.trustRegistryEntry`. Stable for the life of the issuer."
+          },
+          "did": { "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did" },
+          "name": { "type": "string", "minLength": 1 },
+          "admittedOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+          "removedOn": {
+            "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate",
+            "description": "When the issuer left the registry. The ENTRY IS NOT DELETED, because credentials they issued while admitted remain valid and a verifier must still be able to resolve them. Removal stops new issuance; it does not retroactively unmake old attestations."
+          },
+          "accreditationRecognition": {
+            "type": "string",
+            "description": "The issuer's own accreditation, where they hold one. Recorded here as well as on the credential so a verifier can check the claim against the registry rather than taking the credential's word for it — the `accredited-body` provenance tier rests on this."
+          },
+          "keys": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Every key this issuer has ever used, in order. APPEND-ONLY: a key is never removed, because removing it breaks every credential signed with it, including ones signed long before anything went wrong.",
+            "items": {
+              "type": "object",
+              "required": ["id", "validFrom", "status"],
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Matches the credential's `proof.verificationMethod`."
+                },
+                "publicKeyMultibase": { "type": "string" },
+                "validFrom": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+                "status": {
+                  "enum": ["active", "retired", "compromised"],
+                  "description": "THE DISTINCTION ITEM 8 TURNS ON. `retired` is ordinary rotation: the key signs nothing new after `retiredOn`, and everything it signed before remains valid — that is the whole point of rotating rather than revoking. `compromised` means the key fell into someone else's hands, and signatures dated from `compromisedFrom` onward cannot be trusted; signatures BEFORE that date are still good, because the key was still the issuer's when they were made.\n\nCollapsing these two into 'revoked' would either keep trusting a stolen key or destroy years of legitimate credentials, and both are worse than the distinction being slightly fiddly."
+                },
+                "retiredOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+                "compromisedFrom": {
+                  "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate",
+                  "description": "The earliest date from which this key cannot be trusted. REQUIRED when status is `compromised`. Where the date of compromise is genuinely unknown, the honest entry is the key's own `validFrom`, which invalidates everything it ever signed — that is the conservative answer and it should be uncomfortable, because it is what not knowing actually costs."
+                }
+              },
+              "allOf": [
+                {
+                  "if": { "properties": { "status": { "const": "compromised" } }, "required": ["status"] },
+                  "then": { "required": ["compromisedFrom"] }
+                },
+                {
+                  "if": { "properties": { "status": { "const": "retired" } }, "required": ["status"] },
+                  "then": { "required": ["retiredOn"] }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+
+    "revocations": {
+      "type": "array",
+      "description": "Credentials revoked by their issuers. Carried in this file because that is what 'a status list a verifier can obtain without contacting the issuer' means when the registry is the distribution channel — a separate endpoint would reintroduce the network call the whole design removes.\n\nA revocation reaches an air-gapped verifier no faster than the registry does, which is the same staleness bound as everything else here and is stated rather than hidden.",
+      "items": {
+        "type": "object",
+        "required": ["credential", "revokedOn", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "credential": { "type": "string" },
+          "revokedOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+          "reason": { "enum": ["fraud", "assessment-defect", "issuer-error", "holder-request"] }
+        }
+      }
+    },
+
+    "proof": {
+      "type": "object",
+      "required": ["cryptosuite"],
+      "additionalProperties": true,
+      "description": "The registry is itself signed, or it is a text file anybody can edit on the way to the air gap.",
+      "properties": {
+        "cryptosuite": { "const": "ecdsa-rdfc-2019-p256" }
+      }
+    }
+  }
+}

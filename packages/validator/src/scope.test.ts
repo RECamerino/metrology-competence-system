@@ -138,6 +138,7 @@ function corpusWith(roles: unknown): Corpus {
     roles: roles as Record<string, unknown>,
     sources: null,
     bootstrapCohort: null,
+    trustRegistry: null,
     elements: [],
     bok: [],
     modules: [],

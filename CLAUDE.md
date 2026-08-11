@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
 | Content authored | **1 element** · **1 BOK article** · **1 module** |
 | Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
-| Checks | 0 errors · 229/229 tests · typecheck clean |
+| Checks | 0 errors · 247/247 tests · typecheck clean |
 
 ### Phases
 
@@ -84,6 +84,8 @@ Three principles held in tension deliberately:
 
 **8b. "Closed" and "time-limited" are the roster's job, not the credential's.** `bootstrapAuthority` used to be a field a signer wrote about themselves, so anyone could join a cohort with no roster, no convening and no closing date — and three people could bootstrap-sign each other across a domain in a weekend. Membership now resolves against `content/competence/bootstrap-cohort.yaml`, which **publishes**, because a verifier must resolve it offline exactly as they resolve the trust registry. Four controls: **scope** (a founder signs only in the domains their standing covers — no wildcard, because a person competent across all 43 is the person the project says should not exist); **no self-dealing** (a member may never be the *subject* of a bootstrap-signed credential — that is the mutual peer cohort decision 43 rejected); **time** (nothing after `closesOn`, nothing before the member's own `admittedOn`); and **volume** when a steward sets a ceiling. **The shipped roster convenes nobody**, so no bootstrap signature is valid today — the correct state while steward appointment is blocked.
 
+**8c. Offline verification is a snapshot, and the snapshot's age is part of the answer.** A verifier resolves an issuer against `content/trust-registry.yaml`, which **publishes** — with no registry, a signature proves internal consistency and nothing about who made it. **"No network" and "fresh trust" cannot both be absolute**, so the design does not try: every verdict carries `registryAgeDays` and what that age leaves unknowable, and a bare "verified" with no such statement is the defect. Keys are **append-only within an issuer** — removing one breaks every credential it ever signed. `retired` (ordinary rotation) leaves earlier signatures valid and forbids later ones; `compromised` requires a date, invalidates signatures from it onward, and **leaves the ones before it standing**, because invalidating those punishes a holder for a breach that came after they earned it. `didMethods` is the profile a deployment can actually resolve offline — shipped as `did:key` alone. **The registry admits nobody today**, so nothing verifies, which is the correct state while steward appointment is blocked.
+
 **9. Training teaches; it never proves.** A module produces a training record, not a credential — `attestsCompetence` is `const false`. Every module states in `cannotConvey` what its format cannot teach. See decision 45.
 
 **10. A roleTarget is a scoped minimum requirement.** It states the level a role needs *if* the element is in that person's deployment scope — normative, not typical, not aspirational. It does **not** imply the element applies to anyone. **An element outside scope cannot produce a gap.** `null` means the element could never be that role's work in any deployment, which is not the same as "not in this person's scope". See decision 48.
@@ -128,9 +130,13 @@ content/competence/
 
 content/sources/registry.yaml     Source licence register. Outside both trees,
                                   because both cite it.
+content/trust-registry.yaml       Issuer trust registry. Steward-controlled.
+                                  PUBLISHES — offline verification resolves
+                                  against it. Admits nobody yet, so nothing
+                                  verifies.
 
 schemas/                          16 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 229 tests.
+packages/validator/               The ONLY implemented package. 247 tests.
 apps/viewer/                      The only implemented app (template + build script).
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/                            Build scripts, ceiling-plan.json, kind-plan.json,
@@ -149,6 +155,7 @@ Sixteen schemas, and the ones that are not obvious from their names:
 | `element`, `taxonomy`, `bok-article` | The corpus itself |
 | `proficiency`, `role-registry`, `source-registry` | The frames content is written into |
 | `bootstrap-cohort` | The founding roster — makes "closed, time-limited" resolvable rather than asserted |
+| `trust-registry` | Who may issue, which keys were theirs, and how old this snapshot is |
 | `item-archetype`, `item-binding` | The item bank (decision 36) |
 | `credential`, `authorization` | What travels with a person, and what never does |
 | `attempt-ledger` | No-retake rule and exposure control |
@@ -162,6 +169,7 @@ Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
 |---|---|
 | `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules |
 | `credentials.ts` | No self-signoff, signoff policy, the wallet boundary, draft-status attestability, evidenced provenance tier, founding-cohort authority, dual custody |
+| `trust.ts` | Offline verification against a registry snapshot, and the age of the answer |
 | `ledger.ts` | Hash chain, no-retake, exposure count, trust horizon |
 | `definitions.ts` | Semantic pinning — `definitionRef`, `assessmentPolicyRef`, drift |
 | `scope.ts` | Gap analysis. **An element outside scope cannot produce a gap**, and an authority overlay is not an occupation |
@@ -180,7 +188,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 229 guardrail tests
+npm test                  # 247 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:quotes     # complete quotation manifest for legal review
@@ -214,10 +222,9 @@ Changing ceilings or kinds: edit `tools/ceiling-plan.json` or `tools/kind-plan.j
 
 From external architectural review, August 2026. Not a new phase — scope that has to be inside the freeze, because changing it after thousands of articles exist is the same mistake the BOK split avoided by two weeks.
 
-**Done:** knowledge-version provenance (decision 39) · BOK review provenance (decision 40) · disagreement and consensus (decision 41) · **role type, occupational vs authority overlay (was item 14)**.
+**Done:** knowledge-version provenance (decision 39) · BOK review provenance (decision 40) · disagreement and consensus (decision 41) · role type, occupational vs authority overlay (was item 14) · **trust registry, key lifecycle and the DID profile (was items 8 and 18)**.
 
 7. **Many paths to competence.** `BOK → module → assessment` must never harden into a mandatory linear course. Self-study, mentoring, a commercial course and prior practice are all legitimate routes to the same assessment, and the competence definition stays independent of any learning provider. Learning resources are plural and vendor-neutral by construction — this is what makes the corpus disruptive without attacking anyone. Needs a schema before Phase 11, and a stated principle now.
-8. **Trust registry and status lifecycle.** Offline verification promises that a 2028 credential still verifies in 2031. That needs issuer key rotation, compromise and retirement with effective dates, plus a signed status list a verifier can obtain without contacting the issuer. Deleting a compromised key must not invalidate credentials legitimately signed with it earlier.
 9. **Evidence sufficiency.** Hashing an artifact proves it has not changed; it does not record why it was *sufficient*. The reviewer's sufficiency decision and its rationale need a home, or a credential ends up carrying `sha256:…` with nothing saying why that satisfied anything.
 10. **Exposure-group semantics and a binding-review record.** When do two differently parameterized items count as the same exposure? And who decided a binding was professionally valid — CI can only prove it is structurally possible. Both need rules before thousands of bindings exist, or the engine will decide by accident.
 11. **Validity evidence.** CI proves integrity of the representation. Expert review proves technical validity. Neither proves the assessment measures the competence it claims to. That is empirical work — inter-rater reliability, whether items discriminate knowledge from skill from judgment, whether the five-level ladder matches how the profession actually reads competence. Research, not code, and the strongest thing the project could take to NCSL.
@@ -225,7 +232,6 @@ From external architectural review, August 2026. Not a new phase — scope that 
 15. **BOK review pins prose, not claim state.** A section hash covers the body. Change `consensus` from `established` to `contested` and the prose hash is unchanged while the epistemic status of the section has moved — a reviewer's attestation silently survives a change to what the section claims. Decide what a technical reviewer is attesting to: content, or content plus the metadata that tells a reader how to read it.
 16. **Reviewer standing is not evidenced on BOK reviews.** `reviewer.name` is a string. The project eliminated exactly this for credential signers (decision 47) and has not applied its own rule here: the BOK can establish *X reviewed s03 on this date* but not *X had the standing to review it*.
 17. **Cryptosuite identifier needs an interoperability check.** `ecdsa-rdfc-2019-p256` is fixed as a const. Confirm it is the identifier the chosen VC Data Integrity implementation actually expects rather than one invented locally — a standards question, not a metrology one, and cheap to get wrong permanently.
-18. **Offline verification constrains the DID method.** The credential permits any DID method while promising offline verification. Those are not universally compatible: an arbitrary method may need a network resolver. A deployment claiming offline verification must use a method whose verification material is self-contained or travels with the trust registry — state it as a profile rather than leaving the schema permitting credentials the advertised verifier cannot resolve.
 19. **Experience claims need activity-to-element granularity.** Decision 37 lets one activity credit every element it exercises, which is right. The inverse risk is a claim of forty hours against seventeen elements with nothing recording which part demonstrated which. The declaration is reviewable evidence only if there is something to review.
 20. **An organization's view of a person's record is a disclosure, not a read.** `computeGaps(elements, scope, held)` takes what somebody holds as a plain map, with no record of where it came from or what they consented to share. Decision 34 built the consented, scoped, audit-logged model for accreditation assessors; the employer case — the workforce gap dashboard, which is the feature an organization actually buys — has nothing equivalent, and will otherwise assume it may read everything a person holds, including credentials earned elsewhere that are none of its business. Follows directly from the ownership principle; needs a schema before Phase 9 or 10 decides it by accident.
 21. **Revocation is one-sided.** The issuer sets `status.revoked`; the subject cannot contest it in the data. The intent is stated plainly — revocation is not for an employer who has fallen out with the holder — but `fraud` is unfalsifiable from the holder's side, and the status list a verifier consults belongs to the issuer. Decide whether a holder's counter-statement travels with the credential. Pairs with item 8.
@@ -239,7 +245,7 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 **Also done:** credential schema and provenance tiers · **authorization as a first-class object** · attempt ledger, challenge-exam no-retake rule, and exposure control.
 
-**Remaining:** blueprint weighting · DID method and trust registry · reviewer programme · exchange protocol · accreditation-body dossier and scope-matching model.
+**Remaining:** blueprint weighting · reviewer programme · exchange protocol · accreditation-body dossier and scope-matching model.
 
 **The attempt ledger's limit is deliberate and must not be "fixed" naively.** In the Personal edition the holder owns the machine, the ledger and the key, so they can truncate their own chain and it will verify clean — there is a test asserting exactly that. Hash-linking catches edits to the middle; only an *external* anchor fixes history. An unanchored ledger supports self-asserted claims about one's own practice and nothing more. Truncation becomes detectable the moment a counterparty holds a reference, which is why the credential carries `assessment.attemptRef`.
 

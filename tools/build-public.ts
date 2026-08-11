@@ -110,6 +110,11 @@ function main(): number {
     join(CONTENT, 'competence', 'bootstrap-cohort.yaml'),
     join(OUT, 'competence', 'bootstrap-cohort.yaml'),
   );
+  // The trust registry is the file offline verification RESOLVES AGAINST. If it
+  // does not ship, the promise in decision 22 has no artifact behind it — a
+  // verifier with a wallet and no registry can check that a signature is
+  // internally consistent and nothing about who made it.
+  const registry = copyFile(join(CONTENT, 'trust-registry.yaml'), join(OUT, 'trust-registry.yaml'));
   // Training modules publish in full. They are learning material and contain
   // no answer key — a module that needed withholding would be teaching the
   // assessment rather than the subject, which is a defect in the module.
@@ -159,6 +164,7 @@ function main(): number {
   console.log(`  Element files           ${elements}`);
   console.log(`  Source register         ${sources}`);
   console.log(`  Founding cohort         ${cohort}`);
+  console.log(`  Trust registry          ${registry}`);
   console.log(`  Training modules        ${modules}`);
   console.log(`  Archetypes (projected)  ${archetypes}`);
   console.log(`  Bindings  (projected)   ${bindings}`);

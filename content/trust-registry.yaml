@@ -1,0 +1,47 @@
+# Issuer trust registry
+#
+# Steward-controlled. Admitting an issuer is a reserved decision — see
+# GOVERNANCE.md §5. Governed by schemas/trust-registry.schema.json, which
+# carries the reasoning; this file carries the facts.
+#
+# NO ISSUER HAS BEEN ADMITTED, so no credential verifies against this snapshot.
+# That is the correct state rather than an omission: steward appointment is
+# blocked on people, admission is a steward act, and nothing has issued a
+# credential. Design and authoring proceed; issuance does not.
+#
+# WHAT THIS FILE CANNOT DO, stated here because it is the thing most likely to
+# be forgotten by whoever ships the first air-gapped deployment. This is a
+# SNAPSHOT. A verifier holds whichever copy reached them and cannot learn
+# anything that happened afterwards. "No network" and "fresh trust" cannot both
+# be absolute, and the design does not pretend otherwise — it makes the gap
+# measurable instead. `issuedOn` and `nextExpectedUpdate` are what let a
+# verifier say how old their truth is, and every verification result carries
+# that age whether or not anything is wrong.
+#
+# Sequence numbers exist because a rollback needs no forgery. A courier or a
+# mirror handing over an older snapshot discards every revocation and key
+# compromise recorded since, with no signature broken.
+#
+# It sits outside content/competence/ and content/bok/ for the same reason the
+# source register does: it is not part of the corpus, and both the credential
+# layer and any verifier resolve against it.
+
+schemaVersion: 1
+
+# Snapshot identity. Both are load-bearing for an air-gapped reader.
+issuedOn: "2026-08-11"
+sequence: 0
+
+# No nextExpectedUpdate: an empty registry has no cadence to keep, and setting
+# one would imply a publication schedule nobody has committed to.
+
+# The DID method profile — open item 18. `did:key` is the only method whose
+# verification material is entirely self-contained, so it is the only one an
+# air-gapped verifier can resolve with nothing but the credential in hand.
+# Adding a method here is a promise that this deployment's verifiers can
+# actually resolve it offline; adding one they cannot is how the offline
+# guarantee fails at the moment somebody relies on it.
+didMethods:
+  - did:key
+
+issuers: []

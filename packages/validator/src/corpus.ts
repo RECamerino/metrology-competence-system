@@ -50,6 +50,12 @@ export const PATHS = {
    * resolvable instead of asserted.
    */
   bootstrapCohort: join(REPO_ROOT, 'content', 'competence', 'bootstrap-cohort.yaml'),
+  /**
+   * Who may issue, which keys were theirs, and when this snapshot was true.
+   * Outside both content trees for the same reason the source register is:
+   * it is not corpus, and a verifier resolves against it without either.
+   */
+  trustRegistry: join(REPO_ROOT, 'content', 'trust-registry.yaml'),
   elements: join(REPO_ROOT, 'content', 'competence', 'elements'),
   /**
    * The item bank, split the way its economics are split: few expensive
@@ -101,6 +107,8 @@ export interface Corpus {
    * time-limited cohort" from an adjective into something a verifier resolves.
    */
   bootstrapCohort: Record<string, unknown> | null;
+  /** The issuer trust registry snapshot. Steward-controlled; admits nobody yet. */
+  trustRegistry: Record<string, unknown> | null;
   elements: ElementFile[];
   /** BOK articles. Same frontmatter-plus-body shape as an element, different purpose. */
   bok: ElementFile[];
@@ -256,6 +264,7 @@ export function loadCorpus(): { corpus: Corpus; parseErrors: string[] } {
       roles: safe(() => loadYamlFile(PATHS.roles), null),
       sources: safe(() => loadYamlFile(PATHS.sources), null),
       bootstrapCohort: safe(() => loadYamlFile(PATHS.bootstrapCohort), null),
+      trustRegistry: safe(() => loadYamlFile(PATHS.trustRegistry), null),
       elements,
       bok,
       modules,

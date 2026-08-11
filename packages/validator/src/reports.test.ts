@@ -87,6 +87,7 @@ function corpus(elements: ElementFile[], binds: ItemFile[]): Corpus {
     roles: { schemaVersion: 1, roles: [] },
     sources: { schemaVersion: 1, sources: [] },
     bootstrapCohort: { schemaVersion: 1, members: [] },
+    trustRegistry: { schemaVersion: 1, issuedOn: '2026-08-11', sequence: 0, didMethods: ['did:key'], issuers: [] },
     elements,
     bok: [],
     modules: [],

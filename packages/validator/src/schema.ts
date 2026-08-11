@@ -65,7 +65,8 @@ export type SchemaName =
   | 'training-module'
   | 'training-record'
   | 'deployment-scope'
-  | 'bootstrap-cohort';
+  | 'bootstrap-cohort'
+  | 'trust-registry';
 
 let cached: AjvInstance | null = null;
 
