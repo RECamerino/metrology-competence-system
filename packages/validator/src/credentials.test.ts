@@ -23,6 +23,7 @@ import {
   checkAttestableStatus,
   checkBootstrapAuthority,
   checkCredential,
+  checkCustody,
   checkProvenanceTier,
   checkReciprocity,
   highestSupportedTier,
@@ -74,6 +75,18 @@ const credential: Credential = {
       article: 'BOK-0001',
       section: 's03',
       sectionRef: 'sha256:fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9',
+    },
+  ],
+  // Both copies, recorded. The laboratory needs a record it can produce at
+  // audit under §6.2; the holder needs one they can carry anywhere.
+  custody: [
+    { custodian: HOLDER, role: 'holder', since: '2026-08-09' },
+    {
+      custodian: 'Northfield Calibration',
+      role: 'issuing-organization',
+      since: '2026-08-09',
+      retentionUntil: '2036-08-09',
+      retentionBasis: 'ISO/IEC 17025:2017 §8.4.2',
     },
   ],
   // L4 requires a capstone AND a real archived deliverable. The two are not the
@@ -320,6 +333,101 @@ test('but a bootstrap-signed credential is never silent about it', () => {
 test('bootstrap authority is visible from the credential without parsing policy', () => {
   assert.equal(isBootstrapSigned(credential), false);
   assert.equal(isBootstrapSigned({ ...credential, signers: [FOUNDER] }), true);
+});
+
+/* -- Dual custody, as a record rather than a sentence ---------------------- */
+
+test('the worked credential records both copies', () => {
+  assert.deepEqual(checkCustody(credential), []);
+});
+
+test('a credential recording no custody at all is rejected by the schema', () => {
+  const validate = validatorFor('credential');
+  const { custody, ...without } = credential as Record<string, unknown>;
+  assert.equal(validate(without), false);
+  assert.equal(validate({ ...credential, custody: [] }), false);
+});
+
+test('AN ORGANIZATION CANNOT ISSUE A CREDENTIAL THE SUBJECT NEVER RECEIVES', () => {
+  // The half of dual custody that protects the person. A laboratory keeping an
+  // audit record while the individual holds nothing inverts what this object
+  // is for: they cannot prove a competence formally attested about them.
+  const undelivered = {
+    ...credential,
+    custody: credential.custody!.filter((c) => c.role !== 'holder'),
+  };
+  const findings = checkCustody(undelivered);
+  assert.ok(
+    findings.some((f) => f.level === 'error' && f.message.includes('records no holder custody')),
+    `expected an undelivered-credential error, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('a holder entry naming somebody other than the subject is rejected', () => {
+  const findings = checkCustody({
+    ...credential,
+    custody: [{ custodian: REVIEWER_A, role: 'holder', since: '2026-08-09' }],
+  });
+  assert.ok(findings.some((f) => f.message.includes('who is not the subject')));
+});
+
+test('AN ORGANIZATION MUST KEEP A RECORD IT CAN PRODUCE AT AUDIT', () => {
+  // The other half. If the only copy leaves with the person, the laboratory
+  // cannot answer §6.2 — which is the reason dual custody was decided on.
+  const holderOnly = {
+    ...credential,
+    custody: credential.custody!.filter((c) => c.role === 'holder'),
+  };
+  const findings = checkCustody(holderOnly);
+  assert.ok(
+    findings.some((f) => f.level === 'error' && f.message.includes('§6.2')),
+    `expected a missing-organization-custody error, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('single custody is correct below the organization tier, not a defect', () => {
+  // A self-study credential has no laboratory behind it, so there is nobody to
+  // retain anything and nothing to require. Demanding a second custodian here
+  // would be demanding an employer, which is the barrier the project refuses.
+  assert.deepEqual(checkCustody(selfStudy), []);
+});
+
+test('an organization custodian with no retention period is flagged', () => {
+  const findings = checkCustody({
+    ...credential,
+    custody: [
+      credential.custody![0]!,
+      { custodian: 'Northfield Calibration', role: 'issuing-organization', since: '2026-08-09' },
+    ],
+  });
+  assert.ok(
+    findings.some((f) => f.level === 'warn' && f.message.includes('§8.4')),
+    `expected a retention-period warning, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('a retention period ending before the credential existed is an error', () => {
+  const findings = checkCustody({
+    ...credential,
+    custody: [
+      credential.custody![0]!,
+      { custodian: 'Northfield Calibration', role: 'issuing-organization', since: '2026-08-09', retentionUntil: '2020-01-01' },
+    ],
+  });
+  assert.ok(findings.some((f) => f.message.includes('not a retention schedule')));
+});
+
+test('custody travels in the wallet, because the holder benefits from knowing', () => {
+  // Unlike an authorization, this is not something to strip: a verifier
+  // reading the holder's copy learns who else should have one, which is what
+  // makes a later purge nameable rather than silent.
+  const wallet = walletExport([credential]);
+  assert.ok(wallet.credentials[0]!.custody!.some((c) => c.role === 'issuing-organization'));
+});
+
+test('the custody check runs from inside checkCredential', () => {
+  const findings = checkCredential({ ...credential, custody: [credential.custody![1]!] });
+  assert.ok(findings.some((f) => f.message.includes('records no holder custody')));
 });
 
 /* -- The cohort as a roster, not an adjective ------------------------------ */
@@ -714,6 +822,9 @@ const selfStudy: Credential = {
   level: 1,
   provenanceTier: 'self-study',
   assessment: { modality: ['open-resource-parameterized'] },
+  // Single custody, and that is the honest arrangement rather than a defect:
+  // there is no laboratory here, so nobody owes §6.2 a retention schedule.
+  custody: [{ custodian: HOLDER, role: 'holder', since: '2026-08-09' }],
   evidence: [],
   // A former supervisor who agreed to watch. No credential, no reviewer
   // authority, no organization standing behind them.

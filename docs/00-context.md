@@ -114,7 +114,7 @@ The cost is real and lands in a specific place: **a badly bound archetype tests 
 | # | Decision | Why |
 |---|---|---|
 | 22 | W3C Verifiable Credentials 2.0 + Open Badges 3.0, DIDs, offline verification. **No blockchain.** | Verification is a signature check against a signed issuer trust registry distributed as a file. A ledger would add a network dependency, put immutable personal data somewhere it can never be erased, and be rejected outright by the regulated environments this must run in. |
-| 23 | Dual custody | ISO/IEC 17025 §6.2 requires the laboratory to hold competence records for audit; the individual needs portability. Both hold a true copy; neither can erase the other's. |
+| 23 | Dual custody, **recorded on the credential** | ISO/IEC 17025 §6.2 requires the laboratory to hold competence records for audit; the individual needs portability. Both hold a true copy; neither can erase the other's. The `custody` array names who holds a copy and under what retention obligation — see below, because for a while this was a sentence in a schema description and nothing else. |
 | 24 | Visible provenance tiers + peer-review network | Self-study / Peer-reviewed / Organization / Accredited body / Authority. A hiring manager sees not just what was demonstrated but who stood behind it. This is how the entry-barrier principle and the rigor principle coexist: nothing is blocked, and the difference is legible rather than hidden. **Evidenced, not declared** — see below. |
 | 27 | Structural anti-collusion controls + archived artifacts enabling re-review | No self-signoff. Reciprocal review blocked within a window. Reviewer standing verified per element. Artifacts hashed so any credential can be independently re-reviewed years later. |
 | 32 | Reviewer authority is itself a verifiable credential, with a public service record | Reviews given to unaffiliated individuals are counted separately and displayed prominently. That count is the prestige signal, it is verifiable, and it travels onto a CV. |
@@ -156,6 +156,20 @@ The answer is a **closed, time-limited founding cohort**, admitted on demonstrat
 The rule that keeps it from being corrosive: **a bootstrap signature is permanently visible on every credential it produces.** `signers[].bootstrapAuthority` carries the basis for that specific signer, stated per person rather than assumed from cohort membership, and `isBootstrapSigned()` derives the flag from the signers so the two can never disagree. The marker is never cleared when the cohort closes, because the credential was still signed that way.
 
 This is the same move as the provenance tiers. The project does not pretend a self-study credential and an accredited-body credential are equivalent; it makes the difference legible. A bootstrap-signed L5 is a weaker claim than a peer-signed L5, and a reader who cannot tell them apart has been misled about the strongest assertion the system makes.
+
+#### Dual custody had no field
+
+Decision 23 above was true and unrecorded. A single credential object carried no note of who else held a copy, so "both hold a true copy" was a claim the data could neither express nor contradict — an adversarial review called it a comment rather than a protocol, and that was fair.
+
+Two failure cases, and they are not symmetrical.
+
+The one usually noticed: a person leaves, the laboratory purges its copy in a records clear-out, and the only surviving root is the individual's. Nothing in software prevents that — a file held by somebody else is beyond reach, and a mechanism pretending otherwise would be worse than the gap. What the `custody` array does is make it **nameable**: a verifier reading the holder's copy sees that Lab A took custody under an obligation running to a stated date, so the absence is a records-management failure with an owner rather than a silence.
+
+The one that actually harms the holder, and had no answer at all: an organization issues a credential **about** somebody, retains it for its own audit file, and never delivers it. The person cannot prove a competence that has been formally attested about them. A `holder` entry naming the subject is now required, so that credential cannot be well-formed.
+
+The organizational side is required exactly where an organization stands behind the credential — the `organization` tier and above. Below it there is no laboratory, no §6.2 obligation, and **single custody is the honest arrangement rather than a defect**. Requiring a second custodian on a self-study credential would be requiring an employer, which is the barrier the project exists to remove.
+
+**Divergence between copies needed nothing.** Two copies differing in content cannot both verify, because every credential is signed; the cryptography settles it, and a content hash per custody entry would be a second and weaker answer to a question already answered. What a signature cannot detect is a copy that does not exist, and that is the only thing this array is for. Worth stating plainly, so the next reviewer does not add the redundant mechanism.
 
 #### The provenance tier is evidenced, not declared
 
