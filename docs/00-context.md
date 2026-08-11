@@ -411,6 +411,45 @@ A deployment scope names an occupation in `role` and any overlays in `overlays`;
 
 `CM-11-A05` (Approved Signatory Competence) and the `authorities` field already on the role registry both anticipated this. Phase 2 makes it explicit.
 
+## Who owns a person's competency record
+
+**The individual. Always, and without qualification.**
+
+This has been true of every mechanism built so far and was stated in none of them, which is the kind of omission that gets decided by accident later — a dashboard in Phase 10 assuming it may read everything, and a principle discovered only when somebody objects.
+
+**What the organization gets is substantial, and none of it is ownership.** A laboratory using this has an unusually strong instrument: competence evidence an auditor can verify rather than take on trust, a basis for assigning trainers and mentors to the people who will actually benefit, and a workforce gap picture computed against real deployment scopes instead of assembled from job titles. That is a better answer to ISO/IEC 17025:2017 §6.2 than a training matrix in a spreadsheet, and it is worth paying for. It is also entirely compatible with the record belonging to somebody else.
+
+**What the individual carries is responsibility, not just possession.** Keeping the record current, seeking assessment, arranging the training or the bench time, deciding what to pursue next. Ownership without responsibility is a filing cabinet; the reason the record is the person's is that they are the one who has to act on it. An organization can require its people to use the system and can decline to employ somebody whose scope shows unclosed gaps — that is an ordinary employment decision. What it cannot do is hold, withhold, or extinguish the evidence.
+
+### Where this is already encoded
+
+Six mechanisms, none of which was designed with this section in front of it, all of which agree:
+
+| Mechanism | How it carries the principle |
+|---|---|
+| `credential.portable` | `const true`, against `authorization.portable`'s `const false`. The competence travels; the permission does not. |
+| `attempt-ledger.subject` | One ledger per person, *never* per organization — "the record has to follow the person between employers, or the no-retake rule resets every time they change jobs". |
+| `credential.status` | Revocation is for fraud and assessment defect, explicitly **not** "for an employer who has fallen out with the holder: a competency credential records something that happened, and an organization cannot un-happen it". |
+| `training-record` self-attestation | Learning may be self-attested where competence may not, because requiring a witness to *learn* would gate it behind an employer. |
+| `credential.custody` | An organization holds a **copy** under a §6.2 retention obligation. Holding a copy for audit is not owning the record. |
+| `deployment-scope` | The one artifact the organization does own — its statement of what this person's job covers — and deliberately a separate object from anything the person carries. |
+
+### What follows, and is not built
+
+Two consequences fall straight out of the principle and have no mechanism yet. Both are recorded in the open items.
+
+**An organization's view of a person's record is a disclosure, not a read.** `computeGaps(elements, scope, held)` takes what the person holds as a plain map, with no record of where it came from or what was consented to. Decision 34 already built the consented, scoped, audit-logged disclosure model for accreditation assessors; the employer case — the workforce dashboard above — has nothing equivalent, and will otherwise assume it can see everything a person holds, including credentials earned elsewhere that are none of its business.
+
+**Revocation is currently one-sided.** The issuer sets `status.revoked` and the subject has no way to contest it in the data. The intent is stated plainly, but `fraud` is unfalsifiable from the holder's side and the status list a verifier consults belongs to the issuer. Whether a holder's counter-statement travels with the credential is undecided.
+
+### The claim this licenses, stated precisely
+
+A signed, artifact-backed, offline-verifiable record that pins what each claim meant when it was earned is **stronger than a résumé on provenance** — not a self-report, not a title, not an employer's say-so that evaporates when the employer does.
+
+It is **not yet stronger on validity**, which is open item 11: nothing so far establishes that an assessment measures the competence it names, or that L4 means the same thing across two laboratories and two assessors. A signature proves who stood behind a claim. It does not prove they were right.
+
+Both halves have to be said together. The first is what makes this worth building; the second is what a metrologist will ask about first, and the project's credibility rests on having the honest answer ready rather than on the claim being bigger.
+
 ## The one rule that cannot be waived
 
 **IDs are append-only.** `content/competence/taxonomy/domains/*.yaml` and `content/competence/taxonomy/id-registry.lock` may grow. Nothing in them may ever be renamed or removed.
@@ -429,4 +468,6 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 4. **Authority-tier issuer** — a neutral foundation as issuer of last resort is the strongest long-term credential but needs people and funding. Roadmap, not a dependency.
 5. **Recertification defaults** — per-level defaults proposed in `content/competence/taxonomy/proficiency.yaml` (L3 60 months, L4 48, L5 36; none below L3). Per-domain overrides remain open: a `CM-21` element ages far faster than a `CM-02` one, and `volatility` is the field that should drive it.
 6. **Experience-hour thresholds and waiting periods** — proposed per level in `content/competence/taxonomy/proficiency.yaml` (L3 40h/30d, L4 200h/180d, L5 1000h/365d). The attribution rule is settled as decision 37; the numbers themselves are a steward judgement and have not been tested against a real career history.
+8. **Consented disclosure to an employer** — an organization's view of a person's record is a disclosure, not a read, and there is no model for it. Decision 34 built one for accreditation assessors; the workforce gap dashboard has nothing. Follows from [Who owns a person's competency record](#who-owns-a-persons-competency-record). Needs a schema before Phase 9 or 10 settles it by default.
+9. **A holder's counter-statement to revocation** — the issuer can revoke and the subject cannot contest it in the data. Pairs with the trust-registry and status-list work.
 7. **Skeleton scale** — resolved. Landed at 2232 elements across 257 areas and 43 domains, against a 2000+ target.
