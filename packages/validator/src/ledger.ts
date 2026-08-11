@@ -14,8 +14,26 @@
  * far that protection currently reaches.
  *
  * Stated plainly rather than engineered around: an unanchored ledger supports
- * self-study claims and nothing more, which is what the self-study provenance
- * tier already means.
+ * self-asserted claims about one's own practice and nothing more.
+ *
+ * THAT SENTENCE USED TO END "...which is what the self-study provenance tier
+ * already means", AND IT WAS WRONG. The two are different objects and the word
+ * was doing double duty:
+ *
+ *   An unanchored LEDGER is a record nobody but its owner stands behind.
+ *   A self-study CREDENTIAL is signed — by somebody who is not the subject, and
+ *   who holds no credential and no reviewer authority. The tier describes the
+ *   witness's standing, not their absence.
+ *
+ * And a signoff anchors the chain. So an unanchored ledger does not support a
+ * self-study credential either: it supports NO credential, at any tier, because
+ * a credential existing at all means somebody signed, and their signing is the
+ * anchor. What an unanchored ledger supports is a person's own account of their
+ * own practice — a claim, not an attestation.
+ *
+ * Read as one sentence, the two produced a real contradiction: a named tier
+ * that the signature rules appeared to forbid. See checkProvenanceTier in
+ * credentials.ts for what the tier actually requires.
  */
 
 import { sha256Of } from './canonical.ts';
@@ -217,8 +235,8 @@ export function exposureCount(ledger: Ledger, archetype: string): number {
 
 /**
  * The sequence number up to which history is fixed by somebody other than the
- * holder. Everything after it is self-asserted and can support nothing above a
- * self-study claim.
+ * holder. Everything after it is the holder's own account of their own
+ * practice, which no credential rests on at any tier.
  *
  * Returns -1 when no valid anchor exists.
  */
@@ -362,7 +380,7 @@ export function checkChallengeProvenance(
 
     findings.push(
       credential.provenanceTier === 'self-study'
-        ? warn(at(`${message} Consistent with the self-study tier, which is what an unanchored record supports.`))
+        ? warn(at(`${message} Tolerated at the self-study tier, which claims no witness with standing — but note that even here the signoff should have anchored the attempt, so an unanchored one means the record and the credential disagree about when somebody else first saw this.`))
         : err(at(`${message} A credential claiming '${credential.provenanceTier ?? 'an unstated tier'}' asserts that somebody else stood behind this, and on this evidence nobody did. Either anchor the attempt independently of the signoff that used it, or issue at self-study.`)),
     );
   }
@@ -426,7 +444,7 @@ export function verifyLedger(ledger: Ledger): Finding[] {
   if (unanchored > 0 && ledger.entries.length > 0) {
     findings.push(
       warn(
-        at(`${unanchored} entr${unanchored === 1 ? 'y is' : 'ies are'} beyond the last external anchor. The holder controls this machine and these keys, so this portion of the history is self-asserted: it supports self-study claims and cannot support a higher provenance tier.`),
+        at(`${unanchored} entr${unanchored === 1 ? 'y is' : 'ies are'} beyond the last external anchor. The holder controls this machine and these keys, so this portion of the history is the holder's own account: it supports a claim about their own practice, and no credential at any tier — including self-study, which is signed like every other and whose signoff would itself be an anchor.`),
       ),
     );
   }

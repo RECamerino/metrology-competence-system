@@ -22,7 +22,9 @@ import {
   type Credential,
   checkAttestableStatus,
   checkCredential,
+  checkProvenanceTier,
   checkReciprocity,
+  highestSupportedTier,
   isBootstrapSigned,
   signoffPolicyFor,
   walletExport,
@@ -545,6 +547,119 @@ test('the waiting period is measured, not assumed', () => {
   );
 });
 
+/* -- Provenance: who actually stood behind this ---------------------------- */
+
+/**
+ * A self-study credential, built to settle the question directly.
+ *
+ * An external review read `self-study` against "no self-signoff, ever" and
+ * concluded the tier could not be honestly issued at all. It can. The witness
+ * is real, is not the subject, and has no standing — which is precisely what
+ * the tier says. `heldLevel: null` is already legitimate at this level.
+ */
+const selfStudy: Credential = {
+  ...credential,
+  level: 1,
+  provenanceTier: 'self-study',
+  assessment: { modality: ['open-resource-parameterized'] },
+  evidence: [],
+  // A former supervisor who agreed to watch. No credential, no reviewer
+  // authority, no organization standing behind them.
+  signers: [{ did: REVIEWER_A, heldLevel: null }],
+  issuer: { did: REVIEWER_A },
+};
+
+test('A SELF-STUDY CREDENTIAL IS ISSUABLE, and the tier is about the witness\'s standing', () => {
+  // The claimed structural impossibility. The person with no employer and no
+  // professional network earns and holds something real; the tier records that
+  // nobody with standing stood behind it. That is the entry-barrier principle
+  // working, not a hole in it.
+  const validate = validatorFor('credential');
+  assert.ok(validate(selfStudy), JSON.stringify(validate.errors, null, 2));
+  assert.deepEqual(checkCredential(selfStudy, signoffPolicyFor(levelEntry(1))), []);
+  assert.equal(highestSupportedTier(selfStudy), 'self-study');
+});
+
+test('a self-study credential still may not be signed by its own subject', () => {
+  // The tier changes who must have standing. It changes nothing about the one
+  // rule that has no exception.
+  const findings = checkCredential({ ...selfStudy, signers: [{ did: HOLDER, heldLevel: null }] });
+  assert.ok(findings.some((f) => f.message.includes('No self-signoff')));
+});
+
+test('an unbacked signer claim does not lift the tier above self-study', () => {
+  // This is what gives the "Asserted, not proven" warning consequences. Saying
+  // you are an L5 credentialed reviewer is not evidence that you are one.
+  const asserted: Credential = {
+    ...selfStudy,
+    signers: [{ did: REVIEWER_A, heldLevel: 5, credentialedReviewer: true }],
+  };
+  assert.equal(highestSupportedTier(asserted), 'self-study');
+
+  const findings = checkProvenanceTier({ ...asserted, provenanceTier: 'peer-reviewed' });
+  assert.ok(
+    findings.some((f) => f.message.includes('asserted rather than backed')),
+    `expected an overstatement error, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('an evidenced authority chain reaches peer-reviewed', () => {
+  const backed: Credential = { ...selfStudy, signers: [credential.signers[0]!], issuer: { did: REVIEWER_A } };
+  assert.equal(highestSupportedTier(backed), 'peer-reviewed');
+});
+
+test('a founding-cohort basis also counts as evidenced standing', () => {
+  // They hold no credential by definition; the bootstrap basis is the evidence,
+  // and it is stated per signer so a reader can weigh it.
+  const bootstrapped: Credential = { ...selfStudy, signers: [FOUNDER], issuer: { did: REVIEWER_A } };
+  assert.equal(highestSupportedTier(bootstrapped), 'peer-reviewed');
+});
+
+test('a registered issuer is what separates organization from peer-reviewed', () => {
+  const peer: Credential = { ...credential, issuer: { did: REVIEWER_A } };
+  assert.equal(highestSupportedTier(peer), 'peer-reviewed');
+  assert.equal(highestSupportedTier(credential), 'organization');
+
+  const findings = checkProvenanceTier({ ...peer, provenanceTier: 'organization' });
+  assert.ok(findings.some((f) => f.message.includes('registered entity')));
+});
+
+test('accredited-body requires the issuer to record its OWN accreditation', () => {
+  assert.equal(
+    highestSupportedTier({
+      ...credential,
+      issuer: { ...credential.issuer!, accreditationRecognition: 'Schedule of Accreditation 1234, dimensional' },
+    }),
+    'accredited-body',
+  );
+
+  const findings = checkProvenanceTier({ ...credential, provenanceTier: 'accredited-body' });
+  assert.ok(findings.some((f) => f.message.includes('no accreditation of its own')));
+});
+
+test('the authority tier cannot be claimed by anybody, because no such issuer exists', () => {
+  const findings = checkProvenanceTier({ ...credential, provenanceTier: 'authority' });
+  assert.ok(
+    findings.some((f) => f.message.includes('open decision 4')),
+    `expected an authority-tier refusal, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('understating the tier is permitted and silent', () => {
+  // Claiming less than you can prove misleads nobody, and an organization with
+  // house rules about when it puts its name to something is not this
+  // validator's business.
+  assert.equal(highestSupportedTier(credential), 'organization');
+  assert.deepEqual(checkProvenanceTier({ ...credential, provenanceTier: 'self-study' }), []);
+});
+
+test('the tier check runs from inside checkCredential, not only when remembered', () => {
+  // provenanceTier was read by nothing at all. A check that depends on a caller
+  // remembering it is how that happens.
+  const findings = checkCredential({ ...credential, provenanceTier: 'accredited-body' });
+  assert.ok(findings.some((f) => f.message.includes("claims the 'accredited-body' provenance tier")));
+});
+
 test('L1 sets no cost requirements, so none are imposed', () => {
   // The checks must not fire where the ladder does not ask for them: L1 is
   // witnessed observation with no hours, no waiting period and no artifacts.
@@ -552,6 +667,10 @@ test('L1 sets no cost requirements, so none are imposed', () => {
     {
       ...credential,
       level: 1,
+      // Corrected when the tier check landed: this fixture carried
+      // `peer-reviewed` from the base credential while dropping to a single
+      // witness with no standing, which the tier check rightly rejects.
+      provenanceTier: 'self-study',
       assessment: { modality: ['open-resource-parameterized'] },
       evidence: [],
       signers: [{ did: REVIEWER_A, heldLevel: null }],

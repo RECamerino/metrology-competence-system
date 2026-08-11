@@ -200,11 +200,24 @@ test('practice attempts do not consume exposure', () => {
 
 /* -- Where the trust actually comes from ----------------------------------- */
 
-test('an unanchored tail is reported as self-asserted rather than passing silently', () => {
+test('an unanchored tail is reported as the holder\'s own account, not passing silently', () => {
   const findings = verifyLedger(build());
   assert.ok(
-    findings.some((f) => f.level === 'warn' && f.message.includes('self-asserted')),
+    findings.some((f) => f.level === 'warn' && f.message.includes("the holder's own account")),
     `expected an unanchored warning, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('an unanchored ledger backs NO credential, not even one at self-study', () => {
+  // The equivocation this corrects: "an unanchored ledger supports self-study
+  // claims" is about an attempt record. A credential at any tier is signed, and
+  // the signoff is itself an anchor — so an unanchored ledger means nobody has
+  // ever signed anything, which means no credential exists to be tiered.
+  const findings = verifyLedger(build());
+  const warning = findings.find((f) => f.message.includes("the holder's own account"))!;
+  assert.ok(
+    warning.message.includes('no credential at any tier'),
+    `the warning must not offer self-study as a floor, got: ${warning.message}`,
   );
 });
 
@@ -353,11 +366,11 @@ test('THE LAUNDERING PATH: a peer-reviewed challenge credential on an unanchored
   );
 });
 
-test('the same credential at self-study is a warning, because that tier claims no more', () => {
+test('the same credential at self-study is a warning, because that tier claims no witness with standing', () => {
   const { credential, ledger } = challengeCredential({ provenanceTier: 'self-study' });
   const findings = checkChallengeProvenance(credential, ledger);
   assert.deepEqual(errorsOf(findings), []);
-  assert.ok(findings.some((f) => f.level === 'warn' && f.message.includes('Consistent with the self-study tier')));
+  assert.ok(findings.some((f) => f.level === 'warn' && f.message.includes('Tolerated at the self-study tier')));
 });
 
 test('an independently anchored challenge attempt passes', () => {
