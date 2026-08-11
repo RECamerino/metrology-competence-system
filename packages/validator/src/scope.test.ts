@@ -18,9 +18,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { validatorFor } from './schema.ts';
-import { type DeploymentScope, computeGaps, inScope } from './scope.ts';
+import type { Corpus } from './corpus.ts';
+import { type DeploymentScope, checkScope, computeGaps, inScope } from './scope.ts';
 
 const HOLDER = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+const LONG = 'A deliberately long enough string to satisfy the schema minimum length constraints.';
 
 /** Two elements in CM-03, one in DP-21 — the domain nobody's scope covers. */
 const elements = [
@@ -79,7 +81,13 @@ test('a roleTarget does not imply applicability', () => {
 test('an in-scope shortfall is a gap, reported against the required level', () => {
   const gaps = computeGaps(elements, scope, { 'CM-03-053': 2 });
   const gap = gaps.find((g) => g.element === 'CM-03-053');
-  assert.deepEqual(gap, { element: 'CM-03-053', role: 'calibration-engineer', required: 4, held: 2 });
+  assert.deepEqual(gap, {
+    element: 'CM-03-053',
+    role: 'calibration-engineer',
+    required: 4,
+    held: 2,
+    basis: 'occupational',
+  });
 });
 
 test('holding nothing is a gap of the full requirement, not missing information', () => {
@@ -95,6 +103,122 @@ test('meeting or exceeding the minimum is not a gap', () => {
 test('null is not a gap at any scope, because the element is never that role\'s work', () => {
   const technicianScope: DeploymentScope = { ...scope, role: 'metrology-technician-i' };
   assert.deepEqual(computeGaps(elements, technicianScope, {}), []);
+});
+
+/* -- Competence is not authorization, in the role model too ---------------- */
+
+const ROLES = {
+  schemaVersion: 1,
+  roles: [
+    { id: 'calibration-engineer', title: 'Calibration Engineer', roleType: 'occupational', family: 'engineering', summary: LONG },
+    { id: 'metrology-technician-i', title: 'Metrology Technician I', roleType: 'occupational', family: 'technician', summary: LONG },
+    { id: 'approved-signatory', title: 'Approved Signatory', roleType: 'authority-overlay', family: 'quality', summary: LONG },
+  ],
+};
+
+/** Minimal corpus — checkScope reads only the taxonomy and the roles. */
+function corpusWith(roles: unknown): Corpus {
+  return {
+    taxonomy: {
+      schemaVersion: 1,
+      domains: [
+        {
+          id: 'CM-03', title: 'T', kind: 'core', status: 'draft',
+          competencyAreas: [
+            {
+              id: 'CM-03-A05', title: 'A', status: 'draft',
+              elements: [{ id: 'CM-03-053', title: 'E', kind: 'skill', levelCeiling: 5, status: 'draft' }],
+            },
+          ],
+        },
+      ],
+    },
+    taxonomyFiles: [],
+    proficiency: null,
+    roles: roles as Record<string, unknown>,
+    sources: null,
+    bootstrapCohort: null,
+    elements: [],
+    bok: [],
+    modules: [],
+    archetypes: [],
+    bindings: [],
+    lockedIds: null,
+  } as unknown as Corpus;
+}
+
+const signatoryScope: DeploymentScope = {
+  schemaVersion: 1,
+  subject: HOLDER,
+  role: 'approved-signatory',
+  includes: { domains: ['CM-03'] },
+};
+
+test('a scope whose ROLE is an authority overlay is rejected', () => {
+  // The pathological case: a dashboard reporting "short of L3 for
+  // approved-signatory" as a competence deficiency, so an organization reads
+  // closing those gaps as the route to signatory status. It is granted, not
+  // earned, and it ends when the person leaves.
+  const findings = checkScope(signatoryScope, corpusWith(ROLES));
+  assert.ok(
+    findings.some((f) => f.level === 'error' && f.message.includes('authority overlay rather than an occupation')),
+    `expected an overlay-as-role error, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('the same overlay is fine in `overlays`, alongside an occupation', () => {
+  // A person is Calibration Engineer AND Approved Signatory.
+  const both: DeploymentScope = {
+    ...signatoryScope,
+    role: 'calibration-engineer',
+    overlays: ['approved-signatory'],
+  };
+  assert.deepEqual(checkScope(both, corpusWith(ROLES)), []);
+});
+
+test('an occupational role stacked as an overlay is rejected too', () => {
+  // It has a competence profile of its own and belongs in a scope of its own,
+  // not stacked on another as though it were a permission.
+  const wrong: DeploymentScope = { ...scope, overlays: ['metrology-technician-i'] };
+  const findings = checkScope(wrong, corpusWith(ROLES));
+  assert.ok(findings.some((f) => f.message.includes('classifies it as an occupation')));
+});
+
+test('a role the registry does not contain is caught', () => {
+  const findings = checkScope({ ...scope, role: 'chief-vibes-officer' }, corpusWith(ROLES));
+  assert.ok(findings.some((f) => f.message.includes('the role registry does not contain')));
+});
+
+test('overlay gaps are real, and are tagged as a different question', () => {
+  // "Could this person be granted this?" — never "have they earned it?".
+  const withOverlay: DeploymentScope = { ...scope, overlays: ['approved-signatory'] };
+  const signatoryElements = elements.map((e) => ({
+    ...e,
+    roleTargets: { ...e.roleTargets, 'approved-signatory': 3 },
+  }));
+
+  const gaps = computeGaps(signatoryElements, withOverlay, {});
+  const overlay = gaps.filter((g) => g.basis === 'authority-overlay');
+  const occupational = gaps.filter((g) => g.basis === 'occupational');
+
+  assert.ok(overlay.length > 0, 'the overlay must still produce gaps — the competence it presupposes is real');
+  assert.ok(occupational.length > 0);
+  assert.ok(
+    overlay.every((g) => g.role === 'approved-signatory'),
+    'and they must be attributable to the overlay rather than blended into the job',
+  );
+});
+
+test('an element outside scope produces no overlay gap either', () => {
+  // The rule holds for both bases. DP-21 is not this person's work, whatever
+  // authority they carry.
+  const withOverlay: DeploymentScope = { ...scope, overlays: ['approved-signatory'] };
+  const signatoryElements = elements.map((e) => ({
+    ...e,
+    roleTargets: { ...e.roleTargets, 'approved-signatory': 3 },
+  }));
+  const gaps = computeGaps(signatoryElements, withOverlay, {});
+  assert.ok(!gaps.some((g) => g.element === 'DP-21-004'));
 });
 
 /* -- Scope resolution ------------------------------------------------------ */

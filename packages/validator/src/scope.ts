@@ -31,7 +31,10 @@ export interface ScopeSelectors {
 export interface DeploymentScope {
   schemaVersion: 1;
   subject: string;
+  /** An OCCUPATIONAL role. Authority overlays go in `overlays`. */
   role: string;
+  /** Authority overlays carried on top of the occupational role. */
+  overlays?: string[];
   includes: ScopeSelectors;
   excludes?: Omit<ScopeSelectors, 'domains'>;
   effectiveFrom?: string;
@@ -72,6 +75,24 @@ export interface Gap {
   role: string;
   required: number;
   held: number | null;
+  /**
+   * WHICH QUESTION THIS GAP ANSWERS, and it is not the same question in the
+   * two cases.
+   *
+   * `occupational` — what this person is expected to be able to do in their
+   * job, and is short of. A deficiency, in the ordinary sense.
+   *
+   * `authority-overlay` — the competence an authority PRESUPPOSES, which they
+   * do not yet hold. It answers "could this person be granted this?" and never
+   * "have they earned it?", because nobody earns an authority: it is granted by
+   * an organization, recorded in an authorization, and ends on departure.
+   *
+   * Carried on the gap itself so that a renderer showing the two identically is
+   * doing so deliberately. Presenting an overlay gap as a competence deficiency
+   * invites "close these gaps to become a signatory", which is the collapse the
+   * competence/authorization split exists to prevent.
+   */
+  basis: 'occupational' | 'authority-overlay';
 }
 
 /**
@@ -85,6 +106,11 @@ export interface Gap {
  * never part of that role's work in any deployment — a distinct claim from
  * "not in this person's scope today", and the reason the validator refuses to
  * let an author leave a role unrated.
+ *
+ * Occupational gaps come from `scope.role`; overlay gaps from `scope.overlays`.
+ * The basis is positional and needs no registry lookup: a role is an overlay
+ * here because the scope carried it as one, and `checkScope` is what verifies
+ * that placement against the registry.
  */
 export function computeGaps(
   elements: Array<ElementStubLike & { roleTargets?: Record<string, number | null> }>,
@@ -92,16 +118,22 @@ export function computeGaps(
   held: Record<string, number> = {},
 ): Gap[] {
   const gaps: Gap[] = [];
+  const against: Array<[string, Gap['basis']]> = [
+    [scope.role, 'occupational'],
+    ...(scope.overlays ?? []).map((o): [string, Gap['basis']] => [o, 'authority-overlay']),
+  ];
 
   for (const element of elements) {
     if (!inScope(element, scope)) continue;
 
-    const required = element.roleTargets?.[scope.role];
-    if (required === null || required === undefined) continue;
+    for (const [role, basis] of against) {
+      const required = element.roleTargets?.[role];
+      if (required === null || required === undefined) continue;
 
-    const current = held[element.id] ?? null;
-    if (current === null || current < required) {
-      gaps.push({ element: element.id, role: scope.role, required, held: current });
+      const current = held[element.id] ?? null;
+      if (current === null || current < required) {
+        gaps.push({ element: element.id, role, required, held: current, basis });
+      }
     }
   }
 
@@ -125,6 +157,42 @@ export function checkScope(scope: DeploymentScope, corpus: Corpus): Finding[] {
   for (const stub of stubs.values()) {
     domains.add(stub.domain);
     areas.add(stub.competencyArea);
+  }
+
+  // -- Is the role a role, and is it the right KIND of role? ----------------
+  // Neither was checked. The first is an ordinary typo guard; the second is
+  // the substantive one. `approved-signatory` sat in the registry beside
+  // `calibration-engineer` as though the two were the same kind of thing, so a
+  // scope could name it and gap analysis would report shortfalls against it as
+  // COMPETENCE gaps — inviting an organization to read "close these gaps" as
+  // the route to signatory status. It is not. The authority is granted by a
+  // laboratory, recognised there for that scope, and ends on departure.
+  const roles = new Map(
+    ((corpus.roles?.roles ?? []) as Array<Record<string, unknown>>)
+      .filter((r) => typeof r.id === 'string')
+      .map((r) => [r.id as string, r.roleType as string | undefined]),
+  );
+
+  if (roles.size > 0) {
+    if (!roles.has(scope.role)) {
+      findings.push({ level: 'error', message: at(`names role '${scope.role}', which the role registry does not contain`) });
+    } else if (roles.get(scope.role) === 'authority-overlay') {
+      findings.push({
+        level: 'error',
+        message: at(`names '${scope.role}' as its role, but that is an authority overlay rather than an occupation. A person is their occupational role AND this overlay; put it in \`overlays\`. A scope whose role is an overlay reports the competence an authority presupposes as though it were a job's deficiencies, and closing them confers nothing — the authority is granted, not earned.`),
+      });
+    }
+
+    for (const overlay of scope.overlays ?? []) {
+      if (!roles.has(overlay)) {
+        findings.push({ level: 'error', message: at(`names overlay '${overlay}', which the role registry does not contain`) });
+      } else if (roles.get(overlay) !== 'authority-overlay') {
+        findings.push({
+          level: 'error',
+          message: at(`lists '${overlay}' as an authority overlay, but the registry classifies it as an occupation. An occupational role has a competence profile of its own and belongs in a scope of its own, not stacked on another as a permission.`),
+        });
+      }
+    }
   }
 
   for (const domain of scope.includes.domains ?? []) {

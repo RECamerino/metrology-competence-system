@@ -337,7 +337,7 @@ This is expensive to reverse: every credential already issued is signed with the
 
 | # | Decision | Why |
 |---|---|---|
-| 8 | ~12 reference roles, all data, fully org-overridable | The shipped set exists so the platform is useful on first run, not because these are the correct roles for anyone in particular. |
+| 8 | ~12 reference roles, all data, fully org-overridable, each classified `occupational` or `authority-overlay` | The shipped set exists so the platform is useful on first run, not because these are the correct roles for anyone in particular. The classification is required because an overlay is a granted permission rather than a job, and listing the two kinds side by side unmarked made gap analysis report authority as competence. |
 | 17 | Full guardrail kit before the model handoff | Frozen schemas, immutable ID registry, authoring playbook, gold reference set, CI gate. See [`handoff-playbook.md`](handoff-playbook.md). |
 | 18 | `git init` locally; public GitHub | Every push is a separate, explicitly authorised action. |
 
@@ -368,6 +368,23 @@ The consequence that matters most for this project:
 An approved signatory who leaves a laboratory keeps every competency they demonstrated. They do not keep signatory authority, because the laboratory granted it and the accreditation body recognized it *at that laboratory, for that scope*. A wallet that treated the two identically would let someone arrive at a new employer holding what looks like signing authority — a defect in the credential model, not in the taxonomy.
 
 So a person can hold verified L4 judgment in CMM task-specific uncertainty and still not be authorized to release a CMM result, and both statements are true and non-contradictory. Competence is a necessary input to authorization; it is never sufficient, because authorization also depends on appointment, current scope, organizational policy and continued employment.
+
+#### The role model was quietly undoing this
+
+The split above is clean in the schemas — two objects, one portable and one not — and the role registry collapsed it anyway. `approved-signatory` sat beside `calibration-engineer` and `laboratory-manager` as though the three were the same kind of thing. Its own summary said otherwise from the start (*"a position of granted authority attached to a named scope, not a rank — commonly held alongside another role"*) and nothing acted on the words.
+
+The operational consequence, from an adversarial review: gap analysis reports "short of L3 for approved-signatory" as a **competence** gap. A laboratory reading a dashboard concludes that closing those gaps is the route to signatory status — and it is not. The authority is granted by the laboratory, recognised at that laboratory for that scope, and ends on departure. The dual-object model exists to prevent exactly that inference, and the role model was inviting it one layer up.
+
+**Every role now declares `roleType`.**
+
+- `occupational` — a job, with a competence profile of its own. Gaps against it are deficiencies in the ordinary sense.
+- `authority-overlay` — a permission carried on top of an occupational role. A person is *Calibration Engineer AND Approved Signatory*.
+
+A deployment scope names an occupation in `role` and any overlays in `overlays`; an overlay in `role` is a validation error, because a scope whose only role is an overlay is the dashboard above. Overlay gaps are still computed and still real — the competence an authority presupposes is a genuine question — but every `Gap` carries `basis`, so a renderer showing the two identically has chosen to. What an overlay gap answers is *could this person be granted this*. What it never answers is *have they earned it*, because nobody earns an authority.
+
+`approved-signatory` is the only overlay in the shipped set. Two classifications are worth seeing because they could have gone the other way: **technical-assessor** carries real authority — it can recommend withdrawal of an accreditation — and is `occupational` anyway, because the role has a competence profile of its own, the discipline plus assessment practice, which its own summary treats as two separate competencies. **metrology-trainer** is occupational for the same reason. The test is not *does it carry authority* but *does it describe a job*.
+
+`roleType` is required rather than defaulted, because an organization replacing this registry with its own titles has to classify each one, and being made to decide is the point: the distinction is invisible until somebody is told it exists. That is the whole story of this finding — the words were in the file for months and no mechanism read them.
 
 **Authorization becomes a first-class object in Phase 2**, distinct from a competency credential:
 
