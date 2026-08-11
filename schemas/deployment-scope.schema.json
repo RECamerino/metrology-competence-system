@@ -15,7 +15,13 @@
 
     "role": {
       "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/roleId",
-      "description": "Which role's targets apply. A person holding two roles has two scopes; the gap for an element is the strictest requirement among the scopes that contain it."
+      "description": "Which role's targets apply. A person holding two roles has two scopes; the gap for an element is the strictest requirement among the scopes that contain it.\n\nMUST BE AN `occupational` ROLE. An `authority-overlay` such as approved-signatory belongs in `overlays`, and the validator rejects one here: a scope whose only role is an overlay produces a dashboard reading 'this person is short of L3 for approved-signatory' as though signatory status were a competence to be closed in to. It is granted, not earned."
+    },
+
+    "overlays": {
+      "type": "array",
+      "description": "Authority overlays this person holds, or is being considered for, on top of their occupational role — see `roleType` in role-registry.schema.json. A person is *Calibration Engineer AND Approved Signatory*, and this is where the second half goes.\n\nGaps computed against an overlay are real and useful, but they are a DIFFERENT QUESTION from occupational gaps: they answer 'is this person competent to be granted this authority', never 'has this person earned it'. Nobody earns an authority. Gap analysis tags them so a renderer that shows the two identically is doing it deliberately rather than by accident.\n\nHolding the competence an overlay presupposes confers nothing by itself. The grant is an organization's act and lives in an authorization, which is not portable and ends when the person leaves.",
+      "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/roleId" }
     },
 
     "includes": {

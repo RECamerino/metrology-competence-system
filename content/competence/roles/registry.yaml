@@ -15,6 +15,28 @@
 # separately from competence on purpose: a person may understand a method
 # thoroughly and still not be authorised to sign for it. Nothing in this file
 # grants anyone anything.
+#
+# `roleType` says what KIND of thing each entry is, because this file listed
+# two different kinds side by side and nothing marked the difference.
+#
+#   occupational      a job, with a competence profile of its own.
+#   authority-overlay a permission granted on top of an occupational role.
+#
+# ONE ENTRY IS AN OVERLAY: approved-signatory. Its own summary always said so
+# — "a position of granted authority attached to a named scope, not a rank —
+# commonly held alongside another role" — and nothing acted on it. A person is
+# Calibration Engineer AND Approved Signatory; the authority does not describe
+# their occupational competence. Gap analysis reported shortfalls against it as
+# competence gaps, which invites reading "close these gaps" as the route to
+# signatory status. It is not: the authority is granted by a laboratory,
+# recognised at that laboratory for that scope, and ends on departure.
+#
+# TWO CALLS WORTH SEEING. technical-assessor carries real authority — it can
+# recommend withdrawal of an accreditation — and is classified occupational
+# anyway, because the role has a competence profile of its own: the discipline
+# being assessed, plus assessment practice, which its summary treats as two
+# separate competencies. The test is not "does it carry authority" but "does it
+# describe a job". metrology-trainer is occupational for the same reason.
 
 schemaVersion: 1
 
@@ -23,6 +45,7 @@ roles:
 
   - id: metrology-technician-i
     title: Metrology Technician I
+    roleType: occupational
     family: technician
     seniority: 1
     summary: >-
@@ -35,6 +58,7 @@ roles:
 
   - id: metrology-technician-ii
     title: Metrology Technician II
+    roleType: occupational
     family: technician
     seniority: 3
     summary: >-
@@ -48,6 +72,7 @@ roles:
 
   - id: senior-metrology-technician
     title: Senior Metrology Technician
+    roleType: occupational
     family: technician
     seniority: 5
     summary: >-
@@ -64,6 +89,7 @@ roles:
 
   - id: calibration-engineer
     title: Calibration Engineer
+    roleType: occupational
     family: engineering
     seniority: 4
     summary: >-
@@ -78,6 +104,7 @@ roles:
 
   - id: metrology-engineer
     title: Metrology Engineer
+    roleType: occupational
     family: engineering
     seniority: 5
     summary: >-
@@ -94,6 +121,7 @@ roles:
 
   - id: research-metrologist
     title: Research Metrologist
+    roleType: occupational
     family: scientific
     seniority: 7
     summary: >-
@@ -110,6 +138,7 @@ roles:
 
   - id: principal-metrologist
     title: Principal Metrologist
+    roleType: occupational
     family: scientific
     seniority: 9
     summary: >-
@@ -126,6 +155,7 @@ roles:
 
   - id: laboratory-manager
     title: Laboratory Manager
+    roleType: occupational
     family: leadership
     seniority: 7
     summary: >-
@@ -145,6 +175,7 @@ roles:
 
   - id: quality-manager
     title: Quality Manager
+    roleType: occupational
     family: quality
     seniority: 6
     summary: >-
@@ -159,6 +190,7 @@ roles:
 
   - id: approved-signatory
     title: Approved Signatory
+    roleType: authority-overlay
     family: quality
     seniority: 6
     summary: >-
@@ -180,6 +212,7 @@ roles:
 
   - id: technical-assessor
     title: Technical Assessor
+    roleType: occupational
     family: assessment
     seniority: 8
     summary: >-
@@ -198,6 +231,7 @@ roles:
 
   - id: metrology-trainer
     title: Metrology Trainer
+    roleType: occupational
     family: education
     seniority: 5
     summary: >-

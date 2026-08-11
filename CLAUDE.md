@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
 | Content authored | **1 element** · **1 BOK article** · **1 module** |
 | Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
-| Checks | 0 errors · 205/205 tests · typecheck clean |
+| Checks | 0 errors · 211/211 tests · typecheck clean |
 
 ### Phases
 
@@ -86,6 +86,8 @@ Three principles held in tension deliberately:
 
 **10. A roleTarget is a scoped minimum requirement.** It states the level a role needs *if* the element is in that person's deployment scope — normative, not typical, not aspirational. It does **not** imply the element applies to anyone. **An element outside scope cannot produce a gap.** `null` means the element could never be that role's work in any deployment, which is not the same as "not in this person's scope". See decision 48.
 
+**10b. A role is an occupation or an authority overlay, and they are not the same kind of thing.** Every role declares `roleType`. `occupational` is a job with a competence profile of its own; `authority-overlay` is a permission granted on top of one — a person is *Calibration Engineer AND Approved Signatory*. `approved-signatory` is the only overlay in the shipped registry, and it sat beside the occupations unmarked, so gap analysis reported shortfalls against it as **competence** gaps and invited an organization to read "close these" as the route to signatory status. It is not: the authority is granted, recognised at that laboratory for that scope, and ends on departure. A deployment scope names an occupation in `role` and overlays in `overlays`; an overlay in `role` is an **error**. Overlay gaps are still computed and still real — they answer *could this person be granted this*, never *have they earned it* — and every `Gap` carries `basis` so a renderer cannot blend the two by accident. This is rule 6 reaching the role model, which is where it had not.
+
 **11. `skill` is not the same as bench work.** `kind: skill` means the evidence is observable *performance* rather than explanation. It does **not** mean the performance happens at a bench — constructing an uncertainty budget is a skill and is desk work. The element declares `demonstration: desk | equipment`, and a module preparing for an `equipment` element must list it in `requiresPhysicalDemonstration`, leaving it `pending-demonstration`. Listing a `desk` element there is **also** an error: it tells a learner they are waiting for access they never needed, and inventing a barrier is as wrong as hiding one.
 
 **12. The provenance tier is evidenced, not declared.** `provenanceTier` carries the argument for how open entry and rigour coexist, and until it was checked it was read by no code at all — a credential could assert `accredited-body` with one unevidenced witness. Each step up now requires something a reader can verify offline: **self-study** a signer who is not the subject; **peer-reviewed** a signer whose standing is *evidenced*, so an unbacked `heldLevel` or `credentialedReviewer` does not lift it; **organization** an issuer registered with a name and trust-registry entry; **accredited-body** the issuer's own accreditation recorded. **`authority` cannot be issued** — no such issuer exists (open decision 4). Understating is permitted and silent. **`self-study` means the witness has no standing, not that there is no witness** — which is why it is issuable at all, and how somebody with no employer and no network holds something real.
@@ -107,7 +109,8 @@ content/competence/
   taxonomy/id-registry.lock       Every ID ever issued — taxonomy, BOK, modules,
                                   archetypes. Append-only.
   taxonomy/proficiency.yaml       The 5-level ladder. Steward-controlled.
-  roles/registry.yaml             12 reference roles. Every element needs a
+  roles/registry.yaml             12 reference roles — 11 occupational, 1
+                                  authority overlay. Every element needs a
                                   roleTarget for EVERY role — each one added is
                                   2232 more authored ratings.
   elements/                       ASSESSABLE CLAIMS, not prose. 1 authored.
@@ -125,7 +128,7 @@ content/sources/registry.yaml     Source licence register. Outside both trees,
                                   because both cite it.
 
 schemas/                          16 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 205 tests.
+packages/validator/               The ONLY implemented package. 211 tests.
 apps/viewer/                      The only implemented app (template + build script).
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/                            Build scripts, ceiling-plan.json, kind-plan.json,
@@ -159,7 +162,7 @@ Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
 | `credentials.ts` | No self-signoff, signoff policy, the wallet boundary, draft-status attestability, evidenced provenance tier, founding-cohort authority |
 | `ledger.ts` | Hash chain, no-retake, exposure count, trust horizon |
 | `definitions.ts` | Semantic pinning — `definitionRef`, `assessmentPolicyRef`, drift |
-| `scope.ts` | Gap analysis. **An element outside scope cannot produce a gap** |
+| `scope.ts` | Gap analysis. **An element outside scope cannot produce a gap**, and an authority overlay is not an occupation |
 | `canonical.ts` | The one hashing function. Changing it invalidates every hash ever computed |
 | `reports.ts` | Coverage, per-element item gaps, per-archetype reuse |
 
@@ -175,7 +178,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 205 guardrail tests
+npm test                  # 211 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:quotes     # complete quotation manifest for legal review
@@ -209,7 +212,7 @@ Changing ceilings or kinds: edit `tools/ceiling-plan.json` or `tools/kind-plan.j
 
 From external architectural review, August 2026. Not a new phase — scope that has to be inside the freeze, because changing it after thousands of articles exist is the same mistake the BOK split avoided by two weeks.
 
-**Done:** knowledge-version provenance (decision 39) · BOK review provenance (decision 40) · disagreement and consensus (decision 41).
+**Done:** knowledge-version provenance (decision 39) · BOK review provenance (decision 40) · disagreement and consensus (decision 41) · **role type, occupational vs authority overlay (was item 14)**.
 
 7. **Many paths to competence.** `BOK → module → assessment` must never harden into a mandatory linear course. Self-study, mentoring, a commercial course and prior practice are all legitimate routes to the same assessment, and the competence definition stays independent of any learning provider. Learning resources are plural and vendor-neutral by construction — this is what makes the corpus disruptive without attacking anyone. Needs a schema before Phase 11, and a stated principle now.
 8. **Trust registry and status lifecycle.** Offline verification promises that a 2028 credential still verifies in 2031. That needs issuer key rotation, compromise and retirement with effective dates, plus a signed status list a verifier can obtain without contacting the issuer. Deleting a compromised key must not invalidate credentials legitimately signed with it earlier.
@@ -217,7 +220,6 @@ From external architectural review, August 2026. Not a new phase — scope that 
 10. **Exposure-group semantics and a binding-review record.** When do two differently parameterized items count as the same exposure? And who decided a binding was professionally valid — CI can only prove it is structurally possible. Both need rules before thousands of bindings exist, or the engine will decide by accident.
 11. **Validity evidence.** CI proves integrity of the representation. Expert review proves technical validity. Neither proves the assessment measures the competence it claims to. That is empirical work — inter-rater reliability, whether items discriminate knowledge from skill from judgment, whether the five-level ladder matches how the profession actually reads competence. Research, not code, and the strongest thing the project could take to NCSL.
 13. **Authorization scope must become computable.** `authorization.scope` is free-form strings — activities, methods, ranges, locations. The accreditation-body scope-matching engine (decision 34) cannot answer *does this authorization cover this method* by interpreting prose. A scope that participates in computation cannot exist only as prose; `deployment-scope.schema.json` is the model to follow.
-14. **`approved-signatory` is an authority overlay, not an occupational role.** It sits in the role registry beside calibration-engineer and laboratory-manager as though it were the same kind of thing. A person is *Calibration Engineer + Approved Signatory*; the authority does not define their occupational competence profile. Needs a `roleType` distinction, or explicit classification, before role targets are authored at volume.
 15. **BOK review pins prose, not claim state.** A section hash covers the body. Change `consensus` from `established` to `contested` and the prose hash is unchanged while the epistemic status of the section has moved — a reviewer's attestation silently survives a change to what the section claims. Decide what a technical reviewer is attesting to: content, or content plus the metadata that tells a reader how to read it.
 16. **Reviewer standing is not evidenced on BOK reviews.** `reviewer.name` is a string. The project eliminated exactly this for credential signers (decision 47) and has not applied its own rule here: the BOK can establish *X reviewed s03 on this date* but not *X had the standing to review it*.
 17. **Cryptosuite identifier needs an interoperability check.** `ecdsa-rdfc-2019-p256` is fixed as a const. Confirm it is the identifier the chosen VC Data Integrity implementation actually expects rather than one invented locally — a standards question, not a metrology one, and cheap to get wrong permanently.

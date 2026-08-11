@@ -21,13 +21,18 @@
   "$defs": {
     "role": {
       "type": "object",
-      "required": ["id", "title", "family", "summary"],
+      "required": ["id", "title", "roleType", "family", "summary"],
       "additionalProperties": false,
 
       "properties": {
         "id": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/roleId" },
 
         "title": { "type": "string", "minLength": 1 },
+
+        "roleType": {
+          "enum": ["occupational", "authority-overlay"],
+          "description": "WHAT KIND OF THING THIS ROLE IS, and the answer to a conflation the registry made for a while by listing two different kinds of thing side by side.\n\n`occupational` — a job. It has a competence profile of its own, and a person's gaps against it are gaps in what they are expected to be able to do.\n\n`authority-overlay` — a permission an organization grants, carried ON TOP of an occupational role. A person is *Calibration Engineer AND Approved Signatory*; the signatory authority does not describe their occupational competence, it describes what they are permitted to do. `approved-signatory` sat beside `calibration-engineer` and `laboratory-manager` as though it were the same kind of thing, and the consequence was concrete: gap analysis reported 'short of L3 for approved-signatory' as a COMPETENCE gap, so an organization could read closing those gaps as the route to signatory status. It is not. The authority is granted, recorded in an authorization, and ends when the person leaves — see rule 6 and authorization.schema.json. That is exactly the collapse the dual-object model exists to prevent, reappearing in the role model.\n\nAn overlay still carries roleTargets, and they still mean something real: the competence the authority PRESUPPOSES. 'Is this person competent to be granted this?' is a legitimate question and the targets answer it. What they never answer is 'has this person earned this?', because nobody earns an authority.\n\nA deployment scope names an occupational role in `role` and any overlays in `overlays`; the validator rejects an overlay in `role`, because a scope whose only role is an overlay produces precisely the misreading above.\n\nREQUIRED rather than defaulted. An organization replacing this registry with its own job titles has to classify each one, and being made to decide is the point — the distinction is invisible until somebody is told it exists."
+        },
 
         "family": {
           "enum": ["technician", "engineering", "scientific", "leadership", "quality", "assessment", "education"],

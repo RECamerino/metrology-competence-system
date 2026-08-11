@@ -45,8 +45,8 @@ const taxonomy = {
 const roles = {
   schemaVersion: 1,
   roles: [
-    { id: 'test-technician', title: 'Test Technician', family: 'technician', summary: LONG },
-    { id: 'test-engineer', title: 'Test Engineer', family: 'engineering', summary: LONG },
+    { id: 'test-technician', title: 'Test Technician', roleType: 'occupational', family: 'technician', summary: LONG },
+    { id: 'test-engineer', title: 'Test Engineer', roleType: 'occupational', family: 'engineering', summary: LONG },
   ],
 };
 
