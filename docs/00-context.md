@@ -157,6 +157,24 @@ The rule that keeps it from being corrosive: **a bootstrap signature is permanen
 
 This is the same move as the provenance tiers. The project does not pretend a self-study credential and an accredited-body credential are equivalent; it makes the difference legible. A bootstrap-signed L5 is a weaker claim than a peer-signed L5, and a reader who cannot tell them apart has been misled about the strongest assertion the system makes.
 
+#### The cross-organizational rule rested on string inequality
+
+Decision 27's anti-collusion controls include, at L5, "at least one signer outside the candidate's own organization, so that a closed group cannot certify its own experts." The organization was a free-form string, so the rule was worth exactly as much as `!==` between two things somebody typed.
+
+Two colleagues at one laboratory writing **"Northfield Calibration"** and **"Northfield Calibration Ltd"** satisfied it. That is the worst shape a defect can take: it looks like a formatting difference and works like an evasion, so it can be done deliberately with complete deniability and accidentally by anybody.
+
+`organizationRef` replaces the string with `{ name, id? }`, and the comparison now runs in three layers with the validator reporting which one decided:
+
+1. **`id`** settles identity. Two organizations are the same iff their identifiers are — this also catches a *rename*, which no amount of name-matching can.
+2. **Normalised `name`**, when no identifier is present: case, punctuation and trailing legal suffixes collapse, so the example above is one organization. Only *trailing* corporate form is stripped, so "Co-ordinate Metrology Services Ltd" keeps its first token.
+3. **Neither.** A name that identifies nobody — "Independent", "self-employed", "none" — is not an organization. Two signers declaring different flavours of unaffiliated are two unaffiliated people, and counting them as two organizations satisfied the rule while proving nothing at all about separation.
+
+`id` is optional on purpose. Requiring one would mean a signer whose laboratory has never issued anything could not sign, which gates participation behind registration — the barrier this project exists to remove. The cost of that choice is that the comparison is sometimes nominal, and at L5 the validator says so rather than letting a name-matched result look like an identity-matched one.
+
+**The limit, stated because it does not go away.** Normalisation catches the accidental variant and the lazy one. It does not catch an abbreviation, and it does not catch a laboratory that gives its two divisions different names. Only `id` closes that, and only where an identifier exists to be recorded. The rule is stronger than it was and is not absolute; what changed is that a reader can now tell which they are holding.
+
+One case deliberately still passes: an unaffiliated signer **is** outside a named candidate organization. A consultant belonging to nobody is plainly not a member of Northfield, and rejecting that would gate L5 behind employment.
+
 #### Dual custody had no field
 
 Decision 23 above was true and unrecorded. A single credential object carried no note of who else held a copy, so "both hold a true copy" was a claim the data could neither express nor contradict — an adversarial review called it a comment rather than a protocol, and that was fair.

@@ -28,6 +28,9 @@ import {
   checkReciprocity,
   highestSupportedTier,
   isBootstrapSigned,
+  isIdentifyingOrganization,
+  normalizeOrganization,
+  organizationKey,
   signoffPolicyFor,
   walletExport,
 } from './credentials.ts';
@@ -55,7 +58,7 @@ const credential: Credential = {
     archetypes: ['ARC-0002'],
     // The candidate's own laboratory. Recorded so the cross-organizational
     // rule is applied as written rather than approximated.
-    candidateOrganization: 'Northfield Calibration',
+    candidateOrganization: { name: 'Northfield Calibration', id: 'northfield-cal-2026' },
     experienceHours: 260,
     // L4 is doubleScored, and nothing else on the credential could show it —
     // signer count cannot stand in, because scoring is not signing.
@@ -100,7 +103,7 @@ const credential: Credential = {
       did: REVIEWER_A,
       heldLevel: 5,
       credentialedReviewer: true,
-      organization: 'Northfield Calibration',
+      organization: { name: 'Northfield Calibration', id: 'northfield-cal-2026' },
       // Without these the signer's own standing is an assertion, which is the
       // "trust me" this system exists to eliminate, one level up.
       authority: [
@@ -112,7 +115,7 @@ const credential: Credential = {
       did: REVIEWER_B,
       heldLevel: 5,
       credentialedReviewer: true,
-      organization: 'Ardleigh Metrology',
+      organization: { name: 'Ardleigh Metrology', id: 'ardleigh-met-2025' },
       authority: [
         { basis: 'held-level', credentialId: 'urn:uuid:33333333-3333-4333-8333-333333333333', credentialRef: HASH },
         { basis: 'reviewer-authority', credentialId: 'urn:uuid:44444444-4444-4444-8444-444444444444', credentialRef: HASH },
@@ -210,7 +213,7 @@ test('an authorization with no scoped activity is rejected', () => {
 test('a credential the subject signed is rejected', () => {
   const findings = checkCredential({
     ...credential,
-    signers: [{ did: HOLDER, heldLevel: 5, credentialedReviewer: true, organization: 'Northfield Calibration' }],
+    signers: [{ did: HOLDER, heldLevel: 5, credentialedReviewer: true, organization: { name: 'Northfield Calibration' } }],
   });
   assert.ok(
     findings.some((f) => f.message.includes('No self-signoff')),
@@ -236,7 +239,7 @@ test('single-organization signing is rejected at a level requiring cross-organiz
   const findings = checkCredential(
     {
       ...credential,
-      signers: credential.signers.map((s) => ({ ...s, organization: 'Northfield Calibration' })),
+      signers: credential.signers.map((s) => ({ ...s, organization: { name: 'Northfield Calibration', id: 'northfield-cal-2026' } })),
     },
     L5_POLICY,
   );
@@ -291,7 +294,7 @@ const FOUNDER = {
   did: 'did:key:z6MkfrQabcTHRVNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsd',
   heldLevel: null,
   credentialedReviewer: true,
-  organization: 'National Physical Standards',
+  organization: { name: 'National Physical Standards', id: 'nps-2024' },
   bootstrapAuthority: {
     basis: 'Primary standards laboratory appointment and UKAS technical assessor for dimensional scope.',
     cohort: 'founding-2026',
@@ -649,7 +652,7 @@ test('two signers from one EXTERNAL organization also satisfy it', () => {
   const findings = checkCredential(
     {
       ...credential,
-      signers: credential.signers.map((s) => ({ ...s, organization: 'Ardleigh Metrology' })),
+      signers: credential.signers.map((s) => ({ ...s, organization: { name: 'Ardleigh Metrology', id: 'ardleigh-met-2025' } })),
     },
     L5_POLICY,
   );
@@ -660,7 +663,7 @@ test('signers drawn only from the candidate organization are rejected', () => {
   const findings = checkCredential(
     {
       ...credential,
-      signers: credential.signers.map((s) => ({ ...s, organization: 'Northfield Calibration' })),
+      signers: credential.signers.map((s) => ({ ...s, organization: { name: 'Northfield Calibration', id: 'northfield-cal-2026' } })),
     },
     L5_POLICY,
   );
@@ -668,6 +671,121 @@ test('signers drawn only from the candidate organization are rejected', () => {
     findings.some((f) => f.message.includes("outside the candidate's organization")),
     `expected a closed-group error, got: ${JSON.stringify(findings)}`,
   );
+});
+
+/* -- Organization identity, which the rule actually rests on --------------- */
+
+test('THE EXPLOIT: one laboratory spelled two ways is one laboratory', () => {
+  // The residual defect. Two colleagues at Northfield writing "Northfield
+  // Calibration" and "Northfield Calibration Ltd" satisfied a rule that exists
+  // so a closed group cannot certify its own experts. It looks like a
+  // formatting difference and works like an evasion.
+  const { candidateOrganization, ...assessment } = credential.assessment as Record<string, unknown>;
+  const findings = checkCredential(
+    {
+      ...credential,
+      assessment,
+      signers: [
+        { ...credential.signers[0]!, organization: { name: 'Northfield Calibration' } },
+        { ...credential.signers[1]!, organization: { name: 'northfield calibration, ltd.' } },
+      ],
+    },
+    L5_POLICY,
+  );
+  assert.ok(
+    findings.some((f) => f.level === 'error' && f.message.includes('every signer is from one organization')),
+    `expected the two spellings to collapse, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('normalisation collapses case, punctuation and trailing legal suffixes', () => {
+  assert.equal(normalizeOrganization('Northfield Calibration Ltd.'), 'northfield calibration');
+  assert.equal(normalizeOrganization('  NORTHFIELD  CALIBRATION,  LLC '), 'northfield calibration');
+  assert.equal(normalizeOrganization('Ardleigh Metrology GmbH'), 'ardleigh metrology');
+});
+
+test('a leading token that looks like a suffix is not stripped', () => {
+  // "Co-ordinate" must survive; only TRAILING corporate form is removed.
+  assert.equal(normalizeOrganization('Co-ordinate Metrology Services Ltd'), 'co ordinate metrology services');
+});
+
+test('an identifier beats a name, in both directions', () => {
+  // Same id, different names — a rename, which normalisation cannot catch.
+  assert.equal(
+    organizationKey({ name: 'Northfield Calibration', id: 'nc-1' }),
+    organizationKey({ name: 'Northfield Metrology Group', id: 'nc-1' }),
+  );
+  // Same name, different ids — two genuinely distinct organizations that
+  // happen to share a name.
+  assert.notEqual(
+    organizationKey({ name: 'Precision Labs', id: 'pl-uk' }),
+    organizationKey({ name: 'Precision Labs', id: 'pl-us' }),
+  );
+});
+
+test('TWO UNAFFILIATED PEOPLE ARE NOT TWO ORGANIZATIONS', () => {
+  // "Independent" and "Self-employed" are distinct strings and identify
+  // nobody. Counting them as two organizations satisfied the rule while
+  // proving nothing whatever about separation.
+  assert.equal(isIdentifyingOrganization({ name: 'Independent' }), false);
+  assert.equal(isIdentifyingOrganization({ name: 'self-employed' }), false);
+  assert.equal(isIdentifyingOrganization({ name: 'Northfield Calibration' }), true);
+
+  const { candidateOrganization, ...assessment } = credential.assessment as Record<string, unknown>;
+  const findings = checkCredential(
+    {
+      ...credential,
+      assessment,
+      signers: [
+        { ...credential.signers[0]!, organization: { name: 'Independent' } },
+        { ...credential.signers[1]!, organization: { name: 'Self-employed' } },
+      ],
+    },
+    L5_POLICY,
+  );
+  assert.ok(
+    findings.some((f) => f.level === 'error' && f.message.includes('identifies nobody')),
+    `expected unaffiliated signers not to count as two organizations, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('an unaffiliated signer IS outside a named candidate organization', () => {
+  // The rule asks for a signer outside the candidate's organization, and a
+  // consultant at no organization plainly is. Rejecting this would gate L5
+  // behind employment, which is the barrier the project refuses.
+  const findings = checkCredential(
+    {
+      ...credential,
+      signers: [
+        { ...credential.signers[0]!, organization: { name: 'Northfield Calibration', id: 'northfield-cal-2026' } },
+        { ...credential.signers[1]!, organization: { name: 'Independent' } },
+      ],
+    },
+    L5_POLICY,
+  );
+  assert.deepEqual(findings.filter((f) => f.level === 'error'), []);
+});
+
+test('a name-only comparison says so, at the level where it matters', () => {
+  const findings = checkCredential(
+    {
+      ...credential,
+      assessment: { ...credential.assessment as object, candidateOrganization: { name: 'Northfield Calibration' } },
+      signers: [
+        { ...credential.signers[0]!, organization: { name: 'Northfield Calibration' } },
+        { ...credential.signers[1]!, organization: { name: 'Ardleigh Metrology' } },
+      ],
+    },
+    L5_POLICY,
+  );
+  assert.ok(
+    findings.some((f) => f.level === 'warn' && f.message.includes('comparing organization NAMES')),
+    `expected a nominal-comparison warning, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('identifiers everywhere means no such warning', () => {
+  assert.deepEqual(checkCredential(credential, L5_POLICY), []);
 });
 
 test('without the candidate organization the check says it approximated', () => {
@@ -739,7 +857,7 @@ test('THE HEADLINE CASE: L5 the day after L4, no hours, no work product, no ment
       attainedOn: '2026-08-10',
       assessment: {
         modality: ['reviewer-conducted-defense'],
-        candidateOrganization: 'Northfield Calibration',
+        candidateOrganization: { name: 'Northfield Calibration', id: 'northfield-cal-2026' },
         experienceHours: 0,
         scorerCount: 1,
         previousLevelAttainedOn: '2026-08-09',

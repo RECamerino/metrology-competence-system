@@ -30,20 +30,94 @@ export interface SignerAuthority {
   credentialRef: string;
 }
 
+export interface OrganizationRef {
+  name: string;
+  id?: string;
+}
+
 export interface Signer {
   did: string;
   heldLevel: number | null;
   credentialedReviewer?: boolean;
-  organization?: string;
+  organization?: OrganizationRef;
   bootstrapAuthority?: BootstrapAuthority;
   authority?: SignerAuthority[];
+}
+
+/*
+ * Deciding whether two organizations are the same one.
+ *
+ * The cross-organizational rule at L5 exists so that a closed group cannot
+ * certify its own experts, and it rested on string inequality: two colleagues
+ * at one laboratory writing "Northfield Calibration" and "Northfield
+ * Calibration Ltd" satisfied it. That is a defect with plausible deniability —
+ * it looks like a formatting difference and works like an evasion.
+ *
+ * Three layers, weakest last, and the validator reports which one decided:
+ *
+ *   `id` — settles it. Two organizations are the same iff their identifiers are.
+ *   normalised `name` — collapses case, punctuation and trailing legal suffixes,
+ *   which catches the accidental variant and the lazy one.
+ *   nothing — a name that identifies nobody ("Independent", "self") is not an
+ *   organization, and two of them are not two organizations.
+ *
+ * None of this catches an abbreviation or a deliberate rename. That limit is
+ * real and is stated rather than papered over: `id` is the only thing that
+ * closes it, which is why the finding says when it was absent.
+ */
+
+/** Trailing tokens that are corporate form rather than identity. */
+const LEGAL_SUFFIXES = new Set([
+  'ltd', 'limited', 'llc', 'llp', 'lp', 'inc', 'incorporated', 'corp', 'corporation',
+  'co', 'company', 'gmbh', 'mbh', 'ag', 'kg', 'plc', 'sa', 'sas', 'sarl', 'srl', 'spa',
+  'bv', 'nv', 'ab', 'oy', 'oyj', 'as', 'asa', 'aps', 'pty', 'kk', 'pte',
+]);
+
+/**
+ * Names that identify nobody. A person with no organizational affiliation is
+ * not a member of an organization called "Independent" — and two such people
+ * are two unaffiliated individuals, not two organizations, so they cannot
+ * between them satisfy a rule about organizational separation.
+ */
+const NON_IDENTIFYING = new Set([
+  'independent', 'self', 'selfemployed', 'freelance', 'freelancer', 'contractor',
+  'consultant', 'none', 'na', 'nil', 'unaffiliated', 'individual', 'private',
+  'unknown', 'retired', 'sole trader', 'soletrader',
+]);
+
+export function normalizeOrganization(name: string): string {
+  const tokens = name
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean);
+
+  // Only trailing suffixes: "Co-ordinate Metrology" must keep its first token.
+  while (tokens.length > 1 && LEGAL_SUFFIXES.has(tokens[tokens.length - 1]!)) tokens.pop();
+  return tokens.join(' ');
+}
+
+/** Whether this reference picks out a particular organization at all. */
+export function isIdentifyingOrganization(org?: OrganizationRef): boolean {
+  if (!org) return false;
+  if (org.id?.trim()) return true;
+
+  const normalized = normalizeOrganization(org.name ?? '');
+  return normalized.length > 0 && !NON_IDENTIFYING.has(normalized) && !NON_IDENTIFYING.has(normalized.replace(/\s/g, ''));
+}
+
+/** The value two organizations are compared on. */
+export function organizationKey(org: OrganizationRef): string {
+  return org.id?.trim() ? `id:${org.id.trim()}` : `name:${normalizeOrganization(org.name ?? '')}`;
 }
 
 export interface CredentialAssessment {
   modality?: string[];
   archetypes?: string[];
   attemptRef?: string;
-  candidateOrganization?: string;
+  candidateOrganization?: OrganizationRef;
   experienceHours?: number;
   scorerCount?: number;
   previousLevelAttainedOn?: string;
@@ -382,24 +456,57 @@ export function checkCredential(
     // So apply the real rule when the candidate's organization is recorded,
     // and fall back to the approximation when it is not, saying which was
     // used rather than quietly claiming more than was proved.
-    const candidateOrg = (credential.assessment as { candidateOrganization?: string } | undefined)
-      ?.candidateOrganization;
-    const orgs = credential.signers.map((s) => s.organization).filter(Boolean) as string[];
+    const candidateOrg = credential.assessment?.candidateOrganization;
+    const orgs = credential.signers.map((s) => s.organization).filter(Boolean) as OrganizationRef[];
 
-    if (candidateOrg) {
-      if (!orgs.some((org) => org !== candidateOrg)) {
+    // How much the comparison is worth. Identifiers settle identity; names are
+    // compared after normalisation, which catches the accidental variant and
+    // not a deliberate one.
+    const byIdentifier =
+      orgs.every((o) => o.id?.trim()) && (!candidateOrg || Boolean(candidateOrg.id?.trim()));
+
+    const nominal = () => {
+      if (!byIdentifier) {
         findings.push(
-          err(at(`no signer is outside the candidate's organization (${candidateOrg}). This level requires one, so that a closed group cannot certify its own experts.`)),
+          warn(at('cross-organizational signing was decided by comparing organization NAMES, because at least one party records no identifier. Normalisation collapses case, punctuation and legal suffixes, so "Northfield Calibration Ltd" and "northfield calibration" are one organization — but an abbreviation or a rename is not caught, and at this level that is the difference between a rule and an appearance. Record `id` on each organization.')),
         );
       }
-    } else if (new Set(orgs).size < 2) {
-      findings.push(
-        err(at('every signer is from one organization; this level requires at least one signer outside the candidate\'s own, so that a closed group cannot certify its own experts.')),
-      );
+    };
+
+    if (candidateOrg) {
+      const candidateKey = organizationKey(candidateOrg);
+      const external = orgs.filter((o) => organizationKey(o) !== candidateKey);
+
+      if (external.length === 0) {
+        findings.push(
+          err(at(`no signer is outside the candidate's organization (${candidateOrg.name}). This level requires one, so that a closed group cannot certify its own experts.`)),
+        );
+      } else {
+        nominal();
+      }
     } else {
-      findings.push(
-        warn(at('cross-organizational signing was checked as "two distinct signer organizations" because the candidate\'s organization is not recorded. That is sound but stricter than the rule; record assessment.candidateOrganization to apply it as written.')),
-      );
+      // Only organizations that identify somebody can be counted as distinct.
+      // Two signers declaring "Independent" and "Self-employed" are two
+      // unaffiliated people, not two organizations, and treating them as two
+      // satisfied the rule while proving nothing about separation.
+      const identifying = orgs.filter((o) => isIdentifyingOrganization(o));
+      const distinct = new Set(identifying.map(organizationKey));
+
+      if (distinct.size < 2) {
+        const unidentified = orgs.length - identifying.length;
+        findings.push(
+          err(at(
+            unidentified > 0
+              ? `cannot establish two distinct signer organizations: ${unidentified} signer(s) record an organization that identifies nobody (for example "independent" or "self-employed"). An unaffiliated signer may well be outside the candidate's organization, but that cannot be shown without recording the candidate's organization — set assessment.candidateOrganization and the rule can be applied as written.`
+              : 'every signer is from one organization; this level requires at least one signer outside the candidate\'s own, so that a closed group cannot certify its own experts.',
+          )),
+        );
+      } else {
+        findings.push(
+          warn(at('cross-organizational signing was checked as "two distinct signer organizations" because the candidate\'s organization is not recorded. That is sound but stricter than the rule; record assessment.candidateOrganization to apply it as written.')),
+        );
+        nominal();
+      }
     }
   }
 
