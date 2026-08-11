@@ -39,11 +39,30 @@ export interface Signer {
   authority?: SignerAuthority[];
 }
 
+export interface CredentialAssessment {
+  modality?: string[];
+  archetypes?: string[];
+  attemptRef?: string;
+  candidateOrganization?: string;
+  experienceHours?: number;
+  scorerCount?: number;
+  previousLevelAttainedOn?: string;
+}
+
+export interface CredentialEvidence {
+  type: 'work-product' | 'capstone' | 'defense-record' | 'mentoring-record' | 'attempt';
+  ref: string;
+  archivedOn?: string;
+}
+
 export interface Credential {
   id: string;
   subject: string;
   element: string;
   level: number;
+  attainedOn?: string;
+  assessment?: CredentialAssessment;
+  evidence?: CredentialEvidence[];
   signers: Signer[];
   portable: true;
   [key: string]: unknown;
@@ -70,6 +89,60 @@ export interface SignoffPolicy {
   witnessMustHoldLevel: number | null;
   requiresCredentialedReviewer?: boolean;
   requiresCrossOrganizational?: boolean;
+
+  /**
+   * The COST side of the ladder, from the level's `assessment` block.
+   *
+   * These were stated in proficiency.yaml, hashed into `assessmentPolicyRef`,
+   * and enforced by nothing. That is the worst of the three: a credential
+   * carrying a pin that says "1000 hours, mentoring, capstone, double-scored"
+   * while no code read any of it is not merely unenforced policy — it is a
+   * signed artifact asserting compliance with requirements nobody evaluated.
+   *
+   * Optional because L1 and L2 set none of them, and a caller checking only
+   * signoff rules must stay able to.
+   */
+  minExperienceHours?: number;
+  minDaysSincePreviousLevel?: number;
+  requiresWorkProduct?: boolean;
+  requiresCapstone?: boolean;
+  requiresMentoring?: boolean;
+  doubleScored?: boolean;
+}
+
+/**
+ * Flatten one proficiency.yaml level entry into the policy this module applies.
+ *
+ * The requirements live in two sibling blocks — `signoff` carries who must
+ * sign, `assessment` carries what it must have cost — and a caller who
+ * assembled the policy by hand would reach for the first and forget the second.
+ * That is precisely how the cost side came to be unenforced, so the flattening
+ * is done here once rather than at every call site.
+ */
+export function signoffPolicyFor(levelDefinition: Record<string, unknown>): SignoffPolicy {
+  const signoff = (levelDefinition.signoff ?? {}) as Record<string, unknown>;
+  const assessment = (levelDefinition.assessment ?? {}) as Record<string, unknown>;
+
+  return {
+    signerCount: (signoff.signerCount as number) ?? 1,
+    witnessMustHoldLevel: (signoff.witnessMustHoldLevel as number | null) ?? null,
+    requiresCredentialedReviewer: signoff.requiresCredentialedReviewer as boolean | undefined,
+    requiresCrossOrganizational: signoff.requiresCrossOrganizational as boolean | undefined,
+    minExperienceHours: assessment.minExperienceHours as number | undefined,
+    minDaysSincePreviousLevel: assessment.minDaysSincePreviousLevel as number | undefined,
+    requiresWorkProduct: assessment.requiresWorkProduct as boolean | undefined,
+    requiresCapstone: assessment.requiresCapstone as boolean | undefined,
+    requiresMentoring: assessment.requiresMentoring as boolean | undefined,
+    doubleScored: assessment.doubleScored as boolean | undefined,
+  };
+}
+
+/** Whole days between two ISO dates. Negative when `later` precedes `earlier`. */
+function daysBetween(earlier: string, later: string): number | null {
+  const from = Date.parse(`${earlier}T00:00:00Z`);
+  const to = Date.parse(`${later}T00:00:00Z`);
+  if (Number.isNaN(from) || Number.isNaN(to)) return null;
+  return Math.round((to - from) / 86_400_000);
 }
 
 export function checkCredential(
@@ -181,6 +254,78 @@ export function checkCredential(
       findings.push(
         warn(at('cross-organizational signing was checked as "two distinct signer organizations" because the candidate\'s organization is not recorded. That is sound but stricter than the rule; record assessment.candidateOrganization to apply it as written.')),
       );
+    }
+  }
+
+  // -- What the level had to COST -------------------------------------------
+  // Signer rules govern who stood behind the claim. These govern what the
+  // candidate had to have done, and absence is an error rather than a warning
+  // throughout: proficiency.yaml states these as requirements, the credential
+  // pins them into assessmentPolicyRef, and a credential that cannot show it
+  // met a requirement it carries is asserting more than was checked. Silence is
+  // not evidence of compliance.
+  const assessment = (credential.assessment ?? {}) as CredentialAssessment;
+  const evidenceTypes = new Set((credential.evidence ?? []).map((e) => e.type));
+
+  const requiredEvidence: Array<[boolean | undefined, CredentialEvidence['type'], string]> = [
+    [policy.requiresWorkProduct, 'work-product', 'a real archived deliverable rather than an exam answer'],
+    [policy.requiresCapstone, 'capstone', 'a capstone reviewed by the signers'],
+    [policy.requiresMentoring, 'mentoring-record', 'evidence of bringing another practitioner to competence in this element'],
+  ];
+
+  for (const [required, type, what] of requiredEvidence) {
+    if (required && !evidenceTypes.has(type)) {
+      findings.push(
+        err(at(`level ${credential.level} requires ${what}, and no evidence entry of type '${type}' is present. The requirement is pinned into assessmentPolicyRef, so issuing without it makes the credential assert a bar it did not clear.`)),
+      );
+    }
+  }
+
+  if (typeof policy.minExperienceHours === 'number' && policy.minExperienceHours > 0) {
+    const hours = assessment.experienceHours;
+    if (typeof hours !== 'number') {
+      findings.push(
+        err(at(`level ${credential.level} requires at least ${policy.minExperienceHours} experience hours and the credential records none. Record assessment.experienceHours; an unrecorded claim cannot be reviewed, which is the whole point of declaring hours.`)),
+      );
+    } else if (hours < policy.minExperienceHours) {
+      findings.push(
+        err(at(`records ${hours} experience hours; level ${credential.level} requires at least ${policy.minExperienceHours}.`)),
+      );
+    }
+  }
+
+  if (policy.doubleScored) {
+    const scorers = assessment.scorerCount;
+    if (typeof scorers !== 'number') {
+      findings.push(
+        err(at(`level ${credential.level} is double-scored and the credential does not record how many scorers there were. Record assessment.scorerCount.`)),
+      );
+    } else if (scorers < 2) {
+      findings.push(
+        err(at(`records ${scorers} scorer(s); level ${credential.level} is double-scored and requires at least 2. Scoring is not signing — two signers who scored once over do not satisfy this.`)),
+      );
+    }
+  }
+
+  if (typeof policy.minDaysSincePreviousLevel === 'number' && policy.minDaysSincePreviousLevel > 0) {
+    const previous = assessment.previousLevelAttainedOn;
+    if (!previous) {
+      findings.push(
+        err(at(`level ${credential.level} requires ${policy.minDaysSincePreviousLevel} days since the previous level was attained, and the credential records no such date. Record assessment.previousLevelAttainedOn.`)),
+      );
+    } else if (!credential.attainedOn) {
+      findings.push(
+        err(at('carries a previous-level date but no attainedOn, so the waiting period cannot be computed.')),
+      );
+    } else {
+      const elapsed = daysBetween(previous, credential.attainedOn);
+      if (elapsed === null) {
+        findings.push(err(at(`cannot parse the dates '${previous}' and '${credential.attainedOn}' to check the waiting period.`)));
+      } else if (elapsed < policy.minDaysSincePreviousLevel) {
+        findings.push(
+          err(at(`was attained ${elapsed} day(s) after the previous level; level ${credential.level} requires at least ${policy.minDaysSincePreviousLevel}. The waiting period exists because the competence at this level is partly accumulated practice, which cannot be compressed by sitting assessments faster.`)),
+        );
+      }
     }
   }
 

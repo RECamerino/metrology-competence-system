@@ -549,13 +549,20 @@ function checkBok(corpus: Corpus): Finding[] {
 /**
  * Training modules.
  *
- * The rule doing the work here: a module that prepares for a `skill` element
- * must declare that the element still needs physical demonstration. A skill is
- * evidenced by witnessed work on real equipment, so a module claiming to finish
- * one by simulation is asserting that a simulation substitutes for the bench.
- * It does not — and the failure would be invisible, because the module would
- * look complete and the learner would believe they had finished something they
- * have never actually done.
+ * The rule doing the work here: a module that prepares for an element whose
+ * `demonstration` is `equipment` must declare that the element still needs
+ * physical demonstration. Such an element is evidenced by witnessed work on
+ * real apparatus, so a module claiming to finish one by simulation is asserting
+ * that a simulation substitutes for the bench. It does not — and the failure
+ * would be invisible, because the module would look complete and the learner
+ * would believe they had finished something they have never actually done.
+ *
+ * THE TEST IS `demonstration`, NOT `kind`. `skill` means the evidence is
+ * observable performance rather than explanation; it does not mean the
+ * performance happens at a bench. Constructing an uncertainty budget is a skill
+ * and is desk work, and declaring a bench blocker for it tells a learner they
+ * are waiting for access they never needed. Both directions are errors below:
+ * inventing a barrier is as wrong as hiding one.
  *
  * What the learner gets instead is `pending-demonstration`: the knowledge is
  * done, the demonstration is not. The requirement to perform the work on real
@@ -636,8 +643,13 @@ function checkModules(corpus: Corpus): Finding[] {
       const mode = authored ? ((authored.demonstration as string | undefined) ?? 'desk') : undefined;
 
       if (stub.kind === 'skill' && mode === undefined) {
+        // Unknown, and the two readings are not equally safe. Listing it is the
+        // cautious one and is accepted; omitting it may hide a real blocker, so
+        // that is the one that gets named.
         findings.push(
-          warn(at(`prepares for skill element '${target.element}', which has no authored definition, so its demonstration mode is unknown and the physical-demonstration requirement cannot be checked.`)),
+          physical.has(target.element)
+            ? warn(at(`prepares for skill element '${target.element}', which has no authored definition. Its demonstration mode is unknown, so listing it in requiresPhysicalDemonstration is accepted as the cautious reading — revisit it when the element is authored, and remove it if the demonstration turns out to be desk work.`))
+            : warn(at(`prepares for skill element '${target.element}', which has no authored definition, so its demonstration mode is unknown and the physical-demonstration requirement cannot be checked.`)),
         );
       }
 
@@ -647,7 +659,15 @@ function checkModules(corpus: Corpus): Finding[] {
         );
       }
 
-      if (mode !== 'equipment' && physical.has(target.element)) {
+      // `mode === undefined` is deliberately NOT rejected here. It means the
+      // element has no authored definition, and this check previously read
+      // `mode !== 'equipment'`, which swept that case in and told the author
+      // "its demonstration mode is 'undefined' — no equipment is needed": an
+      // assertion that no equipment is needed, made immediately after warning
+      // that the mode is unknown. It left omission as the only permitted move
+      // on an unauthored element, which is the direction that hides a blocker —
+      // exactly what refusing to default the mode to `desk` was meant to avoid.
+      if (mode !== undefined && mode !== 'equipment' && physical.has(target.element)) {
         findings.push(
           err(at(`lists '${target.element}' in requiresPhysicalDemonstration, but its demonstration mode is '${mode}' — no equipment is needed. Claiming a blocker that does not exist tells a learner they are waiting for access they never required.`)),
         );

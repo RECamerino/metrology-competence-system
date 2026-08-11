@@ -904,3 +904,51 @@ test('an equipment element must be declared, a desk element must not', () => {
     `expected an invented-barrier error, got: ${JSON.stringify(invented)}`,
   );
 });
+
+test('on an UNAUTHORED skill element, declaring the bench requirement is permitted', () => {
+  // CM-01-002 is a taxonomy stub with no authored definition, so its
+  // demonstration mode is genuinely unknown. This check previously read
+  // `mode !== 'equipment'`, which swept the unknown case in and rejected the
+  // declaration with "its demonstration mode is 'undefined' — no equipment is
+  // needed": an assertion that no equipment is needed, made immediately after
+  // warning that the mode could not be determined.
+  //
+  // It left omission as the only permitted move, which is the direction that
+  // HIDES a blocker — and refusing to default an unknown mode to `desk` exists
+  // precisely to avoid that. With 2231 of 2232 elements unauthored, this is the
+  // ordinary case for a module written before its elements are.
+  const declared = corpus([element()], LOCK_WITH_MODULE, {
+    modules: [
+      moduleFile({
+        preparesFor: [{ element: 'CM-01-002', level: 2 }],
+        requiresPhysicalDemonstration: ['CM-01-002'],
+      }),
+    ],
+  });
+
+  assert.deepEqual(
+    errorsOf(declared).filter((e) => e.includes('no equipment is needed')),
+    [],
+    'the cautious reading of an unknown mode must not be rejected',
+  );
+
+  const findings = runAllChecks(declared);
+  assert.ok(
+    findings.some((f) => f.level === 'warn' && f.message.includes('cautious reading')),
+    `expected the declaration to be flagged for revisiting, got: ${JSON.stringify(findings.filter((f) => f.level === 'warn'))}`,
+  );
+});
+
+test('an unauthored skill element left undeclared is still warned about', () => {
+  // The other direction of the same unknown: it may be a real bench blocker,
+  // and nothing here can tell.
+  const findings = runAllChecks(
+    corpus([element()], LOCK_WITH_MODULE, {
+      modules: [moduleFile({ preparesFor: [{ element: 'CM-01-002', level: 2 }] })],
+    }),
+  );
+  assert.ok(
+    findings.some((f) => f.level === 'warn' && f.message.includes('cannot be checked')),
+    `expected an unknown-mode warning, got: ${JSON.stringify(findings.filter((f) => f.level === 'warn'))}`,
+  );
+});

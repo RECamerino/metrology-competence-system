@@ -13,6 +13,9 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { parse as parseYaml } from 'yaml';
 import { validatorFor } from './schema.ts';
 import {
   type Authorization,
@@ -21,6 +24,7 @@ import {
   checkCredential,
   checkReciprocity,
   isBootstrapSigned,
+  signoffPolicyFor,
   walletExport,
 } from './credentials.ts';
 
@@ -49,6 +53,12 @@ const credential: Credential = {
     // rule is applied as written rather than approximated.
     candidateOrganization: 'Northfield Calibration',
     experienceHours: 260,
+    // L4 is doubleScored, and nothing else on the credential could show it —
+    // signer count cannot stand in, because scoring is not signing.
+    scorerCount: 2,
+    // L4 requires 180 days since L3. Recorded here so a verifier holding this
+    // credential and nothing else can check the waiting period offline.
+    previousLevelAttainedOn: '2025-11-14',
   },
   // What this element MEANT on the day it was issued. Append-only IDs keep
   // 'CM-03-046' resolving; only this keeps it meaning the same thing.
@@ -63,7 +73,12 @@ const credential: Credential = {
       sectionRef: 'sha256:fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9',
     },
   ],
-  evidence: [{ type: 'capstone', ref: HASH, archivedOn: '2026-07-30' }],
+  // L4 requires a capstone AND a real archived deliverable. The two are not the
+  // same artifact: a capstone is assessment work, a work product is the job.
+  evidence: [
+    { type: 'capstone', ref: HASH, archivedOn: '2026-07-30' },
+    { type: 'work-product', ref: HASH, archivedOn: '2026-06-18' },
+  ],
   signers: [
     {
       did: REVIEWER_A,
@@ -408,4 +423,140 @@ test('a credential with no knowledgeSnapshot is rejected by the schema', () => {
   const validate = validatorFor('credential');
   const { knowledgeSnapshot, ...without } = credential as Record<string, unknown>;
   assert.equal(validate(without), false);
+});
+
+test('an EMPTY knowledgeSnapshot is rejected too, not merely a missing one', () => {
+  // The requirement was shape-only until it carried a floor: `[]` satisfied
+  // "pin the knowledge" while pinning none of it, and the drift check iterated
+  // an empty array and reported nothing.
+  const validate = validatorFor('credential');
+  assert.equal(validate({ ...credential, knowledgeSnapshot: [] }), false);
+});
+
+/* -- What the level had to COST -------------------------------------------- */
+
+/**
+ * Built from the shipped proficiency.yaml rather than a fixture, deliberately.
+ * These requirements were stated there, hashed into assessmentPolicyRef, and
+ * enforced by nothing; a hand-written fixture could drift back out of agreement
+ * with the file and nobody would learn about it.
+ */
+const PROFICIENCY = parseYaml(
+  readFileSync(
+    join(import.meta.dirname, '..', '..', '..', 'content', 'competence', 'taxonomy', 'proficiency.yaml'),
+    'utf8',
+  ),
+) as { levels: Array<Record<string, unknown>> };
+
+const levelEntry = (level: number) => PROFICIENCY.levels.find((l) => l.level === level)!;
+const REAL_L4 = signoffPolicyFor(levelEntry(4));
+const REAL_L5 = signoffPolicyFor(levelEntry(5));
+
+test('the policy is flattened from BOTH blocks, not just signoff', () => {
+  // The cost side lives in `assessment` and the signer side in `signoff`. A
+  // caller assembling this by hand reaches for the second and forgets the
+  // first, which is how these requirements came to be unenforced.
+  assert.equal(REAL_L5.signerCount, 2);
+  assert.equal(REAL_L5.minExperienceHours, 1000);
+  assert.equal(REAL_L5.minDaysSincePreviousLevel, 365);
+  assert.equal(REAL_L5.requiresMentoring, true);
+  assert.equal(REAL_L5.doubleScored, true);
+});
+
+test('the worked L4 credential satisfies the real L4 policy', () => {
+  assert.deepEqual(checkCredential({ ...credential, level: 4 }, REAL_L4), []);
+});
+
+test('THE HEADLINE CASE: L5 the day after L4, no hours, no work product, no mentoring', () => {
+  // Everything in this credential except the signers was previously ignored, so
+  // this passed. The ladder's cost was documentation.
+  const findings = checkCredential(
+    {
+      ...credential,
+      level: 5,
+      attainedOn: '2026-08-10',
+      assessment: {
+        modality: ['reviewer-conducted-defense'],
+        candidateOrganization: 'Northfield Calibration',
+        experienceHours: 0,
+        scorerCount: 1,
+        previousLevelAttainedOn: '2026-08-09',
+      },
+      evidence: [],
+    },
+    REAL_L5,
+  );
+
+  const errors = findings.filter((f) => f.level === 'error').map((f) => f.message);
+  for (const expected of ['work-product', 'capstone', 'mentoring-record', '1000', 'double-scored', '365']) {
+    assert.ok(
+      errors.some((m) => m.includes(expected)),
+      `expected an error mentioning '${expected}', got: ${JSON.stringify(errors, null, 2)}`,
+    );
+  }
+});
+
+test('unrecorded experience hours fail rather than pass unnoticed', () => {
+  const { experienceHours, ...assessment } = credential.assessment as Record<string, unknown>;
+  const findings = checkCredential({ ...credential, assessment }, REAL_L4);
+  assert.ok(findings.some((f) => f.message.includes('records none')));
+});
+
+test('hours below the threshold are rejected', () => {
+  const findings = checkCredential(
+    { ...credential, assessment: { ...credential.assessment as object, experienceHours: 199 } },
+    REAL_L4,
+  );
+  assert.ok(findings.some((f) => f.message.includes('records 199 experience hours')));
+});
+
+test('two signers who scored once between them do not satisfy double scoring', () => {
+  // Scoring is not signing, and the credential must say so in its own field.
+  const findings = checkCredential(
+    { ...credential, assessment: { ...credential.assessment as object, scorerCount: 1 } },
+    REAL_L4,
+  );
+  assert.ok(
+    findings.some((f) => f.message.includes('Scoring is not signing')),
+    `expected a double-scoring error, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('a capstone does not stand in for a work product', () => {
+  const findings = checkCredential(
+    { ...credential, evidence: [{ type: 'capstone', ref: HASH, archivedOn: '2026-07-30' }] },
+    REAL_L4,
+  );
+  assert.ok(findings.some((f) => f.message.includes("type 'work-product'")));
+});
+
+test('the waiting period is measured, not assumed', () => {
+  const findings = checkCredential(
+    {
+      ...credential,
+      attainedOn: '2026-08-09',
+      assessment: { ...credential.assessment as object, previousLevelAttainedOn: '2026-06-09' },
+    },
+    REAL_L4,
+  );
+  assert.ok(
+    findings.some((f) => f.message.includes('61 day(s) after the previous level')),
+    `expected a waiting-period error, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('L1 sets no cost requirements, so none are imposed', () => {
+  // The checks must not fire where the ladder does not ask for them: L1 is
+  // witnessed observation with no hours, no waiting period and no artifacts.
+  const findings = checkCredential(
+    {
+      ...credential,
+      level: 1,
+      assessment: { modality: ['open-resource-parameterized'] },
+      evidence: [],
+      signers: [{ did: REVIEWER_A, heldLevel: null }],
+    },
+    signoffPolicyFor(levelEntry(1)),
+  );
+  assert.deepEqual(findings, []);
 });

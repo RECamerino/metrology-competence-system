@@ -216,7 +216,7 @@ function indexDoc(): string {
     `| Knowledge | I understand this | Explanation, relation, analysis | ${kinds.knowledge} | ${pct(kinds.knowledge!)}% |`,
   );
   out.push(
-    `| Skill | I can perform this | A witnessed work product | ${kinds.skill} | ${pct(kinds.skill!)}% |`,
+    `| Skill | I can perform this | A work product they produced, not an account of it | ${kinds.skill} | ${pct(kinds.skill!)}% |`,
   );
   out.push(
     `| Judgment | I can decide and defend it | A defence; often no single right answer | ${kinds.judgment} | ${pct(kinds.judgment!)}% |`,

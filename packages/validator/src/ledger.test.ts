@@ -16,6 +16,8 @@ import {
   type Ledger,
   appendAttempt,
   canAttempt,
+  checkChallengeProvenance,
+  danglingAnchors,
   exposureCount,
   head,
   trustHorizon,
@@ -260,4 +262,138 @@ test('an unsigned anchor fixes nothing, because the holder controls the file', (
   ];
   assert.equal(trustHorizon(ledger), -1, 'an unsigned anchor must not move the horizon');
   assert.ok(errorsOf(verifyLedger(ledger)).some((e) => e.includes('no signature')));
+});
+
+/* -- Truncation, where it does leave a mark -------------------------------- */
+
+const SIGNED_ANCHOR = (h: string) => ({
+  head: h,
+  attestedBy: REVIEWER,
+  attestedOn: '2026-04-02',
+  context: 'signoff' as const,
+  signature: 'z3MqUZ8kExampleSignatureOverTheHead',
+});
+
+test('an anchor naming a head the chain no longer contains is truncation evidence', () => {
+  // The limitation above stands: a chain truncated below EVERY anchor verifies
+  // clean. But truncating below an anchor the holder already has leaves a
+  // signed statement by somebody else that an entry existed which is now gone,
+  // and that was being discarded in silence.
+  const ledger = build();
+  const anchored: Ledger = { ...ledger, anchors: [SIGNED_ANCHOR(ledger.entries[2]!.hash)] };
+  assert.deepEqual(errorsOf(verifyLedger(anchored)), []);
+
+  const truncated: Ledger = { ...anchored, entries: anchored.entries.slice(0, 2) };
+  assert.equal(danglingAnchors(truncated).length, 1);
+  assert.ok(
+    errorsOf(verifyLedger(truncated)).some((e) => e.includes('rewritten below an anchored point')),
+    `expected a dangling-anchor error, got: ${JSON.stringify(verifyLedger(truncated))}`,
+  );
+});
+
+test('the holder must now delete BOTH the entry and the anchor', () => {
+  // Which is the point. The anchor is the copy a counterparty also holds, so
+  // removing it is the move that becomes visible to somebody else.
+  const ledger = build();
+  const scrubbed: Ledger = { ...ledger, entries: ledger.entries.slice(0, 2), anchors: [] };
+  assert.deepEqual(errorsOf(verifyLedger(scrubbed)), [], 'still not locally detectable, as documented');
+});
+
+/* -- What the no-retake answer is actually worth --------------------------- */
+
+test('a first-attempt allowance on an unanchored ledger is flagged as self-asserted', () => {
+  // The specific hole: a FAILED challenge produces no credential, therefore no
+  // anchor, so the one entry worth removing is the one nothing else holds.
+  const decision = canAttempt(empty, 'CM-03-046', 4, 'challenge-exam');
+  assert.equal(decision.allowed, true);
+  assert.equal(decision.guarantee, 'self-asserted');
+  assert.ok(decision.caveat?.includes('produces no credential'));
+});
+
+test('the same allowance on a fully anchored ledger carries the stronger word', () => {
+  const ledger = build();
+  const anchored: Ledger = { ...ledger, anchors: [SIGNED_ANCHOR(ledger.entries[2]!.hash)] };
+  const decision = canAttempt(anchored, 'CM-03-019', 3, 'challenge-exam');
+  assert.equal(decision.allowed, true);
+  assert.equal(decision.guarantee, 'anchored');
+  assert.equal(decision.caveat, undefined);
+});
+
+test('practice carries no guarantee claim at all, because no rule applies', () => {
+  assert.equal(canAttempt(empty, 'CM-03-046', 4, 'practice').guarantee, 'not-applicable');
+});
+
+/* -- A challenge credential may not launder an unanchored attempt ---------- */
+
+function challengeCredential(overrides: Record<string, unknown> = {}) {
+  const ledger = build();
+  return {
+    credential: {
+      id: 'urn:uuid:3f2b8c1a-5d4e-4f6a-9b2c-7e1d0a3f5b8c',
+      element: 'CM-03-046',
+      level: 4,
+      provenanceTier: 'peer-reviewed',
+      assessment: { modality: ['challenge-exam'], attemptRef: ledger.entries[2]!.hash },
+      ...overrides,
+    },
+    ledger,
+  };
+}
+
+test('THE LAUNDERING PATH: a peer-reviewed challenge credential on an unanchored attempt is rejected', () => {
+  // Fail, truncate, retake, pass, get a signoff — and the signoff anchors the
+  // chain as it stands, which is after the contradicting entry was removed. The
+  // signer cannot see it. What they CAN establish is that the attempt was never
+  // fixed independently of the signoff that used it.
+  const { credential, ledger } = challengeCredential();
+  const findings = checkChallengeProvenance(credential, ledger);
+  assert.ok(
+    findings.some((f) => f.level === 'error' && f.message.includes('nobody did')),
+    `expected an unanchored-challenge error, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('the same credential at self-study is a warning, because that tier claims no more', () => {
+  const { credential, ledger } = challengeCredential({ provenanceTier: 'self-study' });
+  const findings = checkChallengeProvenance(credential, ledger);
+  assert.deepEqual(errorsOf(findings), []);
+  assert.ok(findings.some((f) => f.level === 'warn' && f.message.includes('Consistent with the self-study tier')));
+});
+
+test('an independently anchored challenge attempt passes', () => {
+  const { credential, ledger } = challengeCredential();
+  const anchored: Ledger = { ...ledger, anchors: [SIGNED_ANCHOR(ledger.entries[2]!.hash)] };
+  assert.deepEqual(checkChallengeProvenance(credential, anchored), []);
+});
+
+test('a challenge credential with no attemptRef is rejected outright', () => {
+  const { credential, ledger } = challengeCredential({
+    assessment: { modality: ['challenge-exam'] },
+  });
+  const findings = checkChallengeProvenance(credential, ledger);
+  assert.ok(findings.some((f) => f.message.includes('unfalsifiable')));
+});
+
+test('an attemptRef pointing at an ordinary assessment is rejected', () => {
+  const ledger = build();
+  const { credential } = challengeCredential({
+    assessment: { modality: ['challenge-exam'], attemptRef: ledger.entries[1]!.hash },
+  });
+  const findings = checkChallengeProvenance(credential, ledger);
+  assert.ok(findings.some((f) => f.message.includes("points at a 'assessment' attempt")));
+});
+
+test('an attemptRef for a different unit is rejected', () => {
+  const ledger = build();
+  const anchored: Ledger = { ...ledger, anchors: [SIGNED_ANCHOR(ledger.entries[2]!.hash)] };
+  const { credential } = challengeCredential({ element: 'CM-03-019' });
+  const findings = checkChallengeProvenance(credential, anchored);
+  assert.ok(findings.some((f) => f.message.includes('but attests CM-03-019')));
+});
+
+test('the ordinary assessment route is untouched by any of this', () => {
+  // Nothing here narrows the route that does not carry a no-retake promise.
+  const { ledger } = challengeCredential();
+  const ordinary = { ...challengeCredential().credential, assessment: { modality: ['open-resource-parameterized'] } };
+  assert.deepEqual(checkChallengeProvenance(ordinary, ledger), []);
 });

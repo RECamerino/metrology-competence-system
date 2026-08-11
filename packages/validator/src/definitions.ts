@@ -47,11 +47,38 @@ export interface ElementLike {
  *
  * The projection is the point. Only the fields that change what the credential
  * ASSERTS are included: the kind (which determines what evidence proves it),
- * the ceiling (which bounds what the level means), and the anchor for the
- * attested level (which is the observable behaviour claimed). Summary wording,
+ * the ceiling (which bounds what the level means), the anchor for the attested
+ * level (which is the observable behaviour claimed), and the demonstration mode
+ * (which decides what evidence is admissible for it). Summary wording,
  * citations, related elements and authoring metadata are excluded deliberately
  * — a typo fix in a summary must not make every credential look like it drifted,
  * or the signal becomes noise and reviewers learn to ignore it.
+ *
+ * WHY `demonstration` IS IN HERE. It was not, and that left the pin claiming to
+ * freeze meaning while a meaning-bearing field moved underneath it. Flip an
+ * element from `desk` to `equipment` with the anchor untouched and the hash
+ * still matched: a verifier read "definition unchanged" while what counts as
+ * valid evidence for that very claim had inverted, and a credential earned by
+ * desk work now sat under a definition demanding witnessed work at a bench.
+ * Normalised through the schema default so that an author later writing
+ * `desk` explicitly — which changes nothing — does not manufacture drift.
+ *
+ * WHY THREE OTHER MEANING-BEARING FIELDS ARE STILL OUT. Each was considered and
+ * each is excluded for its own reason, not by oversight:
+ *
+ *   `status` — checked AT ISSUE by checkAttestableStatus, which is where it
+ *   belongs. Pinning it would make the ordinary lifecycle draft → review →
+ *   stable report drift on every credential below it, and deprecation would
+ *   light up every credential ever issued against the element at the moment it
+ *   was superseded. That is punishing the holder for a change somebody else
+ *   made years later, which is exactly what this module refuses to do.
+ *
+ *   `roleTargets` — states what ROLES need, not what this person demonstrated.
+ *   Gap analysis runs against the current corpus for a current deployment, so
+ *   it must read today's targets; a historical pin would be the wrong input.
+ *
+ *   `prerequisites` — the preparation graph. Somebody who met the anchor met
+ *   it, whatever route was recommended at the time.
  */
 export function elementDefinitionHash(element: ElementLike, level: number): string {
   return sha256Of({
@@ -60,6 +87,9 @@ export function elementDefinitionHash(element: ElementLike, level: number): stri
     levelCeiling: element.levelCeiling,
     level,
     anchor: element.anchors?.[String(level)] ?? null,
+    // Schema default, applied here so that omitting the field and stating
+    // `desk` produce the same hash. They mean the same thing.
+    demonstration: (element.demonstration as string | undefined) ?? 'desk',
   });
 }
 
@@ -230,21 +260,57 @@ export function checkDefinitionDrift(
   return findings;
 }
 
-/** Build the pins at issue time. The engine calls this; nothing else should. */
+/**
+ * Build the pins at issue time. The engine calls this; nothing else should.
+ *
+ * EVERY DROPPED REF IS REPORTED. A ref that cannot be resolved — the article is
+ * not loaded, or the section anchor is gone — used to be skipped in silence,
+ * which meant this function could hand back an empty `knowledgeSnapshot` while
+ * looking like it had done its job. The credential would then be schema-valid
+ * on the old schema, the drift check would iterate an empty array and find
+ * nothing wrong, and the knowledge behind the claim would be unpinned with
+ * nothing anywhere recording it. An issuer must not be able to produce that by
+ * forgetting to load the corpus.
+ *
+ * Findings are returned rather than thrown: the caller decides whether a
+ * partial pin is issuable, and that is an issuance decision rather than a
+ * hashing one. But it can no longer be made by accident.
+ */
 export function pinDefinition(
   element: ElementLike,
   level: number,
   refs: Array<{ article: string; section: string }>,
   articles: ArticleLike[],
-): { definitionRef: string; knowledgeSnapshot: KnowledgeSnapshotEntry[] } {
+): { definitionRef: string; knowledgeSnapshot: KnowledgeSnapshotEntry[]; findings: Finding[] } {
   const byId = new Map(articles.map((a) => [a.id, a]));
   const knowledgeSnapshot: KnowledgeSnapshotEntry[] = [];
+  const findings: Finding[] = [];
 
   for (const ref of refs) {
     const article = byId.get(ref.article);
-    const hash = article ? sectionHash(article.body, ref.section) : null;
-    if (hash) knowledgeSnapshot.push({ article: ref.article, section: ref.section, sectionRef: hash });
+    if (!article) {
+      findings.push(
+        err(`${element.id}: cannot pin ${ref.article}#${ref.section} — article ${ref.article} was not supplied, so the knowledge behind this claim would go unpinned.`),
+      );
+      continue;
+    }
+
+    const hash = sectionHash(article.body, ref.section);
+    if (!hash) {
+      findings.push(
+        err(`${element.id}: cannot pin ${ref.article}#${ref.section} — that article declares no such section. The element's knowledgeRef is broken and must be fixed before a credential rests on it.`),
+      );
+      continue;
+    }
+
+    knowledgeSnapshot.push({ article: ref.article, section: ref.section, sectionRef: hash });
   }
 
-  return { definitionRef: elementDefinitionHash(element, level), knowledgeSnapshot };
+  if (knowledgeSnapshot.length === 0) {
+    findings.push(
+      err(`${element.id}: nothing could be pinned from ${refs.length} knowledgeRef(s). A credential issued on this would carry an empty knowledgeSnapshot, which pins the knowledge in shape only.`),
+    );
+  }
+
+  return { definitionRef: elementDefinitionHash(element, level), knowledgeSnapshot, findings };
 }
