@@ -28,7 +28,7 @@
  */
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
-import { join, relative, resolve, sep } from 'node:path';
+import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 import { ARCHETYPE_PUBLIC, BINDING_PUBLIC } from './public-projection.ts';
@@ -36,6 +36,13 @@ import { ARCHETYPE_PUBLIC, BINDING_PUBLIC } from './public-projection.ts';
 const REPO_ROOT = resolve(fileURLToPath(import.meta.url), '../..');
 const CONTENT = join(REPO_ROOT, 'content');
 const OUT = join(REPO_ROOT, 'dist', 'public');
+
+function copyFile(from: string, to: string): number {
+  if (!existsSync(from)) return 0;
+  mkdirSync(dirname(to), { recursive: true });
+  writeFileSync(to, readFileSync(from));
+  return 1;
+}
 
 function copyTree(from: string, to: string): number {
   if (!existsSync(from)) return 0;
@@ -93,6 +100,16 @@ function main(): number {
   const roles = copyTree(join(CONTENT, 'competence', 'roles'), join(OUT, 'competence', 'roles'));
   const elements = copyTree(join(CONTENT, 'competence', 'elements'), join(OUT, 'competence', 'elements'));
   const sources = copyTree(join(CONTENT, 'sources'), join(OUT, 'sources'));
+  // The founding-cohort roster MUST publish, for the same reason the trust
+  // registry does: a verifier resolves a bootstrap signature against it,
+  // offline, with no call to anybody. A roster that stayed in the repository
+  // would leave the check unrunnable in the field, which is where it matters.
+  // It is also the accountability record for the people exercising the
+  // strongest discretionary power in the system, and that belongs in public.
+  const cohort = copyFile(
+    join(CONTENT, 'competence', 'bootstrap-cohort.yaml'),
+    join(OUT, 'competence', 'bootstrap-cohort.yaml'),
+  );
   // Training modules publish in full. They are learning material and contain
   // no answer key — a module that needed withholding would be teaching the
   // assessment rather than the subject, which is a defect in the module.
@@ -141,6 +158,7 @@ function main(): number {
   console.log(`  Role registries         ${roles}`);
   console.log(`  Element files           ${elements}`);
   console.log(`  Source register         ${sources}`);
+  console.log(`  Founding cohort         ${cohort}`);
   console.log(`  Training modules        ${modules}`);
   console.log(`  Archetypes (projected)  ${archetypes}`);
   console.log(`  Bindings  (projected)   ${bindings}`);

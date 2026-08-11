@@ -181,6 +181,23 @@ Two consequences worth stating. Understating is permitted and silent: claiming l
 
 The alternatives were weighed. An authority-tier issuer would be the cleanest story but needs funding and legal existence, blocking the ladder for years. A mutual peer cohort needs nobody's permission but is structurally the reciprocal-review pattern the anti-collusion controls exist to detect — a poor founding act for a trust network. Relaxing the witness level temporarily would silently change what L3 and L4 mean for everyone credentialed during the window.
 
+##### "Closed" and "time-limited" needed a roster
+
+Both words were in the decision from the beginning and neither had a mechanism. `bootstrapAuthority` was a field a signer wrote **about themselves**: a basis string, an optional cohort name nothing resolved, an optional admission date nothing compared to anything. So the cohort had no roster, no convening and no closing date, and anybody willing to write forty characters of plausible standing was a founder. A closed cohort anybody can join is not closed.
+
+The consequence an adversarial review put plainly: three people could bootstrap-sign each other to L5 across an entire domain in a weekend, every marker correctly displayed, and afterwards be the only people able to sign anyone else as a peer. The markers are permanent, but a market that reads "L5" and skips the annotation is not one the annotation protects anybody from. **The ladder's peer meaning would never start.**
+
+`content/competence/bootstrap-cohort.yaml` is the answer, and it publishes — a verifier resolves a bootstrap signature against it offline, exactly as they resolve an issuer against the trust registry. A roster kept in the repository would leave the check unrunnable in the field, which is the only place it matters. It is also the accountability record for the people exercising the strongest discretionary power in the system, which is why member `name` is appropriate here while minimal PII governs everywhere else: a credential holder is someone the system has power over, and a founding-cohort member is someone exercising it.
+
+Four controls, in rough order of how much work they do:
+
+- **Scope.** A founder is admitted on standing in a *field* — a primary-laboratory appointment in dimensional metrology, an assessor role for a named scope — and may sign only in the domains that standing covers. There is deliberately **no wildcard**: a person competent to vouch across all 43 domains is exactly the person the first principle says should not exist. This is that principle enforced as code rather than stated as an aspiration.
+- **No self-dealing.** A member may not be the **subject** of a bootstrap-signed credential. Founders are admitted on external standing and need none; the authority exists to bring *other* people onto the ladder. This is the mutual-peer-cohort alternative — rejected two paragraphs above — made executable rather than merely disapproved of.
+- **Time.** Nothing after `closesOn`, and nothing before the member's own `admittedOn`, which stops a credential being backdated into a period when its signer had no standing. Credentials signed while the cohort was open stay valid forever and keep their marker: closing ends new bootstrap signing, it does not un-happen what was signed. Extending the closing date is a governance act with a record, because quietly extending it indefinitely is how a bootstrap becomes a permanent aristocracy.
+- **Volume.** Enforced when a steward sets `maxCredentials`. The mechanism exists so governance *can* cap it; the number is a steward judgement the schema declines to invent, and scope is doing the real work.
+
+**The shipped roster convenes nobody.** No `closesOn`, no members, so no bootstrap signature is valid anywhere in the system today. That is correct rather than unfinished: appointing stewards is blocked on people, convening a cohort is a steward act, nothing has issued a credential, and the operating rule while that persists is that design proceeds and issuance does not. A roster that permitted bootstrap signing before anybody had been appointed would have quietly reversed it.
+
 #### Draft elements cannot carry serious credentials
 
 Decision 44. Every element is `status: draft` today, and nothing prevented a credential being issued against one.

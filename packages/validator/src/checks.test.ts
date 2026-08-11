@@ -185,6 +185,9 @@ function corpus(
     proficiency: null,
     roles,
     sources,
+    // Not convened, which is the shipped state and the one that refuses every
+    // bootstrap signature.
+    bootstrapCohort: { schemaVersion: 1, members: [] },
     elements,
     bok: items.bok ?? [article()],
     modules: items.modules ?? [],

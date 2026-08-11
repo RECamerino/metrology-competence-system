@@ -21,6 +21,7 @@ import {
   type Authorization,
   type Credential,
   checkAttestableStatus,
+  checkBootstrapAuthority,
   checkCredential,
   checkProvenanceTier,
   checkReciprocity,
@@ -319,6 +320,157 @@ test('but a bootstrap-signed credential is never silent about it', () => {
 test('bootstrap authority is visible from the credential without parsing policy', () => {
   assert.equal(isBootstrapSigned(credential), false);
   assert.equal(isBootstrapSigned({ ...credential, signers: [FOUNDER] }), true);
+});
+
+/* -- The cohort as a roster, not an adjective ------------------------------ */
+
+const FOUNDER_BASIS = FOUNDER.bootstrapAuthority.basis;
+
+const COHORT = {
+  schemaVersion: 1 as const,
+  convenedOn: '2026-09-01',
+  closesOn: '2028-09-01',
+  members: [
+    {
+      did: FOUNDER.did,
+      name: 'A. Founder',
+      admittedOn: '2026-09-01',
+      basis: FOUNDER_BASIS,
+      // Admitted for dimensional standing. NOT all 43 domains.
+      scope: ['CM-03'],
+    },
+  ],
+};
+
+const bootstrapSigned = (overrides: Record<string, unknown> = {}): Credential => ({
+  ...credential,
+  attainedOn: '2027-03-01',
+  signers: [FOUNDER, { ...credential.signers[1]!, heldLevel: null }],
+  ...overrides,
+});
+
+test('the shipped roster convenes no cohort, so no bootstrap signature is valid', () => {
+  // The correct state today: appointing stewards is blocked on people, and a
+  // roster that permitted bootstrap signing before anybody was appointed would
+  // reverse the rule that issuance does not proceed.
+  const findings = checkBootstrapAuthority(bootstrapSigned(), { schemaVersion: 1, members: [] });
+  assert.ok(
+    findings.some((f) => f.level === 'error' && f.message.includes('no cohort has been convened')),
+    `expected a not-convened refusal, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('a signer claiming founding authority who is not on the roster is rejected', () => {
+  // Otherwise the cohort is open to anybody willing to write a basis string,
+  // and a closed cohort anybody can join is not closed.
+  const stranger = {
+    ...FOUNDER,
+    did: 'did:key:z6MkimposterAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+  };
+  const findings = checkBootstrapAuthority(
+    bootstrapSigned({ signers: [stranger] }),
+    COHORT,
+    { elementDomain: 'CM-03' },
+  );
+  assert.ok(findings.some((f) => f.message.includes('is not on the roster')));
+});
+
+test('a well-formed bootstrap signature inside scope and inside the window passes', () => {
+  assert.deepEqual(
+    checkBootstrapAuthority(bootstrapSigned(), COHORT, { elementDomain: 'CM-03' }),
+    [],
+  );
+});
+
+test('SCOPE: a founder may not bootstrap-sign outside the field they were admitted for', () => {
+  // The control that stops three people minting the whole ladder, and the
+  // project's first principle as code: no single person holds all of it.
+  const findings = checkBootstrapAuthority(bootstrapSigned(), COHORT, { elementDomain: 'DP-07' });
+  assert.ok(
+    findings.some((f) => f.message.includes('outside the scope they were admitted for')),
+    `expected a scope error, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('NO SELF-DEALING: a cohort member cannot be the subject of a bootstrap-signed credential', () => {
+  // Three founders signing each other to L5 in a weekend is the reciprocal
+  // pattern decision 43 rejected when it chose this mechanism over a mutual
+  // peer cohort. They are admitted on external standing and need no
+  // bootstrap-signed credential.
+  const findings = checkBootstrapAuthority(
+    bootstrapSigned({ subject: FOUNDER.did, signers: [{ ...FOUNDER, did: credential.signers[1]!.did, bootstrapAuthority: FOUNDER.bootstrapAuthority }] }),
+    { ...COHORT, members: [...COHORT.members, { ...COHORT.members[0]!, did: credential.signers[1]!.did }] },
+    { elementDomain: 'CM-03' },
+  );
+  assert.ok(
+    findings.some((f) => f.message.includes('may not be the subject of a bootstrap-signed credential')),
+    `expected a self-dealing error, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('TIME: a signature after the cohort closes is rejected', () => {
+  const findings = checkBootstrapAuthority(
+    bootstrapSigned({ attainedOn: '2028-09-02' }),
+    COHORT,
+    { elementDomain: 'CM-03' },
+  );
+  assert.ok(findings.some((f) => f.message.includes('after the founding cohort closed')));
+});
+
+test('TIME: a signature predating the signer\'s own admission is backdating', () => {
+  const findings = checkBootstrapAuthority(
+    bootstrapSigned({ attainedOn: '2026-08-01' }),
+    COHORT,
+    { elementDomain: 'CM-03' },
+  );
+  assert.ok(findings.some((f) => f.message.includes('backdating')));
+});
+
+test('credentials signed while the cohort was open stay valid after it closes', () => {
+  // Closing ends new bootstrap signing; it does not un-happen what was signed.
+  const closed = { ...COHORT, closesOn: '2027-06-01' };
+  assert.deepEqual(
+    checkBootstrapAuthority(bootstrapSigned({ attainedOn: '2027-03-01' }), closed, { elementDomain: 'CM-03' }),
+    [],
+  );
+});
+
+test('VOLUME: a ceiling is enforced when a steward sets one', () => {
+  const capped = { ...COHORT, members: [{ ...COHORT.members[0]!, maxCredentials: 25 }] };
+  const findings = checkBootstrapAuthority(bootstrapSigned(), capped, {
+    elementDomain: 'CM-03',
+    signedAlready: { [FOUNDER.did]: 25 },
+  });
+  assert.ok(findings.some((f) => f.message.includes('reaching the ceiling of 25')));
+});
+
+test('a basis disagreeing with the roster is surfaced', () => {
+  const findings = checkBootstrapAuthority(
+    bootstrapSigned({
+      signers: [{ ...FOUNDER, bootstrapAuthority: { ...FOUNDER.bootstrapAuthority, basis: 'A different account of standing, long enough to satisfy the schema minimum.' } }],
+    }),
+    COHORT,
+    { elementDomain: 'CM-03' },
+  );
+  assert.ok(findings.some((f) => f.message.includes('does not match the roster')));
+});
+
+test('an unsupplied element domain is reported rather than assumed', () => {
+  // The domain must be the element's `domain` field. The ID prefix is
+  // historical and would silently check the wrong domain for anything
+  // reorganised — rule 1.
+  const findings = checkBootstrapAuthority(bootstrapSigned(), COHORT);
+  assert.ok(findings.some((f) => f.level === 'warn' && f.message.includes('could not be checked')));
+});
+
+test('a credential with no bootstrap signer is not troubled by any of this', () => {
+  assert.deepEqual(checkBootstrapAuthority(credential, COHORT, { elementDomain: 'CM-03' }), []);
+  assert.deepEqual(checkBootstrapAuthority(credential, undefined), []);
+});
+
+test('the cohort check runs from inside checkCredential, not only when remembered', () => {
+  const findings = checkCredential(bootstrapSigned(), L5_POLICY);
+  assert.ok(findings.some((f) => f.message.includes('no cohort roster was presented')));
 });
 
 test('bootstrap authority with no stated basis is rejected by the schema', () => {
