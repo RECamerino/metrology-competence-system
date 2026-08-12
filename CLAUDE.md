@@ -34,7 +34,7 @@ Three principles held in tension deliberately:
 | Assessable units | 9096 |
 | Ceilings — L3 / L4 / L5 | 13.1% / 66.2% / 20.7% |
 | Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
-| Content authored | **1 element** · **1 BOK article** · **1 module** |
+| Content authored | **2 elements** · **1 BOK article** · **1 module** |
 | Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
 | Checks | 0 errors · 247/247 tests · typecheck clean |
 
@@ -262,7 +262,8 @@ From external architectural review, August 2026. Not a new phase — scope that 
 | | |
 |---|---|
 | `BOK-0001` | `content/bok/CM-03/correlation-and-covariance.md` — five sections, one marked `contested` with both positions recorded |
-| `CM-03-053` | The only authored element. `skill`, ceiling 5, `demonstration: desk`, five performance anchors, twelve role targets, bound at every level |
+| `CM-03-053` | `skill`, ceiling 5, `demonstration: desk`, five performance anchors, twelve role targets, bound at every level |
+| `CM-03-052` | The second element, authored AFTER its items existed. `skill`, ceiling 4. Read its closing note: it records why it cannot go `stable` — `BOK-0001` covers about half of what it assesses, and `knowledgeRefs` cannot say so in data |
 | `MOD-0001` | The only module. States what it `cannotConvey`; deliberately declares NO physical demonstration, because its element is desk work |
 | `ARC-0001`–`0004` | `ARC-0004` is the one built to span a family; the other three are narrow |
 
