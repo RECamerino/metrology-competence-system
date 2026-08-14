@@ -1809,9 +1809,25 @@
       "default": "knowledge",
       "overrides": {
         "DP-08-057": "skill",
+        "DP-08-067": "skill",
+        "DP-08-073": "skill",
+        "DP-08-082": "skill",
         "DP-08-062": "skill",
+        "DP-08-076": "skill",
+        "DP-08-077": "skill",
+        "DP-08-078": "skill",
+        "DP-08-079": "skill",
+        "DP-08-080": "skill",
+        "DP-08-085": "skill",
         "DP-08-063": "skill",
-        "DP-08-064": "skill"
+        "DP-08-086": "skill",
+        "DP-08-087": "skill",
+        "DP-08-090": "skill",
+        "DP-08-091": "skill",
+        "DP-08-093": "skill",
+        "DP-08-064": "skill",
+        "DP-08-096": "skill",
+        "DP-08-097": "judgment"
       }
     }
   }

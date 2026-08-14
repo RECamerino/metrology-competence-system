@@ -14,6 +14,90 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. This is where a career starts and, for most of the
+      # people who will ever use this corpus, where it stays: the areas below
+      # are what a minority go on to. An entry section stuck at the end of the
+      # domain is an entry section nobody finds.
+      #
+      # Added after a practising metrologist pointed out that this domain began
+      # at the ampere definition and the Josephson effect and had no element
+      # for Ohm's law, so prior education was an unstated entry requirement in
+      # a project whose first principle is that nothing gates entry.
+      #
+      # COMPREHENSIVE ON PURPOSE. Sized as a body of knowledge somebody can
+      # work from for twenty years, not as a ramp to the areas below. That is
+      # why it is nearly as large as the rest of the domain, and why instrument
+      # operation is split by CLASS: a 3½-digit handheld, a 6½-digit bench
+      # meter, an 8½-digit reference, a null detector and a nanovoltmeter are
+      # different instruments used for different jobs, and one element called
+      # "operating a digital multimeter" collapsed all of them into a heading
+      # so broad nothing could be assessed against it.
+      #
+      # Ceilings run below 3 where the competence genuinely stops there, which
+      # is what the L1 and L2 rungs in tools/ceiling-plan.json exist for. They
+      # also reach 4 where a twenty-year technician is still better at it than
+      # a two-year one — an 8½-digit reference meter and a nanovoltmeter are
+      # foundational to this discipline and not remotely shallow.
+      - id: DP-08-A07
+        title: Foundational Knowledge — Electrical Quantities and Circuits
+        status: draft
+        summary: >-
+          The working knowledge of electricity and instruments that a person in
+          this discipline needs to do the job: the quantities, the circuit
+          behaviour that makes a connection make sense, the instrument classes
+          and what each is for, the technique that separates a reading from a
+          measurement, and the safety that comes before any of it. Entry to the
+          discipline and, for most practitioners, the whole of it.
+        elements:
+          - { id: DP-08-053, title: "Charge, current, voltage and resistance as physical quantities", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-08-054, title: "Ohm's law applied to a resistive circuit", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-066, title: "Kirchhoff's current and voltage laws", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-055, title: "Series circuits: shared current and summed voltages", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-056, title: "Parallel circuits: shared voltage and summed currents", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-057, title: "Equivalent resistance of series and parallel combinations", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-067, title: "Voltage dividers, and what a load does to one", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-068, title: "Current dividers and unintended shunt paths", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-08-069, title: "Source internal resistance and the cost of loading a source", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-058, title: "Electrical power and energy in a resistive circuit", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-070, title: "Capacitance and inductance as circuit elements", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-08-071, title: "RC and RL time constants, and why a reading needs to settle", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-059, title: "Direct and alternating quantities, and what RMS states", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-060, title: "Frequency, period and waveform shape", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-08-072, title: "Peak, average and RMS: which one an instrument is reporting", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-073, title: "True-RMS and average-responding meters on a distorted waveform", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-074, title: "Crest factor, and where a meter stops being accurate", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-075, title: "Phase between voltage and current, and what it means at the terminals", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-08-081, title: "Digits, counts and resolution, and why none of them is accuracy", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-08-082, title: "Range selection, autoranging, and behaviour at a range boundary", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-062, title: "Operating a handheld digital multimeter (3½ to 4½ digit)", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-076, title: "Operating a bench digital multimeter (5½ to 6½ digit)", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-077, title: "Operating a reference digital multimeter (7½ to 8½ digit)", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-078, title: "Integration time, NPLC, and the noise against speed trade-off", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-079, title: "Operating a null detector in a comparison measurement", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-080, title: "Operating a nanovoltmeter for low-level DC", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-085, title: "Analogue meters, and where one is still the right instrument", kind: skill, levelCeiling: 2, status: draft }
+          - { id: DP-08-083, title: "Burden voltage, and what an ammeter costs the circuit", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-084, title: "Input impedance, and the loading a voltmeter imposes", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-063, title: "Two-terminal and four-terminal connection, and why lead resistance matters", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-086, title: "Test leads and probes as part of the measurement", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-087, title: "Contact resistance and making a clean connection", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-088, title: "Thermal EMF at a junction, and how it shows up in a reading", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-089, title: "Guarding: what a guard terminal is for", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-08-090, title: "Shielding and lead dress for low-level measurement", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-091, title: "Operating a DC voltage or current source into a load", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-092, title: "Batteries, references, and what 'stable' means for a source", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-08-093, title: "Decade boxes and standard resistors in bench use", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-061, title: "Reading a circuit diagram well enough to connect to it", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-08-094, title: "Resolution, accuracy and precision distinguished", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-08-064, title: "Computing a tolerance from a stated accuracy specification", kind: skill, levelCeiling: 2, status: draft }
+          - { id: DP-08-095, title: "When a specification applies: warm-up, temperature and time since calibration", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-096, title: "Recording a measurement result: units, digits and what to write down", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-097, title: "Recognising an implausible reading, and what to do about it", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-08-065, title: "Electrical safety for measurement work", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-098, title: "Measurement categories CAT I to CAT IV, and choosing the instrument", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-099, title: "Working limits, isolation and lock-out for measurement work", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-100, title: "Arc flash and stored energy awareness", kind: knowledge, levelCeiling: 2, status: draft }
+
       - id: DP-08-A01
         title: Quantum Electrical Standards
         status: draft
@@ -99,48 +183,3 @@ domains:
           - { id: DP-08-050, title: "Data acquisition system and scanner calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-08-051, title: "Process calibrators and loop calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-08-052, title: "Oscilloscope DC and timebase calibration", kind: skill, levelCeiling: 4, status: draft }
-
-      # Added after a practising metrologist pointed out that this domain began
-      # at the ampere definition and the Josephson effect, and contained no
-      # element for Ohm's law. The corpus assumed the electrical fundamentals
-      # its own entry-level role — metrology-technician-i, "performs routine
-      # calibrations under supervision" — is still acquiring, which made prior
-      # education an unstated entry requirement in a project whose first
-      # principle is that nothing gates entry.
-      #
-      # SCOPE. Not a physics course. What somebody must hold to work in this
-      # domain and to make sense of the areas above: an element belongs here if
-      # a technician doing supervised electrical calibration needs it, or if an
-      # element elsewhere in DP-08 is unintelligible without it. Maxwell's
-      # equations fail both tests; Ohm's law passes both.
-      #
-      # CEILINGS RUN LOWER HERE, AND THAT IS THE POINT. Several of these top
-      # out at L2 because there is no L3 to reach: applying a definition in a
-      # familiar situation and recognising an unfamiliar one is the whole of
-      # the competence, and claiming a Competent tier above it would
-      # manufacture depth that does not exist. Foundational does not mean
-      # shallow — Ohm's law reaches L3 like anything else — it means the
-      # ceiling is set by the competence rather than by a floor in the plan.
-      - id: DP-08-A07
-        title: Electrical Fundamentals for Metrology Work
-        status: draft
-        summary: >-
-          What a person needs before the rest of this domain is legible: the
-          quantities, the circuit behaviour that makes a measurement connection
-          make sense, and the instrument handling and safety that come before
-          anybody is trusted alone with a bench. Entry to the discipline, not a
-          simplified version of it.
-        elements:
-          - { id: DP-08-053, title: "Charge, current, voltage and resistance as physical quantities", kind: knowledge, levelCeiling: 2, status: draft }
-          - { id: DP-08-054, title: "Ohm's law applied to a resistive circuit", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: DP-08-055, title: "Series circuits: shared current and summed voltages", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: DP-08-056, title: "Parallel circuits: shared voltage and summed currents", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: DP-08-057, title: "Equivalent resistance of series and parallel combinations", kind: skill, levelCeiling: 3, status: draft }
-          - { id: DP-08-058, title: "Electrical power and energy in a resistive circuit", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: DP-08-059, title: "Direct and alternating quantities, and what RMS states", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: DP-08-060, title: "Frequency, period and waveform shape", kind: knowledge, levelCeiling: 2, status: draft }
-          - { id: DP-08-061, title: "Reading a circuit diagram well enough to connect to it", kind: knowledge, levelCeiling: 2, status: draft }
-          - { id: DP-08-062, title: "Operating a digital multimeter: function, range and connection", kind: skill, levelCeiling: 3, status: draft }
-          - { id: DP-08-063, title: "Two-terminal and four-terminal connection, and why lead resistance matters", kind: skill, levelCeiling: 3, status: draft }
-          - { id: DP-08-064, title: "Computing a tolerance from a stated accuracy specification", kind: skill, levelCeiling: 2, status: draft }
-          - { id: DP-08-065, title: "Electrical safety for measurement work", kind: knowledge, levelCeiling: 3, status: draft }

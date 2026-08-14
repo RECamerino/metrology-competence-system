@@ -21,10 +21,12 @@
     --accent:   #0B6E6E;
     --accent-w: #E2F0EF;
 
+    --l2: #4A6B57;
     --l3: #6B7C82;
     --l4: #0B6E6E;
     --l5: #96661C;
 
+    --l2-w: #E8F1EA;
     --l3-w: #EDF1F2;
     --l4-w: #E2F0EF;
     --l5-w: #F6EEDF;
@@ -50,10 +52,12 @@
       --accent:   #57C0B8;
       --accent-w: #16302F;
 
+      --l2: #7FA98D;
       --l3: #8698A0;
       --l4: #57C0B8;
       --l5: #D3A257;
 
+      --l2-w: #1C2A21;
       --l3-w: #1B2426;
       --l4-w: #142E2D;
       --l5-w: #2C2417;
@@ -68,8 +72,8 @@
     --ink: #0F1618; --muted: #566A70; --faint: #7E9096;
     --rule: #D9E3E4; --rule-soft: #E7EEEE;
     --accent: #0B6E6E; --accent-w: #E2F0EF;
-    --l3: #6B7C82; --l4: #0B6E6E; --l5: #96661C;
-    --l3-w: #EDF1F2; --l4-w: #E2F0EF; --l5-w: #F6EEDF;
+    --l2: #4A6B57; --l3: #6B7C82; --l4: #0B6E6E; --l5: #96661C;
+    --l2-w: #E8F1EA; --l3-w: #EDF1F2; --l4-w: #E2F0EF; --l5-w: #F6EEDF;
     --shadow: 0 1px 2px rgba(15, 22, 24, .05), 0 8px 24px -18px rgba(15, 22, 24, .35);
   }
   :root[data-theme="dark"] {
@@ -77,8 +81,8 @@
     --ink: #E4ECEE; --muted: #93A5AA; --faint: #6E8085;
     --rule: #263235; --rule-soft: #1D2729;
     --accent: #57C0B8; --accent-w: #16302F;
-    --l3: #8698A0; --l4: #57C0B8; --l5: #D3A257;
-    --l3-w: #1B2426; --l4-w: #142E2D; --l5-w: #2C2417;
+    --l2: #7FA98D; --l3: #8698A0; --l4: #57C0B8; --l5: #D3A257;
+    --l2-w: #1C2A21; --l3-w: #1B2426; --l4-w: #142E2D; --l5-w: #2C2417;
     --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -18px rgba(0, 0, 0, .8);
   }
 
@@ -209,6 +213,7 @@
   .chip:hover { border-color: var(--faint); }
   .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   .chip[aria-pressed="true"] { color: var(--surface); background: var(--ink); border-color: var(--ink); }
+  .chip.l2[aria-pressed="true"] { background: var(--l2); border-color: var(--l2); color: #fff; }
   .chip.l3[aria-pressed="true"] { background: var(--l3); border-color: var(--l3); color: #fff; }
   .chip.l4[aria-pressed="true"] { background: var(--l4); border-color: var(--l4); color: #fff; }
   .chip.l5[aria-pressed="true"] { background: var(--l5); border-color: var(--l5); color: #fff; }
@@ -380,6 +385,8 @@
     width: 42px;
     letter-spacing: -0.2px;
   }
+  .ceil.c1,
+  .ceil.c2 { color: var(--l2); background: var(--l2-w); }
   .ceil.c3 { color: var(--l3); background: var(--l3-w); }
   .ceil.c4 { color: var(--l4); background: var(--l4-w); }
   .ceil.c5 { color: var(--l5); background: var(--l5-w); }
@@ -515,6 +522,7 @@
   <div class="controls">
     <input class="search" id="q" type="search" placeholder="Search elements, areas, domains, or IDs…" autocomplete="off" aria-label="Search the taxonomy">
     <div class="chips" role="group" aria-label="Filter by level ceiling">
+      <button class="chip l2" data-ceil="2" aria-pressed="false">L2</button>
       <button class="chip l3" data-ceil="3" aria-pressed="false">L3</button>
       <button class="chip l4" data-ceil="4" aria-pressed="false">L4</button>
       <button class="chip l5" data-ceil="5" aria-pressed="false">L5</button>
@@ -620,7 +628,7 @@
   }
 
   let totalElements = 0, totalAreas = 0, totalUnits = 0;
-  const ceilCount = { 3: 0, 4: 0, 5: 0 };
+  const ceilCount = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
   const html = DATA.domains.map((d) => {
     const areaCount = d.areas.length;
@@ -635,7 +643,7 @@
     }
 
     const areas = d.areas.map((a) => `
-      <section class="area" data-area>
+      <section class="area" data-area data-text="${esc((a.id + ' ' + a.title).toLowerCase())}">
         <div class="area-head">
           <span class="aid">${esc(a.id)}</span>
           <span class="atitle">${esc(a.title)}</span>
@@ -677,12 +685,16 @@
 
   /* -- Distribution meter ---------------------------------------------- */
 
-  const ramp = { 3: 'var(--l3)', 4: 'var(--l4)', 5: 'var(--l5)' };
-  const names = { 3: 'Competent', 4: 'Proficient', 5: 'Expert' };
-  document.getElementById('meter').innerHTML = [3, 4, 5]
+  const ramp = { 1: 'var(--l2)', 2: 'var(--l2)', 3: 'var(--l3)', 4: 'var(--l4)', 5: 'var(--l5)' };
+  const names = { 1: 'Novice', 2: 'Advanced Beginner', 3: 'Competent', 4: 'Proficient', 5: 'Expert' };
+  // Only the rungs that occur. Hardcoding 3/4/5 dropped every foundational
+  // element out of the meter the moment ceilings below Competent existed —
+  // the bar stopped summing to the corpus and nothing said so.
+  const rungs = [1, 2, 3, 4, 5].filter((c) => ceilCount[c] > 0);
+  document.getElementById('meter').innerHTML = rungs
     .map((c) => `<i style="width:${(ceilCount[c] / totalElements) * 100}%;background:${ramp[c]}"></i>`)
     .join('');
-  document.getElementById('meter-key').innerHTML = [3, 4, 5]
+  document.getElementById('meter-key').innerHTML = rungs
     .map((c) => `<span><u style="background:${ramp[c]}"></u>L${c} ${names[c]} <b>${((ceilCount[c] / totalElements) * 100).toFixed(1)}%</b></span>`)
     .join('');
 
@@ -700,15 +712,24 @@
 
       for (const area of domain.querySelectorAll('[data-area]')) {
         let areaHasVisible = false;
+        // An area title matches its own elements. This does NOT extend to the
+        // domain title: searching "guardband" would then return all 46
+        // elements of CM-08 just because the domain is called Guardbanding,
+        // and searching a domain already works because every element ID
+        // carries the domain prefix.
+        //
+        // An area is a different case — it holds eight to thirteen elements,
+        // and returning them IS the answer to the query. Without this,
+        // searching "foundational knowledge" found nothing at all: no area
+        // title was indexed anywhere, so every one of the 258 areas was
+        // unreachable by name.
+        const areaText = area.dataset.text || '';
+        const areaMatches = q !== '' && areaText.includes(q);
 
         for (const el of area.querySelectorAll('[data-el]')) {
           const ceilOk = state.ceilings.size === 0 || state.ceilings.has(el.dataset.ceil);
           const ekindOk = state.ekinds.size === 0 || state.ekinds.has(el.dataset.ekind);
-          // Match against the element only. Matching the domain title too would
-          // mean searching "guardband" returns all 46 elements of CM-08 just
-          // because the domain is called Guardbanding. Searching a domain still
-          // works, because every element ID carries the domain prefix.
-          const textOk = q === '' || el.dataset.text.includes(q);
+          const textOk = q === '' || areaMatches || el.dataset.text.includes(q);
           const visible = kindOk && ceilOk && ekindOk && textOk;
           el.hidden = !visible;
           if (visible) { areaHasVisible = true; shownElements++; }

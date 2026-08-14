@@ -89,7 +89,7 @@ const cell = (s: string) => s.replace(/\|/g, '\\|');
 function domainDoc(d: Domain): string {
   const els = elementsOf(d);
   const kinds = { knowledge: 0, skill: 0, judgment: 0 } as Record<string, number>;
-  const ceilings = { 3: 0, 4: 0, 5: 0 } as Record<number, number>;
+  const ceilings = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 } as Record<number, number>;
   for (const e of els) {
     kinds[e.kind] = (kinds[e.kind] ?? 0) + 1;
     ceilings[e.levelCeiling] = (ceilings[e.levelCeiling] ?? 0) + 1;
@@ -112,7 +112,7 @@ function domainDoc(d: Domain): string {
   out.push('');
   out.push(
     `Kind: ${kinds.knowledge} knowledge, ${kinds.skill} skill, ${kinds.judgment} judgment · ` +
-      `Ceilings: ${ceilings[3]} to L3, ${ceilings[4]} to L4, ${ceilings[5]} to L5 · every element starts at L1`,
+      `Ceilings: ${[1, 2, 3, 4, 5].filter((c) => ceilings[c]).map((c) => `${ceilings[c]} to L${c}`).join(', ')} · every element starts at L1`,
   );
   out.push('');
   out.push('---');
@@ -156,7 +156,7 @@ function indexDoc(): string {
   const units = allElements.reduce((n, e) => n + e.levelCeiling, 0);
 
   const kinds = { knowledge: 0, skill: 0, judgment: 0 } as Record<string, number>;
-  const ceilings = { 3: 0, 4: 0, 5: 0 } as Record<number, number>;
+  const ceilings = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 } as Record<number, number>;
   for (const e of allElements) {
     kinds[e.kind] = (kinds[e.kind] ?? 0) + 1;
     ceilings[e.levelCeiling] = (ceilings[e.levelCeiling] ?? 0) + 1;
@@ -237,7 +237,10 @@ function indexDoc(): string {
   out.push('');
   out.push('| Ceiling | Attainable range | Meaning at the ceiling | Elements | Share |');
   out.push('|---|---|---|---|---|');
-  for (const c of [3, 4, 5]) {
+  // Every rung that actually occurs. Hardcoding 3/4/5 silently dropped the
+  // foundational elements from this table the moment ceilings below Competent
+  // became expressible.
+  for (const c of [1, 2, 3, 4, 5].filter((c) => ceilings[c])) {
     out.push(`| ${c} | ${levelRange(c)} | ${LEVEL_LABEL[c]} | ${ceilings[c]} | ${pct(ceilings[c]!)}% |`);
   }
   out.push('');
@@ -286,18 +289,16 @@ function indexDoc(): string {
         : 'Measurement-discipline depth. Separately versioned; a role profile selects from these rather than assuming them entire.',
     );
     out.push('');
-    out.push('| Domain | Areas | Elements | K / S / J | L3 / L4 / L5 |');
+    out.push('| Domain | Areas | Elements | K / S / J | L2 / L3 / L4 / L5 |');
     out.push('|---|---|---|---|---|');
     for (const d of group) {
       const els = elementsOf(d);
       const k = els.filter((e) => e.kind === 'knowledge').length;
       const s = els.filter((e) => e.kind === 'skill').length;
       const j = els.filter((e) => e.kind === 'judgment').length;
-      const c3 = els.filter((e) => e.levelCeiling === 3).length;
-      const c4 = els.filter((e) => e.levelCeiling === 4).length;
-      const c5 = els.filter((e) => e.levelCeiling === 5).length;
+      const at = (c: number) => els.filter((e) => e.levelCeiling === c).length;
       out.push(
-        `| [**${d.id}** ${cell(d.title)}](${d.id}.md) | ${d.competencyAreas.length} | ${els.length} | ${k} / ${s} / ${j} | ${c3} / ${c4} / ${c5} |`,
+        `| [**${d.id}** ${cell(d.title)}](${d.id}.md) | ${d.competencyAreas.length} | ${els.length} | ${k} / ${s} / ${j} | ${at(2)} / ${at(3)} / ${at(4)} / ${at(5)} |`,
       );
     }
     out.push('');
