@@ -429,6 +429,40 @@ A deployment scope names an occupation in `role` and any overlays in `overlays`;
 
 `CM-11-A05` (Approved Signatory Competence) and the `authorities` field already on the role registry both anticipated this. Phase 2 makes it explicit.
 
+## The corpus started above where people start
+
+Raised by a practising metrologist, checked, and correct.
+
+`DP-08` — DC and Low Frequency Electrical Metrology, 52 elements — opened with *The ampere definition from the elementary charge* (L4) and *Josephson effect and voltage standards* (L5). It contained **no element for Ohm's law**, none for series or parallel circuit behaviour, and none for what a volt is. `CM-13-A05`, "Underlying Physics for Metrologists", covers thermal expansion, heat transfer, elasticity, fluid statics and wave optics — and has no electrical content at all, across four electrical discipline packs.
+
+Every one of the 43 domains bottomed out at ceiling 3, because `tools/ceiling-plan.json` defined only L3, L4 and L5. There was no rung below Competent in the plan, so an element that genuinely tops out lower could not be expressed, and foundational content was therefore either inflated or — as actually happened — left out entirely.
+
+### Why this was a defect and not a scope decision
+
+A metrology BOK is not a physics textbook, and that would be a perfectly good reason to exclude circuit theory. Three things stop it being the reason here.
+
+**Nothing declared the assumption.** A stated prerequisite is a scope decision. An unstated one is a gate, and *nothing gates entry* is the project's first principle.
+
+**The role registry already contains the excluded person.** `metrology-technician-i` — "performs routine calibrations against documented procedures, under supervision" — is a first-class role requiring a `roleTarget` on every element, and there was no element pitched where they actually begin.
+
+**It would have been decided 2232 times instead of once.** Every author reaching "what does `metrology-technician-i` need for *Cryogenic current comparator bridges*?" answers `null`, honestly. Repeat that across the corpus and the technician is written out one cell at a time — and the repair becomes thousands of edits rather than one structural change. The same deadline logic as `roleType`: **before role targets are authored at volume.**
+
+### What it is not
+
+It is not a lower tier of the same elements. L1 is already reachable on all 2245 — that was never the gap, and the level-range work that made L1 visible in the generated views does not address this. **L1 on a hard element is "can follow a supplied rule on a hard thing", which is not the same claim as competence in series-circuit behaviour.** The fix is elements, not levels.
+
+### The shape
+
+Each domain carries a foundational-knowledge area where one is appropriate, with **the same depth as any other area in that domain**, covering what personnel need to perform the work.
+
+Scope is bounded by a checkable test rather than by anyone's view of what a technician ought to know: an element belongs if a technician doing supervised work in that domain needs it, **or** if an element elsewhere in the domain is unintelligible without it. Ohm's law passes both — `DP-08-021`, Wheatstone and Kelvin bridge techniques, is not comprehensible without it. Maxwell's equations fail both. The test also gives `prerequisites` somewhere to bottom out; that field could previously only point within the professional tier, so the graph had no floor.
+
+Ceilings run lower here and that is the point. `DP-08-053` (charge, current, voltage and resistance as quantities) tops out at **L2**: applying a definition in a familiar situation and recognising an unfamiliar one is the whole competence, and there is no unsupervised novel-case practice above it. Ohm's law reaches L3 like anything else. Foundational does not mean shallow — it means the ceiling is set by the competence rather than by a floor in the plan.
+
+**Training is authored per domain, not per element.** Foundational knowledge is learned as a block, and thirteen modules for thirteen fundamentals would be an administrative fiction rather than a teaching decision. One module per foundational area. Note the ordering constraint that already applies: a module needs `knowledgeRefs` into the BOK, and no BOK article covers electrical fundamentals yet, so the module follows the article rather than the taxonomy.
+
+`DP-08-A07` — Electrical Fundamentals for Metrology Work, 13 elements — is the worked pattern. The remaining 42 domains follow it.
+
 ## Who owns a person's competency record
 
 **The individual. Always, and without qualification.**

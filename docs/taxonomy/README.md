@@ -19,9 +19,9 @@ The authoritative source is [`content/competence/taxonomy/domains/`](../../conte
 | | |
 |---|---|
 | Domains | 43 |
-| Competency areas | 257 |
-| Elements | 2232 |
-| Assessable units | 9096 |
+| Competency areas | 258 |
+| Elements | 2245 |
+| Assessable units | 9131 |
 
 An assessable unit is one element at one level. Every level is assessed at element scope, so a credential names exactly what was tested.
 
@@ -45,9 +45,9 @@ The highest level attainable for an element. Not every element supports all five
 
 | Ceiling | Attainable range | Meaning at the ceiling | Elements | Share |
 |---|---|---|---|---|
-| 3 | L1–L3 | Competent | 293 | 13.1% |
-| 4 | L1–L4 | Proficient | 1478 | 66.2% |
-| 5 | L1–L5 | Expert | 461 | 20.7% |
+| 3 | L1–L3 | Competent | 302 | 13.5% |
+| 4 | L1–L4 | Proficient | 1478 | 65.8% |
+| 5 | L1–L5 | Expert | 461 | 20.5% |
 
 **L5 is reserved** for elements where a person could plausibly spend a career and still be learning, and where a defensible capstone with cross-organizational review is actually writable.
 
@@ -57,9 +57,9 @@ What kind of competence an element is, and therefore what evidence proves it.
 
 | Kind | The claim | What proves it | Elements | Share |
 |---|---|---|---|---|
-| Knowledge | I understand this | Explanation, relation, analysis | 658 | 29.5% |
-| Skill | I can perform this | A work product they produced, not an account of it | 1131 | 50.7% |
-| Judgment | I can decide and defend it | A defence; often no single right answer | 443 | 19.8% |
+| Knowledge | I understand this | Explanation, relation, analysis | 667 | 29.7% |
+| Skill | I can perform this | A work product they produced, not an account of it | 1135 | 50.6% |
+| Judgment | I can decide and defend it | A defence; often no single right answer | 443 | 19.7% |
 
 **Authority is deliberately not a kind.** Knowledge, skill and judgment are earned and belong to a person. Authority is granted, and is a relationship between a person, an organization and a scope of work. Competency credentials are portable; authorizations are not. See [`../00-context.md`](../00-context.md).
 
@@ -105,7 +105,7 @@ Measurement-discipline depth. Separately versioned; a role profile selects from 
 | [**DP-05** Temperature and Thermophysical Properties](DP-05.md) | 5 | 54 | 11 / 41 / 2 | 1 / 45 / 8 |
 | [**DP-06** Humidity and Moisture](DP-06.md) | 5 | 37 | 6 / 28 / 3 | 5 / 26 / 6 |
 | [**DP-07** Flow Measurement](DP-07.md) | 5 | 48 | 24 / 17 / 7 | 2 / 39 / 7 |
-| [**DP-08** DC and Low Frequency Electrical Metrology](DP-08.md) | 6 | 52 | 13 / 38 / 1 | 2 / 39 / 11 |
+| [**DP-08** DC and Low Frequency Electrical Metrology](DP-08.md) | 7 | 65 | 22 / 42 / 1 | 11 / 39 / 11 |
 | [**DP-09** AC, Power, Energy and Impedance](DP-09.md) | 5 | 48 | 8 / 40 / 0 | 2 / 38 / 8 |
 | [**DP-10** RF, Microwave, Antenna and EMC](DP-10.md) | 6 | 57 | 15 / 41 / 1 | 1 / 46 / 10 |
 | [**DP-11** Magnetics and High Voltage](DP-11.md) | 5 | 41 | 9 / 29 / 3 | 2 / 32 / 7 |
