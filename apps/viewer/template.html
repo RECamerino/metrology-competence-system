@@ -324,7 +324,9 @@
 
   .el {
     display: grid;
-    grid-template-columns: 92px 1fr 18px 26px;
+    /* Last column is 42px, not 26px: the badge carries a range now, and a
+       column sized for one digit squashed the kind letter beside it. */
+    grid-template-columns: 92px 1fr 18px 42px;
     align-items: baseline;
     gap: 12px;
     padding: 5px 0;
@@ -362,6 +364,10 @@
   .kind.k-s { color: var(--accent); }
   .kind.k-j { color: var(--l5); }
 
+  /* The attainable RANGE, not the ceiling alone. Showing "4" against 1478
+     elements told a reader where an element stops and hid where it starts —
+     and L1/L2 are the on-ramp, and currently the only levels attainable at
+     all, since every element is still draft. */
   .ceil {
     font-family: var(--mono);
     font-variant-numeric: tabular-nums;
@@ -371,11 +377,89 @@
     border-radius: 3px;
     padding: 2px 0;
     justify-self: end;
-    width: 24px;
+    width: 42px;
+    letter-spacing: -0.2px;
   }
   .ceil.c3 { color: var(--l3); background: var(--l3-w); }
   .ceil.c4 { color: var(--l4); background: var(--l4-w); }
   .ceil.c5 { color: var(--l5); background: var(--l5-w); }
+
+  /* ---- Authored elements expand ---------------------------------------- */
+
+  .el.has-detail { cursor: pointer; }
+  .el.has-detail:hover .etitle,
+  .el.has-detail:focus-visible .etitle { color: var(--accent); }
+  .el.has-detail:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* A dot rather than a caret: it marks that a definition EXISTS, which at two
+     of 2232 is information in itself. */
+  .el.has-detail .eid::after {
+    content: '●';
+    font-size: 7px;
+    color: var(--accent);
+    vertical-align: 2px;
+    margin-left: 5px;
+  }
+
+  .edetail {
+    grid-column: 1 / -1;
+    display: none;
+    padding: 14px 0 8px;
+    border-top: 1px dashed var(--rule-soft);
+    margin-top: 8px;
+  }
+  .el.open .edetail { display: block; }
+
+  .edetail h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 16px 0 7px;
+  }
+  .edetail h4:first-child { margin-top: 0; }
+  .edetail .esummary {
+    font-family: var(--serif);
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .anchors { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .anchors li { display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: baseline; }
+  .anchors b {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 2px 0;
+    text-align: center;
+    border-radius: 3px;
+    color: var(--l3);
+    background: var(--l3-w);
+  }
+  .anchors span { font-size: 13px; line-height: 1.55; }
+
+  .facts { display: flex; flex-wrap: wrap; gap: 6px; }
+  .facts span {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    background: var(--rule-soft);
+    color: var(--ink-soft);
+  }
+
+  .reflist { list-style: none; margin: 0; padding: 0; font-size: 12.5px; line-height: 1.6; }
+  .reflist li { margin-bottom: 4px; }
+  .reflist code { font-family: var(--mono); font-size: 11.5px; color: var(--accent); }
+  .reflist em { color: var(--faint); font-style: normal; }
+
+  .targets { display: flex; flex-wrap: wrap; gap: 4px 6px; font-size: 11.5px; }
+  .targets span { font-family: var(--mono); color: var(--ink-soft); }
+  .targets span b { color: var(--accent); font-weight: 600; }
+  .targets span.na { color: var(--faint); }
 
   .empty {
     text-align: center;
@@ -394,7 +478,12 @@
     .domain-head { grid-template-columns: auto 1fr; row-gap: 6px; }
     .dmeta { grid-column: 1 / -1; }
     .caret { display: none; }
-    .el { grid-template-columns: 82px 1fr 26px; }
+    /* Four columns, not three. The old rule left one cell too few for the
+       row's children, so the level badge wrapped onto a line of its own —
+       tolerable when it was a single digit and not when it carries the
+       attainable range, which is the thing a reader most needs to see. */
+    .el { grid-template-columns: 78px 1fr 14px 40px; gap: 8px; }
+    .ceil { width: 40px; font-size: 10px; }
   }
 </style>
 
@@ -404,9 +493,10 @@
     <p class="eyebrow">Phase 1 · Review gate</p>
     <h1>Metrology Body of Knowledge — taxonomy skeleton</h1>
     <p class="standfirst">
-      Every domain, competency area and element identifier in the corpus, with its
-      attainable level ceiling. Structure and coverage only — no content is authored
-      against this yet, and nothing here is expensive to change until it is.
+      Every domain, competency area and element identifier in the corpus, with the
+      range of levels attainable against it. <strong>Every element starts at L1</strong> —
+      the badge says how far it goes, not where it begins. Rows marked with a dot have an
+      authored definition and expand to show it; the rest are structure and coverage only.
     </p>
 
     <div class="totals">
@@ -461,13 +551,73 @@
 
   const KINDS = {
     k: 'Knowledge — can explain, relate and analyse it. Evidence is explanation.',
-    s: 'Skill — can perform it. Evidence is a witnessed work product.',
+    s: 'Skill — can perform it. Evidence is a work product they produced; an account of how it would be done cannot substitute.',
     j: 'Judgment — can decide under ambiguity and defend it. Evidence is a defence.',
   };
+
+  const LEVEL_NAMES = { 1: 'Novice', 2: 'Advanced Beginner', 3: 'Competent', 4: 'Proficient', 5: 'Expert' };
 
   /* -- Build the DOM once; filtering only toggles [hidden]. ------------- */
 
   const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  /**
+   * The authored definition of one element.
+   *
+   * Only reached for elements that have one. The anchors are the substance:
+   * everything else on the row is metadata about the claim, and these are the
+   * claim — what a person can be SEEN doing at each level.
+   */
+  function detail(e) {
+    const d = e.d;
+    const anchors = Object.keys(d.a).sort().map((lvl) => `
+      <li>
+        <b title="L${lvl} — ${LEVEL_NAMES[lvl] ?? ''}">L${esc(String(lvl))}</b>
+        <span>${esc(String(d.a[lvl]).trim())}</span>
+      </li>`).join('');
+
+    // A null target is not "unrated": it says the element could never be that
+    // role's work in any deployment, which is a different claim and is why the
+    // validator refuses to let an author leave one out.
+    const targets = Object.keys(d.r).sort().map((role) => {
+      const v = d.r[role];
+      return v === null
+        ? `<span class="na" title="Never this role's work in any deployment">${esc(role)} —</span>`
+        : `<span>${esc(role)} <b>L${v}</b></span>`;
+    }).join('');
+
+    const citations = d.ci.map((c) => `
+      <li><code>${esc(c.s)} §${esc(c.c)}</code>${c.r ? ` — <em>${esc(c.r.trim())}</em>` : ''}</li>`).join('');
+
+    const knowledge = d.kr.map((k) => `
+      <li><code>${esc(k.a)} #${esc(k.s)}</code>${k.r ? ` — <em>${esc(k.r.trim())}</em>` : ''}</li>`).join('');
+
+    const links = [...(d.pre ?? []).map((p) => `prerequisite ${p}`), ...(d.rel ?? []).map((r) => `related ${r}`)];
+
+    return `
+      <div class="edetail">
+        <p class="esummary">${esc(String(d.s).trim())}</p>
+
+        <h4>Performance anchors — what is observed at each level</h4>
+        <ul class="anchors">${anchors}</ul>
+
+        <h4>Role targets — the minimum a role needs, if the element is in scope</h4>
+        <div class="targets">${targets}</div>
+
+        <h4>Knowledge</h4>
+        <ul class="reflist">${knowledge}</ul>
+
+        <h4>Sources</h4>
+        <ul class="reflist">${citations}</ul>
+
+        <h4>Status</h4>
+        <div class="facts">
+          <span>${esc(d.st)}</span>
+          <span>demonstration: ${esc(d.dm)}</span>
+          ${links.map((l) => `<span>${esc(l)}</span>`).join('')}
+        </div>
+      </div>`;
+  }
 
   let totalElements = 0, totalAreas = 0, totalUnits = 0;
   const ceilCount = { 3: 0, 4: 0, 5: 0 };
@@ -494,11 +644,12 @@
         ${a.summary ? `<p class="asummary">${esc(a.summary)}</p>` : ''}
         <ul class="elements">
           ${a.elements.map((e) => `
-            <li class="el" data-el data-ceil="${e.c}" data-ekind="${e.k}" data-text="${esc((e.id + ' ' + e.title).toLowerCase())}">
+            <li class="el${e.d ? ' has-detail' : ''}" data-el data-ceil="${e.c}" data-ekind="${e.k}" data-text="${esc((e.id + ' ' + e.title).toLowerCase())}"${e.d ? ' data-detail tabindex="0" role="button" aria-expanded="false"' : ''}>
               <span class="eid">${esc(e.id)}</span>
               <span class="etitle">${esc(e.title)}</span>
               <span class="kind k-${e.k}" title="${KINDS[e.k] ?? ''}">${e.k.toUpperCase()}</span>
-              <span class="ceil c${e.c}" title="Attainable level ceiling ${e.c}">${e.c}</span>
+              <span class="ceil c${e.c}" title="Attainable from L1 up to L${e.c} — ${e.c} assessable units">L1&#8211;${e.c}</span>
+              ${e.d ? detail(e) : ''}
             </li>`).join('')}
         </ul>
       </section>`).join('');
@@ -584,11 +735,35 @@
   /* -- Interaction ------------------------------------------------------ */
 
   domainsEl.addEventListener('click', (event) => {
+    // An authored element expands into its definition. Checked before the
+    // domain head so a click inside an open detail panel does not collapse
+    // the domain underneath it.
+    const row = event.target.closest('[data-detail]');
+    if (row) {
+      // Let a click land inside the open panel without closing it — the
+      // anchors are long enough that people will select text in them.
+      if (event.target.closest('.edetail')) return;
+      const open = row.classList.toggle('open');
+      row.setAttribute('aria-expanded', String(open));
+      return;
+    }
+
     const head = event.target.closest('.domain-head');
     if (!head) return;
     const domain = head.closest('.domain');
     const open = domain.classList.toggle('open');
     head.setAttribute('aria-expanded', String(open));
+  });
+
+  // The rows are focusable and announced as buttons, so they must answer the
+  // keyboard the same way.
+  domainsEl.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    const row = event.target.closest('[data-detail]');
+    if (!row || event.target !== row) return;
+    event.preventDefault();
+    const open = row.classList.toggle('open');
+    row.setAttribute('aria-expanded', String(open));
   });
 
   let debounce;

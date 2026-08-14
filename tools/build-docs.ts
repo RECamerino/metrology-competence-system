@@ -59,6 +59,23 @@ const LEVEL_LABEL: Record<number, string> = {
   5: 'Expert',
 };
 
+/**
+ * The attainable range, rather than the ceiling alone.
+ *
+ * Every element starts at L1. Rendering only the ceiling showed 1478 elements
+ * as "Proficient" with nothing indicating there were rungs beneath it, which
+ * reads as a requirement rather than a summit — and hides the on-ramp from
+ * exactly the reader the open-entry principle exists for. It also hid the only
+ * levels currently attainable: rule 7 permits L1 and L2 against a draft
+ * element, and every element in the corpus is draft.
+ */
+const levelRange = (ceiling: number) => `L1–L${ceiling}`;
+
+/** The generic ladder, loaded so the rungs mean something to a first reader. */
+const proficiency = parseYaml(
+  readFileSync(join(REPO_ROOT, 'content', 'competence', 'taxonomy', 'proficiency.yaml'), 'utf8'),
+) as { levels: Array<{ level: number; name: string; descriptor: string }> };
+
 const elementsOf = (d: Domain) => d.competencyAreas.flatMap((a) => a.elements);
 const allElements = domains.flatMap(elementsOf);
 
@@ -95,7 +112,7 @@ function domainDoc(d: Domain): string {
   out.push('');
   out.push(
     `Kind: ${kinds.knowledge} knowledge, ${kinds.skill} skill, ${kinds.judgment} judgment · ` +
-      `Ceiling: ${ceilings[3]} L3, ${ceilings[4]} L4, ${ceilings[5]} L5`,
+      `Ceilings: ${ceilings[3]} to L3, ${ceilings[4]} to L4, ${ceilings[5]} to L5 · every element starts at L1`,
   );
   out.push('');
   out.push('---');
@@ -108,11 +125,11 @@ function domainDoc(d: Domain): string {
       out.push(`> ${a.summary.trim().replace(/\s+/g, ' ')}`);
       out.push('');
     }
-    out.push('| ID | Element | Kind | Ceiling |');
-    out.push('|---|---|---|---|');
+    out.push('| ID | Element | Kind | Levels | Ceiling means |');
+    out.push('|---|---|---|---|---|');
     for (const e of a.elements) {
       out.push(
-        `| \`${e.id}\` | ${cell(e.title)} | ${KIND_LABEL[e.kind] ?? e.kind} | ${e.levelCeiling} — ${LEVEL_LABEL[e.levelCeiling]} |`,
+        `| \`${e.id}\` | ${cell(e.title)} | ${KIND_LABEL[e.kind] ?? e.kind} | ${levelRange(e.levelCeiling)} | ${LEVEL_LABEL[e.levelCeiling]} |`,
       );
     }
     out.push('');
@@ -190,14 +207,38 @@ function indexDoc(): string {
   );
   out.push('');
 
+  out.push('## The ladder');
+  out.push('');
+  out.push(
+    '**Every element starts at L1.** The ceiling below says how far an element goes, not where it begins — ' +
+      'a reader who sees only "Proficient" against 1478 elements has been shown the summit and not the climb. ' +
+      'These five levels are the frame every per-element anchor is written into.',
+  );
+  out.push('');
+  out.push('| | Level | What it means |');
+  out.push('|---|---|---|');
+  for (const l of proficiency.levels) {
+    out.push(`| **L${l.level}** | ${l.name} | ${l.descriptor.trim().replace(/\s+/g, ' ')} |`);
+  }
+  out.push('');
+  out.push(
+    'L1 and L2 are witnessed observation and may be assessed against a `draft` element; ' +
+      'from L3 the element must be `stable`. Every element in the corpus is currently draft, ' +
+      'so **L1 and L2 are the only levels anybody can earn today**.',
+  );
+  out.push('');
+
   out.push('## Level ceiling');
   out.push('');
-  out.push('The highest level attainable for an element. Not every element supports all five.');
+  out.push(
+    'The highest level attainable for an element. Not every element supports all five, ' +
+      'and an element attainable to L4 carries four assessable units — L1, L2, L3 and L4 — not one.',
+  );
   out.push('');
-  out.push('| Ceiling | Meaning | Elements | Share |');
-  out.push('|---|---|---|---|');
+  out.push('| Ceiling | Attainable range | Meaning at the ceiling | Elements | Share |');
+  out.push('|---|---|---|---|---|');
   for (const c of [3, 4, 5]) {
-    out.push(`| ${c} | ${LEVEL_LABEL[c]} | ${ceilings[c]} | ${pct(ceilings[c]!)}% |`);
+    out.push(`| ${c} | ${levelRange(c)} | ${LEVEL_LABEL[c]} | ${ceilings[c]} | ${pct(ceilings[c]!)}% |`);
   }
   out.push('');
   out.push(
@@ -304,6 +345,7 @@ function csvDoc(): string {
       'element_title',
       'kind',
       'level_ceiling',
+      'attainable_levels',
       'status',
     ].join(','),
   ];
@@ -312,7 +354,14 @@ function csvDoc(): string {
     for (const a of d.competencyAreas) {
       for (const e of a.elements) {
         rows.push(
-          [d.id, d.title, d.kind, a.id, a.title, e.id, e.title, e.kind, e.levelCeiling, e.status]
+          [
+            d.id, d.title, d.kind, a.id, a.title, e.id, e.title, e.kind,
+            e.levelCeiling,
+            // Every level from 1 to the ceiling is an assessable unit. Without
+            // this the CSV could not answer "how many units exist at L1".
+            Array.from({ length: e.levelCeiling }, (_, i) => i + 1).join(' '),
+            e.status,
+          ]
             .map(q)
             .join(','),
         );
