@@ -99,3 +99,48 @@ domains:
           - { id: DP-08-050, title: "Data acquisition system and scanner calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-08-051, title: "Process calibrators and loop calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-08-052, title: "Oscilloscope DC and timebase calibration", kind: skill, levelCeiling: 4, status: draft }
+
+      # Added after a practising metrologist pointed out that this domain began
+      # at the ampere definition and the Josephson effect, and contained no
+      # element for Ohm's law. The corpus assumed the electrical fundamentals
+      # its own entry-level role — metrology-technician-i, "performs routine
+      # calibrations under supervision" — is still acquiring, which made prior
+      # education an unstated entry requirement in a project whose first
+      # principle is that nothing gates entry.
+      #
+      # SCOPE. Not a physics course. What somebody must hold to work in this
+      # domain and to make sense of the areas above: an element belongs here if
+      # a technician doing supervised electrical calibration needs it, or if an
+      # element elsewhere in DP-08 is unintelligible without it. Maxwell's
+      # equations fail both tests; Ohm's law passes both.
+      #
+      # CEILINGS RUN LOWER HERE, AND THAT IS THE POINT. Several of these top
+      # out at L2 because there is no L3 to reach: applying a definition in a
+      # familiar situation and recognising an unfamiliar one is the whole of
+      # the competence, and claiming a Competent tier above it would
+      # manufacture depth that does not exist. Foundational does not mean
+      # shallow — Ohm's law reaches L3 like anything else — it means the
+      # ceiling is set by the competence rather than by a floor in the plan.
+      - id: DP-08-A07
+        title: Electrical Fundamentals for Metrology Work
+        status: draft
+        summary: >-
+          What a person needs before the rest of this domain is legible: the
+          quantities, the circuit behaviour that makes a measurement connection
+          make sense, and the instrument handling and safety that come before
+          anybody is trusted alone with a bench. Entry to the discipline, not a
+          simplified version of it.
+        elements:
+          - { id: DP-08-053, title: "Charge, current, voltage and resistance as physical quantities", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-08-054, title: "Ohm's law applied to a resistive circuit", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-055, title: "Series circuits: shared current and summed voltages", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-056, title: "Parallel circuits: shared voltage and summed currents", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-057, title: "Equivalent resistance of series and parallel combinations", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-058, title: "Electrical power and energy in a resistive circuit", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-059, title: "Direct and alternating quantities, and what RMS states", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-08-060, title: "Frequency, period and waveform shape", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-08-061, title: "Reading a circuit diagram well enough to connect to it", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-08-062, title: "Operating a digital multimeter: function, range and connection", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-063, title: "Two-terminal and four-terminal connection, and why lead resistance matters", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-08-064, title: "Computing a tolerance from a stated accuracy specification", kind: skill, levelCeiling: 2, status: draft }
+          - { id: DP-08-065, title: "Electrical safety for measurement work", kind: knowledge, levelCeiling: 3, status: draft }

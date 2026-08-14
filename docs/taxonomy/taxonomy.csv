@@ -1600,6 +1600,19 @@ DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A06,Multifuncti
 DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A06,Multifunction Instruments and Calibrators,DP-08-050,Data acquisition system and scanner calibration,skill,4,1 2 3 4,draft
 DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A06,Multifunction Instruments and Calibrators,DP-08-051,Process calibrators and loop calibration,skill,4,1 2 3 4,draft
 DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A06,Multifunction Instruments and Calibrators,DP-08-052,Oscilloscope DC and timebase calibration,skill,4,1 2 3 4,draft
+DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A07,Electrical Fundamentals for Metrology Work,DP-08-053,"Charge, current, voltage and resistance as physical quantities",knowledge,2,1 2,draft
+DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A07,Electrical Fundamentals for Metrology Work,DP-08-054,Ohm's law applied to a resistive circuit,knowledge,3,1 2 3,draft
+DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A07,Electrical Fundamentals for Metrology Work,DP-08-055,Series circuits: shared current and summed voltages,knowledge,3,1 2 3,draft
+DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A07,Electrical Fundamentals for Metrology Work,DP-08-056,Parallel circuits: shared voltage and summed currents,knowledge,3,1 2 3,draft
+DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A07,Electrical Fundamentals for Metrology Work,DP-08-057,Equivalent resistance of series and parallel combinations,skill,3,1 2 3,draft
+DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A07,Electrical Fundamentals for Metrology Work,DP-08-058,Electrical power and energy in a resistive circuit,knowledge,3,1 2 3,draft
+DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A07,Electrical Fundamentals for Metrology Work,DP-08-059,"Direct and alternating quantities, and what RMS states",knowledge,3,1 2 3,draft
+DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A07,Electrical Fundamentals for Metrology Work,DP-08-060,"Frequency, period and waveform shape",knowledge,2,1 2,draft
+DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A07,Electrical Fundamentals for Metrology Work,DP-08-061,Reading a circuit diagram well enough to connect to it,knowledge,2,1 2,draft
+DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A07,Electrical Fundamentals for Metrology Work,DP-08-062,"Operating a digital multimeter: function, range and connection",skill,3,1 2 3,draft
+DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A07,Electrical Fundamentals for Metrology Work,DP-08-063,"Two-terminal and four-terminal connection, and why lead resistance matters",skill,3,1 2 3,draft
+DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A07,Electrical Fundamentals for Metrology Work,DP-08-064,Computing a tolerance from a stated accuracy specification,skill,2,1 2,draft
+DP-08,DC and Low Frequency Electrical Metrology,discipline,DP-08-A07,Electrical Fundamentals for Metrology Work,DP-08-065,Electrical safety for measurement work,knowledge,3,1 2 3,draft
 DP-09,"AC, Power, Energy and Impedance",discipline,DP-09-A01,AC Voltage and Current,DP-09-001,"RMS, average and peak values and their relationships",knowledge,3,1 2 3,draft
 DP-09,"AC, Power, Energy and Impedance",discipline,DP-09-A01,AC Voltage and Current,DP-09-002,Thermal converters and AC-DC transfer difference,skill,5,1 2 3 4 5,draft
 DP-09,"AC, Power, Energy and Impedance",discipline,DP-09-A01,AC Voltage and Current,DP-09-003,Multijunction thermal converters,skill,4,1 2 3 4,draft

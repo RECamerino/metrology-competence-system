@@ -30,10 +30,10 @@ Three principles held in tension deliberately:
 
 | | |
 |---|---|
-| Domains / areas / elements | 43 / 257 / **2232** |
-| Assessable units | 9096 |
-| Ceilings — L3 / L4 / L5 | 13.1% / 66.2% / 20.7% |
-| Kinds — knowledge / skill / judgment | 29.5% / 50.7% / 19.8% |
+| Domains / areas / elements | 43 / 258 / **2245** |
+| Assessable units | 9131 |
+| Ceilings — L2 / L3 / L4 / L5 | 0.2% / 13.5% / 65.8% / 20.5% |
+| Kinds — knowledge / skill / judgment | 29.7% / 50.6% / 19.7% |
 | Content authored | **2 elements** · **1 BOK article** · **1 module** |
 | Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
 | Checks | 0 errors · 247/247 tests · typecheck clean |
@@ -95,6 +95,8 @@ Three principles held in tension deliberately:
 **11. `skill` is not the same as bench work.** `kind: skill` means the evidence is observable *performance* rather than explanation. It does **not** mean the performance happens at a bench — constructing an uncertainty budget is a skill and is desk work. The element declares `demonstration: desk | equipment`, and a module preparing for an `equipment` element must list it in `requiresPhysicalDemonstration`, leaving it `pending-demonstration`. Listing a `desk` element there is **also** an error: it tells a learner they are waiting for access they never needed, and inventing a barrier is as wrong as hiding one.
 
 **12. The provenance tier is evidenced, not declared.** `provenanceTier` carries the argument for how open entry and rigour coexist, and until it was checked it was read by no code at all — a credential could assert `accredited-body` with one unevidenced witness. Each step up now requires something a reader can verify offline: **self-study** a signer who is not the subject; **peer-reviewed** a signer whose standing is *evidenced*, so an unbacked `heldLevel` or `credentialedReviewer` does not lift it; **organization** an issuer registered with a name and trust-registry entry; **accredited-body** the issuer's own accreditation recorded. **`authority` cannot be issued** — no such issuer exists (open decision 4). Understating is permitted and silent. **`self-study` means the witness has no standing, not that there is no witness** — which is why it is issuable at all, and how somebody with no employer and no network holds something real.
+
+**13. Every domain carries a foundational-knowledge area where one is appropriate.** The corpus began each discipline at professional practice — `DP-08` opened at the ampere definition and the Josephson effect and had no element for Ohm's law — so prior education was an unstated entry requirement in a project whose first principle is that nothing gates entry. The gap was invisible because the *levels* looked open: L1 is reachable on every element, but L1 on *Cryogenic current comparator bridges* is not competence in series-circuit behaviour. **The fix is elements, not levels.** A foundational area has the same depth as any other area in its domain and covers what personnel actually need to do the work. Scope test: it belongs if a technician doing supervised work in that domain needs it, or if an element elsewhere in the domain is unintelligible without it — Ohm's law passes both, Maxwell's equations fail both. **Ceilings genuinely run below 3 here**, which is why `tools/ceiling-plan.json` now has L1 and L2 rungs it never had; a definitional element with no unsupervised novel-case practice tops out at L2, and inflating it to L3 manufactures depth. `DP-08-A07` is the worked pattern. **Training for a domain's foundational knowledge is authored as one module, not one per element** — it is learned as a block, and 13 modules for 13 fundamentals would be an administrative fiction.
 
 ---
 
