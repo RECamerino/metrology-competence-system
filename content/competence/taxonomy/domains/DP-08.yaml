@@ -122,7 +122,7 @@ domains:
       # shallow — Ohm's law reaches L3 like anything else — it means the
       # ceiling is set by the competence rather than by a floor in the plan.
       - id: DP-08-A07
-        title: Electrical Fundamentals for Metrology Work
+        title: Foundational Knowledge — Electrical Quantities and Circuits
         status: draft
         summary: >-
           What a person needs before the rest of this domain is legible: the

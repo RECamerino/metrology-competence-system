@@ -461,7 +461,9 @@ Ceilings run lower here and that is the point. `DP-08-053` (charge, current, vol
 
 **Training is authored per domain, not per element.** Foundational knowledge is learned as a block, and thirteen modules for thirteen fundamentals would be an administrative fiction rather than a teaching decision. One module per foundational area. Note the ordering constraint that already applies: a module needs `knowledgeRefs` into the BOK, and no BOK article covers electrical fundamentals yet, so the module follows the article rather than the taxonomy.
 
-`DP-08-A07` — Electrical Fundamentals for Metrology Work, 13 elements — is the worked pattern. The remaining 42 domains follow it.
+Every foundational area is titled **`Foundational Knowledge — <what it covers>`**. That is not decoration: it is one recognisable section repeated across 43 domains, and the first person to look for it searched the viewer for "Foundational" and found nothing, because the area had been given a descriptive name of its own instead.
+
+`DP-08-A07` — Foundational Knowledge — Electrical Quantities and Circuits, 13 elements — is the worked pattern. The remaining 42 domains follow it.
 
 ## Who owns a person's competency record
 

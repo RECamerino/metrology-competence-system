@@ -635,7 +635,7 @@
     }
 
     const areas = d.areas.map((a) => `
-      <section class="area" data-area>
+      <section class="area" data-area data-text="${esc((a.id + ' ' + a.title).toLowerCase())}">
         <div class="area-head">
           <span class="aid">${esc(a.id)}</span>
           <span class="atitle">${esc(a.title)}</span>
@@ -700,15 +700,24 @@
 
       for (const area of domain.querySelectorAll('[data-area]')) {
         let areaHasVisible = false;
+        // An area title matches its own elements. This does NOT extend to the
+        // domain title: searching "guardband" would then return all 46
+        // elements of CM-08 just because the domain is called Guardbanding,
+        // and searching a domain already works because every element ID
+        // carries the domain prefix.
+        //
+        // An area is a different case — it holds eight to thirteen elements,
+        // and returning them IS the answer to the query. Without this,
+        // searching "foundational knowledge" found nothing at all: no area
+        // title was indexed anywhere, so every one of the 258 areas was
+        // unreachable by name.
+        const areaText = area.dataset.text || '';
+        const areaMatches = q !== '' && areaText.includes(q);
 
         for (const el of area.querySelectorAll('[data-el]')) {
           const ceilOk = state.ceilings.size === 0 || state.ceilings.has(el.dataset.ceil);
           const ekindOk = state.ekinds.size === 0 || state.ekinds.has(el.dataset.ekind);
-          // Match against the element only. Matching the domain title too would
-          // mean searching "guardband" returns all 46 elements of CM-08 just
-          // because the domain is called Guardbanding. Searching a domain still
-          // works, because every element ID carries the domain prefix.
-          const textOk = q === '' || el.dataset.text.includes(q);
+          const textOk = q === '' || areaMatches || el.dataset.text.includes(q);
           const visible = kindOk && ceilOk && ekindOk && textOk;
           el.hidden = !visible;
           if (visible) { areaHasVisible = true; shownElements++; }
