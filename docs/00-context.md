@@ -461,6 +461,12 @@ Ceilings run lower here and that is the point. `DP-08-053` (charge, current, vol
 
 **Training is authored per domain, not per element.** Foundational knowledge is learned as a block, and thirteen modules for thirteen fundamentals would be an administrative fiction rather than a teaching decision. One module per foundational area. Note the ordering constraint that already applies: a module needs `knowledgeRefs` into the BOK, and no BOK article covers electrical fundamentals yet, so the module follows the article rather than the taxonomy.
 
+**Size it as a career, not a ramp.** For most people who will ever use this corpus the foundational area is not the route to the rest of the domain — it is the whole of it, and very few venture further. `DP-08-A07` is 48 elements against 52 for the entire professional remainder of the domain, and that ratio is the point rather than an overshoot. It has to carry somebody for twenty years.
+
+**It comes first.** Display order follows array order in the YAML rather than the area ID, so the block sits at the top of `competencyAreas` while keeping its append-only `A07`. An entry section at the bottom of the domain is an entry section nobody finds.
+
+**Split by instrument class and use case.** The first draft had one element called *operating a digital multimeter*, which spanned a 3½-digit handheld, a 6½-digit bench meter, an 8½-digit reference, a null detector and a nanovoltmeter — different instruments, different jobs, under a heading too broad for any item to be bound to it. Each class is now its own element, and the ceilings differ accordingly: a handheld reaches L3, a reference DMM and a nanovoltmeter reach L4, because a twenty-year technician is still better at those than a two-year one. Foundational is not shallow.
+
 Every foundational area is titled **`Foundational Knowledge — <what it covers>`**. That is not decoration: it is one recognisable section repeated across 43 domains, and the first person to look for it searched the viewer for "Foundational" and found nothing, because the area had been given a descriptive name of its own instead.
 
 `DP-08-A07` — Foundational Knowledge — Electrical Quantities and Circuits, 13 elements — is the worked pattern. The remaining 42 domains follow it.
