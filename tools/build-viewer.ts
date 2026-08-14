@@ -20,14 +20,77 @@
  * Usage:  node tools/build-viewer.ts
  */
 
-import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
 
 const REPO_ROOT = resolve(fileURLToPath(import.meta.url), '../..');
 const DOMAINS_DIR = join(REPO_ROOT, 'content', 'competence', 'taxonomy', 'domains');
+const ELEMENTS_DIR = join(REPO_ROOT, 'content', 'competence', 'elements');
 const VIEWER_DIR = join(REPO_ROOT, 'apps', 'viewer');
+
+/**
+ * Authored element definitions, keyed by ID.
+ *
+ * The taxonomy gives every element a title, a kind and a ceiling — the same
+ * four facts for all 2232, which makes the skeleton scannable and tells a
+ * reader nothing about what the competence IS. The anchors are the only place
+ * that says what somebody can be seen doing, and until now they were readable
+ * only by opening the Markdown file.
+ *
+ * Attached here so the viewer can expand a row into the real definition.
+ * Elements without one are simply not expandable, which is an honest signal:
+ * two of 2232 are authored, and the interface should show that rather than
+ * imply depth that does not exist.
+ *
+ * SIZE, EVENTUALLY. Two elements cost nothing. A fully authored corpus would
+ * put several megabytes of anchor prose in a single self-contained file, and
+ * the air-gap rule forbids fetching the rest on demand. Splitting per domain
+ * is the obvious answer and is deliberately not done yet — see the note in the
+ * viewer README when the payload starts to matter.
+ */
+function loadAuthoredElements(): Map<string, Record<string, unknown>> {
+  const found = new Map<string, Record<string, unknown>>();
+  if (!existsSync(ELEMENTS_DIR)) return found;
+
+  const walk = (dir: string): string[] =>
+    readdirSync(dir).sort().flatMap((entry) => {
+      const full = join(dir, entry);
+      return statSync(full).isDirectory() ? walk(full) : full.endsWith('.md') ? [full] : [];
+    });
+
+  for (const file of walk(ELEMENTS_DIR)) {
+    const raw = readFileSync(file, 'utf8').replace(/^﻿/, '').replace(/\r\n/g, '\n');
+    if (!raw.startsWith('---\n')) continue;
+    const end = raw.indexOf('\n---', 3);
+    if (end === -1) continue;
+
+    const data = parseYaml(raw.slice(4, end + 1)) as Record<string, any>;
+    if (!data?.id) continue;
+
+    found.set(data.id, {
+      // Short keys, matching the payload's existing convention.
+      s: data.summary ?? '',
+      st: data.status ?? '',
+      dm: data.demonstration ?? 'desk',
+      a: data.anchors ?? {},
+      r: data.roleTargets ?? {},
+      ci: (data.citations ?? []).map((c: Record<string, any>) => ({
+        s: c.source, c: c.clause, r: c.relevance ?? '',
+      })),
+      kr: (data.knowledgeRefs ?? []).map((k: Record<string, any>) => ({
+        a: k.article, s: k.section, r: k.relevance ?? '',
+      })),
+      pre: data.prerequisites ?? [],
+      rel: data.relatedElements ?? [],
+    });
+  }
+
+  return found;
+}
+
+const authored = loadAuthoredElements();
 
 const domains = readdirSync(DOMAINS_DIR)
   .filter((f) => f.endsWith('.yaml'))
@@ -51,6 +114,9 @@ const domains = readdirSync(DOMAINS_DIR)
         c: e.levelCeiling,
         // knowledge | skill | judgment, abbreviated to keep the payload small.
         k: String(e.kind ?? '').charAt(0),
+        // The authored definition, where one exists. Absent for the 2230 that
+        // have only a skeleton entry, and the viewer keys expandability off it.
+        ...(authored.has(e.id) ? { d: authored.get(e.id) } : {}),
       })),
     })),
   }));
@@ -94,5 +160,6 @@ console.log('Viewer built');
 console.log(`  domains:  ${domains.length}`);
 console.log(`  areas:    ${areaCount}`);
 console.log(`  elements: ${elementCount}`);
+console.log(`  authored: ${authored.size}  (expandable to the full definition)`);
 console.log(`  index.html    ${(standalone.length / 1024).toFixed(0)} KB`);
 console.log(`  fragment.html ${(fragment.length / 1024).toFixed(0)} KB`);

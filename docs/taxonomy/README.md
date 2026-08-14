@@ -25,15 +25,29 @@ The authoritative source is [`content/competence/taxonomy/domains/`](../../conte
 
 An assessable unit is one element at one level. Every level is assessed at element scope, so a credential names exactly what was tested.
 
+## The ladder
+
+**Every element starts at L1.** The ceiling below says how far an element goes, not where it begins — a reader who sees only "Proficient" against 1478 elements has been shown the summit and not the climb. These five levels are the frame every per-element anchor is written into.
+
+| | Level | What it means |
+|---|---|---|
+| **L1** | Novice | Recognises the concept and can apply it by following a rule that someone else supplied, in a situation someone else framed. Depends on explicit instruction and does not yet distinguish the cases where the rule stops holding. |
+| **L2** | Advanced Beginner | Applies the concept to familiar situations without step-by-step direction, and recognises when a situation is NOT the familiar one — but escalates at that point rather than resolving it independently. |
+| **L3** | Competent | Works unsupervised on routine cases and produces a defensible result, including in situations not seen before. Recognises the limits of their own competence and can say what would change their approach. This is the level at which independent laboratory work is normally entrusted. |
+| **L4** | Proficient | Handles the non-routine case, and sees the situation as a whole rather than as a set of rules to apply in turn. Diagnoses why an approach is failing, adapts it, and defends the adaptation against a peer who is actively looking for its weaknesses. |
+| **L5** | Expert | Advances the practice rather than only executing it: resolves cases where the established approach gives no answer, and can bring another person to competence in the same element. Expected to know where the field's own position is contested, and to hold a defensible view on it. |
+
+L1 and L2 are witnessed observation and may be assessed against a `draft` element; from L3 the element must be `stable`. Every element in the corpus is currently draft, so **L1 and L2 are the only levels anybody can earn today**.
+
 ## Level ceiling
 
-The highest level attainable for an element. Not every element supports all five.
+The highest level attainable for an element. Not every element supports all five, and an element attainable to L4 carries four assessable units — L1, L2, L3 and L4 — not one.
 
-| Ceiling | Meaning | Elements | Share |
-|---|---|---|---|
-| 3 | Competent | 293 | 13.1% |
-| 4 | Proficient | 1478 | 66.2% |
-| 5 | Expert | 461 | 20.7% |
+| Ceiling | Attainable range | Meaning at the ceiling | Elements | Share |
+|---|---|---|---|---|
+| 3 | L1–L3 | Competent | 293 | 13.1% |
+| 4 | L1–L4 | Proficient | 1478 | 66.2% |
+| 5 | L1–L5 | Expert | 461 | 20.7% |
 
 **L5 is reserved** for elements where a person could plausibly spend a career and still be learning, and where a defensible capstone with cross-organizational review is actually writable.
 
