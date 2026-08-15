@@ -14,6 +14,32 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: CM-19-A07
+        title: Foundational Knowledge — Integrity in Measurement Work
+        status: draft
+        summary: >-
+          The conduct the whole system rests on, stated as competence
+          because it is one: everything else in this corpus is worthless
+          if the number was invented.
+        elements:
+          - { id: CM-19-049, title: "Why a measurement record is a statement of fact", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-19-050, title: "Falsification, and the forms it takes in a laboratory", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-19-051, title: "Recording a result you did not expect", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-19-052, title: "Pressure to pass an item, and what to do about it", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-19-053, title: "Repeating a measurement until it passes", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-19-054, title: "Reporting your own mistake", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-19-055, title: "Working within your own competence", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-19-056, title: "Confidentiality of a customer's information", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-19-057, title: "Impartiality and conflict of interest", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-19-058, title: "Legal metrology and where measurement is regulated", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-19-059, title: "Raising a concern and whistleblowing routes", kind: knowledge, levelCeiling: 3, status: draft }
+
       - id: CM-19-A01
         title: Professional Ethics
         status: draft

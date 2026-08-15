@@ -146,7 +146,7 @@ domains:
           - { id: EC-01-055, title: "Output impedance, compliance and loading behaviour", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-056, title: "Distortion and harmonic content of an AC output", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-057, title: "Wideband output verification", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-01-058, title: "Artefact calibration and internal self-adjustment", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-01-058, title: "Performing an artefact calibration and self-adjustment sequence", kind: judgment, levelCeiling: 5, status: draft }
           - { id: EC-01-059, title: "Verifying a calibrator against a higher-order standard", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-060, title: "Adjustment of a multifunction calibrator, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-061, title: "Uncertainty budget for a multifunction calibrator calibration", kind: skill, levelCeiling: 4, status: draft }

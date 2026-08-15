@@ -15,6 +15,34 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-21-A07
+        title: Foundational Knowledge — Position, Height and Gravity
+        status: draft
+        summary: >-
+          The quantities of geodetic measurement, where a coordinate
+          means nothing without its datum and a height means nothing
+          without saying height above what.
+        elements:
+          - { id: DP-21-056, title: "Coordinate systems and why a coordinate needs a datum", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-21-057, title: "Geodetic and projected coordinates distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-21-058, title: "Ellipsoidal height, orthometric height and the geoid", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-21-059, title: "Latitude, longitude and grid coordinates", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-21-060, title: "GNSS in outline and what a receiver actually measures", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-21-061, title: "Satellite geometry, DOP and its effect on a position", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-21-062, title: "Multipath and obstruction at a survey site", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-21-063, title: "Instrument height measurement and reduction to the marker", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-21-064, title: "Centring, levelling and setting up over a point", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-21-065, title: "Gravity, its variation and why it matters", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-21-066, title: "Refraction and atmospheric effects on a sighting", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-21-067, title: "Baseline and network as a reference for calibration", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-21-068, title: "Recording a geodetic observation with its metadata", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-21-A01
         title: Reference Frames and Coordinate Systems
         status: draft

@@ -16,6 +16,35 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-16-A08
+        title: Foundational Knowledge — Chemical Quantities, Solutions and Sample Handling
+        status: draft
+        summary: >-
+          The quantities of chemical measurement and the sample
+          discipline that determines the result before the instrument is
+          switched on.
+        elements:
+          - { id: DP-16-062, title: "Amount of substance, the mole and concentration units", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-16-063, title: "Mass fraction, volume fraction and molarity distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-16-064, title: "Dilution and its calculation", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-16-065, title: "Purity, grade and what a certificate of analysis states", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-16-066, title: "Reference materials and certified values", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-16-067, title: "Sampling and whether a sample represents the batch", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: DP-16-068, title: "Contamination, carryover and cross-contamination", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-16-069, title: "Sample storage, stability and holding time", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-16-070, title: "Glassware: volumetric grades and their use", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-16-071, title: "Weighing and dispensing for solution preparation", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-16-072, title: "Temperature effects on volume and concentration", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-16-073, title: "Chemical safety, hazard labelling and safety data sheets", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-16-074, title: "Waste handling and disposal", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-16-075, title: "Recording a chemical result with its method and conditions", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-16-A01
         title: Foundations of Chemical Measurement
         status: draft

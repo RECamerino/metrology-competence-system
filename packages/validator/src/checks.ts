@@ -184,6 +184,48 @@ function checkIdRegistry(corpus: Corpus): Finding[] {
 
 /* ------------------------------------------------------------------------ */
 
+/**
+ * Two elements with the same title.
+ *
+ * Not an error — an ID is what a credential names, and two identically titled
+ * elements are still two distinct competences. It is a WARNING because a human
+ * cannot tell them apart. "Immersion depth and stem conduction error" appeared
+ * as both a foundational temperature element and a thermocouple-calibration
+ * element; a reader handed either one has no way to know which competence was
+ * attested without resolving the ID against the corpus.
+ *
+ * Added after the same defect was found twice by ad-hoc script during a large
+ * generated build-out. A check that has to be remembered is a check that stops
+ * being run, and this corpus is now well past the size where a person notices
+ * a collision by reading.
+ */
+function checkDuplicateTitles(corpus: Corpus): Finding[] {
+  const byTitle = new Map<string, string[]>();
+
+  for (const stub of indexStubs(corpus.taxonomy).values()) {
+    // Internal whitespace collapsed too: a title differing only by a double
+    // space is the same title to every reader, and comparing raw strings would
+    // let that pair through. The test for this check found exactly that.
+    const key = stub.title.trim().replace(/\s+/g, ' ').toLowerCase();
+    const ids = byTitle.get(key) ?? [];
+    ids.push(stub.id);
+    byTitle.set(key, ids);
+  }
+
+  const findings: Finding[] = [];
+  for (const [, ids] of byTitle) {
+    if (ids.length < 2) continue;
+    findings.push(
+      warn(
+        `${ids.join(' and ')} share an element title. Both remain distinct competences, but a reader cannot tell which one a credential names — retitle one so the difference is visible in the words.`,
+      ),
+    );
+  }
+  return findings;
+}
+
+/* ------------------------------------------------------------------------ */
+
 function checkElementIntegrity(corpus: Corpus): Finding[] {
   const findings: Finding[] = [];
   const stubs = indexStubs(corpus.taxonomy);
@@ -854,6 +896,7 @@ export function runAllChecks(corpus: Corpus): Finding[] {
   return [
     ...checkSchemas(corpus),
     ...checkIdRegistry(corpus),
+    ...checkDuplicateTitles(corpus),
     ...checkElementIntegrity(corpus),
     ...checkPrerequisiteGraph(corpus),
     ...checkBok(corpus),

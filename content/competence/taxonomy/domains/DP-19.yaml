@@ -14,6 +14,34 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-19-A06
+        title: Foundational Knowledge — Production Measurement and Process Context
+        status: draft
+        summary: >-
+          Measurement inside manufacturing, where the part is still
+          changing, the measurement is one step in a process, and the
+          answer feeds a decision immediately.
+        elements:
+          - { id: DP-19-055, title: "Measurement in-process, on-machine and post-process compared", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-19-056, title: "Process capability and what Cp and Cpk describe", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-19-057, title: "Variation: common cause and special cause", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-19-058, title: "Control charts and reading one correctly", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-19-059, title: "Gauge R&R and what it tells you about a measurement", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-19-060, title: "Measurement uncertainty against process tolerance", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-19-061, title: "How often to measure, and how many parts", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-19-062, title: "First article inspection and its purpose", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-19-063, title: "Part cleanliness, burrs and as-manufactured condition", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-19-064, title: "Thermal state of a part straight off a machine", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-19-065, title: "Fixturing and datum repeatability in production", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-19-066, title: "Additive processes and how they differ for measurement", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-19-067, title: "Recording a production measurement and its disposition", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-19-A01
         title: Additive Manufacturing Measurement
         status: draft

@@ -128,7 +128,7 @@ domains:
           - { id: EC-02-063, title: "Selecting the standards and fixturing for a vector network analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-02-064, title: "SOLT error correction and its residual terms", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-02-065, title: "TRL and LRM correction and when each is required", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-02-066, title: "Calibration kit definitions and standard models", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-066, title: "Entering and verifying kit definitions on the instrument", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-02-067, title: "Verification of a correction using a check standard", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-02-068, title: "Residual directivity, tracking and source match", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-02-069, title: "Receiver dynamic range and noise floor verification", kind: skill, levelCeiling: 4, status: draft }

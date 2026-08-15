@@ -14,6 +14,34 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-20-A06
+        title: Foundational Knowledge — Digital Data, Files and Measurement Records
+        status: draft
+        summary: >-
+          The competence that decides whether a correct measurement
+          survives being written down, transmitted and stored — which is
+          where digital metrology actually fails.
+        elements:
+          - { id: DP-20-040, title: "Digital and analogue representation of a measurement", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-20-041, title: "Resolution, quantisation and least significant bit", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-20-042, title: "Data types, precision and rounding in software", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-20-043, title: "Units in a data file and the errors of omitting them", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: DP-20-044, title: "Timestamps, time zones and clock accuracy", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-20-045, title: "File formats, exports and what is lost in conversion", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-20-046, title: "Spreadsheet use and its common measurement errors", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-20-047, title: "Version control of a record and of a template", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-20-048, title: "Data entry, transcription and verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-20-049, title: "Backup, retention and retrievability of records", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-20-050, title: "Electronic signature and record integrity in outline", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-20-051, title: "Networks, transfer and where data can be corrupted", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-20-052, title: "Reconstructing a result from the raw data", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-20-A01
         title: Machine-Readable Measurement Information
         status: draft

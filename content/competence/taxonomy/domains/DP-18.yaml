@@ -13,6 +13,34 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-18-A06
+        title: Foundational Knowledge — Measurement at the Nanoscale
+        status: draft
+        summary: >-
+          What changes when the feature is smaller than the probe: the
+          environment becomes the dominant error, and a surface is not
+          the same thing as a bulk material.
+        elements:
+          - { id: DP-18-040, title: "Length units at the nanometre and picometre scale", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-18-041, title: "Surface against bulk properties", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-18-042, title: "Probe and feature size, and what convolution means", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-18-043, title: "Vibration isolation and why a building matters", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-18-044, title: "Thermal drift over the duration of a scan", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-18-045, title: "Acoustic and airflow disturbance at the nanoscale", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-18-046, title: "Cleanliness, particulates and cleanroom classes", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-18-047, title: "Handling specimens without contaminating them", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-18-048, title: "Vacuum basics for surface instruments", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-18-049, title: "Electrostatic charge and its effect on a measurement", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-18-050, title: "Reference artefacts at the nanoscale", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-18-051, title: "Image against measurement: when a picture is not data", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: DP-18-052, title: "Recording a nanoscale result with its conditions", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-18-A01
         title: Foundations at the Nanoscale
         status: draft

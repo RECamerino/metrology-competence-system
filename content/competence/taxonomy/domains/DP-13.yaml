@@ -13,6 +13,34 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-13-A07
+        title: Foundational Knowledge — Spectra, Lasers and Optical Fibre
+        status: draft
+        summary: >-
+          Wavelength as the organising quantity, the loss budget that
+          governs fibre work, and the laser safety that governs
+          everything else.
+        elements:
+          - { id: DP-13-049, title: "Wavelength, frequency and the electromagnetic spectrum", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-13-050, title: "Absorption, transmission and reflection", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-13-051, title: "Absorbance and transmittance and the relationship between them", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-13-052, title: "Laser classes and the hazard each presents", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-13-053, title: "Laser safety: eyewear, controlled areas and interlocks", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-13-054, title: "Beam divergence, spot size and power density", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-13-055, title: "Optical fibre: single mode and multimode", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-13-056, title: "Loss in decibels and the fibre loss budget", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-13-057, title: "Connector types, end-face condition and cleaning", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-13-058, title: "Bend radius, stress and fibre handling", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-13-059, title: "Splices, reflections and their effect on a link", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-13-060, title: "Cleanliness of optics and why a fingerprint is a measurement error", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-13-061, title: "Recording an optical result with its wavelength", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-13-A01
         title: Spectroscopic Fundamentals
         status: draft

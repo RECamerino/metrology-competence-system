@@ -13,6 +13,35 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-10-A07
+        title: Foundational Knowledge — Radio Frequency, Impedance and the Decibel
+        status: draft
+        summary: >-
+          Why RF is different: the cable is part of the circuit,
+          everything is a ratio in decibels, and a connector is a
+          precision component.
+        elements:
+          - { id: DP-10-058, title: "Frequency, wavelength and their relationship", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-10-059, title: "Why a cable becomes a transmission line at high frequency", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-10-060, title: "Characteristic impedance and the 50 ohm convention", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-10-061, title: "Reflection, VSWR and return loss as one idea", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-10-062, title: "The decibel, dBm and absolute against relative levels", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-10-063, title: "Insertion loss and attenuation", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-10-064, title: "Connector types and matching them correctly", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-10-065, title: "Connector care, torque and gauging", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-10-066, title: "Cable flexure, phase stability and damage", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-10-067, title: "Terminations and why an unterminated port matters", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-10-068, title: "Adapters and what each one costs the measurement", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-10-069, title: "Power levels, damage thresholds and protecting a sensor", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: DP-10-070, title: "RF exposure and safe working practice", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-10-071, title: "Recording an RF result with its frequency and conditions", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-10-A01
         title: RF Fundamentals
         status: draft

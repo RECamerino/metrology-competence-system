@@ -535,7 +535,13 @@ Ceilings run lower here and that is the point. `DP-08-053` (charge, current, vol
 
 Every foundational area is titled **`Foundational Knowledge — <what it covers>`**. That is not decoration: it is one recognisable section repeated across 43 domains, and the first person to look for it searched the viewer for "Foundational" and found nothing, because the area had been given a descriptive name of its own instead.
 
-`DP-08-A07` — Foundational Knowledge — Electrical Quantities and Circuits, 13 elements — is the worked pattern. The remaining 42 domains follow it.
+`DP-08-A07` — Foundational Knowledge — Electrical Quantities and Circuits — was the worked pattern, and **31 domains now carry one: all 21 disciplines and 10 of the core**, 395 further elements.
+
+Where they do not is a decision rather than an omission. `CM-01` and `CM-02` get none because they *are* the corpus's foundational layer; a tier beneath *What measurement is, and what it is not* would be inventing depth downward. Nine core domains get none because nobody's first day is measurement decision risk or AI in metrology — those are specialist practice reached from elsewhere, not disciplines somebody enters cold.
+
+**No `EC` pack gets one either**, and that is the least obvious call. Equipment-family entry knowledge already exists in two places: the quantity fundamentals sit in the paired `DP` foundational area, and bench practice sits in `CM-06` *Calibration at the Bench* and `CM-12` *The Laboratory Environment and Bench Discipline* — both written in this pass with the equipment packs in mind. Twenty-one more foundational areas would have duplicated both, and duplication in a corpus this size is worse than absence because two copies drift.
+
+The pass also produced seven duplicate element titles — four pre-existing `DP`/`EC` collisions where the same words described knowing a technique and performing it, and three introduced by the new areas. All seven were retitled, and the collision is now a standing check rather than something found by ad-hoc script. `checkDuplicateTitles` warns rather than errors: two identically titled elements are still distinct competences, but a reader handed one cannot tell which competence a credential names. Its own test caught a defect in it — the first version compared raw strings and would have missed a title differing only by a double space.
 
 ## Who owns a person's competency record
 

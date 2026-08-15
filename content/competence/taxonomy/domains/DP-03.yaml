@@ -12,6 +12,36 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-03-A07
+        title: Foundational Knowledge — Pressure, Vacuum and Fluid Basics
+        status: draft
+        summary: >-
+          Pressure as force over area, the three references it can be
+          quoted against, and the head and media discipline that decides
+          whether two gauges agree.
+        elements:
+          - { id: DP-03-058, title: "Pressure as force per unit area, and its units", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-03-059, title: "Gauge, absolute and differential pressure distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-03-060, title: "Barometric pressure and its effect on a gauge reading", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-03-061, title: "Head correction and the height difference between instruments", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-03-062, title: "Vacuum ranges and why one gauge cannot span them", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-03-063, title: "Density and specific gravity distinguished", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-03-064, title: "Viscosity as resistance to flow, and its units", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-03-065, title: "Media compatibility and cross-contamination", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: DP-03-066, title: "Trapped air in a liquid system and what it does", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-03-067, title: "Leak testing a connection before trusting a reading", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-03-068, title: "Overpressure, burst and the consequences of exceeding a range", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-03-069, title: "Torque, thread sealing and making a pressure connection", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-03-070, title: "Stabilisation and settling before taking a reading", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-03-071, title: "Working safely with stored pressure energy", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-03-072, title: "Recording a pressure result with its reference and conditions", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-03-A01
         title: Pressure Fundamentals and Realisation
         status: draft

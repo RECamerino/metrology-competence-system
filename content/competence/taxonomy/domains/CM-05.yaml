@@ -14,6 +14,31 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: CM-05-A12
+        title: Foundational Knowledge — Reading Data and Simple Statistics
+        status: draft
+        summary: >-
+          The arithmetic a technician actually uses on measurement data,
+          and the plots that show what a table hides.
+        elements:
+          - { id: CM-05-090, title: "Mean, median and range", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-05-091, title: "Standard deviation and what it describes", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-05-092, title: "Population and sample distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-05-093, title: "Plotting data and reading a trend", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-05-094, title: "Histogram and the shape of a data set", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-05-095, title: "Run charts and spotting a shift", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-05-096, title: "Correlation and why it is not cause", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-05-097, title: "Sample size and what a small sample cannot tell you", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-05-098, title: "Rounding and precision in a calculated statistic", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-05-099, title: "Spreadsheet arithmetic and its common errors", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-05-100, title: "Presenting data honestly", kind: judgment, levelCeiling: 3, status: draft }
+
       - id: CM-05-A01
         title: Descriptive Statistics and Data Summaries
         status: draft

@@ -13,6 +13,33 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-06-A06
+        title: Foundational Knowledge — Humidity, Moisture and Psychrometry
+        status: draft
+        summary: >-
+          The several different quantities all called humidity, why they
+          are not interchangeable, and why temperature is inside every
+          one of them.
+        elements:
+          - { id: DP-06-038, title: "Relative humidity, absolute humidity and dew point distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-06-039, title: "Saturation and why relative humidity depends on temperature", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-06-040, title: "Dew point, frost point and where they diverge", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-06-041, title: "Wet and dry bulb measurement and psychrometric charts", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-06-042, title: "Sensor response time and equilibration", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-06-043, title: "Sensor hysteresis after exposure to high humidity", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-06-044, title: "Contamination, condensation and sensor recovery", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-06-045, title: "Air velocity over a probe and its effect", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-06-046, title: "Salt solutions as a field check", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-06-047, title: "Sampling: measuring the air you meant to measure", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: DP-06-048, title: "Moisture in solids and in gases as different measurements", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-06-049, title: "Recording a humidity result with its temperature", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-06-A01
         title: Humidity Quantities and Relationships
         status: draft

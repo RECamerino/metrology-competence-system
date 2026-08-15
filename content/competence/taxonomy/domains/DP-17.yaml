@@ -16,6 +16,33 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-17-A06
+        title: Foundational Knowledge — Clinical Measurement and Patient Context
+        status: draft
+        summary: >-
+          What changes when the measurand is a person: the acceptance
+          criteria come from a clinical standard, and the consequence of
+          an error is not a rejected part.
+        elements:
+          - { id: DP-17-047, title: "Physiological quantities and their units", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-17-048, title: "Simulators and why a simulated patient is not a patient", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-17-049, title: "Clinical acceptance criteria against manufacturer specification", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-17-050, title: "Patient safety and the consequence of an undetected error", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: DP-17-051, title: "Electrical safety and leakage current in medical devices", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-17-052, title: "Infection control and equipment decontamination", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-17-053, title: "Single-use, sterile and reusable equipment", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-17-054, title: "Alarm limits and their clinical meaning", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-17-055, title: "Device labelling, classification and regulatory context", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-17-056, title: "Working in a clinical environment around staff and patients", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-17-057, title: "Traceability of clinical measurements and reference methods", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-17-058, title: "Recording a clinical verification result", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-17-A01
         title: Foundations of Clinical Measurement
         status: draft

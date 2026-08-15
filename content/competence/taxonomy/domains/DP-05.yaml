@@ -13,6 +13,36 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-05-A06
+        title: Foundational Knowledge — Temperature, Heat and Thermal Behaviour
+        status: draft
+        summary: >-
+          Temperature as a state rather than an amount, and the
+          immersion, equilibrium and sensor discipline that decides
+          whether a probe reads the thing you meant to measure.
+        elements:
+          - { id: DP-05-055, title: "Temperature and heat distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-05-056, title: "Celsius, Kelvin and Fahrenheit, and converting between them", kind: skill, levelCeiling: 2, status: draft }
+          - { id: DP-05-057, title: "Thermal equilibrium and why a reading needs time", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-05-058, title: "Conduction, convection and radiation", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-05-059, title: "Getting a probe deep enough into what you are measuring", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-05-060, title: "Self-heating in a resistance sensor", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-05-061, title: "Thermocouple, RTD and thermistor compared for ordinary use", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-05-062, title: "The reference junction and why a thermocouple needs one", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-05-063, title: "Extension and compensating cable, and getting polarity right", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-05-064, title: "Sensor placement and what a probe is actually measuring", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: DP-05-065, title: "Response time and reading a changing temperature", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-05-066, title: "Ice point check as a field verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-05-067, title: "Contact, surface and non-contact measurement compared", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-05-068, title: "Emissivity and why an infrared reading can be wrong", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-05-069, title: "Recording a temperature result with its conditions", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-05-A01
         title: Temperature Scales and Realisation
         status: draft

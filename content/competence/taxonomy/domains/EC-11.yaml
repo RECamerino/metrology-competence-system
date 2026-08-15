@@ -95,7 +95,7 @@ domains:
           - { id: EC-11-042, title: "Calibration configuration and stabilisation for an accelerometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-11-043, title: "Selecting the standards and fixturing for an accelerometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-044, title: "Sensitivity at a reference frequency by comparison", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-11-045, title: "Primary calibration by laser interferometry", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-045, title: "Primary accelerometer calibration by laser interferometry", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-11-046, title: "Frequency response and resonance determination", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-047, title: "Transverse sensitivity determination", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-048, title: "Amplitude linearity across the acceleration range", kind: skill, levelCeiling: 4, status: draft }

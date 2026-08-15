@@ -13,6 +13,34 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-12-A06
+        title: Foundational Knowledge — Light, Colour and Photometric Quantities
+        status: draft
+        summary: >-
+          The difference between measuring light physically and
+          measuring it as the eye responds to it, which is where most
+          photometric confusion begins.
+        elements:
+          - { id: DP-12-049, title: "Radiometric and photometric quantities distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-12-050, title: "Lumen, candela, lux and their relationship", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-12-051, title: "Luminance against illuminance", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-12-052, title: "The photopic response and why a detector must match it", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-12-053, title: "Wavelength, spectrum and colour", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-12-054, title: "Colour temperature and the illuminant", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-12-055, title: "The inverse square law and measurement distance", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-12-056, title: "Cosine response and the angle of incident light", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-12-057, title: "Stray light and ambient rejection", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-12-058, title: "Detector fatigue, warm-up and drift", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-12-059, title: "Source stabilisation and lamp warm-up", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-12-060, title: "Laser and optical radiation safety in outline", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-12-061, title: "Recording a photometric result with its geometry", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-12-A01
         title: Radiometric and Photometric Quantities
         status: draft

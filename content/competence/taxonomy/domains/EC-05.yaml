@@ -96,7 +96,7 @@ domains:
           - { id: EC-05-043, title: "Calibration configuration and stabilisation for a vacuum gauge", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-044, title: "Selecting the standards and fixturing for a vacuum gauge calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-045, title: "Indication error across pressure decades", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-05-046, title: "Gas species dependence and correction factors", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-046, title: "Applying gas species correction in a vacuum gauge calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-047, title: "Pirani, thermocouple and capacitance gauge specifics", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-048, title: "Ionisation gauge sensitivity and filament condition", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-049, title: "Outgassing, pump-down and system cleanliness effects", kind: skill, levelCeiling: 4, status: draft }

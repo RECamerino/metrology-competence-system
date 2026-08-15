@@ -30,10 +30,10 @@ Three principles held in tension deliberately:
 
 | | |
 |---|---|
-| Domains / areas / elements | 64 / 461 / **5012** |
-| Assessable units | 19945 |
-| Ceilings — L2 / L3 / L4 / L5 | 0.3% / 17.6% / 66.0% / 16.1% |
-| Kinds — knowledge / skill / judgment | 14.7% / 62.6% / 22.7% |
+| Domains / areas / elements | 64 / 491 / **5407** |
+| Assessable units | 21114 |
+| Ceilings — L2 / L3 / L4 / L5 | 0.6% / 23.3% / 61.1% / 15.0% |
+| Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
 | Content authored | **2 elements** · **1 BOK article** · **1 module** |
 | Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
 | Checks | 0 errors · 247/247 tests · typecheck clean |
@@ -173,7 +173,7 @@ Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
 
 | Module | The rule it enforces |
 |---|---|
-| `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules |
+| `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules, duplicate titles |
 | `credentials.ts` | No self-signoff, signoff policy, the wallet boundary, draft-status attestability, evidenced provenance tier, founding-cohort authority, dual custody |
 | `trust.ts` | Offline verification against a registry snapshot, and the age of the answer |
 | `ledger.ts` | Hash chain, no-retake, exposure count, trust horizon |

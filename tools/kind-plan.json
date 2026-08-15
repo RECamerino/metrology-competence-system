@@ -3590,6 +3590,336 @@
         "EC-21-078": "judgment",
         "EC-21-080": "judgment"
       }
+    },
+    "DP-01-A09": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-01-096": "skill",
+        "DP-01-102": "judgment",
+        "DP-01-104": "skill",
+        "DP-01-106": "skill",
+        "DP-01-107": "skill",
+        "DP-01-108": "skill",
+        "DP-01-110": "skill",
+        "DP-01-111": "skill",
+        "DP-01-112": "skill",
+        "DP-01-113": "judgment"
+      }
+    },
+    "DP-02-A07": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-02-071": "skill",
+        "DP-02-072": "skill",
+        "DP-02-073": "skill",
+        "DP-02-074": "skill",
+        "DP-02-075": "skill",
+        "DP-02-078": "skill",
+        "DP-02-079": "skill",
+        "DP-02-080": "skill"
+      }
+    },
+    "DP-03-A07": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-03-061": "skill",
+        "DP-03-065": "judgment",
+        "DP-03-066": "skill",
+        "DP-03-067": "skill",
+        "DP-03-069": "skill",
+        "DP-03-070": "skill",
+        "DP-03-072": "skill"
+      }
+    },
+    "DP-04-A06": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-04-056": "skill",
+        "DP-04-057": "skill",
+        "DP-04-058": "skill",
+        "DP-04-059": "skill",
+        "DP-04-061": "skill"
+      }
+    },
+    "DP-05-A06": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-05-056": "skill",
+        "DP-05-063": "skill",
+        "DP-05-064": "judgment",
+        "DP-05-065": "skill",
+        "DP-05-066": "skill",
+        "DP-05-069": "skill"
+      }
+    },
+    "DP-06-A06": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-06-041": "skill",
+        "DP-06-042": "skill",
+        "DP-06-044": "skill",
+        "DP-06-046": "skill",
+        "DP-06-047": "judgment",
+        "DP-06-049": "skill"
+      }
+    },
+    "DP-07-A06": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-07-050": "skill",
+        "DP-07-056": "skill",
+        "DP-07-057": "skill",
+        "DP-07-060": "skill",
+        "DP-07-061": "skill"
+      }
+    },
+    "DP-09-A06": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-09-063": "skill"
+      }
+    },
+    "DP-10-A07": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-10-065": "skill",
+        "DP-10-066": "skill",
+        "DP-10-069": "judgment",
+        "DP-10-071": "skill"
+      }
+    },
+    "DP-11-A06": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-11-047": "skill",
+        "DP-11-048": "skill",
+        "DP-11-051": "skill",
+        "DP-11-054": "skill",
+        "DP-11-055": "skill"
+      }
+    },
+    "DP-12-A06": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-12-055": "skill",
+        "DP-12-057": "skill",
+        "DP-12-058": "skill",
+        "DP-12-059": "skill",
+        "DP-12-061": "skill"
+      }
+    },
+    "DP-13-A07": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-13-053": "skill",
+        "DP-13-056": "skill",
+        "DP-13-057": "skill",
+        "DP-13-058": "skill",
+        "DP-13-060": "skill",
+        "DP-13-061": "skill"
+      }
+    },
+    "DP-14-A07": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-14-050": "skill",
+        "DP-14-059": "skill",
+        "DP-14-061": "skill"
+      }
+    },
+    "DP-15-A06": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-15-053": "skill",
+        "DP-15-054": "judgment",
+        "DP-15-058": "skill",
+        "DP-15-060": "skill",
+        "DP-15-061": "skill"
+      }
+    },
+    "DP-16-A08": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-16-064": "skill",
+        "DP-16-067": "judgment",
+        "DP-16-068": "skill",
+        "DP-16-069": "skill",
+        "DP-16-070": "skill",
+        "DP-16-071": "skill",
+        "DP-16-074": "skill",
+        "DP-16-075": "skill"
+      }
+    },
+    "DP-17-A06": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-17-050": "judgment",
+        "DP-17-052": "skill",
+        "DP-17-056": "skill",
+        "DP-17-058": "skill"
+      }
+    },
+    "DP-18-A06": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-18-046": "skill",
+        "DP-18-047": "skill",
+        "DP-18-051": "judgment",
+        "DP-18-052": "skill"
+      }
+    },
+    "DP-19-A06": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-19-058": "skill",
+        "DP-19-063": "skill",
+        "DP-19-065": "skill",
+        "DP-19-067": "skill"
+      }
+    },
+    "DP-20-A06": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-20-043": "judgment",
+        "DP-20-045": "skill",
+        "DP-20-046": "skill",
+        "DP-20-047": "skill",
+        "DP-20-048": "skill",
+        "DP-20-049": "skill",
+        "DP-20-052": "skill"
+      }
+    },
+    "DP-21-A07": {
+      "default": "knowledge",
+      "overrides": {
+        "DP-21-063": "skill",
+        "DP-21-064": "skill",
+        "DP-21-068": "skill"
+      }
+    },
+    "CM-03-A11": {
+      "default": "knowledge",
+      "overrides": {
+        "CM-03-106": "skill",
+        "CM-03-111": "skill",
+        "CM-03-112": "judgment",
+        "CM-03-113": "skill",
+        "CM-03-115": "skill",
+        "CM-03-117": "skill"
+      }
+    },
+    "CM-04-A07": {
+      "default": "knowledge",
+      "overrides": {
+        "CM-04-052": "skill",
+        "CM-04-053": "judgment",
+        "CM-04-055": "skill",
+        "CM-04-056": "skill",
+        "CM-04-059": "skill",
+        "CM-04-060": "skill"
+      }
+    },
+    "CM-05-A12": {
+      "default": "knowledge",
+      "overrides": {
+        "CM-05-090": "skill",
+        "CM-05-091": "skill",
+        "CM-05-093": "skill",
+        "CM-05-094": "skill",
+        "CM-05-095": "skill",
+        "CM-05-097": "judgment",
+        "CM-05-098": "skill",
+        "CM-05-099": "skill",
+        "CM-05-100": "judgment"
+      }
+    },
+    "CM-06-A10": {
+      "default": "knowledge",
+      "overrides": {
+        "CM-06-076": "skill",
+        "CM-06-077": "skill",
+        "CM-06-078": "skill",
+        "CM-06-079": "skill",
+        "CM-06-080": "skill",
+        "CM-06-082": "skill",
+        "CM-06-083": "skill",
+        "CM-06-084": "skill",
+        "CM-06-085": "skill",
+        "CM-06-086": "judgment",
+        "CM-06-087": "skill",
+        "CM-06-088": "skill",
+        "CM-06-089": "skill"
+      }
+    },
+    "CM-10-A07": {
+      "default": "knowledge",
+      "overrides": {
+        "CM-10-058": "skill",
+        "CM-10-060": "skill",
+        "CM-10-065": "skill"
+      }
+    },
+    "CM-12-A06": {
+      "default": "knowledge",
+      "overrides": {
+        "CM-12-043": "skill",
+        "CM-12-045": "skill",
+        "CM-12-046": "skill",
+        "CM-12-047": "skill",
+        "CM-12-048": "skill",
+        "CM-12-049": "skill",
+        "CM-12-051": "judgment",
+        "CM-12-052": "skill",
+        "CM-12-053": "skill"
+      }
+    },
+    "CM-14-A07": {
+      "default": "knowledge",
+      "overrides": {
+        "CM-14-054": "skill",
+        "CM-14-055": "skill",
+        "CM-14-056": "skill",
+        "CM-14-058": "skill",
+        "CM-14-059": "skill",
+        "CM-14-060": "skill",
+        "CM-14-062": "skill",
+        "CM-14-064": "skill"
+      }
+    },
+    "CM-15-A07": {
+      "default": "knowledge",
+      "overrides": {
+        "CM-15-047": "skill",
+        "CM-15-048": "skill",
+        "CM-15-049": "skill",
+        "CM-15-051": "skill",
+        "CM-15-052": "judgment",
+        "CM-15-053": "skill",
+        "CM-15-054": "judgment",
+        "CM-15-055": "skill"
+      }
+    },
+    "CM-19-A07": {
+      "default": "knowledge",
+      "overrides": {
+        "CM-19-051": "judgment",
+        "CM-19-052": "judgment",
+        "CM-19-053": "judgment",
+        "CM-19-054": "judgment",
+        "CM-19-055": "judgment"
+      }
+    },
+    "CM-22-A06": {
+      "default": "knowledge",
+      "overrides": {
+        "CM-22-042": "skill",
+        "CM-22-043": "skill",
+        "CM-22-048": "skill",
+        "CM-22-050": "judgment",
+        "CM-22-051": "judgment",
+        "CM-22-052": "skill",
+        "CM-22-053": "judgment"
+      }
     }
   }
 }
