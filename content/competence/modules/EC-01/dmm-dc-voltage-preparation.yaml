@@ -1,0 +1,99 @@
+# MOD-0002 — Preparing for a DC voltage verification
+#
+# THE FIRST MODULE WITH requiresPhysicalDemonstration, and the counterpart to
+# MOD-0001 rather than a repeat of it. MOD-0001 prepares for a `desk` element
+# and deliberately declares NO physical demonstration; this one prepares for an
+# `equipment` element and must declare it. Between them the two halves of
+# rule 11 are exercised: inventing a barrier is as wrong as hiding one, and
+# each module is wrong in the way the other would be if it copied the other's
+# choice.
+
+id: MOD-0002
+title: Preparing for a DC voltage verification
+status: draft
+format: guided-worked-example
+
+summary: >-
+  A worked preparation for the bench, in three parts. The learner selects test
+  points across the ranges of a supplied meter specification and sees what a
+  full-scale-only point list leaves untested; computes the permitted error at
+  each chosen point and the ratio against a supplied calibrator's uncertainty,
+  finding the range where the ratio fails; and works through an as-found record
+  with the shorted-input indication missing, to see what a later reader cannot
+  conclude without it. Everything here is arithmetic and record structure. None
+  of it is the connection.
+
+knowledgeRefs:
+  - article: BOK-0006
+    section: s03
+    relevance: >-
+      Choosing test points across and within ranges, polarity and the shorted
+      zero — the first part of the module.
+  - article: BOK-0006
+    section: s02
+    relevance: >-
+      The standard and the ratio it must achieve, including what the honest
+      responses are when it cannot be met. The second part.
+  - article: BOK-0006
+    section: s06
+    relevance: >-
+      What the as-found record consists of, per test point and per
+      calibration. The third part.
+  - article: BOK-0005
+    section: s03
+    relevance: >-
+      Why the permitted error differs so much between the top and bottom of a
+      range, which is what makes a full-scale-only point list inadequate.
+  - article: BOK-0005
+    section: s04
+    relevance: >-
+      Computing the permitted error, which the second part has the learner do
+      repeatedly against a supplied datasheet.
+
+preparesFor:
+  - element: EC-01-030
+    level: 2
+  - element: EC-01-030
+    level: 3
+  - element: DP-08-064
+    level: 2
+
+# EC-01-030 IS LISTED HERE AND DP-08-064 IS NOT, and the difference is the
+# whole point of the field. Both are `skill` elements. EC-01-030's
+# demonstration is `equipment` — it cannot be evidenced without a meter, a
+# calibrator and leads — so a learner completing this module has the knowledge
+# and still needs a bench, and the record must say so. DP-08-064's
+# demonstration is `desk`: computing a permitted error from a datasheet needs
+# nothing but the datasheet, and listing it here would tell a learner they are
+# waiting for access they never needed.
+requiresPhysicalDemonstration:
+  - EC-01-030
+
+cannotConvey: >-
+  Everything that makes the millivolt ranges difficult. This module cannot
+  teach the judgement of when an indication has actually settled as against
+  merely stopped moving quickly, which is learned by watching a display drift
+  for two minutes and finding out afterwards whether you waited long enough. It
+  cannot teach how much thermal EMF a particular bench, a particular set of
+  leads and a particular pair of hands actually produce, and that number is the
+  one that decides whether a low-range reading means anything. It cannot teach
+  recognising, from the feel of a connection, that a binding post is not quite
+  tight. A learner who completes this arrives at the bench able to say what
+  should be recorded and unable to produce a reading worth recording, and they
+  should be told that in those words rather than discovering it.
+
+estimatedMinutes: 40
+
+alternativeRoutes: >-
+  Most laboratories teach this by putting a new starter alongside somebody
+  doing the job, which is better than this module in every respect except
+  availability. The point-selection reasoning is also covered by manufacturer
+  calibration procedures for specific meters, which are freely available and
+  are more concrete than anything here — with the caveat that a procedure tells
+  you which points to use and not why, and this module is entirely about the
+  why. Nothing in it is required before assessment: somebody who has been
+  verifying meters for twenty years sits the same assessment without opening
+  it.
+
+authoring:
+  createdOn: "2026-08-14"
