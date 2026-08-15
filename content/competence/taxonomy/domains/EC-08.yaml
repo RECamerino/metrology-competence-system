@@ -1,0 +1,105 @@
+# Equipment-calibration pack. See rule 14 in CLAUDE.md: an EC element is the
+# competence to calibrate a CLASS OF EQUIPMENT — the parameters, the standards
+# required, and where the job goes wrong. Calibration methodology stays in
+# CM-06, and an element here that could be written without naming the
+# equipment belongs there instead.
+
+schemaVersion: 1
+domains:
+  - id: EC-08
+    title: Optical, Photometric and Radiometric Instrument Calibration
+    kind: equipment
+    status: draft
+    summary: >-
+      Calibrating instruments that measure light and optical properties,
+      where spectral response, geometry and stray light decide whether two
+      instruments agree. Boundary: the measurement science is DP-12 and
+      DP-13.
+
+    competencyAreas:
+
+      - id: EC-08-A01
+        title: Photometer and Illuminance Meter Calibration
+        status: draft
+        summary: >-
+          Lux and luminance meters, where the match to the photopic
+          response and the cosine correction are the calibration.
+        elements:
+          - { id: EC-08-001, title: "Receiving inspection and functional check of an illuminance meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-002, title: "Calibration configuration and stabilisation for an illuminance meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-003, title: "Selecting the standards and fixturing for an illuminance meter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-004, title: "Illuminance indication error against a reference source", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-005, title: "Spectral mismatch and f1' determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-08-006, title: "Cosine response and f2' determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-007, title: "Linearity across the measuring decades", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-008, title: "Luminance meter acceptance angle and field verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-009, title: "Source distance, inverse square law and geometry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-010, title: "Fatigue, drift and temperature dependence of a detector", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-011, title: "Adjustment of an illuminance meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-012, title: "Uncertainty budget for an illuminance meter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-013, title: "Conformity statement for an illuminance meter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-08-A02
+        title: Optical Power and Laser Meter Calibration
+        status: draft
+        summary: >-
+          Fibre-optic and free-space power measurement, calibrated per
+          wavelength because responsivity is not flat.
+        elements:
+          - { id: EC-08-014, title: "Receiving inspection and functional check of an optical power meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-015, title: "Calibration configuration and stabilisation for an optical power meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-016, title: "Selecting the standards and fixturing for an optical power meter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-017, title: "Responsivity and power accuracy against wavelength", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-018, title: "Linearity over the dynamic range", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-019, title: "Detector spatial uniformity across the active area", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-020, title: "Connector and fibre interface repeatability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-021, title: "Laser energy meter and pulsed measurement verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-022, title: "Damage threshold and detector history", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: EC-08-023, title: "Ambient light rejection and zeroing", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-024, title: "Adjustment of an optical power meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-025, title: "Uncertainty budget for an optical power meter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-026, title: "Conformity statement for an optical power meter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-08-A03
+        title: Spectrophotometer and Colorimeter Calibration
+        status: draft
+        summary: >-
+          Wavelength and photometric scales verified with certified
+          reference materials, plus the stray light that quietly limits
+          absorbance.
+        elements:
+          - { id: EC-08-027, title: "Receiving inspection and functional check of a spectrophotometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-028, title: "Calibration configuration and stabilisation for a spectrophotometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-029, title: "Selecting the standards and fixturing for a spectrophotometer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-030, title: "Wavelength accuracy and repeatability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-031, title: "Photometric accuracy and absorbance scale linearity", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-032, title: "Stray light determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-033, title: "Spectral bandwidth and resolution verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-034, title: "Baseline flatness and noise", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-035, title: "Cell and cuvette pathlength verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-036, title: "Colour scale and illuminant-observer verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-037, title: "Certified reference materials and their handling", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-038, title: "Adjustment of a spectrophotometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-039, title: "Uncertainty budget for a spectrophotometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-040, title: "Conformity statement for a spectrophotometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-08-A04
+        title: Optical Instrument and Refractometer Calibration
+        status: draft
+        summary: >-
+          Refractometers, microscopes and optical benches, where
+          temperature control and the reference liquid are the
+          calibration.
+        elements:
+          - { id: EC-08-041, title: "Receiving inspection and functional check of an optical instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-042, title: "Calibration configuration and stabilisation for an optical instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-043, title: "Selecting the standards and fixturing for an optical instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-044, title: "Refractive index indication against reference liquids", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-045, title: "Temperature control and compensation in a refractometer", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-046, title: "Microscope stage micrometer and reticle verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-047, title: "Magnification and field-of-view verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-048, title: "Polarimeter optical rotation accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-049, title: "Turbidity meter verification against formazin standards", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-050, title: "Adjustment of an optical instrument, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-051, title: "Uncertainty budget for an optical instrument calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-052, title: "Conformity statement for an optical instrument against its specification", kind: judgment, levelCeiling: 4, status: draft }

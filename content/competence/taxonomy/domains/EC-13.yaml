@@ -1,0 +1,133 @@
+# Equipment-calibration pack. See rule 14 in CLAUDE.md: an EC element is the
+# competence to calibrate a CLASS OF EQUIPMENT — the parameters, the standards
+# required, and where the job goes wrong. Calibration methodology stays in
+# CM-06, and an element here that could be written without naming the
+# equipment belongs there instead.
+
+schemaVersion: 1
+domains:
+  - id: EC-13
+    title: Electrical Power, Energy and High Voltage Equipment Calibration
+    kind: equipment
+    status: draft
+    summary: >-
+      Calibrating the instruments of power and energy measurement, and the
+      high-voltage equipment used to test electrical apparatus, where
+      phase angle and waveform distortion decide the result and the
+      working voltages are hazardous. Boundary: the measurement science is
+      DP-09 and DP-11.
+
+    competencyAreas:
+
+      - id: EC-13-A01
+        title: Energy Meter Calibration
+        status: draft
+        summary: >-
+          Watt-hour meters calibrated across load and power factor,
+          because a meter accurate at unity can be badly wrong at a real
+          one.
+        elements:
+          - { id: EC-13-001, title: "Receiving inspection and functional check of an energy meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-002, title: "Calibration configuration and stabilisation for an energy meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-003, title: "Selecting the standards and fixturing for an energy meter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-004, title: "Energy registration error at stated load points", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-005, title: "Power factor dependence and phase angle error", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-006, title: "Starting current and no-load creep verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-007, title: "Harmonic and distorted waveform response", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-008, title: "Multi-phase and unbalanced load behaviour", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-009, title: "Register, pulse output and display verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-010, title: "Reference meter and phantom loading arrangements", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-011, title: "Tariff, time-of-use and demand register verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-012, title: "Adjustment of an energy meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-013, title: "Uncertainty budget for an energy meter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-014, title: "Conformity statement for an energy meter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-13-A02
+        title: Power Analyser and Power Quality Instrument Calibration
+        status: draft
+        summary: >-
+          Instruments measuring power, harmonics and flicker, where the
+          calibration must cover the distorted conditions they exist to
+          characterise.
+        elements:
+          - { id: EC-13-015, title: "Receiving inspection and functional check of a power analyser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-016, title: "Calibration configuration and stabilisation for a power analyser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-017, title: "Selecting the standards and fixturing for a power analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-018, title: "Active, reactive and apparent power accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-019, title: "Phase angle and power factor measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-020, title: "Harmonic amplitude and phase measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-021, title: "Flicker measurement verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-022, title: "Transient, dip and swell capture verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-023, title: "Bandwidth and sampling effects on a power reading", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-024, title: "Current and voltage input channel accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-025, title: "Clamp and shunt input verification as a system", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-026, title: "Adjustment of a power analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-027, title: "Uncertainty budget for a power analyser calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-028, title: "Conformity statement for a power analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-13-A03
+        title: Instrument Transformer Calibration
+        status: draft
+        summary: >-
+          Current and voltage transformers characterised for ratio and
+          phase error at burden, which is where the class is actually
+          decided.
+        elements:
+          - { id: EC-13-029, title: "Receiving inspection and functional check of an instrument transformer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-030, title: "Calibration configuration and stabilisation for an instrument transformer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-031, title: "Selecting the standards and fixturing for an instrument transformer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-032, title: "Ratio error against burden and current", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-033, title: "Phase displacement determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-034, title: "Accuracy class verification and assignment", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-035, title: "Burden measurement and its effect on error", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-036, title: "Excitation characteristic and knee point determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-037, title: "Composite error under fault conditions", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-038, title: "Comparison bridge techniques for transformer calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-039, title: "Adjustment of an instrument transformer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-040, title: "Uncertainty budget for an instrument transformer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-041, title: "Conformity statement for an instrument transformer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-13-A04
+        title: High Voltage Measurement and Test Equipment Calibration
+        status: draft
+        summary: >-
+          Dividers, spheres and impulse systems, calibrated at or scaled
+          to working voltage, where clearance and safety govern the
+          method.
+        elements:
+          - { id: EC-13-042, title: "Receiving inspection and functional check of high voltage measuring equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-043, title: "Calibration configuration and stabilisation for high voltage measuring equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-044, title: "Selecting the standards and fixturing for high voltage measuring equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-045, title: "Divider ratio determination at voltage", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-046, title: "Scale factor linearity and voltage dependence", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-047, title: "Impulse voltage measuring system verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-048, title: "Sphere gap and reference measurement comparison", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-049, title: "Frequency response and step response of a divider", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-050, title: "Partial discharge measurement system calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-051, title: "Proximity, clearance and earthing effects on a reading", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-052, title: "Safe working practice during high voltage calibration", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-13-053, title: "Adjustment of high voltage measuring equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-054, title: "Uncertainty budget for high voltage measuring equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-055, title: "Conformity statement for high voltage measuring equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-13-A05
+        title: Protection Relay and Test Set Calibration
+        status: draft
+        summary: >-
+          The equipment that proves protection systems, calibrated for
+          the current, voltage and timing accuracy the protection
+          settings rely on.
+        elements:
+          - { id: EC-13-056, title: "Receiving inspection and functional check of a relay test set", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-057, title: "Calibration configuration and stabilisation for a relay test set", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-058, title: "Selecting the standards and fixturing for a relay test set calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-059, title: "Current and voltage output accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-060, title: "Phase angle output accuracy between channels", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-061, title: "Frequency output accuracy and ramping", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-062, title: "Timing measurement accuracy and trip capture", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-063, title: "Output under burden and compliance limits", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-064, title: "Harmonic and waveform generation verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-065, title: "Binary input and output timing verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-066, title: "Adjustment of a relay test set, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-067, title: "Uncertainty budget for a relay test set calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-068, title: "Conformity statement for a relay test set against its specification", kind: judgment, levelCeiling: 4, status: draft }

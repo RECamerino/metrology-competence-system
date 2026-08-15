@@ -1,0 +1,83 @@
+# Equipment-calibration pack. See rule 14 in CLAUDE.md: an EC element is the
+# competence to calibrate a CLASS OF EQUIPMENT — the parameters, the standards
+# required, and where the job goes wrong. Calibration methodology stays in
+# CM-06, and an element here that could be written without naming the
+# equipment belongs there instead.
+
+schemaVersion: 1
+domains:
+  - id: EC-07
+    title: Time, Frequency and Timing Device Calibration
+    kind: equipment
+    status: draft
+    summary: >-
+      Calibrating clocks, counters, oscillators and timing receivers,
+      where the reference is usually better than the device by orders of
+      magnitude and the interesting quantity is stability rather than
+      accuracy. Boundary: the measurement science is DP-14.
+
+    competencyAreas:
+
+      - id: EC-07-A01
+        title: Frequency Standard and Oscillator Calibration
+        status: draft
+        summary: >-
+          Ovened, rubidium and caesium sources characterised for offset,
+          ageing and short-term stability, which are three different
+          measurements.
+        elements:
+          - { id: EC-07-001, title: "Receiving inspection and functional check of a frequency standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-002, title: "Calibration configuration and stabilisation for a frequency standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-003, title: "Selecting the standards and fixturing for a frequency standard calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-004, title: "Frequency offset against a reference standard", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-005, title: "Ageing rate determination over time", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-006, title: "Allan deviation and short-term stability characterisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-07-007, title: "Warm-up and retrace behaviour after power cycling", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-008, title: "Temperature coefficient of frequency", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-009, title: "Phase comparison and beat frequency methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-010, title: "Disciplined oscillator holdover verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-011, title: "Adjustment of a frequency standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-012, title: "Uncertainty budget for a frequency standard calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-013, title: "Conformity statement for a frequency standard against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-07-A02
+        title: Timing Receiver and Distribution Calibration
+        status: draft
+        summary: >-
+          GNSS receivers and distribution amplifiers, where cable delay
+          and antenna position are part of the delivered time.
+        elements:
+          - { id: EC-07-014, title: "Receiving inspection and functional check of a timing receiver", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-015, title: "Calibration configuration and stabilisation for a timing receiver", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-016, title: "Selecting the standards and fixturing for a timing receiver calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-017, title: "One pulse per second output accuracy against UTC", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-018, title: "Antenna cable delay determination and correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-019, title: "Receiver internal delay calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-07-020, title: "Holdover performance on loss of signal", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-021, title: "Distribution amplifier channel delay and skew", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-022, title: "Time code output verification: IRIG, NTP and PTP", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-023, title: "Multipath and antenna siting effects", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-07-024, title: "Adjustment of a timing receiver, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-025, title: "Uncertainty budget for a timing receiver calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-026, title: "Conformity statement for a timing receiver against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-07-A03
+        title: Stopwatch, Timer and Clock Calibration
+        status: draft
+        summary: >-
+          Handheld and process timers, where the operator reaction time
+          frequently exceeds the instrument error and has to be handled
+          honestly.
+        elements:
+          - { id: EC-07-027, title: "Receiving inspection and functional check of a stopwatch or timer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-028, title: "Calibration configuration and stabilisation for a stopwatch or timer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-029, title: "Selecting the standards and fixturing for a stopwatch or timer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-030, title: "Time interval indication error over stated durations", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-031, title: "Timebase frequency verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-032, title: "Start-stop and lap function verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-033, title: "Operator reaction and its treatment in the result", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: EC-07-034, title: "Display resolution and rounding behaviour", kind: skill, levelCeiling: 2, status: draft }
+          - { id: EC-07-035, title: "Process timer and interval controller verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-036, title: "Adjustment of a stopwatch or timer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-037, title: "Uncertainty budget for a stopwatch or timer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-038, title: "Conformity statement for a stopwatch or timer against its specification", kind: judgment, levelCeiling: 4, status: draft }

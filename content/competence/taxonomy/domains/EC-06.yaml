@@ -1,0 +1,195 @@
+# Equipment-calibration pack. See rule 14 in CLAUDE.md: an EC element is the
+# competence to calibrate a CLASS OF EQUIPMENT — the parameters, the standards
+# required, and where the job goes wrong. Calibration methodology stays in
+# CM-06, and an element here that could be written without naming the
+# equipment belongs there instead.
+
+schemaVersion: 1
+domains:
+  - id: EC-06
+    title: Temperature and Humidity Instrument Calibration
+    kind: equipment
+    status: draft
+    summary: >-
+      Calibrating thermometers, probes, sources and humidity instruments,
+      where the thing being calibrated is usually a sensor plus a readout
+      plus a lead, and where the immersion depth and the uniformity of the
+      source are inside every number. Boundary: the measurement science is
+      DP-05 and DP-06.
+
+    competencyAreas:
+
+      - id: EC-06-A01
+        title: Thermocouple Calibration
+        status: draft
+        summary: >-
+          EMF against temperature by comparison or fixed point, with the
+          reference junction and the inhomogeneity of a used
+          thermocouple as the recurring problems.
+        elements:
+          - { id: EC-06-001, title: "Receiving inspection and functional check of a thermocouple", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-002, title: "Calibration configuration and stabilisation for a thermocouple", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-003, title: "Selecting the standards and fixturing for a thermocouple calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-004, title: "EMF against temperature by comparison", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-005, title: "Reference junction compensation and ice-point verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-006, title: "Thermoelectric inhomogeneity and its detection", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-007, title: "Type-specific behaviour and tolerance classes", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-06-008, title: "Immersion depth and stem conduction error", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-009, title: "Drift, ageing and recalibration intervals for a thermocouple", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-010, title: "Extension and compensating cable verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-011, title: "Fixed-point calibration of a thermocouple", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-012, title: "Adjustment of a thermocouple, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-013, title: "Uncertainty budget for a thermocouple calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-014, title: "Conformity statement for a thermocouple against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A02
+        title: Resistance Thermometer Calibration
+        status: draft
+        summary: >-
+          PRTs and industrial RTDs, where the resistance measurement,
+          the self-heating and the coefficients are three separate error
+          sources.
+        elements:
+          - { id: EC-06-015, title: "Receiving inspection and functional check of a resistance thermometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-016, title: "Calibration configuration and stabilisation for a resistance thermometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-017, title: "Selecting the standards and fixturing for a resistance thermometer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-018, title: "Resistance against temperature by comparison", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-019, title: "Fixed-point calibration and ITS-90 realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-020, title: "Callendar–Van Dusen and ITS-90 coefficient determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-021, title: "Self-heating determination and correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-022, title: "Lead resistance and three- versus four-wire connection", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-023, title: "Insulation resistance of a probe at temperature", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-024, title: "Hysteresis and thermal shock history", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-025, title: "Immersion characteristic verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-026, title: "Adjustment of a resistance thermometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-027, title: "Uncertainty budget for a resistance thermometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-028, title: "Conformity statement for a resistance thermometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A03
+        title: Temperature Indicator and Readout Calibration
+        status: draft
+        summary: >-
+          The electrical half of a temperature measurement, calibrated
+          by simulation and then verified with the probe attached.
+        elements:
+          - { id: EC-06-029, title: "Receiving inspection and functional check of a temperature readout", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-030, title: "Calibration configuration and stabilisation for a temperature readout", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-031, title: "Selecting the standards and fixturing for a temperature readout calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-032, title: "Thermocouple input accuracy by simulated EMF", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-033, title: "RTD input accuracy by simulated resistance", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-034, title: "Cold junction compensation accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-035, title: "Linearisation and conversion algorithm verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-036, title: "System calibration of probe and readout together", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-037, title: "Measuring current and its self-heating contribution", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-038, title: "Display resolution, rounding and units handling", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-039, title: "Adjustment of a temperature readout, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-040, title: "Uncertainty budget for a temperature readout calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-041, title: "Conformity statement for a temperature readout against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A04
+        title: Liquid-in-Glass and Dial Thermometer Calibration
+        status: draft
+        summary: >-
+          Direct-reading thermometers whose immersion condition and stem
+          correction are part of the stated result.
+        elements:
+          - { id: EC-06-042, title: "Receiving inspection and functional check of a liquid-in-glass thermometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-043, title: "Calibration configuration and stabilisation for a liquid-in-glass thermometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-044, title: "Selecting the standards and fixturing for a liquid-in-glass thermometer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-045, title: "Indication error at test points by comparison", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-046, title: "Total, partial and complete immersion conditions", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-06-047, title: "Emergent stem correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-048, title: "Column separation, bore defects and inspection", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-049, title: "Ice point verification and its use between calibrations", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-050, title: "Bimetallic and dial thermometer indication and hysteresis", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-051, title: "Adjustment of a liquid-in-glass thermometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-052, title: "Uncertainty budget for a liquid-in-glass thermometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-053, title: "Conformity statement for a liquid-in-glass thermometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A05
+        title: Infrared Thermometer and Thermal Imager Calibration
+        status: draft
+        summary: >-
+          Non-contact temperature, where emissivity, field of view and
+          background radiation are the calibration.
+        elements:
+          - { id: EC-06-054, title: "Receiving inspection and functional check of an infrared thermometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-055, title: "Calibration configuration and stabilisation for an infrared thermometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-056, title: "Selecting the standards and fixturing for an infrared thermometer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-057, title: "Indication error against a blackbody source", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-058, title: "Emissivity setting and its effect on indication", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-059, title: "Distance-to-spot ratio and field of view verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-060, title: "Background and reflected temperature compensation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-061, title: "Blackbody source cavity emissivity and uniformity", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-062, title: "Thermal imager pixel uniformity and noise-equivalent temperature", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-063, title: "Atmospheric transmission and path length effects", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-06-064, title: "Spectral response and its effect on a reading", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-06-065, title: "Adjustment of an infrared thermometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-066, title: "Uncertainty budget for an infrared thermometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-067, title: "Conformity statement for an infrared thermometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A06
+        title: Temperature Source and Enclosure Calibration
+        status: draft
+        summary: >-
+          Baths, dry blocks, furnaces and chambers, characterised for
+          uniformity and stability rather than for indication alone.
+        elements:
+          - { id: EC-06-068, title: "Receiving inspection and functional check of a temperature source", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-069, title: "Calibration configuration and stabilisation for a temperature source", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-070, title: "Selecting the standards and fixturing for a temperature source calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-071, title: "Temperature uniformity across the working volume", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-072, title: "Stability over time at a setpoint", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-073, title: "Axial and radial gradient in a dry block or bath", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-074, title: "Loading effect of the devices under test", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-075, title: "Indicated versus actual temperature of a source", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-076, title: "Insert and sleeve fit in a dry block", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-077, title: "Environmental chamber mapping and sensor placement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-078, title: "Recovery after door opening or load change", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-079, title: "Adjustment of a temperature source, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-080, title: "Uncertainty budget for a temperature source calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-081, title: "Conformity statement for a temperature source against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A07
+        title: Humidity Instrument Calibration
+        status: draft
+        summary: >-
+          Relative humidity and dew point, where the generator, the
+          temperature measurement and the sensor's own hysteresis all
+          contribute.
+        elements:
+          - { id: EC-06-082, title: "Receiving inspection and functional check of a humidity instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-083, title: "Calibration configuration and stabilisation for a humidity instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-084, title: "Selecting the standards and fixturing for a humidity instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-085, title: "Relative humidity indication error against a generator", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-086, title: "Dew-point hygrometer verification and mirror condition", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-087, title: "Temperature dependence of a humidity reading", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-088, title: "Sensor hysteresis and response time", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-089, title: "Salt solution methods and their limits", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-090, title: "Two-pressure and two-temperature generator principles", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-06-091, title: "Contamination, drift and sensor recovery", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-092, title: "Adjustment of a humidity instrument, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-093, title: "Uncertainty budget for a humidity instrument calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-094, title: "Conformity statement for a humidity instrument against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A08
+        title: Data Logger and Monitoring System Calibration
+        status: draft
+        summary: >-
+          Instruments that record unattended, calibrated as a system
+          including their channels, their clock and their stated
+          resolution.
+        elements:
+          - { id: EC-06-095, title: "Receiving inspection and functional check of a data logger", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-096, title: "Calibration configuration and stabilisation for a data logger", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-097, title: "Selecting the standards and fixturing for a data logger calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-098, title: "Per-channel indication error across the range", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-099, title: "Internal clock and timestamp accuracy", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-100, title: "Sampling interval and averaging behaviour", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-101, title: "Memory, wrap-around and data integrity verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-102, title: "Battery and power-loss behaviour", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-103, title: "Calibration of a logger with its probe as a system", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-104, title: "Alarm threshold and excursion recording verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-105, title: "Adjustment of a data logger, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-106, title: "Uncertainty budget for a data logger calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-107, title: "Conformity statement for a data logger against its specification", kind: judgment, levelCeiling: 4, status: draft }

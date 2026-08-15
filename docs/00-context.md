@@ -447,6 +447,12 @@ It is **not** a restatement of `CM-06`, which owns calibration *methodology* —
 
 **The test: an EC element that could be written without naming the equipment belongs in `CM-06` instead.**
 
+**The pack is now built out: 13 EC domains, 86 equipment types, 1185 elements.** Every area follows one spine — receiving inspection, calibration configuration, standards and fixturing, then adjustment, uncertainty budget, conformity statement — wrapped around the parameters that make that equipment type distinct. The spine repeats because the job genuinely does. The parameters never repeat: no two of the 86 areas share a single parameter element, which is the mechanical form of the rule that an area whose parameters could be swapped for another type's has been written wrong.
+
+Both examples that prompted this now resolve. Searching the viewer for *oscilloscope* returns 26 elements; *RF passive* returns 17, covering attenuation against frequency, return loss, coupler directivity, adapter removal, connector gauging and mismatch uncertainty — none of which existed anywhere in the corpus a day ago.
+
+**This was generated in one pass and that is a risk worth naming.** IDs are append-only, so 1185 titles are now permanent. The parameter lists are drawn from ordinary calibration practice and the boundary rule was applied throughout, but a practising metrologist reading their own discipline will find titles they would have worded differently, and a few they would not have included. Correcting a title is free; withdrawing an element means deprecating it. **This wants a discipline-by-discipline review before anything is authored against it**, and the review is cheaper than it looks because a whole equipment type is thirteen to twenty lines in one file.
+
 `EC-01-A01` — Oscilloscope Calibration, 26 elements — is the worked pattern, and the oscilloscope was chosen deliberately because it spans three quantity domains at once and so is the strongest available test of whether the axis is real. It is: none of those 26 elements can be placed in a single `DP` domain without losing part of the job.
 
 Ceilings run mostly to 4, where the non-routine case — a scope that meets bandwidth on one channel and not the next — is where proficiency actually shows. Two reach 5: high-bandwidth work above 1 GHz, and timebase jitter, both of which support career-long learning and a defensible capstone.

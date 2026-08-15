@@ -1,0 +1,105 @@
+# Equipment-calibration pack. See rule 14 in CLAUDE.md: an EC element is the
+# competence to calibrate a CLASS OF EQUIPMENT — the parameters, the standards
+# required, and where the job goes wrong. Calibration methodology stays in
+# CM-06, and an element here that could be written without naming the
+# equipment belongs there instead.
+
+schemaVersion: 1
+domains:
+  - id: EC-10
+    title: Ionising Radiation Instrument Calibration
+    kind: equipment
+    status: draft
+    summary: >-
+      Calibrating survey meters, dosimeters and activity measuring
+      instruments, where the calibration is energy and geometry dependent,
+      the source is itself hazardous, and the consequence of an undetected
+      error is a person's dose record. Boundary: the measurement science
+      is DP-15.
+
+    competencyAreas:
+
+      - id: EC-10-A01
+        title: Survey Meter and Dose Rate Instrument Calibration
+        status: draft
+        summary: >-
+          Dose rate instruments calibrated against a known field, where
+          energy response and angular dependence dominate the real-world
+          error.
+        elements:
+          - { id: EC-10-001, title: "Receiving inspection and functional check of a radiation survey meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-002, title: "Calibration configuration and stabilisation for a radiation survey meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-003, title: "Selecting the standards and fixturing for a radiation survey meter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-004, title: "Dose rate indication error against a reference field", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-005, title: "Energy response across the photon energy range", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-006, title: "Angular response and directional dependence", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-007, title: "Linearity and range switching across decades", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-008, title: "Dead time and saturation at high dose rate", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-009, title: "Source geometry, distance and scatter correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-010, title: "Alarm threshold and audible indication verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-011, title: "Detector type specifics: GM, scintillator and ion chamber", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-10-012, title: "Adjustment of a radiation survey meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-013, title: "Uncertainty budget for a radiation survey meter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-014, title: "Conformity statement for a radiation survey meter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-10-A02
+        title: Dosimeter and Personal Monitor Calibration
+        status: draft
+        summary: >-
+          The instruments that create a dose of record, calibrated on
+          phantoms in operational quantities rather than in free air.
+        elements:
+          - { id: EC-10-015, title: "Receiving inspection and functional check of a personal dosimeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-016, title: "Calibration configuration and stabilisation for a personal dosimeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-017, title: "Selecting the standards and fixturing for a personal dosimeter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-018, title: "Personal dose equivalent response on a phantom", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-019, title: "Operational quantity selection and conversion", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-10-020, title: "Energy and angular response of a personal dosimeter", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-021, title: "Electronic dosimeter dose and dose rate response", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-022, title: "Passive dosimeter reader calibration and fading", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-023, title: "Background subtraction and control dosimeters", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-024, title: "Reproducibility and the dose of record", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-10-025, title: "Adjustment of a personal dosimeter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-026, title: "Uncertainty budget for a personal dosimeter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-027, title: "Conformity statement for a personal dosimeter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-10-A03
+        title: Contamination Monitor Calibration
+        status: draft
+        summary: >-
+          Surface activity measurement, where the calibration is an
+          efficiency for a specific nuclide and geometry, not a general
+          one.
+        elements:
+          - { id: EC-10-028, title: "Receiving inspection and functional check of a contamination monitor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-029, title: "Calibration configuration and stabilisation for a contamination monitor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-030, title: "Selecting the standards and fixturing for a contamination monitor calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-031, title: "Detection efficiency against reference sources", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-032, title: "Nuclide and emission type dependence of efficiency", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-033, title: "Surface emission rate and activity distinguished", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-10-034, title: "Background and minimum detectable activity determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-035, title: "Probe geometry, window condition and source-to-window distance", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-036, title: "Alarm setting and response time verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-037, title: "Adjustment of a contamination monitor, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-038, title: "Uncertainty budget for a contamination monitor calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-039, title: "Conformity statement for a contamination monitor against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-10-A04
+        title: Activity and Dose Calibrator Verification
+        status: draft
+        summary: >-
+          Well-chamber instruments in nuclear medicine, verified for
+          accuracy, linearity and geometry with a decaying source.
+        elements:
+          - { id: EC-10-040, title: "Receiving inspection and functional check of an activity meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-041, title: "Calibration configuration and stabilisation for an activity meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-042, title: "Selecting the standards and fixturing for an activity meter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-043, title: "Accuracy against certified reference sources", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-044, title: "Linearity determination by decay or shield method", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-045, title: "Geometry dependence: volume, container and position", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-046, title: "Nuclide setting and dial factor verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-047, title: "Constancy checks and their frequency", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-048, title: "Background and residual contamination checks", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-049, title: "Adjustment of an activity meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-050, title: "Uncertainty budget for an activity meter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-051, title: "Conformity statement for an activity meter against its specification", kind: judgment, levelCeiling: 4, status: draft }

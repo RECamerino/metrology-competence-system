@@ -1,0 +1,159 @@
+# Equipment-calibration pack. See rule 14 in CLAUDE.md: an EC element is the
+# competence to calibrate a CLASS OF EQUIPMENT — the parameters, the standards
+# required, and where the job goes wrong. Calibration methodology stays in
+# CM-06, and an element here that could be written without naming the
+# equipment belongs there instead.
+
+schemaVersion: 1
+domains:
+  - id: EC-04
+    title: Mass, Force, Torque and Hardness Instrument Calibration
+    kind: equipment
+    status: draft
+    summary: >-
+      Calibrating the instruments of mechanical quantity measurement,
+      where the standard is frequently an artefact rather than an
+      instrument, and where buoyancy, alignment and loading history change
+      the result. Boundary: the measurement science is DP-02; this is the
+      work on the bench and in the field.
+
+    competencyAreas:
+
+      - id: EC-04-A01
+        title: Balance and Weighing Instrument Calibration
+        status: draft
+        summary: >-
+          Repeatability, eccentricity and linearity rather than a single
+          indication, which is what separates a calibration from a
+          check.
+        elements:
+          - { id: EC-04-001, title: "Receiving inspection and functional check of a balance", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-002, title: "Calibration configuration and stabilisation for a balance", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-003, title: "Selecting the standards and fixturing for a balance calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-004, title: "Repeatability at the test loads", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-005, title: "Eccentricity and off-centre loading error", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-006, title: "Linearity and departure across the weighing range", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-007, title: "Indication error at nominal test points", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-008, title: "Air buoyancy correction and its necessity", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-009, title: "Minimum weight determination for a process", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-010, title: "Warm-up, levelling and installation effects", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-011, title: "Internal adjustment weight verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-012, title: "High-capacity and platform scale calibration in situ", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-013, title: "Adjustment of a balance, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-014, title: "Uncertainty budget for a balance calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-015, title: "Conformity statement for a balance against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-04-A02
+        title: Mass Standard Calibration
+        status: draft
+        summary: >-
+          Weights calibrated by substitution weighing against a
+          reference, with the whole result resting on the weighing
+          design and the environment.
+        elements:
+          - { id: EC-04-016, title: "Receiving inspection and functional check of a mass standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-017, title: "Calibration configuration and stabilisation for a mass standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-018, title: "Selecting the standards and fixturing for a mass standard calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-019, title: "Substitution weighing designs and their execution", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-020, title: "Conventional mass and true mass distinguished", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-04-021, title: "Air density determination and buoyancy correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-022, title: "Surface condition, cleaning and its effect on mass", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-023, title: "Density and volume determination of a weight", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-024, title: "Class assignment and maximum permissible error", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-025, title: "Handling, storage and the transport of mass standards", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-026, title: "Weight set consistency and internal closure checks", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-027, title: "Adjustment of a mass standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-028, title: "Uncertainty budget for a mass standard calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-029, title: "Conformity statement for a mass standard against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-04-A03
+        title: Force Instrument Calibration
+        status: draft
+        summary: >-
+          Load cells and force gauges calibrated in tension and
+          compression, where loading sequence and fixturing dominate the
+          uncertainty.
+        elements:
+          - { id: EC-04-030, title: "Receiving inspection and functional check of a force measuring instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-031, title: "Calibration configuration and stabilisation for a force measuring instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-032, title: "Selecting the standards and fixturing for a force measuring instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-033, title: "Indication error in increasing and decreasing force", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-034, title: "Hysteresis and its treatment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-035, title: "Repeatability with and without rotation of the transducer", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-036, title: "Zero return and creep behaviour", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-037, title: "Alignment, side loading and end-fitting effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-038, title: "Temperature sensitivity of a force transducer", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-039, title: "Calibration machine verification and its own traceability", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-040, title: "Classification against ISO 376-style criteria", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-041, title: "Adjustment of a force measuring instrument, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-042, title: "Uncertainty budget for a force measuring instrument calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-043, title: "Conformity statement for a force measuring instrument against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-04-A04
+        title: Torque Instrument Calibration
+        status: draft
+        summary: >-
+          Torque wrenches, screwdrivers and transducers, where the
+          tool's own mechanism and the operator's technique are inside
+          the measurement.
+        elements:
+          - { id: EC-04-044, title: "Receiving inspection and functional check of a torque tool or transducer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-045, title: "Calibration configuration and stabilisation for a torque tool or transducer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-046, title: "Selecting the standards and fixturing for a torque tool or transducer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-047, title: "Torque wrench indication error across the range", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-048, title: "Click-type wrench trip point and repeatability", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-049, title: "Direction dependence and reverse-torque behaviour", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-050, title: "Loading rate and its effect on a measured value", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-051, title: "Torque transducer linearity, hysteresis and creep", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-052, title: "Fixturing, reaction and parasitic bending moment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-053, title: "Torque screwdriver and low-torque instrument specifics", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-054, title: "Torque multipliers and their ratio verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-055, title: "Calibration in the position of use", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-056, title: "Adjustment of a torque tool or transducer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-057, title: "Uncertainty budget for a torque tool or transducer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-058, title: "Conformity statement for a torque tool or transducer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-04-A05
+        title: Hardness Tester Calibration and Verification
+        status: draft
+        summary: >-
+          Direct and indirect verification, where a machine can pass
+          every component check and still read wrong on a reference
+          block.
+        elements:
+          - { id: EC-04-059, title: "Receiving inspection and functional check of a hardness tester", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-060, title: "Calibration configuration and stabilisation for a hardness tester", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-061, title: "Selecting the standards and fixturing for a hardness tester calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-062, title: "Direct verification of test force", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-063, title: "Indenter geometry and condition verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-064, title: "Depth measuring system verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-065, title: "Dwell time and loading cycle verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-066, title: "Indirect verification against reference blocks", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-067, title: "Rockwell, Brinell and Vickers scale specifics", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-068, title: "Reference block calibration and its uniformity", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-069, title: "Optical measurement of an indentation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-070, title: "Portable and rebound hardness tester verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-071, title: "Adjustment of a hardness tester, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-072, title: "Uncertainty budget for a hardness tester calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-073, title: "Conformity statement for a hardness tester against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-04-A06
+        title: Materials Testing Machine Calibration
+        status: draft
+        summary: >-
+          Force, extension and speed on a machine whose frame compliance
+          is part of every result it reports.
+        elements:
+          - { id: EC-04-074, title: "Receiving inspection and functional check of a materials testing machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-075, title: "Calibration configuration and stabilisation for a materials testing machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-076, title: "Selecting the standards and fixturing for a materials testing machine calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-077, title: "Force indication verification in tension and compression", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-078, title: "Extensometer calibration and classification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-079, title: "Crosshead displacement and speed verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-080, title: "Frame compliance determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-081, title: "Alignment and bending strain verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-082, title: "Load train and grip effects on a measured force", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-083, title: "Data acquisition rate and its effect on peak capture", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-084, title: "Adjustment of a materials testing machine, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-085, title: "Uncertainty budget for a materials testing machine calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-086, title: "Conformity statement for a materials testing machine against its specification", kind: judgment, levelCeiling: 4, status: draft }

@@ -18,10 +18,10 @@ The authoritative source is [`content/competence/taxonomy/domains/`](../../conte
 
 | | |
 |---|---|
-| Domains | 44 |
-| Competency areas | 259 |
-| Elements | 2306 |
-| Assessable units | 9330 |
+| Domains | 56 |
+| Competency areas | 344 |
+| Elements | 3465 |
+| Assessable units | 13728 |
 
 An assessable unit is one element at one level. Every level is assessed at element scope, so a credential names exactly what was tested.
 
@@ -45,10 +45,10 @@ The highest level attainable for an element. Not every element supports all five
 
 | Ceiling | Attainable range | Meaning at the ceiling | Elements | Share |
 |---|---|---|---|---|
-| 2 | L1–L2 | Advanced Beginner | 13 | 0.6% |
-| 3 | L1–L3 | Competent | 331 | 14.4% |
-| 4 | L1–L4 | Proficient | 1499 | 65.0% |
-| 5 | L1–L5 | Expert | 463 | 20.1% |
+| 2 | L1–L2 | Advanced Beginner | 15 | 0.4% |
+| 3 | L1–L3 | Competent | 606 | 17.5% |
+| 4 | L1–L4 | Proficient | 2340 | 67.5% |
+| 5 | L1–L5 | Expert | 504 | 14.5% |
 
 **L5 is reserved** for elements where a person could plausibly spend a career and still be learning, and where a defensible capstone with cross-organizational review is actually writable.
 
@@ -58,9 +58,9 @@ What kind of competence an element is, and therefore what evidence proves it.
 
 | Kind | The claim | What proves it | Elements | Share |
 |---|---|---|---|---|
-| Knowledge | I understand this | Explanation, relation, analysis | 688 | 29.8% |
-| Skill | I can perform this | A work product they produced, not an account of it | 1171 | 50.8% |
-| Judgment | I can decide and defend it | A defence; often no single right answer | 447 | 19.4% |
+| Knowledge | I understand this | Explanation, relation, analysis | 720 | 20.8% |
+| Skill | I can perform this | A work product they produced, not an account of it | 2012 | 58.1% |
+| Judgment | I can decide and defend it | A defence; often no single right answer | 733 | 21.2% |
 
 **Authority is deliberately not a kind.** Knowledge, skill and judgment are earned and belong to a person. Authority is granted, and is a relationship between a person, an organization and a scope of work. Competency credentials are portable; authorizations are not. See [`../00-context.md`](../00-context.md).
 
@@ -127,7 +127,19 @@ Organised by the equipment TYPE that arrives on a bench, because that axis cuts 
 
 | Domain | Areas | Elements | K / S / J | L2 / L3 / L4 / L5 |
 |---|---|---|---|---|
-| [**EC-01** Electrical Test and Measurement Instrument Calibration](EC-01.md) | 1 | 26 | 2 / 21 / 3 | 0 / 6 / 18 / 2 |
+| [**EC-01** Electrical Test and Measurement Instrument Calibration](EC-01.md) | 12 | 189 | 6 / 144 / 39 | 0 / 48 / 136 / 5 |
+| [**EC-02** RF and Microwave Device Calibration](EC-02.md) | 8 | 114 | 6 / 84 / 24 | 0 / 20 / 87 / 7 |
+| [**EC-03** Dimensional and Geometric Instrument Calibration](EC-03.md) | 12 | 158 | 5 / 113 / 40 | 1 / 45 / 105 / 7 |
+| [**EC-04** Mass, Force, Torque and Hardness Instrument Calibration](EC-04.md) | 6 | 86 | 1 / 62 / 23 | 0 / 22 / 60 / 4 |
+| [**EC-05** Pressure, Vacuum and Flow Instrument Calibration](EC-05.md) | 8 | 107 | 2 / 76 / 29 | 0 / 25 / 78 / 4 |
+| [**EC-06** Temperature and Humidity Instrument Calibration](EC-06.md) | 8 | 107 | 5 / 73 / 29 | 0 / 28 / 75 / 4 |
+| [**EC-07** Time, Frequency and Timing Device Calibration](EC-07.md) | 3 | 38 | 1 / 27 / 10 | 1 / 11 / 24 / 2 |
+| [**EC-08** Optical, Photometric and Radiometric Instrument Calibration](EC-08.md) | 4 | 52 | 1 / 39 / 12 | 0 / 15 / 36 / 1 |
+| [**EC-09** Chemical and Analytical Instrument Calibration](EC-09.md) | 5 | 65 | 2 / 45 / 18 | 0 / 19 / 46 / 0 |
+| [**EC-10** Ionising Radiation Instrument Calibration](EC-10.md) | 4 | 51 | 3 / 35 / 13 | 0 / 11 / 39 / 1 |
+| [**EC-11** Acoustic and Vibration Instrument Calibration](EC-11.md) | 6 | 81 | 0 / 62 / 19 | 0 / 13 / 66 / 2 |
+| [**EC-12** Medical and Biomedical Equipment Calibration](EC-12.md) | 5 | 69 | 1 / 52 / 16 | 0 / 12 / 57 / 0 |
+| [**EC-13** Electrical Power, Energy and High Voltage Equipment Calibration](EC-13.md) | 5 | 68 | 1 / 50 / 17 | 0 / 12 / 50 / 6 |
 
 ---
 

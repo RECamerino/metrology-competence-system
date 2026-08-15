@@ -1,0 +1,126 @@
+# Equipment-calibration pack. See rule 14 in CLAUDE.md: an EC element is the
+# competence to calibrate a CLASS OF EQUIPMENT — the parameters, the standards
+# required, and where the job goes wrong. Calibration methodology stays in
+# CM-06, and an element here that could be written without naming the
+# equipment belongs there instead.
+
+schemaVersion: 1
+domains:
+  - id: EC-09
+    title: Chemical and Analytical Instrument Calibration
+    kind: equipment
+    status: draft
+    summary: >-
+      Calibrating the instruments of chemical measurement, where the
+      calibrant is a certified reference material, the sample matrix
+      changes the answer, and calibration and method validation are harder
+      to separate than elsewhere. Boundary: the measurement science is
+      DP-16.
+
+    competencyAreas:
+
+      - id: EC-09-A01
+        title: pH and Ion-Selective Electrode Calibration
+        status: draft
+        summary: >-
+          Slope and offset from buffers, where temperature and electrode
+          condition matter more than the meter.
+        elements:
+          - { id: EC-09-001, title: "Receiving inspection and functional check of a pH meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-002, title: "Calibration configuration and stabilisation for a pH meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-003, title: "Selecting the standards and fixturing for a pH meter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-004, title: "Slope and offset determination from buffer solutions", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-005, title: "Buffer selection, bracketing and traceability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-006, title: "Temperature compensation and isopotential point", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-007, title: "Electrode response time and drift", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-008, title: "Junction potential and sample matrix effects", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-09-009, title: "Electrode condition, cleaning and storage", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-010, title: "Ion-selective electrode selectivity and interference", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-011, title: "Adjustment of a pH meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-012, title: "Uncertainty budget for a pH meter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-013, title: "Conformity statement for a pH meter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-09-A02
+        title: Conductivity and Electrochemical Instrument Calibration
+        status: draft
+        summary: >-
+          Cell constant determination against reference solutions, with
+          temperature and polarisation as the recurring problems.
+        elements:
+          - { id: EC-09-014, title: "Receiving inspection and functional check of a conductivity meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-015, title: "Calibration configuration and stabilisation for a conductivity meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-016, title: "Selecting the standards and fixturing for a conductivity meter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-017, title: "Cell constant determination against reference solutions", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-018, title: "Temperature compensation and reference temperature", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-019, title: "Range and decade linearity", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-020, title: "Polarisation and cell geometry effects", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-09-021, title: "Resistivity and TDS derived-value verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-022, title: "Dissolved oxygen and ORP instrument verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-023, title: "Adjustment of a conductivity meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-024, title: "Uncertainty budget for a conductivity meter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-025, title: "Conformity statement for a conductivity meter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-09-A03
+        title: Gas Analyser and Detector Calibration
+        status: draft
+        summary: >-
+          Span gas and zero gas, where the delivery system and the
+          cross-sensitivity are as much the calibration as the analyser.
+        elements:
+          - { id: EC-09-026, title: "Receiving inspection and functional check of a gas analyser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-027, title: "Calibration configuration and stabilisation for a gas analyser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-028, title: "Selecting the standards and fixturing for a gas analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-029, title: "Zero and span calibration against certified gas mixtures", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-030, title: "Linearity across the measuring range", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-031, title: "Cross-sensitivity and interference from other species", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-032, title: "Response time and recovery verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-033, title: "Sample delivery, flow rate and dilution effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-034, title: "Bump testing versus full calibration", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: EC-09-035, title: "Portable gas detector and alarm threshold verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-036, title: "Sensor ageing and end-of-life behaviour", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-037, title: "Adjustment of a gas analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-038, title: "Uncertainty budget for a gas analyser calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-039, title: "Conformity statement for a gas analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-09-A04
+        title: Chromatograph and Analytical Separation Instrument Calibration
+        status: draft
+        summary: >-
+          Retention and response calibrated together, where the column
+          and the injector drift independently of the detector.
+        elements:
+          - { id: EC-09-040, title: "Receiving inspection and functional check of a chromatograph", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-041, title: "Calibration configuration and stabilisation for a chromatograph", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-042, title: "Selecting the standards and fixturing for a chromatograph calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-043, title: "Detector response calibration against standards", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-044, title: "Retention time repeatability and drift", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-045, title: "Injector volume and split ratio verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-046, title: "Oven and column temperature verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-047, title: "Carrier gas flow and pressure control verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-048, title: "Detector linearity and limit of detection determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-049, title: "System suitability testing as an interim check", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-050, title: "Adjustment of a chromatograph, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-051, title: "Uncertainty budget for a chromatograph calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-052, title: "Conformity statement for a chromatograph against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-09-A05
+        title: Balance-Adjacent and Sample Preparation Equipment Calibration
+        status: draft
+        summary: >-
+          Centrifuges, incubators, autoclaves and water baths, whose
+          calibration is speed, temperature and uniformity rather than a
+          chemical quantity.
+        elements:
+          - { id: EC-09-053, title: "Receiving inspection and functional check of sample preparation equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-054, title: "Calibration configuration and stabilisation for sample preparation equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-055, title: "Selecting the standards and fixturing for sample preparation equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-056, title: "Centrifuge speed and timer verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-057, title: "Centrifuge temperature and rotor imbalance checks", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-058, title: "Incubator temperature uniformity and stability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-059, title: "Autoclave temperature, pressure and cycle verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-060, title: "Water bath and heating block uniformity", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-061, title: "Fume hood and safety cabinet airflow verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-062, title: "Freezer and cold storage mapping", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-063, title: "Adjustment of sample preparation equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-064, title: "Uncertainty budget for sample preparation equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-065, title: "Conformity statement for sample preparation equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
