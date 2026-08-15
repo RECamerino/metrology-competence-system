@@ -103,3 +103,66 @@ domains:
           - { id: EC-10-049, title: "Adjustment of an activity meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-10-050, title: "Uncertainty budget for an activity meter calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-10-051, title: "Conformity statement for an activity meter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-10-A05
+        title: Diagnostic X-ray and Imaging QA Equipment Calibration
+        status: draft
+        summary: >-
+          The instruments that qualify a diagnostic X-ray installation,
+          calibrated for beam quality and dose in the geometry of use.
+        elements:
+          - { id: EC-10-052, title: "Receiving inspection and functional check of X-ray QA equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-053, title: "Calibration configuration and stabilisation for X-ray QA equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-054, title: "Selecting the standards and fixturing for X-ray QA equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-055, title: "kVp meter accuracy and waveform capture", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-056, title: "Dose and dose-area-product meter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-057, title: "Exposure time and pulse counting verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-058, title: "Half value layer measurement equipment verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-059, title: "Beam quality dependence of a dose measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-060, title: "Phantom and test object dimensional verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-061, title: "Detector positioning and backscatter conditions", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-062, title: "Adjustment of X-ray QA equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-063, title: "Uncertainty budget for X-ray QA equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-064, title: "Conformity statement for X-ray QA equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-10-A06
+        title: Neutron Detection Instrument Calibration
+        status: draft
+        summary: >-
+          Neutron dose and flux measurement, where the energy spectrum
+          of the calibration source rarely matches the workplace field.
+        elements:
+          - { id: EC-10-065, title: "Receiving inspection and functional check of a neutron detector", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-066, title: "Calibration configuration and stabilisation for a neutron detector", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-067, title: "Selecting the standards and fixturing for a neutron detector calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-068, title: "Neutron dose equivalent response against a reference field", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-069, title: "Energy response across the neutron spectrum", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-070, title: "Source spectrum and workplace field mismatch", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-10-071, title: "Room scatter and shadow cone correction", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-072, title: "Moderated detector and rem-ball behaviour", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-073, title: "Gamma discrimination and mixed field response", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-074, title: "Source handling and dose control during calibration", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-10-075, title: "Adjustment of a neutron detector, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-076, title: "Uncertainty budget for a neutron detector calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-077, title: "Conformity statement for a neutron detector against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-10-A07
+        title: Environmental and Radon Monitor Calibration
+        status: draft
+        summary: >-
+          Low-level and long-integration instruments, calibrated in
+          chambers where the background is comparable to the signal.
+        elements:
+          - { id: EC-10-078, title: "Receiving inspection and functional check of an environmental radiation monitor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-079, title: "Calibration configuration and stabilisation for an environmental radiation monitor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-080, title: "Selecting the standards and fixturing for an environmental radiation monitor calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-081, title: "Radon chamber concentration reference and traceability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-082, title: "Detector response at environmental levels", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-083, title: "Background determination and subtraction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-084, title: "Humidity, temperature and pressure influence", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-085, title: "Integration period and time-resolved response", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-086, title: "Continuous environmental monitor verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-087, title: "Passive detector reader calibration and fading", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-088, title: "Adjustment of an environmental radiation monitor, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-089, title: "Uncertainty budget for an environmental radiation monitor calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-090, title: "Conformity statement for an environmental radiation monitor against its specification", kind: judgment, levelCeiling: 4, status: draft }

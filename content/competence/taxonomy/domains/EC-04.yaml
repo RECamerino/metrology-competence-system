@@ -157,3 +157,88 @@ domains:
           - { id: EC-04-084, title: "Adjustment of a materials testing machine, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-085, title: "Uncertainty budget for a materials testing machine calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-04-086, title: "Conformity statement for a materials testing machine against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-04-A07
+        title: Durometer and Elastomer Hardness Tester Calibration
+        status: draft
+        summary: >-
+          Indentation hardness of rubbers and plastics, where the spring
+          force, the indenter and the timing define the scale.
+        elements:
+          - { id: EC-04-087, title: "Receiving inspection and functional check of a durometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-088, title: "Calibration configuration and stabilisation for a durometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-089, title: "Selecting the standards and fixturing for a durometer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-090, title: "Indenter geometry and extension verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-091, title: "Spring force calibration against the scale", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-092, title: "Shore A, D and other scale specifics", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: EC-04-093, title: "Dwell time and reading timing effects", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-094, title: "Reference block verification and block ageing", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-095, title: "Stand-mounted versus hand-held operation", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-096, title: "Specimen thickness and support requirements", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: EC-04-097, title: "Adjustment of a durometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-098, title: "Uncertainty budget for a durometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-099, title: "Conformity statement for a durometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-04-A08
+        title: Impact and Fracture Test Machine Verification
+        status: draft
+        summary: >-
+          Charpy and Izod machines verified for energy, geometry and
+          loss, where an unverified machine gives plausible wrong
+          numbers.
+        elements:
+          - { id: EC-04-100, title: "Receiving inspection and functional check of an impact testing machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-101, title: "Calibration configuration and stabilisation for an impact testing machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-102, title: "Selecting the standards and fixturing for an impact testing machine calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-103, title: "Potential energy and striker velocity verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-104, title: "Friction and windage loss determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-105, title: "Striker and anvil geometry verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-106, title: "Specimen positioning and centring verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-107, title: "Indirect verification with reference specimens", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-108, title: "Instrumented striker force and displacement verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-109, title: "Low-temperature testing and specimen transfer time", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-110, title: "Adjustment of an impact testing machine, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-111, title: "Uncertainty budget for an impact testing machine calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-112, title: "Conformity statement for an impact testing machine against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-04-A09
+        title: Spring, Tension and Crimp Tester Calibration
+        status: draft
+        summary: >-
+          Small force instruments used in assembly and quality control,
+          calibrated in the direction and rate of use.
+        elements:
+          - { id: EC-04-113, title: "Receiving inspection and functional check of a spring or tension tester", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-114, title: "Calibration configuration and stabilisation for a spring or tension tester", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-115, title: "Selecting the standards and fixturing for a spring or tension tester calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-116, title: "Force indication error in tension and compression", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-117, title: "Displacement and travel measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-118, title: "Spring rate determination verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-119, title: "Crimp pull-off force measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-120, title: "Cable and belt tension meter verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-121, title: "Loading rate dependence and grip effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-122, title: "Peak hold and capture behaviour", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-123, title: "Adjustment of a spring or tension tester, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-124, title: "Uncertainty budget for a spring or tension tester calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-125, title: "Conformity statement for a spring or tension tester against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-04-A10
+        title: Density and Specific Gravity Apparatus Calibration
+        status: draft
+        summary: >-
+          Solid and liquid density by hydrostatic weighing and
+          oscillating tube, where temperature is inside every result.
+        elements:
+          - { id: EC-04-126, title: "Receiving inspection and functional check of density measuring apparatus", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-127, title: "Calibration configuration and stabilisation for density measuring apparatus", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-128, title: "Selecting the standards and fixturing for density measuring apparatus calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-129, title: "Hydrostatic weighing kit verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-130, title: "Oscillating tube densitometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-131, title: "Temperature control and its effect on density", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-132, title: "Reference liquids and their traceable density values", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-133, title: "Air buoyancy and immersed volume corrections", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-134, title: "Viscosity correction in an oscillating tube instrument", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-135, title: "Pycnometer volume determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-136, title: "Adjustment of density measuring apparatus, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-137, title: "Uncertainty budget for density measuring apparatus calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-138, title: "Conformity statement for density measuring apparatus against its specification", kind: judgment, levelCeiling: 4, status: draft }

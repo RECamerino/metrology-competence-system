@@ -202,3 +202,115 @@ domains:
           - { id: EC-02-112, title: "Adjustment of EMC test equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-02-113, title: "Uncertainty budget for EMC test equipment calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-02-114, title: "Conformity statement for EMC test equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-02-A09
+        title: Calibration Kit and Verification Kit Calibration
+        status: draft
+        summary: >-
+          The standards a network analyser correction is built on, and
+          the artefacts used to prove that correction. Calibrating them
+          is a different job from using them, and the one most often
+          assumed rather than performed.
+        elements:
+          - { id: EC-02-115, title: "Receiving inspection and functional check of a calibration kit", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-02-116, title: "Calibration configuration and stabilisation for a calibration kit", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-02-117, title: "Selecting the standards and fixturing for a calibration kit calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-118, title: "Open, short and load standard characterisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-119, title: "Offset short and sliding load characterisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-120, title: "Standard definition coefficients and their determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-121, title: "Airline characterisation and dimensional traceability", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-122, title: "Verification kit attenuator and mismatch artefact calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-123, title: "Kit definition file integrity and instrument entry verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-124, title: "Connector wear, gauging and kit end-of-life", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-125, title: "Traceability chain from a cal kit to a national standard", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: EC-02-126, title: "Interim verification of a kit between calibrations", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-127, title: "Adjustment of a calibration kit, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-128, title: "Uncertainty budget for a calibration kit calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-129, title: "Conformity statement for a calibration kit against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-02-A10
+        title: Noise Source and Noise Figure Instrument Calibration
+        status: draft
+        summary: >-
+          Excess noise ratio against frequency, and the analysers that
+          use it, where a small ENR error propagates through every noise
+          figure measured with it.
+        elements:
+          - { id: EC-02-130, title: "Receiving inspection and functional check of a noise source", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-02-131, title: "Calibration configuration and stabilisation for a noise source", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-02-132, title: "Selecting the standards and fixturing for a noise source calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-133, title: "Excess noise ratio determination against frequency", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-134, title: "ENR uncertainty and its propagation into noise figure", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-135, title: "Noise source output match and its effect", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-136, title: "Noise figure analyser measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-137, title: "Y-factor method execution and verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-138, title: "Cold and hot state switching and settling", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-139, title: "Ambient temperature correction in a noise measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-140, title: "Adjustment of a noise source, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-141, title: "Uncertainty budget for a noise source calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-142, title: "Conformity statement for a noise source against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-02-A11
+        title: RF Amplifier, Mixer and Active Component Characterisation
+        status: draft
+        summary: >-
+          Gain, compression and conversion measured under drive, where
+          linearity is the specification that matters.
+        elements:
+          - { id: EC-02-143, title: "Receiving inspection and functional check of an active RF component", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-02-144, title: "Calibration configuration and stabilisation for an active RF component", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-02-145, title: "Selecting the standards and fixturing for an active RF component calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-146, title: "Small-signal gain and gain flatness against frequency", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-147, title: "1 dB compression point determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-148, title: "Third-order intercept and intermodulation measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-149, title: "Mixer conversion loss and isolation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-150, title: "Amplifier noise figure and its measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-151, title: "Input and output match under drive", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-152, title: "Harmonic output and spurious products", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-153, title: "Thermal behaviour and drift under continuous drive", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-154, title: "Adjustment of an active RF component, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-155, title: "Uncertainty budget for an active RF component calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-156, title: "Conformity statement for an active RF component against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-02-A12
+        title: RF Switch, Filter and Waveguide Component Calibration
+        status: draft
+        summary: >-
+          Switches, filters, isolators and waveguide sections,
+          characterised for loss, isolation and repeatability.
+        elements:
+          - { id: EC-02-157, title: "Receiving inspection and functional check of a passive RF network component", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-02-158, title: "Calibration configuration and stabilisation for a passive RF network component", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-02-159, title: "Selecting the standards and fixturing for a passive RF network component calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-160, title: "Insertion loss against frequency", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-161, title: "Switch isolation and port-to-port crosstalk", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-162, title: "Switch repeatability over operating cycles", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-163, title: "Filter passband, stopband and shape verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-164, title: "Isolator and circulator isolation and directivity", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-165, title: "Waveguide flange alignment and its effect", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-166, title: "Group delay and phase linearity measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-167, title: "Adjustment of a passive RF network component, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-168, title: "Uncertainty budget for a passive RF network component calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-169, title: "Conformity statement for a passive RF network component against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-02-A13
+        title: Phase Noise and Modulation Analyser Calibration
+        status: draft
+        summary: >-
+          Instruments that measure spectral purity, verified against
+          known-noise sources because their own noise floor is the
+          limit.
+        elements:
+          - { id: EC-02-170, title: "Receiving inspection and functional check of a phase noise analyser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-02-171, title: "Calibration configuration and stabilisation for a phase noise analyser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-02-172, title: "Selecting the standards and fixturing for a phase noise analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-173, title: "Phase noise measurement accuracy against a reference source", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-174, title: "Instrument noise floor determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-175, title: "Offset frequency range and resolution verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-176, title: "Amplitude noise and AM-PM separation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-177, title: "Modulation depth and deviation measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-178, title: "Error vector magnitude measurement verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-179, title: "Jitter measurement and its relationship to phase noise", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-02-180, title: "Adjustment of a phase noise analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-181, title: "Uncertainty budget for a phase noise analyser calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-182, title: "Conformity statement for a phase noise analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }

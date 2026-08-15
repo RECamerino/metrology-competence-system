@@ -277,3 +277,140 @@ domains:
           - { id: EC-03-156, title: "Adjustment of a rule or tape measure, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-157, title: "Uncertainty budget for a rule or tape measure calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-158, title: "Conformity statement for a rule or tape measure against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-03-A13
+        title: Fixture, Custom Gauge and Print Conformance Calibration
+        status: draft
+        summary: >-
+          The purpose-built gauges and holding fixtures that no
+          manufacturer's specification covers, calibrated against the
+          engineering drawing that defines them. The commonest real
+          calibration in a production environment and the one no
+          standard instrument procedure fits.
+        elements:
+          - { id: EC-03-159, title: "Receiving inspection and functional check of a custom fixture or gauge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-160, title: "Calibration configuration and stabilisation for a custom fixture or gauge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-161, title: "Selecting the standards and fixturing for a custom fixture or gauge calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-162, title: "Reading the print: datums, tolerances and the feature to be verified", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-163, title: "Determining what on a fixture is dimensionally significant", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-03-164, title: "Datum feature verification against the drawing scheme", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-165, title: "Locator, pin and rest pad position verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-166, title: "Clamp force, repeatability and part seating effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-167, title: "Gauge R&R of a fixture as used in production", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-168, title: "Wear surfaces, contact points and re-verification intervals", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-169, title: "Weld, assembly and check fixture verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-170, title: "Functional and attribute gauge conformance to print", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-171, title: "Writing a calibration procedure for a one-off fixture", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-172, title: "Uncertainty for a fixture measured on a CMM against print", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-173, title: "Deciding a fixture is unverifiable as drawn", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-03-174, title: "Adjustment of a custom fixture or gauge, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-175, title: "Uncertainty budget for a custom fixture or gauge calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-176, title: "Conformity statement for a custom fixture or gauge against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-03-A14
+        title: Machine Tool and Machine Geometry Verification
+        status: draft
+        summary: >-
+          Positioning, squareness and volumetric behaviour of the
+          machine that makes the part, verified by laser, ballbar and
+          artefact.
+        elements:
+          - { id: EC-03-177, title: "Receiving inspection and functional check of a machine tool", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-178, title: "Calibration configuration and stabilisation for a machine tool", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-179, title: "Selecting the standards and fixturing for a machine tool calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-180, title: "Linear positioning accuracy and repeatability per axis", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-181, title: "Backlash, reversal and bidirectional repeatability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-182, title: "Squareness and parallelism between axes", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-183, title: "Ballbar circularity and dynamic performance", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-184, title: "Spindle runout, taper and thermal growth", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-185, title: "Rotary axis and trunnion verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-186, title: "Volumetric compensation verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-187, title: "Thermal drift and warm-up characterisation of a machine", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-188, title: "Adjustment of a machine tool, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-189, title: "Uncertainty budget for a machine tool calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-190, title: "Conformity statement for a machine tool against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-03-A15
+        title: Gear, Spline and Thread Form Measurement Equipment
+        status: draft
+        summary: >-
+          Form-specific measuring machines and artefacts, where the
+          reference is a master and the parameter set is defined by a
+          gear standard.
+        elements:
+          - { id: EC-03-191, title: "Receiving inspection and functional check of gear and thread measuring equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-192, title: "Calibration configuration and stabilisation for gear and thread measuring equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-193, title: "Selecting the standards and fixturing for gear and thread measuring equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-194, title: "Gear measuring machine verification against a master gear", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-195, title: "Involute, lead and pitch measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-196, title: "Runout and composite error measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-197, title: "Master gear and spline artefact calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-198, title: "Thread measuring wire and best-size wire calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-199, title: "Pitch diameter by three-wire method verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-200, title: "Thread form and flank angle measurement equipment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-201, title: "Adjustment of gear and thread measuring equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-202, title: "Uncertainty budget for gear and thread measuring equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-203, title: "Conformity statement for gear and thread measuring equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-03-A16
+        title: Thickness and Coating Measurement Instrument Calibration
+        status: draft
+        summary: >-
+          Ultrasonic, magnetic and eddy-current thickness instruments,
+          where the substrate and the couplant change the reading.
+        elements:
+          - { id: EC-03-204, title: "Receiving inspection and functional check of a thickness gauge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-205, title: "Calibration configuration and stabilisation for a thickness gauge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-206, title: "Selecting the standards and fixturing for a thickness gauge calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-207, title: "Ultrasonic wall thickness accuracy and velocity setting", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-208, title: "Couplant, surface condition and probe wear effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-209, title: "Coating thickness accuracy on ferrous and non-ferrous substrates", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-210, title: "Substrate thickness and curvature effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-211, title: "Calibration foils, shims and reference standards", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-212, title: "Magnetic and eddy-current method selection", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-213, title: "Paint, plating and galvanising measurement specifics", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-214, title: "Adjustment of a thickness gauge, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-215, title: "Uncertainty budget for a thickness gauge calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-216, title: "Conformity statement for a thickness gauge against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-03-A17
+        title: Portable Arm CMM and Optical Scanner Verification
+        status: draft
+        summary: >-
+          Articulated arms, laser scanners and photogrammetry, verified
+          volumetrically because component errors do not predict field
+          performance.
+        elements:
+          - { id: EC-03-217, title: "Receiving inspection and functional check of a portable measuring system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-218, title: "Calibration configuration and stabilisation for a portable measuring system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-219, title: "Selecting the standards and fixturing for a portable measuring system calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-220, title: "Single-point articulation and repeatability test", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-221, title: "Volumetric length performance against a reference artefact", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-222, title: "Scanner point cloud noise and form error", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-223, title: "Probe and scanner head exchange verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-224, title: "Leapfrogging and multi-station registration error", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-225, title: "Photogrammetric target and scale bar calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-226, title: "Environment, vibration and setup effects in the field", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-227, title: "Adjustment of a portable measuring system, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-228, title: "Uncertainty budget for a portable measuring system calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-229, title: "Conformity statement for a portable measuring system against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-03-A18
+        title: Feeler, Radius and Template Gauge Calibration
+        status: draft
+        summary: >-
+          Simple form and clearance artefacts, whose calibration is a
+          thickness and a form and a wear judgement.
+        elements:
+          - { id: EC-03-230, title: "Receiving inspection and functional check of a template or feeler gauge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-231, title: "Calibration configuration and stabilisation for a template or feeler gauge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-232, title: "Selecting the standards and fixturing for a template or feeler gauge calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-233, title: "Feeler gauge blade thickness and parallelism", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-234, title: "Radius gauge form and edge condition", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-235, title: "Thread pitch gauge form verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-236, title: "Weld gauge and profile template verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-237, title: "Pin and wire gauge set diameter verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-238, title: "Wear, nicks and withdrawal criteria", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: EC-03-239, title: "Adjustment of a template or feeler gauge, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-240, title: "Uncertainty budget for a template or feeler gauge calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-241, title: "Conformity statement for a template or feeler gauge against its specification", kind: judgment, levelCeiling: 4, status: draft }

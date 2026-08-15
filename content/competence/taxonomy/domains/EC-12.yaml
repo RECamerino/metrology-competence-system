@@ -129,3 +129,90 @@ domains:
           - { id: EC-12-067, title: "Adjustment of imaging equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-068, title: "Uncertainty budget for imaging equipment calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-069, title: "Conformity statement for imaging equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-12-A06
+        title: Dialysis and Extracorporeal Equipment Verification
+        status: draft
+        summary: >-
+          Fluid, conductivity and temperature control on equipment where
+          an error reaches the patient's blood directly.
+        elements:
+          - { id: EC-12-070, title: "Receiving inspection and functional check of a dialysis machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-071, title: "Calibration configuration and stabilisation for a dialysis machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-072, title: "Selecting the standards and fixturing for a dialysis machine calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-073, title: "Dialysate conductivity and composition verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-074, title: "Dialysate temperature accuracy and alarm limits", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-075, title: "Ultrafiltration volume and rate accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-076, title: "Blood pump flow rate accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-077, title: "Transmembrane and venous pressure measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-078, title: "Blood leak and air detector verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-079, title: "Conductivity cell and sensor traceability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-080, title: "Adjustment of a dialysis machine, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-081, title: "Uncertainty budget for a dialysis machine calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-082, title: "Conformity statement for a dialysis machine against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-12-A07
+        title: Steriliser and Decontamination Equipment Verification
+        status: draft
+        summary: >-
+          Autoclaves and washer-disinfectors verified for the
+          temperature-time-pressure condition the process is validated
+          against.
+        elements:
+          - { id: EC-12-083, title: "Receiving inspection and functional check of a steriliser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-084, title: "Calibration configuration and stabilisation for a steriliser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-085, title: "Selecting the standards and fixturing for a steriliser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-086, title: "Chamber temperature uniformity during the hold period", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-087, title: "Pressure and saturated steam relationship verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-088, title: "Hold time and cycle timing accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-089, title: "Load probe placement and worst-case location", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-090, title: "Air removal and vacuum leak rate testing", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-091, title: "Washer-disinfector temperature and A0 verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-092, title: "Chart, printout and data logger agreement", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-093, title: "Adjustment of a steriliser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-094, title: "Uncertainty budget for a steriliser calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-095, title: "Conformity statement for a steriliser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-12-A08
+        title: Clinical Laboratory Analyser Verification
+        status: draft
+        summary: >-
+          Analysers whose result is a patient value, verified with
+          controls and calibrators against the method's own acceptance
+          criteria.
+        elements:
+          - { id: EC-12-096, title: "Receiving inspection and functional check of a clinical analyser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-097, title: "Calibration configuration and stabilisation for a clinical analyser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-098, title: "Selecting the standards and fixturing for a clinical analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-099, title: "Calibrator and control material traceability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-100, title: "Analytical accuracy and bias against reference values", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-101, title: "Precision, repeatability and reproducibility verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-102, title: "Carryover and cross-contamination testing", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-103, title: "Reagent and sample volume delivery verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-104, title: "Incubation temperature and timing verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-105, title: "Linearity and reportable range verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-106, title: "Point-of-care device verification against a laboratory method", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-107, title: "Adjustment of a clinical analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-108, title: "Uncertainty budget for a clinical analyser calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-109, title: "Conformity statement for a clinical analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-12-A09
+        title: Surgical and Theatre Equipment Verification
+        status: draft
+        summary: >-
+          Insufflators, surgical lights, pumps and tables, verified for
+          the parameters a procedure depends on.
+        elements:
+          - { id: EC-12-110, title: "Receiving inspection and functional check of theatre equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-111, title: "Calibration configuration and stabilisation for theatre equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-112, title: "Selecting the standards and fixturing for theatre equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-113, title: "Insufflator pressure and flow accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-114, title: "Suction and vacuum regulator accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-115, title: "Surgical light illuminance and colour rendering", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-116, title: "Operating table position, load and tilt verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-117, title: "Warming device temperature accuracy and limits", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-118, title: "Medical gas outlet pressure and flow verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-119, title: "Tourniquet pressure and timing accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-120, title: "Adjustment of theatre equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-121, title: "Uncertainty budget for theatre equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-122, title: "Conformity statement for theatre equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }

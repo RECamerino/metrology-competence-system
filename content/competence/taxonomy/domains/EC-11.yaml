@@ -149,3 +149,49 @@ domains:
           - { id: EC-11-079, title: "Adjustment of audiometric equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-080, title: "Uncertainty budget for audiometric equipment calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-081, title: "Conformity statement for audiometric equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-11-A07
+        title: Vibration Exciter and Shaker System Calibration
+        status: draft
+        summary: >-
+          The exciters used to calibrate transducers and to run tests,
+          characterised for distortion, transverse motion and uniformity
+          in their own right.
+        elements:
+          - { id: EC-11-082, title: "Receiving inspection and functional check of a vibration exciter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-083, title: "Calibration configuration and stabilisation for a vibration exciter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-084, title: "Selecting the standards and fixturing for a vibration exciter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-085, title: "Acceleration amplitude accuracy across frequency", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-086, title: "Total harmonic distortion of the motion", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-087, title: "Transverse and rocking motion determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-088, title: "Table uniformity and mounting location dependence", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-089, title: "Load and mass loading effects on the exciter", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-090, title: "Control system and closed-loop verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-091, title: "Shock and classical pulse generation verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-092, title: "Random vibration spectrum control verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-093, title: "Adjustment of a vibration exciter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-094, title: "Uncertainty budget for a vibration exciter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-095, title: "Conformity statement for a vibration exciter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-11-A08
+        title: Ultrasonic and Non-Destructive Test Equipment Calibration
+        status: draft
+        summary: >-
+          Flaw detectors and thickness instruments verified against
+          reference blocks, where the probe and the couplant are part of
+          the instrument.
+        elements:
+          - { id: EC-11-096, title: "Receiving inspection and functional check of ultrasonic NDT equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-097, title: "Calibration configuration and stabilisation for ultrasonic NDT equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-098, title: "Selecting the standards and fixturing for ultrasonic NDT equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-099, title: "Timebase linearity and range accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-100, title: "Vertical linearity and gain accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-101, title: "Probe index, beam angle and squint verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-102, title: "Resolution and dead zone determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-103, title: "Reference block verification and block traceability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-104, title: "Phased array element and focal law verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-105, title: "Eddy current and magnetic particle equipment verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-106, title: "Sensitivity setting and DAC curve construction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-107, title: "Adjustment of ultrasonic NDT equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-108, title: "Uncertainty budget for ultrasonic NDT equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-109, title: "Conformity statement for ultrasonic NDT equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }

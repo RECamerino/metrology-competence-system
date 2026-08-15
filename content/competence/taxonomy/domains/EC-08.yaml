@@ -103,3 +103,85 @@ domains:
           - { id: EC-08-050, title: "Adjustment of an optical instrument, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-051, title: "Uncertainty budget for an optical instrument calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-052, title: "Conformity statement for an optical instrument against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-08-A05
+        title: Gloss, Haze and Appearance Instrument Calibration
+        status: draft
+        summary: >-
+          Appearance instruments calibrated against certified tiles and
+          standards, where the geometry defines the scale.
+        elements:
+          - { id: EC-08-053, title: "Receiving inspection and functional check of a gloss meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-054, title: "Calibration configuration and stabilisation for a gloss meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-055, title: "Selecting the standards and fixturing for a gloss meter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-056, title: "Gloss value against certified reference tiles", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-057, title: "Measurement geometry: 20, 60 and 85 degree verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-058, title: "Haze and clarity measurement verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-059, title: "Zero, black trap and calibration tile care", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-060, title: "Surface curvature, texture and sample presentation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-061, title: "Instrument-to-instrument agreement", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-062, title: "Adjustment of a gloss meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-063, title: "Uncertainty budget for a gloss meter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-064, title: "Conformity statement for a gloss meter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-08-A06
+        title: Fibre Optic Test Equipment Calibration
+        status: draft
+        summary: >-
+          OTDRs, loss test sets and light sources, where connector
+          condition and launch conditions dominate the measured loss.
+        elements:
+          - { id: EC-08-065, title: "Receiving inspection and functional check of fibre optic test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-066, title: "Calibration configuration and stabilisation for fibre optic test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-067, title: "Selecting the standards and fixturing for fibre optic test equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-068, title: "OTDR distance accuracy and group index setting", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-069, title: "OTDR loss and reflectance measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-070, title: "Dead zone and dynamic range verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-071, title: "Optical loss test set source and meter accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-072, title: "Launch condition, mandrel wrap and mode filling", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-073, title: "Connector end-face inspection and cleanliness", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-074, title: "Reference cord and adapter loss contribution", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-075, title: "Adjustment of fibre optic test equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-076, title: "Uncertainty budget for fibre optic test equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-077, title: "Conformity statement for fibre optic test equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-08-A07
+        title: Optical Spectrum Analyser and Wavelength Meter Calibration
+        status: draft
+        summary: >-
+          Wavelength and level across the optical band, referenced to
+          gas cells and stabilised lasers.
+        elements:
+          - { id: EC-08-078, title: "Receiving inspection and functional check of an optical spectrum analyser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-079, title: "Calibration configuration and stabilisation for an optical spectrum analyser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-080, title: "Selecting the standards and fixturing for an optical spectrum analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-081, title: "Wavelength accuracy against a reference laser or gas cell", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-082, title: "Level accuracy and polarisation dependence", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-083, title: "Resolution bandwidth and dynamic range verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-084, title: "Wavelength meter accuracy and its reference", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-085, title: "Fibre input coupling and its effect on level", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-086, title: "Sweep linearity and repeatability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-087, title: "Adjustment of an optical spectrum analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-088, title: "Uncertainty budget for an optical spectrum analyser calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-089, title: "Conformity statement for an optical spectrum analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-08-A08
+        title: Laser Power and Energy Meter Calibration
+        status: draft
+        summary: >-
+          Thermal and photodiode heads calibrated per wavelength and per
+          pulse regime, with damage threshold as a real constraint.
+        elements:
+          - { id: EC-08-090, title: "Receiving inspection and functional check of a laser power meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-091, title: "Calibration configuration and stabilisation for a laser power meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-092, title: "Selecting the standards and fixturing for a laser power meter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-093, title: "Power responsivity against wavelength", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-094, title: "Pulse energy measurement and pulse width dependence", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-095, title: "Detector spatial uniformity and beam position", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-096, title: "Linearity and response over the dynamic range", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-097, title: "Thermal head time constant and settling", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-098, title: "Damage threshold, absorber condition and history", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-099, title: "Beam profile and aperture effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-100, title: "Adjustment of a laser power meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-101, title: "Uncertainty budget for a laser power meter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-102, title: "Conformity statement for a laser power meter against its specification", kind: judgment, levelCeiling: 4, status: draft }

@@ -81,3 +81,45 @@ domains:
           - { id: EC-07-036, title: "Adjustment of a stopwatch or timer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-07-037, title: "Uncertainty budget for a stopwatch or timer calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-07-038, title: "Conformity statement for a stopwatch or timer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-07-A04
+        title: Phase Noise and Frequency Stability Analyser Calibration
+        status: draft
+        summary: >-
+          Instruments that characterise oscillators, verified against
+          sources of known instability because their own floor bounds
+          every result.
+        elements:
+          - { id: EC-07-039, title: "Receiving inspection and functional check of a stability analyser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-040, title: "Calibration configuration and stabilisation for a stability analyser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-041, title: "Selecting the standards and fixturing for a stability analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-042, title: "Allan deviation measurement verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-07-043, title: "Instrument noise floor and cross-correlation limits", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-07-044, title: "Phase noise measurement accuracy against a reference", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-07-045, title: "Frequency offset and drift measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-046, title: "Measurement bandwidth and averaging effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-047, title: "Dead time and its effect on a stability statistic", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: EC-07-048, title: "Reference source selection for a stability measurement", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-07-049, title: "Adjustment of a stability analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-050, title: "Uncertainty budget for a stability analyser calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-051, title: "Conformity statement for a stability analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-07-A05
+        title: Tachometer and Rotational Speed Instrument Calibration
+        status: draft
+        summary: >-
+          Contact, optical and stroboscopic speed measurement, where the
+          sampling and the target pattern define the answer.
+        elements:
+          - { id: EC-07-052, title: "Receiving inspection and functional check of a tachometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-053, title: "Calibration configuration and stabilisation for a tachometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-054, title: "Selecting the standards and fixturing for a tachometer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-055, title: "Speed indication accuracy against a reference", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-056, title: "Contact versus optical measurement technique", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-057, title: "Stroboscope flash rate accuracy and harmonic confusion", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-058, title: "Target marking, reflectivity and pulse-per-revolution setting", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-059, title: "Gate time and resolution at low speed", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-060, title: "Surface speed and length measurement functions", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-061, title: "Adjustment of a tachometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-062, title: "Uncertainty budget for a tachometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-063, title: "Conformity statement for a tachometer against its specification", kind: judgment, levelCeiling: 4, status: draft }

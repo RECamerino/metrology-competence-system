@@ -117,6 +117,14 @@ domains:
           - { id: EC-01-043, title: "Adjustment of a digital multimeter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-044, title: "Uncertainty budget for a digital multimeter calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-045, title: "Conformity statement for a digital multimeter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-190, title: "Selecting between direct, comparison and bridge methods for a long-scale DMM", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-01-191, title: "Comparison calibration against a reference DMM of equal or better scale", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-192, title: "Wheatstone and Hamon bridge techniques in DMM calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-193, title: "Zener reference transfer, drift and the DC voltage scaling chain", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-194, title: "Resistance ratio bridges and scaling to non-decade values", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-195, title: "Thermal EMF, guarding and reversal in a long-scale calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-196, title: "Statistical treatment of repeat readings at 8½ digits", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-197, title: "Establishing the laboratory's own capability for a long-scale DMM", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: EC-01-A03
         title: Multifunction Calibrator and Source Calibration
@@ -347,3 +355,132 @@ domains:
           - { id: EC-01-187, title: "Adjustment of a panel instrument or recorder, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-188, title: "Uncertainty budget for a panel instrument or recorder calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-189, title: "Conformity statement for a panel instrument or recorder against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-01-A13
+        title: Standard Resistor and Shunt Calibration
+        status: draft
+        summary: >-
+          The resistance artefacts a laboratory scales from, where the
+          temperature coefficient and the power coefficient are the
+          calibration.
+        elements:
+          - { id: EC-01-198, title: "Receiving inspection and functional check of a standard resistor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-199, title: "Calibration configuration and stabilisation for a standard resistor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-200, title: "Selecting the standards and fixturing for a standard resistor calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-201, title: "Resistance value by substitution against a reference", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-202, title: "Temperature coefficient determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-203, title: "Power coefficient and self-heating determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-204, title: "Drift history and predicted value at a date", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-205, title: "Oil bath and air standard construction differences", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-01-206, title: "Four-terminal definition and connection technique", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-207, title: "Hamon build-up and build-down scaling", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-208, title: "Current shunt AC-DC difference", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-209, title: "Adjustment of a standard resistor, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-210, title: "Uncertainty budget for a standard resistor calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-211, title: "Conformity statement for a standard resistor against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-01-A14
+        title: Voltage Reference and Zener Standard Calibration
+        status: draft
+        summary: >-
+          Solid-state voltage references characterised for drift,
+          temperature and pressure sensitivity, and carried between
+          laboratories as transfer standards.
+        elements:
+          - { id: EC-01-212, title: "Receiving inspection and functional check of a voltage reference standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-213, title: "Calibration configuration and stabilisation for a voltage reference standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-214, title: "Selecting the standards and fixturing for a voltage reference standard calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-215, title: "Output voltage against a reference standard", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-216, title: "Drift rate determination and predicted value", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-01-217, title: "Temperature coefficient of a Zener reference", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-218, title: "Barometric pressure sensitivity", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-219, title: "Transport behaviour and re-stabilisation after shipping", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-220, title: "1 V and 10 V output relationship and scaling", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-221, title: "Noise and short-term stability at the microvolt level", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-222, title: "Josephson comparison and its interpretation", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: EC-01-223, title: "Adjustment of a voltage reference standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-224, title: "Uncertainty budget for a voltage reference standard calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-225, title: "Conformity statement for a voltage reference standard against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-01-A15
+        title: Micro-ohmmeter and Low Resistance Instrument Calibration
+        status: draft
+        summary: >-
+          Low-resistance measurement where the test current, the thermal
+          EMF and the contact are the whole problem.
+        elements:
+          - { id: EC-01-226, title: "Receiving inspection and functional check of a micro-ohmmeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-227, title: "Calibration configuration and stabilisation for a micro-ohmmeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-228, title: "Selecting the standards and fixturing for a micro-ohmmeter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-229, title: "Resistance accuracy at micro- and milli-ohm levels", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-230, title: "Test current accuracy and its heating effect", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-231, title: "Thermal EMF cancellation and current reversal verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-232, title: "Four-terminal Kelvin connection integrity", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-233, title: "Low-value resistance standards and their handling", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-234, title: "Dry-circuit testing and contact resistance mode", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-235, title: "Inductive load and settling behaviour", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-236, title: "Adjustment of a micro-ohmmeter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-237, title: "Uncertainty budget for a micro-ohmmeter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-238, title: "Conformity statement for a micro-ohmmeter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-01-A16
+        title: Electrometer and Picoammeter Calibration
+        status: draft
+        summary: >-
+          Sub-picoamp and high-impedance measurement, where leakage,
+          guarding and triaxial cabling dominate everything else.
+        elements:
+          - { id: EC-01-239, title: "Receiving inspection and functional check of an electrometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-240, title: "Calibration configuration and stabilisation for an electrometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-241, title: "Selecting the standards and fixturing for an electrometer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-242, title: "Current accuracy at picoamp and femtoamp levels", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-243, title: "High resistance measurement to teraohms", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-244, title: "Input bias current and offset verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-245, title: "Charge measurement and coulombmeter function", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-246, title: "Guarding, triaxial cable and insulation integrity", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-247, title: "Voltage source and source-measure function accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-248, title: "Environmental and humidity effects on a leakage measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-249, title: "Adjustment of an electrometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-250, title: "Uncertainty budget for an electrometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-251, title: "Conformity statement for an electrometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-01-A17
+        title: Battery and Cell Test Equipment Calibration
+        status: draft
+        summary: >-
+          Chargers, analysers and cyclers, calibrated for voltage,
+          current and capacity integration over time.
+        elements:
+          - { id: EC-01-252, title: "Receiving inspection and functional check of battery test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-253, title: "Calibration configuration and stabilisation for battery test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-254, title: "Selecting the standards and fixturing for battery test equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-255, title: "Charge and discharge current accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-256, title: "Cell and stack voltage measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-257, title: "Capacity integration and amp-hour accounting accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-258, title: "Internal resistance measurement verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-259, title: "Temperature channel and thermal cut-off verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-260, title: "Timing and cycle control accuracy", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-261, title: "Load bank and electronic load interaction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-262, title: "Adjustment of battery test equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-263, title: "Uncertainty budget for battery test equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-264, title: "Conformity statement for battery test equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-01-A18
+        title: Cable Test and Time Domain Reflectometer Calibration
+        status: draft
+        summary: >-
+          Fault location and cable characterisation, where the velocity
+          factor and the pulse are the measurement.
+        elements:
+          - { id: EC-01-265, title: "Receiving inspection and functional check of a cable test set", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-266, title: "Calibration configuration and stabilisation for a cable test set", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-267, title: "Selecting the standards and fixturing for a cable test set calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-268, title: "Distance-to-fault accuracy and velocity factor", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-269, title: "Pulse width, rise time and resolution verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-270, title: "Impedance measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-271, title: "Wire map, continuity and pair identification verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-272, title: "Insulation and high-voltage cable test function", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-273, title: "Network cable certifier performance verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-274, title: "Adjustment of a cable test set, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-275, title: "Uncertainty budget for a cable test set calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-276, title: "Conformity statement for a cable test set against its specification", kind: judgment, levelCeiling: 4, status: draft }

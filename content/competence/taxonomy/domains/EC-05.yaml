@@ -192,3 +192,131 @@ domains:
           - { id: EC-05-105, title: "Adjustment of a pipette or volumetric vessel, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-106, title: "Uncertainty budget for a pipette or volumetric vessel calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-107, title: "Conformity statement for a pipette or volumetric vessel against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-05-A09
+        title: Manometer and Barometer Calibration
+        status: draft
+        summary: >-
+          Liquid column and aneroid instruments, where local gravity and
+          fluid density are part of the pressure they indicate.
+        elements:
+          - { id: EC-05-108, title: "Receiving inspection and functional check of a manometer or barometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-109, title: "Calibration configuration and stabilisation for a manometer or barometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-110, title: "Selecting the standards and fixturing for a manometer or barometer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-111, title: "Indication error against a reference pressure", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-112, title: "Local gravity and fluid density corrections", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-113, title: "Meniscus reading, parallax and scale technique", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-114, title: "Barometer altitude and station correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-115, title: "Temperature effect on column and on scale", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-116, title: "Digital barometer drift and reference comparison", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-117, title: "Absolute reference and vacuum integrity of a manometer", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-118, title: "Adjustment of a manometer or barometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-119, title: "Uncertainty budget for a manometer or barometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-120, title: "Conformity statement for a manometer or barometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-05-A10
+        title: Leak Detector and Leak Standard Calibration
+        status: draft
+        summary: >-
+          Calibrated leaks and the instruments that find them, where the
+          leak rate depends on the gas, the temperature and the pressure
+          across it.
+        elements:
+          - { id: EC-05-121, title: "Receiving inspection and functional check of a leak detector", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-122, title: "Calibration configuration and stabilisation for a leak detector", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-123, title: "Selecting the standards and fixturing for a leak detector calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-124, title: "Calibrated leak rate determination and certification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-125, title: "Helium mass spectrometer sensitivity and response", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-126, title: "Gas species and temperature dependence of a leak rate", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-127, title: "Permeation leak ageing and reservoir depletion", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-128, title: "Minimum detectable leak rate determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-129, title: "Pressure decay and bubble test method verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-130, title: "Background and cleanliness effects on a leak test", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-131, title: "Adjustment of a leak detector, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-132, title: "Uncertainty budget for a leak detector calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-133, title: "Conformity statement for a leak detector against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-05-A11
+        title: Safety and Relief Valve Test Equipment Calibration
+        status: draft
+        summary: >-
+          Set pressure benches and the valves they prove, where the
+          opening event is transient and the medium changes the result.
+        elements:
+          - { id: EC-05-134, title: "Receiving inspection and functional check of valve test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-135, title: "Calibration configuration and stabilisation for valve test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-136, title: "Selecting the standards and fixturing for valve test equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-137, title: "Set pressure indication accuracy on a test bench", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-138, title: "Pop, seat and reseat pressure determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-139, title: "Test medium and its effect on set pressure", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-140, title: "Back pressure and its correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-141, title: "Data capture rate for a transient opening", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-142, title: "In-situ set pressure verification methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-143, title: "Seat tightness and leakage test verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-144, title: "Adjustment of valve test equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-145, title: "Uncertainty budget for valve test equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-146, title: "Conformity statement for valve test equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-05-A12
+        title: Viscometer and Rheometer Calibration
+        status: draft
+        summary: >-
+          Viscosity by capillary, rotational and falling-body method,
+          where the temperature bath is as much the calibration as the
+          instrument.
+        elements:
+          - { id: EC-05-147, title: "Receiving inspection and functional check of a viscometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-148, title: "Calibration configuration and stabilisation for a viscometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-149, title: "Selecting the standards and fixturing for a viscometer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-150, title: "Kinematic viscosity by capillary against reference oils", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-151, title: "Rotational viscometer torque and speed verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-152, title: "Temperature control and its effect on viscosity", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-153, title: "Certified reference fluids and their handling", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-154, title: "Shear rate and non-Newtonian behaviour", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-05-155, title: "Capillary constant determination and re-determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-156, title: "Falling-ball and cup viscometer verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-157, title: "Adjustment of a viscometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-158, title: "Uncertainty budget for a viscometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-159, title: "Conformity statement for a viscometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-05-A13
+        title: Level Instrument Calibration
+        status: draft
+        summary: >-
+          Tank and vessel level by pressure, radar, ultrasonic and
+          float, where the medium and the vessel geometry are inside the
+          reading.
+        elements:
+          - { id: EC-05-160, title: "Receiving inspection and functional check of a level measuring instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-161, title: "Calibration configuration and stabilisation for a level measuring instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-162, title: "Selecting the standards and fixturing for a level measuring instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-163, title: "Level indication accuracy against a reference height", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-164, title: "Density and specific gravity dependence of a level reading", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-165, title: "Radar and ultrasonic transit time verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-166, title: "Dielectric constant effects on a radar level reading", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-05-167, title: "Differential pressure level transmitter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-168, title: "Zero suppression, elevation and wet-leg compensation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-169, title: "Vessel geometry and strapping table verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-170, title: "Adjustment of a level measuring instrument, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-171, title: "Uncertainty budget for a level measuring instrument calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-172, title: "Conformity statement for a level measuring instrument against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-05-A14
+        title: Hydrometer and Liquid Density Instrument Calibration
+        status: draft
+        summary: >-
+          Direct-reading density and concentration instruments,
+          calibrated by comparison at a stated reference temperature.
+        elements:
+          - { id: EC-05-173, title: "Receiving inspection and functional check of a hydrometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-174, title: "Calibration configuration and stabilisation for a hydrometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-175, title: "Selecting the standards and fixturing for a hydrometer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-176, title: "Scale indication error by comparison or by Cuckow method", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-177, title: "Reference temperature and thermal correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-178, title: "Surface tension effects and meniscus reading", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-179, title: "Alcoholmeter, saccharometer and concentration scale specifics", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-180, title: "Hydrometer cylinder and immersion conditions", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-181, title: "Bulb condition, shot movement and rejection criteria", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: EC-05-182, title: "Adjustment of a hydrometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-183, title: "Uncertainty budget for a hydrometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-184, title: "Conformity statement for a hydrometer against its specification", kind: judgment, levelCeiling: 4, status: draft }

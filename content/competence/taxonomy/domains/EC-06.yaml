@@ -193,3 +193,139 @@ domains:
           - { id: EC-06-105, title: "Adjustment of a data logger, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-106, title: "Uncertainty budget for a data logger calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-107, title: "Conformity statement for a data logger against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A09
+        title: Environmental Chamber Calibration and Mapping
+        status: draft
+        summary: >-
+          Temperature and humidity chambers characterised as a working
+          VOLUME rather than a setpoint. The chamber's own controller is
+          the least of it: uniformity, loaded behaviour and recovery
+          decide whether a test inside it means anything.
+        elements:
+          - { id: EC-06-108, title: "Receiving inspection and functional check of an environmental chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-109, title: "Calibration configuration and stabilisation for an environmental chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-110, title: "Selecting the standards and fixturing for an environmental chamber calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-111, title: "Empty chamber temperature mapping and sensor layout", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-112, title: "Loaded chamber mapping and the effect of the test load", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-113, title: "Spatial uniformity and gradient determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-114, title: "Temporal stability and control fluctuation at setpoint", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-115, title: "Humidity uniformity and its interaction with temperature", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-116, title: "Recovery after door opening and after a setpoint change", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-117, title: "Determining the qualified working volume", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-06-118, title: "Chamber controller indication against measured conditions", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-119, title: "Sensor placement, number and justification for a mapping", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-06-120, title: "Airflow, fan condition and its effect on uniformity", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-121, title: "Mapping frequency and what triggers a re-map", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-122, title: "Adjustment of an environmental chamber, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-123, title: "Uncertainty budget for an environmental chamber calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-124, title: "Conformity statement for an environmental chamber against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A10
+        title: Altitude and Low Pressure Chamber Calibration
+        status: draft
+        summary: >-
+          Chambers that simulate altitude, where pressure, rate of
+          change and the temperature that comes with it are all
+          controlled quantities.
+        elements:
+          - { id: EC-06-125, title: "Receiving inspection and functional check of an altitude chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-126, title: "Calibration configuration and stabilisation for an altitude chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-127, title: "Selecting the standards and fixturing for an altitude chamber calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-128, title: "Chamber pressure indication accuracy against a reference", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-129, title: "Altitude conversion and the atmosphere model used", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-130, title: "Rate of climb and descent accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-131, title: "Combined altitude and temperature condition verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-132, title: "Leak rate and chamber integrity determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-133, title: "Pressure uniformity and sensor port location effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-134, title: "Rapid decompression profile verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-135, title: "Safety interlocks and their verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-136, title: "Adjustment of an altitude chamber, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-137, title: "Uncertainty budget for an altitude chamber calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-138, title: "Conformity statement for an altitude chamber against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A11
+        title: Thermal Vacuum Chamber Calibration
+        status: draft
+        summary: >-
+          Vacuum and radiative thermal conditions together, where
+          conduction is removed and the shroud temperature becomes the
+          measurement.
+        elements:
+          - { id: EC-06-139, title: "Receiving inspection and functional check of a thermal vacuum chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-140, title: "Calibration configuration and stabilisation for a thermal vacuum chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-141, title: "Selecting the standards and fixturing for a thermal vacuum chamber calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-142, title: "Chamber vacuum level measurement and gauge traceability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-143, title: "Shroud temperature uniformity and control", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-144, title: "Radiative versus conductive heat transfer in the mapping", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: EC-06-145, title: "Thermocouple attachment and reading in vacuum", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-146, title: "Pump-down and repressurisation profile verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-147, title: "Outgassing, contamination and cold trap effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-148, title: "Combined thermal and vacuum condition verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-149, title: "Adjustment of a thermal vacuum chamber, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-150, title: "Uncertainty budget for a thermal vacuum chamber calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-151, title: "Conformity statement for a thermal vacuum chamber against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A12
+        title: Thermal Shock and Cycling Chamber Verification
+        status: draft
+        summary: >-
+          Chambers whose specification is a transition time, verified
+          with a measured payload rather than an air sensor.
+        elements:
+          - { id: EC-06-152, title: "Receiving inspection and functional check of a thermal shock chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-153, title: "Calibration configuration and stabilisation for a thermal shock chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-154, title: "Selecting the standards and fixturing for a thermal shock chamber calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-155, title: "Transfer and transition time verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-156, title: "Zone temperature recovery after a transfer", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-157, title: "Payload temperature against air temperature", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-158, title: "Dwell time and cycle count accuracy", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-159, title: "Two-zone and three-zone chamber specifics", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-160, title: "Basket and load configuration effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-161, title: "Adjustment of a thermal shock chamber, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-162, title: "Uncertainty budget for a thermal shock chamber calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-163, title: "Conformity statement for a thermal shock chamber against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A13
+        title: Furnace, Oven and Heat Treatment Equipment Verification
+        status: draft
+        summary: >-
+          High-temperature enclosures verified by temperature uniformity
+          survey and system accuracy test, to a heat-treatment standard
+          rather than a chamber one.
+        elements:
+          - { id: EC-06-164, title: "Receiving inspection and functional check of a furnace or oven", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-165, title: "Calibration configuration and stabilisation for a furnace or oven", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-166, title: "Selecting the standards and fixturing for a furnace or oven calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-167, title: "Temperature uniformity survey execution", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-168, title: "System accuracy test and correction factors", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-169, title: "Instrumentation class and thermocouple placement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-170, title: "Load thermocouple versus control thermocouple", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-171, title: "Furnace class assignment and qualified range", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-172, title: "Atmosphere, vacuum and quench furnace specifics", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-173, title: "Survey frequency and re-survey triggers", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-174, title: "Adjustment of a furnace or oven, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-175, title: "Uncertainty budget for a furnace or oven calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-176, title: "Conformity statement for a furnace or oven against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A14
+        title: Thermal Imager Calibration
+        status: draft
+        summary: >-
+          Imaging radiometers calibrated per pixel and per field, where
+          uniformity and the noise floor matter more than a single spot
+          value.
+        elements:
+          - { id: EC-06-177, title: "Receiving inspection and functional check of a thermal imager", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-178, title: "Calibration configuration and stabilisation for a thermal imager", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-179, title: "Selecting the standards and fixturing for a thermal imager calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-180, title: "Radiometric accuracy against an extended blackbody", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-181, title: "Pixel-to-pixel non-uniformity and correction verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-182, title: "Noise equivalent temperature difference determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-183, title: "Spatial resolution and slit response function", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-184, title: "Emissivity, reflected temperature and distance settings", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-185, title: "Lens, filter and window transmission corrections", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-186, title: "Drift, shutter and internal calibration behaviour", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-187, title: "Adjustment of a thermal imager, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-188, title: "Uncertainty budget for a thermal imager calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-189, title: "Conformity statement for a thermal imager against its specification", kind: judgment, levelCeiling: 4, status: draft }

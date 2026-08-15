@@ -131,3 +131,88 @@ domains:
           - { id: EC-13-066, title: "Adjustment of a relay test set, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-13-067, title: "Uncertainty budget for a relay test set calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-068, title: "Conformity statement for a relay test set against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-13-A06
+        title: Transformer Turns Ratio and Winding Test Equipment
+        status: draft
+        summary: >-
+          Ratio, winding resistance and impedance test sets, used on
+          apparatus whose condition is inferred from small differences.
+        elements:
+          - { id: EC-13-069, title: "Receiving inspection and functional check of transformer test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-070, title: "Calibration configuration and stabilisation for transformer test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-071, title: "Selecting the standards and fixturing for transformer test equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-072, title: "Turns ratio measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-073, title: "Phase deviation and vector group verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-074, title: "Winding resistance measurement accuracy at low ohms", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-075, title: "Excitation current measurement verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-076, title: "Short-circuit impedance measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-077, title: "Demagnetisation and its necessity after a DC test", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-13-078, title: "Tap changer position and range verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-079, title: "Adjustment of transformer test equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-080, title: "Uncertainty budget for transformer test equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-081, title: "Conformity statement for transformer test equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-13-A07
+        title: Insulation Diagnostic and Tan Delta Test Set Calibration
+        status: draft
+        summary: >-
+          Dissipation factor, capacitance and partial discharge
+          instruments, where the measured quantity is a very small loss
+          angle.
+        elements:
+          - { id: EC-13-082, title: "Receiving inspection and functional check of an insulation diagnostic test set", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-083, title: "Calibration configuration and stabilisation for an insulation diagnostic test set", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-084, title: "Selecting the standards and fixturing for an insulation diagnostic test set calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-085, title: "Capacitance measurement accuracy at high voltage", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-086, title: "Dissipation factor and tan delta accuracy", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-087, title: "Reference capacitor and standard loss verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-088, title: "Guard circuit and stray capacitance handling", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-089, title: "Partial discharge charge calibration in picocoulombs", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-090, title: "Noise rejection and background discharge level", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-091, title: "Frequency dependence of a dielectric measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-092, title: "Adjustment of an insulation diagnostic test set, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-093, title: "Uncertainty budget for an insulation diagnostic test set calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-094, title: "Conformity statement for an insulation diagnostic test set against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-13-A08
+        title: Earth, Ground Grid and Soil Resistivity Tester Calibration
+        status: draft
+        summary: >-
+          Instruments measuring earth and soil resistance, where the
+          electrode arrangement is inseparable from the number.
+        elements:
+          - { id: EC-13-095, title: "Receiving inspection and functional check of an earth resistance tester", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-096, title: "Calibration configuration and stabilisation for an earth resistance tester", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-097, title: "Selecting the standards and fixturing for an earth resistance tester calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-098, title: "Earth resistance measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-099, title: "Test current, frequency and injection verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-100, title: "Three-point, four-point and clamp-on method specifics", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-101, title: "Soil resistivity measurement and electrode spacing", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-102, title: "Stray voltage and interference rejection", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-103, title: "Loop impedance and prospective fault current functions", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-104, title: "Ground grid integrity measurement verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-105, title: "Adjustment of an earth resistance tester, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-106, title: "Uncertainty budget for an earth resistance tester calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-107, title: "Conformity statement for an earth resistance tester against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-13-A09
+        title: Battery, UPS and Standby Power Test Equipment
+        status: draft
+        summary: >-
+          Impedance testers, load banks and discharge equipment used to
+          prove standby systems will carry the load.
+        elements:
+          - { id: EC-13-108, title: "Receiving inspection and functional check of standby power test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-109, title: "Calibration configuration and stabilisation for standby power test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-110, title: "Selecting the standards and fixturing for standby power test equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-111, title: "Cell and string impedance measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-112, title: "Discharge current and load bank accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-113, title: "Voltage measurement accuracy across a string", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-114, title: "Capacity determination and its timing accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-115, title: "Temperature measurement and compensation", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-116, title: "Ripple and float current measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-117, title: "Transfer time measurement for a UPS", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-118, title: "Adjustment of standby power test equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-119, title: "Uncertainty budget for standby power test equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-120, title: "Conformity statement for standby power test equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
