@@ -1,0 +1,151 @@
+# Equipment-calibration pack. See rule 14 in CLAUDE.md: an EC element is the
+# competence to calibrate a CLASS OF EQUIPMENT — the parameters, the standards
+# required, and where the job goes wrong. Calibration methodology stays in
+# CM-06, and an element here that could be written without naming the
+# equipment belongs there instead.
+#
+# ONE EC PACK PER DP. DP-18 is the discipline this pack serves. The parity is a
+# test rather than a tidiness rule: a discipline with no equipment pack is a
+# discipline whose instruments nobody can be assessed on.
+
+schemaVersion: 1
+domains:
+  - id: EC-18
+    title: Nanometrology and Surface Science Instrument Calibration
+    kind: equipment
+    status: draft
+    summary: >-
+      Calibrating instruments that measure at the nanometre scale, where
+      the probe is comparable in size to the feature, the artefact is
+      itself a national-scale challenge, and drift over a single scan is a
+      real error source.
+
+    competencyAreas:
+
+      - id: EC-18-A01
+        title: Scanning Probe Microscope Calibration
+        status: draft
+        summary: >-
+          AFM and STM instruments calibrated in all three axes against
+          transfer standards, where the tip and the scanner nonlinearity
+          dominate.
+        elements:
+          - { id: EC-18-001, title: "Receiving inspection and functional check of a scanning probe microscope", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-002, title: "Calibration configuration and stabilisation for a scanning probe microscope", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-003, title: "Selecting the standards and fixturing for a scanning probe microscope calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-18-004, title: "Lateral X and Y scale calibration against a grating standard", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-005, title: "Z scale calibration against step height standards", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-006, title: "Scanner nonlinearity, hysteresis and creep correction", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-007, title: "Tip geometry, radius and its convolution with the feature", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-008, title: "Thermal drift over a scan and its correction", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-009, title: "Force calibration and cantilever spring constant determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-010, title: "Orthogonality and crosstalk between axes", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-011, title: "Noise floor and vertical resolution determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-012, title: "Adjustment of a scanning probe microscope, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-18-013, title: "Uncertainty budget for a scanning probe microscope calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-014, title: "Conformity statement for a scanning probe microscope against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-18-A02
+        title: Electron Microscope Dimensional Calibration
+        status: draft
+        summary: >-
+          SEM and TEM magnification and distortion calibration, where
+          the accelerating voltage and working distance change the
+          scale.
+        elements:
+          - { id: EC-18-015, title: "Receiving inspection and functional check of an electron microscope", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-016, title: "Calibration configuration and stabilisation for an electron microscope", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-017, title: "Selecting the standards and fixturing for an electron microscope calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-18-018, title: "Magnification calibration against a certified pitch standard", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-019, title: "Distortion and linearity across the field of view", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-020, title: "Accelerating voltage and working distance dependence", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-021, title: "Beam-induced contamination and specimen charging effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-022, title: "Edge definition and measurement algorithm dependence", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-023, title: "Critical dimension measurement and its uncertainty", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-024, title: "Stage movement and repeatability verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-025, title: "Adjustment of an electron microscope, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-18-026, title: "Uncertainty budget for an electron microscope calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-027, title: "Conformity statement for an electron microscope against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-18-A03
+        title: Nanoscale Transfer Standard Calibration
+        status: draft
+        summary: >-
+          Step height, pitch and roughness artefacts that carry the
+          nanometre scale, calibrated interferometrically or by
+          diffraction.
+        elements:
+          - { id: EC-18-028, title: "Receiving inspection and functional check of a nanoscale transfer standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-029, title: "Calibration configuration and stabilisation for a nanoscale transfer standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-030, title: "Selecting the standards and fixturing for a nanoscale transfer standard calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-18-031, title: "Step height determination by interferometry", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-032, title: "Lateral pitch determination by optical diffraction", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-033, title: "Traceability of a pitch standard to the metre", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-034, title: "Uniformity and site-to-site variation of an artefact", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-035, title: "Roughness standard characterisation at the nanoscale", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-036, title: "Contamination, cleaning and handling of nanoscale artefacts", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-037, title: "Uncertainty budget for a nanoscale artefact", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-038, title: "Adjustment of a nanoscale transfer standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-18-039, title: "Uncertainty budget for a nanoscale transfer standard calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-040, title: "Conformity statement for a nanoscale transfer standard against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-18-A04
+        title: Thin Film and Ellipsometry Instrument Calibration
+        status: draft
+        summary: >-
+          Optical and X-ray film thickness instruments, where the
+          optical model is as much the measurement as the instrument.
+        elements:
+          - { id: EC-18-041, title: "Receiving inspection and functional check of a thin film measurement instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-042, title: "Calibration configuration and stabilisation for a thin film measurement instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-043, title: "Selecting the standards and fixturing for a thin film measurement instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-18-044, title: "Film thickness accuracy against reference films", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-045, title: "Ellipsometer polariser and analyser angular calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-046, title: "Optical constants and model dependence of a result", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-047, title: "X-ray reflectometry thickness and density determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-048, title: "Wavelength and angle-of-incidence calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-049, title: "Substrate effects and multilayer resolution", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-050, title: "Adjustment of a thin film measurement instrument, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-18-051, title: "Uncertainty budget for a thin film measurement instrument calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-052, title: "Conformity statement for a thin film measurement instrument against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-18-A05
+        title: Surface Analysis Instrument Calibration
+        status: draft
+        summary: >-
+          XPS, Auger and SIMS instruments calibrated for energy scale
+          and intensity, where the sputter rate is its own measurement.
+        elements:
+          - { id: EC-18-053, title: "Receiving inspection and functional check of a surface analysis instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-054, title: "Calibration configuration and stabilisation for a surface analysis instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-055, title: "Selecting the standards and fixturing for a surface analysis instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-18-056, title: "Binding energy scale calibration against reference materials", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-057, title: "Intensity and transmission function determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-058, title: "Depth profiling sputter rate calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-059, title: "Spatial resolution and analysis area determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-060, title: "Charge compensation and its effect on the energy scale", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-061, title: "Vacuum quality, contamination and surface cleanliness", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-062, title: "Adjustment of a surface analysis instrument, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-18-063, title: "Uncertainty budget for a surface analysis instrument calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-064, title: "Conformity statement for a surface analysis instrument against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-18-A06
+        title: Nanoparticle Size and Concentration Instrument Calibration
+        status: draft
+        summary: >-
+          Dynamic light scattering, tracking analysis and mobility
+          instruments, calibrated against certified particle
+          suspensions.
+        elements:
+          - { id: EC-18-065, title: "Receiving inspection and functional check of a nanoparticle measuring instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-066, title: "Calibration configuration and stabilisation for a nanoparticle measuring instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-067, title: "Selecting the standards and fixturing for a nanoparticle measuring instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-18-068, title: "Size accuracy against certified nanoparticle standards", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-069, title: "Size distribution width and resolution verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-070, title: "Concentration and number accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-071, title: "Temperature and viscosity dependence in scattering methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-072, title: "Differential mobility analyser sizing verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-073, title: "Sample preparation, dispersion and aggregation effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-074, title: "Adjustment of a nanoparticle measuring instrument, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-18-075, title: "Uncertainty budget for a nanoparticle measuring instrument calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-18-076, title: "Conformity statement for a nanoparticle measuring instrument against its specification", kind: judgment, levelCeiling: 4, status: draft }

@@ -150,28 +150,6 @@ domains:
           - { id: EC-06-080, title: "Uncertainty budget for a temperature source calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-081, title: "Conformity statement for a temperature source against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
-      - id: EC-06-A07
-        title: Humidity Instrument Calibration
-        status: draft
-        summary: >-
-          Relative humidity and dew point, where the generator, the
-          temperature measurement and the sensor's own hysteresis all
-          contribute.
-        elements:
-          - { id: EC-06-082, title: "Receiving inspection and functional check of a humidity instrument", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-083, title: "Calibration configuration and stabilisation for a humidity instrument", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-084, title: "Selecting the standards and fixturing for a humidity instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-06-085, title: "Relative humidity indication error against a generator", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-06-086, title: "Dew-point hygrometer verification and mirror condition", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-06-087, title: "Temperature dependence of a humidity reading", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-06-088, title: "Sensor hysteresis and response time", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-06-089, title: "Salt solution methods and their limits", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-090, title: "Two-pressure and two-temperature generator principles", kind: knowledge, levelCeiling: 4, status: draft }
-          - { id: EC-06-091, title: "Contamination, drift and sensor recovery", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-06-092, title: "Adjustment of a humidity instrument, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-06-093, title: "Uncertainty budget for a humidity instrument calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-06-094, title: "Conformity statement for a humidity instrument against its specification", kind: judgment, levelCeiling: 4, status: draft }
-
       - id: EC-06-A08
         title: Data Logger and Monitoring System Calibration
         status: draft

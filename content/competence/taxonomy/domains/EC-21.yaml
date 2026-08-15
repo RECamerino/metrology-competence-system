@@ -1,0 +1,153 @@
+# Equipment-calibration pack. See rule 14 in CLAUDE.md: an EC element is the
+# competence to calibrate a CLASS OF EQUIPMENT — the parameters, the standards
+# required, and where the job goes wrong. Calibration methodology stays in
+# CM-06, and an element here that could be written without naming the
+# equipment belongs there instead.
+#
+# ONE EC PACK PER DP. DP-21 is the discipline this pack serves. The parity is a
+# test rather than a tidiness rule: a discipline with no equipment pack is a
+# discipline whose instruments nobody can be assessed on.
+
+schemaVersion: 1
+domains:
+  - id: EC-21
+    title: Geodetic and Gravimetric Instrument Calibration
+    kind: equipment
+    status: draft
+    summary: >-
+      Calibrating instruments that measure position, height and gravity
+      over the earth, where the reference is a network or a physical model
+      rather than a bench artefact, and where the calibration facility is
+      frequently outdoors and kilometres long.
+
+    competencyAreas:
+
+      - id: EC-21-A01
+        title: Gravimeter Calibration
+        status: draft
+        summary: >-
+          Absolute and relative gravity instruments, calibrated on
+          gravity networks and against absolute determinations.
+        elements:
+          - { id: EC-21-001, title: "Receiving inspection and functional check of a gravimeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-002, title: "Calibration configuration and stabilisation for a gravimeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-003, title: "Selecting the standards and fixturing for a gravimeter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-21-004, title: "Absolute gravimeter operation and drop measurement", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-005, title: "Scale factor determination on a calibration line", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-006, title: "Relative gravimeter drift and tare determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-007, title: "Tidal, ocean loading and polar motion corrections", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-008, title: "Vertical gradient determination at a station", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-009, title: "Instrument height reduction to the station marker", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-010, title: "International comparison participation and offset", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-21-011, title: "Superconducting gravimeter operation and calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-012, title: "Adjustment of a gravimeter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-21-013, title: "Uncertainty budget for a gravimeter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-014, title: "Conformity statement for a gravimeter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-21-A02
+        title: GNSS Receiver and Geodetic Antenna Calibration
+        status: draft
+        summary: >-
+          Positioning equipment where the antenna phase centre, not the
+          physical marker, is what the system actually measures.
+        elements:
+          - { id: EC-21-015, title: "Receiving inspection and functional check of a GNSS receiver and antenna", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-016, title: "Calibration configuration and stabilisation for a GNSS receiver and antenna", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-017, title: "Selecting the standards and fixturing for a GNSS receiver and antenna calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-21-018, title: "Antenna phase centre offset and variation determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-019, title: "Robot and anechoic chamber antenna calibration methods", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-020, title: "Receiver code and carrier phase bias determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-021, title: "Multipath assessment at a calibration site", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-022, title: "Baseline determination on a calibration network", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-023, title: "Antenna height measurement and reduction to the marker", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-024, title: "Multi-constellation and multi-frequency bias handling", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-025, title: "Adjustment of a GNSS receiver and antenna, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-21-026, title: "Uncertainty budget for a GNSS receiver and antenna calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-027, title: "Conformity statement for a GNSS receiver and antenna against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-21-A03
+        title: Total Station and Theodolite Calibration
+        status: draft
+        summary: >-
+          Angle and distance instruments verified for collimation, index
+          and additive constant on a calibrated baseline.
+        elements:
+          - { id: EC-21-028, title: "Receiving inspection and functional check of a total station", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-029, title: "Calibration configuration and stabilisation for a total station", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-030, title: "Selecting the standards and fixturing for a total station calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-21-031, title: "Horizontal collimation and trunnion axis error", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-032, title: "Vertical index error determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-033, title: "Angular accuracy by round-of-angles measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-034, title: "Additive constant and scale error on a baseline", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-035, title: "Reflectorless distance measurement verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-036, title: "Compensator range, accuracy and behaviour", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-037, title: "Prism constant determination and prism matching", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-038, title: "Automatic target recognition verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-039, title: "Adjustment of a total station, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-21-040, title: "Uncertainty budget for a total station calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-041, title: "Conformity statement for a total station against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-21-A04
+        title: Levelling Instrument and Staff Calibration
+        status: draft
+        summary: >-
+          Levels and their staves, where the staff graduation and the
+          collimation error are the height error over a run.
+        elements:
+          - { id: EC-21-042, title: "Receiving inspection and functional check of a levelling instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-043, title: "Calibration configuration and stabilisation for a levelling instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-044, title: "Selecting the standards and fixturing for a levelling instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-21-045, title: "Collimation error determination by two-peg test", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-046, title: "Compensator accuracy and setting sensitivity", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-047, title: "Staff graduation interval calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-048, title: "Staff thermal expansion and its correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-049, title: "Invar staff and bar-code staff specifics", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-050, title: "Digital level reading accuracy and staff matching", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-051, title: "Circular bubble and staff verticality verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-052, title: "Adjustment of a levelling instrument, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-21-053, title: "Uncertainty budget for a levelling instrument calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-054, title: "Conformity statement for a levelling instrument against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-21-A05
+        title: EDM Baseline and Calibration Facility Verification
+        status: draft
+        summary: >-
+          The outdoor facility itself — pillars, distances and stability
+          — without which none of the instruments above have a
+          reference.
+        elements:
+          - { id: EC-21-055, title: "Receiving inspection and functional check of an EDM calibration baseline", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-056, title: "Calibration configuration and stabilisation for an EDM calibration baseline", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-057, title: "Selecting the standards and fixturing for an EDM calibration baseline calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-21-058, title: "Baseline pillar distance determination and its uncertainty", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-059, title: "Pillar stability monitoring and re-determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-060, title: "Atmospheric measurement along the baseline", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-061, title: "Refractive index and first velocity correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-062, title: "Baseline design, spacing and cyclic error detection", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-063, title: "Centring, forced-centring and target alignment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-064, title: "Uncertainty budget for a baseline distance", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-065, title: "Adjustment of an EDM calibration baseline, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-21-066, title: "Uncertainty budget for an EDM calibration baseline calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-067, title: "Conformity statement for an EDM calibration baseline against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-21-A06
+        title: Inertial, Tilt and Deformation Sensor Calibration
+        status: draft
+        summary: >-
+          Inclinometers, IMUs and structural monitoring sensors
+          calibrated on tilt tables and rate tables against known
+          motion.
+        elements:
+          - { id: EC-21-068, title: "Receiving inspection and functional check of an inertial or tilt sensor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-069, title: "Calibration configuration and stabilisation for an inertial or tilt sensor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-070, title: "Selecting the standards and fixturing for an inertial or tilt sensor calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-21-071, title: "Tilt sensor scale factor and zero determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-072, title: "Tilt table and rate table verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-073, title: "Accelerometer bias, scale and axis misalignment in an IMU", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-074, title: "Gyroscope scale factor and bias stability", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-21-075, title: "Temperature compensation of an inertial sensor", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-076, title: "Long-term drift for structural monitoring applications", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-077, title: "Extensometer and crackmeter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-078, title: "Adjustment of an inertial or tilt sensor, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-21-079, title: "Uncertainty budget for an inertial or tilt sensor calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-21-080, title: "Conformity statement for an inertial or tilt sensor against its specification", kind: judgment, levelCeiling: 4, status: draft }

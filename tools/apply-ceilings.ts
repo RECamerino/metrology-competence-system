@@ -54,6 +54,8 @@ let unchanged = 0;
 const distribution = new Map<number, number>();
 const missingAreas = new Set<string>();
 const unknownOverrides: string[] = [];
+/** Every element id the scan visited, wherever its file lives. */
+const seenElements = new Set<string>();
 
 for (const file of readdirSync(DOMAINS_DIR).sort()) {
   if (!file.endsWith('.yaml')) continue;
@@ -82,6 +84,7 @@ for (const file of readdirSync(DOMAINS_DIR).sort()) {
     const [, prefix, id, middle, existing, suffix] = elementMatch;
     const target = areaPlan.overrides?.[id!] ?? areaPlan.default;
 
+    seenElements.add(id!);
     distribution.set(target, (distribution.get(target) ?? 0) + 1);
 
     if (String(target) === existing) {
@@ -93,18 +96,23 @@ for (const file of readdirSync(DOMAINS_DIR).sort()) {
     }
   }
 
-  // Flag overrides naming an element that is not in the area we think it is —
-  // usually a typo, and silently ignoring it would leave a ceiling unset.
-  for (const [area, areaPlan] of Object.entries(plan.areas)) {
-    if (!area.startsWith(file.replace('.yaml', ''))) continue;
-    for (const id of Object.keys(areaPlan.overrides ?? {})) {
-      if (!lines.some((l) => l.includes(`id: ${id},`))) {
-        unknownOverrides.push(`${area} -> ${id}`);
-      }
-    }
-  }
-
   if (fileChanged && !dryRun) writeFileSync(path, lines.join('\n'), 'utf8');
+}
+
+// Flag overrides naming an element that does not exist — usually a typo, and
+// silently ignoring it would leave a ceiling unset.
+//
+// Checked against every element the scan actually visited, NOT against the file
+// whose name matches the area's prefix. That shortcut assumed an area lives in
+// the domain file its ID begins with, which rule 1 explicitly denies: an ID
+// records where something was FIRST created and is historical, while the
+// containing structure is authoritative. The moment areas moved between domains
+// — which is how every DP came to have an EC pack of its own — the shortcut
+// reported 31 perfectly correct overrides as typos.
+for (const [area, areaPlan] of Object.entries(plan.areas)) {
+  for (const id of Object.keys(areaPlan.overrides ?? {})) {
+    if (!seenElements.has(id)) unknownOverrides.push(`${area} -> ${id}`);
+  }
 }
 
 const total = [...distribution.values()].reduce((a, b) => a + b, 0);

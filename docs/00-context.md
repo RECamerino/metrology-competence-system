@@ -447,7 +447,7 @@ It is **not** a restatement of `CM-06`, which owns calibration *methodology* —
 
 **The test: an EC element that could be written without naming the equipment belongs in `CM-06` instead.**
 
-**The pack is now built out: 13 EC domains, 173 equipment types, 2344 elements.** Every area follows one spine — receiving inspection, calibration configuration, standards and fixturing, then adjustment, uncertainty budget, conformity statement — wrapped around the parameters that make that equipment type distinct. The spine repeats because the job genuinely does. The parameters never repeat: no two of the 86 areas share a single parameter element, which is the mechanical form of the rule that an area whose parameters could be swapped for another type's has been written wrong.
+**The pack is now built out: 21 EC domains, 203 equipment types, 2732 elements.** Every area follows one spine — receiving inspection, calibration configuration, standards and fixturing, then adjustment, uncertainty budget, conformity statement — wrapped around the parameters that make that equipment type distinct. The spine repeats because the job genuinely does. The parameters never repeat: no two of the 86 areas share a single parameter element, which is the mechanical form of the rule that an area whose parameters could be swapped for another type's has been written wrong.
 
 Both examples that prompted this now resolve. Searching the viewer for *oscilloscope* returns 26 elements; *RF passive* returns 17, covering attenuation against frequency, return loss, coupler directivity, adapter removal, connector gauging and mismatch uncertainty — none of which existed anywhere in the corpus a day ago.
 
@@ -472,6 +472,16 @@ So the chain read: working instrument → *nothing* → SI realisation.
 | SI realisation | **Torque standard machine**; **Kibble balance and primary mass dissemination** |
 
 **The boundary against `DP` is the same one that keeps `EC` out of `CM-06`, one tier up.** `DP-08-002` is knowledge of the Josephson effect. `EC-01-A15` is the competence to run the cryogenic system, select the Shapiro step, detect a mis-biased array, and defend a calibration made with it. One is what the standard *is*; the other is whether this person can *operate* it.
+
+### One EC pack per DP, as a test
+
+The fourth correction was a counting argument: there should be as many equipment packs as there are disciplines, and there were 13 against 21.
+
+The count is a crude test and it found five real holes. **Nanometrology, additive manufacturing, digital metrology and geodesy had no equipment pack at all** — four disciplines whose instruments nobody could be assessed on. And **magnetics** had one on paper only: `EC-13` claimed DP-11 and contained no gaussmeter, no fluxmeter, no permeameter, no magnetometer. Zero magnetics elements anywhere in the axis. A pack that claims a discipline and covers half of it is worse than an absent one, because the count looks satisfied.
+
+Four packs were also carrying two disciplines each. Those split — flow out of pressure, humidity out of temperature, spectroscopy and fibre out of photometry — and **the moved areas kept their IDs**. `EC-14` contains areas numbered `EC-05-A05` and elements numbered `EC-05-1xx`, which looks wrong and is correct: rule 1 says an ID records where something was FIRST created, and the containing structure is what is authoritative.
+
+That move exposed a bug of exactly the kind this session has been finding. `tools/apply-ceilings.ts` checked its overrides with `if (!area.startsWith(file.replace('.yaml','')))` — assuming an area lives in the domain file whose name its ID begins with. The project's own first rule denies that assumption, and the moment an area moved, the applier reported 31 perfectly correct overrides as typos. It now checks against every element the scan actually visited.
 
 **Both passes were generated, and that is a risk worth naming.** IDs are append-only, so 1185 titles are now permanent. The parameter lists are drawn from ordinary calibration practice and the boundary rule was applied throughout, but a practising metrologist reading their own discipline will find titles they would have worded differently, and a few they would not have included. Correcting a title is free; withdrawing an element means deprecating it. **This wants a discipline-by-discipline review before anything is authored against it**, and the review is cheaper than it looks because a whole equipment type is thirteen to twenty lines in one file.
 

@@ -1,0 +1,155 @@
+# Equipment-calibration pack. See rule 14 in CLAUDE.md: an EC element is the
+# competence to calibrate a CLASS OF EQUIPMENT — the parameters, the standards
+# required, and where the job goes wrong. Calibration methodology stays in
+# CM-06, and an element here that could be written without naming the
+# equipment belongs there instead.
+#
+# ONE EC PACK PER DP. DP-19 is the discipline this pack serves. The parity is a
+# test rather than a tidiness rule: a discipline with no equipment pack is a
+# discipline whose instruments nobody can be assessed on.
+
+schemaVersion: 1
+domains:
+  - id: EC-19
+    title: Additive Manufacturing and Production Metrology Equipment Calibration
+    kind: equipment
+    status: draft
+    summary: >-
+      Calibrating the measuring equipment embedded in production:
+      on-machine probing, in-process sensing, industrial CT and the
+      automated cells that inspect without an operator. Measurement here
+      happens where the part is made, and the machine is both the
+      manufacturer and the measuring instrument.
+
+    competencyAreas:
+
+      - id: EC-19-A01
+        title: On-Machine and In-Process Measurement System Verification
+        status: draft
+        summary: >-
+          Probing systems used on the machine that made the part, where
+          the machine's own errors are inside every measurement it
+          reports.
+        elements:
+          - { id: EC-19-001, title: "Receiving inspection and functional check of an on-machine measurement system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-19-002, title: "Calibration configuration and stabilisation for an on-machine measurement system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-19-003, title: "Selecting the standards and fixturing for an on-machine measurement system calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-19-004, title: "Touch probe pretravel, lobing and repeatability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-005, title: "On-machine measurement against an independent reference", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-19-006, title: "Machine thermal state at the time of measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-007, title: "Tool setting probe and length offset verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-008, title: "Laser tool setter accuracy and repeatability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-009, title: "In-process gauging head calibration and drift", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-010, title: "Deciding what an on-machine result can and cannot support", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-19-011, title: "Adjustment of an on-machine measurement system, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-19-012, title: "Uncertainty budget for an on-machine measurement system calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-013, title: "Conformity statement for an on-machine measurement system against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-19-A02
+        title: Structured Light and Optical 3D Scanner Verification
+        status: draft
+        summary: >-
+          Non-contact area scanners verified for probing error, sphere
+          spacing and flatness against artefacts designed for optical
+          systems.
+        elements:
+          - { id: EC-19-014, title: "Receiving inspection and functional check of an optical 3D scanner", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-19-015, title: "Calibration configuration and stabilisation for an optical 3D scanner", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-19-016, title: "Selecting the standards and fixturing for an optical 3D scanner calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-19-017, title: "Probing error: size and form, against a reference sphere", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-018, title: "Sphere spacing error across the measuring volume", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-019, title: "Flatness measurement error on a reference plane", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-020, title: "Surface finish, colour and reflectivity effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-021, title: "Multi-scan registration and alignment error", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-19-022, title: "Point density, noise and outlier behaviour", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-023, title: "Ambient light and thermal stability during a scan", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-024, title: "Adjustment of an optical 3D scanner, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-19-025, title: "Uncertainty budget for an optical 3D scanner calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-026, title: "Conformity statement for an optical 3D scanner against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-19-A03
+        title: Industrial Computed Tomography System Calibration
+        status: draft
+        summary: >-
+          Dimensional CT verified for scale and probing error, where the
+          surface determination threshold moves every measured
+          dimension.
+        elements:
+          - { id: EC-19-027, title: "Receiving inspection and functional check of an industrial CT system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-19-028, title: "Calibration configuration and stabilisation for an industrial CT system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-19-029, title: "Selecting the standards and fixturing for an industrial CT system calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-19-030, title: "Voxel size and geometric magnification calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-19-031, title: "Sphere distance and probing error verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-19-032, title: "Surface determination threshold and its effect on dimensions", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-19-033, title: "Beam hardening, scatter and artefact correction", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-19-034, title: "Multi-material and density-dependent measurement error", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-19-035, title: "Rotary axis and geometric alignment verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-19-036, title: "Reference artefacts designed for CT verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-19-037, title: "Task-specific uncertainty for a CT measurement", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-19-038, title: "Adjustment of an industrial CT system, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-19-039, title: "Uncertainty budget for an industrial CT system calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-040, title: "Conformity statement for an industrial CT system against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-19-A04
+        title: Additive Build Platform and Process Sensor Verification
+        status: draft
+        summary: >-
+          The sensing built into a build chamber — melt pool, layer,
+          temperature and atmosphere — verified so that in-situ
+          monitoring means something.
+        elements:
+          - { id: EC-19-041, title: "Receiving inspection and functional check of an additive manufacturing process sensor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-19-042, title: "Calibration configuration and stabilisation for an additive manufacturing process sensor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-19-043, title: "Selecting the standards and fixturing for an additive manufacturing process sensor calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-19-044, title: "Build platform flatness, level and position verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-045, title: "Laser power and spot size verification at the build plane", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-19-046, title: "Scanner positioning accuracy across the build area", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-19-047, title: "Melt pool monitoring sensor verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-19-048, title: "Chamber atmosphere and oxygen sensor verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-049, title: "Recoater and layer thickness verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-050, title: "Thermal imaging of the build and its calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-19-051, title: "Adjustment of an additive manufacturing process sensor, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-19-052, title: "Uncertainty budget for an additive manufacturing process sensor calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-053, title: "Conformity statement for an additive manufacturing process sensor against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-19-A05
+        title: Powder and Feedstock Characterisation Equipment Calibration
+        status: draft
+        summary: >-
+          Instruments qualifying the feedstock, where the sample
+          handling changes the result more than the instrument does.
+        elements:
+          - { id: EC-19-054, title: "Receiving inspection and functional check of powder characterisation equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-19-055, title: "Calibration configuration and stabilisation for powder characterisation equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-19-056, title: "Selecting the standards and fixturing for powder characterisation equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-19-057, title: "Particle size distribution instrument verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-058, title: "Flowability and Hall flowmeter apparatus verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-059, title: "Apparent and tap density apparatus verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-060, title: "Moisture content determination in powders", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-061, title: "Sampling, splitting and representativeness", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-19-062, title: "Morphology and shape analysis instrument verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-063, title: "Adjustment of powder characterisation equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-19-064, title: "Uncertainty budget for powder characterisation equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-065, title: "Conformity statement for powder characterisation equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-19-A06
+        title: Automated Inspection Cell and Robot Metrology Verification
+        status: draft
+        summary: >-
+          Robots and fixtures used as measuring systems, verified for
+          pose accuracy and for the repeatability the cell's throughput
+          assumes.
+        elements:
+          - { id: EC-19-066, title: "Receiving inspection and functional check of an automated inspection cell", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-19-067, title: "Calibration configuration and stabilisation for an automated inspection cell", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-19-068, title: "Selecting the standards and fixturing for an automated inspection cell calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-19-069, title: "Robot pose accuracy and repeatability verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-070, title: "Tool centre point calibration and its verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-071, title: "Cell-level volumetric performance against an artefact", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-19-072, title: "Part presentation, fixturing and datum repeatability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-073, title: "Vision system calibration within the cell", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-074, title: "Drift monitoring and interim check strategy for a cell", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-19-075, title: "Correlating cell results against a reference CMM", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-19-076, title: "Adjustment of an automated inspection cell, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-19-077, title: "Uncertainty budget for an automated inspection cell calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-19-078, title: "Conformity statement for an automated inspection cell against its specification", kind: judgment, levelCeiling: 4, status: draft }
