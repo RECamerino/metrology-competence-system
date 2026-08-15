@@ -2279,3 +2279,29 @@ DP-21,Geodetic and Gravitational Metrology,discipline,DP-21-A06,"Deformation, Mo
 DP-21,Geodetic and Gravitational Metrology,discipline,DP-21-A06,"Deformation, Monitoring and Applied Geodetic Measurement",DP-21-053,Engineering geodesy for large facilities and accelerators,skill,5,1 2 3 4 5,draft
 DP-21,Geodetic and Gravitational Metrology,discipline,DP-21-A06,"Deformation, Monitoring and Applied Geodetic Measurement",DP-21-054,Geodetic input to sea level and climate records,skill,4,1 2 3 4,draft
 DP-21,Geodetic and Gravitational Metrology,discipline,DP-21-A06,"Deformation, Monitoring and Applied Geodetic Measurement",DP-21-055,Legal and cadastral measurement,knowledge,3,1 2 3,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-001,Receiving inspection and functional check of an oscilloscope,skill,3,1 2 3,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-002,"Establishing the calibration configuration: firmware, self-calibration and warm-up",skill,3,1 2 3,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-003,Selecting the standards and fixturing for an oscilloscope calibration,judgment,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-004,DC vertical gain accuracy across ranges,skill,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-005,DC offset and position accuracy,skill,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-006,Vertical linearity and dynamic range verification,skill,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-007,Input impedance and coupling verification at 1 MΩ and 50 Ω,skill,3,1 2 3,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-008,Bandwidth verification and the −3 dB point,skill,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-009,"Rise time measurement, and its relationship to bandwidth",knowledge,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-010,High-bandwidth oscilloscope calibration above 1 GHz,skill,5,1 2 3 4 5,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-011,Channel-to-channel crosstalk and isolation,skill,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-012,Noise floor and baseline stability verification,skill,3,1 2 3,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-013,Timebase accuracy across sweep ranges,skill,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-014,Delta-time and time-interval measurement accuracy,skill,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-015,"Horizontal delay, position and holdoff verification",skill,3,1 2 3,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-016,Timebase jitter and short-term stability,skill,5,1 2 3 4 5,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-017,Trigger sensitivity across the bandwidth,skill,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-018,Trigger level accuracy and trigger mode verification,skill,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-019,Probe attenuation ratio verification and compensation,skill,3,1 2 3,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-020,"Probe loading, and treating the probe as part of the instrument",knowledge,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-021,"Sample rate, record length and interpolation verification",skill,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-022,Effective number of bits and vertical resolution in practice,skill,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-023,Verifying the automated measurement functions a scope reports,skill,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-024,"Adjustment and self-calibration, and what it does to as-found data",judgment,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-025,Uncertainty budget for an oscilloscope calibration,skill,4,1 2 3 4,draft
+EC-01,Electrical Test and Measurement Instrument Calibration,equipment,EC-01-A01,Oscilloscope Calibration,EC-01-026,Conformity statement for an oscilloscope against its specification,judgment,4,1 2 3 4,draft

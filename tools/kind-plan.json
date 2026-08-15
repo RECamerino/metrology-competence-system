@@ -1829,6 +1829,16 @@
         "DP-08-096": "skill",
         "DP-08-097": "judgment"
       }
+    },
+    "EC-01-A01": {
+      "default": "skill",
+      "overrides": {
+        "EC-01-003": "judgment",
+        "EC-01-009": "knowledge",
+        "EC-01-020": "knowledge",
+        "EC-01-024": "judgment",
+        "EC-01-026": "judgment"
+      }
     }
   }
 }

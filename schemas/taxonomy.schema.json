@@ -27,8 +27,8 @@
         "id": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/domainId" },
         "title": { "type": "string", "minLength": 1 },
         "kind": {
-          "enum": ["core", "discipline"],
-          "description": "core = cross-cutting competency every role shares to some degree (CM-*). discipline = measurement-discipline depth, shipped as a separately versioned pack (DP-*)."
+          "enum": ["core", "discipline", "equipment"],
+          "description": "core = cross-cutting competency every role shares to some degree (CM-*). discipline = measurement-discipline depth by QUANTITY, shipped as a separately versioned pack (DP-*). equipment = calibration competence for an equipment TYPE (EC-*), which cuts across the quantity axis: an oscilloscope is voltage, timing and bandwidth at once, and describing that job inside any one quantity domain truncates it."
         },
         "status": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/lifecycleStatus" },
         "summary": {

@@ -106,7 +106,7 @@ function domainDoc(d: Domain): string {
     out.push('');
   }
   out.push(
-    `**${d.kind === 'core' ? 'Cross-cutting core' : 'Discipline pack'}** · ` +
+    `**${{ core: 'Cross-cutting core', discipline: 'Discipline pack', equipment: 'Equipment-calibration pack' }[d.kind] ?? d.kind}** · ` +
       `${d.competencyAreas.length} competency areas · ${els.length} elements`,
   );
   out.push('');
@@ -273,21 +273,29 @@ function indexDoc(): string {
   );
   out.push('');
 
-  for (const kind of ['core', 'discipline'] as const) {
+  const GROUP_HEADING: Record<string, [string, string]> = {
+    core: [
+      '## Cross-cutting core domains',
+      'Competencies every metrological role shares to some degree, including the adjacent ones that are routinely missed.',
+    ],
+    discipline: [
+      '## Discipline packs',
+      'Measurement-discipline depth, organised by the QUANTITY measured. Separately versioned; a role profile selects from these rather than assuming them entire.',
+    ],
+    equipment: [
+      '## Equipment-calibration packs',
+      'Organised by the equipment TYPE that arrives on a bench, because that axis cuts across the quantity one: calibrating an oscilloscope is a single job spanning voltage, timing and bandwidth, and describing it inside any one discipline pack truncates it to the part that fits. This is where the technician works, the engineer designs, and the metrologist reads to judge whether a measurement was sound.',
+    ],
+  };
+
+  for (const kind of ['core', 'discipline', 'equipment'] as const) {
     const group = domains.filter((d) => d.kind === kind);
     if (group.length === 0) continue;
 
-    out.push(
-      kind === 'core'
-        ? '## Cross-cutting core domains'
-        : '## Discipline packs',
-    );
+    const [heading, blurb] = GROUP_HEADING[kind]!;
+    out.push(heading);
     out.push('');
-    out.push(
-      kind === 'core'
-        ? 'Competencies every metrological role shares to some degree, including the adjacent ones that are routinely missed.'
-        : 'Measurement-discipline depth. Separately versioned; a role profile selects from these rather than assuming them entire.',
-    );
+    out.push(blurb);
     out.push('');
     out.push('| Domain | Areas | Elements | K / S / J | L2 / L3 / L4 / L5 |');
     out.push('|---|---|---|---|---|');

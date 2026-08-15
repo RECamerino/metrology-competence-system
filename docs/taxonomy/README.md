@@ -18,10 +18,10 @@ The authoritative source is [`content/competence/taxonomy/domains/`](../../conte
 
 | | |
 |---|---|
-| Domains | 43 |
-| Competency areas | 258 |
-| Elements | 2280 |
-| Assessable units | 9230 |
+| Domains | 44 |
+| Competency areas | 259 |
+| Elements | 2306 |
+| Assessable units | 9330 |
 
 An assessable unit is one element at one level. Every level is assessed at element scope, so a credential names exactly what was tested.
 
@@ -46,9 +46,9 @@ The highest level attainable for an element. Not every element supports all five
 | Ceiling | Attainable range | Meaning at the ceiling | Elements | Share |
 |---|---|---|---|---|
 | 2 | L1–L2 | Advanced Beginner | 13 | 0.6% |
-| 3 | L1–L3 | Competent | 325 | 14.3% |
-| 4 | L1–L4 | Proficient | 1481 | 65.0% |
-| 5 | L1–L5 | Expert | 461 | 20.2% |
+| 3 | L1–L3 | Competent | 331 | 14.4% |
+| 4 | L1–L4 | Proficient | 1499 | 65.0% |
+| 5 | L1–L5 | Expert | 463 | 20.1% |
 
 **L5 is reserved** for elements where a person could plausibly spend a career and still be learning, and where a defensible capstone with cross-organizational review is actually writable.
 
@@ -58,9 +58,9 @@ What kind of competence an element is, and therefore what evidence proves it.
 
 | Kind | The claim | What proves it | Elements | Share |
 |---|---|---|---|---|
-| Knowledge | I understand this | Explanation, relation, analysis | 686 | 30.1% |
-| Skill | I can perform this | A work product they produced, not an account of it | 1150 | 50.4% |
-| Judgment | I can decide and defend it | A defence; often no single right answer | 444 | 19.5% |
+| Knowledge | I understand this | Explanation, relation, analysis | 688 | 29.8% |
+| Skill | I can perform this | A work product they produced, not an account of it | 1171 | 50.8% |
+| Judgment | I can decide and defend it | A defence; often no single right answer | 447 | 19.4% |
 
 **Authority is deliberately not a kind.** Knowledge, skill and judgment are earned and belong to a person. Authority is granted, and is a relationship between a person, an organization and a scope of work. Competency credentials are portable; authorizations are not. See [`../00-context.md`](../00-context.md).
 
@@ -95,7 +95,7 @@ Competencies every metrological role shares to some degree, including the adjace
 
 ## Discipline packs
 
-Measurement-discipline depth. Separately versioned; a role profile selects from these rather than assuming them entire.
+Measurement-discipline depth, organised by the QUANTITY measured. Separately versioned; a role profile selects from these rather than assuming them entire.
 
 | Domain | Areas | Elements | K / S / J | L2 / L3 / L4 / L5 |
 |---|---|---|---|---|
@@ -120,6 +120,14 @@ Measurement-discipline depth. Separately versioned; a role profile selects from 
 | [**DP-19** Additive Manufacturing and Advanced Production Metrology](DP-19.md) | 5 | 54 | 6 / 40 / 8 | 0 / 1 / 40 / 13 |
 | [**DP-20** Digital Metrology, DCC and Industry 4.0](DP-20.md) | 5 | 39 | 14 / 19 / 6 | 0 / 1 / 30 / 8 |
 | [**DP-21** Geodetic and Gravitational Metrology](DP-21.md) | 6 | 55 | 21 / 30 / 4 | 0 / 2 / 19 / 34 |
+
+## Equipment-calibration packs
+
+Organised by the equipment TYPE that arrives on a bench, because that axis cuts across the quantity one: calibrating an oscilloscope is a single job spanning voltage, timing and bandwidth, and describing it inside any one discipline pack truncates it to the part that fits. This is where the technician works, the engineer designs, and the metrologist reads to judge whether a measurement was sound.
+
+| Domain | Areas | Elements | K / S / J | L2 / L3 / L4 / L5 |
+|---|---|---|---|---|
+| [**EC-01** Electrical Test and Measurement Instrument Calibration](EC-01.md) | 1 | 26 | 2 / 21 / 3 | 0 / 6 / 18 / 2 |
 
 ---
 

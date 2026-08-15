@@ -7,19 +7,19 @@
   "$defs": {
     "domainId": {
       "type": "string",
-      "pattern": "^(CM|DP)-[0-9]{2}$",
-      "description": "Top-level domain. CM = cross-cutting core, DP = discipline pack. Example: CM-03."
+      "pattern": "^(CM|DP|EC)-[0-9]{2}$",
+      "description": "Top-level domain. CM = cross-cutting core, DP = discipline pack organised by measurement QUANTITY, EC = equipment-calibration pack organised by the equipment TYPE that arrives on a bench. Example: CM-03, DP-08, EC-01.\n\nEC exists because the first two axes are both organised by measurement science and neither is organised by the work. Calibrating an oscilloscope is one job that spans DC voltage (DP-08), timing (DP-14) and bandwidth (DP-10); asked to live in a quantity domain it gets truncated to the part that fits, which is exactly what DP-08-052 'Oscilloscope DC and timebase calibration' is."
     },
 
     "competencyAreaId": {
       "type": "string",
-      "pattern": "^(CM|DP)-[0-9]{2}-A[0-9]{2}$",
+      "pattern": "^(CM|DP|EC)-[0-9]{2}-A[0-9]{2}$",
       "description": "Competency area within a domain. Example: CM-03-A02."
     },
 
     "elementId": {
       "type": "string",
-      "pattern": "^(CM|DP)-[0-9]{2}-[0-9]{3}$",
+      "pattern": "^(CM|DP|EC)-[0-9]{2}-[0-9]{3}$",
       "description": "Leaf element — the unit of rating, evidence, and credentialing. Example: CM-03-014. IMPORTANT: the domain prefix records where the element was FIRST created and is historical. The authoritative domain and competency area are the `domain` and `competencyArea` fields on the element. If an element is later reassigned, those fields change and the ID does not, because IDs are immutable — a credential attesting CM-03-014 must resolve to the same element forever."
     },
 

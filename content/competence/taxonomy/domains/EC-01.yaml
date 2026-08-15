@@ -1,0 +1,91 @@
+# Equipment-calibration pack: electrical test and measurement instruments.
+#
+# WHY A THIRD AXIS EXISTS. The corpus had two, and both are organised by
+# measurement science: CM by cross-cutting concept, DP by measured quantity.
+# Neither is organised by the work. A technician's day is not "uncertainty,
+# then traceability" — it is an oscilloscope, then a torque wrench, then an RF
+# attenuator, and their competence is per equipment type.
+#
+# The proof was already in the corpus before this pack existed. DP-08-052 is
+# titled "Oscilloscope DC and timebase calibration", truncated to the parts
+# that fit a DC and low-frequency electrical domain: bandwidth belongs to
+# DP-10, jitter and time-interval to DP-14. Calibrating a scope is ONE job, and
+# a quantity-organised taxonomy could only describe a third of it. That is what
+# a missing axis looks like from the inside.
+#
+# WHAT AN EC ELEMENT IS, AND IS NOT. It is the competence to calibrate a class
+# of equipment: what the parameters are, how they are measured, what standard
+# is required, and where the job goes wrong. It is NOT a restatement of CM-06,
+# which owns calibration METHODOLOGY — procedure design, adjustment decisions,
+# certificates, as-found and as-left. CM-06 says what as-found data is and why
+# both are recorded; EC says what as-found data for an oscilloscope consists
+# of. Neither substitutes for the other, and an EC element that could be
+# written without naming the equipment belongs in CM-06 instead.
+#
+# The three roles the metrologist named all read this pack differently: the
+# technician performs it, the engineer designs the method and the fixturing,
+# and the metrologist has to understand it well enough to say whether the
+# measurement was sound.
+
+schemaVersion: 1
+domains:
+  - id: EC-01
+    title: Electrical Test and Measurement Instrument Calibration
+    kind: equipment
+    status: draft
+    summary: >-
+      Calibrating the instruments that measure electrical quantities, organised
+      by the instrument that arrives on the bench rather than by the quantity
+      it measures. Oscilloscopes, multimeters, sources, generators and analysers
+      each present a whole job: several parameters, several standards, and
+      failure modes that belong to the instrument rather than to any one
+      quantity. Boundary: the physics and the measurement science are DP-08,
+      DP-09 and DP-14; calibration methodology is CM-06; this pack is the work.
+
+    competencyAreas:
+
+      # The worked equipment type. Built first because an oscilloscope spans
+      # three quantity domains at once, which makes it the strongest test of
+      # whether the equipment axis is real or whether these elements could
+      # have lived in DP after all. They could not.
+      #
+      # Ceilings mostly 4: this is professional calibration technique, and the
+      # non-routine case — a scope that meets bandwidth on one channel and not
+      # the next — is exactly where proficiency shows. Two reach 5, where
+      # high-bandwidth work genuinely supports career-long learning and a
+      # defensible capstone.
+      - id: EC-01-A01
+        title: Oscilloscope Calibration
+        status: draft
+        summary: >-
+          The whole job on an oscilloscope, from receiving inspection to a
+          defensible certificate: vertical accuracy and bandwidth, timebase and
+          time-interval, trigger behaviour, probes, and the digital-specific
+          parameters that analogue practice never had to think about.
+        elements:
+          - { id: EC-01-001, title: "Receiving inspection and functional check of an oscilloscope", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-002, title: "Establishing the calibration configuration: firmware, self-calibration and warm-up", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-003, title: "Selecting the standards and fixturing for an oscilloscope calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-004, title: "DC vertical gain accuracy across ranges", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-005, title: "DC offset and position accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-006, title: "Vertical linearity and dynamic range verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-007, title: "Input impedance and coupling verification at 1 MΩ and 50 Ω", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-008, title: "Bandwidth verification and the −3 dB point", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-009, title: "Rise time measurement, and its relationship to bandwidth", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-01-010, title: "High-bandwidth oscilloscope calibration above 1 GHz", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-011, title: "Channel-to-channel crosstalk and isolation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-012, title: "Noise floor and baseline stability verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-013, title: "Timebase accuracy across sweep ranges", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-014, title: "Delta-time and time-interval measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-015, title: "Horizontal delay, position and holdoff verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-016, title: "Timebase jitter and short-term stability", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-017, title: "Trigger sensitivity across the bandwidth", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-018, title: "Trigger level accuracy and trigger mode verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-019, title: "Probe attenuation ratio verification and compensation", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-020, title: "Probe loading, and treating the probe as part of the instrument", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-01-021, title: "Sample rate, record length and interpolation verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-022, title: "Effective number of bits and vertical resolution in practice", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-023, title: "Verifying the automated measurement functions a scope reports", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-024, title: "Adjustment and self-calibration, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-025, title: "Uncertainty budget for an oscilloscope calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-026, title: "Conformity statement for an oscilloscope against its specification", kind: judgment, levelCeiling: 4, status: draft }
