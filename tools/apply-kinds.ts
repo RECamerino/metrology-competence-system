@@ -53,12 +53,12 @@ interface Plan {
 const dryRun = process.argv.includes('--dry-run');
 const plan = JSON.parse(readFileSync(PLAN_PATH, 'utf8')) as Plan;
 
-const AREA_LINE = /^\s*-\s+id:\s+((?:CM|DP)-\d{2}-A\d{2})\s*$/;
+const AREA_LINE = /^\s*-\s+id:\s+((?:CM|DP|EC)-\d{2}-A\d{2})\s*$/;
 // Captures: prefix .. id .. everything up to the title .. title .. rest.
 // `kind` is inserted directly after the title so a reader sees what the
 // element IS immediately after what it is called.
 const ELEMENT_LINE =
-  /^(\s*-\s*\{\s*id:\s*)((?:CM|DP)-\d{2}-\d{3})(\s*,\s*title:\s*"(?:[^"\\]|\\.)*")(\s*,\s*kind:\s*\w+)?(.*)$/;
+  /^(\s*-\s*\{\s*id:\s*)((?:CM|DP|EC)-\d{2}-\d{3})(\s*,\s*title:\s*"(?:[^"\\]|\\.)*")(\s*,\s*kind:\s*\w+)?(.*)$/;
 
 let inserted = 0;
 let rewritten = 0;

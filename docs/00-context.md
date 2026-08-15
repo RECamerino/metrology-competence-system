@@ -429,6 +429,34 @@ A deployment scope names an occupation in `role` and any overlays in `overlays`;
 
 `CM-11-A05` (Approved Signatory Competence) and the `authorities` field already on the role registry both anticipated this. Phase 2 makes it explicit.
 
+## The taxonomy was missing an axis
+
+Raised by a practising metrologist after the foundational work landed: there is nothing to mark off whether somebody can calibrate a generic oscilloscope, nothing for calibrating an RF passive device. Checked, and correct — but the diagnosis is not "some elements are missing".
+
+**The corpus had two axes and both are measurement science.** `CM` organises by cross-cutting concept, `DP` by measured quantity. Neither is organised by *the work*. A technician's day is not "uncertainty, then traceability" — it is an oscilloscope, then a torque wrench, then an RF attenuator, and their competence is per equipment type. That axis did not exist.
+
+**The proof was already in the corpus.** `DP-08-052` is titled *Oscilloscope **DC and timebase** calibration*. It was truncated to the parts that fit a DC and low-frequency electrical domain: bandwidth belongs to `DP-10`, jitter and time-interval to `DP-14`. Calibrating a scope is one job, and a quantity-organised taxonomy could only describe a third of it. An element cut down to fit the shelf it was put on is what a missing axis looks like from the inside — and the same applies to an RF attenuator, whose physics is `DP-10`, whose DC resistance is `DP-08`, and whose calibration is neither.
+
+`EC` is the third axis, organised by the equipment type that arrives on a bench. It required widening the ID patterns in `common.schema.json`, a third `kind` on the taxonomy schema, and a third group in the generated docs and the viewer — all additive, and widening an ID pattern cannot invalidate an existing ID.
+
+### The boundary that keeps EC from swallowing CM-06
+
+An EC element is the competence to calibrate a class of equipment: what the parameters are, how they are measured, what standard is required, and where the job goes wrong.
+
+It is **not** a restatement of `CM-06`, which owns calibration *methodology* — procedure design, adjustment decisions, certificates, as-found and as-left. `CM-06` says what as-found data is and why both are recorded; `EC` says what as-found data for an oscilloscope consists of.
+
+**The test: an EC element that could be written without naming the equipment belongs in `CM-06` instead.**
+
+`EC-01-A01` — Oscilloscope Calibration, 26 elements — is the worked pattern, and the oscilloscope was chosen deliberately because it spans three quantity domains at once and so is the strongest available test of whether the axis is real. It is: none of those 26 elements can be placed in a single `DP` domain without losing part of the job.
+
+Ceilings run mostly to 4, where the non-routine case — a scope that meets bandwidth on one channel and not the next — is where proficiency actually shows. Two reach 5: high-bandwidth work above 1 GHz, and timebase jitter, both of which support career-long learning and a defensible capstone.
+
+### Scale, and why it is not a reason to decline
+
+A typical accredited scope of accreditation runs to dozens or low hundreds of equipment types. At the density of the worked pattern that is well over a thousand elements, and this axis plausibly grows the corpus by half again.
+
+That is what it costs to describe the work rather than the science. A competence system for calibration that cannot say *"this person can calibrate an oscilloscope"* is missing its most-used claim, and the three roles read it differently: the technician performs it, the engineer designs the method and the fixturing, and the metrologist has to understand it well enough to say whether the measurement was sound.
+
 ## The corpus started above where people start
 
 Raised by a practising metrologist, checked, and correct.

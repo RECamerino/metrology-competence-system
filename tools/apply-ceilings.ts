@@ -46,8 +46,8 @@ interface Plan {
 const dryRun = process.argv.includes('--dry-run');
 const plan = JSON.parse(readFileSync(PLAN_PATH, 'utf8')) as Plan;
 
-const AREA_LINE = /^\s*-\s+id:\s+((?:CM|DP)-\d{2}-A\d{2})\s*$/;
-const ELEMENT_LINE = /^(\s*-\s*\{\s*id:\s*)((?:CM|DP)-\d{2}-\d{3})(\s*,.*levelCeiling:\s*)(\d)(.*)$/;
+const AREA_LINE = /^\s*-\s+id:\s+((?:CM|DP|EC)-\d{2}-A\d{2})\s*$/;
+const ELEMENT_LINE = /^(\s*-\s*\{\s*id:\s*)((?:CM|DP|EC)-\d{2}-\d{3})(\s*,.*levelCeiling:\s*)(\d)(.*)$/;
 
 let changed = 0;
 let unchanged = 0;
