@@ -54,9 +54,25 @@ jobs:
       - name: Assemble site
         run: |
           mkdir -p _site
-          cp apps/viewer/index.html _site/index.html
+          # The viewer is an index plus one page per domain. Every page is
+          # self-contained and fetches nothing, so they can be copied
+          # individually to a file share and still work — which is the whole
+          # reason for the split. Templates are sources, not output.
+          cp apps/viewer/*.html _site/
+          rm -f _site/template.html _site/index-template.html
           # Jekyll would otherwise try to process the output and mangle it.
           touch _site/.nojekyll
+          echo "Published $(ls _site/*.html | wc -l) pages"
+
+      - name: Refuse to publish a page that fetches at runtime
+        run: |
+          # Rule 5, checked rather than trusted: a page that reaches the
+          # network works on Pages and breaks silently from a USB stick.
+          if grep -lE 'fetch\(|XMLHttpRequest|<script[^>]+src=|<link[^>]+stylesheet' _site/*.html; then
+            echo "A viewer page loads something at runtime — see the files above."
+            exit 1
+          fi
+          echo "No page fetches anything."
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

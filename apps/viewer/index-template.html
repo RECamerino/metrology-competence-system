@@ -1,0 +1,204 @@
+__STYLE__
+<style>
+  /* ---- Index-only: the domain grid ------------------------------------ */
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+  }
+
+  .card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 14px 16px;
+  }
+  .card[hidden] { display: none; }
+  .card:hover { border-color: var(--accent); }
+  .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .card-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .card .did {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--surface);
+    background: var(--accent);
+    border-radius: 4px;
+    padding: 2px 6px;
+  }
+  .card.is-discipline .did { background: var(--muted); }
+  .card.is-equipment .did { background: var(--l5); }
+  .card .ctitle { font-size: 14.5px; font-weight: 560; line-height: 1.3; }
+  .card .csummary {
+    font-family: var(--serif);
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 0 0 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card .cmeta {
+    display: flex;
+    gap: 14px;
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 11px;
+    color: var(--faint);
+  }
+  .card .cmeta b { color: var(--ink); font-weight: 600; }
+
+  .groupmark {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 26px 0 10px;
+  }
+  .groupmark:first-of-type { margin-top: 0; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Body of Knowledge · Taxonomy</p>
+    <h1>Metrology Competence System — the corpus</h1>
+    <p class="standfirst">
+      Every domain in the corpus. <strong>Pick the one you work in</strong> — each opens
+      as its own page carrying the whole of that domain, so nothing here loads anything
+      else and any page can be copied to a file share on its own.
+    </p>
+
+    <div class="totals">
+      <div class="stat"><b id="t-domains">0</b><span>Domains</span></div>
+      <div class="stat"><b id="t-areas">0</b><span>Competency areas</span></div>
+      <div class="stat"><b id="t-elements">0</b><span>Elements</span></div>
+      <div class="stat"><b id="t-units">0</b><span>Assessable units</span></div>
+
+      <div class="meter">
+        <div class="meter-bar" id="meter"></div>
+        <div class="meter-key" id="meter-key"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="controls">
+    <input class="search" id="q" type="search" placeholder="Search domains by name or ID…" autocomplete="off" aria-label="Search domains">
+    <div class="chips" role="group" aria-label="Filter by domain kind">
+      <button class="chip" data-kind="core" aria-pressed="false">Core</button>
+      <button class="chip" data-kind="discipline" aria-pressed="false">Discipline</button>
+      <button class="chip" data-kind="equipment" aria-pressed="false">Equipment</button>
+    </div>
+    <span class="spacer"></span>
+    <span class="showing" id="showing"></span>
+  </div>
+
+  <div id="grid"></div>
+  <p class="empty" id="empty" hidden>No domain matches those filters.</p>
+
+</div>
+
+<script>
+  const DATA = __INDEX__;
+
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const gridEl = document.getElementById('grid');
+  const qEl = document.getElementById('q');
+  const state = { q: '', kinds: new Set() };
+
+  const GROUP = {
+    core: ['Cross-cutting core', 'Competencies every metrological role shares to some degree.'],
+    discipline: ['Discipline packs', 'Measurement-discipline depth, organised by the QUANTITY measured.'],
+    equipment: ['Equipment-calibration packs', 'Organised by the equipment TYPE that arrives on a bench. One pack per discipline.'],
+  };
+
+  let html = '';
+  for (const kind of ['core', 'discipline', 'equipment']) {
+    const group = DATA.domains.filter((d) => d.kind === kind);
+    if (group.length === 0) continue;
+    html += `<p class="groupmark" data-group="${kind}">${GROUP[kind][0]} — ${GROUP[kind][1]}</p>`;
+    html += '<div class="grid">';
+    for (const d of group) {
+      html += `
+        <a class="card is-${d.kind}" href="${esc(d.id)}.html" data-card data-kind="${d.kind}"
+           data-text="${esc((d.id + ' ' + d.title).toLowerCase())}">
+          <span class="card-head">
+            <span class="did">${esc(d.id)}</span>
+            <span class="ctitle">${esc(d.title)}</span>
+          </span>
+          ${d.summary ? `<p class="csummary">${esc(d.summary)}</p>` : ''}
+          <span class="cmeta">
+            <span><b>${d.areas}</b> areas</span>
+            <span><b>${d.elements.toLocaleString()}</b> elements</span>
+            <span><b>${d.units.toLocaleString()}</b> units</span>
+          </span>
+        </a>`;
+    }
+    html += '</div>';
+  }
+  gridEl.innerHTML = html;
+
+  document.getElementById('t-domains').textContent = DATA.domains.length.toLocaleString();
+  document.getElementById('t-areas').textContent = DATA.totals.areas.toLocaleString();
+  document.getElementById('t-elements').textContent = DATA.totals.elements.toLocaleString();
+  document.getElementById('t-units').textContent = DATA.totals.units.toLocaleString();
+
+  const ramp = { 1: 'var(--l2)', 2: 'var(--l2)', 3: 'var(--l3)', 4: 'var(--l4)', 5: 'var(--l5)' };
+  const names = { 1: 'Novice', 2: 'Advanced Beginner', 3: 'Competent', 4: 'Proficient', 5: 'Expert' };
+  const rungs = [1, 2, 3, 4, 5].filter((c) => DATA.totals.ceilings[c] > 0);
+  const totalEl = DATA.totals.elements;
+  document.getElementById('meter').innerHTML = rungs
+    .map((c) => `<i style="width:${(DATA.totals.ceilings[c] / totalEl) * 100}%;background:${ramp[c]}"></i>`).join('');
+  document.getElementById('meter-key').innerHTML = rungs
+    .map((c) => `<span><u style="background:${ramp[c]}"></u>L${c} ${names[c]} <b>${((DATA.totals.ceilings[c] / totalEl) * 100).toFixed(1)}%</b></span>`).join('');
+
+  const cards = [...document.querySelectorAll('[data-card]')];
+  const emptyEl = document.getElementById('empty');
+
+  function apply() {
+    const q = state.q.trim().toLowerCase();
+    let shown = 0;
+    for (const card of cards) {
+      const kindOk = state.kinds.size === 0 || state.kinds.has(card.dataset.kind);
+      const textOk = q === '' || card.dataset.text.includes(q);
+      const visible = kindOk && textOk;
+      card.hidden = !visible;
+      if (visible) shown += 1;
+    }
+    for (const mark of document.querySelectorAll('[data-group]')) {
+      const group = mark.nextElementSibling;
+      const any = [...group.querySelectorAll('[data-card]')].some((c) => !c.hidden);
+      mark.hidden = !any;
+      group.hidden = !any;
+    }
+    emptyEl.hidden = shown > 0;
+    document.getElementById('showing').textContent =
+      shown === cards.length ? `${cards.length} domains` : `${shown} of ${cards.length} domains`;
+  }
+
+  let debounce;
+  qEl.addEventListener('input', () => {
+    clearTimeout(debounce);
+    debounce = setTimeout(() => { state.q = qEl.value; apply(); }, 120);
+  });
+  for (const chip of document.querySelectorAll('.chip[data-kind]')) {
+    chip.addEventListener('click', () => {
+      const k = chip.dataset.kind;
+      const on = state.kinds.has(k);
+      on ? state.kinds.delete(k) : state.kinds.add(k);
+      chip.setAttribute('aria-pressed', String(!on));
+      apply();
+    });
+  }
+  apply();
+</script>

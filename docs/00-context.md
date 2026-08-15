@@ -429,6 +429,27 @@ A deployment scope names an occupation in `role` and any overlays in `overlays`;
 
 `CM-11-A05` (Approved Signatory Competence) and the `authorities` field already on the role registry both anticipated this. Phase 2 makes it explicit.
 
+## The viewer had to split, and why it could not lazy-load
+
+The viewer was one self-contained HTML file, and that property is the point rather than an implementation detail: it opens from a file share or any static intranet host with no server, so a reviewer in an air-gapped environment gets the same artifact as everybody else. Rule 5 forbids fetching anything at runtime.
+
+Self-contained plus no server means everything ships in the file, so size grows with the corpus. Measured rather than estimated: **96% of the page was data**, a stub element costs ~100 bytes and an **authored** element costs ~3.4 KB — a **34× multiplier applied to every element that gets written**. At 5,407 elements a fully authored single file projects to roughly **18 MB**. The growth is not the taxonomy; it is authoring succeeding.
+
+**Lazy-loading fragments is the obvious fix and is ruled out by the promise, not by taste.** `fetch()` against `file://` is blocked by CORS in every current browser, so a lazy viewer works perfectly on the published site and breaks silently the moment somebody copies it to a USB stick — which is the distribution the design exists to serve. A failure that only appears in the air-gapped case is the worst possible shape for this project.
+
+So the split is per **domain**, and every page stays whole:
+
+| | |
+|---|---|
+| `index.html` | 64 domains with counts — **52 KB** |
+| `<DOMAIN>.html` | one domain entire, areas and elements and authored detail — **40 KB mean, 68 KB largest** |
+
+Against 655 KB for the old single file, and against 18 MB projected.
+
+**The cost is that search and filter are per-domain rather than corpus-wide.** That is a real loss and it was weighed against how the thing is actually used: a reader goes to the discipline they work in — 64 to choose between, on one screen — and digs from there. Searching 5,407 elements at once was never how anybody navigated this.
+
+CI now refuses to publish a page containing a `fetch`, an `XMLHttpRequest`, a script `src` or a stylesheet `link`. The constraint that makes the whole design work was previously honoured by discipline alone, and discipline is not a check.
+
 ## The taxonomy was missing an axis
 
 Raised by a practising metrologist after the foundational work landed: there is nothing to mark off whether somebody can calibrate a generic oscilloscope, nothing for calibrating an RF passive device. Checked, and correct — but the diagnosis is not "some elements are missing".

@@ -104,6 +104,9 @@
 
   .masthead { padding: 40px 0 22px; }
 
+  .backlink { color: var(--accent); text-decoration: none; }
+  .backlink:hover { text-decoration: underline; }
+
   .eyebrow {
     font-family: var(--mono);
     font-size: 11px;
@@ -498,13 +501,13 @@
 <div class="wrap">
 
   <header class="masthead">
-    <p class="eyebrow">Phase 1 · Review gate</p>
-    <h1>Metrology Body of Knowledge — taxonomy skeleton</h1>
-    <p class="standfirst">
-      Every domain, competency area and element identifier in the corpus, with the
-      range of levels attainable against it. <strong>Every element starts at L1</strong> —
-      the badge says how far it goes, not where it begins. Rows marked with a dot have an
-      authored definition and expand to show it; the rest are structure and coverage only.
+    <p class="eyebrow"><a class="backlink" href="index.html">← All domains</a> · __EYEBROW__</p>
+    <h1>__DOMAIN_ID__ — __DOMAIN_TITLE__</h1>
+    <p class="standfirst">__DOMAIN_SUMMARY__</p>
+    <p class="standfirst" style="margin-top:10px">
+      <strong>Every element starts at L1</strong> — the badge says how far it goes, not
+      where it begins. Rows marked with a dot have an authored definition and expand to
+      show it; the rest are structure and coverage only.
     </p>
 
     <div class="totals">
@@ -521,7 +524,7 @@
   </header>
 
   <div class="controls">
-    <input class="search" id="q" type="search" placeholder="Search elements, areas, domains, or IDs…" autocomplete="off" aria-label="Search the taxonomy">
+    <input class="search" id="q" type="search" placeholder="Search this domain — elements, areas or IDs…" autocomplete="off" aria-label="Search this domain">
     <div class="chips" role="group" aria-label="Filter by level ceiling">
       <button class="chip l2" data-ceil="2" aria-pressed="false">L2</button>
       <button class="chip l3" data-ceil="3" aria-pressed="false">L3</button>
@@ -532,11 +535,6 @@
       <button class="chip ek" data-ekind="k" aria-pressed="false">Knowledge</button>
       <button class="chip ek" data-ekind="s" aria-pressed="false">Skill</button>
       <button class="chip ek" data-ekind="j" aria-pressed="false">Judgment</button>
-    </div>
-    <div class="chips" role="group" aria-label="Filter by domain kind">
-      <button class="chip" data-kind="core" aria-pressed="false">Core</button>
-      <button class="chip" data-kind="discipline" aria-pressed="false">Discipline</button>
-      <button class="chip" data-kind="equipment" aria-pressed="false">Equipment</button>
     </div>
     <span class="spacer"></span>
     <button class="chip" id="toggle-all" aria-pressed="false">Expand all</button>
@@ -679,6 +677,14 @@
   }).join('');
 
   domainsEl.innerHTML = html;
+
+  // A domain page carries exactly one domain, so there is nothing to choose
+  // between: open it. The collapse control stays for a reader who wants the
+  // area list alone.
+  for (const d of domainsEl.querySelectorAll('.domain')) {
+    d.classList.add('open');
+    d.querySelector('.domain-head')?.setAttribute('aria-expanded', 'true');
+  }
 
   document.getElementById('t-domains').textContent = DATA.domains.length;
   document.getElementById('t-areas').textContent = totalAreas;
