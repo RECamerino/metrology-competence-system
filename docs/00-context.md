@@ -303,6 +303,16 @@ The damage is not theoretical. Every element carries a rating for every role, so
 
 It also sharpens what `null` means. Null is now the strong claim that the element could **never** be part of that role's work in any deployment, which is different from "not in this person's scope today" — and the latter is exactly what scope is for. An author who reaches for null to mean "most people in this role wouldn't do this" is answering the wrong question.
 
+**And it left one question unanswered, which authoring eight elements at once exposed.** Decision 48 says what null claims. It does not say *what to read the claim against*, and there are two candidates that disagree: the element's title, which describes it at its ceiling, and the element's **L1 anchor**, which describes its floor.
+
+The disagreement is not marginal. `metrology-technician-i` is defined as not evaluating uncertainty independently. Against the title *Assigning a rectangular distribution* that reads as null. Against the L1 anchor — *given a source statement already identified as a stated limit and told the shape to assign, produces the standard uncertainty* — it plainly is not, because that is a technician applying an existing budget. Two authors, both following decision 48 correctly, produce opposite ratings. At 5407 elements × 12 roles that is **64,884 ratings with no tie-breaker**, and the resulting gap analysis would be incoherent in a way no check could detect: every individual rating is defensible and the aggregate means nothing.
+
+**Settled: null is decided against the L1 anchor.** Null means the role could not perform what the L1 anchor describes, in any deployment. If it could, the target is 1. There is nothing in between, and using null because the *upper* levels are out of reach is the original error in a new place — it removes the requirement at every level, including the one the role actually needs.
+
+This makes `kind` a useful heuristic and explains a pattern that would otherwise look inconsistent. A `skill` element's L1 is usually a supplied-step performance, so null is **rarer** than the title suggests. A `judgment` element's L1 is still a decision under ambiguity however tightly framed, so a role defined as not exercising judgement in that area is null at every level, and null is **commoner**. The heuristic is not the rule, though: `CM-03-050` and `CM-03-051` are `skill` elements with ordinary L1 anchors and are still null for `metrology-technician-i`, because deriving a sensitivity coefficient is *constructing* a budget rather than applying one — which the role excludes at any level. The question was never the anchor's difficulty. It was whether the role does that kind of work at all.
+
+The operational form is in [`handoff-playbook.md`](handoff-playbook.md), with the worked CM-03 ratings.
+
 #### A credential must pin the bar, not only the definition
 
 Decision 46, from a second external review. Decision 39 was **half applied**, and the missing half was the one its own reasoning most obviously demanded.
@@ -603,6 +613,33 @@ It is **not yet stronger on validity**, which is open item 11: nothing so far es
 
 Both halves have to be said together. The first is what makes this worth building; the second is what a metrologist will ask about first, and the project's credibility rests on having the honest answer ready rather than on the claim being bigger.
 
+## Some elements have two evidence routes
+
+Open item 10. Found by authoring `CM-03-051` — the sixth time authoring against the design has surfaced something reading the schema did not.
+
+`demonstration: desk | equipment` is a single enum on the element, and it answers a question that sounds like it has one answer: is this competence observable with ordinary working tools, or does it need apparatus the learner may not be able to reach?
+
+For most elements it does. Constructing an uncertainty budget is desk work; wringing a gauge block stack is not. Decision 45 and rule 11 both lean on this, and the reasoning is sound: telling somebody they are blocked on equipment access when they could sit the assessment tomorrow with a spreadsheet **invents a barrier**, and the project's position is that barriers inherent to the competence are real while invented ones are not.
+
+**`CM-03-051` — numerical estimation of sensitivity coefficients — has two routes, and the standard contemplates both.** The coefficient is obtained by perturbing an input and observing the result. Where the model is a manufacturer's correction routine or a fitted surface, that is desk work. Where the model exists only as the instrument itself, the perturbation is applied to the physical instrument and the observation carries its measurement noise — which is bench work, and is the route JCGM 100 §5.1.4 describes most directly.
+
+The competence is the same in both. What differs is the apparatus, and **which route is available is a property of the laboratory, not of the element.**
+
+Forcing one value is wrong in both directions, and neither error is silent for the same person:
+
+- **`equipment`** invents a barrier for every learner who could demonstrate this tomorrow against a routine. That is the failure rule 11 names explicitly, and it lands on exactly the person the Personal edition exists for — no employer, no bench, no budget.
+- **`desk`** — the value the element currently carries — means a module preparing someone for the instrument route cannot list it in `requiresPhysicalDemonstration`, so a learner who will need access is told nothing about it. Rule 11's other half, hiding a real barrier.
+
+**This is a schema-freeze question rather than a content one**, which is why it is recorded here rather than fixed. `demonstration` sits inside the definition pin — it was added to the projection when an adversarial review found that flipping `desk` to `equipment` left the hash matching while what counts as admissible evidence had inverted. That was the right fix, and its consequence is that **correcting this later reads as drift on every credential already issued against the element.** Cheap now; permanent after Phase 3.
+
+Three shapes are worth weighing, and none is chosen here:
+
+1. **Make it a set.** `demonstration: [desk, equipment]` — both routes admissible, and a module declares which one it prepares for. Most honest, and the largest change: every consumer of the field currently assumes a scalar.
+2. **Keep the scalar as the *minimum* route** and let the module carry the rest. Smallest change; leaves the element unable to say that the harder route exists at all.
+3. **Split the element.** Rejected on the reasoning already in rule 14 — one competence, two routes to evidencing it, and splitting would create two elements a person could hold separately for work that is not separate. It is not the *Oscilloscope DC and timebase* case; nothing here is truncated.
+
+**Note the shape of the defect, because it is a repeat.** The element records the ambiguity in a YAML comment explaining why `desk` was chosen. A human reads that comment; no code does. That is open item 22 in [`../CLAUDE.md`](../CLAUDE.md) — `knowledgeRefs` proving a link resolves while proving nothing about coverage — appearing in a second field, and the two should probably be answered together: **the corpus has several places where an author knows something true about an element and has nowhere to put it that participates in anything.**
+
 ## The one rule that cannot be waived
 
 **IDs are append-only.** `content/competence/taxonomy/domains/*.yaml` and `content/competence/taxonomy/id-registry.lock` may grow. Nothing in them may ever be renamed or removed.
@@ -623,4 +660,5 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 6. **Experience-hour thresholds and waiting periods** — proposed per level in `content/competence/taxonomy/proficiency.yaml` (L3 40h/30d, L4 200h/180d, L5 1000h/365d). The attribution rule is settled as decision 37; the numbers themselves are a steward judgement and have not been tested against a real career history.
 8. **Consented disclosure to an employer** — an organization's view of a person's record is a disclosure, not a read, and there is no model for it. Decision 34 built one for accreditation assessors; the workforce gap dashboard has nothing. Follows from [Who owns a person's competency record](#who-owns-a-persons-competency-record). Needs a schema before Phase 9 or 10 settles it by default.
 9. **A holder's counter-statement to revocation** — the issuer can revoke and the subject cannot contest it in the data. Pairs with the trust-registry and status-list work.
+10. **`demonstration` is a scalar, and for some elements the evidence route is not** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). A schema-freeze question, not a content one.
 7. **Skeleton scale** — resolved. Landed at 2232 elements across 257 areas and 43 domains, against a 2000+ target.
