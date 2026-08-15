@@ -14,6 +14,35 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-15-A06
+        title: Foundational Knowledge — Radiation, Dose and Radiological Protection
+        status: draft
+        summary: >-
+          The quantities of radiation measurement and the protection
+          discipline that comes before any of them, because the
+          instrument is used in a field that is itself the hazard.
+        elements:
+          - { id: DP-15-048, title: "Ionising and non-ionising radiation distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-15-049, title: "Alpha, beta, gamma and neutron radiation and their penetration", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-15-050, title: "Activity, absorbed dose and dose equivalent, and their units", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-15-051, title: "Dose rate against accumulated dose", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-15-052, title: "Half-life and decay", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-15-053, title: "Time, distance and shielding as protection", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-15-054, title: "ALARA and its practical application", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: DP-15-055, title: "Background radiation and its variability", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-15-056, title: "Contamination against irradiation", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-15-057, title: "Personal dosimetry and the dose of record", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-15-058, title: "Source handling, security and accounting", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-15-059, title: "Detector types and what each responds to", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-15-060, title: "Contamination monitoring and survey technique", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-15-061, title: "Recording a radiological result with its conditions", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-15-A01
         title: Radiation Physics and Quantities
         status: draft

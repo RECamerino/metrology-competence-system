@@ -1,0 +1,240 @@
+# Equipment-calibration pack. See rule 14 in CLAUDE.md: an EC element is the
+# competence to calibrate a CLASS OF EQUIPMENT — the parameters, the standards
+# required, and where the job goes wrong. Calibration methodology stays in
+# CM-06, and an element here that could be written without naming the
+# equipment belongs there instead.
+
+schemaVersion: 1
+domains:
+  - id: EC-11
+    title: Acoustic and Vibration Instrument Calibration
+    kind: equipment
+    status: draft
+    summary: >-
+      Calibrating sound and vibration instruments, where the transducer,
+      the coupling and the frequency weighting are inseparable from the
+      reading, and where a field check and a laboratory calibration answer
+      different questions. Boundary: the measurement science is DP-04.
+
+    competencyAreas:
+
+      - id: EC-11-A01
+        title: Sound Level Meter Calibration
+        status: draft
+        summary: >-
+          Acoustic and electrical tests, where the microphone is
+          calibrated acoustically and the rest of the instrument
+          electrically.
+        elements:
+          - { id: EC-11-001, title: "Receiving inspection and functional check of a sound level meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-002, title: "Calibration configuration and stabilisation for a sound level meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-003, title: "Selecting the standards and fixturing for a sound level meter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-004, title: "Acoustic sensitivity at the calibration frequency", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-005, title: "Frequency weighting: A, C and Z response verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-006, title: "Time weighting: fast, slow and impulse response", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-007, title: "Linearity across the level range and range switching", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-008, title: "Microphone free-field and pressure response correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-009, title: "Self-generated noise floor determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-010, title: "Peak and impulse response verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-011, title: "Octave and third-octave filter verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-012, title: "Windscreen, case and diffraction corrections", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-013, title: "Adjustment of a sound level meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-014, title: "Uncertainty budget for a sound level meter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-015, title: "Conformity statement for a sound level meter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-11-A02
+        title: Acoustic Calibrator and Source Calibration
+        status: draft
+        summary: >-
+          The pistonphones and sound calibrators used for field checks,
+          calibrated for level and frequency including their ambient
+          dependence.
+        elements:
+          - { id: EC-11-016, title: "Receiving inspection and functional check of an acoustic calibrator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-017, title: "Calibration configuration and stabilisation for an acoustic calibrator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-018, title: "Selecting the standards and fixturing for an acoustic calibrator calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-019, title: "Sound pressure level output accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-020, title: "Frequency accuracy of the output", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-021, title: "Static pressure and temperature dependence", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-022, title: "Distortion of the generated tone", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-023, title: "Coupler volume and microphone fit effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-024, title: "Multi-frequency and multi-level calibrator verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-025, title: "Adjustment of an acoustic calibrator, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-026, title: "Uncertainty budget for an acoustic calibrator calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-027, title: "Conformity statement for an acoustic calibrator against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-11-A03
+        title: Microphone Calibration
+        status: draft
+        summary: >-
+          Sensitivity by reciprocity or comparison, plus the frequency
+          response that decides what the microphone is fit for.
+        elements:
+          - { id: EC-11-028, title: "Receiving inspection and functional check of a measurement microphone", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-029, title: "Calibration configuration and stabilisation for a measurement microphone", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-030, title: "Selecting the standards and fixturing for a measurement microphone calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-031, title: "Open-circuit sensitivity by comparison", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-032, title: "Primary calibration by reciprocity", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-033, title: "Free-field, diffuse-field and pressure response", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-034, title: "Frequency response across the working range", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-035, title: "Polarisation voltage and preamplifier loading", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-036, title: "Environmental corrections for temperature and pressure", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-037, title: "Diaphragm condition, contamination and damage", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-038, title: "Adjustment of a measurement microphone, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-039, title: "Uncertainty budget for a measurement microphone calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-040, title: "Conformity statement for a measurement microphone against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-11-A04
+        title: Accelerometer and Vibration Transducer Calibration
+        status: draft
+        summary: >-
+          Sensitivity against frequency by comparison or by laser
+          interferometry, where the mounting is part of the transducer.
+        elements:
+          - { id: EC-11-041, title: "Receiving inspection and functional check of an accelerometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-042, title: "Calibration configuration and stabilisation for an accelerometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-043, title: "Selecting the standards and fixturing for an accelerometer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-044, title: "Sensitivity at a reference frequency by comparison", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-045, title: "Primary accelerometer calibration by laser interferometry", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-046, title: "Frequency response and resonance determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-047, title: "Transverse sensitivity determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-048, title: "Amplitude linearity across the acceleration range", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-049, title: "Mounting method and torque effects on response", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-050, title: "Cable, charge amplifier and conditioning verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-051, title: "Temperature sensitivity and base strain effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-052, title: "Adjustment of an accelerometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-053, title: "Uncertainty budget for an accelerometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-054, title: "Conformity statement for an accelerometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-11-A05
+        title: Vibration Meter and Shaker Calibration
+        status: draft
+        summary: >-
+          Whole-system verification and the exciters used to do it,
+          characterised for distortion and uniformity as well as
+          amplitude.
+        elements:
+          - { id: EC-11-055, title: "Receiving inspection and functional check of a vibration measuring system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-056, title: "Calibration configuration and stabilisation for a vibration measuring system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-057, title: "Selecting the standards and fixturing for a vibration measuring system calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-058, title: "System sensitivity and indication error", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-059, title: "Velocity and displacement integration verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-060, title: "Frequency weighting for human vibration exposure", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-061, title: "Shaker amplitude accuracy and distortion", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-062, title: "Shaker transverse motion and table uniformity", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-063, title: "Hand-arm and whole-body measurement configuration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-064, title: "Field calibrator verification for vibration", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-065, title: "Adjustment of a vibration measuring system, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-066, title: "Uncertainty budget for a vibration measuring system calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-067, title: "Conformity statement for a vibration measuring system against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-11-A06
+        title: Audiometric Equipment Calibration
+        status: draft
+        summary: >-
+          Audiometers and their transducers, calibrated to reference
+          threshold levels because the result becomes a clinical record.
+        elements:
+          - { id: EC-11-068, title: "Receiving inspection and functional check of audiometric equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-069, title: "Calibration configuration and stabilisation for audiometric equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-070, title: "Selecting the standards and fixturing for audiometric equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-071, title: "Output level accuracy at audiometric frequencies", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-072, title: "Reference equivalent threshold level verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-073, title: "Frequency accuracy and total harmonic distortion", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-074, title: "Earphone, bone vibrator and insert transducer specifics", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-075, title: "Attenuator linearity and step accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-076, title: "Masking noise level and spectrum verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-077, title: "Crosstalk and unwanted output between channels", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-078, title: "Test booth ambient noise verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-079, title: "Adjustment of audiometric equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-080, title: "Uncertainty budget for audiometric equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-081, title: "Conformity statement for audiometric equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-11-A07
+        title: Vibration Exciter and Shaker System Calibration
+        status: draft
+        summary: >-
+          The exciters used to calibrate transducers and to run tests,
+          characterised for distortion, transverse motion and uniformity
+          in their own right.
+        elements:
+          - { id: EC-11-082, title: "Receiving inspection and functional check of a vibration exciter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-083, title: "Calibration configuration and stabilisation for a vibration exciter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-084, title: "Selecting the standards and fixturing for a vibration exciter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-085, title: "Acceleration amplitude accuracy across frequency", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-086, title: "Total harmonic distortion of the motion", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-087, title: "Transverse and rocking motion determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-088, title: "Table uniformity and mounting location dependence", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-089, title: "Load and mass loading effects on the exciter", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-090, title: "Control system and closed-loop verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-091, title: "Shock and classical pulse generation verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-092, title: "Random vibration spectrum control verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-093, title: "Adjustment of a vibration exciter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-094, title: "Uncertainty budget for a vibration exciter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-095, title: "Conformity statement for a vibration exciter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-11-A08
+        title: Ultrasonic and Non-Destructive Test Equipment Calibration
+        status: draft
+        summary: >-
+          Flaw detectors and thickness instruments verified against
+          reference blocks, where the probe and the couplant are part of
+          the instrument.
+        elements:
+          - { id: EC-11-096, title: "Receiving inspection and functional check of ultrasonic NDT equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-097, title: "Calibration configuration and stabilisation for ultrasonic NDT equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-098, title: "Selecting the standards and fixturing for ultrasonic NDT equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-099, title: "Timebase linearity and range accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-100, title: "Vertical linearity and gain accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-101, title: "Probe index, beam angle and squint verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-102, title: "Resolution and dead zone determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-103, title: "Reference block verification and block traceability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-104, title: "Phased array element and focal law verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-105, title: "Eddy current and magnetic particle equipment verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-106, title: "Sensitivity setting and DAC curve construction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-107, title: "Adjustment of ultrasonic NDT equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-108, title: "Uncertainty budget for ultrasonic NDT equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-109, title: "Conformity statement for ultrasonic NDT equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-11-A09
+        title: Microphone Reciprocity Apparatus Operation
+        status: draft
+        summary: >-
+          The primary route to a microphone sensitivity, using coupled
+          pairs and no reference microphone at all.
+        elements:
+          - { id: EC-11-110, title: "Receiving inspection and functional check of a reciprocity calibration apparatus", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-111, title: "Calibration configuration and stabilisation for a reciprocity calibration apparatus", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-112, title: "Selecting the standards and fixturing for a reciprocity calibration apparatus calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-113, title: "Coupler selection, volume determination and sealing", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-114, title: "Three-microphone reciprocity measurement execution", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-115, title: "Electrical transfer impedance measurement", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-116, title: "Acoustic transfer impedance and its computation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-117, title: "Heat conduction and capillary tube corrections", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-118, title: "Environmental correction: temperature, pressure, humidity", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-119, title: "Free-field and diffuse-field derivation from pressure sensitivity", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-120, title: "Adjustment of a reciprocity calibration apparatus, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-121, title: "Uncertainty budget for a reciprocity calibration apparatus calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-122, title: "Conformity statement for a reciprocity calibration apparatus against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-11-A10
+        title: Primary Vibration Calibration System Operation
+        status: draft
+        summary: >-
+          Laser interferometric calibration of accelerometers, realising
+          acceleration from displacement and time rather than by
+          comparison.
+        elements:
+          - { id: EC-11-123, title: "Receiving inspection and functional check of a primary vibration calibration system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-124, title: "Calibration configuration and stabilisation for a primary vibration calibration system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-125, title: "Selecting the standards and fixturing for a primary vibration calibration system calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-126, title: "Fringe counting and sine approximation method execution", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-127, title: "Minimum point and fringe disappearance method", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-128, title: "Heterodyne interferometry for phase and magnitude", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-129, title: "Exciter distortion and transverse motion limits for primary work", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-130, title: "Phase shift determination against frequency", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-131, title: "Shock and low-frequency primary calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-132, title: "Uncertainty budget for a primary vibration realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-133, title: "Adjustment of a primary vibration calibration system, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-134, title: "Uncertainty budget for a primary vibration calibration system calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-135, title: "Conformity statement for a primary vibration calibration system against its specification", kind: judgment, levelCeiling: 4, status: draft }

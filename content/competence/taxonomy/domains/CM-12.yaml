@@ -13,6 +13,33 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: CM-12-A06
+        title: Foundational Knowledge — The Laboratory Environment and Bench Discipline
+        status: draft
+        summary: >-
+          The physical conditions and handling habits that decide
+          whether any of the rest works, and the ones most often blamed
+          after a discrepancy nobody can explain.
+        elements:
+          - { id: CM-12-042, title: "Temperature, humidity and their control in a laboratory", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-12-043, title: "Monitoring the environment and recording it", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-044, title: "Vibration, draughts and their effect on measurement", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-12-045, title: "Lighting, cleanliness and bench layout", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-046, title: "Electrostatic discharge and its control", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-047, title: "Handling, gloves and thermal contamination", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-048, title: "Storage of standards and equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-049, title: "Segregation of items awaiting, in progress and completed", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-050, title: "Access control and who may be in the laboratory", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-12-051, title: "Housekeeping as a measurement control", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-12-052, title: "Laboratory safety: hazards, PPE and reporting", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-12-053, title: "Reporting an environmental excursion", kind: skill, levelCeiling: 3, status: draft }
+
       - id: CM-12-A01
         title: Environmental Control
         status: draft

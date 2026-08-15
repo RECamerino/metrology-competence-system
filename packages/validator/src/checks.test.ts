@@ -956,3 +956,33 @@ test('an unauthored skill element left undeclared is still warned about', () => 
     `expected an unknown-mode warning, got: ${JSON.stringify(findings.filter((f) => f.level === 'warn'))}`,
   );
 });
+
+test('two elements sharing a title are flagged, without being called an error', () => {
+  // An ID is what a credential names, so two identically titled elements are
+  // still distinct competences — but a human handed one cannot tell which. This
+  // was found twice by ad-hoc script during a generated build-out before it
+  // became a standing check.
+  const clash = {
+    ...taxonomy,
+    domains: [{
+      ...taxonomy.domains[0]!,
+      competencyAreas: [{
+        ...taxonomy.domains[0]!.competencyAreas[0]!,
+        elements: [
+          { id: 'CM-01-001', title: 'Immersion depth', kind: 'knowledge', levelCeiling: 3, status: 'draft' },
+          { id: 'CM-01-002', title: 'immersion  DEPTH ', kind: 'knowledge', levelCeiling: 3, status: 'draft' },
+        ],
+      }],
+    }],
+  };
+  const findings = runAllChecks({ ...corpus([]), taxonomy: clash });
+  const dup = findings.filter((f) => f.message.includes('share an element title'));
+  assert.equal(dup.length, 1, `expected one duplicate-title finding, got ${JSON.stringify(dup)}`);
+  assert.equal(dup[0]!.level, 'warn');
+  assert.ok(dup[0]!.message.includes('CM-01-001') && dup[0]!.message.includes('CM-01-002'));
+});
+
+test('distinct titles raise nothing', () => {
+  const findings = runAllChecks(corpus([]));
+  assert.deepEqual(findings.filter((f) => f.message.includes('share an element title')), []);
+});

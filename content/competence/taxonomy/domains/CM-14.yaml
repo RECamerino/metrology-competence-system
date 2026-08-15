@@ -13,6 +13,32 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: CM-14-A07
+        title: Foundational Knowledge — Measurement Software and Data Handling
+        status: draft
+        summary: >-
+          The everyday computer competence a measurement result passes
+          through, where the commonest error is not a wrong reading but
+          a right one entered wrongly.
+        elements:
+          - { id: CM-14-054, title: "Data entry, transcription and checking", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-14-055, title: "Spreadsheets: formulas, references and their common errors", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-14-056, title: "Units and unit consistency in a calculation", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-14-057, title: "Rounding and precision in software", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-14-058, title: "File naming, versions and finding a record later", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-14-059, title: "Templates and using the approved one", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-14-060, title: "Backups and what to do when a file is lost", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-14-061, title: "Instrument interfaces and captured data", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-14-062, title: "Copy, paste and the errors it causes", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-14-063, title: "Access, passwords and shared accounts", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-14-064, title: "Checking a calculated result independently", kind: skill, levelCeiling: 3, status: draft }
+
       - id: CM-14-A01
         title: Software as Part of the Measurement Chain
         status: draft

@@ -13,6 +13,33 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: CM-22-A06
+        title: Foundational Knowledge — Safety, Hazards and Human Limits
+        status: draft
+        summary: >-
+          The hazards of measurement work and the human factors that
+          cause errors, which are the same subject seen from two sides.
+        elements:
+          - { id: CM-22-041, title: "Hazard, risk and control in a laboratory", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-22-042, title: "Risk assessment and reading one", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-22-043, title: "Personal protective equipment and its correct use", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-22-044, title: "Electrical hazards and safe working in a laboratory", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-22-045, title: "Mechanical, pressure and stored energy hazards", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-22-046, title: "Chemical hazards and safety data sheets", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-22-047, title: "Radiation, laser and optical hazards in outline", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-22-048, title: "Manual handling of heavy standards", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-22-049, title: "Fatigue, shift work and error rates", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-22-050, title: "Distraction, interruption and losing your place in a procedure", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-22-051, title: "Checking your own work, and why self-checking fails", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-22-052, title: "Incident and near-miss reporting", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-22-053, title: "Stopping work when it is not safe to continue", kind: judgment, levelCeiling: 3, status: draft }
+
       - id: CM-22-A01
         title: Human Performance in Measurement
         status: draft

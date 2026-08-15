@@ -447,6 +447,44 @@ It is **not** a restatement of `CM-06`, which owns calibration *methodology* —
 
 **The test: an EC element that could be written without naming the equipment belongs in `CM-06` instead.**
 
+**The pack is now built out: 21 EC domains, 203 equipment types, 2732 elements.** Every area follows one spine — receiving inspection, calibration configuration, standards and fixturing, then adjustment, uncertainty budget, conformity statement — wrapped around the parameters that make that equipment type distinct. The spine repeats because the job genuinely does. The parameters never repeat: no two of the 86 areas share a single parameter element, which is the mechanical form of the rule that an area whose parameters could be swapped for another type's has been written wrong.
+
+Both examples that prompted this now resolve. Searching the viewer for *oscilloscope* returns 26 elements; *RF passive* returns 17, covering attenuation against frequency, return loss, coupler directivity, adapter removal, connector gauging and mismatch uncertainty — none of which existed anywhere in the corpus a day ago.
+
+**The first pass missed things, and a metrologist reading it found them in minutes.** Fixture and custom-gauge calibration against a print — the commonest real calibration in a production environment — was absent entirely. Calibration kits and verification kits appeared only as *parameters* inside the VNA area, never as artefacts with a calibration of their own. Environmental chambers were one line inside a temperature-source area, with altitude and thermal-vacuum chambers missing outright. Fluid colour measurement — Gardner, Saybolt, Lovibond — did not exist. And long-scale DMM calibration was a single title where the actual work is a choice between direct, comparison and bridge methods with a Zener transfer.
+
+That is the shape of the error to expect from a generated pass: the **spine** is reliable and the **coverage** is not. A whole equipment type going missing is invisible from inside the corpus, because nothing in it is wrong — there is simply nothing there, and no check can find an absence it was never told to look for. The second pass added 58 areas and 773 elements, which is a 65% increase on the first, and there is no reason to think a third pass would find nothing.
+
+### The list has to reach the SI, not stop at the bench
+
+A third correction, and the one that changed what the pack is for. An equipment list is only sufficient if it contains **every piece of calibration equipment needed to trace a measurement back to the SI** — not just the tier a technician touches.
+
+The gap was structural and easy to miss because both ends existed. `DP` held the science of the standards: *Josephson effect and voltage standards*, *ITS-90 structure and defining fixed points*, *Microcalorimeters as primary power standards*, *Caesium beam and fountain clocks*. `EC` held the working instruments. **Nothing held the apparatus in between or above** — the torque transducer as a reference standard rather than a parameter inside the torque-wrench area, the force standard machine, the fixed-point cell as something you operate, the Josephson system as hardware somebody keeps running.
+
+So the chain read: working instrument → *nothing* → SI realisation.
+
+`EC` now carries three rungs in every discipline:
+
+| Tier | Example in `EC-04` |
+|---|---|
+| Working instrument | Torque wrench and screwdriver calibration |
+| Reference standard | **Torque transducer and reference torque standard** |
+| SI realisation | **Torque standard machine**; **Kibble balance and primary mass dissemination** |
+
+**The boundary against `DP` is the same one that keeps `EC` out of `CM-06`, one tier up.** `DP-08-002` is knowledge of the Josephson effect. `EC-01-A15` is the competence to run the cryogenic system, select the Shapiro step, detect a mis-biased array, and defend a calibration made with it. One is what the standard *is*; the other is whether this person can *operate* it.
+
+### One EC pack per DP, as a test
+
+The fourth correction was a counting argument: there should be as many equipment packs as there are disciplines, and there were 13 against 21.
+
+The count is a crude test and it found five real holes. **Nanometrology, additive manufacturing, digital metrology and geodesy had no equipment pack at all** — four disciplines whose instruments nobody could be assessed on. And **magnetics** had one on paper only: `EC-13` claimed DP-11 and contained no gaussmeter, no fluxmeter, no permeameter, no magnetometer. Zero magnetics elements anywhere in the axis. A pack that claims a discipline and covers half of it is worse than an absent one, because the count looks satisfied.
+
+Four packs were also carrying two disciplines each. Those split — flow out of pressure, humidity out of temperature, spectroscopy and fibre out of photometry — and **the moved areas kept their IDs**. `EC-14` contains areas numbered `EC-05-A05` and elements numbered `EC-05-1xx`, which looks wrong and is correct: rule 1 says an ID records where something was FIRST created, and the containing structure is what is authoritative.
+
+That move exposed a bug of exactly the kind this session has been finding. `tools/apply-ceilings.ts` checked its overrides with `if (!area.startsWith(file.replace('.yaml','')))` — assuming an area lives in the domain file whose name its ID begins with. The project's own first rule denies that assumption, and the moment an area moved, the applier reported 31 perfectly correct overrides as typos. It now checks against every element the scan actually visited.
+
+**Both passes were generated, and that is a risk worth naming.** IDs are append-only, so 1185 titles are now permanent. The parameter lists are drawn from ordinary calibration practice and the boundary rule was applied throughout, but a practising metrologist reading their own discipline will find titles they would have worded differently, and a few they would not have included. Correcting a title is free; withdrawing an element means deprecating it. **This wants a discipline-by-discipline review before anything is authored against it**, and the review is cheaper than it looks because a whole equipment type is thirteen to twenty lines in one file.
+
 `EC-01-A01` — Oscilloscope Calibration, 26 elements — is the worked pattern, and the oscilloscope was chosen deliberately because it spans three quantity domains at once and so is the strongest available test of whether the axis is real. It is: none of those 26 elements can be placed in a single `DP` domain without losing part of the job.
 
 Ceilings run mostly to 4, where the non-routine case — a scope that meets bandwidth on one channel and not the next — is where proficiency actually shows. Two reach 5: high-bandwidth work above 1 GHz, and timebase jitter, both of which support career-long learning and a defensible capstone.
@@ -497,7 +535,13 @@ Ceilings run lower here and that is the point. `DP-08-053` (charge, current, vol
 
 Every foundational area is titled **`Foundational Knowledge — <what it covers>`**. That is not decoration: it is one recognisable section repeated across 43 domains, and the first person to look for it searched the viewer for "Foundational" and found nothing, because the area had been given a descriptive name of its own instead.
 
-`DP-08-A07` — Foundational Knowledge — Electrical Quantities and Circuits, 13 elements — is the worked pattern. The remaining 42 domains follow it.
+`DP-08-A07` — Foundational Knowledge — Electrical Quantities and Circuits — was the worked pattern, and **31 domains now carry one: all 21 disciplines and 10 of the core**, 395 further elements.
+
+Where they do not is a decision rather than an omission. `CM-01` and `CM-02` get none because they *are* the corpus's foundational layer; a tier beneath *What measurement is, and what it is not* would be inventing depth downward. Nine core domains get none because nobody's first day is measurement decision risk or AI in metrology — those are specialist practice reached from elsewhere, not disciplines somebody enters cold.
+
+**No `EC` pack gets one either**, and that is the least obvious call. Equipment-family entry knowledge already exists in two places: the quantity fundamentals sit in the paired `DP` foundational area, and bench practice sits in `CM-06` *Calibration at the Bench* and `CM-12` *The Laboratory Environment and Bench Discipline* — both written in this pass with the equipment packs in mind. Twenty-one more foundational areas would have duplicated both, and duplication in a corpus this size is worse than absence because two copies drift.
+
+The pass also produced seven duplicate element titles — four pre-existing `DP`/`EC` collisions where the same words described knowing a technique and performing it, and three introduced by the new areas. All seven were retitled, and the collision is now a standing check rather than something found by ad-hoc script. `checkDuplicateTitles` warns rather than errors: two identically titled elements are still distinct competences, but a reader handed one cannot tell which competence a credential names. Its own test caught a defect in it — the first version compared raw strings and would have missed a title differing only by a double space.
 
 ## Who owns a person's competency record
 

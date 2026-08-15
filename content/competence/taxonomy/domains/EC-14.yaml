@@ -1,0 +1,132 @@
+# Equipment-calibration pack. See rule 14 in CLAUDE.md: an EC element is the
+# competence to calibrate a CLASS OF EQUIPMENT — the parameters, the standards
+# required, and where the job goes wrong. Calibration methodology stays in
+# CM-06, and an element here that could be written without naming the
+# equipment belongs there instead.
+#
+# ONE EC PACK PER DP. DP-07 is the discipline this pack serves. The parity is a
+# test rather than a tidiness rule: a discipline with no equipment pack is a
+# discipline whose instruments nobody can be assessed on.
+
+schemaVersion: 1
+domains:
+  - id: EC-14
+    title: Flow and Volume Instrument Calibration
+    kind: equipment
+    status: draft
+    summary: >-
+      Calibrating the instruments of flow and volume measurement, where
+      installation, flow profile and reference conditions change a meter
+      factor more than the meter drifts. Split from the pressure pack so
+      that DP-07 has an equipment pack of its own.
+
+    competencyAreas:
+
+      - id: EC-05-A05
+        title: Liquid Flow Meter Calibration
+        status: draft
+        summary: >-
+          Gravimetric and volumetric comparison, where installation and
+          flow profile change a meter's factor more than the meter
+          itself drifts.
+        elements:
+          - { id: EC-05-055, title: "Receiving inspection and functional check of a liquid flow meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-056, title: "Calibration configuration and stabilisation for a liquid flow meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-057, title: "Selecting the standards and fixturing for a liquid flow meter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-058, title: "Meter factor determination by gravimetric method", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-059, title: "Volumetric proving and prover verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-060, title: "Linearity and turn-down across the flow range", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-061, title: "Repeatability and run-to-run scatter", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-062, title: "Upstream straight length and flow profile effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-063, title: "Temperature and density correction to reference conditions", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-064, title: "Viscosity dependence of a meter factor", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-065, title: "In-situ verification against a portable standard", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-066, title: "Adjustment of a liquid flow meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-067, title: "Uncertainty budget for a liquid flow meter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-068, title: "Conformity statement for a liquid flow meter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-05-A06
+        title: Gas Flow Meter Calibration
+        status: draft
+        summary: >-
+          Compressible flow, where pressure and temperature at the meter
+          define what a volume even means.
+        elements:
+          - { id: EC-05-069, title: "Receiving inspection and functional check of a gas flow meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-070, title: "Calibration configuration and stabilisation for a gas flow meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-071, title: "Selecting the standards and fixturing for a gas flow meter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-072, title: "Flow accuracy against a reference standard", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-073, title: "Reference condition definition and conversion", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-074, title: "Bell prover, piston prover and sonic nozzle methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-075, title: "Mass flow controller accuracy and gas correction factors", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-076, title: "Pressure and temperature compensation verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-077, title: "Leak testing of the flow calibration circuit", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-078, title: "Low flow and high flow regime specifics", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-079, title: "Adjustment of a gas flow meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-080, title: "Uncertainty budget for a gas flow meter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-081, title: "Conformity statement for a gas flow meter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-05-A07
+        title: Anemometer and Air Velocity Instrument Calibration
+        status: draft
+        summary: >-
+          Velocity in a wind tunnel or duct, where probe alignment and
+          blockage are part of the measurement.
+        elements:
+          - { id: EC-05-082, title: "Receiving inspection and functional check of an anemometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-083, title: "Calibration configuration and stabilisation for an anemometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-084, title: "Selecting the standards and fixturing for an anemometer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-085, title: "Velocity indication error against a reference", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-086, title: "Directional sensitivity and probe alignment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-087, title: "Low velocity threshold and starting speed", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-088, title: "Blockage and confinement correction in a tunnel", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-089, title: "Temperature and density correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-090, title: "Hot-wire, vane and pitot instrument specifics", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-091, title: "Adjustment of an anemometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-092, title: "Uncertainty budget for an anemometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-093, title: "Conformity statement for an anemometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-05-A08
+        title: Volumetric Glassware and Pipette Calibration
+        status: draft
+        summary: >-
+          Gravimetric determination of delivered or contained volume,
+          where evaporation and water density dominate a small volume
+          result.
+        elements:
+          - { id: EC-05-094, title: "Receiving inspection and functional check of a pipette or volumetric vessel", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-095, title: "Calibration configuration and stabilisation for a pipette or volumetric vessel", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-096, title: "Selecting the standards and fixturing for a pipette or volumetric vessel calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-097, title: "Gravimetric determination of delivered volume", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-098, title: "Water density, Z-factor and buoyancy correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-099, title: "Evaporation control and its effect at small volumes", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-100, title: "Systematic and random error components for a pipette", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-101, title: "Multichannel pipette channel-to-channel consistency", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-102, title: "Tip fit, technique and operator dependence", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-103, title: "Contained versus delivered volume for glassware", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: EC-05-104, title: "Dispenser and burette verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-105, title: "Adjustment of a pipette or volumetric vessel, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-106, title: "Uncertainty budget for a pipette or volumetric vessel calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-107, title: "Conformity statement for a pipette or volumetric vessel against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-05-A15
+        title: Primary Pressure Standard Operation
+        status: draft
+        summary: >-
+          Mercury and ultrasonic interferometer manometers, and the
+          piston gauges characterised dimensionally rather than by
+          comparison.
+        elements:
+          - { id: EC-05-185, title: "Receiving inspection and functional check of a primary pressure standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-186, title: "Calibration configuration and stabilisation for a primary pressure standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-187, title: "Selecting the standards and fixturing for a primary pressure standard calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-188, title: "Mercury manometer column height determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-189, title: "Ultrasonic interferometer manometer operation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-190, title: "Mercury density, temperature and local gravity corrections", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-191, title: "Dimensional characterisation of a piston-cylinder assembly", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-192, title: "Distortion coefficient determination under pressure", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-193, title: "Cross-float between primary and transfer standards", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-194, title: "Uncertainty budget for a primary pressure realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-195, title: "Adjustment of a primary pressure standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-196, title: "Uncertainty budget for a primary pressure standard calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-197, title: "Conformity statement for a primary pressure standard against its specification", kind: judgment, levelCeiling: 4, status: draft }

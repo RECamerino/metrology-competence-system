@@ -30,10 +30,10 @@ Three principles held in tension deliberately:
 
 | | |
 |---|---|
-| Domains / areas / elements | 44 / 259 / **2306** |
-| Assessable units | 9330 |
-| Ceilings — L2 / L3 / L4 / L5 | 0.6% / 14.3% / 65.0% / 20.2% |
-| Kinds — knowledge / skill / judgment | 30.1% / 50.4% / 19.5% |
+| Domains / areas / elements | 64 / 491 / **5407** |
+| Assessable units | 21114 |
+| Ceilings — L2 / L3 / L4 / L5 | 0.6% / 23.3% / 61.1% / 15.0% |
+| Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
 | Content authored | **2 elements** · **1 BOK article** · **1 module** |
 | Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
 | Checks | 0 errors · 247/247 tests · typecheck clean |
@@ -98,7 +98,7 @@ Three principles held in tension deliberately:
 
 **13. Every domain opens with a foundational-knowledge area where one is appropriate — FIRST, not last.** The corpus began each discipline at professional practice: `DP-08` opened at the ampere definition and the Josephson effect and had no element for Ohm's law, so prior education was an unstated entry requirement in a project whose first principle is that nothing gates entry. The gap was invisible because the *levels* looked open — L1 is reachable on every element, but L1 on *Cryogenic current comparator bridges* is not competence in series-circuit behaviour. **The fix is elements, not levels.** Display order follows array order in the YAML, not the area ID, so the block sits at the top of `competencyAreas` while keeping its append-only ID. **Size it as a career, not a ramp.** For most people who will ever use this corpus, the foundational area is not the path to the rest of the domain — it is the whole of it, and very few venture further. `DP-08-A07` is 48 elements against 52 for the entire professional remainder, and that ratio is deliberate. **Split by instrument class and use case.** A single element called *operating a digital multimeter* spanned a 3½-digit handheld, an 8½-digit reference, a null detector and a nanovoltmeter — different instruments for different jobs, under a heading too broad to assess against. Each class is its own element. Ceilings run below 3 where the competence genuinely stops there, which is what the L1 and L2 rungs in `tools/ceiling-plan.json` exist for, and reach 4 where a twenty-year technician is still better at it than a two-year one. Foundational is not shallow. **Every such area is titled `Foundational Knowledge — <what it covers>`**, without exception: one recognisable section repeated across 43 domains, which a reader can find by searching the words they were told to expect. **Training for a domain's foundational knowledge is authored as one module, not one per element** — it is learned as a block, and 48 modules for 48 fundamentals would be an administrative fiction.
 
-**14. Three axes, not two — `EC` is the equipment-calibration pack.** `CM` is organised by cross-cutting concept and `DP` by measured **quantity**; both are measurement science, and neither is organised by **the work**. A technician's day is an oscilloscope, then a torque wrench, then an RF attenuator, and their competence is per equipment type. The corpus already contained the proof: `DP-08-052` is titled *Oscilloscope **DC and timebase** calibration* because bandwidth belongs to `DP-10` and jitter to `DP-14` — one job, truncated to the third of it that fitted the shelf it was put on. **An EC element is the competence to calibrate a class of equipment**: the parameters, the standards required, and where the job goes wrong. It is **not** a restatement of `CM-06`, which owns calibration *methodology* — `CM-06` says what as-found data is and why both are recorded, `EC` says what as-found data for an oscilloscope consists of. **An EC element that could be written without naming the equipment belongs in `CM-06` instead.** `EC-01-A01` (oscilloscope, 26 elements) is the worked pattern. This is where the technician works, the engineer designs, and the metrologist reads to judge whether a measurement was sound.
+**14. Three axes, not two — `EC` is the equipment-calibration pack.** `CM` is organised by cross-cutting concept and `DP` by measured **quantity**; both are measurement science, and neither is organised by **the work**. A technician's day is an oscilloscope, then a torque wrench, then an RF attenuator, and their competence is per equipment type. The corpus already contained the proof: `DP-08-052` is titled *Oscilloscope **DC and timebase** calibration* because bandwidth belongs to `DP-10` and jitter to `DP-14` — one job, truncated to the third of it that fitted the shelf it was put on. **An EC element is the competence to calibrate a class of equipment**: the parameters, the standards required, and where the job goes wrong. It is **not** a restatement of `CM-06`, which owns calibration *methodology* — `CM-06` says what as-found data is and why both are recorded, `EC` says what as-found data for an oscilloscope consists of. **An EC element that could be written without naming the equipment belongs in `CM-06` instead.** **21 EC packs — one per DP — 203 equipment types, 2732 elements — and it carries the WHOLE TRACEABILITY CHAIN**, not just the working tier. Three rungs: the instrument that arrives on a bench, the reference standard it is calibrated against (torque transducers, standard resistors, SPRTs, AC-DC transfer standards), and the apparatus that realises the SI (Josephson and quantum Hall systems, force and torque standard machines, fixed-point cells, caesium fountains, cryogenic radiometers, Kibble balance). **`DP` holds the science of a standard; `EC` holds the competence to operate the apparatus and calibrate with it** — the same boundary as CM-06, one tier up. A list that stops at the working instrument cannot answer how a measurement reaches the SI, which is the question the whole system exists to answer. **ONE EC PACK PER DP, AND THAT IS A TEST.** 21 and 21. A discipline with no equipment pack is a discipline whose instruments nobody can be assessed on, and counting found five: nanometrology, additive manufacturing, digital metrology, geodesy, and magnetics — which had an EC pack claiming it and covering only its high-voltage half. When an area moves between packs its IDs do **not** renumber; the prefix is historical, per rule 1. Every area is a SPINE — receiving inspection, configuration, standards and fixturing, then adjustment, uncertainty, conformity — wrapped around the parameters that make that equipment type distinct. The spine repeats because it genuinely does; the parameters never do. **Test: no two areas share a single parameter element, and an area whose parameters could be swapped for another type's has been written wrong.** This is where the technician works, the engineer designs, and the metrologist reads to judge whether a measurement was sound.
 
 ---
 
@@ -113,7 +113,7 @@ content/bok/<domain>/*.md         THE BODY OF KNOWLEDGE. Encyclopedic reference,
                                   ids; elements link to sections, not articles.
 
 content/competence/
-  taxonomy/domains/*.yaml         44 files, one per domain. THE taxonomy.
+  taxonomy/domains/*.yaml         64 files, one per domain. THE taxonomy.
                                   CM = concept, DP = quantity, EC = equipment
                                   type. Three axes; see rule 14.
   taxonomy/id-registry.lock       Every ID ever issued — taxonomy, BOK, modules,
@@ -173,7 +173,7 @@ Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
 
 | Module | The rule it enforces |
 |---|---|
-| `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules |
+| `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules, duplicate titles |
 | `credentials.ts` | No self-signoff, signoff policy, the wallet boundary, draft-status attestability, evidenced provenance tier, founding-cohort authority, dual custody |
 | `trust.ts` | Offline verification against a registry snapshot, and the age of the answer |
 | `ledger.ts` | Hash chain, no-retake, exposure count, trust horizon |

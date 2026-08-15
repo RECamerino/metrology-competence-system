@@ -13,6 +13,35 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-11-A06
+        title: Foundational Knowledge — Magnetic Quantities and High Voltage Safety
+        status: draft
+        summary: >-
+          The magnetic quantities and their units, and the high-voltage
+          discipline that has to be second nature before anybody works
+          near apparatus at voltage.
+        elements:
+          - { id: DP-11-042, title: "Magnetic field strength, flux and flux density distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-11-043, title: "Units: tesla, gauss, ampere per metre and weber", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-11-044, title: "Permeability and magnetic materials", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-11-045, title: "The earth's field as a background to any measurement", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-11-046, title: "Hysteresis and remanence in a magnetic material", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-11-047, title: "Demagnetisation and why it is needed", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-11-048, title: "Probe orientation and the cosine effect", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-11-049, title: "Magnetic safety: implants, media and ferrous objects near a field", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-11-050, title: "High voltage: clearance, creepage and flashover", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-11-051, title: "Earthing, bonding and discharge sticks", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-11-052, title: "Stored energy in capacitance and why a circuit stays dangerous", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-11-053, title: "Insulation, dielectric strength and partial discharge in outline", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-11-054, title: "Permits, isolation and lock-out for high voltage work", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-11-055, title: "Recording a magnetic or high voltage result safely", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-11-A01
         title: Magnetic Quantities and Standards
         status: draft

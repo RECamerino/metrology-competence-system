@@ -14,6 +14,30 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: CM-15-A07
+        title: Foundational Knowledge — Recording and Reporting a Result
+        status: draft
+        summary: >-
+          Writing down what happened so that somebody who was not there
+          can rely on it, which is a skill and not a formality.
+        elements:
+          - { id: CM-15-046, title: "What a measurement record must contain", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-15-047, title: "Writing legibly, unambiguously and in the right units", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-15-048, title: "Correcting an entry without obscuring it", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-15-049, title: "Reporting a result with its uncertainty", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-15-050, title: "Statements of conformity in plain terms", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-15-051, title: "Describing a deviation from the procedure", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-15-052, title: "Writing for the person who reads it next", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-15-053, title: "Tables, figures and when each is clearer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-15-054, title: "Avoiding claims the data does not support", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-15-055, title: "Reviewing somebody else's record", kind: skill, levelCeiling: 3, status: draft }
+
       - id: CM-15-A01
         title: Foundations of Technical Writing
         status: draft

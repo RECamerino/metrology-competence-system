@@ -13,6 +13,32 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: CM-04-A07
+        title: Foundational Knowledge — Traceability and Reading a Certificate
+        status: draft
+        summary: >-
+          Where a number's authority comes from, and how to read the
+          document that carries it — the first thing a technician
+          handles and the last thing anybody explains.
+        elements:
+          - { id: CM-04-050, title: "What traceability means and what it does not", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-04-051, title: "The chain from a working instrument to a national standard", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-04-052, title: "Reading a calibration certificate", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-04-053, title: "What a certificate does and does not say about fitness for use", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-04-054, title: "Accreditation marks and what accreditation covers", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-04-055, title: "Scope of accreditation and reading one", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-04-056, title: "Calibration due date and status labelling", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-04-057, title: "Reference standards and working standards distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-04-058, title: "Unbroken chain: what breaks one", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-04-059, title: "Certificates from a supplier and what to check on receipt", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-04-060, title: "Recording the standards used in a calibration", kind: skill, levelCeiling: 3, status: draft }
+
       - id: CM-04-A01
         title: Metrological Traceability Concepts
         status: draft

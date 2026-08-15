@@ -12,6 +12,34 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-04-A06
+        title: Foundational Knowledge — Vibration, Sound and the Decibel
+        status: draft
+        summary: >-
+          The quantities of dynamic measurement, where the same motion
+          has three descriptions and almost everything is reported on a
+          logarithmic scale.
+        elements:
+          - { id: DP-04-049, title: "Frequency, period and amplitude", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-04-050, title: "Acceleration, velocity and displacement as descriptions of one motion", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-04-051, title: "The decibel: a ratio, not a unit", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-04-052, title: "Sound pressure, sound pressure level and the reference value", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-04-053, title: "A, C and Z frequency weighting and why they exist", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-04-054, title: "Peak, RMS and average of a dynamic signal", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-04-055, title: "Resonance and why a structure amplifies at one frequency", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-04-056, title: "Mounting a transducer, and how mounting changes what it reads", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-04-057, title: "Cable routing, triboelectric noise and connector care", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-04-058, title: "Background noise and its effect on a measurement", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-04-059, title: "Field calibration check before and after a measurement", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-04-060, title: "Hearing protection and exposure limits", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-04-061, title: "Recording a vibration or acoustic result with its conditions", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-04-A01
         title: Dynamic Measurement Foundations
         status: draft

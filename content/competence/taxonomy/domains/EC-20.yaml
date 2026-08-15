@@ -1,0 +1,152 @@
+# Equipment-calibration pack. See rule 14 in CLAUDE.md: an EC element is the
+# competence to calibrate a CLASS OF EQUIPMENT — the parameters, the standards
+# required, and where the job goes wrong. Calibration methodology stays in
+# CM-06, and an element here that could be written without naming the
+# equipment belongs there instead.
+#
+# ONE EC PACK PER DP. DP-20 is the discipline this pack serves. The parity is a
+# test rather than a tidiness rule: a discipline with no equipment pack is a
+# discipline whose instruments nobody can be assessed on.
+
+schemaVersion: 1
+domains:
+  - id: EC-20
+    title: Digital Metrology and Calibration Infrastructure Verification
+    kind: equipment
+    status: draft
+    summary: >-
+      Verifying the software, data and networked devices that now carry
+      calibration results, where the failure is silent: a wrong number
+      that was measured correctly and then transported, converted or
+      stored wrongly. The equipment here is largely not physical, and it
+      still needs verifying.
+
+    competencyAreas:
+
+      - id: EC-20-A01
+        title: Digital Calibration Certificate System Verification
+        status: draft
+        summary: >-
+          DCC generation and consumption verified end to end, because a
+          machine-readable certificate that says something different
+          from the human-readable one is worse than no certificate.
+        elements:
+          - { id: EC-20-001, title: "Receiving inspection and functional check of a digital calibration certificate system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-20-002, title: "Calibration configuration and stabilisation for a digital calibration certificate system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-20-003, title: "Selecting the standards and fixturing for a digital calibration certificate system calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-20-004, title: "Schema conformance of a generated certificate", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-005, title: "Agreement between human-readable and machine-readable content", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-20-006, title: "Unit, quantity and D-SI representation correctness", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-007, title: "Uncertainty representation and coverage factor encoding", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-008, title: "Digital signature generation and verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-009, title: "Round-trip verification: generate, transmit, consume, compare", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-20-010, title: "Version, revision and superseded certificate handling", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-011, title: "Adjustment of a digital calibration certificate system, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-20-012, title: "Uncertainty budget for a digital calibration certificate system calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-013, title: "Conformity statement for a digital calibration certificate system against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-20-A02
+        title: Calibration Management Software Validation
+        status: draft
+        summary: >-
+          The system of record for calibration, validated for the
+          calculations it performs and the states it can reach.
+        elements:
+          - { id: EC-20-014, title: "Receiving inspection and functional check of calibration management software", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-20-015, title: "Calibration configuration and stabilisation for calibration management software", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-20-016, title: "Selecting the standards and fixturing for calibration management software calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-20-017, title: "Calculation and rounding verification against hand computation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-018, title: "Tolerance evaluation and pass-fail logic verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-019, title: "Interval assignment and recall logic verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-020, title: "Audit trail completeness and immutability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-021, title: "User access control and electronic signature verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-022, title: "Data migration verification between systems", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-20-023, title: "Validation after a version upgrade", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-20-024, title: "Adjustment of calibration management software, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-20-025, title: "Uncertainty budget for calibration management software calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-026, title: "Conformity statement for calibration management software against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-20-A03
+        title: Automated Calibration System and Sequence Verification
+        status: draft
+        summary: >-
+          Automated sequences verified against a manual execution,
+          because automation hides the step it skipped.
+        elements:
+          - { id: EC-20-027, title: "Receiving inspection and functional check of an automated calibration system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-20-028, title: "Calibration configuration and stabilisation for an automated calibration system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-20-029, title: "Selecting the standards and fixturing for an automated calibration system calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-20-030, title: "Sequence correctness against the written procedure", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-031, title: "Instrument driver and command verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-032, title: "Settling, delay and timing within an automated sequence", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-033, title: "Automated result compared against a manual measurement", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-20-034, title: "Error handling, abort and partial-result behaviour", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-035, title: "Switching, routing and path loss within the system", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-036, title: "System-level uncertainty for an automated calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-20-037, title: "Adjustment of an automated calibration system, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-20-038, title: "Uncertainty budget for an automated calibration system calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-039, title: "Conformity statement for an automated calibration system against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-20-A04
+        title: Sensor Network and Connected Device Calibration
+        status: draft
+        summary: >-
+          Distributed and IIoT sensing calibrated as a chain from
+          transducer to stored value, where the conversion happens
+          somewhere nobody can see.
+        elements:
+          - { id: EC-20-040, title: "Receiving inspection and functional check of a networked sensor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-20-041, title: "Calibration configuration and stabilisation for a networked sensor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-20-042, title: "Selecting the standards and fixturing for a networked sensor calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-20-043, title: "End-to-end verification from transducer to stored value", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-044, title: "On-device conversion, scaling and firmware coefficient verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-045, title: "Wireless transmission integrity and packet loss effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-046, title: "Time stamping accuracy and network synchronisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-047, title: "Battery, duty cycle and drift between calibrations", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-048, title: "In-situ verification of a deployed sensor", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-20-049, title: "Gateway aggregation, averaging and data reduction effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-050, title: "Adjustment of a networked sensor, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-20-051, title: "Uncertainty budget for a networked sensor calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-052, title: "Conformity statement for a networked sensor against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-20-A05
+        title: Measurement Data Integrity and Traceability Chain Verification
+        status: draft
+        summary: >-
+          Verifying that a number survives its journey — units,
+          precision, conversion and storage — which is where digital
+          metrology actually fails.
+        elements:
+          - { id: EC-20-053, title: "Receiving inspection and functional check of a measurement data chain", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-20-054, title: "Calibration configuration and stabilisation for a measurement data chain", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-20-055, title: "Selecting the standards and fixturing for a measurement data chain calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-20-056, title: "Unit conversion and dimensional consistency verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-057, title: "Precision, rounding and floating-point behaviour in a chain", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-058, title: "Data transformation and aggregation verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-059, title: "Traceability metadata retention through processing", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-060, title: "Reconstructing a reported result from raw data", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-20-061, title: "Archive integrity and long-term readability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-062, title: "Detecting silent data corruption in a measurement record", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-20-063, title: "Adjustment of a measurement data chain, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-20-064, title: "Uncertainty budget for a measurement data chain calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-065, title: "Conformity statement for a measurement data chain against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-20-A06
+        title: Time Synchronisation Infrastructure Verification
+        status: draft
+        summary: >-
+          NTP and PTP infrastructure verified for the accuracy that
+          timestamped measurement records assume.
+        elements:
+          - { id: EC-20-066, title: "Receiving inspection and functional check of time synchronisation infrastructure", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-20-067, title: "Calibration configuration and stabilisation for time synchronisation infrastructure", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-20-068, title: "Selecting the standards and fixturing for time synchronisation infrastructure calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-20-069, title: "NTP and PTP offset accuracy against a reference clock", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-070, title: "Grandmaster and boundary clock verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-071, title: "Network asymmetry and its effect on synchronisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-20-072, title: "Holdover behaviour on loss of reference", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-073, title: "Timestamp accuracy at the point of measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-074, title: "Leap second and time zone handling verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-075, title: "Adjustment of time synchronisation infrastructure, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-20-076, title: "Uncertainty budget for time synchronisation infrastructure calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-20-077, title: "Conformity statement for time synchronisation infrastructure against its specification", kind: judgment, levelCeiling: 4, status: draft }

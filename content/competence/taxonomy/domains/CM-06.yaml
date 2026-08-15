@@ -13,6 +13,38 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: CM-06-A10
+        title: Foundational Knowledge — Calibration at the Bench
+        status: draft
+        summary: >-
+          The everyday practice of doing a calibration: following a
+          procedure, taking the readings in the right order, and
+          recording what happened. This is also the bench-practice layer
+          the equipment packs assume — see rule 14.
+        elements:
+          - { id: CM-06-074, title: "What a calibration is, and what it is not", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-06-075, title: "Calibration, verification and adjustment distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-06-076, title: "Reading and following a calibration procedure", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-077, title: "Preparing a bench and staging the equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-078, title: "Receiving an item: identification, condition and damage", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-079, title: "Stabilisation, soak and warm-up before measurement", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-080, title: "Taking readings in the specified order and direction", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-081, title: "As-found and as-left data and why both are taken", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-06-082, title: "Recording raw data legibly and completely", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-083, title: "Environmental conditions and recording them", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-084, title: "Handling, cleanliness and protecting an item under test", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-085, title: "Labelling, status marking and segregation", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-086, title: "Recognising a result that does not look right", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-06-087, title: "Escalating an out-of-tolerance finding", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-088, title: "Returning an item and what goes with it", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-089, title: "Housekeeping, and leaving the bench fit for the next job", kind: skill, levelCeiling: 2, status: draft }
+
       - id: CM-06-A01
         title: Calibration Fundamentals
         status: draft

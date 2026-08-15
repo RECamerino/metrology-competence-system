@@ -13,6 +13,33 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-14-A07
+        title: Foundational Knowledge — Time, Frequency and Stability
+        status: draft
+        summary: >-
+          Why time and frequency are the same measurement inverted, and
+          why an instrument can be extremely stable and still be wrong.
+        elements:
+          - { id: DP-14-049, title: "Time interval, period and frequency", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-14-050, title: "Parts per million and parts per billion", kind: skill, levelCeiling: 2, status: draft }
+          - { id: DP-14-051, title: "Accuracy and stability distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-14-052, title: "Short-term and long-term stability", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-14-053, title: "Ageing and drift of an oscillator", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-14-054, title: "Warm-up and retrace after power cycling", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-14-055, title: "Reference standards: quartz, rubidium and caesium compared", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-14-056, title: "UTC, TAI and local time scales", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-14-057, title: "Time synchronisation over a network in outline", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-14-058, title: "Gate time, resolution and measurement duration", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-14-059, title: "Trigger level and its effect on a time measurement", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-14-060, title: "Cable delay and why it matters at nanosecond level", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-14-061, title: "Recording a frequency result with its reference", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-14-A01
         title: Time and Frequency Fundamentals
         status: draft

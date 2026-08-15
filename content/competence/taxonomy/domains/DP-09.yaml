@@ -13,6 +13,36 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-09-A06
+        title: Foundational Knowledge — Alternating Quantities, Power and Energy
+        status: draft
+        summary: >-
+          What changes when a quantity alternates: why one waveform
+          needs three numbers to describe it, and why power depends on
+          the angle between voltage and current.
+        elements:
+          - { id: DP-09-049, title: "Alternating voltage and current, and the waveform", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-050, title: "Peak, peak-to-peak, average and RMS", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-051, title: "Why RMS is the value that does the work", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-052, title: "Frequency, period and phase", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-053, title: "Phase angle between voltage and current", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-054, title: "Real, reactive and apparent power", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-055, title: "Power factor and what it costs", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-056, title: "Energy against power, and the units of each", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-057, title: "Single-phase and three-phase supply arrangements", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-058, title: "Star and delta connection and where the voltages are", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-059, title: "Harmonics and distorted waveforms in ordinary supplies", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-060, title: "Impedance, reactance and resistance distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-061, title: "Current transformers and voltage transformers in use", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-062, title: "Safe working on live and energised circuits", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-063, title: "Recording a power or energy result with its conditions", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-09-A01
         title: AC Voltage and Current
         status: draft

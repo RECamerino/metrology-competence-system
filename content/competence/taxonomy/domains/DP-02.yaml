@@ -13,6 +13,37 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: DP-02-A07
+        title: Foundational Knowledge — Mass, Force and Turning Effect
+        status: draft
+        summary: >-
+          The quantities of mechanical measurement and the handling that
+          protects them: what mass and force actually are, why weight is
+          not mass, and why a dropped weight is no longer a standard.
+        elements:
+          - { id: DP-02-065, title: "Mass and weight distinguished, and why it matters", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-02-066, title: "Force, its units, and newtons against kilogram-force", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-02-067, title: "Local gravity and why a weighing result depends on where you are", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-02-068, title: "Air buoyancy in ordinary weighing", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-02-069, title: "Torque as force times distance, and its units", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-02-070, title: "Hardness as a scale rather than a physical quantity", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-02-071, title: "Levelling, stability and installation of a balance", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-02-072, title: "Draught, vibration and thermal effects on a weighing", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-02-073, title: "Handling weights: gloves, tweezers and why skin matters", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-02-074, title: "Storage, contamination and the value of a mass standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-02-075, title: "Loading a force or torque instrument in its intended direction", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-02-076, title: "Hysteresis and why an increasing reading differs from a decreasing one", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-02-077, title: "Reading a balance display: resolution against capability", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-02-078, title: "Tare, zero and what each does to a result", kind: skill, levelCeiling: 2, status: draft }
+          - { id: DP-02-079, title: "Safe handling of heavy standards and lifting equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-02-080, title: "Recording a mass or force result with its conditions", kind: skill, levelCeiling: 3, status: draft }
+
       - id: DP-02-A01
         title: Mass Standards and Realisation
         status: draft

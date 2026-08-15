@@ -13,6 +13,31 @@ domains:
 
     competencyAreas:
 
+      # FIRST, not last. Display order follows array order, not the area ID.
+      # This is where a career starts and, for most people who will ever use
+      # this corpus, where it stays: the areas below are what a minority go on
+      # to. Ceilings run low here because that is honest — several of these
+      # genuinely stop at Advanced Beginner, which is what the L1 and L2 rungs
+      # in tools/ceiling-plan.json exist for.
+      - id: CM-10-A07
+        title: Foundational Knowledge — Working Inside a Quality System
+        status: draft
+        summary: >-
+          What a management system asks of the person at the bench,
+          which is mostly about documents, records and saying when
+          something went wrong.
+        elements:
+          - { id: CM-10-056, title: "Why a laboratory has a quality system", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-10-057, title: "Procedures, work instructions and forms", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-10-058, title: "Document control and using the current version", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-10-059, title: "Records: what they are for and how long they are kept", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-10-060, title: "Nonconformance and raising one", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-10-061, title: "Corrective action in outline", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-10-062, title: "Internal audit and what to expect from one", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-10-063, title: "Impartiality and confidentiality obligations", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-10-064, title: "Competence records and why yours exists", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-10-065, title: "Change: how a procedure gets updated", kind: skill, levelCeiling: 3, status: draft }
+
       - id: CM-10-A01
         title: Management System Fundamentals
         status: draft
