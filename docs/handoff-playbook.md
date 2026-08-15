@@ -143,6 +143,10 @@ Worked from the CM-03 set, for `metrology-technician-i`: `null` on `CM-03-019`, 
 
 That last group is the point of the rule. Two of those three are `skill` elements with perfectly ordinary L1 anchors, and the heuristic still gives null — because the question was never the anchor's difficulty, it was whether the role does that kind of work at all.
 
+**Expect foundational elements to come out uniform, and do not manufacture variation.** `DP-08-081`, `DP-08-094` and `DP-08-064` each carry `2` for all twelve roles. That is the honest answer: where a ceiling-2 foundational element is in a person's scope, no role needs less than the ceiling — a technician who cannot separate resolution from accuracy should not be reading a meter, and an assessor who cannot is not assessing — and no role can be `null`, because there is no deployment in which the element could never apply if the domain is in scope at all. Twelve identical ratings looks like a filled-in form and is not. Spreading them to look considered would be inventing a requirement gradient that does not exist.
+
+Two consequences worth knowing. Across the 443 foundational elements this is roughly 5,300 near-constant ratings, which makes them the easiest chunk to generate and check mechanically. And it is an argument — recorded, not acted on — that the schema might want an element- or area-level default with per-role overrides, rather than twelve mandatory ratings on every element.
+
 **Choosing `levelCeiling` honestly.** Most elements top out at 3. Reserve 4 for elements with real practitioner-level depth, and 5 for elements where genuine expert practice exists — where a person could plausibly spend a career and still be learning. Inflating ceilings manufactures depth that is not there and creates assessable units nobody can write items for.
 
 ### 2. Write the file

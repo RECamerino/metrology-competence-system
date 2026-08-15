@@ -43,6 +43,27 @@ The commonest error is a knowledge anchor on a skill element. "Understands the e
 
 **If you cannot write an anchor of the declared kind, the kind is wrong.** Fix `tools/kind-plan.json`; do not bend the anchor.
 
+### The upper rungs are phrased for `skill` and `judgment` — read them differently for `knowledge`
+
+The progression above says L4 *handles the case the procedure does not cover* and L5 *resolves the case where no established approach gives an answer*. Both describe someone acting. `resolves` is listed in the table you just read as a **judgment** verb, and the same table says a `knowledge` anchor never describes performing a task.
+
+So the two halves of this document contradict each other for a knowledge element above L3, and following either one alone produces a bad anchor. This was found by authoring `CM-08-038` and `DP-20-002`, both `knowledge` at ceiling 5, and both needing the same fix.
+
+**For `knowledge`, the upper levels are about giving an account, not reaching a verdict.**
+
+| | `skill` / `judgment` | `knowledge` |
+|---|---|---|
+| **L4** | Handles the case the procedure does not cover, and defends the treatment | **Explains why the established accounts diverge on this case**, contrasts what each treats as the thing that matters, and traces the divergence to its actual source rather than to one being stricter |
+| **L5** | Resolves the case no approach settles, states what the assumption costs | **Gives an account of a genuinely unsettled question** — states each position as its holders would recognise it, says what turns on each, and says what evidence would settle it and why none currently does |
+
+L5 still requires mentoring, on knowledge exactly as on the others.
+
+This is a real competence and not a weaker substitute for deciding: knowing a live disagreement well enough to argue either side, and to say what would end it, is what distinguishes someone who has read the field from someone who has read one paper. It is also what keeps the boundary clean — `CM-08-038` (`knowledge`) gives the account, `CM-08-039` (`judgment`) makes the call, and an item that asks a candidate to *choose* is testing the second one.
+
+**The check to apply:** if a knowledge element's L4 or L5 anchor could be satisfied by picking a side, it has drifted into judgment. Either rewrite it, or the `kind` is wrong.
+
+**Scale, so this is not treated as an edge case:** 953 elements are `knowledge`, 17.6 % of the corpus, and 108 of them carry a ceiling of 5.
+
 ---
 
 ## Unobservable phrasing is rejected mechanically
