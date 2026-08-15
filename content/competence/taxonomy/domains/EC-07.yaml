@@ -123,3 +123,25 @@ domains:
           - { id: EC-07-061, title: "Adjustment of a tachometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-07-062, title: "Uncertainty budget for a tachometer calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-07-063, title: "Conformity statement for a tachometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-07-A06
+        title: Primary Frequency Standard Operation
+        status: draft
+        summary: >-
+          Caesium fountains, beam standards and hydrogen masers,
+          operated as the reference the rest of the timing chain is
+          measured against.
+        elements:
+          - { id: EC-07-064, title: "Receiving inspection and functional check of a primary frequency standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-065, title: "Calibration configuration and stabilisation for a primary frequency standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-066, title: "Selecting the standards and fixturing for a primary frequency standard calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-067, title: "Caesium beam standard operation and tube health", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-07-068, title: "Caesium fountain operation and evaluation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-07-069, title: "Hydrogen maser operation, cavity tuning and drift", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-07-070, title: "Systematic frequency shift evaluation and correction", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-07-071, title: "Ensemble timescale generation and steering", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-07-072, title: "Comparison to international time scales and reporting", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-07-073, title: "Uncertainty budget for a primary frequency realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-07-074, title: "Adjustment of a primary frequency standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-075, title: "Uncertainty budget for a primary frequency standard calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-076, title: "Conformity statement for a primary frequency standard against its specification", kind: judgment, levelCeiling: 4, status: draft }

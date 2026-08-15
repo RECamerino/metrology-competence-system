@@ -19,9 +19,9 @@ The authoritative source is [`content/competence/taxonomy/domains/`](../../conte
 | | |
 |---|---|
 | Domains | 56 |
-| Competency areas | 402 |
-| Elements | 4238 |
-| Assessable units | 16723 |
+| Competency areas | 431 |
+| Elements | 4624 |
+| Assessable units | 18374 |
 
 An assessable unit is one element at one level. Every level is assessed at element scope, so a credential names exactly what was tested.
 
@@ -45,10 +45,10 @@ The highest level attainable for an element. Not every element supports all five
 
 | Ceiling | Attainable range | Meaning at the ceiling | Elements | Share |
 |---|---|---|---|---|
-| 2 | L1–L2 | Advanced Beginner | 15 | 0.4% |
-| 3 | L1–L3 | Competent | 760 | 17.9% |
-| 4 | L1–L4 | Proficient | 2902 | 68.5% |
-| 5 | L1–L5 | Expert | 561 | 13.2% |
+| 2 | L1–L2 | Advanced Beginner | 15 | 0.3% |
+| 3 | L1–L3 | Competent | 818 | 17.7% |
+| 4 | L1–L4 | Proficient | 3065 | 66.3% |
+| 5 | L1–L5 | Expert | 726 | 15.7% |
 
 **L5 is reserved** for elements where a person could plausibly spend a career and still be learning, and where a defensible capstone with cross-organizational review is actually writable.
 
@@ -58,9 +58,9 @@ What kind of competence an element is, and therefore what evidence proves it.
 
 | Kind | The claim | What proves it | Elements | Share |
 |---|---|---|---|---|
-| Knowledge | I understand this | Explanation, relation, analysis | 732 | 17.3% |
-| Skill | I can perform this | A work product they produced, not an account of it | 2570 | 60.6% |
-| Judgment | I can decide and defend it | A defence; often no single right answer | 936 | 22.1% |
+| Knowledge | I understand this | Explanation, relation, analysis | 738 | 16.0% |
+| Skill | I can perform this | A work product they produced, not an account of it | 2849 | 61.6% |
+| Judgment | I can decide and defend it | A defence; often no single right answer | 1037 | 22.4% |
 
 **Authority is deliberately not a kind.** Knowledge, skill and judgment are earned and belong to a person. Authority is granted, and is a relationship between a person, an organization and a scope of work. Competency credentials are portable; authorizations are not. See [`../00-context.md`](../00-context.md).
 
@@ -127,19 +127,19 @@ Organised by the equipment TYPE that arrives on a bench, because that axis cuts 
 
 | Domain | Areas | Elements | K / S / J | L2 / L3 / L4 / L5 |
 |---|---|---|---|---|
-| [**EC-01** Electrical Test and Measurement Instrument Calibration](EC-01.md) | 18 | 276 | 8 / 207 / 61 | 0 / 63 / 193 / 20 |
-| [**EC-02** RF and Microwave Device Calibration](EC-02.md) | 13 | 182 | 8 / 133 / 41 | 0 / 30 / 134 / 18 |
-| [**EC-03** Dimensional and Geometric Instrument Calibration](EC-03.md) | 18 | 241 | 5 / 173 / 63 | 1 / 64 / 162 / 14 |
-| [**EC-04** Mass, Force, Torque and Hardness Instrument Calibration](EC-04.md) | 10 | 138 | 3 / 100 / 35 | 0 / 37 / 96 / 5 |
-| [**EC-05** Pressure, Vacuum and Flow Instrument Calibration](EC-05.md) | 14 | 184 | 4 / 130 / 50 | 0 / 45 / 134 / 5 |
-| [**EC-06** Temperature and Humidity Instrument Calibration](EC-06.md) | 14 | 189 | 6 / 131 / 52 | 0 / 41 / 137 / 11 |
-| [**EC-07** Time, Frequency and Timing Device Calibration](EC-07.md) | 5 | 63 | 2 / 44 / 17 | 1 / 20 / 35 / 7 |
-| [**EC-08** Optical, Photometric and Radiometric Instrument Calibration](EC-08.md) | 8 | 102 | 1 / 75 / 26 | 0 / 26 / 75 / 1 |
-| [**EC-09** Chemical and Analytical Instrument Calibration](EC-09.md) | 11 | 142 | 2 / 100 / 40 | 0 / 32 / 110 / 0 |
-| [**EC-10** Ionising Radiation Instrument Calibration](EC-10.md) | 7 | 90 | 4 / 63 / 23 | 0 / 17 / 67 / 6 |
-| [**EC-11** Acoustic and Vibration Instrument Calibration](EC-11.md) | 8 | 109 | 0 / 84 / 25 | 0 / 17 / 88 / 4 |
+| [**EC-01** Electrical Test and Measurement Instrument Calibration](EC-01.md) | 22 | 329 | 9 / 245 / 75 | 0 / 71 / 214 / 44 |
+| [**EC-02** RF and Microwave Device Calibration](EC-02.md) | 15 | 208 | 9 / 152 / 47 | 0 / 34 / 144 / 30 |
+| [**EC-03** Dimensional and Geometric Instrument Calibration](EC-03.md) | 20 | 267 | 6 / 192 / 69 | 1 / 68 / 174 / 24 |
+| [**EC-04** Mass, Force, Torque and Hardness Instrument Calibration](EC-04.md) | 15 | 209 | 4 / 150 / 55 | 0 / 47 / 132 / 30 |
+| [**EC-05** Pressure, Vacuum and Flow Instrument Calibration](EC-05.md) | 16 | 210 | 4 / 150 / 56 | 0 / 49 / 145 / 16 |
+| [**EC-06** Temperature and Humidity Instrument Calibration](EC-06.md) | 18 | 243 | 7 / 170 / 66 | 0 / 49 / 162 / 32 |
+| [**EC-07** Time, Frequency and Timing Device Calibration](EC-07.md) | 6 | 76 | 2 / 53 / 21 | 1 / 22 / 39 / 14 |
+| [**EC-08** Optical, Photometric and Radiometric Instrument Calibration](EC-08.md) | 10 | 128 | 2 / 93 / 33 | 0 / 30 / 88 / 10 |
+| [**EC-09** Chemical and Analytical Instrument Calibration](EC-09.md) | 13 | 168 | 2 / 119 / 47 | 0 / 36 / 120 / 12 |
+| [**EC-10** Ionising Radiation Instrument Calibration](EC-10.md) | 9 | 116 | 4 / 82 / 30 | 0 / 21 / 75 / 20 |
+| [**EC-11** Acoustic and Vibration Instrument Calibration](EC-11.md) | 10 | 135 | 0 / 104 / 31 | 0 / 21 / 96 / 18 |
 | [**EC-12** Medical and Biomedical Equipment Calibration](EC-12.md) | 9 | 122 | 1 / 91 / 30 | 0 / 22 / 100 / 0 |
-| [**EC-13** Electrical Power, Energy and High Voltage Equipment Calibration](EC-13.md) | 9 | 120 | 2 / 89 / 29 | 0 / 21 / 90 / 9 |
+| [**EC-13** Electrical Power, Energy and High Voltage Equipment Calibration](EC-13.md) | 10 | 133 | 2 / 98 / 33 | 0 / 23 / 95 / 15 |
 
 ---
 

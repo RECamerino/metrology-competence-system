@@ -166,3 +166,46 @@ domains:
           - { id: EC-10-088, title: "Adjustment of an environmental radiation monitor, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-10-089, title: "Uncertainty budget for an environmental radiation monitor calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-10-090, title: "Conformity statement for an environmental radiation monitor against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-10-A08
+        title: Primary Standard Ionisation Chamber Operation
+        status: draft
+        summary: >-
+          Free-air and cavity chambers that realise air kerma and
+          exposure, operated with the correction factors that make the
+          realisation defensible.
+        elements:
+          - { id: EC-10-091, title: "Receiving inspection and functional check of a primary standard ionisation chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-092, title: "Calibration configuration and stabilisation for a primary standard ionisation chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-093, title: "Selecting the standards and fixturing for a primary standard ionisation chamber calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-094, title: "Free-air chamber operation and collecting volume definition", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-095, title: "Cavity chamber operation and Bragg-Gray application", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-096, title: "Correction factor determination: recombination, polarity, humidity", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-097, title: "Air density, temperature and pressure correction", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-098, title: "Beam quality specification and its effect on the realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-099, title: "Scatter, attenuation and electron loss corrections", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-100, title: "Dissemination to secondary standard chambers", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-101, title: "Adjustment of a primary standard ionisation chamber, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-102, title: "Uncertainty budget for a primary standard ionisation chamber calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-103, title: "Conformity statement for a primary standard ionisation chamber against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-10-A09
+        title: Calorimetric Absorbed Dose Standard Operation
+        status: draft
+        summary: >-
+          Graphite and water calorimeters that realise absorbed dose
+          directly from a temperature rise.
+        elements:
+          - { id: EC-10-104, title: "Receiving inspection and functional check of an absorbed dose calorimeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-105, title: "Calibration configuration and stabilisation for an absorbed dose calorimeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-106, title: "Selecting the standards and fixturing for an absorbed dose calorimeter calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-107, title: "Graphite calorimeter operation and core thermal isolation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-108, title: "Water calorimeter operation and heat defect assessment", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-109, title: "Temperature rise measurement at the millikelvin level", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-110, title: "Heat transfer and gap correction determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-111, title: "Conversion from graphite to water absorbed dose", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-112, title: "Comparison against ionometric standards", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-10-113, title: "Uncertainty budget for an absorbed dose realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-114, title: "Adjustment of an absorbed dose calorimeter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-115, title: "Uncertainty budget for an absorbed dose calorimeter calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-116, title: "Conformity statement for an absorbed dose calorimeter against its specification", kind: judgment, levelCeiling: 4, status: draft }

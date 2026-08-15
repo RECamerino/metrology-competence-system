@@ -185,3 +185,47 @@ domains:
           - { id: EC-08-100, title: "Adjustment of a laser power meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-101, title: "Uncertainty budget for a laser power meter calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-102, title: "Conformity statement for a laser power meter against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-08-A09
+        title: Cryogenic Radiometer and Absolute Detector Operation
+        status: draft
+        summary: >-
+          The electrical substitution radiometer that realises optical
+          power, and the detector chain that carries it to a working
+          meter.
+        elements:
+          - { id: EC-08-103, title: "Receiving inspection and functional check of a cryogenic radiometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-104, title: "Calibration configuration and stabilisation for a cryogenic radiometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-105, title: "Selecting the standards and fixturing for a cryogenic radiometer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-106, title: "Cryogenic radiometer operation and electrical substitution", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-08-107, title: "Cavity absorptance and non-equivalence determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-08-108, title: "Laser power stabilisation and beam handling", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-08-109, title: "Trap detector characterisation against the radiometer", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-08-110, title: "Spectral responsivity scale realisation and interpolation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-08-111, title: "Window transmission and polarisation corrections", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-112, title: "Uncertainty budget for a realised optical power scale", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-08-113, title: "Adjustment of a cryogenic radiometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-114, title: "Uncertainty budget for a cryogenic radiometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-115, title: "Conformity statement for a cryogenic radiometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-08-A10
+        title: Standard Lamp and Photometric Scale Realisation
+        status: draft
+        summary: >-
+          Luminous intensity and spectral irradiance standards, whose
+          operating current, ageing and alignment define the scale they
+          carry.
+        elements:
+          - { id: EC-08-116, title: "Receiving inspection and functional check of a standard lamp", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-117, title: "Calibration configuration and stabilisation for a standard lamp", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-118, title: "Selecting the standards and fixturing for a standard lamp calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-119, title: "Lamp operating current and voltage setting accuracy", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-120, title: "Luminous intensity determination and distance geometry", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-08-121, title: "Spectral irradiance scale realisation and transfer", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-08-122, title: "Lamp ageing, seasoning and burn-hours tracking", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-123, title: "Alignment, orientation and baffling in a photometric bench", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-124, title: "Stray light and ambient rejection on a bench", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-125, title: "Candela realisation from detector-based radiometry", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: EC-08-126, title: "Adjustment of a standard lamp, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-127, title: "Uncertainty budget for a standard lamp calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-128, title: "Conformity statement for a standard lamp against its specification", kind: judgment, levelCeiling: 4, status: draft }

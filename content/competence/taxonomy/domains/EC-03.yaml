@@ -414,3 +414,47 @@ domains:
           - { id: EC-03-239, title: "Adjustment of a template or feeler gauge, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-240, title: "Uncertainty budget for a template or feeler gauge calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-241, title: "Conformity statement for a template or feeler gauge against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-03-A19
+        title: Stabilised Laser and Realisation of the Metre
+        status: draft
+        summary: >-
+          The light source that realises the metre, its frequency locked
+          to an atomic or molecular transition, and the comparison that
+          verifies it.
+        elements:
+          - { id: EC-03-242, title: "Receiving inspection and functional check of a stabilised laser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-243, title: "Calibration configuration and stabilisation for a stabilised laser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-244, title: "Selecting the standards and fixturing for a stabilised laser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-245, title: "Iodine-stabilised and frequency-stabilised laser operation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-246, title: "Locking, servo behaviour and loss-of-lock detection", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-247, title: "Beat frequency comparison against a reference laser", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-248, title: "Frequency comb comparison and absolute frequency measurement", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-249, title: "Recommended radiation selection and its stated uncertainty", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: EC-03-250, title: "Wavelength in air and refractive index correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-251, title: "Uncertainty budget for a realised length", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-252, title: "Adjustment of a stabilised laser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-253, title: "Uncertainty budget for a stabilised laser calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-254, title: "Conformity statement for a stabilised laser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-03-A20
+        title: Interferometric Comparator and Line Scale Calibration
+        status: draft
+        summary: >-
+          The machines that transfer realised length onto gauge blocks
+          and line scales, where the comparator's own errors are the
+          calibration.
+        elements:
+          - { id: EC-03-255, title: "Receiving inspection and functional check of an interferometric comparator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-256, title: "Calibration configuration and stabilisation for an interferometric comparator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-257, title: "Selecting the standards and fixturing for an interferometric comparator calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-258, title: "Gauge block interferometer operation and fringe fraction", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-259, title: "Phase change on reflection and wringing film correction", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-260, title: "Line scale comparator operation and microscope alignment", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-261, title: "Abbe error and comparator geometry", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-262, title: "Environmental measurement for refractive index correction", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-263, title: "Thermal equilibrium and material temperature determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-264, title: "Comparator verification against a known artefact", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-265, title: "Adjustment of an interferometric comparator, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-266, title: "Uncertainty budget for an interferometric comparator calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-267, title: "Conformity statement for an interferometric comparator against its specification", kind: judgment, levelCeiling: 4, status: draft }

@@ -195,3 +195,46 @@ domains:
           - { id: EC-11-107, title: "Adjustment of ultrasonic NDT equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-108, title: "Uncertainty budget for ultrasonic NDT equipment calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-109, title: "Conformity statement for ultrasonic NDT equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-11-A09
+        title: Microphone Reciprocity Apparatus Operation
+        status: draft
+        summary: >-
+          The primary route to a microphone sensitivity, using coupled
+          pairs and no reference microphone at all.
+        elements:
+          - { id: EC-11-110, title: "Receiving inspection and functional check of a reciprocity calibration apparatus", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-111, title: "Calibration configuration and stabilisation for a reciprocity calibration apparatus", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-112, title: "Selecting the standards and fixturing for a reciprocity calibration apparatus calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-113, title: "Coupler selection, volume determination and sealing", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-114, title: "Three-microphone reciprocity measurement execution", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-115, title: "Electrical transfer impedance measurement", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-116, title: "Acoustic transfer impedance and its computation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-117, title: "Heat conduction and capillary tube corrections", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-118, title: "Environmental correction: temperature, pressure, humidity", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-119, title: "Free-field and diffuse-field derivation from pressure sensitivity", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-120, title: "Adjustment of a reciprocity calibration apparatus, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-121, title: "Uncertainty budget for a reciprocity calibration apparatus calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-122, title: "Conformity statement for a reciprocity calibration apparatus against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-11-A10
+        title: Primary Vibration Calibration System Operation
+        status: draft
+        summary: >-
+          Laser interferometric calibration of accelerometers, realising
+          acceleration from displacement and time rather than by
+          comparison.
+        elements:
+          - { id: EC-11-123, title: "Receiving inspection and functional check of a primary vibration calibration system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-124, title: "Calibration configuration and stabilisation for a primary vibration calibration system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-125, title: "Selecting the standards and fixturing for a primary vibration calibration system calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-126, title: "Fringe counting and sine approximation method execution", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-127, title: "Minimum point and fringe disappearance method", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-128, title: "Heterodyne interferometry for phase and magnitude", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-129, title: "Exciter distortion and transverse motion limits for primary work", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-130, title: "Phase shift determination against frequency", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-131, title: "Shock and low-frequency primary calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-132, title: "Uncertainty budget for a primary vibration realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-133, title: "Adjustment of a primary vibration calibration system, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-11-134, title: "Uncertainty budget for a primary vibration calibration system calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-135, title: "Conformity statement for a primary vibration calibration system against its specification", kind: judgment, levelCeiling: 4, status: draft }

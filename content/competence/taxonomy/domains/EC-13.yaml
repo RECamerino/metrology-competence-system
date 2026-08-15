@@ -216,3 +216,25 @@ domains:
           - { id: EC-13-118, title: "Adjustment of standby power test equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-13-119, title: "Uncertainty budget for standby power test equipment calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-120, title: "Conformity statement for standby power test equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-13-A10
+        title: Reference Power and Energy Standard Calibration
+        status: draft
+        summary: >-
+          The wattmeters and energy references a meter-testing
+          laboratory works from, calibrated for phase and waveform as
+          well as magnitude.
+        elements:
+          - { id: EC-13-121, title: "Receiving inspection and functional check of a reference power standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-122, title: "Calibration configuration and stabilisation for a reference power standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-123, title: "Selecting the standards and fixturing for a reference power standard calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-124, title: "Active power accuracy against a reference wattmeter", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-125, title: "Phase angle realisation and its traceability", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-126, title: "Sampling wattmeter operation and synchronisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-127, title: "Current and voltage transducer pairing in a reference system", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-128, title: "Harmonic power measurement traceability", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-129, title: "Comparison against a national power standard", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-13-130, title: "Uncertainty budget for a reference power measurement", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-131, title: "Adjustment of a reference power standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-132, title: "Uncertainty budget for a reference power standard calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-133, title: "Conformity statement for a reference power standard against its specification", kind: judgment, levelCeiling: 4, status: draft }

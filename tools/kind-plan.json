@@ -3087,6 +3087,258 @@
         "EC-13-118": "judgment",
         "EC-13-120": "judgment"
       }
+    },
+    "EC-01-A19": {
+      "default": "skill",
+      "overrides": {
+        "EC-01-279": "judgment",
+        "EC-01-283": "judgment",
+        "EC-01-287": "judgment",
+        "EC-01-288": "judgment",
+        "EC-01-290": "judgment"
+      }
+    },
+    "EC-01-A20": {
+      "default": "skill",
+      "overrides": {
+        "EC-01-293": "judgment",
+        "EC-01-301": "judgment",
+        "EC-01-303": "judgment"
+      }
+    },
+    "EC-01-A21": {
+      "default": "skill",
+      "overrides": {
+        "EC-01-306": "judgment",
+        "EC-01-314": "judgment",
+        "EC-01-316": "judgment"
+      }
+    },
+    "EC-01-A22": {
+      "default": "skill",
+      "overrides": {
+        "EC-01-319": "judgment",
+        "EC-01-326": "knowledge",
+        "EC-01-327": "judgment",
+        "EC-01-329": "judgment"
+      }
+    },
+    "EC-02-A14": {
+      "default": "skill",
+      "overrides": {
+        "EC-02-185": "judgment",
+        "EC-02-188": "knowledge",
+        "EC-02-193": "judgment",
+        "EC-02-195": "judgment"
+      }
+    },
+    "EC-02-A15": {
+      "default": "skill",
+      "overrides": {
+        "EC-02-198": "judgment",
+        "EC-02-206": "judgment",
+        "EC-02-208": "judgment"
+      }
+    },
+    "EC-03-A19": {
+      "default": "skill",
+      "overrides": {
+        "EC-03-244": "judgment",
+        "EC-03-249": "knowledge",
+        "EC-03-252": "judgment",
+        "EC-03-254": "judgment"
+      }
+    },
+    "EC-03-A20": {
+      "default": "skill",
+      "overrides": {
+        "EC-03-257": "judgment",
+        "EC-03-265": "judgment",
+        "EC-03-267": "judgment"
+      }
+    },
+    "EC-04-A11": {
+      "default": "skill",
+      "overrides": {
+        "EC-04-141": "judgment",
+        "EC-04-149": "judgment",
+        "EC-04-151": "judgment",
+        "EC-04-153": "judgment",
+        "EC-04-155": "judgment"
+      }
+    },
+    "EC-04-A12": {
+      "default": "skill",
+      "overrides": {
+        "EC-04-158": "judgment",
+        "EC-04-166": "judgment",
+        "EC-04-167": "judgment",
+        "EC-04-169": "judgment"
+      }
+    },
+    "EC-04-A13": {
+      "default": "skill",
+      "overrides": {
+        "EC-04-172": "judgment",
+        "EC-04-180": "judgment",
+        "EC-04-181": "judgment",
+        "EC-04-183": "judgment"
+      }
+    },
+    "EC-04-A14": {
+      "default": "skill",
+      "overrides": {
+        "EC-04-186": "judgment",
+        "EC-04-192": "judgment",
+        "EC-04-194": "judgment",
+        "EC-04-196": "judgment"
+      }
+    },
+    "EC-04-A15": {
+      "default": "skill",
+      "overrides": {
+        "EC-04-199": "judgment",
+        "EC-04-203": "knowledge",
+        "EC-04-207": "judgment",
+        "EC-04-209": "judgment"
+      }
+    },
+    "EC-05-A15": {
+      "default": "skill",
+      "overrides": {
+        "EC-05-187": "judgment",
+        "EC-05-195": "judgment",
+        "EC-05-197": "judgment"
+      }
+    },
+    "EC-05-A16": {
+      "default": "skill",
+      "overrides": {
+        "EC-05-200": "judgment",
+        "EC-05-208": "judgment",
+        "EC-05-210": "judgment"
+      }
+    },
+    "EC-06-A15": {
+      "default": "skill",
+      "overrides": {
+        "EC-06-192": "judgment",
+        "EC-06-197": "judgment",
+        "EC-06-201": "judgment",
+        "EC-06-203": "judgment"
+      }
+    },
+    "EC-06-A16": {
+      "default": "skill",
+      "overrides": {
+        "EC-06-206": "judgment",
+        "EC-06-211": "judgment",
+        "EC-06-215": "judgment",
+        "EC-06-217": "judgment"
+      }
+    },
+    "EC-06-A17": {
+      "default": "skill",
+      "overrides": {
+        "EC-06-220": "judgment",
+        "EC-06-228": "judgment",
+        "EC-06-230": "judgment"
+      }
+    },
+    "EC-06-A18": {
+      "default": "skill",
+      "overrides": {
+        "EC-06-233": "judgment",
+        "EC-06-238": "knowledge",
+        "EC-06-241": "judgment",
+        "EC-06-243": "judgment"
+      }
+    },
+    "EC-07-A06": {
+      "default": "skill",
+      "overrides": {
+        "EC-07-066": "judgment",
+        "EC-07-072": "judgment",
+        "EC-07-074": "judgment",
+        "EC-07-076": "judgment"
+      }
+    },
+    "EC-08-A09": {
+      "default": "skill",
+      "overrides": {
+        "EC-08-105": "judgment",
+        "EC-08-113": "judgment",
+        "EC-08-115": "judgment"
+      }
+    },
+    "EC-08-A10": {
+      "default": "skill",
+      "overrides": {
+        "EC-08-118": "judgment",
+        "EC-08-122": "judgment",
+        "EC-08-125": "knowledge",
+        "EC-08-126": "judgment",
+        "EC-08-128": "judgment"
+      }
+    },
+    "EC-09-A12": {
+      "default": "skill",
+      "overrides": {
+        "EC-09-145": "judgment",
+        "EC-09-151": "judgment",
+        "EC-09-153": "judgment",
+        "EC-09-155": "judgment"
+      }
+    },
+    "EC-09-A13": {
+      "default": "skill",
+      "overrides": {
+        "EC-09-158": "judgment",
+        "EC-09-166": "judgment",
+        "EC-09-168": "judgment"
+      }
+    },
+    "EC-10-A08": {
+      "default": "skill",
+      "overrides": {
+        "EC-10-093": "judgment",
+        "EC-10-101": "judgment",
+        "EC-10-103": "judgment"
+      }
+    },
+    "EC-10-A09": {
+      "default": "skill",
+      "overrides": {
+        "EC-10-106": "judgment",
+        "EC-10-112": "judgment",
+        "EC-10-114": "judgment",
+        "EC-10-116": "judgment"
+      }
+    },
+    "EC-11-A09": {
+      "default": "skill",
+      "overrides": {
+        "EC-11-112": "judgment",
+        "EC-11-120": "judgment",
+        "EC-11-122": "judgment"
+      }
+    },
+    "EC-11-A10": {
+      "default": "skill",
+      "overrides": {
+        "EC-11-125": "judgment",
+        "EC-11-133": "judgment",
+        "EC-11-135": "judgment"
+      }
+    },
+    "EC-13-A10": {
+      "default": "skill",
+      "overrides": {
+        "EC-13-123": "judgment",
+        "EC-13-129": "judgment",
+        "EC-13-131": "judgment",
+        "EC-13-133": "judgment"
+      }
     }
   }
 }

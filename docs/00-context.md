@@ -447,13 +447,31 @@ It is **not** a restatement of `CM-06`, which owns calibration *methodology* —
 
 **The test: an EC element that could be written without naming the equipment belongs in `CM-06` instead.**
 
-**The pack is now built out: 13 EC domains, 144 equipment types, 1958 elements.** Every area follows one spine — receiving inspection, calibration configuration, standards and fixturing, then adjustment, uncertainty budget, conformity statement — wrapped around the parameters that make that equipment type distinct. The spine repeats because the job genuinely does. The parameters never repeat: no two of the 86 areas share a single parameter element, which is the mechanical form of the rule that an area whose parameters could be swapped for another type's has been written wrong.
+**The pack is now built out: 13 EC domains, 173 equipment types, 2344 elements.** Every area follows one spine — receiving inspection, calibration configuration, standards and fixturing, then adjustment, uncertainty budget, conformity statement — wrapped around the parameters that make that equipment type distinct. The spine repeats because the job genuinely does. The parameters never repeat: no two of the 86 areas share a single parameter element, which is the mechanical form of the rule that an area whose parameters could be swapped for another type's has been written wrong.
 
 Both examples that prompted this now resolve. Searching the viewer for *oscilloscope* returns 26 elements; *RF passive* returns 17, covering attenuation against frequency, return loss, coupler directivity, adapter removal, connector gauging and mismatch uncertainty — none of which existed anywhere in the corpus a day ago.
 
 **The first pass missed things, and a metrologist reading it found them in minutes.** Fixture and custom-gauge calibration against a print — the commonest real calibration in a production environment — was absent entirely. Calibration kits and verification kits appeared only as *parameters* inside the VNA area, never as artefacts with a calibration of their own. Environmental chambers were one line inside a temperature-source area, with altitude and thermal-vacuum chambers missing outright. Fluid colour measurement — Gardner, Saybolt, Lovibond — did not exist. And long-scale DMM calibration was a single title where the actual work is a choice between direct, comparison and bridge methods with a Zener transfer.
 
 That is the shape of the error to expect from a generated pass: the **spine** is reliable and the **coverage** is not. A whole equipment type going missing is invisible from inside the corpus, because nothing in it is wrong — there is simply nothing there, and no check can find an absence it was never told to look for. The second pass added 58 areas and 773 elements, which is a 65% increase on the first, and there is no reason to think a third pass would find nothing.
+
+### The list has to reach the SI, not stop at the bench
+
+A third correction, and the one that changed what the pack is for. An equipment list is only sufficient if it contains **every piece of calibration equipment needed to trace a measurement back to the SI** — not just the tier a technician touches.
+
+The gap was structural and easy to miss because both ends existed. `DP` held the science of the standards: *Josephson effect and voltage standards*, *ITS-90 structure and defining fixed points*, *Microcalorimeters as primary power standards*, *Caesium beam and fountain clocks*. `EC` held the working instruments. **Nothing held the apparatus in between or above** — the torque transducer as a reference standard rather than a parameter inside the torque-wrench area, the force standard machine, the fixed-point cell as something you operate, the Josephson system as hardware somebody keeps running.
+
+So the chain read: working instrument → *nothing* → SI realisation.
+
+`EC` now carries three rungs in every discipline:
+
+| Tier | Example in `EC-04` |
+|---|---|
+| Working instrument | Torque wrench and screwdriver calibration |
+| Reference standard | **Torque transducer and reference torque standard** |
+| SI realisation | **Torque standard machine**; **Kibble balance and primary mass dissemination** |
+
+**The boundary against `DP` is the same one that keeps `EC` out of `CM-06`, one tier up.** `DP-08-002` is knowledge of the Josephson effect. `EC-01-A15` is the competence to run the cryogenic system, select the Shapiro step, detect a mis-biased array, and defend a calibration made with it. One is what the standard *is*; the other is whether this person can *operate* it.
 
 **Both passes were generated, and that is a risk worth naming.** IDs are append-only, so 1185 titles are now permanent. The parameter lists are drawn from ordinary calibration practice and the boundary rule was applied throughout, but a practising metrologist reading their own discipline will find titles they would have worded differently, and a few they would not have included. Correcting a title is free; withdrawing an element means deprecating it. **This wants a discipline-by-discipline review before anything is authored against it**, and the review is cheaper than it looks because a whole equipment type is thirteen to twenty lines in one file.
 

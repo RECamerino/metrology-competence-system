@@ -314,3 +314,46 @@ domains:
           - { id: EC-02-180, title: "Adjustment of a phase noise analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-02-181, title: "Uncertainty budget for a phase noise analyser calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-02-182, title: "Conformity statement for a phase noise analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-02-A14
+        title: Microcalorimeter and Primary RF Power Standard Operation
+        status: draft
+        summary: >-
+          The apparatus that realises RF power, and the transfer
+          standards that carry it out to a working power meter.
+        elements:
+          - { id: EC-02-183, title: "Receiving inspection and functional check of a primary RF power standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-02-184, title: "Calibration configuration and stabilisation for a primary RF power standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-02-185, title: "Selecting the standards and fixturing for a primary RF power standard calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-186, title: "Microcalorimeter operation and thermal equilibrium", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-187, title: "Effective efficiency determination of a transfer standard", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-188, title: "DC substitution and the equivalence assumption", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: EC-02-189, title: "Waveguide and coaxial calorimeter differences", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-190, title: "Transfer standard characterisation and its stability", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-191, title: "Scaling from primary power to a working sensor", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-192, title: "Uncertainty budget for a primary RF power realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-193, title: "Adjustment of a primary RF power standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-194, title: "Uncertainty budget for a primary RF power standard calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-195, title: "Conformity statement for a primary RF power standard against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-02-A15
+        title: Attenuation and Impedance Standard Calibration
+        status: draft
+        summary: >-
+          Piston attenuators, step attenuators and impedance artefacts
+          that define the RF scales, calibrated by ratio rather than by
+          comparison.
+        elements:
+          - { id: EC-02-196, title: "Receiving inspection and functional check of an attenuation standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-02-197, title: "Calibration configuration and stabilisation for an attenuation standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-02-198, title: "Selecting the standards and fixturing for an attenuation standard calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-199, title: "Piston attenuator operation and cutoff calculation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-200, title: "Attenuation measurement by RF substitution", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-201, title: "Intermediate frequency and audio substitution methods", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-202, title: "Step attenuator step accuracy and cumulative error", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-203, title: "Airline and coaxial impedance standard characterisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-204, title: "Waveguide standard dimensional traceability", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-205, title: "Uncertainty budget for an attenuation standard", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-02-206, title: "Adjustment of an attenuation standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-02-207, title: "Uncertainty budget for an attenuation standard calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-02-208, title: "Conformity statement for an attenuation standard against its specification", kind: judgment, levelCeiling: 4, status: draft }

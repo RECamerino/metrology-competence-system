@@ -329,3 +329,92 @@ domains:
           - { id: EC-06-187, title: "Adjustment of a thermal imager, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-188, title: "Uncertainty budget for a thermal imager calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-189, title: "Conformity statement for a thermal imager against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A15
+        title: ITS-90 Fixed Point Cell Realisation and Maintenance
+        status: draft
+        summary: >-
+          The cells that realise the temperature scale, where the
+          plateau, the immersion and the purity of the material are the
+          measurement.
+        elements:
+          - { id: EC-06-190, title: "Receiving inspection and functional check of a fixed point cell", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-191, title: "Calibration configuration and stabilisation for a fixed point cell", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-192, title: "Selecting the standards and fixturing for a fixed point cell calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-193, title: "Triple point of water cell realisation and mantle preparation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-194, title: "Freezing and melting point cell realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-195, title: "Plateau identification, duration and quality assessment", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-196, title: "Immersion characteristic and hydrostatic head correction", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-197, title: "Cell purity, impurity effects and cell comparison", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-06-198, title: "Furnace and maintenance apparatus for fixed points", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-199, title: "Cell handling, storage and long-term consistency", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-200, title: "Uncertainty budget for a fixed point realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-201, title: "Adjustment of a fixed point cell, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-202, title: "Uncertainty budget for a fixed point cell calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-203, title: "Conformity statement for a fixed point cell against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A16
+        title: Standard Platinum Resistance Thermometer Calibration
+        status: draft
+        summary: >-
+          SPRTs calibrated at fixed points and characterised by ITS-90
+          deviation functions — a different instrument and a different
+          job from an industrial RTD.
+        elements:
+          - { id: EC-06-204, title: "Receiving inspection and functional check of a standard platinum resistance thermometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-205, title: "Calibration configuration and stabilisation for a standard platinum resistance thermometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-206, title: "Selecting the standards and fixturing for a standard platinum resistance thermometer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-207, title: "Fixed point calibration and sub-range selection", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-208, title: "ITS-90 deviation function determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-209, title: "W(Ga) and W(Hg) acceptance criteria verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-210, title: "Self-heating determination and zero-power extrapolation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-211, title: "Annealing, quenching and thermal history management", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-06-212, title: "Triple point of water check and drift monitoring", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-213, title: "Capsule, long-stem and high-temperature SPRT specifics", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-214, title: "Insulation resistance and leakage at temperature", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-215, title: "Adjustment of a standard platinum resistance thermometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-216, title: "Uncertainty budget for a standard platinum resistance thermometer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-217, title: "Conformity statement for a standard platinum resistance thermometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A17
+        title: Thermometry Resistance Bridge Calibration
+        status: draft
+        summary: >-
+          The ratio bridges used to read an SPRT, calibrated for ratio
+          linearity because a temperature result is a resistance ratio.
+        elements:
+          - { id: EC-06-218, title: "Receiving inspection and functional check of a thermometry resistance bridge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-219, title: "Calibration configuration and stabilisation for a thermometry resistance bridge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-220, title: "Selecting the standards and fixturing for a thermometry resistance bridge calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-221, title: "Ratio accuracy and linearity across the range", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-222, title: "Bridge linearity verification by resistance build-up", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-223, title: "Standard resistor pairing and its temperature control", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-224, title: "AC and DC bridge differences and quadrature effects", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-225, title: "Measuring current, self-heating and current reversal", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-226, title: "Noise, resolution and averaging behaviour", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-227, title: "Multiplexer and channel-to-channel consistency", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-228, title: "Adjustment of a thermometry resistance bridge, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-229, title: "Uncertainty budget for a thermometry resistance bridge calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-230, title: "Conformity statement for a thermometry resistance bridge against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-06-A18
+        title: Blackbody and Radiance Source Calibration
+        status: draft
+        summary: >-
+          The sources against which radiation thermometers are
+          calibrated, characterised for cavity emissivity, uniformity
+          and aperture.
+        elements:
+          - { id: EC-06-231, title: "Receiving inspection and functional check of a blackbody radiance source", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-232, title: "Calibration configuration and stabilisation for a blackbody radiance source", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-233, title: "Selecting the standards and fixturing for a blackbody radiance source calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-234, title: "Cavity emissivity determination and its uncertainty", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-235, title: "Temperature uniformity of the cavity and its walls", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-236, title: "Aperture size, geometry and size-of-source effect", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-237, title: "Fixed point blackbody realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-238, title: "Radiance temperature and its relation to contact temperature", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: EC-06-239, title: "Window, purge and atmospheric transmission effects", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-240, title: "Long-term stability and drift monitoring", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-241, title: "Adjustment of a blackbody radiance source, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-06-242, title: "Uncertainty budget for a blackbody radiance source calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-243, title: "Conformity statement for a blackbody radiance source against its specification", kind: judgment, levelCeiling: 4, status: draft }

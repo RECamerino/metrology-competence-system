@@ -242,3 +242,122 @@ domains:
           - { id: EC-04-136, title: "Adjustment of density measuring apparatus, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-137, title: "Uncertainty budget for density measuring apparatus calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-04-138, title: "Conformity statement for density measuring apparatus against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-04-A11
+        title: Torque Transducer and Reference Torque Standard Calibration
+        status: draft
+        summary: >-
+          The transducers that carry the torque scale, calibrated as
+          reference standards rather than as working tools. This is the
+          tier a torque wrench calibration is traceable through, and it
+          is a different job from checking a wrench: the transducer is
+          characterised for interpolation, rotational position, and the
+          parasitic components its mounting introduces.
+        elements:
+          - { id: EC-04-139, title: "Receiving inspection and functional check of a reference torque transducer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-140, title: "Calibration configuration and stabilisation for a reference torque transducer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-141, title: "Selecting the standards and fixturing for a reference torque transducer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-142, title: "Calibration in clockwise and anticlockwise directions", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-143, title: "Repeatability with and without rotation about the torque axis", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-144, title: "Reproducibility with remounting between series", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-145, title: "Interpolation deviation and the fitted characteristic", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-146, title: "Zero drift, creep and recovery after loading", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-147, title: "Reversibility and hysteresis determination", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-148, title: "Parasitic bending moment and axial force sensitivity", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-149, title: "Classification against ISO 6789 and ISO 1201-style criteria", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-150, title: "Temperature sensitivity of a torque transducer", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-151, title: "Amplifier and indicator pairing as a calibrated system", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-152, title: "Uncertainty budget for a reference torque transducer", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-153, title: "Adjustment of a reference torque transducer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-154, title: "Uncertainty budget for a reference torque transducer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-155, title: "Conformity statement for a reference torque transducer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-04-A12
+        title: Torque Standard Machine Verification
+        status: draft
+        summary: >-
+          The machines that realise torque from mass and lever arm, or
+          by reference transducer, verified for the quantities they
+          generate rather than the ones they read.
+        elements:
+          - { id: EC-04-156, title: "Receiving inspection and functional check of a torque standard machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-157, title: "Calibration configuration and stabilisation for a torque standard machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-158, title: "Selecting the standards and fixturing for a torque standard machine calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-159, title: "Lever arm length determination and its uncertainty", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-160, title: "Mass set calibration and local gravity application", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-161, title: "Air buoyancy correction in a deadweight torque machine", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-162, title: "Bearing friction and its contribution to generated torque", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-163, title: "Alignment, levelling and axis coincidence", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-164, title: "Reference transducer machine verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-165, title: "Continuous and stepwise loading behaviour", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-166, title: "Machine classification and range of validity", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-04-167, title: "Adjustment of a torque standard machine, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-168, title: "Uncertainty budget for a torque standard machine calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-169, title: "Conformity statement for a torque standard machine against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-04-A13
+        title: Force Standard Machine and Deadweight Force Verification
+        status: draft
+        summary: >-
+          Deadweight, lever-amplified and hydraulic force machines,
+          whose generated force is traceable through mass, gravity and
+          geometry rather than through an indicator.
+        elements:
+          - { id: EC-04-170, title: "Receiving inspection and functional check of a force standard machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-171, title: "Calibration configuration and stabilisation for a force standard machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-172, title: "Selecting the standards and fixturing for a force standard machine calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-173, title: "Deadweight force generation and its computation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-174, title: "Local gravity determination and application", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-175, title: "Air buoyancy correction for a force machine", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-176, title: "Lever ratio determination in an amplified machine", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-177, title: "Alignment, side force and bending in the load train", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-178, title: "Hydraulic amplification machine verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-179, title: "Comparison against a reference force transducer", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-180, title: "Machine classification and stated relative uncertainty", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-04-181, title: "Adjustment of a force standard machine, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-182, title: "Uncertainty budget for a force standard machine calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-183, title: "Conformity statement for a force standard machine against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-04-A14
+        title: Mass Comparator Operation and Verification
+        status: draft
+        summary: >-
+          The balances used for substitution weighing of mass standards,
+          verified for the discrimination and stability the weighing
+          design assumes.
+        elements:
+          - { id: EC-04-184, title: "Receiving inspection and functional check of a mass comparator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-185, title: "Calibration configuration and stabilisation for a mass comparator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-186, title: "Selecting the standards and fixturing for a mass comparator calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-187, title: "Discrimination and repeatability at the working load", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-188, title: "Sensitivity determination with a sensitivity weight", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-189, title: "Automatic weight handler and exchange verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-190, title: "Environmental control: temperature, pressure, humidity", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-191, title: "Drift, thermal equilibrium and settling behaviour", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-192, title: "Weighing design selection and its execution", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-04-193, title: "Vacuum and inert atmosphere comparator operation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-194, title: "Adjustment of a mass comparator, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-195, title: "Uncertainty budget for a mass comparator calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-196, title: "Conformity statement for a mass comparator against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-04-A15
+        title: Realisation of the Kilogram and Primary Mass Dissemination
+        status: draft
+        summary: >-
+          Kibble balance and X-ray crystal density realisation, and the
+          dissemination chain from a realised kilogram to a laboratory's
+          reference set.
+        elements:
+          - { id: EC-04-197, title: "Receiving inspection and functional check of a primary mass realisation", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-198, title: "Calibration configuration and stabilisation for a primary mass realisation", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-199, title: "Selecting the standards and fixturing for a primary mass realisation calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-200, title: "Kibble balance operation: weighing and velocity modes", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-201, title: "Alignment, coil geometry and magnet system stability", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-202, title: "Vacuum operation and buoyancy elimination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-203, title: "X-ray crystal density realisation and sphere characterisation", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: EC-04-204, title: "Dissemination from a realised kilogram to reference standards", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-205, title: "Surface effects, sorption and cleaning in primary mass work", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-206, title: "Uncertainty budget for a primary mass realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-207, title: "Adjustment of a primary mass realisation, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-208, title: "Uncertainty budget for a primary mass realisation calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-209, title: "Conformity statement for a primary mass realisation against its specification", kind: judgment, levelCeiling: 4, status: draft }

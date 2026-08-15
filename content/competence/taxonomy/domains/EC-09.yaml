@@ -255,3 +255,47 @@ domains:
           - { id: EC-09-140, title: "Adjustment of an online process analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-09-141, title: "Uncertainty budget for an online process analyser calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-142, title: "Conformity statement for an online process analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-09-A12
+        title: Primary Reference Material Preparation and Certification
+        status: draft
+        summary: >-
+          Preparing and certifying the materials everything else in
+          chemical measurement is traceable to, where homogeneity and
+          stability are as much the certification as the assigned value.
+        elements:
+          - { id: EC-09-143, title: "Receiving inspection and functional check of a reference material", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-144, title: "Calibration configuration and stabilisation for a reference material", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-145, title: "Selecting the standards and fixturing for a reference material calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-146, title: "Gravimetric preparation and its traceability to mass", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-09-147, title: "Homogeneity assessment and between-bottle variation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-09-148, title: "Stability study design: long-term and transport", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-09-149, title: "Characterisation by primary method of measurement", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-09-150, title: "Assigned value determination and uncertainty statement", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-09-151, title: "Commutability assessment for a matrix material", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-09-152, title: "Packaging, storage and shelf-life assignment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-153, title: "Adjustment of a reference material, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-154, title: "Uncertainty budget for a reference material calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-155, title: "Conformity statement for a reference material against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-09-A13
+        title: Gravimetric Gas Mixture Preparation
+        status: draft
+        summary: >-
+          Gas standards prepared by weighing, where the cylinder
+          treatment and the verification are as important as the
+          gravimetry.
+        elements:
+          - { id: EC-09-156, title: "Receiving inspection and functional check of a gravimetric gas mixture", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-157, title: "Calibration configuration and stabilisation for a gravimetric gas mixture", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-158, title: "Selecting the standards and fixturing for a gravimetric gas mixture calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-159, title: "Gravimetric preparation and component mass determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-09-160, title: "Cylinder treatment, passivation and pre-conditioning", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-09-161, title: "Purity analysis of parent gases and its effect", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-09-162, title: "Verification of a prepared mixture against an independent standard", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-09-163, title: "Stability and adsorption behaviour over time", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-09-164, title: "Dynamic dilution and permeation tube methods", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-165, title: "Uncertainty budget for a gravimetric gas mixture", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-09-166, title: "Adjustment of a gravimetric gas mixture, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-167, title: "Uncertainty budget for a gravimetric gas mixture calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-168, title: "Conformity statement for a gravimetric gas mixture against its specification", kind: judgment, levelCeiling: 4, status: draft }

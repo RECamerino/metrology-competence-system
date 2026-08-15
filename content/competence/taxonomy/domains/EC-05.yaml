@@ -320,3 +320,46 @@ domains:
           - { id: EC-05-182, title: "Adjustment of a hydrometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-183, title: "Uncertainty budget for a hydrometer calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-184, title: "Conformity statement for a hydrometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-05-A15
+        title: Primary Pressure Standard Operation
+        status: draft
+        summary: >-
+          Mercury and ultrasonic interferometer manometers, and the
+          piston gauges characterised dimensionally rather than by
+          comparison.
+        elements:
+          - { id: EC-05-185, title: "Receiving inspection and functional check of a primary pressure standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-186, title: "Calibration configuration and stabilisation for a primary pressure standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-187, title: "Selecting the standards and fixturing for a primary pressure standard calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-188, title: "Mercury manometer column height determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-189, title: "Ultrasonic interferometer manometer operation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-190, title: "Mercury density, temperature and local gravity corrections", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-191, title: "Dimensional characterisation of a piston-cylinder assembly", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-192, title: "Distortion coefficient determination under pressure", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-193, title: "Cross-float between primary and transfer standards", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-194, title: "Uncertainty budget for a primary pressure realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-195, title: "Adjustment of a primary pressure standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-196, title: "Uncertainty budget for a primary pressure standard calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-197, title: "Conformity statement for a primary pressure standard against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-05-A16
+        title: Primary Flow Standard and Prover Calibration
+        status: draft
+        summary: >-
+          Gravimetric, volumetric and sonic nozzle standards that
+          realise flow from mass or volume and time.
+        elements:
+          - { id: EC-05-198, title: "Receiving inspection and functional check of a primary flow standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-199, title: "Calibration configuration and stabilisation for a primary flow standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-200, title: "Selecting the standards and fixturing for a primary flow standard calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-201, title: "Gravimetric flow standard operation and diverter timing", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-202, title: "Volumetric prover and pipe prover calibration by water draw", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-203, title: "Sonic nozzle characterisation and critical flow function", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-204, title: "Bell prover and piston prover verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-205, title: "Diverter timing error and its determination", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-206, title: "Density, temperature and buoyancy corrections in flow realisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-207, title: "Uncertainty budget for a primary flow realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-208, title: "Adjustment of a primary flow standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-05-209, title: "Uncertainty budget for a primary flow standard calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-210, title: "Conformity statement for a primary flow standard against its specification", kind: judgment, levelCeiling: 4, status: draft }
