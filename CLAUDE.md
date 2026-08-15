@@ -30,20 +30,20 @@ Three principles held in tension deliberately:
 
 | | |
 |---|---|
-| Domains / areas / elements | 64 / 491 / **5407** |
+| Domains / areas / elements | 64 / 491 / **5407** — three axes, see rule 14 |
 | Assessable units | 21114 |
 | Ceilings — L2 / L3 / L4 / L5 | 0.6% / 23.3% / 61.1% / 15.0% |
 | Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
 | Content authored | **2 elements** · **1 BOK article** · **1 module** |
 | Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
-| Checks | 0 errors · 247/247 tests · typecheck clean |
+| Checks | 0 errors · 249/249 tests · typecheck clean |
 
 ### Phases
 
 | Phase | What | State |
 |---|---|---|
 | 0 | Foundation — scaffold, licences, schemas, CI, source register | Done |
-| 1 | Taxonomy skeleton + gate review + revision | **Done** |
+| 1 | Taxonomy skeleton + gate review + revision | **Done** — but the skeleton that passed the gate was 2232 elements, and it is now 5407. See *The corpus tripled* below. |
 | 2 | Proficiency rubric, roles, evidence model, credential + exchange + authorization design | **In progress** |
 | 3 | Guardrail kit, gold reference elements, schema freeze | Not started |
 | 4 | Cross-cutting core `CM-01`…`CM-22` — BOK articles first, then the elements that reference them | Not started |
@@ -122,8 +122,8 @@ content/competence/
   roles/registry.yaml             12 reference roles — 11 occupational, 1
                                   authority overlay. Every element needs a
                                   roleTarget for EVERY role — each one added is
-                                  2232 more authored ratings.
-  elements/                       ASSESSABLE CLAIMS, not prose. 1 authored.
+                                  now 5407 more authored ratings.
+  elements/                       ASSESSABLE CLAIMS, not prose. 2 authored.
   items/archetypes/               Reusable parameterized item SHAPES. ARC-nnnn.
   items/bindings/                 One archetype × one (element×level). Scales here.
   items/rubrics/                  Ships in the same commit as its item.
@@ -141,8 +141,8 @@ content/trust-registry.yaml       Issuer trust registry. Steward-controlled.
                                   against it. Admits nobody yet, so nothing
                                   verifies.
 
-schemas/                          16 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 247 tests.
+schemas/                          17 JSON Schemas. Frozen at Phase 3.
+packages/validator/               The ONLY implemented package. 249 tests.
 apps/viewer/                      The only implemented app. TWO templates and a
                                   build script; output is an index page plus one
                                   page per domain, none committed. Every page is
@@ -159,7 +159,7 @@ docs/                             Decision record, playbook, anchor template, go
 
 ### Where the contracts and the executable rules live
 
-Sixteen schemas, and the ones that are not obvious from their names:
+Seventeen schemas, and the ones that are not obvious from their names:
 
 | Schema | Governs |
 |---|---|
@@ -245,7 +245,8 @@ From external architectural review, August 2026. Not a new phase — scope that 
 17. **Cryptosuite identifier needs an interoperability check.** `ecdsa-rdfc-2019-p256` is fixed as a const. Confirm it is the identifier the chosen VC Data Integrity implementation actually expects rather than one invented locally — a standards question, not a metrology one, and cheap to get wrong permanently.
 19. **Experience claims need activity-to-element granularity.** Decision 37 lets one activity credit every element it exercises, which is right. The inverse risk is a claim of forty hours against seventeen elements with nothing recording which part demonstrated which. The declaration is reviewable evidence only if there is something to review.
 20. **An organization's view of a person's record is a disclosure, not a read.** `computeGaps(elements, scope, held)` takes what somebody holds as a plain map, with no record of where it came from or what they consented to share. Decision 34 built the consented, scoped, audit-logged model for accreditation assessors; the employer case — the workforce gap dashboard, which is the feature an organization actually buys — has nothing equivalent, and will otherwise assume it may read everything a person holds, including credentials earned elsewhere that are none of its business. Follows directly from the ownership principle; needs a schema before Phase 9 or 10 decides it by accident.
-21. **Revocation is one-sided.** The issuer sets `status.revoked`; the subject cannot contest it in the data. The intent is stated plainly — revocation is not for an employer who has fallen out with the holder — but `fraud` is unfalsifiable from the holder's side, and the status list a verifier consults belongs to the issuer. Decide whether a holder's counter-statement travels with the credential. Pairs with item 8.
+21. **Revocation is one-sided.** The issuer sets `status.revoked`; the subject cannot contest it in the data. The intent is stated plainly — revocation is not for an employer who has fallen out with the holder — but `fraud` is unfalsifiable from the holder's side, and the status list a verifier consults belongs to the issuer. Decide whether a holder's counter-statement travels with the credential. The registry now carries the issuer's revocations and nothing from the subject, so this is where it would go.
+22. **`knowledgeRefs` proves a link RESOLVES, not that it COVERS.** CI checks the article exists and declares the section; it cannot check that those sections cover the element. `CM-03-052` points at `BOK-0001` §s03 and §s02 honestly and they cover about half of what it assesses — nothing on coverage factors, deriving a standard uncertainty from a certificate, or the negligibility judgement its L4 anchor turns on. The element is schema-valid, CI-clean, and its refresher path is broken for a holder who has forgotten any of those. Recorded in the element's closing note, where a human will read it and no code will. Sibling of items 9, 15 and 16.
 12. **Standards-revision review triggers.** `currency.volatility: controlled` means review is woken by a published revision rather than a calendar. The field exists on articles and elements; the tooling that actually wakes them does not. Tooling, not schema, so it can follow the freeze.
 
 ---
@@ -268,7 +269,19 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 ## Picking up cold
 
-**What actually exists as content.** Four artifacts, and they are worth reading before writing anything — each is the worked reference for its format:
+### The corpus tripled, and most of it is unreviewed
+
+**2232 → 5407 elements in one session.** The `EC` axis (21 packs, 203 equipment types, 2732 elements) and 31 `Foundational Knowledge` areas were **generated in passes** from hand-written per-type specifications. Read that as a warning label, not a boast.
+
+**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 249 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
+
+**Coverage is the thing that is not proven.** A practising metrologist reviewed the equipment axis four times and found real gaps every time — fixture-to-print calibration absent entirely, cal kits present only as parameters, magnetics claimed by a pack that contained none of it, the whole reference-and-primary tier missing between a working instrument and the SI. Each round changed the design rather than adding to it.
+
+The reason it keeps happening is worth internalising: **a missing equipment type is invisible from inside the corpus.** Nothing in it is wrong. There is simply nothing there, and no check finds an absence it was never told to look for. Assume a further pass would find more.
+
+**So: a discipline-by-discipline read by somebody who works in that discipline is owed work, not optional.** It is also cheap now and expensive later — a title can be corrected freely, but an element can only ever be deprecated, and one equipment type is 13–20 lines in one file. `EC-10` (radiation dose standards) and `EC-12` (medical) are where the generated content is least trustworthy.
+
+**What actually exists as content.** Five artifacts, and they are worth reading before writing anything — each is the worked reference for its format:
 
 | | |
 |---|---|
@@ -280,7 +293,7 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 **What the corpus says about itself.** Run `npm run report:coverage` first — its `ITEM GAPS` section names the next content work rather than requiring you to infer it, and it is authoritative where this file has gone stale. Two shapes to expect: elements carrying items with **no authored definition** (a binding claims to test a competence that has no anchors to test against), and elements with items only at upper levels (a candidate cannot climb to an L4 they have no L3 item for). Both are real today.
 
-**The highest-value engineering work is authoring something real against the design.** That exercise has found a genuine flaw four times out of four — the BOK/competence split, the generator-parameter leak, the missing level pin, and the undefined `roleTarget`. Reading the schemas has never found one. If you are choosing what to do next and nothing else is pressing, author an element or bind one and see what breaks.
+**The highest-value engineering work is authoring something real against the design.** That exercise has found a genuine flaw **five times out of five** — the BOK/competence split, the generator-parameter leak, the missing level pin, the undefined `roleTarget`, and `knowledgeRefs` proving that a link RESOLVES while proving nothing about whether it COVERS (open decision 22). Reading the schemas has never found one. If you are choosing what to do next and nothing else is pressing, author an element or bind one and see what breaks.
 
 **Do not raise stewards or experience-hour validation as next actions.** Both are blocked on people, with no timetable. See the note under Open decisions.
 
