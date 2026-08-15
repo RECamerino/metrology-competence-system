@@ -34,7 +34,7 @@ Three principles held in tension deliberately:
 | Assessable units | 21114 |
 | Ceilings — L2 / L3 / L4 / L5 | 0.6% / 23.3% / 61.1% / 15.0% |
 | Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
-| Content authored | **10 elements** · **4 BOK articles** · **1 module** |
+| Content authored | **19 elements** · **10 BOK articles** · **2 modules** — 8 domains, all three axes |
 | Item bank | 4 archetypes · 28 bindings · **0.1%** of units covered |
 | Checks | 0 errors · 249/249 tests · typecheck clean |
 
@@ -249,13 +249,15 @@ From external architectural review, August 2026. Not a new phase — scope that 
 21. **Revocation is one-sided.** The issuer sets `status.revoked`; the subject cannot contest it in the data. The intent is stated plainly — revocation is not for an employer who has fallen out with the holder — but `fraud` is unfalsifiable from the holder's side, and the status list a verifier consults belongs to the issuer. Decide whether a holder's counter-statement travels with the credential. The registry now carries the issuer's revocations and nothing from the subject, so this is where it would go.
 22. **`knowledgeRefs` proves a link RESOLVES, not that it COVERS.** CI checks the article exists and declares the section; it cannot check that those sections cover the element. `CM-03-052` points at `BOK-0001` §s03 and §s02 honestly and they cover about half of what it assesses — nothing on coverage factors, deriving a standard uncertainty from a certificate, or the negligibility judgement its L4 anchor turns on. The element is schema-valid, CI-clean, and its refresher path is broken for a holder who has forgotten any of those. Recorded in the element's closing note, where a human will read it and no code will. Sibling of items 9, 15 and 16.
 23. **`demonstration` is a scalar and some elements have two evidence routes.** `CM-03-051` is estimated by perturbing a numerical routine (desk) or the physical instrument (bench), the GUM contemplates both, and which is available is a property of the laboratory rather than the element. Forcing one value fails rule 11 in one direction or the other: `equipment` invents a barrier for a learner who could sit it tomorrow with a spreadsheet, `desk` — what the element carries — stops a module declaring access the instrument route genuinely needs. **A freeze question, because `demonstration` is inside the definition pin**, so correcting it later reads as drift on every credential already issued. Three shapes weighed in [`docs/00-context.md`](docs/00-context.md); none chosen. Sibling of item 22 — an author knowing something true about an element with nowhere to put it that participates in anything.
-12. **Standards-revision review triggers.** `currency.volatility: controlled` means review is woken by a published revision rather than a calendar. The field exists on articles and elements; the tooling that actually wakes them does not. Tooling, not schema, so it can follow the freeze.
+24. **The source register has no physics and no safety, and the foundational tier needs both.** 30 registered sources: governance, uncertainty, vocabulary, units, statistics, GPS. Rule 2 requires a clause-level reference to a **registered** source, so anything resting on units or measurement vocabulary is authorable (`DP-08-081`, `094`, `064` all cite the VIM) and anything resting on the physics or the hazard is not — `DP-08-068` (shunt paths) and `DP-08-100` (arc flash) were both attempted and abandoned rather than fitted to a strained citation. Generalises to all 31 foundational areas: mechanics, thermodynamics, fluid dynamics, optics, chemistry. **A licence and editorial-policy question, not authoring work** — the obvious candidates are restricted and land in the same counsel queue as item 1, and whether the project cites textbooks has never been decided. Cheap now, expensive once 443 elements exist. See [`docs/00-context.md`](docs/00-context.md).
+25. **`authoring.goldReference` is author-declared.** An element can be marked as the exemplar others are held to, by the person who wrote it, with no review recorded. Unused so far. Same shape as `bootstrapAuthority` before decision 8b, and Phase 3 is where gold references get created — so the control wants to exist before then.
+12. **Standards-revision review triggers.** `currency.volatility: controlled` means review is woken by a published revision rather than a calendar. The field exists on articles and elements; the tooling that actually wakes them does not. Tooling, not schema, so it can follow the freeze. **One case inverts and the tooling must not assume otherwise: for `historical` content the trigger is a revision of the thing that REPLACED the source, not of the source.** A withdrawn standard will never be revised again, so `CM-08-038` is woken by a new edition of ISO/IEC 17025 or JCGM 106 — never by Z540.3. Wiring "wake content when its cited source is revised" would leave every historical element permanently asleep.
 
 ---
 
 ## What Phase 2 has to produce
 
-**Done:** proficiency ladder · 12 reference roles · **per-element anchor template** ([`docs/anchor-template.md`](docs/anchor-template.md), with a CI lint rejecting unobservable phrasing) · item parameterization format (archetypes + bindings, decision 36) · rubric format · experience hours and waiting periods (decision 37) · recertification defaults per level.
+**Done:** proficiency ladder · 12 reference roles · **per-element anchor template** ([`docs/anchor-template.md`](docs/anchor-template.md), with a CI lint rejecting unobservable phrasing, and separate upper-rung guidance for `knowledge` — its L4/L5 rows were phrased for `skill` and `judgment`, which made them unfollowable for the 108 knowledge elements at ceiling 5) · item parameterization format (archetypes + bindings, decision 36) · rubric format · experience hours and waiting periods (decision 37) · recertification defaults per level.
 
 **Also done:** credential schema and provenance tiers · **authorization as a first-class object** · attempt ledger, challenge-exam no-retake rule, and exposure control.
 
@@ -283,17 +285,25 @@ The reason it keeps happening is worth internalising: **a missing equipment type
 
 **So: a discipline-by-discipline read by somebody who works in that discipline is owed work, not optional.** It is also cheap now and expensive later — a title can be corrected freely, but an element can only ever be deprecated, and one equipment type is 13–20 lines in one file. `EC-10` (radiation dose standards) and `EC-12` (medical) are where the generated content is least trustworthy.
 
-**What actually exists as content.** All of it is `CM-03`, and it is worth reading before writing anything — each artifact is the worked reference for its format:
+**What actually exists as content.** Two clusters, and they were authored for different reasons. The `CM-03` set closed a real defect; the rest were chosen deliberately to STRESS THE SCHEMA before the Phase 3 freeze, picking the weirdest shapes rather than the easiest ones. Each artifact is the worked reference for its format:
 
 | | |
 |---|---|
 | `BOK-0001` | `correlation-and-covariance.md` — five sections, one marked `contested` with both positions recorded |
 | `BOK-0002`–`0004` | Type B distributions, sensitivity coefficients and linearisation, completeness and double-counting. Written to serve the eight elements below, each carries one `contested` section, and between them they closed two of the three gaps `CM-03-052` recorded against itself |
 | `CM-03-053` | `skill`, ceiling 5, `demonstration: desk`, five performance anchors, twelve role targets, bound at every level |
-| `CM-03-052` | The second element, authored AFTER its items existed. `skill`, ceiling 4. Read its closing note: it now records what the new articles closed, what is still missing (the coverage factor in the REPORTING direction, which belongs to `CM-03-060`), and why the element still cannot go `stable` |
+| `CM-03-052` | The second element, authored AFTER its items existed. `skill`, ceiling 4. Read its closing note: it records what the new articles closed, what is still missing (the coverage factor in the REPORTING direction, which belongs to `CM-03-060`), and why it still cannot go `stable` |
 | `CM-03-019`, `036`, `038`, `040`, `046`, `050`, `051`, `056` | The eight that had bindings and no definition — a binding claiming to test a competence with no anchors to test against. Authored to close that. Four `skill`, three `judgment`, ceilings 4 and 5 |
-| `MOD-0001` | The only module. States what it `cannotConvey`; deliberately declares NO physical demonstration, because its element is desk work |
-| `ARC-0001`–`0004` | `ARC-0004` is the one built to span a family; the other three are narrow |
+| **The schema probes** | Below. Read these before authoring outside `CM-03` — each is the only worked example of its shape |
+| `BOK-0005` + `DP-08-081`, `094`, `064` | Foundational tier. `knowledge` and `skill` at **ceiling 2**, no prerequisites, every role target identical. The shape most of the corpus's 443 foundational elements will take |
+| `BOK-0006` + `EC-01-030` | The only `EC` element and the only **`demonstration: equipment`** one. Cross-axis prerequisite into `DP-08`. Read it with `MOD-0002` |
+| `BOK-0007` + `CM-15-046`, `052` | Adjacent competency. `046` is `normative`; `052` is **`accepted-practice`** — the worked case of rule 2's "no clause requires anything of anybody" |
+| `BOK-0008` + `CM-21-012` | **`interpretation`** + `volatile`. Its subject is fabricated clause references, which is a defect this corpus's own CI cannot detect |
+| `BOK-0009` + `CM-08-038` | **`historical`** — a withdrawn standard still contractually binding. Article carries the only `jurisdiction-dependent` section |
+| `BOK-0010` + `DP-20-002` | **`emerging`** + the only `recertificationMonths`. `knowledge` at ceiling 5 |
+| `MOD-0001` | Prepares for a `desk` element and deliberately declares NO physical demonstration |
+| `MOD-0002` | Prepares for an `equipment` element and MUST declare it. The two modules are the two halves of rule 11, and CI enforces both directions — verified by deliberately breaking each |
+| `ARC-0001`–`0004` | `ARC-0004` is the one built to span a family; the other three are narrow. **No archetype yet binds anything outside `CM-03`** |
 
 **What the corpus says about itself.** Run `npm run report:coverage` first — its `ITEM GAPS` section names the next content work rather than requiring you to infer it, and it is authoritative where this file has gone stale. Two shapes to expect. Elements carrying items with **no authored definition** — a binding claiming to test a competence that has no anchors to test against — which stood at eight and is now **zero**. And elements with items only at upper levels, a candidate unable to climb to an L4 they have no L3 item for, which is still real: eight elements have unbound attainable levels. Several of those are **deliberate and documented in the binding file**, because at L1 the archetype supplies the values the element exists to obtain, and padding `ARC-0004` into the slot would inflate the reuse figure while assessing nothing. Read the binding's comment before treating a gap as work.
 

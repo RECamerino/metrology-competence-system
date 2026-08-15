@@ -570,6 +570,31 @@ Every foundational area is titled **`Foundational Knowledge — <what it covers>
 
 Where they do not is a decision rather than an omission. `CM-01` and `CM-02` get none because they *are* the corpus's foundational layer; a tier beneath *What measurement is, and what it is not* would be inventing depth downward. Nine core domains get none because nobody's first day is measurement decision risk or AI in metrology — those are specialist practice reached from elsewhere, not disciplines somebody enters cold.
 
+### …and the source register cannot support it
+
+Open item 11. Found by trying to author `DP-08-A07` and getting three elements out of five.
+
+Rule 2 requires every element to carry a clause-level reference to a source **registered in `content/sources/registry.yaml`**. The reference need not be normative — accepted practice, research and interpretation all qualify, and a handbook is a perfectly good source. What it must be is *registered*.
+
+The register holds 30 sources. Sorted by what they are about, they are: measurement governance and accreditation (ISO/IEC 17025, 17011, 9001, 10012, ILAC, the MRA, Z540 series, NCSLI RP-1), uncertainty (the JCGM family, UKAS M3003, EURAMET cg-18, NIST TN 1297), vocabulary and units (VIM ×2, the SI Brochure, NIST SP 811), statistics (the NIST/SEMATECH handbook), and geometrical product specification (ASME Y14.5, ISO 1101, ISO 14253-1).
+
+**There is no physics in it, and no safety.**
+
+That was invisible while every authored element was in `CM-03`, because uncertainty evaluation is exactly what the register covers. It becomes load-bearing the moment the foundational tier is authored, and it divides the tier cleanly in two:
+
+- **Authorable now.** Anything resting on units or on measurement vocabulary. `DP-08-081` (digits and counts) and `DP-08-094` (resolution, accuracy, precision) cite VIM entries; `DP-08-064` (computing a tolerance) cites the VIM's maximum permissible error. `DP-08-053` is citable against the SI Brochure.
+- **Not authorable.** Anything resting on the physics or the hazard. `DP-08-068` (current dividers and unintended shunt paths) is circuit behaviour and no registered source describes it. `DP-08-100` (arc flash and stored energy) needs an electrical-safety source and there is none. Both were attempted and abandoned rather than fitted to a strained citation.
+
+And it generalises, because every foundational area has the same shape. Mechanics for `DP-02`, thermodynamics for `DP-05`, fluid dynamics for `DP-07`, optics for `DP-12`, chemistry for `DP-16`. **443 elements across 31 areas, of which an unknown but substantial fraction cannot be cited against anything currently registered.**
+
+Three things follow, and none of them is authoring work:
+
+1. **Registering a source is a licence judgement, not an editorial one.** Each entry needs a tier, a quotation policy, a `termsBasis` and a `termsReviewedOn`. The obvious candidates — NFPA 70E, IEC 61010, the IEEE standards, ISO 80000 for quantities and units — are all restricted, so each one lands in the same `CONFIRM-WITH-COUNSEL` queue that already blocks quotation. Citation is unaffected by that queue and registration is not.
+2. **Textbooks are legitimate and nobody has decided on them.** Rule 2 permits a non-normative source and the register already contains a handbook. Whether the project cites textbooks for foundational physics — and if so which, chosen by whom, and how a reader without that book follows the reference — has never been discussed.
+3. **It is cheap now and expensive later.** The tier is unwritten. Deciding the source policy before 443 elements exist costs a conversation; deciding it afterwards means revisiting every one of them, and elements are append-only.
+
+The failure mode to avoid is the one that was nearly taken here: reaching for a governance clause that is *adjacent* to the subject and writing a `relevance` that strains to connect them. `ISO/IEC 17025 §6.3` is about facilities and environmental conditions and could be made to look like a citation for an arc-flash element. It would pass CI, it would be dishonest, and the corpus's entire value is that its references hold up.
+
 **No `EC` pack gets one either**, and that is the least obvious call. Equipment-family entry knowledge already exists in two places: the quantity fundamentals sit in the paired `DP` foundational area, and bench practice sits in `CM-06` *Calibration at the Bench* and `CM-12` *The Laboratory Environment and Bench Discipline* — both written in this pass with the equipment packs in mind. Twenty-one more foundational areas would have duplicated both, and duplication in a corpus this size is worse than absence because two copies drift.
 
 The pass also produced seven duplicate element titles — four pre-existing `DP`/`EC` collisions where the same words described knowing a technique and performing it, and three introduced by the new areas. All seven were retitled, and the collision is now a standing check rather than something found by ad-hoc script. `checkDuplicateTitles` warns rather than errors: two identically titled elements are still distinct competences, but a reader handed one cannot tell which competence a credential names. Its own test caught a defect in it — the first version compared raw strings and would have missed a title differing only by a double space.
@@ -661,4 +686,6 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 8. **Consented disclosure to an employer** — an organization's view of a person's record is a disclosure, not a read, and there is no model for it. Decision 34 built one for accreditation assessors; the workforce gap dashboard has nothing. Follows from [Who owns a person's competency record](#who-owns-a-persons-competency-record). Needs a schema before Phase 9 or 10 settles it by default.
 9. **A holder's counter-statement to revocation** — the issuer can revoke and the subject cannot contest it in the data. Pairs with the trust-registry and status-list work.
 10. **`demonstration` is a scalar, and for some elements the evidence route is not** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). A schema-freeze question, not a content one.
+11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
+12. **`authoring.goldReference` is author-declared** — an element can be marked as the exemplar others are held to, by the person who wrote it, with no review recorded. Unused so far. This is the shape decision 8b removed from `bootstrapAuthority`, and Phase 3 is where gold references get created, so it wants a control before then rather than after.
 7. **Skeleton scale** — resolved. Landed at 2232 elements across 257 areas and 43 domains, against a 2000+ target.
