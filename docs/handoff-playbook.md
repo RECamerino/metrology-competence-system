@@ -125,6 +125,24 @@ Use `null` only where the element could **never** be part of that role's work in
 
 The commonest error will be using null as a soft "probably not relevant". That silently removes the requirement for everyone, including the person for whom it was the whole job.
 
+**Decide null against the element's L1 anchor, not against its title.** This is the rule that actually resolves the hard cases, and it was missing until eight elements were authored against it.
+
+The difficulty is real. `metrology-technician-i` is defined as not evaluating uncertainty independently. Read against the *title* of an element like *Assigning a rectangular distribution*, that looks like null. Read against its **L1 anchor** — *given a source statement already identified as a stated limit and told the shape to assign, produces the standard uncertainty* — it plainly is not: that is a technician applying an existing budget, which the role does every day. The title describes the element at its ceiling. The roleTarget question is about the floor.
+
+So: **null means the role could not perform what the L1 anchor describes, in any deployment.** If it could, the target is 1. Nothing in between is available, and reaching for null because the element's upper levels are out of reach is the same error as using null for "probably not relevant" — it removes the requirement at *every* level, including the one the role genuinely needs.
+
+`kind` is a strong heuristic once you look at it this way, and it is worth knowing why:
+
+| `kind` | What L1 typically asks | Effect on null |
+|---|---|---|
+| `skill` | A supplied-step performance — values given, target pointed out | Reachable by more roles than the title suggests. Null is **rarer** than it looks |
+| `judgment` | Still a decision under ambiguity, even framed | A role defined as not exercising independent judgement in that area is null **at every level**. Null is **commoner** |
+| `knowledge` | An explanation of something framed for them | Usually reachable; null is rare |
+
+Worked from the CM-03 set, for `metrology-technician-i`: `null` on `CM-03-019`, `040` and `046` — all `judgment`, all of whose L1 anchors are decisions the role does not make. `1` on `CM-03-036` and `038` — both `skill`, both of whose L1 anchors are steps performed inside a budget somebody else built. And `null` again on `CM-03-050`, `051` and `056`, not because they are hard but because deriving or estimating a sensitivity coefficient is *constructing* a budget rather than applying one, which the role excludes at any level.
+
+That last group is the point of the rule. Two of those three are `skill` elements with perfectly ordinary L1 anchors, and the heuristic still gives null — because the question was never the anchor's difficulty, it was whether the role does that kind of work at all.
+
 **Choosing `levelCeiling` honestly.** Most elements top out at 3. Reserve 4 for elements with real practitioner-level depth, and 5 for elements where genuine expert practice exists — where a person could plausibly spend a career and still be learning. Inflating ceilings manufactures depth that is not there and creates assessable units nobody can write items for.
 
 ### 2. Write the file

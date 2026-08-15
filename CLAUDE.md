@@ -34,8 +34,8 @@ Three principles held in tension deliberately:
 | Assessable units | 21114 |
 | Ceilings — L2 / L3 / L4 / L5 | 0.6% / 23.3% / 61.1% / 15.0% |
 | Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
-| Content authored | **2 elements** · **1 BOK article** · **1 module** |
-| Item bank | 4 archetypes · 28 bindings · **0.3%** of units covered |
+| Content authored | **10 elements** · **4 BOK articles** · **1 module** |
+| Item bank | 4 archetypes · 28 bindings · **0.1%** of units covered |
 | Checks | 0 errors · 249/249 tests · typecheck clean |
 
 ### Phases
@@ -88,7 +88,7 @@ Three principles held in tension deliberately:
 
 **9. Training teaches; it never proves.** A module produces a training record, not a credential — `attestsCompetence` is `const false`. Every module states in `cannotConvey` what its format cannot teach. See decision 45.
 
-**10. A roleTarget is a scoped minimum requirement.** It states the level a role needs *if* the element is in that person's deployment scope — normative, not typical, not aspirational. It does **not** imply the element applies to anyone. **An element outside scope cannot produce a gap.** `null` means the element could never be that role's work in any deployment, which is not the same as "not in this person's scope". See decision 48.
+**10. A roleTarget is a scoped minimum requirement.** It states the level a role needs *if* the element is in that person's deployment scope — normative, not typical, not aspirational. It does **not** imply the element applies to anyone. **An element outside scope cannot produce a gap.** `null` means the element could never be that role's work in any deployment, which is not the same as "not in this person's scope". **Decide null against the element's L1 anchor, not its title** — the title describes the ceiling and the rating question is about the floor, and without that tie-breaker two authors following the rule correctly produce opposite ratings on the same element. If the role could do what L1 describes, the target is 1; null removes the requirement at *every* level. A `judgment` element's L1 is still a decision under ambiguity, so null is commoner there than on `skill`. See decision 48 and [`docs/handoff-playbook.md`](docs/handoff-playbook.md) for the worked CM-03 ratings.
 
 **10b. A role is an occupation or an authority overlay, and they are not the same kind of thing.** Every role declares `roleType`. `occupational` is a job with a competence profile of its own; `authority-overlay` is a permission granted on top of one — a person is *Calibration Engineer AND Approved Signatory*. `approved-signatory` is the only overlay in the shipped registry, and it sat beside the occupations unmarked, so gap analysis reported shortfalls against it as **competence** gaps and invited an organization to read "close these" as the route to signatory status. It is not: the authority is granted, recognised at that laboratory for that scope, and ends on departure. A deployment scope names an occupation in `role` and overlays in `overlays`; an overlay in `role` is an **error**. Overlay gaps are still computed and still real — they answer *could this person be granted this*, never *have they earned it* — and every `Gap` carries `basis` so a renderer cannot blend the two by accident. This is rule 6 reaching the role model, which is where it had not.
 
@@ -123,7 +123,8 @@ content/competence/
                                   authority overlay. Every element needs a
                                   roleTarget for EVERY role — each one added is
                                   now 5407 more authored ratings.
-  elements/                       ASSESSABLE CLAIMS, not prose. 2 authored.
+  elements/                       ASSESSABLE CLAIMS, not prose. 10 authored,
+                                  all in CM-03.
   items/archetypes/               Reusable parameterized item SHAPES. ARC-nnnn.
   items/bindings/                 One archetype × one (element×level). Scales here.
   items/rubrics/                  Ships in the same commit as its item.
@@ -199,7 +200,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 247 guardrail tests
+npm test                  # 249 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:quotes     # complete quotation manifest for legal review
@@ -247,6 +248,7 @@ From external architectural review, August 2026. Not a new phase — scope that 
 20. **An organization's view of a person's record is a disclosure, not a read.** `computeGaps(elements, scope, held)` takes what somebody holds as a plain map, with no record of where it came from or what they consented to share. Decision 34 built the consented, scoped, audit-logged model for accreditation assessors; the employer case — the workforce gap dashboard, which is the feature an organization actually buys — has nothing equivalent, and will otherwise assume it may read everything a person holds, including credentials earned elsewhere that are none of its business. Follows directly from the ownership principle; needs a schema before Phase 9 or 10 decides it by accident.
 21. **Revocation is one-sided.** The issuer sets `status.revoked`; the subject cannot contest it in the data. The intent is stated plainly — revocation is not for an employer who has fallen out with the holder — but `fraud` is unfalsifiable from the holder's side, and the status list a verifier consults belongs to the issuer. Decide whether a holder's counter-statement travels with the credential. The registry now carries the issuer's revocations and nothing from the subject, so this is where it would go.
 22. **`knowledgeRefs` proves a link RESOLVES, not that it COVERS.** CI checks the article exists and declares the section; it cannot check that those sections cover the element. `CM-03-052` points at `BOK-0001` §s03 and §s02 honestly and they cover about half of what it assesses — nothing on coverage factors, deriving a standard uncertainty from a certificate, or the negligibility judgement its L4 anchor turns on. The element is schema-valid, CI-clean, and its refresher path is broken for a holder who has forgotten any of those. Recorded in the element's closing note, where a human will read it and no code will. Sibling of items 9, 15 and 16.
+23. **`demonstration` is a scalar and some elements have two evidence routes.** `CM-03-051` is estimated by perturbing a numerical routine (desk) or the physical instrument (bench), the GUM contemplates both, and which is available is a property of the laboratory rather than the element. Forcing one value fails rule 11 in one direction or the other: `equipment` invents a barrier for a learner who could sit it tomorrow with a spreadsheet, `desk` — what the element carries — stops a module declaring access the instrument route genuinely needs. **A freeze question, because `demonstration` is inside the definition pin**, so correcting it later reads as drift on every credential already issued. Three shapes weighed in [`docs/00-context.md`](docs/00-context.md); none chosen. Sibling of item 22 — an author knowing something true about an element with nowhere to put it that participates in anything.
 12. **Standards-revision review triggers.** `currency.volatility: controlled` means review is woken by a published revision rather than a calendar. The field exists on articles and elements; the tooling that actually wakes them does not. Tooling, not schema, so it can follow the freeze.
 
 ---
@@ -281,17 +283,19 @@ The reason it keeps happening is worth internalising: **a missing equipment type
 
 **So: a discipline-by-discipline read by somebody who works in that discipline is owed work, not optional.** It is also cheap now and expensive later — a title can be corrected freely, but an element can only ever be deprecated, and one equipment type is 13–20 lines in one file. `EC-10` (radiation dose standards) and `EC-12` (medical) are where the generated content is least trustworthy.
 
-**What actually exists as content.** Five artifacts, and they are worth reading before writing anything — each is the worked reference for its format:
+**What actually exists as content.** All of it is `CM-03`, and it is worth reading before writing anything — each artifact is the worked reference for its format:
 
 | | |
 |---|---|
-| `BOK-0001` | `content/bok/CM-03/correlation-and-covariance.md` — five sections, one marked `contested` with both positions recorded |
+| `BOK-0001` | `correlation-and-covariance.md` — five sections, one marked `contested` with both positions recorded |
+| `BOK-0002`–`0004` | Type B distributions, sensitivity coefficients and linearisation, completeness and double-counting. Written to serve the eight elements below, each carries one `contested` section, and between them they closed two of the three gaps `CM-03-052` recorded against itself |
 | `CM-03-053` | `skill`, ceiling 5, `demonstration: desk`, five performance anchors, twelve role targets, bound at every level |
-| `CM-03-052` | The second element, authored AFTER its items existed. `skill`, ceiling 4. Read its closing note: it records why it cannot go `stable` — `BOK-0001` covers about half of what it assesses, and `knowledgeRefs` cannot say so in data |
+| `CM-03-052` | The second element, authored AFTER its items existed. `skill`, ceiling 4. Read its closing note: it now records what the new articles closed, what is still missing (the coverage factor in the REPORTING direction, which belongs to `CM-03-060`), and why the element still cannot go `stable` |
+| `CM-03-019`, `036`, `038`, `040`, `046`, `050`, `051`, `056` | The eight that had bindings and no definition — a binding claiming to test a competence with no anchors to test against. Authored to close that. Four `skill`, three `judgment`, ceilings 4 and 5 |
 | `MOD-0001` | The only module. States what it `cannotConvey`; deliberately declares NO physical demonstration, because its element is desk work |
 | `ARC-0001`–`0004` | `ARC-0004` is the one built to span a family; the other three are narrow |
 
-**What the corpus says about itself.** Run `npm run report:coverage` first — its `ITEM GAPS` section names the next content work rather than requiring you to infer it, and it is authoritative where this file has gone stale. Two shapes to expect: elements carrying items with **no authored definition** (a binding claims to test a competence that has no anchors to test against), and elements with items only at upper levels (a candidate cannot climb to an L4 they have no L3 item for). Both are real today.
+**What the corpus says about itself.** Run `npm run report:coverage` first — its `ITEM GAPS` section names the next content work rather than requiring you to infer it, and it is authoritative where this file has gone stale. Two shapes to expect. Elements carrying items with **no authored definition** — a binding claiming to test a competence that has no anchors to test against — which stood at eight and is now **zero**. And elements with items only at upper levels, a candidate unable to climb to an L4 they have no L3 item for, which is still real: eight elements have unbound attainable levels. Several of those are **deliberate and documented in the binding file**, because at L1 the archetype supplies the values the element exists to obtain, and padding `ARC-0004` into the slot would inflate the reuse figure while assessing nothing. Read the binding's comment before treating a gap as work.
 
 **The highest-value engineering work is authoring something real against the design.** That exercise has found a genuine flaw **five times out of five** — the BOK/competence split, the generator-parameter leak, the missing level pin, the undefined `roleTarget`, and `knowledgeRefs` proving that a link RESOLVES while proving nothing about whether it COVERS (open decision 22). Reading the schemas has never found one. If you are choosing what to do next and nothing else is pressing, author an element or bind one and see what breaks.
 
