@@ -20,10 +20,12 @@ bundles/
 *.bok.json
 
 # Generated viewer output — rebuilt from the taxonomy with `npm run build:viewer`.
-# Not committed: it is a 234 KB derived file that would churn on every
-# taxonomy edit, and the template plus the build script are the real source.
-apps/viewer/index.html
-apps/viewer/fragment.html
+# Not committed: derived files that would churn on every taxonomy edit, and the
+# templates plus the build script are the real source. One page per domain now,
+# so this is 65 files rather than two.
+apps/viewer/*.html
+!apps/viewer/template.html
+!apps/viewer/index-template.html
 
 # Local databases and wallets — NEVER commit; may contain PII or private keys
 *.sqlite

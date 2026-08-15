@@ -143,7 +143,12 @@ content/trust-registry.yaml       Issuer trust registry. Steward-controlled.
 
 schemas/                          16 JSON Schemas. Frozen at Phase 3.
 packages/validator/               The ONLY implemented package. 247 tests.
-apps/viewer/                      The only implemented app (template + build script).
+apps/viewer/                      The only implemented app. TWO templates and a
+                                  build script; output is an index page plus one
+                                  page per domain, none committed. Every page is
+                                  self-contained and fetches NOTHING — that is
+                                  what lets it be copied to a file share, and CI
+                                  refuses to publish a page that reaches out.
 docs/taxonomy/                    GENERATED. Never hand-edit; CI fails if stale.
 tools/                            Build scripts, ceiling-plan.json, kind-plan.json,
                                   public-projection.ts (the publication allowlist).
@@ -201,7 +206,7 @@ npm run report:quotes     # complete quotation manifest for legal review
 npm run registry:sync     # append new IDs to the lock; commit the result
 npm run build:docs        # regenerate docs/taxonomy/ — commit the result
 npm run check:docs        # fail if docs/taxonomy/ is stale (CI runs this)
-npm run build:viewer      # regenerate apps/viewer/index.html
+npm run build:viewer      # regenerate the viewer: index + one page per domain
 npm run check:airgap      # scan build output for external references
 npm run build:public      # public distribution — BOK ships, item internals do not
 npm run check:leak        # fail if restricted content reached dist/public/ (CI runs this)
