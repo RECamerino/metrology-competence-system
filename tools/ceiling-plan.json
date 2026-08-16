@@ -27,11 +27,35 @@
     "is 4 are practice areas. Nothing defaults to 5 except CM-03-A10 and CM-05-A09,",
     "which are the two genuinely frontier areas in the corpus.",
     "",
-    "FOUNDATIONAL AREAS default to 3 and override DOWN. The floor used to be L3",
-    "for everything, which meant the corpus could not express a competence that",
-    "genuinely tops out below Competent — and every foundational element was",
-    "therefore either inflated to L3 or, as actually happened, left out of the",
-    "corpus altogether. L1 and L2 exist for that case and for no other."
+    "FOUNDATIONAL AREAS default to 3 and override IN BOTH DIRECTIONS. The floor",
+    "used to be L3 for everything, which meant the corpus could not express a",
+    "competence that genuinely tops out below Competent — and every foundational",
+    "element was therefore either inflated to L3 or, as actually happened, left",
+    "out of the corpus altogether. L1 and L2 exist for that case.",
+    "",
+    "This said 'override DOWN ... and for no other' until 2026-08-16, and the one",
+    "area a practising metrologist graded by hand contradicted it: DP-08-A07",
+    "pushed three elements UP to L4 — operating a reference DMM, operating a",
+    "nanovoltmeter, and recognising an implausible reading. Foundational is not",
+    "shallow (rule 13), so an area is not only a place where ceilings fall, and",
+    "an area that comes back with no L4 has probably not been asked the question.",
+    "Nine of the ten graded foundational areas currently have no L4 at all.",
+    "",
+    "GRADING A FOUNDATIONAL AREA — the rule, derived from DP-08-A07's overrides.",
+    "It does NOT track `kind`: eleven knowledge elements went to L2 there and",
+    "twenty-one others were deliberately left at L3.",
+    "  L2  Knowing what a thing IS. Naming, defining, distinguishing, or a single",
+    "      computation with one right answer.",
+    "  L3  Knowing what a thing DOES TO YOUR READING. These titles carry a",
+    "      consequence clause — 'and why a reading needs to settle'.",
+    "  L4  Where genuine expertise exists even in a foundational area.",
+    "",
+    "reviewedBy / reviewedOn record that a person actually judged an area. Without",
+    "them {\"default\": 3, \"overrides\": {}} is ambiguous between 'judged and",
+    "uniform' and 'never looked at' — and 21 of 31 foundational areas are in that",
+    "state as an artefact of the generated pass, not as 21 separate decisions.",
+    "Run `npm run report:foundational` to see which. An area with overrides but no",
+    "reviewer is graded-but-unattributed, which is a weaker claim than reviewed."
   ],
   "areas": {
     "CM-01-A01": {
@@ -4019,7 +4043,17 @@
     },
     "CM-03-A11": {
       "default": 3,
-      "overrides": {}
+      "overrides": {
+        "CM-03-105": 2,
+        "CM-03-107": 2,
+        "CM-03-108": 2,
+        "CM-03-109": 2,
+        "CM-03-110": 2,
+        "CM-03-111": 2,
+        "CM-03-112": 4,
+        "CM-03-114": 2,
+        "CM-03-116": 2
+      }
     },
     "CM-04-A07": {
       "default": 3,

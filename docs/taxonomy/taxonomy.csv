@@ -91,18 +91,18 @@ CM-02,Terminology and the International System of Units,core,CM-02-A06,"Legacy, 
 CM-02,Terminology and the International System of Units,core,CM-02-A06,"Legacy, Customary and Sector Unit Systems",CM-02-044,Sector-specific units in radiation and dosimetry,knowledge,3,1 2 3,draft
 CM-02,Terminology and the International System of Units,core,CM-02-A06,"Legacy, Customary and Sector Unit Systems",CM-02-045,Units in clinical and laboratory medicine,knowledge,3,1 2 3,draft
 CM-02,Terminology and the International System of Units,core,CM-02-A06,"Legacy, Customary and Sector Unit Systems",CM-02-046,Managing mixed-unit environments without error,judgment,3,1 2 3,draft
-CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-105,Significant figures and what they claim,knowledge,3,1 2 3,draft
+CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-105,Significant figures and what they claim,knowledge,2,1 2,draft
 CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-106,Rounding rules and where rounding changes a decision,skill,3,1 2 3,draft
-CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-107,"Resolution, repeatability and accuracy distinguished",knowledge,3,1 2 3,draft
-CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-108,Tolerance and specification limit,knowledge,3,1 2 3,draft
-CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-109,Tolerance and uncertainty distinguished,knowledge,3,1 2 3,draft
-CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-110,Why repeated measurements differ,knowledge,3,1 2 3,draft
-CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-111,Average and spread of a set of readings,skill,3,1 2 3,draft
-CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-112,Outliers and what to do about one,judgment,3,1 2 3,draft
+CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-107,"Resolution, repeatability and accuracy distinguished",knowledge,2,1 2,draft
+CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-108,Tolerance and specification limit,knowledge,2,1 2,draft
+CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-109,Tolerance and uncertainty distinguished,knowledge,2,1 2,draft
+CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-110,Why repeated measurements differ,knowledge,2,1 2,draft
+CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-111,Average and spread of a set of readings,skill,2,1 2,draft
+CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-112,Outliers and what to do about one,judgment,4,1 2 3 4,draft
 CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-113,Reading an uncertainty statement on a certificate,skill,3,1 2 3,draft
-CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-114,Coverage factor and what plus-or-minus means,knowledge,3,1 2 3,draft
+CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-114,Coverage factor and what plus-or-minus means,knowledge,2,1 2,draft
 CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-115,"Error and correction, and applying one",skill,3,1 2 3,draft
-CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-116,Systematic and random effects in plain terms,knowledge,3,1 2 3,draft
+CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-116,Systematic and random effects in plain terms,knowledge,2,1 2,draft
 CM-03,Measurement Uncertainty,core,CM-03-A11,"Foundational Knowledge — Numbers, Spread and What a Tolerance Means",CM-03-117,Recording enough for somebody else to check the result,skill,3,1 2 3,draft
 CM-03,Measurement Uncertainty,core,CM-03-A01,Foundations of the GUM Framework,CM-03-001,Scope and intent of the GUM,knowledge,3,1 2 3,draft
 CM-03,Measurement Uncertainty,core,CM-03-A01,Foundations of the GUM Framework,CM-03-002,The uncertainty approach contrasted with the error approach,knowledge,4,1 2 3 4,draft

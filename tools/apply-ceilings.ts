@@ -38,6 +38,14 @@ const PLAN_PATH = join(REPO_ROOT, 'tools', 'ceiling-plan.json');
 interface AreaPlan {
   default: number;
   overrides?: Record<string, number>;
+  /**
+   * Who judged this area's ceilings, and when. Absent means nobody has — which
+   * is a different claim from "judged and found uniform", and the two were
+   * indistinguishable while a bare default was the only way to say either.
+   * Not consumed here; `npm run report:foundational` reads them.
+   */
+  reviewedBy?: string;
+  reviewedOn?: string;
 }
 interface Plan {
   areas: Record<string, AreaPlan>;
