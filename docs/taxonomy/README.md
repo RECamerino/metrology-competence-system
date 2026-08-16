@@ -20,8 +20,8 @@ The authoritative source is [`content/competence/taxonomy/domains/`](../../conte
 |---|---|
 | Domains | 64 |
 | Competency areas | 491 |
-| Elements | 5407 |
-| Assessable units | 21107 |
+| Elements | 5409 |
+| Assessable units | 21116 |
 
 An assessable unit is one element at one level. Every level is assessed at element scope, so a credential names exactly what was tested.
 
@@ -46,9 +46,9 @@ The highest level attainable for an element. Not every element supports all five
 | Ceiling | Attainable range | Meaning at the ceiling | Elements | Share |
 |---|---|---|---|---|
 | 2 | L1–L2 | Advanced Beginner | 39 | 0.7% |
-| 3 | L1–L3 | Competent | 1252 | 23.2% |
-| 4 | L1–L4 | Proficient | 3307 | 61.2% |
-| 5 | L1–L5 | Expert | 809 | 15.0% |
+| 3 | L1–L3 | Competent | 1252 | 23.1% |
+| 4 | L1–L4 | Proficient | 3308 | 61.2% |
+| 5 | L1–L5 | Expert | 810 | 15.0% |
 
 **L5 is reserved** for elements where a person could plausibly spend a career and still be learning, and where a defensible capstone with cross-organizational review is actually writable.
 
@@ -59,7 +59,7 @@ What kind of competence an element is, and therefore what evidence proves it.
 | Kind | The claim | What proves it | Elements | Share |
 |---|---|---|---|---|
 | Knowledge | I understand this | Explanation, relation, analysis | 953 | 17.6% |
-| Skill | I can perform this | A work product they produced, not an account of it | 3289 | 60.8% |
+| Skill | I can perform this | A work product they produced, not an account of it | 3291 | 60.8% |
 | Judgment | I can decide and defend it | A defence; often no single right answer | 1165 | 21.5% |
 
 **Authority is deliberately not a kind.** Knowledge, skill and judgment are earned and belong to a person. Authority is granted, and is a relationship between a person, an organization and a scope of work. Competency credentials are portable; authorizations are not. See [`../00-context.md`](../00-context.md).
@@ -72,7 +72,7 @@ Competencies every metrological role shares to some degree, including the adjace
 |---|---|---|---|---|
 | [**CM-01** Foundations of Measurement Science](CM-01.md) | 6 | 46 | 43 / 0 / 3 | 0 / 31 / 14 / 1 |
 | [**CM-02** Terminology and the International System of Units](CM-02.md) | 6 | 46 | 33 / 11 / 2 | 0 / 34 / 11 / 1 |
-| [**CM-03** Measurement Uncertainty](CM-03.md) | 11 | 117 | 24 / 52 / 41 | 8 / 10 / 56 / 43 |
+| [**CM-03** Measurement Uncertainty](CM-03.md) | 11 | 118 | 24 / 53 / 41 | 8 / 10 / 57 / 43 |
 | [**CM-04** Traceability, Reference Standards and the CIPM MRA](CM-04.md) | 7 | 60 | 37 / 10 / 13 | 0 / 15 / 31 / 14 |
 | [**CM-05** Statistics and Data Analysis for Metrology](CM-05.md) | 12 | 100 | 19 / 62 / 19 | 0 / 19 / 49 / 32 |
 | [**CM-06** Calibration Methodology and Practice](CM-06.md) | 10 | 89 | 14 / 46 / 29 | 1 / 22 / 51 / 15 |
@@ -99,7 +99,7 @@ Measurement-discipline depth, organised by the QUANTITY measured. Separately ver
 
 | Domain | Areas | Elements | K / S / J | L2 / L3 / L4 / L5 |
 |---|---|---|---|---|
-| [**DP-01** Dimensional and Geometric Metrology](DP-01.md) | 9 | 113 | 33 / 69 / 11 | 5 / 19 / 70 / 19 |
+| [**DP-01** Dimensional and Geometric Metrology](DP-01.md) | 9 | 114 | 33 / 70 / 11 | 5 / 19 / 70 / 20 |
 | [**DP-02** Mass, Force, Torque and Hardness](DP-02.md) | 7 | 80 | 22 / 55 / 3 | 2 / 19 / 44 / 15 |
 | [**DP-03** Pressure, Vacuum, Density and Viscosity](DP-03.md) | 7 | 72 | 23 / 48 / 1 | 2 / 17 / 46 / 7 |
 | [**DP-04** Vibration, Shock and Acoustics](DP-04.md) | 6 | 61 | 19 / 41 / 1 | 0 / 15 / 38 / 8 |

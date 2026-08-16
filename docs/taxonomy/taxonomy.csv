@@ -181,10 +181,11 @@ CM-03,Measurement Uncertainty,core,CM-03-A07,Monte Carlo and Distribution Propag
 CM-03,Measurement Uncertainty,core,CM-03-A07,Monte Carlo and Distribution Propagation,CM-03-075,Random number generation quality and reproducibility,skill,4,1 2 3 4,draft
 CM-03,Measurement Uncertainty,core,CM-03-A07,Monte Carlo and Distribution Propagation,CM-03-076,Software tools for Monte Carlo uncertainty evaluation,skill,4,1 2 3 4,draft
 CM-03,Measurement Uncertainty,core,CM-03-A08,Uncertainty Budgets in Practice,CM-03-077,Structure and layout of an uncertainty budget,skill,4,1 2 3 4,draft
-CM-03,Measurement Uncertainty,core,CM-03-A08,Uncertainty Budgets in Practice,CM-03-078,Building a budget: dimensional measurement,skill,4,1 2 3 4,draft
-CM-03,Measurement Uncertainty,core,CM-03-A08,Uncertainty Budgets in Practice,CM-03-079,Building a budget: electrical measurement,skill,4,1 2 3 4,draft
-CM-03,Measurement Uncertainty,core,CM-03-A08,Uncertainty Budgets in Practice,CM-03-080,Building a budget: temperature measurement,skill,4,1 2 3 4,draft
-CM-03,Measurement Uncertainty,core,CM-03-A08,Uncertainty Budgets in Practice,CM-03-081,Building a budget: mass measurement,skill,4,1 2 3 4,draft
+CM-03,Measurement Uncertainty,core,CM-03-A08,Uncertainty Budgets in Practice,CM-03-078,Building a budget: dimensional measurement,skill,4,1 2 3 4,deprecated
+CM-03,Measurement Uncertainty,core,CM-03-A08,Uncertainty Budgets in Practice,CM-03-079,Building a budget: electrical measurement,skill,4,1 2 3 4,deprecated
+CM-03,Measurement Uncertainty,core,CM-03-A08,Uncertainty Budgets in Practice,CM-03-080,Building a budget: temperature measurement,skill,4,1 2 3 4,deprecated
+CM-03,Measurement Uncertainty,core,CM-03-A08,Uncertainty Budgets in Practice,CM-03-081,Building a budget: mass measurement,skill,4,1 2 3 4,deprecated
+CM-03,Measurement Uncertainty,core,CM-03-A08,Uncertainty Budgets in Practice,CM-03-118,Transferring a budget structure to an unfamiliar measurement type,skill,4,1 2 3 4,draft
 CM-03,Measurement Uncertainty,core,CM-03-A08,Uncertainty Budgets in Practice,CM-03-082,Identifying dominant terms and simplifying defensibly,judgment,4,1 2 3 4,draft
 CM-03,Measurement Uncertainty,core,CM-03-A08,Uncertainty Budgets in Practice,CM-03-083,Best measurement capability and derivation of a CMC,judgment,5,1 2 3 4 5,draft
 CM-03,Measurement Uncertainty,core,CM-03-A08,Uncertainty Budgets in Practice,CM-03-084,Uncertainty across a scope of accreditation,judgment,5,1 2 3 4 5,draft
@@ -1294,6 +1295,7 @@ DP-01,Dimensional and Geometric Metrology,discipline,DP-01-A01,Length Standards 
 DP-01,Dimensional and Geometric Metrology,discipline,DP-01-A01,Length Standards and Realisation,DP-01-009,Ring and plug gauges,skill,4,1 2 3 4,draft
 DP-01,Dimensional and Geometric Metrology,discipline,DP-01-A01,Length Standards and Realisation,DP-01-010,Thermal expansion correction and the 20 degree reference,skill,4,1 2 3 4,draft
 DP-01,Dimensional and Geometric Metrology,discipline,DP-01-A01,Length Standards and Realisation,DP-01-011,Refractive index of air and the Edlen equation,skill,5,1 2 3 4 5,draft
+DP-01,Dimensional and Geometric Metrology,discipline,DP-01-A01,Length Standards and Realisation,DP-01-114,Uncertainty budget for dimensional calibration,skill,5,1 2 3 4 5,draft
 DP-01,Dimensional and Geometric Metrology,discipline,DP-01-A02,Hand Tools and Shop-Floor Instruments,DP-01-012,"Micrometers: principle, error sources and calibration",skill,4,1 2 3 4,draft
 DP-01,Dimensional and Geometric Metrology,discipline,DP-01-A02,Hand Tools and Shop-Floor Instruments,DP-01-013,Vernier and digital calipers,skill,4,1 2 3 4,draft
 DP-01,Dimensional and Geometric Metrology,discipline,DP-01-A02,Hand Tools and Shop-Floor Instruments,DP-01-014,Dial and digital indicators,skill,4,1 2 3 4,draft

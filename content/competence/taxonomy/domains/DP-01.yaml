@@ -64,6 +64,14 @@ domains:
           - { id: DP-01-009, title: "Ring and plug gauges", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-01-010, title: "Thermal expansion correction and the 20 degree reference", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-01-011, title: "Refractive index of air and the Edlen equation", kind: skill, levelCeiling: 5, status: draft }
+          # Added 2026-08-16. Every other DP pack carries a per-technique budget
+          # element at ceiling 5 — DP-02-016, DP-03-011, DP-05-026 and seventeen
+          # more — and DP-01 had none. Its only uncertainty element was
+          # DP-01-057, which is task-specific uncertainty for coordinate
+          # measurement and does not cover length calibration. The gap was
+          # concealed by CM-03-078, a dimensional budget element sitting on the
+          # concept axis; deprecating that one exposed it.
+          - { id: DP-01-114, title: "Uncertainty budget for dimensional calibration", kind: skill, levelCeiling: 5, status: draft }
 
       - id: DP-01-A02
         title: Hand Tools and Shop-Floor Instruments
