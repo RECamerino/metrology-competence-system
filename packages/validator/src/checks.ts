@@ -363,6 +363,18 @@ function checkElementIntegrity(corpus: Corpus): Finding[] {
         continue;
       }
 
+      // The register may record limits for a source whose terms counsel has not
+      // yet confirmed. Those limits describe the intended ceiling once review
+      // completes; until then nothing may be quoted at all. Without this the
+      // CONFIRM-WITH-COUNSEL marker is prose in `notes` that no code reads,
+      // while the machine-readable limits beside it say quotation is fine.
+      if (rules.blockedPendingCounsel) {
+        findings.push(
+          err(at(`quotes ${label}, but legal review of that source's terms is not complete (blockedPendingCounsel). Cite the clause instead — citations are never restricted.`)),
+        );
+        continue;
+      }
+
       const words = wordCount(String(quote.text ?? ''));
       if (rules.maxWordsPerQuote !== undefined && words > rules.maxWordsPerQuote) {
         findings.push(

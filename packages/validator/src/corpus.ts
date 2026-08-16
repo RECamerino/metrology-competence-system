@@ -301,6 +301,7 @@ export interface SourceEntry {
     maxQuotesPerElement?: number;
     requiresCommentary?: boolean;
     strippedInRedistributable?: boolean;
+    blockedPendingCounsel?: boolean;
   };
 }
 

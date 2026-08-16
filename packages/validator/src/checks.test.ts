@@ -65,6 +65,7 @@ const sources = {
         maxWordsPerQuote: 10,
         maxQuotesPerElement: 1,
         requiresCommentary: false,
+        blockedPendingCounsel: false,
       },
       termsBasis: 'Public domain for the purposes of this test fixture.',
       termsReviewedOn: '2026-08-08',
@@ -76,7 +77,7 @@ const sources = {
       publisher: 'Test Publisher',
       edition: '2020',
       tier: 3,
-      quotation: { permitted: false },
+      quotation: { permitted: false, blockedPendingCounsel: false },
       termsBasis: 'No reproduction licence held for the purposes of this test fixture.',
       termsReviewedOn: '2026-08-08',
     },
@@ -307,6 +308,32 @@ test('a restricted quotation without commentary is rejected', () => {
   c.sources = withCommentaryRequired;
 
   assert.ok(errorsOf(c).some((e) => e.includes('no commentary')));
+});
+
+test('a quotation is rejected while the source awaits legal review, even within its limits', () => {
+  const pendingCounsel = structuredClone(sources);
+  pendingCounsel.sources[0]!.quotation.blockedPendingCounsel = true;
+
+  const c = corpus([element({ quotes: [{ source: 'OPEN-SOURCE-1', clause: '5.1', text: 'short quote' }] })]);
+  c.sources = pendingCounsel;
+
+  assert.ok(
+    errorsOf(c).some((e) => e.includes('blockedPendingCounsel')),
+    'a source whose terms counsel has not confirmed must reject quotation regardless of its recorded limits',
+  );
+});
+
+test('a source awaiting legal review may still be cited', () => {
+  const pendingCounsel = structuredClone(sources);
+  pendingCounsel.sources[0]!.quotation.blockedPendingCounsel = true;
+
+  const c = corpus([element({ citations: [{ source: 'OPEN-SOURCE-1', clause: '5.1', relevance: 'Defines the term.' }] })]);
+  c.sources = pendingCounsel;
+
+  assert.ok(
+    !errorsOf(c).some((e) => e.includes('blockedPendingCounsel')),
+    'the block is on quotation only — citations are never restricted, and rule 2 requires them everywhere',
+  );
 });
 
 /* -- Proficiency and role completeness ----------------------------------- */

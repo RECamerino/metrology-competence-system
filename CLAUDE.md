@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
 | Content authored | **19 elements** · **10 BOK articles** · **2 modules** — 8 domains, all three axes |
 | Item bank | 4 archetypes · 28 bindings · **0.1%** of units covered |
-| Checks | 0 errors · 249/249 tests · typecheck clean |
+| Checks | 0 errors · 251/251 tests · typecheck clean |
 
 ### Phases
 
@@ -68,7 +68,7 @@ Three principles held in tension deliberately:
 
 **2. Every element and article carries a clause-level source reference.** `ISO/IEC 17025:2017 §7.6.1`, not "see the standard". Referenceability is universal and CI rejects content without one. It need **not** be *normative*: the corpus covers accepted practice, emerging technique, research and interpretation, plus adjacent competencies — technical writing, teaching, ethics — where no clause requires anything of anybody. The standing of the claim is recorded separately in `currency.authorityStatus`, and whether practitioners agree in a section's `consensus`.
 
-**3. Never paste text from a standard you cannot redistribute.** Quotation is separate from citation and is gated by `content/sources/registry.yaml`. Tier 3 = no quotation at all. Tier 2 = ≤25 words, ≤2 per source per element, with commentary. **Do not author quotations against any source flagged `CONFIRM-WITH-COUNSEL` — legal review is not complete.** Citations are always safe.
+**3. Never paste text from a standard you cannot redistribute.** Quotation is separate from citation and is gated by `content/sources/registry.yaml`. Tier 3 = no quotation at all. Tier 2 = ≤25 words, ≤2 per source per element, with commentary. **Do not author quotations against any source flagged `CONFIRM-WITH-COUNSEL` — legal review is not complete.** That rule is now executable: 24 of the 30 registered sources carry `quotation.blockedPendingCounsel: true`, and the validator rejects any quotation against them regardless of the word and count limits recorded beside it. Those limits stay in the register on purpose — they are the ceiling that takes effect the moment counsel reports, not a claim that quotation is permitted now. Until then the marker was prose in `notes` that no code read, while the machine-readable fields next to it said 80 words were fine. Citations are always safe.
 
 **4. No AI ships in the product.** AI is a knowledge domain (`CM-21`) and an authoring tool. No AI code path reaches a user whose output becomes accreditation evidence. Candidates may freely use their own AI during assessment — items are designed on that assumption.
 
@@ -143,7 +143,7 @@ content/trust-registry.yaml       Issuer trust registry. Steward-controlled.
                                   verifies.
 
 schemas/                          17 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 249 tests.
+packages/validator/               The ONLY implemented package. 251 tests.
 apps/viewer/                      The only implemented app. TWO templates and a
                                   build script; output is an index page plus one
                                   page per domain, none committed. Every page is
@@ -200,7 +200,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 249 guardrail tests
+npm test                  # 251 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:quotes     # complete quotation manifest for legal review
@@ -277,7 +277,7 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 **2232 → 5407 elements in one session.** The `EC` axis (21 packs, 203 equipment types, 2732 elements) and 31 `Foundational Knowledge` areas were **generated in passes** from hand-written per-type specifications. Read that as a warning label, not a boast.
 
-**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 249 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
+**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 251 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
 
 **Coverage is the thing that is not proven.** A practising metrologist reviewed the equipment axis four times and found real gaps every time — fixture-to-print calibration absent entirely, cal kits present only as parameters, magnetics claimed by a pack that contained none of it, the whole reference-and-primary tier missing between a working instrument and the SI. Each round changed the design rather than adding to it.
 
