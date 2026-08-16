@@ -135,6 +135,7 @@ sources:
     edition: "9th edition, 2019 (with 2022 corrections)"
     tier: 1
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 100
       maxQuotesPerElement: 4
@@ -158,6 +159,7 @@ sources:
     edition: "2008 (GUM 1995 with minor corrections)"
     tier: 1
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 80
       maxQuotesPerElement: 4
@@ -183,6 +185,7 @@ sources:
     edition: "2008"
     tier: 1
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 80
       maxQuotesPerElement: 4
@@ -202,6 +205,7 @@ sources:
     edition: "2011"
     tier: 1
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 80
       maxQuotesPerElement: 4
@@ -220,6 +224,7 @@ sources:
     edition: "2009"
     tier: 1
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 80
       maxQuotesPerElement: 4
@@ -238,6 +243,7 @@ sources:
     edition: "2012"
     tier: 1
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 80
       maxQuotesPerElement: 4
@@ -258,6 +264,7 @@ sources:
     edition: "3rd edition, 2008 version with 2012 minor corrections"
     tier: 1
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 60
       maxQuotesPerElement: 6
@@ -280,6 +287,7 @@ sources:
     edition: "09/2020"
     tier: 1
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 60
       maxQuotesPerElement: 3
@@ -302,6 +310,7 @@ sources:
     edition: "09/2019"
     tier: 1
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 60
       maxQuotesPerElement: 3
@@ -322,6 +331,7 @@ sources:
     edition: "07/2020"
     tier: 1
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 60
       maxQuotesPerElement: 3
@@ -340,6 +350,7 @@ sources:
     edition: "1999, as revised"
     tier: 1
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 60
       maxQuotesPerElement: 3
@@ -366,6 +377,7 @@ sources:
     edition: "Edition 4, 2019"
     tier: 2
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 40
       maxQuotesPerElement: 2
@@ -391,6 +403,7 @@ sources:
     edition: "current version"
     tier: 2
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 40
       maxQuotesPerElement: 2
@@ -422,6 +435,7 @@ sources:
     edition: "2017 (third edition)"
     tier: 2
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 25
       maxQuotesPerElement: 2
@@ -450,6 +464,7 @@ sources:
     edition: "2017 (second edition)"
     tier: 2
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 25
       maxQuotesPerElement: 2
@@ -471,6 +486,7 @@ sources:
     edition: "2015 (fifth edition)"
     tier: 2
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 25
       maxQuotesPerElement: 2
@@ -490,6 +506,7 @@ sources:
     edition: "2003"
     tier: 2
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 25
       maxQuotesPerElement: 2
@@ -509,6 +526,7 @@ sources:
     edition: "1994, reaffirmed 2002"
     tier: 2
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 25
       maxQuotesPerElement: 2
@@ -532,6 +550,7 @@ sources:
     edition: "2006, reaffirmed 2013"
     tier: 2
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 25
       maxQuotesPerElement: 2
@@ -562,6 +581,7 @@ sources:
     edition: "2010"
     tier: 2
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 25
       maxQuotesPerElement: 2
@@ -583,6 +603,7 @@ sources:
     edition: "2018"
     tier: 2
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 25
       maxQuotesPerElement: 2
@@ -607,6 +628,7 @@ sources:
     edition: "2017"
     tier: 2
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 25
       maxQuotesPerElement: 2
@@ -626,6 +648,7 @@ sources:
     edition: "2017"
     tier: 2
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 25
       maxQuotesPerElement: 2
@@ -647,6 +670,7 @@ sources:
     edition: "2007"
     tier: 2
     quotation:
+      blockedPendingCounsel: true
       permitted: true
       maxWordsPerQuote: 25
       maxQuotesPerElement: 2

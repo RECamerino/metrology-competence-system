@@ -82,6 +82,11 @@
               "type": "boolean",
               "default": false,
               "description": "When true, quote text from this source is removed by `npm run build:bok --strip-tier2` and replaced with a pointer to the clause. Citations are never stripped."
+            },
+            "blockedPendingCounsel": {
+              "type": "boolean",
+              "default": false,
+              "description": "When true, no quotation may be authored against this source regardless of the limits above, because legal review of its terms is not complete. The limits stay recorded so they take effect the moment counsel reports — this is a gate, not a revision of them. Set on every entry whose `notes` carry CONFIRM-WITH-COUNSEL; that marker is prose and enforces nothing on its own."
             }
           },
           "allOf": [
