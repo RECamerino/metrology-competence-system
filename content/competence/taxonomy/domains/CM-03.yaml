@@ -28,18 +28,18 @@ domains:
           read a number and its digits, what a tolerance says, and why
           repeating a measurement gives a different answer each time.
         elements:
-          - { id: CM-03-105, title: "Significant figures and what they claim", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-03-105, title: "Significant figures and what they claim", kind: knowledge, levelCeiling: 2, status: draft }
           - { id: CM-03-106, title: "Rounding rules and where rounding changes a decision", kind: skill, levelCeiling: 3, status: draft }
-          - { id: CM-03-107, title: "Resolution, repeatability and accuracy distinguished", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: CM-03-108, title: "Tolerance and specification limit", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: CM-03-109, title: "Tolerance and uncertainty distinguished", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: CM-03-110, title: "Why repeated measurements differ", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: CM-03-111, title: "Average and spread of a set of readings", kind: skill, levelCeiling: 3, status: draft }
-          - { id: CM-03-112, title: "Outliers and what to do about one", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-03-107, title: "Resolution, repeatability and accuracy distinguished", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: CM-03-108, title: "Tolerance and specification limit", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: CM-03-109, title: "Tolerance and uncertainty distinguished", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: CM-03-110, title: "Why repeated measurements differ", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: CM-03-111, title: "Average and spread of a set of readings", kind: skill, levelCeiling: 2, status: draft }
+          - { id: CM-03-112, title: "Outliers and what to do about one", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-03-113, title: "Reading an uncertainty statement on a certificate", kind: skill, levelCeiling: 3, status: draft }
-          - { id: CM-03-114, title: "Coverage factor and what plus-or-minus means", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-03-114, title: "Coverage factor and what plus-or-minus means", kind: knowledge, levelCeiling: 2, status: draft }
           - { id: CM-03-115, title: "Error and correction, and applying one", kind: skill, levelCeiling: 3, status: draft }
-          - { id: CM-03-116, title: "Systematic and random effects in plain terms", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-03-116, title: "Systematic and random effects in plain terms", kind: knowledge, levelCeiling: 2, status: draft }
           - { id: CM-03-117, title: "Recording enough for somebody else to check the result", kind: skill, levelCeiling: 3, status: draft }
 
       - id: CM-03-A01
