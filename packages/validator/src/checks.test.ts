@@ -391,6 +391,38 @@ test('a prerequisite pointing at a nonexistent element is rejected', () => {
   assert.ok(errors.some((e) => e.includes('unknown element')));
 });
 
+test('a role cannot need an element whose prerequisite is null for that role', () => {
+  const foundation = element({
+    id: 'CM-01-002',
+    kind: 'skill',
+    levelCeiling: 2,
+    anchors: { '1': LONG, '2': LONG },
+    roleTargets: { 'test-technician': null, 'test-engineer': 2 },
+  });
+  const dependent = element({ id: 'CM-01-001', prerequisites: ['CM-01-002'] });
+
+  const errors = errorsOf(corpus([foundation, dependent]));
+  assert.ok(
+    errors.some((e) => e.includes('test-technician') && e.includes('CM-01-002') && e.includes('never that role')),
+    `expected a roleTarget/prerequisite coherence error, got: ${JSON.stringify(errors)}`,
+  );
+  assert.ok(
+    !errors.some((e) => e.includes('test-engineer')),
+    'the engineer holds a target on both elements and must not be reported',
+  );
+});
+
+test('an unauthored prerequisite has no roleTargets to contradict', () => {
+  // CM-01-002 is in the taxonomy skeleton but has no element file, so there is
+  // nothing to disagree with. Without this the check would fire across most of
+  // the corpus, where prerequisites routinely point at unauthored elements.
+  const errors = errorsOf(corpus([element({ id: 'CM-01-001', prerequisites: ['CM-01-002'] })]));
+  assert.ok(
+    !errors.some((e) => e.includes('never that role')),
+    `an unauthored prerequisite must not trigger the coherence check, got: ${JSON.stringify(errors)}`,
+  );
+});
+
 test('duplicate element IDs across files are rejected', () => {
   const errors = errorsOf(corpus([element(), { ...element(), path: 'content/competence/elements/CM-01/dup.md' }]));
   assert.ok(errors.some((e) => e.includes('also defined in')));

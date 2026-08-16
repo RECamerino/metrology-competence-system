@@ -451,6 +451,54 @@ function checkPrerequisiteGraph(corpus: Corpus): Finding[] {
   };
 
   for (const node of graph.keys()) visit(node);
+
+  /*
+   * A role cannot be required to hold an element whose prerequisite that same
+   * role can never need.
+   *
+   * `null` is not "low priority" — per rule 10 it says the element could never
+   * be that role's work in ANY deployment, and it removes the requirement at
+   * every level. So a numeric target on X plus `null` on a prerequisite of X
+   * asserts two incompatible things: that the role must reach X, and that the
+   * route into X is permanently outside its work. Gap analysis then reports the
+   * role as deficient on X while never surfacing the thing X is built on, and a
+   * supervisor reading that output trains the wrong element.
+   *
+   * Checked only where the prerequisite is authored. An unauthored prerequisite
+   * has no roleTargets to disagree with, so this necessarily grows in reach as
+   * the corpus fills in — which is the point of doing it in CI rather than by
+   * hand across 5407 elements.
+   */
+  const authored = new Map<string, { targets: Record<string, number | null>; path: string }>();
+  for (const element of corpus.elements) {
+    const d = element.data as Record<string, any>;
+    if (d.id) {
+      authored.set(d.id, { targets: (d.roleTargets ?? {}) as Record<string, number | null>, path: element.path });
+    }
+  }
+
+  for (const element of corpus.elements) {
+    const d = element.data as Record<string, any>;
+    const targets = (d.roleTargets ?? {}) as Record<string, number | null>;
+
+    for (const prerequisite of (d.prerequisites ?? []) as string[]) {
+      const prior = authored.get(prerequisite);
+      if (!prior) continue;
+
+      for (const [role, target] of Object.entries(targets)) {
+        if (typeof target !== 'number') continue;
+        if (!(role in prior.targets)) continue;
+        if (prior.targets[role] !== null) continue;
+
+        findings.push(
+          err(
+            `${element.path}: role '${role}' targets level ${target} on ${d.id}, but its prerequisite ${prerequisite} is null for that role — asserting the route into it is never that role's work. Set a target on ${prerequisite}, or null on ${d.id}.`,
+          ),
+        );
+      }
+    }
+  }
+
   return findings;
 }
 

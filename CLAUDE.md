@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
 | Content authored | **19 elements** · **10 BOK articles** · **2 modules** — 8 domains, all three axes |
 | Item bank | 4 archetypes · 28 bindings · **0.1%** of units covered |
-| Checks | 0 errors · 249/249 tests · typecheck clean |
+| Checks | 0 errors · 251/251 tests · typecheck clean |
 
 ### Phases
 
@@ -88,7 +88,7 @@ Three principles held in tension deliberately:
 
 **9. Training teaches; it never proves.** A module produces a training record, not a credential — `attestsCompetence` is `const false`. Every module states in `cannotConvey` what its format cannot teach. See decision 45.
 
-**10. A roleTarget is a scoped minimum requirement.** It states the level a role needs *if* the element is in that person's deployment scope — normative, not typical, not aspirational. It does **not** imply the element applies to anyone. **An element outside scope cannot produce a gap.** `null` means the element could never be that role's work in any deployment, which is not the same as "not in this person's scope". **Decide null against the element's L1 anchor, not its title** — the title describes the ceiling and the rating question is about the floor, and without that tie-breaker two authors following the rule correctly produce opposite ratings on the same element. If the role could do what L1 describes, the target is 1; null removes the requirement at *every* level. A `judgment` element's L1 is still a decision under ambiguity, so null is commoner there than on `skill`. See decision 48 and [`docs/handoff-playbook.md`](docs/handoff-playbook.md) for the worked CM-03 ratings.
+**10. A roleTarget is a scoped minimum requirement.** It states the level a role needs *if* the element is in that person's deployment scope — normative, not typical, not aspirational. It does **not** imply the element applies to anyone. **An element outside scope cannot produce a gap.** `null` means the element could never be that role's work in any deployment, which is not the same as "not in this person's scope". **Decide null against the element's L1 anchor, not its title** — the title describes the ceiling and the rating question is about the floor, and without that tie-breaker two authors following the rule correctly produce opposite ratings on the same element. If the role could do what L1 describes, the target is 1; null removes the requirement at *every* level. **That makes `null` on a prerequisite incompatible with a numeric target on what depends on it**, and CI now rejects the pair: gap analysis would otherwise report the role short on the dependent element while never surfacing the thing it is built on, sending a supervisor to train the wrong element. Checked only where the prerequisite is authored, so its reach grows as the corpus fills in. A `judgment` element's L1 is still a decision under ambiguity, so null is commoner there than on `skill`. See decision 48 and [`docs/handoff-playbook.md`](docs/handoff-playbook.md) for the worked CM-03 ratings.
 
 **10b. A role is an occupation or an authority overlay, and they are not the same kind of thing.** Every role declares `roleType`. `occupational` is a job with a competence profile of its own; `authority-overlay` is a permission granted on top of one — a person is *Calibration Engineer AND Approved Signatory*. `approved-signatory` is the only overlay in the shipped registry, and it sat beside the occupations unmarked, so gap analysis reported shortfalls against it as **competence** gaps and invited an organization to read "close these" as the route to signatory status. It is not: the authority is granted, recognised at that laboratory for that scope, and ends on departure. A deployment scope names an occupation in `role` and overlays in `overlays`; an overlay in `role` is an **error**. Overlay gaps are still computed and still real — they answer *could this person be granted this*, never *have they earned it* — and every `Gap` carries `basis` so a renderer cannot blend the two by accident. This is rule 6 reaching the role model, which is where it had not.
 
@@ -143,7 +143,7 @@ content/trust-registry.yaml       Issuer trust registry. Steward-controlled.
                                   verifies.
 
 schemas/                          17 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 249 tests.
+packages/validator/               The ONLY implemented package. 251 tests.
 apps/viewer/                      The only implemented app. TWO templates and a
                                   build script; output is an index page plus one
                                   page per domain, none committed. Every page is
@@ -179,7 +179,7 @@ Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
 
 | Module | The rule it enforces |
 |---|---|
-| `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules, duplicate titles |
+| `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules, duplicate titles, and that a role never needs an element whose prerequisite is `null` for it |
 | `credentials.ts` | No self-signoff, signoff policy, the wallet boundary, draft-status attestability, evidenced provenance tier, founding-cohort authority, dual custody |
 | `trust.ts` | Offline verification against a registry snapshot, and the age of the answer |
 | `ledger.ts` | Hash chain, no-retake, exposure count, trust horizon |
@@ -200,7 +200,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 249 guardrail tests
+npm test                  # 251 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:quotes     # complete quotation manifest for legal review
@@ -277,7 +277,7 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 **2232 → 5407 elements in one session.** The `EC` axis (21 packs, 203 equipment types, 2732 elements) and 31 `Foundational Knowledge` areas were **generated in passes** from hand-written per-type specifications. Read that as a warning label, not a boast.
 
-**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 249 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
+**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 251 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
 
 **Coverage is the thing that is not proven.** A practising metrologist reviewed the equipment axis four times and found real gaps every time — fixture-to-print calibration absent entirely, cal kits present only as parameters, magnetics claimed by a pack that contained none of it, the whole reference-and-primary tier missing between a working instrument and the SI. Each round changed the design rather than adding to it.
 
