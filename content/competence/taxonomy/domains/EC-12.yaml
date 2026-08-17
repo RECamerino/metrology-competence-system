@@ -14,8 +14,12 @@ domains:
       Calibrating and performance-verifying medical devices, where the
       measurand is a patient parameter, the analyser simulates a
       physiology, and the acceptance criteria come from a clinical
-      standard rather than a manufacturer's specification. Boundary: the
-      measurement science is DP-17.
+      standard rather than a manufacturer's specification. Scope is the
+      whole hospital inventory, not only what a laboratory receives on a
+      bench — hence imaging systems, operating tables and in-situ safety
+      testing. Boundaries: the measurement science is DP-17; calibrating
+      the safety analyser is EC-01, performing the test on a device is
+      EC-12-A10.
 
     competencyAreas:
 
@@ -216,3 +220,60 @@ domains:
           - { id: EC-12-120, title: "Adjustment of theatre equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-121, title: "Uncertainty budget for theatre equipment calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-122, title: "Conformity statement for theatre equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      # Added 2026-08-17. Device-side electrical safety testing appeared in this
+      # pack exactly once — EC-12-036, bolted to the electrosurgery area — while
+      # eight other equipment classes had none and no cross-class element
+      # existed. A candidate holding every other element in EC-12 was attested
+      # to verify a ventilator, a dialyser and an infusion pump and held no
+      # attested competence in the test that decides whether any of them may be
+      # reconnected to a patient. In hospital practice it is the most frequently
+      # performed procedure in the pack.
+      #
+      # Boundary, stated because two neighbours are close. EC-01 has an
+      # Electrical Safety and Hipot Tester Calibration area: that is calibrating
+      # the ANALYSER, one rung up the traceability chain. This area is
+      # performing the test on the device in front of you. DP-17-051 carries the
+      # same subject as foundational KNOWLEDGE at L3 — explanation, not
+      # performance — and cannot bear a performance attestation.
+      #
+      # EC-12-036 stays. Its subject is RF leakage and patient isolation of an
+      # electrosurgical unit, which is a genuinely different measurement from
+      # mains-frequency leakage under a general safety standard. The titles are
+      # close enough that the distinction needs to be written down, which is
+      # what this note is for.
+      #
+      # This area does not carry the full six-element spine. Receiving
+      # inspection, standards and fixturing, uncertainty and conformity all
+      # apply and are present. "Adjustment, and what it does to as-found data"
+      # is deliberately absent: a device under electrical safety test is not
+      # adjusted, it passes or it is withdrawn, so an adjustment element here
+      # would assert a competence that does not exist.
+      - id: EC-12-A10
+        title: Electrical Safety Testing and Device Release
+        status: draft
+        summary: >-
+          Performing an electrical safety test on a medical device and
+          deciding what its result means. Protective earth continuity,
+          the three leakage currents and the applied-part discrimination
+          that sets their limits, in normal and single-fault condition.
+          Boundary: calibrating the safety analyser is EC-01; this is
+          using one on a device. The competence this area exists for is
+          the release decision, not the reading.
+        elements:
+          - { id: EC-12-123, title: "Device classification: Class I, Class II and internally powered", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: EC-12-124, title: "Applied part types B, BF and CF, and what each changes about the limits", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: EC-12-125, title: "Protective earth continuity and resistance measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-126, title: "Earth leakage current in normal and single-fault condition", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-127, title: "Enclosure leakage current and its measurement configuration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-128, title: "Patient leakage current measured by applied-part type", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-129, title: "Patient auxiliary current between applied-part connections", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-130, title: "Mains voltage on the applied part, and when that test applies", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-131, title: "Insulation resistance and dielectric strength on a medical device", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-132, title: "Receiving inspection and functional check before a safety test", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-133, title: "Selecting the analyser, leads and fixturing for the device under test", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-134, title: "Selecting the limit set: standard edition, device class and applied-part type", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-135, title: "Uncertainty of a leakage current measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-136, title: "Conformity statement for an electrical safety test against its limit set", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-137, title: "Electrical safety after repair, and how it differs from periodic testing", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-138, title: "Interpreting a failed safety test and the device-release decision", kind: judgment, levelCeiling: 5, status: draft }
