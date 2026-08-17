@@ -45,6 +45,12 @@ sections:
       figure, conformity statements, and how a consumer validates what it
       receives.
     consensus: contested
+    contestedBasis: source-silent
+    contestedBasisNote: >-
+      The DCC standards are still moving and none of them settles how
+      much of the measurement model a certificate should carry. There is
+      no authority to appeal to yet, which is why this sits alongside an
+      emerging authorityStatus rather than a normative one.
     alternativeViews:
       - position: >-
           A DCC should carry a rich machine-readable model of the measurement,

@@ -60,6 +60,13 @@ sections:
       allowance or a way of publishing a capability the laboratory does not
       routinely achieve.
     consensus: contested
+    contestedBasis: source-ambiguous
+    contestedBasisNote: >-
+      ILAC P14 states the allowance and does not bound it. Whether a
+      repeatability contribution of zero for the best existing device is
+      the intended reading or an over-reach turns on what 'demonstrably
+      realisable' demands as evidence, which the policy leaves to the
+      reader.
     alternativeViews:
       - position: >-
           Where a best existing device could genuinely contribute nothing from

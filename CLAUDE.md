@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
 | Content authored | **21 elements** · **12 BOK articles** · **2 modules** — 8 domains, all three axes |
 | Item bank | 4 archetypes · 28 bindings · **0.1%** of units covered |
-| Checks | 0 errors · 253/253 tests · typecheck clean |
+| Checks | 0 errors · 258/258 tests · typecheck clean |
 
 ### Phases
 
@@ -143,7 +143,7 @@ content/trust-registry.yaml       Issuer trust registry. Steward-controlled.
                                   verifies.
 
 schemas/                          17 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 253 tests.
+packages/validator/               The ONLY implemented package. 258 tests.
 apps/viewer/                      The only implemented app. TWO templates and a
                                   build script; output is an index page plus one
                                   page per domain, none committed. Every page is
@@ -179,7 +179,7 @@ Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
 
 | Module | The rule it enforces |
 |---|---|
-| `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules, duplicate titles, and that a role never needs an element whose prerequisite is `null` for it |
+| `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules, duplicate titles, that a role never needs an element whose prerequisite is `null` for it, that a contested section says WHERE the disagreement lives, and that an item bound to disputed knowledge declares what its scoring must not credit |
 | `credentials.ts` | No self-signoff, signoff policy, the wallet boundary, draft-status attestability, evidenced provenance tier, founding-cohort authority, dual custody |
 | `trust.ts` | Offline verification against a registry snapshot, and the age of the answer |
 | `ledger.ts` | Hash chain, no-retake, exposure count, trust horizon |
@@ -200,7 +200,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 253 guardrail tests
+npm test                  # 258 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:foundational # which foundational areas a person has actually graded
@@ -235,7 +235,7 @@ Changing ceilings or kinds: edit `tools/ceiling-plan.json` or `tools/kind-plan.j
 
 From external architectural review, August 2026. Not a new phase — scope that has to be inside the freeze, because changing it after thousands of articles exist is the same mistake the BOK split avoided by two weeks.
 
-**Done:** knowledge-version provenance (decision 39) · BOK review provenance (decision 40) · disagreement and consensus (decision 41) · role type, occupational vs authority overlay (was item 14) · **trust registry, key lifecycle and the DID profile (was items 8 and 18)**.
+**Done:** knowledge-version provenance (decision 39) · BOK review provenance (decision 40) · disagreement and consensus (decision 41) · role type, occupational vs authority overlay (was item 14) · **trust registry, key lifecycle and the DID profile (was items 8 and 18)** · **where a disagreement lives, and what an item may not score for it** — `consensus` said practitioners disagree and nothing said *why*, so a section contested because its source contradicts itself could not be told from one contested because no source reaches the question, and only the first is resolved by a revision. `contestedBasis` splits them four ways and all four are used by real content. Its consequence for assessment is `positionNeutrality`: an item bound to an element that reaches disputed knowledge must state what the scoring credits and what it must never credit, because a rubric that rewards arriving at the author's position is a validity defect that reads perfectly well on the page. The obligation is **derived, not declared** — the corpus already knows which sections are disputed and which elements reach them, and an author who has to remember a flag is the arrangement that left `CONFIRM-WITH-COUNSEL` unenforceable.
 
 7. **Many paths to competence.** `BOK → module → assessment` must never harden into a mandatory linear course. Self-study, mentoring, a commercial course and prior practice are all legitimate routes to the same assessment, and the competence definition stays independent of any learning provider. Learning resources are plural and vendor-neutral by construction — this is what makes the corpus disruptive without attacking anyone. Needs a schema before Phase 11, and a stated principle now.
 9. **Evidence sufficiency.** Hashing an artifact proves it has not changed; it does not record why it was *sufficient*. The reviewer's sufficiency decision and its rationale need a home, or a credential ends up carrying `sha256:…` with nothing saying why that satisfied anything.
@@ -278,7 +278,7 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 **2232 → 5407 elements in one session.** The `EC` axis (21 packs, 203 equipment types, 2732 elements) and 31 `Foundational Knowledge` areas were **generated in passes** from hand-written per-type specifications. Read that as a warning label, not a boast.
 
-**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 253 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
+**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 258 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
 
 **Coverage is the thing that is not proven.** A practising metrologist reviewed the equipment axis four times and found real gaps every time — fixture-to-print calibration absent entirely, cal kits present only as parameters, magnetics claimed by a pack that contained none of it, the whole reference-and-primary tier missing between a working instrument and the SI. Each round changed the design rather than adding to it.
 

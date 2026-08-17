@@ -19,6 +19,12 @@ bindings:
       stated target. The candidate works from records, notices the first-order
       result is not adequate, and carries the higher-order term — noticing is
       the competence, not the algebra.
+    positionNeutrality: >-
+      Does not engage the disputed question. What is assessed is noticing
+      that the first-order result is inadequate at the stated target,
+      which is a determination the records support. Which treatment to
+      reach for afterwards is the s06 dispute and belongs to the higher
+      levels.
     parameterRanges:
       - name: structural_feature
         choices: [curvature significant at the stated target]
@@ -36,6 +42,15 @@ bindings:
       first-order budget with the reasoning recorded scores as well as a
       higher-order one — which is what stops this becoming a test of whether
       they remembered the higher-order formula.
+    positionNeutrality: >-
+      Engages the disputed question directly, and the binding is built on
+      it: curvature sits near the threshold where either treatment is
+      defensible. A first-order budget with its reasoning recorded scores
+      as well as a higher-order one. Credit the decision, the reasoning
+      and what would change it. Never credit reaching for numerical
+      propagation over a closed-form correction or the reverse — BOK-0003
+      s06 records national-institute practice and small-laboratory
+      practice diverging on exactly this.
     parameterRanges:
       - name: structural_feature
         choices: [curvature near the threshold of significance]
@@ -53,6 +68,13 @@ bindings:
       first-order nor higher-order is defensible on the records alone. The
       element's L5 sits exactly here: no established approach settles it, and
       the answer is a reasoned treatment with the residual assumption stated.
+    positionNeutrality: >-
+      Engages the disputed question at its hardest: neither first-order
+      nor higher-order is defensible on the records, because the input
+      distributions are not known well enough to justify the correction
+      the higher-order route assumes. Credit recognising that both routes
+      fail and saying what evidence would rescue either. Never credit the
+      route chosen.
     parameterRanges:
       - name: structural_feature
         choices: [curvature significant but input distributions insufficiently characterised]

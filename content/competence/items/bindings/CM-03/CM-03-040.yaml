@@ -11,6 +11,14 @@ bindings:
       would not. Draws pit rectangular against normal for a source statement
       that genuinely admits both readings, and the candidate is assigned a
       side so they cannot retreat to the easier one.
+    positionNeutrality: >-
+      Engages the dispute directly: the draw pits rectangular against
+      normal for a statement that honestly admits both. Credit the defence
+      — which reading was taken, what the specification was held to stand
+      behind, and what the choice costs in the reported figure. Never
+      credit rectangular over normal or the reverse. Both are defended in
+      BOK-0002 s05 and a candidate arguing either from the datasheet
+      wording has demonstrated the competence.
     parameterRanges:
       - name: scenario
         choices:
@@ -30,6 +38,12 @@ bindings:
       not settle it. The competence is holding a position under informed
       pressure while naming what evidence would decide it — which is the
       observable behaviour that justifies this element's L5 ceiling.
+    positionNeutrality: >-
+      Engages a dispute of the same kind on different ground — arcsine
+      against rectangular for a cyclic influence, where the literature
+      does not settle it. Credit holding a position under informed
+      pressure, naming what would change it, and conceding the direction
+      of the residual error. Never credit the distribution chosen.
     parameterRanges:
       - name: scenario
         choices:
@@ -49,6 +63,14 @@ bindings:
       committed in someone else's budget rather than as a decision they are
       making themselves. Recognising a wrong assignment is a distinct
       observable from defending a right one.
+    positionNeutrality: >-
+      Engages the dispute from the other side: the reading is already
+      committed in someone else's budget. Credit whether the candidate
+      identifies which reading was taken and whether the records support
+      it. A candidate who finds the original author's assignment
+      defensible and says so has scored the same as one who overturns it —
+      the defect is an assignment nobody can source, not an assignment the
+      reviewer would not have made.
     parameterRanges:
       - name: defect_class
         choices: [wrong divisor]

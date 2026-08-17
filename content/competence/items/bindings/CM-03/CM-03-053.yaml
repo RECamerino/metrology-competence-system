@@ -17,6 +17,12 @@ bindings:
       the inputs as independent. The draw fixes the structural feature to a
       correlated pair and supplies every value, which is what makes this an L1
       item rather than a search task.
+    positionNeutrality: >-
+      Does not engage the disputed question. The pair is pointed out and
+      every value supplied, so the candidate carries a correlation through
+      rather than deciding how to obtain one. The bound-versus-estimate
+      dispute in BOK-0001 s04 arises only where the coefficient cannot be
+      got from the records, which is not this draw.
     parameterRanges:
       - name: structural_feature
         choices: [correlated pair traceable to a shared reference standard]
@@ -34,6 +40,11 @@ bindings:
       standard. That is precisely the step between the element's L1 and L2
       anchors, and it is set here by withdrawing the hint rather than by
       changing the task.
+    positionNeutrality: >-
+      Does not engage the disputed question. The step assessed is noticing
+      that two lines trace to one standard; the values are still supplied.
+      Nothing here turns on how an unobtainable coefficient should be
+      treated.
     parameterRanges:
       - name: structural_feature
         choices: [correlated pair traceable to a shared reference standard]
@@ -51,6 +62,12 @@ bindings:
       reviewer can follow it. The draw supplies raw certificates rather than
       values, which forces the candidate to derive the shared contribution
       rather than be told it.
+    positionNeutrality: >-
+      Does not engage the disputed question. The draw supplies raw
+      certificates from which a coefficient can be derived, so the
+      candidate is on the estimable path that BOK-0001 s04 describes
+      before the disagreement starts. Scoring the derivation and its
+      recorded basis as right or wrong is legitimate here.
     parameterRanges:
       - name: structural_feature
         choices: [correlated pair traceable to a shared reference standard]
@@ -68,6 +85,12 @@ bindings:
       reduces the combined uncertainty rather than raising it — the situation
       that runs against the intuition every other example builds, and where a
       candidate applying a remembered rule gets it backwards.
+    positionNeutrality: >-
+      Does not engage the disputed question. Opposite-signed sensitivity
+      coefficients make the covariance term reduce the combined
+      uncertainty, which is a structural result the sources settle; the
+      difficulty is that it runs against expectation, not that
+      practitioners differ about it.
     parameterRanges:
       - name: structural_feature
         choices:
@@ -88,6 +111,14 @@ bindings:
       nor bounding is simply correct. The defensible answer is a reasoned
       treatment with the residual assumption and its cost stated — which is the
       element's L5 anchor almost word for word.
+    positionNeutrality: >-
+      Engages the disputed question directly: the correlation is
+      unresolvable from the records and a full bound at unity inflates the
+      result past the stated target, which is exactly the case BOK-0001
+      s04 records as divided. Credit stating which treatment was adopted,
+      why, and what it costs. Never credit bounding over a reasoned
+      estimate or the reverse — accredited practice and tight-tolerance
+      practice pull opposite ways and both are defended.
     parameterRanges:
       - name: structural_feature
         choices: [correlated pair whose coefficient cannot be estimated from the records]
