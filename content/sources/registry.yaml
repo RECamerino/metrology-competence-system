@@ -731,3 +731,69 @@ sources:
       Representative ASTM entry. Additional ASTM standards will be registered
       individually as discipline packs are authored. Treat all ASTM material as
       Tier 3 unless a specific basis is documented.
+
+  - id: IEC-60601-1-2020
+    designation: IEC 60601-1:2005+A1:2012+A2:2020 (Ed. 3.2)
+    title: "Medical electrical equipment — Part 1: General requirements for basic safety and essential performance"
+    publisher: International Electrotechnical Commission
+    edition: "Edition 3.2, 2020 consolidated (third edition 2005 with amendments 1:2012 and 2:2020)"
+    tier: 2
+    quotation:
+      blockedPendingCounsel: true
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "IEC webstore or a national committee"
+    termsBasis: >-
+      Copyright IEC. No reproduction licence held, and IEC's own terms of use
+      were not reviewed when this entry was created. Classified Tier 2 by
+      analogy with ISO-IEC-17025-2017 and on the same reasoning: clause-level
+      citation is a factual reference requiring no permission, and brief
+      attributed quotation accompanying original commentary is a bounded use.
+      That is an interpretation twice over — of the terms and of the analogy —
+      and requires legal confirmation before any quotation is authored.
+      Quotation is blocked until then.
+    termsReviewedOn: "2026-08-17"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. The design and type-test standard behind EC-12-A10.
+      Defines the Class I, Class II and internally powered classification and
+      the type B, BF and CF applied parts that set the leakage limits, which is
+      what EC-12-123 and EC-12-124 rest on. Its limits are TYPE-TEST limits and
+      are not the in-service limits — those are IEC-62353-2014. EC-12-134
+      exists because choosing between the two is a real decision with a real
+      wrong answer.
+
+  - id: IEC-62353-2014
+    designation: IEC 62353:2014 (Ed. 2.0)
+    title: "Medical electrical equipment — Recurrent test and test after repair of medical electrical equipment"
+    publisher: International Electrotechnical Commission
+    edition: "Edition 2.0, 2014"
+    tier: 2
+    quotation:
+      blockedPendingCounsel: true
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "IEC webstore or a national committee"
+    termsBasis: >-
+      Copyright IEC. Same basis and the same reservations as IEC-60601-1-2020:
+      no reproduction licence held, IEC's terms not reviewed, Tier 2 assigned
+      by analogy and requiring legal confirmation before any quotation.
+    termsReviewedOn: "2026-08-17"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. The IN-SERVICE standard, and the one a hospital
+      biomedical department actually works to: recurrent testing and testing
+      after repair, which is precisely what EC-12-A10 assesses and what
+      EC-12-137 distinguishes. It carries allowable-value tables keyed to the
+      edition of IEC 60601-1 the device was built to, which is why EC-12-134
+      names the standard EDITION as part of the limit-set decision rather than
+      only the device class. Scope excludes repair, component exchange and
+      modification, so an element about performing a repair is not citable here.
