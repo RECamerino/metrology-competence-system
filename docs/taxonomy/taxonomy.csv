@@ -120,6 +120,7 @@ CM-03,Measurement Uncertainty,core,CM-03-A02,Modelling the Measurement,CM-03-013
 CM-03,Measurement Uncertainty,core,CM-03-A02,Modelling the Measurement,CM-03-014,Definitional uncertainty within the model,knowledge,4,1 2 3 4,draft
 CM-03,Measurement Uncertainty,core,CM-03-A02,Modelling the Measurement,CM-03-015,Choosing model granularity,judgment,4,1 2 3 4,draft
 CM-03,Measurement Uncertainty,core,CM-03-A02,Modelling the Measurement,CM-03-016,Representing corrections and their uncertainties in the model,judgment,4,1 2 3 4,draft
+CM-03,Measurement Uncertainty,core,CM-03-A02,Modelling the Measurement,CM-03-120,"Deciding not to apply a known correction, and treating what remains",judgment,5,1 2 3 4 5,draft
 CM-03,Measurement Uncertainty,core,CM-03-A02,Modelling the Measurement,CM-03-017,Modelling influence quantities,judgment,4,1 2 3 4,draft
 CM-03,Measurement Uncertainty,core,CM-03-A02,Modelling the Measurement,CM-03-018,Cause-and-effect analysis for uncertainty sources,skill,4,1 2 3 4,draft
 CM-03,Measurement Uncertainty,core,CM-03-A02,Modelling the Measurement,CM-03-019,Completeness: finding the sources you have missed,judgment,5,1 2 3 4 5,draft
