@@ -117,7 +117,24 @@ domains:
         summary: >-
           Radiographic and ultrasound systems verified for output,
           geometry and image quality, where the phantom is the
-          reference.
+          reference. Boundary: EC-10 calibrates the QA INSTRUMENT — the
+          kVp meter, the dose meter, the half-value-layer set — and this
+          area uses one to verify an imaging SYSTEM. Two modalities with
+          no standard in common, so each generic element is assessed
+          against one candidate-nominated modality and the attestation
+          records which.
+        # The EC-10 boundary was undeclared until 2026-08-17 and three pairs sat
+        # a title apart with nothing distinguishing them: EC-12-059/-060/-066
+        # against EC-10-055, -056, -057 and -058. Two authors writing anchors
+        # from those titles would have written the same anchors.
+        #
+        # OPEN, and deliberately not settled here: in most jurisdictions
+        # diagnostic X-ray SYSTEM QA is a qualified medical physicist's
+        # regulated activity rather than a calibration function's, so this area
+        # may be claiming a scope the pack should not hold. That would be a
+        # deprecate-and-supersede of the ionising half, not a summary edit, and
+        # it needs a decision rather than an assumption. The ultrasound elements
+        # are unaffected either way.
         elements:
           - { id: EC-12-056, title: "Receiving inspection and functional check of imaging equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-12-057, title: "Calibration configuration and stabilisation for imaging equipment", kind: skill, levelCeiling: 3, status: draft }
@@ -204,8 +221,26 @@ domains:
         title: Surgical and Theatre Equipment Verification
         status: draft
         summary: >-
-          Insufflators, surgical lights, pumps and tables, verified for
-          the parameters a procedure depends on.
+          Insufflators, suction and vacuum regulators, surgical lights,
+          operating tables, patient warmers, medical gas outlets and
+          tourniquets — seven device types whose common factor is the
+          theatre, not a measurand. No standard spans them, so each
+          generic element is assessed against one candidate-nominated
+          device type and the attestation records which.
+        # The summary said "insufflators, surgical lights, pumps and tables"
+        # until 2026-08-17 — four types where the area holds seven, and one of
+        # the four (pumps) has no element here at all: infusion pumps are
+        # EC-12-A02. The area outgrew its own description during the generated
+        # pass and nothing noticed, because a summary is prose no check reads.
+        #
+        # The scoping sentence is what makes the generic elements assessable.
+        # "Selecting the standards and fixturing for theatre equipment" spans a
+        # photometer, a medical-gas flow bench and a pressure standard; nobody
+        # passes or fails that as written, and an assessor would otherwise
+        # invent a scope per candidate, so the same credential would mean
+        # different things for different holders. Naming the device type in the
+        # attestation is the cheaper half of the fix. The expensive half — split
+        # the area by device family — stays available and is not done here.
         elements:
           - { id: EC-12-110, title: "Receiving inspection and functional check of theatre equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-12-111, title: "Calibration configuration and stabilisation for theatre equipment", kind: skill, levelCeiling: 3, status: draft }
