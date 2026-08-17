@@ -58,6 +58,22 @@
             "default": "established",
             "description": "Do competent practitioners AGREE about this? A separate axis from `currency.authorityStatus`, which answers what STANDING a claim has — where it comes from and whether it binds. The two are genuinely orthogonal and must not be collapsed: an ISO clause can be fully normative and its interpretation still contested, which in metrology is common rather than exotic.\n\nRecorded per section rather than per article because disagreement attaches to a specific claim, not to a whole subject. Most sections are `established` and the field can be omitted.\n\nThe purpose is intellectual honesty. An encyclopedia that silently picks one side of a live professional disagreement and presents it as settled has overstated what the field knows, and has quietly substituted its authors' judgement for the profession's."
           },
+          "contestedBasis": {
+            "enum": [
+              "source-silent",
+              "source-ambiguous",
+              "source-conflicting",
+              "practice-diverges"
+            ],
+            "description": "WHERE the disagreement lives, and therefore what would settle it. REQUIRED by the validator whenever consensus is `contested`. `consensus` says practitioners disagree; this says why, and the four cases are not interchangeable to a reader deciding what to do next.\n\n`source-silent` — nothing authoritative reaches the question, so a laboratory must take a defensible position and record it. Includes the case where two sources each supply a method and neither says which to prefer. `source-ambiguous` — the statement at issue admits more than one honest reading, so the argument is about interpretation and an assessor may hold a view. The statement need not be a registered source: a manufacturer's specification describing a limit and a typical performance at once is the commonest instance in this corpus. `source-conflicting` — one source says two things that do not reconcile, so citing it settles nothing and a reader must be told so explicitly. `practice-diverges` — the source is clear and a substantial body of practice does otherwise, which is the one case where following the source is unremarkable and departing from it needs justifying.\n\nThe distinction is operational, not decorative, and it feeds the review trigger of open decision 12. A section contested because its source contradicts itself, or admits two readings, is exactly what a revision of that source might resolve — so it should wake when the source is revised. A section contested because no source reaches the question would NOT be resolved by a revision, and waking it on one wastes the reviewer. Collapsing the four loses the ability to tell those apart."
+          },
+
+          "contestedBasisNote": {
+            "type": "string",
+            "minLength": 40,
+            "description": "Why THAT basis and not another — normally one or two sentences naming the clause that is silent, ambiguous or self-conflicting, or the practice that departs from it. Optional, and worth writing on every contested section: the enum on its own cannot be told apart from a value someone picked quickly, which is the same defect the `reviewedBy` pair on the ceiling plan exists to close."
+          },
+
           "alternativeViews": {
             "type": "array",
             "description": "The other readings, stated in their strongest form. REQUIRED by the validator whenever consensus is contested, jurisdiction-dependent or organization-specific: a section flagged as disputed with no alternative recorded is worse than no flag at all, because it tells a reader there is controversy without telling them what it is, and leaves them less able to act than before.",

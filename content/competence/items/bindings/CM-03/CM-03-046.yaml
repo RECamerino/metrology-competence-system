@@ -12,6 +12,12 @@ bindings:
       specification that already includes it. The candidate must notice that
       one physical effect appears twice under two names, which is what makes
       this the element's competence rather than general budget arithmetic.
+    positionNeutrality: >-
+      Does not engage the disputed question. The overlap at this level is
+      total — one effect wholly carried twice — which BOK-0004 s04 and s05
+      settle and the GUM addresses directly at 3.4.8. Removal is correct
+      here and may be scored as correct. The partial-overlap dispute in
+      s06 belongs to the L5 binding.
     parameterRanges:
       - name: defect_class
         choices: [double-counted contribution]
@@ -34,6 +40,14 @@ bindings:
       The defensible answer is a reasoned partial allowance with its basis
       stated, and that irreducible judgement is exactly why this element
       carries a ceiling of five.
+    positionNeutrality: >-
+      Engages the disputed question directly: the overlap is partial, so
+      neither removing the contribution nor keeping it in full is right,
+      and BOK-0004 s06 records that with no source to settle it. Credit
+      establishing what the observations actually varied, stating which
+      treatment was adopted, and conceding what the residual assumption
+      costs and in which direction. Never credit carrying both in full
+      over a reasoned partial allowance, or the reverse.
     parameterRanges:
       - name: defect_class
         choices: [double-counted contribution]

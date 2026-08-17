@@ -64,6 +64,12 @@ sections:
       the maximum correction summed, given that the Guide describes the practice
       in one place and warns against its general form in another.
     consensus: contested
+    contestedBasis: source-conflicting
+    contestedBasisNote: >-
+      The GUM describes the added-maxima practice in F.2.4.5 and warns
+      against the general form of it in the note to 6.3.1, without
+      reconciling the two. Citing the Guide therefore settles nothing
+      here, and a revision could resolve it outright.
     alternativeViews:
       - position: >-
           Where the conditions the Guide describes genuinely hold, summing the

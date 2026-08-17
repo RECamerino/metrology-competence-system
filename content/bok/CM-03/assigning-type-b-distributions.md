@@ -44,6 +44,12 @@ sections:
       performance at once, and the live disagreement about which reading to
       take.
     consensus: contested
+    contestedBasis: source-ambiguous
+    contestedBasisNote: >-
+      The disputed statement is the manufacturer's specification itself,
+      which describes a limit and a typical performance at once and is
+      read honestly in two different ways. The GUM supplies the
+      conversion once a reading is chosen; it cannot choose the reading.
     alternativeViews:
       - position: >-
           Where a specification states a limit, the limit should be read as a

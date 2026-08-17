@@ -455,6 +455,67 @@ test('duplicate element IDs across files are rejected', () => {
   assert.ok(errors.some((e) => e.includes('also defined in')));
 });
 
+/* -- Contested knowledge and scoring neutrality --------------------------- */
+
+/** An article whose only section is disputed, with everything else well-formed. */
+function contestedArticle(overrides: Record<string, unknown> = {}): ElementFile {
+  return article({
+    sections: [
+      {
+        id: 's01',
+        heading: 'First',
+        consensus: 'contested',
+        contestedBasis: 'source-silent',
+        alternativeViews: [{ position: LONG, basis: LONG }],
+        ...overrides,
+      },
+    ],
+  });
+}
+
+test('a contested section must say where the disagreement lives', () => {
+  const noBasis = contestedArticle({ contestedBasis: undefined });
+  const errors = errorsOf(corpus([element()], undefined, { bok: [noBasis] }));
+  assert.ok(
+    errors.some((e) => e.includes('contestedBasis')),
+    `expected a contestedBasis error, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('a contested section with a basis is accepted', () => {
+  assert.deepEqual(errorsOf(corpus([element()], undefined, { bok: [contestedArticle()] })), []);
+});
+
+test('an item bound to disputed knowledge must declare what it does not score', () => {
+  // The element's knowledgeRef reaches s01, which is contested — so a rubric
+  // here could credit agreement with its author and nothing would show it.
+  const c = corpus([element()], ['CM-01', 'CM-01-A01', 'CM-01-001', 'CM-01-002', 'BOK-0001', 'ARC-0001'], {
+    archetypes: [archetypeFile()],
+    bindings: [bindingFile()],
+    bok: [contestedArticle()],
+  });
+
+  assert.ok(
+    errorsOf(c).some((e) => e.includes('positionNeutrality')),
+    `expected a positionNeutrality error, got: ${JSON.stringify(errorsOf(c))}`,
+  );
+});
+
+test('declaring it discharges the obligation, including to say it does not apply', () => {
+  const c = corpus([element()], ['CM-01', 'CM-01-A01', 'CM-01-001', 'CM-01-002', 'BOK-0001', 'ARC-0001'], {
+    archetypes: [archetypeFile()],
+    bindings: [bindingFile({ positionNeutrality: 'This level supplies both values and does not reach the disputed question.' })],
+    bok: [contestedArticle()],
+  });
+
+  assert.ok(!errorsOf(c).some((e) => e.includes('positionNeutrality')));
+});
+
+test('an element on settled ground needs no neutrality statement', () => {
+  // Otherwise the requirement would fire across the whole bank and be ignored.
+  assert.deepEqual(errorsOf(withItems([archetypeFile()], [bindingFile()])), []);
+});
+
 /* -- Item bank ------------------------------------------------------------ */
 
 test('a well-formed archetype and binding produce no errors', () => {
@@ -742,6 +803,7 @@ test('a contested section that records the other position is accepted', () => {
               id: 's01',
               heading: 'First',
               consensus: 'contested',
+              contestedBasis: 'source-silent',
               alternativeViews: [
                 {
                   position: 'The opposing reading, stated in its strongest form.',

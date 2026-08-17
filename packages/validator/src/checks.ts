@@ -577,6 +577,28 @@ function checkBok(corpus: Corpus): Finding[] {
         );
       }
 
+      /*
+       * `contested` says practitioners disagree. It does not say where the
+       * disagreement lives, and the four cases are not interchangeable to
+       * anyone deciding what to do next — nor to the tooling that decides when
+       * to wake a section for review.
+       *
+       * A section contested because its source contradicts itself, or admits
+       * two readings, is precisely what a revision of that source may resolve,
+       * so it should wake on one. A section contested because no source reaches
+       * the question would not be, and waking it wastes the reviewer. Without
+       * this field the two are indistinguishable and the trigger of open
+       * decision 12 cannot be built correctly.
+       *
+       * Required for `contested` only. `jurisdiction-dependent` and
+       * `organization-specific` already say where the disagreement lives.
+       */
+      if (section?.consensus === 'contested' && !section?.contestedBasis) {
+        findings.push(
+          err(at(`section '${section.id}' is marked 'contested' with no contestedBasis. Say whether the source is silent, ambiguous, self-conflicting, or clear-but-widely-departed-from — they call for different things from a reader, and only one of them is settled by a revision.`)),
+        );
+      }
+
       if (section?.deprecated && !section?.supersededBy) {
         findings.push(
           err(at(`section '${section.id}' is deprecated with no supersededBy. A reader following an old reference must land somewhere that tells them what changed.`)),
@@ -882,6 +904,40 @@ function checkItemBank(corpus: Corpus): Finding[] {
   // -- Bindings ------------------------------------------------------------
   const seenUnits = new Map<string, string>();
 
+  /*
+   * Which elements rest on knowledge the profession genuinely disputes.
+   *
+   * A rubric scoring a contested question is the one validity defect that
+   * reads perfectly well on the page: it credits agreement with its author
+   * rather than competence, and nothing about the wording gives it away. The
+   * candidate who takes the other side and defends it from the records is
+   * marked down for being right in an unexpected direction.
+   *
+   * The obligation is DERIVED rather than declared, because an author who has
+   * to remember to set a flag is the same arrangement that left
+   * CONFIRM-WITH-COUNSEL unenforceable for months. The corpus already knows
+   * which sections are disputed and which elements reach them.
+   */
+  const disputedSections = new Set<string>();
+  for (const article of corpus.bok) {
+    const a = article.data as Record<string, any>;
+    for (const section of (a.sections ?? []) as Array<Record<string, any>>) {
+      const consensus = section?.consensus ?? 'established';
+      if (consensus !== 'established' && consensus !== 'broadly-accepted') {
+        disputedSections.add(`${a.id}#${section?.id}`);
+      }
+    }
+  }
+
+  const elementsOnDisputedGround = new Map<string, string[]>();
+  for (const element of corpus.elements) {
+    const e = element.data as Record<string, any>;
+    const reached = ((e.knowledgeRefs ?? []) as Array<Record<string, any>>)
+      .map((ref) => `${ref?.article}#${ref?.section}`)
+      .filter((key) => disputedSections.has(key));
+    if (e.id && reached.length > 0) elementsOnDisputedGround.set(e.id, reached);
+  }
+
   for (const file of corpus.bindings) {
     const d = file.data as Record<string, any>;
     const elementId: string | undefined = d.element;
@@ -901,6 +957,17 @@ function checkItemBank(corpus: Corpus): Finding[] {
       if (typeof level === 'number' && level > stub.levelCeiling) {
         findings.push(
           err(at(`${label} exceeds the element's ceiling of ${stub.levelCeiling}. There is no such assessable unit.`)),
+        );
+      }
+
+      const disputed = elementsOnDisputedGround.get(elementId);
+      if (disputed && !String(binding?.positionNeutrality ?? '').trim()) {
+        findings.push(
+          err(
+            at(
+              `${label} has no positionNeutrality, but this element rests on disputed knowledge (${disputed.join(', ')}). State what the scoring credits and what it must not — a rubric may credit recognising the disagreement, declaring a reading and following it consistently, never arriving at a particular position. If this level does not engage the disputed question, say that in one line.`,
+            ),
+          ),
         );
       }
 

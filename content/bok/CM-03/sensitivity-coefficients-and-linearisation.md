@@ -50,6 +50,12 @@ sections:
       numerically, what each assumes, and the disagreement about which to
       reach for first.
     consensus: contested
+    contestedBasis: source-silent
+    contestedBasisNote: >-
+      The GUM supplies a higher-order term and JCGM 101 supplies
+      numerical propagation. Each source describes its own method and
+      neither addresses which to reach for when curvature is
+      significant, so the question at issue has no source to settle it.
     alternativeViews:
       - position: >-
           Where the model is nonlinear enough for the first-order result to be

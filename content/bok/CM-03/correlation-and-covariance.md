@@ -33,6 +33,14 @@ sections:
       Estimating from repeated observations, deriving from a shared calibration
       path, and the bounding argument to use when neither is available.
     consensus: contested
+    contestedBasis: practice-diverges
+    contestedBasisNote: >-
+      The GUM permits the covariance to be taken as zero where there is
+      insufficient information to evaluate it (F.1.2.1). Neither
+      position here accepts that: both hold that a budget with an
+      unevaluated correlation needs something better than a zero, and
+      they divide over what. The source is clear and a substantial body
+      of accredited practice does otherwise.
     alternativeViews:
       - position: >-
           Where a correlation cannot be estimated from data, the budget should

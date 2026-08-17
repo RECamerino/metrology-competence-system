@@ -49,6 +49,13 @@ sections:
       The case where a specification covers some but not all of what the
       observations captured, and the disagreement about how to treat it.
     consensus: contested
+    contestedBasis: source-silent
+    contestedBasisNote: >-
+      The GUM addresses double-counting where an effect is wholly
+      covered twice (3.4.8). It does not reach the partial overlap,
+      where a specification covers some but not all of what the
+      observations captured, and that is the case the disagreement is
+      about.
     alternativeViews:
       - position: >-
           Where the overlap is partial and cannot be resolved from the
