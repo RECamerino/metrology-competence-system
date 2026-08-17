@@ -30,9 +30,9 @@ Three principles held in tension deliberately:
 
 | | |
 |---|---|
-| Domains / areas / elements | 64 / 492 / **5427** — three axes, see rule 14 |
-| Assessable units | 21188 |
-| Ceilings — L2 / L3 / L4 / L5 | 0.7% / 23.1% / 61.2% / 15.0% |
+| Domains / areas / elements | 64 / 494 / **5459** — three axes, see rule 14 |
+| Assessable units | 21314 |
+| Ceilings — L2 / L3 / L4 / L5 | 0.7% / 23.1% / 61.3% / 14.9% |
 | Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
 | Content authored | **21 elements** · **12 BOK articles** · **2 modules** — 8 domains, all three axes |
 | Item bank | 4 archetypes · 28 bindings · **0.1%** of units covered |

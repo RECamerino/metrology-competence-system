@@ -277,3 +277,85 @@ domains:
           - { id: EC-12-136, title: "Conformity statement for an electrical safety test against its limit set", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-137, title: "Electrical safety after repair, and how it differs from periodic testing", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-138, title: "Interpreting a failed safety test and the device-release decision", kind: judgment, levelCeiling: 5, status: draft }
+
+      # Added 2026-08-17. Neonatal thermal equipment was absent from the WHOLE
+      # corpus, not only from this pack: `infant`, `neonat`, `radiant warmer`
+      # and `phototherapy` each returned zero hits across all 64 domain files.
+      # A technician assessed complete against EC-12 had no attested competence
+      # on the equipment serving the most vulnerable patients in the building,
+      # and there was no element anywhere to attest it against — so the gap
+      # could not even be recorded as a gap.
+      #
+      # Two disproof attempts, both recorded because the next reviewer will make
+      # them too. `incubator` hits EC-09-058, which is a LABORATORY incubator in
+      # the chemical pack — different standard, no patient in it. EC-12-117
+      # (warming device temperature) sits in the theatre area, which its own
+      # summary scopes to insufflators, lights, pumps and tables — a patient
+      # warmer, not neonatal thermal equipment.
+      #
+      # SPLIT INTO TWO AREAS DELIBERATELY, and this is the judgement call worth
+      # arguing about. One "neonatal equipment" area would have spanned a
+      # thermal measurand and an optical one, so its generic spine elements
+      # would have asked a candidate to demonstrate standard selection across a
+      # thermometer AND a spectroradiometer — which is exactly the defect the
+      # EC-12 review files against EC-12-A09, and creating a second instance of
+      # it while that finding is open would be indefensible. Rule 14's test is
+      # that an area whose parameters could be swapped for another type's has
+      # been written wrong; hood oxygen and spectral irradiance cannot be
+      # swapped, so they are two areas.
+      - id: EC-12-A11
+        title: Infant Thermal Equipment Verification
+        status: draft
+        summary: >-
+          Closed and transport incubators and radiant warmers, where the
+          patient cannot report discomfort and the control loop is
+          servoed to their own skin. Air and surface temperature,
+          uniformity across the mattress, overshoot after a setpoint
+          change, humidity, hood oxygen, airflow and sound. Boundary:
+          the laboratory incubator is EC-09; the theatre patient warmer
+          is EC-12-A09.
+        elements:
+          - { id: EC-12-139, title: "Air temperature accuracy at the control point", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-140, title: "Mattress-surface temperature uniformity across the platform", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-141, title: "Air-mode and skin-mode servo control agreement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-142, title: "Temperature overshoot and recovery after a setpoint change", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-143, title: "Time to steady state and thermal stability in the hood", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-144, title: "Relative humidity in the hood", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-145, title: "Hood oxygen concentration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-146, title: "Airflow velocity over the mattress", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-147, title: "Sound level inside the hood", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-148, title: "Radiant warmer irradiated-surface temperature distribution", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-149, title: "Skin temperature probe accuracy and servo response", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-150, title: "Transport incubator performance on battery and under movement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-151, title: "Over-temperature alarm threshold and response time", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-152, title: "Probe-fault, power-fail and airflow alarm verification", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-153, title: "Reconciling a skin-mode and air-mode disagreement, and the fitness decision", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-12-154, title: "Receiving inspection and functional check of infant thermal equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-155, title: "Calibration configuration and stabilisation for infant thermal equipment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-156, title: "Selecting the standards and fixturing for infant thermal equipment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-157, title: "Adjustment of infant thermal equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-158, title: "Uncertainty budget for infant thermal equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-159, title: "Conformity statement for infant thermal equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
+
+      - id: EC-12-A12
+        title: Phototherapy Equipment Verification
+        status: draft
+        summary: >-
+          Neonatal phototherapy units, where the delivered quantity is
+          spectral irradiance in a therapeutic band and the commonest
+          failure is a lamp that still lights while delivering too
+          little to treat. Irradiance, its uniformity across the
+          footprint, its dependence on distance, and its decay over lamp
+          life. Boundary: the radiometer itself is EC-08.
+        elements:
+          - { id: EC-12-160, title: "Spectral irradiance in the therapeutic band", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-161, title: "Irradiance uniformity across the treatment footprint", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-162, title: "Irradiance dependence on distance from the source", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-163, title: "Irradiance decay over lamp life and the replacement criterion", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-164, title: "Radiometer bandpass matching and spectral mismatch correction", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: EC-12-165, title: "Receiving inspection and functional check of phototherapy equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-166, title: "Calibration configuration and stabilisation for phototherapy equipment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-167, title: "Selecting the standards and fixturing for phototherapy equipment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-168, title: "Adjustment of phototherapy equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-169, title: "Uncertainty budget for phototherapy equipment calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-170, title: "Conformity statement for phototherapy equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
