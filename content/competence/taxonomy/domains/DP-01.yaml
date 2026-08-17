@@ -64,6 +64,27 @@ domains:
           - { id: DP-01-009, title: "Ring and plug gauges", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-01-010, title: "Thermal expansion correction and the 20 degree reference", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-01-011, title: "Refractive index of air and the Edlen equation", kind: skill, levelCeiling: 5, status: draft }
+          # Added 2026-08-16. Scoped to THIS area's technique, matching the
+          # convention every other budget element follows: DP-02-016 (mass
+          # calibration) sits in Mass Comparison and Balances, DP-05-026
+          # (contact thermometry) in Contact Thermometry. A domain-scoped title
+          # here would promise coverage of coordinate measurement, surface
+          # texture, angle and threads while sitting in the gauge-block area,
+          # and would overlap DP-01-057, which is already the CMM-shaped budget
+          # competence under another name.
+          #
+          # DP-01 was NOT the only pack missing one. Eighteen budget elements
+          # exist across ELEVEN of the twenty-one DP packs; ten had none, and
+          # DP-01 was one of them. Still missing: DP-11, DP-12, DP-13, DP-15,
+          # DP-16, DP-17, DP-18, DP-19, DP-20. Each has one or more
+          # "uncertainty evaluation in X" elements, which is a weaker and less
+          # specific claim than a budget — but whether that is the discipline's
+          # genuine equivalent or a gap needs a specialist per pack, so they are
+          # deliberately not swept in here.
+          #
+          # Ceiling 5 without an override would silently become 4: DP-01-A01
+          # defaults to 4, and all eighteen existing budget elements are 5.
+          - { id: DP-01-114, title: "Uncertainty budget for length calibration", kind: skill, levelCeiling: 5, status: draft }
 
       - id: DP-01-A02
         title: Hand Tools and Shop-Floor Instruments

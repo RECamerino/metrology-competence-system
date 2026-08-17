@@ -173,13 +173,35 @@ domains:
         summary: >-
           Constructing, reviewing and defending a real budget. Boundary:
           discipline-specific budgets live in the DP packs; these elements teach
-          the transferable craft.
+          the transferable craft. That boundary was falsified inside this file
+          until 2026-08-16 by four discipline-named budget elements, now
+          deprecated in favour of CM-03-118 — see the note beside them. An
+          element here that cannot be written without naming a measurement
+          discipline belongs in that discipline's DP pack instead.
         elements:
           - { id: CM-03-077, title: "Structure and layout of an uncertainty budget", kind: skill, levelCeiling: 4, status: draft }
-          - { id: CM-03-078, title: "Building a budget: dimensional measurement", kind: skill, levelCeiling: 4, status: draft }
-          - { id: CM-03-079, title: "Building a budget: electrical measurement", kind: skill, levelCeiling: 4, status: draft }
-          - { id: CM-03-080, title: "Building a budget: temperature measurement", kind: skill, levelCeiling: 4, status: draft }
-          - { id: CM-03-081, title: "Building a budget: mass measurement", kind: skill, levelCeiling: 4, status: draft }
+          # Deprecated 2026-08-16. These four were discipline-specific budgets
+          # sitting on the concept axis, which is what this area's own boundary
+          # statement says belongs to the DP packs. Each duplicated a DP element
+          # at a LOWER ceiling — CM-03-081 was L4 against DP-02-016 at L5 — so a
+          # person's recorded level depended on which shelf the assessor reached
+          # for. The four disciplines were also arbitrary out of 21, telling a
+          # flow or RF metrologist that budget-building was not their work.
+          #
+          # The "technique vehicle" defence does not survive the corpus: CM-03-077
+          # and CM-03-085 are already the discipline-free technique elements, and
+          # ARC-0004 carries measurement_context as a PROMPT parameter precisely
+          # so the surface can vary without the assessed competence varying. The
+          # item bank already treats discipline as surface; four discipline-named
+          # elements contradicted it.
+          #
+          # Superseded by CM-03-118, which is the one competence they were
+          # collectively gesturing at and none of them stated.
+          - { id: CM-03-078, title: "Building a budget: dimensional measurement", kind: skill, levelCeiling: 4, status: deprecated, supersededBy: CM-03-118 }
+          - { id: CM-03-079, title: "Building a budget: electrical measurement", kind: skill, levelCeiling: 4, status: deprecated, supersededBy: CM-03-118 }
+          - { id: CM-03-080, title: "Building a budget: temperature measurement", kind: skill, levelCeiling: 4, status: deprecated, supersededBy: CM-03-118 }
+          - { id: CM-03-081, title: "Building a budget: mass measurement", kind: skill, levelCeiling: 4, status: deprecated, supersededBy: CM-03-118 }
+          - { id: CM-03-118, title: "Transferring a budget structure to an unfamiliar measurement type", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-03-082, title: "Identifying dominant terms and simplifying defensibly", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-03-083, title: "Best measurement capability and derivation of a CMC", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-03-084, title: "Uncertainty across a scope of accreditation", kind: judgment, levelCeiling: 5, status: draft }
