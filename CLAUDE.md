@@ -30,11 +30,11 @@ Three principles held in tension deliberately:
 
 | | |
 |---|---|
-| Domains / areas / elements | 64 / 491 / **5410** — three axes, see rule 14 |
-| Assessable units | 21121 |
+| Domains / areas / elements | 64 / 491 / **5411** — three axes, see rule 14 |
+| Assessable units | 21126 |
 | Ceilings — L2 / L3 / L4 / L5 | 0.7% / 23.1% / 61.1% / 15.0% |
 | Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
-| Content authored | **20 elements** · **11 BOK articles** · **2 modules** — 8 domains, all three axes |
+| Content authored | **21 elements** · **12 BOK articles** · **2 modules** — 8 domains, all three axes |
 | Item bank | 4 archetypes · 28 bindings · **0.1%** of units covered |
 | Checks | 0 errors · 253/253 tests · typecheck clean |
 
@@ -295,6 +295,7 @@ The reason it keeps happening is worth internalising: **a missing equipment type
 | `CM-03-053` | `skill`, ceiling 5, `demonstration: desk`, five performance anchors, twelve role targets, bound at every level |
 | `CM-03-052` | The second element, authored AFTER its items existed. `skill`, ceiling 4. Read its closing note: it records what the new articles closed, what is still missing (the coverage factor in the REPORTING direction, which belongs to `CM-03-060`), and why it still cannot go `stable` |
 | `CM-03-019`, `036`, `038`, `040`, `046`, `050`, `051`, `056` | The eight that had bindings and no definition — a binding claiming to test a competence with no anchors to test against. Authored to close that. Four `skill`, three `judgment`, ceilings 4 and 5 |
+| `BOK-0012` + `CM-03-120` | Known corrections left **unapplied** — the case the method's own founding assumption excludes. `CM-03-016` represents a correction and `CM-03-115` applies one; both assume it is applied, so the corpus held both halves of the default and nothing of the departure. Article carries a `contested` section on a tension **inside the GUM itself**, which describes the added-maxima practice in one place and warns against its general form in another. The element's closing note forbids scoring an item on which side a candidate takes |
 | `BOK-0011` + `CM-03-119` | The CMC → certificate substitution. The **only content authored against `ILAC-P14-2020`** rather than the GUM, and the worked case of a competence found by tracing a chain rather than by reading a file: `CM-03-083` derives the CMC, `CM-03-084` spans the scope, and the step between them was missing, so a holder of both could still report the CMC verbatim on every certificate. Article carries a `contested` section on how far the repeatability allowance may be pressed |
 | **The schema probes** | Below. Read these before authoring outside `CM-03` — each is the only worked example of its shape |
 | `BOK-0005` + `DP-08-081`, `094`, `064` | Foundational tier. `knowledge` and `skill` at **ceiling 2**, no prerequisites, every role target identical. The shape most of the corpus's 443 foundational elements will take |

@@ -71,6 +71,15 @@ domains:
           - { id: CM-03-014, title: "Definitional uncertainty within the model", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-03-015, title: "Choosing model granularity", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-03-016, title: "Representing corrections and their uncertainties in the model", kind: judgment, levelCeiling: 4, status: draft }
+          # Added 2026-08-17. CM-03-016 represents a correction in the model and
+          # CM-03-115 applies one; both assume it IS applied, which is the
+          # assumption the GUM states and the whole method rests on. The corpus
+          # covered both halves of the default and nothing of the departure —
+          # so a candidate could be assessed as competent across corrections
+          # while never meeting the case where a known significant one is left
+          # unapplied, which is common in practice and which the GUM treats in
+          # two places specifically because it is easy to do badly.
+          - { id: CM-03-120, title: "Deciding not to apply a known correction, and treating what remains", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-03-017, title: "Modelling influence quantities", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-03-018, title: "Cause-and-effect analysis for uncertainty sources", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-03-019, title: "Completeness: finding the sources you have missed", kind: judgment, levelCeiling: 5, status: draft }
