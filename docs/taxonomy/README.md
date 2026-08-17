@@ -19,9 +19,9 @@ The authoritative source is [`content/competence/taxonomy/domains/`](../../conte
 | | |
 |---|---|
 | Domains | 64 |
-| Competency areas | 491 |
-| Elements | 5411 |
-| Assessable units | 21126 |
+| Competency areas | 492 |
+| Elements | 5427 |
+| Assessable units | 21188 |
 
 An assessable unit is one element at one level. Every level is assessed at element scope, so a credential names exactly what was tested.
 
@@ -46,9 +46,9 @@ The highest level attainable for an element. Not every element supports all five
 | Ceiling | Attainable range | Meaning at the ceiling | Elements | Share |
 |---|---|---|---|---|
 | 2 | L1–L2 | Advanced Beginner | 39 | 0.7% |
-| 3 | L1–L3 | Competent | 1252 | 23.1% |
-| 4 | L1–L4 | Proficient | 3308 | 61.1% |
-| 5 | L1–L5 | Expert | 812 | 15.0% |
+| 3 | L1–L3 | Competent | 1255 | 23.1% |
+| 4 | L1–L4 | Proficient | 3320 | 61.2% |
+| 5 | L1–L5 | Expert | 813 | 15.0% |
 
 **L5 is reserved** for elements where a person could plausibly spend a career and still be learning, and where a defensible capstone with cross-organizational review is actually writable.
 
@@ -58,9 +58,9 @@ What kind of competence an element is, and therefore what evidence proves it.
 
 | Kind | The claim | What proves it | Elements | Share |
 |---|---|---|---|---|
-| Knowledge | I understand this | Explanation, relation, analysis | 953 | 17.6% |
-| Skill | I can perform this | A work product they produced, not an account of it | 3291 | 60.8% |
-| Judgment | I can decide and defend it | A defence; often no single right answer | 1167 | 21.6% |
+| Knowledge | I understand this | Explanation, relation, analysis | 955 | 17.6% |
+| Skill | I can perform this | A work product they produced, not an account of it | 3301 | 60.8% |
+| Judgment | I can decide and defend it | A defence; often no single right answer | 1171 | 21.6% |
 
 **Authority is deliberately not a kind.** Knowledge, skill and judgment are earned and belong to a person. Authority is granted, and is a relationship between a person, an organization and a scope of work. Competency credentials are portable; authorizations are not. See [`../00-context.md`](../00-context.md).
 
@@ -138,7 +138,7 @@ Organised by the equipment TYPE that arrives on a bench, because that axis cuts 
 | [**EC-09** Chemical and Analytical Instrument Calibration](EC-09.md) | 13 | 168 | 2 / 119 / 47 | 0 / 36 / 120 / 12 |
 | [**EC-10** Ionising Radiation Instrument Calibration](EC-10.md) | 9 | 116 | 4 / 82 / 30 | 0 / 21 / 75 / 20 |
 | [**EC-11** Acoustic and Vibration Instrument Calibration](EC-11.md) | 10 | 135 | 0 / 104 / 31 | 0 / 21 / 96 / 18 |
-| [**EC-12** Medical and Biomedical Equipment Calibration](EC-12.md) | 9 | 122 | 1 / 91 / 30 | 0 / 22 / 100 / 0 |
+| [**EC-12** Medical and Biomedical Equipment Calibration](EC-12.md) | 10 | 138 | 3 / 101 / 34 | 0 / 25 / 112 / 1 |
 | [**EC-13** Electrical Power, Energy and High Voltage Equipment Calibration](EC-13.md) | 10 | 133 | 2 / 98 / 33 | 0 / 23 / 95 / 15 |
 | [**EC-14** Flow and Volume Instrument Calibration](EC-14.md) | 5 | 66 | 1 / 48 / 17 | 0 / 14 / 45 / 7 |
 | [**EC-15** Humidity and Moisture Instrument Calibration](EC-15.md) | 1 | 13 | 1 / 8 / 4 | 0 / 3 / 10 / 0 |
