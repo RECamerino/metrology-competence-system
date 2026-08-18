@@ -57,10 +57,11 @@
                   "open-resource-parameterized",
                   "reviewer-conducted-defense",
                   "capstone-with-review",
-                  "challenge-exam"
+                  "challenge-exam",
+                  "witnessed-proficiency-test"
                 ]
               },
-              "description": "Recorded as visible provenance on the resulting credential, so a reader sees how it was earned rather than having to assume."
+              "description": "Recorded as visible provenance on the resulting credential, so a reader sees how it was earned rather than having to assume. `witnessed-proficiency-test` is a satisfactory result in a proficiency test or interlaboratory comparison for the measurement area, witnessed and recorded. It is the evidence route the profession names first and it was absent until 2026-08-17 — NCSLI RP-17 (2007) treats a proficiency test as a demonstration of qualification and gives it its own line on the certification summary form, and RP-20 (2010) describes demonstrated-competency evaluation through interlaboratory comparison. Admissible from L3 upward and not below, because L1 and L2 are witnessed observation of framed work and a PT result is neither framed nor observed. It is the only modality here whose comparison value the candidate's own laboratory did not set, which is why an assessor asks for it, and why re-manufacturing it as a work product understated what the holder actually held."
             },
             "requiresCapstone": { "type": "boolean" },
             "requiresWorkProduct": {

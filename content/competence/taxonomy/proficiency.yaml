@@ -77,6 +77,21 @@ levels:
       modality:
         - open-resource-parameterized
         - challenge-exam
+        - witnessed-proficiency-test
+      # witnessed-proficiency-test added 2026-08-17. A satisfactory result in a
+      # proficiency test or interlaboratory comparison for this measurement
+      # area, witnessed and recorded. Admitted from L3 because that is where
+      # independent work begins; L1 and L2 are witnessed observation of framed
+      # work, and a PT result is neither framed nor observed. It is the only
+      # modality whose comparison value the candidate's own laboratory did not
+      # set, which is why an assessor asks for it first — NCSLI RP-17 (2007)
+      # gives it its own line on the certification summary form, and RP-20
+      # (2010) names interlaboratory comparison as demonstrated-competency
+      # evaluation. Until this was added, a laboratory holding the profession's
+      # strongest objective evidence for a person had to re-manufacture it as a
+      # work product, which is a weaker claim: an internally produced
+      # deliverable judged by a colleague, rather than a result compared against
+      # a value the candidate's own laboratory did not choose.
       requiresCapstone: false
       # A real deliverable, archived and hashed — not an exam answer. From here
       # up, the evidence is work, not response.
@@ -103,6 +118,7 @@ levels:
       modality:
         - reviewer-conducted-defense
         - capstone-with-review
+        - witnessed-proficiency-test
       requiresCapstone: true
       requiresWorkProduct: true
       doubleScored: true
@@ -126,6 +142,7 @@ levels:
       modality:
         - reviewer-conducted-defense
         - capstone-with-review
+        - witnessed-proficiency-test
       requiresCapstone: true
       requiresWorkProduct: true
       # At expert level the field's judgement is that you have not mastered
