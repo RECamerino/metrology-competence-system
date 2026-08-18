@@ -797,3 +797,105 @@ sources:
       names the standard EDITION as part of the limit-set decision rather than
       only the device class. Scope excludes repair, component exchange and
       modification, so an element about performing a repair is not citable here.
+  - id: NCSLI-RP-17-2007
+    designation: NCSLI RP-17 (2007)
+    title: "Documenting Metrology Education, Training, and On The Job Training"
+    publisher: NCSL International
+    edition: "2007"
+    tier: 2
+    quotation:
+      blockedPendingCounsel: true
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "NCSL International"
+    termsBasis: Same basis as ISO-IEC-17025-2017 and NCSLI-RP-1-2010.
+    termsReviewedOn: "2026-08-17"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. One of the profession's two published competence
+      scales: a four-rung per-parameter authorization ladder — Perform Under
+      Supervision, Qualified to Perform, Qualified to Train, Authorized
+      Signatory — where a higher rung subsumes the lower. Also the source for
+      the witness requirement (a qualified individual with expertise in the
+      specific measurement area) and for proficiency testing as a demonstration
+      of qualification. See the crosswalk in proficiency.yaml.
+
+  - id: NCSLI-RP-20-2010
+    designation: NCSLI RP-20 (2010)
+    title: "Laboratory Workforce Planning"
+    publisher: NCSL International
+    edition: "2010"
+    tier: 2
+    quotation:
+      blockedPendingCounsel: true
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "NCSL International"
+    termsBasis: Same basis as ISO-IEC-17025-2017 and NCSLI-RP-1-2010.
+    termsReviewedOn: "2026-08-17"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. The profession's other competence scale: a
+      three-valued staff KSA matrix — Trained, Proficient, SME — recorded per
+      measurement parameter per employee. Its "Proficient" is THIS SYSTEM'S L3
+      Competent, not its L4 Proficient; the crosswalk in proficiency.yaml
+      exists because that collision would otherwise promote every mapped
+      employee by a rung.
+
+  - id: NCSLI-LM-13-2012
+    designation: NCSLI LM-13 (2012)
+    title: "Calibration Laboratory Personnel Qualifications"
+    publisher: NCSL International
+    edition: "2012"
+    tier: 2
+    quotation:
+      blockedPendingCounsel: true
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "NCSL International"
+    termsBasis: Same basis as ISO-IEC-17025-2017 and NCSLI-RP-1-2010.
+    termsReviewedOn: "2026-08-17"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. Third in the personnel series after RP-17 and
+      RP-20, and the source for the three job-description families:
+      Metrologist / Metrology Manager / Metrology Supervisor, Metrology or
+      Calibration Engineer, and Calibration Technician.
+
+  - id: NCSLI-LM-14-2010
+    designation: NCSLI LM-14 (2010)
+    title: "Metrology Human Resources Handbook"
+    publisher: NCSL International
+    edition: "2010"
+    tier: 2
+    quotation:
+      blockedPendingCounsel: true
+      permitted: true
+      maxWordsPerQuote: 25
+      maxQuotesPerElement: 2
+      requiresCommentary: true
+      strippedInRedistributable: true
+    access:
+      freelyAvailable: false
+      obtainFrom: "NCSL International"
+    termsBasis: Same basis as ISO-IEC-17025-2017 and NCSLI-RP-1-2010.
+    termsReviewedOn: "2026-08-17"
+    notes: >-
+      CONFIRM-WITH-COUNSEL. The joint ASQ MQD / NCSLI benchmarking study
+      behind the profession's job titles and grade grid. The source for the
+      three-family career model and for education as a route substitutable
+      for experience — neither of which the role registry or the ladder
+      currently models. Relevant to open decisions on the role set.
+

@@ -88,7 +88,7 @@ An organization that holds ISO/IEC 17025 may inject the actual clause text into 
 
 Every entry in the register whose classification rests on an interpretation rather than an explicit licence grant is flagged `CONFIRM-WITH-COUNSEL` in its `notes`. **No quotation should be authored against a flagged entry until that review is complete.** Citations are unaffected.
 
-That prohibition is now **executable** rather than advisory: 26 of the 32 entries carry `quotation.blockedPendingCounsel: true`, and the validator rejects a quotation against any of them regardless of the word and count limits recorded beside it. The limits stay in place deliberately — they are the ceiling that takes effect the moment counsel reports, not a claim that quotation is permitted now. Until #31 the marker was prose in `notes` that no code read, while the machine-readable fields next to it said 80 words were fine.
+That prohibition is now **executable** rather than advisory: 30 of the 36 entries carry `quotation.blockedPendingCounsel: true`, and the validator rejects a quotation against any of them regardless of the word and count limits recorded beside it. The limits stay in place deliberately — they are the ceiling that takes effect the moment counsel reports, not a claim that quotation is permitted now. Until #31 the marker was prose in `notes` that no code read, while the machine-readable fields next to it said 80 words were fine.
 
 Priority for review, in order:
 
@@ -97,6 +97,7 @@ Priority for review, in order:
 3. **ASME Y14.5** — figure-heavy, and DP-01 depends on it.
 4. **BIPM SI Brochure** — verify the Creative Commons statement on the specific edition.
 5. **ILAC, UKAS, EURAMET, OIML** — free availability is not the same as a reproduction licence, and the distinction determines their tier.
-6. **IEC 60601-1 and IEC 62353** — the weakest classification in the register, and flagged as such in their own `termsBasis`. Tier 2 was assigned **by analogy** with ISO/IEC 17025 rather than from IEC's own terms, which were not reviewed. That is an interpretation of an interpretation. If counsel reaches only one thing on this list beyond item 1, reaching these would convert a guess into a decision.
+6. **NCSLI personnel series (RP-17, RP-20, LM-13, LM-14)** — registered 2026-08-17 on the same basis as NCSLI-RP-1-2010. They are cited by the proficiency crosswalk rather than quoted, so exposure is low, but they are the profession's own position on the two artifacts the crosswalk maps.
+7. **IEC 60601-1 and IEC 62353** — the weakest classification in the register, and flagged as such in their own `termsBasis`. Tier 2 was assigned **by analogy** with ISO/IEC 17025 rather than from IEC's own terms, which were not reviewed. That is an interpretation of an interpretation. If counsel reaches only one thing on this list beyond item 1, reaching these would convert a guess into a decision.
 
 Record the outcome in each entry's `termsBasis` and `termsReviewedOn`, and remove the flag.
