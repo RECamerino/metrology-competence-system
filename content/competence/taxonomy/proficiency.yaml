@@ -15,6 +15,68 @@
 #
 #   No self-signoff, ever. The signer is always a distinct natural person.
 #
+# ---------------------------------------------------------------------------
+# CROSSWALK TO THE PROFESSION'S OWN SCALES — added 2026-08-17
+# ---------------------------------------------------------------------------
+#
+# This ladder came from a general skill-acquisition model (decision 7,
+# "5-level Dreyfus-style"), not from the metrology profession's published
+# position. The profession has two scales and this system matches neither, so
+# the mapping is stated here rather than left for each adopting laboratory to
+# guess. Renaming the levels is NOT the fix: level names are load-bearing on
+# every credential already issued.
+#
+# READ THIS FIRST. RP-20's "Proficient" is THIS SYSTEM'S L3 Competent. It is
+# NOT this system's L4, which is also called Proficient. The word denotes a
+# different rung in each document. A manager mapping their existing Proficient
+# staff onto the same word here promotes every one of them by a rung — and that
+# rung is not nominal: L4 costs 200 hours, 180 days, a capstone, a work
+# product, double scoring and two signers who hold L5 in the same element.
+# This is the single most likely adoption error and it is silent.
+#
+#   NCSLI RP-20 (2010) — staff KSA matrix, three values, per parameter
+#     Trained     -> L1 Novice / L2 Advanced Beginner
+#     Proficient  -> L3 Competent          <-- NOT L4
+#     SME         -> L5 Expert             (see the L5 note below)
+#
+#   NCSLI RP-17 (2007) — four-rung authorization ladder, per parameter,
+#   ascending, where a higher rung subsumes the lower ones
+#     Perform Under Supervision -> L1 / L2
+#     Qualified to Perform      -> L3 Competent
+#     Qualified to Train        -> no clean equivalent; see below
+#     Authorized Signatory      -> NOT A LEVEL IN THIS SYSTEM
+#
+# Two deliberate departures, declared rather than silent:
+#
+#   1. Authorized Signatory is not a rung here. RP-17 places it at the top of
+#      its ladder and treats it as subsuming every activity for that parameter
+#      — that is, it ranks a PERMISSION as a qualification. This system holds
+#      the opposite (rule 6): competence is what a person can do, authority is
+#      what a laboratory permits them to do, it is granted for a named scope
+#      and it ends on departure. `approved-signatory` is therefore an
+#      authority-overlay role, not a level. The divergence is intentional and
+#      this system's position is the one to defend.
+#
+#   2. Qualified to Train sits one rung above independent performance in
+#      RP-17, and RP-20 likewise reaches SME from Proficient in a single step.
+#      This system puts the mentoring requirement at L5 only — two rungs above
+#      L3 — and gates it behind 1000 hours, 365 days and a cross-organizational
+#      signature. That is a real divergence from both documents and it is NOT
+#      yet resolved: it is why `senior-metrology-technician` and
+#      `metrology-trainer` currently carry role targets that do not reach the
+#      level their own `authorities` entries describe. Open, and the crosswalk
+#      records it rather than papering over it.
+#
+# The unit of record also differs and no aggregation exists. Both NCSLI scales
+# are per MEASUREMENT PARAMETER on the laboratory's scope — torque, mass,
+# temperature — and this system records per ELEMENT (`assessedAt: element`).
+# A laboratory answering "is this person qualified for our temperature scope"
+# needs a mapping the corpus does not currently provide. Anything scope-facing
+# built later has to close that, and RP-20's matrix is the layout to target.
+#
+# Sources are registered: NCSLI-RP-17-2007, NCSLI-RP-20-2010, NCSLI-LM-13-2012,
+# NCSLI-LM-14-2010. Cited, never quoted — all four are blockedPendingCounsel.
+#
 # PROVISIONAL: the experience-hour thresholds and waiting periods below are a
 # steward judgement that has never been tested against a real career history.
 # They are the numbers most likely to move once practising metrologists review
