@@ -1019,6 +1019,42 @@ function checkItemBank(corpus: Corpus): Finding[] {
 
 /* ------------------------------------------------------------------------ */
 
+/* ------------------------------------------------------------------------ */
+
+/**
+ * Where an evidence modality may legitimately be used.
+ *
+ * `witnessed-proficiency-test` is a satisfactory result in a proficiency test
+ * or interlaboratory comparison, and it is the strongest objective evidence the
+ * profession recognises — its comparison value is one the candidate's own
+ * laboratory did not set. That is exactly why it cannot stand at L1 or L2:
+ * those levels are witnessed observation of framed work, and a PT result is
+ * neither framed nor observed. Admitting it there would let the strongest
+ * available evidence be recorded against the weakest claim, which reads as a
+ * promotion to anyone comparing two credentials.
+ *
+ * Checked rather than left to the comment beside it, because the comment is
+ * prose no code reads — the same defect CONFIRM-WITH-COUNSEL had.
+ */
+function checkProficiencyPolicy(corpus: Corpus): Finding[] {
+  const findings: Finding[] = [];
+  const levels = (corpus.proficiency?.levels ?? []) as Array<Record<string, any>>;
+
+  for (const entry of levels) {
+    const level = Number(entry?.level);
+    const modality = (entry?.assessment?.modality ?? []) as string[];
+    if (level <= 2 && modality.includes('witnessed-proficiency-test')) {
+      findings.push(
+        err(
+          `content/competence/taxonomy/proficiency.yaml: L${level} admits 'witnessed-proficiency-test', but L1 and L2 are witnessed observation of framed work and a proficiency-test result is neither. It is admissible from L3 upward.`,
+        ),
+      );
+    }
+  }
+
+  return findings;
+}
+
 export function runAllChecks(corpus: Corpus): Finding[] {
   return [
     ...checkSchemas(corpus),
@@ -1029,5 +1065,6 @@ export function runAllChecks(corpus: Corpus): Finding[] {
     ...checkBok(corpus),
     ...checkModules(corpus),
     ...checkItemBank(corpus),
+    ...checkProficiencyPolicy(corpus),
   ];
 }
