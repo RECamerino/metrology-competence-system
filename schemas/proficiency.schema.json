@@ -84,6 +84,11 @@
               "minimum": 0,
               "description": "Minimum recorded practice before the level may be claimed. Time cannot be shortcut; this is one of the mechanisms that makes the corpus a lifetime's pursuit rather than a checkbox."
             },
+            "minDistinctActivities": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "How many SEPARATE pieces of work the experience must span, alongside minExperienceHours. Hours measure duration; this measures range, and they are different claims. LM-14 describes progression as several years of progressively more complex ASSIGNMENTS, which is a statement about variety — and 1000 hours accumulated on one repetitive task satisfies an hours threshold exactly as well as 1000 hours across escalating work, at the level whose whole claim is judgement in unfamiliar cases. An activity is the unit of decision 37: one activity credits every element it genuinely exercises, so this counts distinct activities rather than distinct elements. Set only at L4 and L5, where breadth is what the level asserts; at L3 forty hours is a single competent job and range is not the claim."
+            },
             "minDaysSincePreviousLevel": {
               "type": "integer",
               "minimum": 0,

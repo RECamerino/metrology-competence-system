@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
 | Content authored | **21 elements** · **12 BOK articles** · **2 modules** — 8 domains, all three axes |
 | Item bank | 4 archetypes · 28 bindings · **0.1%** of units covered |
-| Checks | 0 errors · 260/260 tests · typecheck clean |
+| Checks | 0 errors · 262/262 tests · typecheck clean |
 
 ### Phases
 
@@ -144,7 +144,7 @@ content/trust-registry.yaml       Issuer trust registry. Steward-controlled.
                                   verifies.
 
 schemas/                          17 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 260 tests.
+packages/validator/               The ONLY implemented package. 262 tests.
 apps/viewer/                      The only implemented app. TWO templates and a
                                   build script; output is an index page plus one
                                   page per domain, none committed. Every page is
@@ -201,7 +201,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 260 guardrail tests
+npm test                  # 262 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:foundational # which foundational areas a person has actually graded
@@ -238,6 +238,8 @@ Changing ceilings or kinds: edit `tools/ceiling-plan.json` or `tools/kind-plan.j
 From external architectural review, August 2026. Not a new phase — scope that has to be inside the freeze, because changing it after thousands of articles exist is the same mistake the BOK split avoided by two weeks.
 
 **Done:** knowledge-version provenance (decision 39) · BOK review provenance (decision 40) · disagreement and consensus (decision 41) · role type, occupational vs authority overlay (was item 14) · **trust registry, key lifecycle and the DID profile (was items 8 and 18)** · **where a disagreement lives, and what an item may not score for it** — `consensus` said practitioners disagree and nothing said *why*, so a section contested because its source contradicts itself could not be told from one contested because no source reaches the question, and only the first is resolved by a revision. `contestedBasis` splits them four ways and all four are used by real content. Its consequence for assessment is `positionNeutrality`: an item bound to an element that reaches disputed knowledge must state what the scoring credits and what it must never credit, because a rubric that rewards arriving at the author's position is a validity defect that reads perfectly well on the page. The obligation is **derived, not declared** — the corpus already knows which sections are disputed and which elements reach them, and an author who has to remember a flag is the arrangement that left `CONFIRM-WITH-COUNSEL` unenforceable.
+
+**Also done:** **experience breadth, and a declared position on education** — `minExperienceHours` was the ladder's only experience input, and hours measure duration. LM-14 describes progression as several years of progressively more complex *assignments*, which is a claim about range: 1000 hours on one repetitive task clears a 1000-hour bar exactly as well as 1000 hours across escalating work, at the level whose whole claim is judgement in unfamiliar cases. `minDistinctActivities` is set at L4 and L5, recorded on the credential as `distinctActivities`, and checked — a requirement nothing reads is the defect corrected twice already. Separately, the profession treats formal education as **substitutable** for experience (RP-17 §4.2.1, LM-14) and this system does not admit it; that exclusion is now declared in `proficiency.yaml` with its reasoning and its cost, because an undeclared departure reads as an oversight.
 
 **Also done:** **the evidence route the profession names first** — `assessment.modality` enumerated four values and none was a proficiency test or interlaboratory comparison, so a laboratory holding the strongest objective evidence for a person (a satisfactory PT result in that measurement area, compared against a value it did not set) had to re-manufacture it as a work product judged by a colleague. `witnessed-proficiency-test` is admissible from L3 and checked not to appear below it, because L1 and L2 are witnessed observation of framed work and a PT result is neither. Additive, so nothing already issued is affected — but the enum lives in two schemas that freeze at Phase 3, which is what made it urgent rather than important.
 
@@ -284,7 +286,7 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 **2232 → 5407 elements in one session.** The `EC` axis (21 packs, 203 equipment types, 2732 elements) and 31 `Foundational Knowledge` areas were **generated in passes** from hand-written per-type specifications. Read that as a warning label, not a boast.
 
-**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 260 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
+**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 262 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
 
 **Coverage is the thing that is not proven.** A practising metrologist reviewed the equipment axis four times and found real gaps every time — fixture-to-print calibration absent entirely, cal kits present only as parameters, magnetics claimed by a pack that contained none of it, the whole reference-and-primary tier missing between a working instrument and the SI. Each round changed the design rather than adding to it.
 
