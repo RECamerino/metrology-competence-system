@@ -1107,3 +1107,34 @@ test('distinct titles raise nothing', () => {
   const findings = runAllChecks(corpus([]));
   assert.deepEqual(findings.filter((f) => f.message.includes('share an element title')), []);
 });
+
+/* -- Proficiency policy --------------------------------------------------- */
+
+const ladder = (level: number, modality: string[]) => ({
+  schemaVersion: 1,
+  levels: [{ level, name: 'Test', assessment: { modality, requiresCapstone: false } }],
+});
+
+test('a proficiency-test result cannot stand at L1 or L2', () => {
+  // The strongest objective evidence recorded against the weakest claim reads
+  // as a promotion to anyone comparing two credentials.
+  for (const level of [1, 2]) {
+    const c = corpus([element()]);
+    c.proficiency = ladder(level, ['open-resource-parameterized', 'witnessed-proficiency-test']);
+    assert.ok(
+      errorsOf(c).some((e) => e.includes('witnessed-proficiency-test')),
+      `expected L${level} to reject the modality`,
+    );
+  }
+});
+
+test('a proficiency-test result is admissible from L3 upward', () => {
+  for (const level of [3, 4, 5]) {
+    const c = corpus([element()]);
+    c.proficiency = ladder(level, ['witnessed-proficiency-test']);
+    assert.ok(
+      !errorsOf(c).some((e) => e.includes('witnessed-proficiency-test')),
+      `expected L${level} to accept the modality`,
+    );
+  }
+});
