@@ -107,6 +107,31 @@ levels:
       signerCount: 1
       # Null deliberately: a witness attests that they saw the work, which does
       # not require them to be more expert than the candidate.
+      #
+      # THIS IS A DECLARED DEPARTURE FROM THE PROFESSION, not an oversight.
+      # NCSLI RP-17 (2007) requires the witness to a satisfactory demonstration
+      # to be a qualified individual possessing expertise in the specific
+      # measurement area, and even its lowest rung — Perform Under Supervision —
+      # presupposes a competent supervising person. This system does not require
+      # that at L1 or L2, and the reason is the first principle in CLAUDE.md:
+      # nothing gates entry. Requiring a witness who already holds a level would
+      # make L1 unreachable for a person with no employer and no professional
+      # network, which is precisely the person the Personal edition exists for.
+      #
+      # The distinction RP-17 carries in the witness requirement is carried
+      # HERE by provenanceTier instead, and it is machine-checked offline:
+      # `highestSupportedTier` returns `self-study` whenever no signer has
+      # evidenced standing, and `checkProvenanceTier` refuses a credential that
+      # claims more than its signers can show. So an L1 witnessed by somebody
+      # with no standing and an L1 witnessed by a competent practitioner are NOT
+      # indistinguishable — the first cannot rise above `self-study`, and a
+      # reader sees which they are holding. Two candidates who hold nothing may
+      # witness each other; both results are `self-study`, which asserts only
+      # that somebody who was not the subject saw the work, and that is the
+      # honest floor rather than a loophole.
+      #
+      # From L3 the requirement appears, because that is where independent work
+      # is entrusted and the signer judges quality rather than merely observing.
       witnessMustHoldLevel: null
 
   - level: 2
@@ -125,6 +150,10 @@ levels:
       minDaysSincePreviousLevel: 0
     signoff:
       signerCount: 1
+      # Null for the same declared reason as L1 — see the note there. RP-17
+      # would require a witness with expertise in the measurement area; this
+      # system carries that distinction in provenanceTier rather than in a
+      # level gate, so that entry stays open.
       witnessMustHoldLevel: null
 
   - level: 3
