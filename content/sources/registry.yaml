@@ -81,7 +81,7 @@ sources:
     notes: >-
       Superseded in practice by JCGM 100 for uncertainty evaluation. Retained
       because a great deal of US laboratory documentation still references it,
-      and practitioners need to recognise the differences.
+      and practitioners need to recognize the differences.
 
   - id: NIST-HB-143-2019
     designation: NIST Handbook 143 (2019)

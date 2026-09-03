@@ -29,7 +29,7 @@ domains:
           where digital metrology actually fails.
         elements:
           - { id: DP-20-040, title: "Digital and analogue representation of a measurement", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: DP-20-041, title: "Resolution, quantisation and least significant bit", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-20-041, title: "Resolution, quantization and least significant bit", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-20-042, title: "Data types, precision and rounding in software", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-20-043, title: "Units in a data file and the errors of omitting them", kind: judgment, levelCeiling: 3, status: draft }
           - { id: DP-20-044, title: "Timestamps, time zones and clock accuracy", kind: knowledge, levelCeiling: 3, status: draft }
@@ -78,7 +78,7 @@ domains:
           - { id: DP-20-020, title: "Smart sensors and self-describing devices", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-20-021, title: "Sensor networks and distributed measurement architecture", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-20-022, title: "Edge processing and where the calculation happens", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: DP-20-023, title: "Time synchronisation across a measurement network", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-20-023, title: "Time synchronization across a measurement network", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-20-024, title: "Metrological confirmation of a networked measurement system", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-20-025, title: "Legacy instrument integration and protocol translation", kind: skill, levelCeiling: 4, status: draft }
 

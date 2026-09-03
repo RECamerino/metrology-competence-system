@@ -9,7 +9,7 @@ domains:
       infrastructure that underwrites those claims fits together. Everything
       else in the corpus assumes this. Boundary: terminology and units belong to
       CM-02; uncertainty evaluation belongs to CM-03; this domain covers the
-      concepts those two operationalise.
+      concepts those two operationalize.
 
     competencyAreas:
 
@@ -68,7 +68,7 @@ domains:
         summary: >-
           The conceptual shift from the error approach to the uncertainty
           approach. Practitioners trained before this shift, and documentation
-          written before it, remain in circulation — recognising both is
+          written before it, remain in circulation — recognizing both is
           necessary.
         elements:
           - { id: CM-01-024, title: "Error and uncertainty: the conceptual break between them", kind: knowledge, levelCeiling: 4, status: draft }
@@ -88,7 +88,7 @@ domains:
           Why the system looks the way it does. Useful less as heritage than as
           explanation for conventions that otherwise appear arbitrary.
         elements:
-          - { id: CM-01-033, title: "Origins of standardised measurement in trade and law", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-01-033, title: "Origins of standardized measurement in trade and law", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-01-034, title: "The Metre Convention and the founding of international metrology", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-01-035, title: "From artefact standards to constant-based definitions", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-01-036, title: "Measurement as a social contract: trust, trade and enforcement", kind: knowledge, levelCeiling: 3, status: draft }

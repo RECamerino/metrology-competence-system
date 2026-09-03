@@ -31,7 +31,7 @@ domains:
           itself drifts.
         elements:
           - { id: EC-05-055, title: "Receiving inspection and functional check of a liquid flow meter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-056, title: "Calibration configuration and stabilisation for a liquid flow meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-056, title: "Calibration configuration and stabilization for a liquid flow meter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-057, title: "Selecting the standards and fixturing for a liquid flow meter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-058, title: "Meter factor determination by gravimetric method", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-059, title: "Volumetric proving and prover verification", kind: skill, levelCeiling: 4, status: draft }
@@ -53,7 +53,7 @@ domains:
           define what a volume even means.
         elements:
           - { id: EC-05-069, title: "Receiving inspection and functional check of a gas flow meter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-070, title: "Calibration configuration and stabilisation for a gas flow meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-070, title: "Calibration configuration and stabilization for a gas flow meter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-071, title: "Selecting the standards and fixturing for a gas flow meter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-072, title: "Flow accuracy against a reference standard", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-073, title: "Reference condition definition and conversion", kind: skill, levelCeiling: 4, status: draft }
@@ -74,7 +74,7 @@ domains:
           blockage are part of the measurement.
         elements:
           - { id: EC-05-082, title: "Receiving inspection and functional check of an anemometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-083, title: "Calibration configuration and stabilisation for an anemometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-083, title: "Calibration configuration and stabilization for an anemometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-084, title: "Selecting the standards and fixturing for an anemometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-085, title: "Velocity indication error against a reference", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-086, title: "Directional sensitivity and probe alignment", kind: skill, levelCeiling: 4, status: draft }
@@ -95,7 +95,7 @@ domains:
           result.
         elements:
           - { id: EC-05-094, title: "Receiving inspection and functional check of a pipette or volumetric vessel", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-095, title: "Calibration configuration and stabilisation for a pipette or volumetric vessel", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-095, title: "Calibration configuration and stabilization for a pipette or volumetric vessel", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-096, title: "Selecting the standards and fixturing for a pipette or volumetric vessel calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-097, title: "Gravimetric determination of delivered volume", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-098, title: "Water density, Z-factor and buoyancy correction", kind: skill, levelCeiling: 4, status: draft }
@@ -114,19 +114,19 @@ domains:
         status: draft
         summary: >-
           Mercury and ultrasonic interferometer manometers, and the
-          piston gauges characterised dimensionally rather than by
+          piston gauges characterized dimensionally rather than by
           comparison.
         elements:
           - { id: EC-05-185, title: "Receiving inspection and functional check of a primary pressure standard", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-186, title: "Calibration configuration and stabilisation for a primary pressure standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-186, title: "Calibration configuration and stabilization for a primary pressure standard", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-187, title: "Selecting the standards and fixturing for a primary pressure standard calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-188, title: "Mercury manometer column height determination", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-05-189, title: "Ultrasonic interferometer manometer operation", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-05-190, title: "Mercury density, temperature and local gravity corrections", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-05-191, title: "Dimensional characterisation of a piston-cylinder assembly", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-191, title: "Dimensional characterization of a piston-cylinder assembly", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-05-192, title: "Distortion coefficient determination under pressure", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-05-193, title: "Cross-float between primary and transfer standards", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-05-194, title: "Uncertainty budget for a primary pressure realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-194, title: "Uncertainty budget for a primary pressure realization", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-05-195, title: "Adjustment of a primary pressure standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-196, title: "Uncertainty budget for a primary pressure standard calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-197, title: "Conformity statement for a primary pressure standard against its specification", kind: judgment, levelCeiling: 4, status: draft }

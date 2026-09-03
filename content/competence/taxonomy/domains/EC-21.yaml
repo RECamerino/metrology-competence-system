@@ -30,7 +30,7 @@ domains:
           gravity networks and against absolute determinations.
         elements:
           - { id: EC-21-001, title: "Receiving inspection and functional check of a gravimeter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-21-002, title: "Calibration configuration and stabilisation for a gravimeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-002, title: "Calibration configuration and stabilization for a gravimeter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-21-003, title: "Selecting the standards and fixturing for a gravimeter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-21-004, title: "Absolute gravimeter operation and drop measurement", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-21-005, title: "Scale factor determination on a calibration line", kind: skill, levelCeiling: 5, status: draft }
@@ -52,7 +52,7 @@ domains:
           physical marker, is what the system actually measures.
         elements:
           - { id: EC-21-015, title: "Receiving inspection and functional check of a GNSS receiver and antenna", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-21-016, title: "Calibration configuration and stabilisation for a GNSS receiver and antenna", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-016, title: "Calibration configuration and stabilization for a GNSS receiver and antenna", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-21-017, title: "Selecting the standards and fixturing for a GNSS receiver and antenna calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-21-018, title: "Antenna phase centre offset and variation determination", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-21-019, title: "Robot and anechoic chamber antenna calibration methods", kind: skill, levelCeiling: 5, status: draft }
@@ -73,7 +73,7 @@ domains:
           and additive constant on a calibrated baseline.
         elements:
           - { id: EC-21-028, title: "Receiving inspection and functional check of a total station", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-21-029, title: "Calibration configuration and stabilisation for a total station", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-029, title: "Calibration configuration and stabilization for a total station", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-21-030, title: "Selecting the standards and fixturing for a total station calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-21-031, title: "Horizontal collimation and trunnion axis error", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-21-032, title: "Vertical index error determination", kind: skill, levelCeiling: 4, status: draft }
@@ -95,7 +95,7 @@ domains:
           collimation error are the height error over a run.
         elements:
           - { id: EC-21-042, title: "Receiving inspection and functional check of a levelling instrument", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-21-043, title: "Calibration configuration and stabilisation for a levelling instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-043, title: "Calibration configuration and stabilization for a levelling instrument", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-21-044, title: "Selecting the standards and fixturing for a levelling instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-21-045, title: "Collimation error determination by two-peg test", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-21-046, title: "Compensator accuracy and setting sensitivity", kind: skill, levelCeiling: 4, status: draft }
@@ -117,7 +117,7 @@ domains:
           reference.
         elements:
           - { id: EC-21-055, title: "Receiving inspection and functional check of an EDM calibration baseline", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-21-056, title: "Calibration configuration and stabilisation for an EDM calibration baseline", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-056, title: "Calibration configuration and stabilization for an EDM calibration baseline", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-21-057, title: "Selecting the standards and fixturing for an EDM calibration baseline calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-21-058, title: "Baseline pillar distance determination and its uncertainty", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-21-059, title: "Pillar stability monitoring and re-determination", kind: skill, levelCeiling: 5, status: draft }
@@ -139,7 +139,7 @@ domains:
           motion.
         elements:
           - { id: EC-21-068, title: "Receiving inspection and functional check of an inertial or tilt sensor", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-21-069, title: "Calibration configuration and stabilisation for an inertial or tilt sensor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-21-069, title: "Calibration configuration and stabilization for an inertial or tilt sensor", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-21-070, title: "Selecting the standards and fixturing for an inertial or tilt sensor calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-21-071, title: "Tilt sensor scale factor and zero determination", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-21-072, title: "Tilt table and rate table verification", kind: skill, levelCeiling: 5, status: draft }

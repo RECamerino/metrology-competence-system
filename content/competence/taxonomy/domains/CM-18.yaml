@@ -7,7 +7,7 @@ domains:
     summary: >-
       Running measurement work as a managed activity, and making the case for it
       in terms an organization acts on. Included because the ceiling on most
-      metrology careers is commercial and organisational rather than technical.
+      metrology careers is commercial and organizational rather than technical.
       Boundary: quality management systems are CM-10; people development is
       CM-17.
 
@@ -48,7 +48,7 @@ domains:
         status: draft
         elements:
           - { id: CM-18-018, title: "Defining meaningful performance indicators for a laboratory", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: CM-18-019, title: "Turnaround, throughput and utilisation", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-18-019, title: "Turnaround, throughput and utilization", kind: skill, levelCeiling: 3, status: draft }
           - { id: CM-18-020, title: "Capacity planning and demand forecasting", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-18-021, title: "Costing and pricing calibration services", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-18-022, title: "Continuous improvement methods applied to laboratory work", kind: knowledge, levelCeiling: 4, status: draft }
@@ -56,16 +56,16 @@ domains:
           - { id: CM-18-024, title: "Metrics that distort behaviour when targeted", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: CM-18-A04
-        title: Stakeholders, Influence and Organisational Position
+        title: Stakeholders, Influence and Organizational Position
         status: draft
         elements:
           - { id: CM-18-025, title: "Identifying stakeholders and their actual interests", kind: skill, levelCeiling: 3, status: draft }
           - { id: CM-18-026, title: "Influence without authority", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-18-027, title: "Negotiating requirements and specifications", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-18-028, title: "Managing conflict between quality and delivery pressure", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: CM-18-029, title: "Where metrology sits in an organisation and why it matters", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-18-029, title: "Where metrology sits in an organization and why it matters", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-18-030, title: "Building a corporate metrology function", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: CM-18-031, title: "Standardising measurement practice across multiple sites", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-18-031, title: "Standardizing measurement practice across multiple sites", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-18-032, title: "Working with procurement, engineering and production", kind: judgment, levelCeiling: 3, status: draft }
 
       - id: CM-18-A05

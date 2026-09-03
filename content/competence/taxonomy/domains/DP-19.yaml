@@ -52,11 +52,11 @@ domains:
           - { id: DP-19-004, title: "Computed tomography for additive part inspection", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-19-005, title: "CT calibration, artefacts and dimensional traceability", kind: skill, levelCeiling: 5, status: draft }
           - { id: DP-19-006, title: "Surface texture of as-built additive surfaces", kind: skill, levelCeiling: 4, status: draft }
-          - { id: DP-19-007, title: "Porosity, density and defect characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-007, title: "Porosity, density and defect characterization", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-19-008, title: "Residual stress measurement in additive parts", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-19-009, title: "Distortion, warping and datum instability", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-19-010, title: "Test artefacts and machine qualification for additive processes", kind: skill, levelCeiling: 4, status: draft }
-          - { id: DP-19-011, title: "Feedstock powder characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-19-011, title: "Feedstock powder characterization", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-19-012, title: "Qualification of additive parts for critical applications", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: DP-19-A02

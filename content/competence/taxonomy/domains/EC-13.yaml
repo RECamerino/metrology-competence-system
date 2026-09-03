@@ -28,7 +28,7 @@ domains:
           one.
         elements:
           - { id: EC-13-001, title: "Receiving inspection and functional check of an energy meter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-13-002, title: "Calibration configuration and stabilisation for an energy meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-002, title: "Calibration configuration and stabilization for an energy meter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-13-003, title: "Selecting the standards and fixturing for an energy meter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-13-004, title: "Energy registration error at stated load points", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-005, title: "Power factor dependence and phase angle error", kind: skill, levelCeiling: 4, status: draft }
@@ -43,16 +43,16 @@ domains:
           - { id: EC-13-014, title: "Conformity statement for an energy meter against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-13-A02
-        title: Power Analyser and Power Quality Instrument Calibration
+        title: Power Analyzer and Power Quality Instrument Calibration
         status: draft
         summary: >-
           Instruments measuring power, harmonics and flicker, where the
           calibration must cover the distorted conditions they exist to
-          characterise.
+          characterize.
         elements:
-          - { id: EC-13-015, title: "Receiving inspection and functional check of a power analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-13-016, title: "Calibration configuration and stabilisation for a power analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-13-017, title: "Selecting the standards and fixturing for a power analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-015, title: "Receiving inspection and functional check of a power analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-016, title: "Calibration configuration and stabilization for a power analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-017, title: "Selecting the standards and fixturing for a power analyzer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-13-018, title: "Active, reactive and apparent power accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-019, title: "Phase angle and power factor measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-020, title: "Harmonic amplitude and phase measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
@@ -61,20 +61,20 @@ domains:
           - { id: EC-13-023, title: "Bandwidth and sampling effects on a power reading", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-024, title: "Current and voltage input channel accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-025, title: "Clamp and shunt input verification as a system", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-13-026, title: "Adjustment of a power analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-13-027, title: "Uncertainty budget for a power analyser calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-13-028, title: "Conformity statement for a power analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-026, title: "Adjustment of a power analyzer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-13-027, title: "Uncertainty budget for a power analyzer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-13-028, title: "Conformity statement for a power analyzer against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-13-A03
         title: Instrument Transformer Calibration
         status: draft
         summary: >-
-          Current and voltage transformers characterised for ratio and
+          Current and voltage transformers characterized for ratio and
           phase error at burden, which is where the class is actually
           decided.
         elements:
           - { id: EC-13-029, title: "Receiving inspection and functional check of an instrument transformer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-13-030, title: "Calibration configuration and stabilisation for an instrument transformer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-030, title: "Calibration configuration and stabilization for an instrument transformer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-13-031, title: "Selecting the standards and fixturing for an instrument transformer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-13-032, title: "Ratio error against burden and current", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-033, title: "Phase displacement determination", kind: skill, levelCeiling: 4, status: draft }
@@ -96,7 +96,7 @@ domains:
           method.
         elements:
           - { id: EC-13-042, title: "Receiving inspection and functional check of high voltage measuring equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-13-043, title: "Calibration configuration and stabilisation for high voltage measuring equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-043, title: "Calibration configuration and stabilization for high voltage measuring equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-13-044, title: "Selecting the standards and fixturing for high voltage measuring equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-13-045, title: "Divider ratio determination at voltage", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-13-046, title: "Scale factor linearity and voltage dependence", kind: skill, levelCeiling: 4, status: draft }
@@ -119,7 +119,7 @@ domains:
           settings rely on.
         elements:
           - { id: EC-13-056, title: "Receiving inspection and functional check of a relay test set", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-13-057, title: "Calibration configuration and stabilisation for a relay test set", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-057, title: "Calibration configuration and stabilization for a relay test set", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-13-058, title: "Selecting the standards and fixturing for a relay test set calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-13-059, title: "Current and voltage output accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-060, title: "Phase angle output accuracy between channels", kind: skill, levelCeiling: 4, status: draft }
@@ -140,14 +140,14 @@ domains:
           apparatus whose condition is inferred from small differences.
         elements:
           - { id: EC-13-069, title: "Receiving inspection and functional check of transformer test equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-13-070, title: "Calibration configuration and stabilisation for transformer test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-070, title: "Calibration configuration and stabilization for transformer test equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-13-071, title: "Selecting the standards and fixturing for transformer test equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-13-072, title: "Turns ratio measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-073, title: "Phase deviation and vector group verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-074, title: "Winding resistance measurement accuracy at low ohms", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-075, title: "Excitation current measurement verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-076, title: "Short-circuit impedance measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-13-077, title: "Demagnetisation and its necessity after a DC test", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-13-077, title: "Demagnetization and its necessity after a DC test", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: EC-13-078, title: "Tap changer position and range verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-079, title: "Adjustment of transformer test equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-13-080, title: "Uncertainty budget for transformer test equipment calibration", kind: skill, levelCeiling: 4, status: draft }
@@ -162,7 +162,7 @@ domains:
           angle.
         elements:
           - { id: EC-13-082, title: "Receiving inspection and functional check of an insulation diagnostic test set", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-13-083, title: "Calibration configuration and stabilisation for an insulation diagnostic test set", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-083, title: "Calibration configuration and stabilization for an insulation diagnostic test set", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-13-084, title: "Selecting the standards and fixturing for an insulation diagnostic test set calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-13-085, title: "Capacitance measurement accuracy at high voltage", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-086, title: "Dissipation factor and tan delta accuracy", kind: skill, levelCeiling: 5, status: draft }
@@ -183,7 +183,7 @@ domains:
           electrode arrangement is inseparable from the number.
         elements:
           - { id: EC-13-095, title: "Receiving inspection and functional check of an earth resistance tester", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-13-096, title: "Calibration configuration and stabilisation for an earth resistance tester", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-096, title: "Calibration configuration and stabilization for an earth resistance tester", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-13-097, title: "Selecting the standards and fixturing for an earth resistance tester calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-13-098, title: "Earth resistance measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-099, title: "Test current, frequency and injection verification", kind: skill, levelCeiling: 4, status: draft }
@@ -204,7 +204,7 @@ domains:
           prove standby systems will carry the load.
         elements:
           - { id: EC-13-108, title: "Receiving inspection and functional check of standby power test equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-13-109, title: "Calibration configuration and stabilisation for standby power test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-109, title: "Calibration configuration and stabilization for standby power test equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-13-110, title: "Selecting the standards and fixturing for standby power test equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-13-111, title: "Cell and string impedance measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-112, title: "Discharge current and load bank accuracy", kind: skill, levelCeiling: 4, status: draft }
@@ -226,11 +226,11 @@ domains:
           well as magnitude.
         elements:
           - { id: EC-13-121, title: "Receiving inspection and functional check of a reference power standard", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-13-122, title: "Calibration configuration and stabilisation for a reference power standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-13-122, title: "Calibration configuration and stabilization for a reference power standard", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-13-123, title: "Selecting the standards and fixturing for a reference power standard calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-13-124, title: "Active power accuracy against a reference wattmeter", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-13-125, title: "Phase angle realisation and its traceability", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-13-126, title: "Sampling wattmeter operation and synchronisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-125, title: "Phase angle realization and its traceability", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-13-126, title: "Sampling wattmeter operation and synchronization", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-13-127, title: "Current and voltage transducer pairing in a reference system", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-13-128, title: "Harmonic power measurement traceability", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-13-129, title: "Comparison against a national power standard", kind: judgment, levelCeiling: 5, status: draft }

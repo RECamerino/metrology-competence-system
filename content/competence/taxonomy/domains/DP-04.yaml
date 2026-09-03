@@ -51,7 +51,7 @@ domains:
           - { id: DP-04-005, title: "Amplitude conventions: peak, RMS, peak-to-peak", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-04-006, title: "Frequency response functions and coherence", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: DP-04-007, title: "Phase measurement and its pitfalls", kind: knowledge, levelCeiling: 4, status: draft }
-          - { id: DP-04-008, title: "Random, periodic and transient signal characterisation", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-04-008, title: "Random, periodic and transient signal characterization", kind: knowledge, levelCeiling: 4, status: draft }
 
       - id: DP-04-A02
         title: Vibration Measurement and Calibration
@@ -62,7 +62,7 @@ domains:
           - { id: DP-04-011, title: "Mounting effects and mounted resonance", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-04-012, title: "Primary calibration by laser interferometry", kind: skill, levelCeiling: 5, status: draft }
           - { id: DP-04-013, title: "Comparison calibration against a reference accelerometer", kind: skill, levelCeiling: 4, status: draft }
-          - { id: DP-04-014, title: "Vibration exciters and their characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-04-014, title: "Vibration exciters and their characterization", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-04-015, title: "Transverse sensitivity and cross-axis response", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-04-016, title: "Charge amplifiers, signal conditioning and cable effects", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-04-017, title: "Low frequency and high frequency calibration challenges", kind: skill, levelCeiling: 4, status: draft }
@@ -74,7 +74,7 @@ domains:
         title: Shock and Transient Measurement
         status: draft
         elements:
-          - { id: DP-04-021, title: "Shock pulse characterisation and shock response spectrum", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-04-021, title: "Shock pulse characterization and shock response spectrum", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: DP-04-022, title: "Shock calibration methods", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-04-023, title: "High-g and pyroshock measurement", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-04-024, title: "Zero shift and transducer damage in shock events", kind: skill, levelCeiling: 4, status: draft }

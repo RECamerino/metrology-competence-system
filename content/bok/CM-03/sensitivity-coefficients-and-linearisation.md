@@ -91,7 +91,7 @@ citations:
     relevance: >-
       The law of propagation of uncertainty for uncorrelated inputs. Its
       accompanying note is the source for the higher-order treatment in s06,
-      and is where the framework itself states that linearisation has limits.
+      and is where the framework itself states that linearization has limits.
   - source: JCGM-100-2008
     clause: "5.1.3"
     relevance: >-
@@ -211,7 +211,7 @@ coefficient is obtained by moving the input and observing the output.
 
 The procedure is unremarkable: perturb one input by a known amount, hold the
 others, record the change in the result, and take the ratio. The GUM
-recognises this route explicitly, and it is not a second-class one — for a
+recognizes this route explicitly, and it is not a second-class one — for a
 model that exists only as software it is the only honest route available.
 
 What the resulting number *is*: an estimate of the derivative averaged over the
@@ -313,7 +313,7 @@ sometimes more than is actually known.
 
 That last point is the case worth preparing for, because it is where neither
 answer is available. If the curvature is significant *and* the input
-distributions are not characterised well enough to justify propagating them,
+distributions are not characterized well enough to justify propagating them,
 then the higher-order term rests on a normality assumption that is not
 supported and the numerical propagation rests on distributions that were
 guessed. Nothing on the records settles it.

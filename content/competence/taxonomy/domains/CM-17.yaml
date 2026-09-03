@@ -64,11 +64,11 @@ domains:
           - { id: CM-17-026, title: "Graduated release of responsibility", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-17-027, title: "Supervising work you remain accountable for", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-17-028, title: "Developing someone whose specialism exceeds your own", kind: judgment, levelCeiling: 5, status: draft }
-          - { id: CM-17-029, title: "Recognising and developing potential", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-17-029, title: "Recognizing and developing potential", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-17-030, title: "Sponsorship, visibility and career advocacy", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-17-A05
-        title: Organisational Knowledge and Succession
+        title: Organizational Knowledge and Succession
         status: draft
         summary: >-
           The field's demographic problem. Much metrology competence is

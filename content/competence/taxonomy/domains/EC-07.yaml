@@ -22,16 +22,16 @@ domains:
         title: Frequency Standard and Oscillator Calibration
         status: draft
         summary: >-
-          Ovened, rubidium and caesium sources characterised for offset,
+          Ovened, rubidium and caesium sources characterized for offset,
           ageing and short-term stability, which are three different
           measurements.
         elements:
           - { id: EC-07-001, title: "Receiving inspection and functional check of a frequency standard", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-07-002, title: "Calibration configuration and stabilisation for a frequency standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-002, title: "Calibration configuration and stabilization for a frequency standard", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-07-003, title: "Selecting the standards and fixturing for a frequency standard calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-07-004, title: "Frequency offset against a reference standard", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-07-005, title: "Ageing rate determination over time", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-07-006, title: "Allan deviation and short-term stability characterisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-07-006, title: "Allan deviation and short-term stability characterization", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-07-007, title: "Warm-up and retrace behaviour after power cycling", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-07-008, title: "Temperature coefficient of frequency", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-07-009, title: "Phase comparison and beat frequency methods", kind: skill, levelCeiling: 4, status: draft }
@@ -48,7 +48,7 @@ domains:
           and antenna position are part of the delivered time.
         elements:
           - { id: EC-07-014, title: "Receiving inspection and functional check of a timing receiver", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-07-015, title: "Calibration configuration and stabilisation for a timing receiver", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-015, title: "Calibration configuration and stabilization for a timing receiver", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-07-016, title: "Selecting the standards and fixturing for a timing receiver calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-07-017, title: "One pulse per second output accuracy against UTC", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-07-018, title: "Antenna cable delay determination and correction", kind: skill, levelCeiling: 4, status: draft }
@@ -70,7 +70,7 @@ domains:
           honestly.
         elements:
           - { id: EC-07-027, title: "Receiving inspection and functional check of a stopwatch or timer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-07-028, title: "Calibration configuration and stabilisation for a stopwatch or timer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-028, title: "Calibration configuration and stabilization for a stopwatch or timer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-07-029, title: "Selecting the standards and fixturing for a stopwatch or timer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-07-030, title: "Time interval indication error over stated durations", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-07-031, title: "Timebase frequency verification", kind: skill, levelCeiling: 3, status: draft }
@@ -83,16 +83,16 @@ domains:
           - { id: EC-07-038, title: "Conformity statement for a stopwatch or timer against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-07-A04
-        title: Phase Noise and Frequency Stability Analyser Calibration
+        title: Phase Noise and Frequency Stability Analyzer Calibration
         status: draft
         summary: >-
-          Instruments that characterise oscillators, verified against
+          Instruments that characterize oscillators, verified against
           sources of known instability because their own floor bounds
           every result.
         elements:
-          - { id: EC-07-039, title: "Receiving inspection and functional check of a stability analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-07-040, title: "Calibration configuration and stabilisation for a stability analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-07-041, title: "Selecting the standards and fixturing for a stability analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-039, title: "Receiving inspection and functional check of a stability analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-040, title: "Calibration configuration and stabilization for a stability analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-041, title: "Selecting the standards and fixturing for a stability analyzer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-07-042, title: "Allan deviation measurement verification", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-07-043, title: "Instrument noise floor and cross-correlation limits", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-07-044, title: "Phase noise measurement accuracy against a reference", kind: skill, levelCeiling: 5, status: draft }
@@ -100,9 +100,9 @@ domains:
           - { id: EC-07-046, title: "Measurement bandwidth and averaging effects", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-07-047, title: "Dead time and its effect on a stability statistic", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: EC-07-048, title: "Reference source selection for a stability measurement", kind: judgment, levelCeiling: 5, status: draft }
-          - { id: EC-07-049, title: "Adjustment of a stability analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-07-050, title: "Uncertainty budget for a stability analyser calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-07-051, title: "Conformity statement for a stability analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-049, title: "Adjustment of a stability analyzer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-07-050, title: "Uncertainty budget for a stability analyzer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-07-051, title: "Conformity statement for a stability analyzer against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-07-A05
         title: Tachometer and Rotational Speed Instrument Calibration
@@ -112,7 +112,7 @@ domains:
           sampling and the target pattern define the answer.
         elements:
           - { id: EC-07-052, title: "Receiving inspection and functional check of a tachometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-07-053, title: "Calibration configuration and stabilisation for a tachometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-053, title: "Calibration configuration and stabilization for a tachometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-07-054, title: "Selecting the standards and fixturing for a tachometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-07-055, title: "Speed indication accuracy against a reference", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-07-056, title: "Contact versus optical measurement technique", kind: skill, levelCeiling: 3, status: draft }
@@ -133,7 +133,7 @@ domains:
           measured against.
         elements:
           - { id: EC-07-064, title: "Receiving inspection and functional check of a primary frequency standard", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-07-065, title: "Calibration configuration and stabilisation for a primary frequency standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-07-065, title: "Calibration configuration and stabilization for a primary frequency standard", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-07-066, title: "Selecting the standards and fixturing for a primary frequency standard calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-07-067, title: "Caesium beam standard operation and tube health", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-07-068, title: "Caesium fountain operation and evaluation", kind: skill, levelCeiling: 5, status: draft }
@@ -141,7 +141,7 @@ domains:
           - { id: EC-07-070, title: "Systematic frequency shift evaluation and correction", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-07-071, title: "Ensemble timescale generation and steering", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-07-072, title: "Comparison to international time scales and reporting", kind: judgment, levelCeiling: 5, status: draft }
-          - { id: EC-07-073, title: "Uncertainty budget for a primary frequency realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-07-073, title: "Uncertainty budget for a primary frequency realization", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-07-074, title: "Adjustment of a primary frequency standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-07-075, title: "Uncertainty budget for a primary frequency standard calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-07-076, title: "Conformity statement for a primary frequency standard against its specification", kind: judgment, levelCeiling: 4, status: draft }

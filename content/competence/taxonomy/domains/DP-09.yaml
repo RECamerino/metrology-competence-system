@@ -40,7 +40,7 @@ domains:
           - { id: DP-09-059, title: "Harmonics and distorted waveforms in ordinary supplies", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-09-060, title: "Impedance, reactance and resistance distinguished", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-09-061, title: "Current transformers and voltage transformers in use", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: DP-09-062, title: "Safe working on live and energised circuits", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-09-062, title: "Safe working on live and energized circuits", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-09-063, title: "Recording a power or energy result with its conditions", kind: skill, levelCeiling: 3, status: draft }
 
       - id: DP-09-A01
@@ -71,7 +71,7 @@ domains:
           - { id: DP-09-017, title: "AC resistance and its frequency dependence", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-09-018, title: "Transformer ratio bridges", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-09-019, title: "Quadrature bridges and impedance scaling", kind: skill, levelCeiling: 4, status: draft }
-          - { id: DP-09-020, title: "LCR meters and impedance analysers", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-09-020, title: "LCR meters and impedance analyzers", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-09-021, title: "Two, three and four terminal-pair definitions", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: DP-09-022, title: "Lead and fixture compensation in impedance measurement", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-09-023, title: "Dissipation factor and loss measurement", kind: skill, levelCeiling: 4, status: draft }
@@ -86,7 +86,7 @@ domains:
           - { id: DP-09-027, title: "Waveform generators and their calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-09-028, title: "Arbitrary waveform synthesis and fidelity", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-09-029, title: "Oscilloscope AC and bandwidth calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: DP-09-030, title: "Digitiser characterisation and effective bits", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-09-030, title: "Digitizer characterization and effective bits", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-09-031, title: "Harmonic and distortion measurement", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-09-A04

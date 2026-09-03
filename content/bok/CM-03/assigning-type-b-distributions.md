@@ -188,7 +188,7 @@ The wording that signals this is more consistent than it first appears.
 Maximum permissible error, a tolerance band, a specified limit, a guaranteed
 not-to-exceed figure — each describes a boundary the quantity is asserted to
 lie inside, with no claim about the distribution within. Resolution and
-quantisation belong here too: a reading displayed to a given increment tells
+quantization belong here too: a reading displayed to a given increment tells
 you which interval the value fell in and nothing else about where in it.
 
 Two errors dominate. **Dividing by two instead of root three** treats a stated

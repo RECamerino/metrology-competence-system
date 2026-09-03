@@ -62,7 +62,7 @@ domains:
           - { id: DP-18-010, title: "Scanner calibration, nonlinearity, creep and hysteresis", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-18-011, title: "Metrological AFM with interferometric position feedback", kind: skill, levelCeiling: 5, status: draft }
           - { id: DP-18-012, title: "Scanning tunnelling microscopy", kind: skill, levelCeiling: 4, status: draft }
-          - { id: DP-18-013, title: "Tip characterisation, wear and artefact recognition", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-18-013, title: "Tip characterization, wear and artefact recognition", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-18-014, title: "Force spectroscopy and nanomechanical measurement", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-18-015, title: "Image processing, levelling and the risk of creating features", kind: judgment, levelCeiling: 5, status: draft }
 

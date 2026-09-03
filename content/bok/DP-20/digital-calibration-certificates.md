@@ -153,7 +153,7 @@ Four things go wrong in that step, and none of them is exotic:
 
 Machine-readable data removes the first two by construction and makes the
 second two detectable. That is the case for a DCC, and it is worth being
-precise that it is an *error-rate* argument rather than a modernisation one.
+precise that it is an *error-rate* argument rather than a modernization one.
 
 ## What has to be in it, and where that comes from {#s02}
 
@@ -172,7 +172,7 @@ express, at minimum:
   interpret it.
 - **Evidence of metrological traceability** for the results reported.
 - **Statements of conformity** where given, with the decision rule applied.
-- **Who authorised the release.**
+- **Who authorized the release.**
 
 This is worth stating plainly because DCC discussions drift quickly into schema
 design, and the requirements are settled. What is being designed is a
@@ -227,7 +227,7 @@ traversable, and it is the capability that most distinguishes a DCC from a PDF.
 Done as free text it is a PDF with angle brackets.
 
 **The issuing laboratory**, including its accreditation, identified so that a
-consumer can check it rather than recognise it.
+consumer can check it rather than recognize it.
 
 Then the signature. A cryptographic signature over the document establishes
 that it has not been altered since signing and that it was signed by the holder

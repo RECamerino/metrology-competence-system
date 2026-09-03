@@ -31,7 +31,7 @@ domains:
           contribute.
         elements:
           - { id: EC-06-082, title: "Receiving inspection and functional check of a humidity instrument", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-083, title: "Calibration configuration and stabilisation for a humidity instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-083, title: "Calibration configuration and stabilization for a humidity instrument", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-084, title: "Selecting the standards and fixturing for a humidity instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-085, title: "Relative humidity indication error against a generator", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-086, title: "Dew-point hygrometer verification and mirror condition", kind: skill, levelCeiling: 4, status: draft }

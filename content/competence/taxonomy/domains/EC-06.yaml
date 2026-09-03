@@ -28,7 +28,7 @@ domains:
           thermocouple as the recurring problems.
         elements:
           - { id: EC-06-001, title: "Receiving inspection and functional check of a thermocouple", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-002, title: "Calibration configuration and stabilisation for a thermocouple", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-002, title: "Calibration configuration and stabilization for a thermocouple", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-003, title: "Selecting the standards and fixturing for a thermocouple calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-004, title: "EMF against temperature by comparison", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-005, title: "Reference junction compensation and ice-point verification", kind: skill, levelCeiling: 4, status: draft }
@@ -51,10 +51,10 @@ domains:
           sources.
         elements:
           - { id: EC-06-015, title: "Receiving inspection and functional check of a resistance thermometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-016, title: "Calibration configuration and stabilisation for a resistance thermometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-016, title: "Calibration configuration and stabilization for a resistance thermometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-017, title: "Selecting the standards and fixturing for a resistance thermometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-018, title: "Resistance against temperature by comparison", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-06-019, title: "Fixed-point calibration and ITS-90 realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-019, title: "Fixed-point calibration and ITS-90 realization", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-06-020, title: "Callendar–Van Dusen and ITS-90 coefficient determination", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-021, title: "Self-heating determination and correction", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-022, title: "Lead resistance and three- versus four-wire connection", kind: skill, levelCeiling: 4, status: draft }
@@ -73,12 +73,12 @@ domains:
           by simulation and then verified with the probe attached.
         elements:
           - { id: EC-06-029, title: "Receiving inspection and functional check of a temperature readout", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-030, title: "Calibration configuration and stabilisation for a temperature readout", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-030, title: "Calibration configuration and stabilization for a temperature readout", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-031, title: "Selecting the standards and fixturing for a temperature readout calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-032, title: "Thermocouple input accuracy by simulated EMF", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-033, title: "RTD input accuracy by simulated resistance", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-034, title: "Cold junction compensation accuracy", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-06-035, title: "Linearisation and conversion algorithm verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-06-035, title: "Linearization and conversion algorithm verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-036, title: "System calibration of probe and readout together", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-037, title: "Measuring current and its self-heating contribution", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-038, title: "Display resolution, rounding and units handling", kind: skill, levelCeiling: 3, status: draft }
@@ -94,7 +94,7 @@ domains:
           correction are part of the stated result.
         elements:
           - { id: EC-06-042, title: "Receiving inspection and functional check of a liquid-in-glass thermometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-043, title: "Calibration configuration and stabilisation for a liquid-in-glass thermometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-043, title: "Calibration configuration and stabilization for a liquid-in-glass thermometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-044, title: "Selecting the standards and fixturing for a liquid-in-glass thermometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-045, title: "Indication error at test points by comparison", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-046, title: "Total, partial and complete immersion conditions", kind: knowledge, levelCeiling: 4, status: draft }
@@ -114,7 +114,7 @@ domains:
           background radiation are the calibration.
         elements:
           - { id: EC-06-054, title: "Receiving inspection and functional check of an infrared thermometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-055, title: "Calibration configuration and stabilisation for an infrared thermometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-055, title: "Calibration configuration and stabilization for an infrared thermometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-056, title: "Selecting the standards and fixturing for an infrared thermometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-057, title: "Indication error against a blackbody source", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-058, title: "Emissivity setting and its effect on indication", kind: skill, levelCeiling: 4, status: draft }
@@ -132,11 +132,11 @@ domains:
         title: Temperature Source and Enclosure Calibration
         status: draft
         summary: >-
-          Baths, dry blocks, furnaces and chambers, characterised for
+          Baths, dry blocks, furnaces and chambers, characterized for
           uniformity and stability rather than for indication alone.
         elements:
           - { id: EC-06-068, title: "Receiving inspection and functional check of a temperature source", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-069, title: "Calibration configuration and stabilisation for a temperature source", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-069, title: "Calibration configuration and stabilization for a temperature source", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-070, title: "Selecting the standards and fixturing for a temperature source calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-071, title: "Temperature uniformity across the working volume", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-072, title: "Stability over time at a setpoint", kind: skill, levelCeiling: 4, status: draft }
@@ -159,7 +159,7 @@ domains:
           resolution.
         elements:
           - { id: EC-06-095, title: "Receiving inspection and functional check of a data logger", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-096, title: "Calibration configuration and stabilisation for a data logger", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-096, title: "Calibration configuration and stabilization for a data logger", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-097, title: "Selecting the standards and fixturing for a data logger calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-098, title: "Per-channel indication error across the range", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-099, title: "Internal clock and timestamp accuracy", kind: skill, levelCeiling: 3, status: draft }
@@ -176,13 +176,13 @@ domains:
         title: Environmental Chamber Calibration and Mapping
         status: draft
         summary: >-
-          Temperature and humidity chambers characterised as a working
+          Temperature and humidity chambers characterized as a working
           VOLUME rather than a setpoint. The chamber's own controller is
           the least of it: uniformity, loaded behaviour and recovery
           decide whether a test inside it means anything.
         elements:
           - { id: EC-06-108, title: "Receiving inspection and functional check of an environmental chamber", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-109, title: "Calibration configuration and stabilisation for an environmental chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-109, title: "Calibration configuration and stabilization for an environmental chamber", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-110, title: "Selecting the standards and fixturing for an environmental chamber calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-111, title: "Empty chamber temperature mapping and sensor layout", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-112, title: "Loaded chamber mapping and the effect of the test load", kind: skill, levelCeiling: 4, status: draft }
@@ -208,7 +208,7 @@ domains:
           controlled quantities.
         elements:
           - { id: EC-06-125, title: "Receiving inspection and functional check of an altitude chamber", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-126, title: "Calibration configuration and stabilisation for an altitude chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-126, title: "Calibration configuration and stabilization for an altitude chamber", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-127, title: "Selecting the standards and fixturing for an altitude chamber calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-128, title: "Chamber pressure indication accuracy against a reference", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-129, title: "Altitude conversion and the atmosphere model used", kind: skill, levelCeiling: 4, status: draft }
@@ -231,7 +231,7 @@ domains:
           measurement.
         elements:
           - { id: EC-06-139, title: "Receiving inspection and functional check of a thermal vacuum chamber", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-140, title: "Calibration configuration and stabilisation for a thermal vacuum chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-140, title: "Calibration configuration and stabilization for a thermal vacuum chamber", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-141, title: "Selecting the standards and fixturing for a thermal vacuum chamber calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-142, title: "Chamber vacuum level measurement and gauge traceability", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-143, title: "Shroud temperature uniformity and control", kind: skill, levelCeiling: 4, status: draft }
@@ -252,7 +252,7 @@ domains:
           with a measured payload rather than an air sensor.
         elements:
           - { id: EC-06-152, title: "Receiving inspection and functional check of a thermal shock chamber", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-153, title: "Calibration configuration and stabilisation for a thermal shock chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-153, title: "Calibration configuration and stabilization for a thermal shock chamber", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-154, title: "Selecting the standards and fixturing for a thermal shock chamber calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-155, title: "Transfer and transition time verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-156, title: "Zone temperature recovery after a transfer", kind: skill, levelCeiling: 4, status: draft }
@@ -273,7 +273,7 @@ domains:
           rather than a chamber one.
         elements:
           - { id: EC-06-164, title: "Receiving inspection and functional check of a furnace or oven", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-165, title: "Calibration configuration and stabilisation for a furnace or oven", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-165, title: "Calibration configuration and stabilization for a furnace or oven", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-166, title: "Selecting the standards and fixturing for a furnace or oven calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-167, title: "Temperature uniformity survey execution", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-168, title: "System accuracy test and correction factors", kind: skill, levelCeiling: 4, status: draft }
@@ -295,7 +295,7 @@ domains:
           value.
         elements:
           - { id: EC-06-177, title: "Receiving inspection and functional check of a thermal imager", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-178, title: "Calibration configuration and stabilisation for a thermal imager", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-178, title: "Calibration configuration and stabilization for a thermal imager", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-179, title: "Selecting the standards and fixturing for a thermal imager calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-180, title: "Radiometric accuracy against an extended blackbody", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-181, title: "Pixel-to-pixel non-uniformity and correction verification", kind: skill, levelCeiling: 4, status: draft }
@@ -309,24 +309,24 @@ domains:
           - { id: EC-06-189, title: "Conformity statement for a thermal imager against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-06-A15
-        title: ITS-90 Fixed Point Cell Realisation and Maintenance
+        title: ITS-90 Fixed Point Cell Realization and Maintenance
         status: draft
         summary: >-
-          The cells that realise the temperature scale, where the
+          The cells that realize the temperature scale, where the
           plateau, the immersion and the purity of the material are the
           measurement.
         elements:
           - { id: EC-06-190, title: "Receiving inspection and functional check of a fixed point cell", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-191, title: "Calibration configuration and stabilisation for a fixed point cell", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-191, title: "Calibration configuration and stabilization for a fixed point cell", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-192, title: "Selecting the standards and fixturing for a fixed point cell calibration", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-06-193, title: "Triple point of water cell realisation and mantle preparation", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-06-194, title: "Freezing and melting point cell realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-193, title: "Triple point of water cell realization and mantle preparation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-194, title: "Freezing and melting point cell realization", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-06-195, title: "Plateau identification, duration and quality assessment", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-06-196, title: "Immersion characteristic and hydrostatic head correction", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-06-197, title: "Cell purity, impurity effects and cell comparison", kind: judgment, levelCeiling: 5, status: draft }
           - { id: EC-06-198, title: "Furnace and maintenance apparatus for fixed points", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-06-199, title: "Cell handling, storage and long-term consistency", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-06-200, title: "Uncertainty budget for a fixed point realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-200, title: "Uncertainty budget for a fixed point realization", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-06-201, title: "Adjustment of a fixed point cell, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-202, title: "Uncertainty budget for a fixed point cell calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-203, title: "Conformity statement for a fixed point cell against its specification", kind: judgment, levelCeiling: 4, status: draft }
@@ -335,12 +335,12 @@ domains:
         title: Standard Platinum Resistance Thermometer Calibration
         status: draft
         summary: >-
-          SPRTs calibrated at fixed points and characterised by ITS-90
+          SPRTs calibrated at fixed points and characterized by ITS-90
           deviation functions — a different instrument and a different
           job from an industrial RTD.
         elements:
           - { id: EC-06-204, title: "Receiving inspection and functional check of a standard platinum resistance thermometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-205, title: "Calibration configuration and stabilisation for a standard platinum resistance thermometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-205, title: "Calibration configuration and stabilization for a standard platinum resistance thermometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-206, title: "Selecting the standards and fixturing for a standard platinum resistance thermometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-207, title: "Fixed point calibration and sub-range selection", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-06-208, title: "ITS-90 deviation function determination", kind: skill, levelCeiling: 5, status: draft }
@@ -362,7 +362,7 @@ domains:
           linearity because a temperature result is a resistance ratio.
         elements:
           - { id: EC-06-218, title: "Receiving inspection and functional check of a thermometry resistance bridge", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-219, title: "Calibration configuration and stabilisation for a thermometry resistance bridge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-219, title: "Calibration configuration and stabilization for a thermometry resistance bridge", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-220, title: "Selecting the standards and fixturing for a thermometry resistance bridge calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-221, title: "Ratio accuracy and linearity across the range", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-06-222, title: "Bridge linearity verification by resistance build-up", kind: skill, levelCeiling: 5, status: draft }
@@ -380,16 +380,16 @@ domains:
         status: draft
         summary: >-
           The sources against which radiation thermometers are
-          calibrated, characterised for cavity emissivity, uniformity
+          calibrated, characterized for cavity emissivity, uniformity
           and aperture.
         elements:
           - { id: EC-06-231, title: "Receiving inspection and functional check of a blackbody radiance source", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-06-232, title: "Calibration configuration and stabilisation for a blackbody radiance source", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-06-232, title: "Calibration configuration and stabilization for a blackbody radiance source", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-06-233, title: "Selecting the standards and fixturing for a blackbody radiance source calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-06-234, title: "Cavity emissivity determination and its uncertainty", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-06-235, title: "Temperature uniformity of the cavity and its walls", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-06-236, title: "Aperture size, geometry and size-of-source effect", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-06-237, title: "Fixed point blackbody realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-06-237, title: "Fixed point blackbody realization", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-06-238, title: "Radiance temperature and its relation to contact temperature", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: EC-06-239, title: "Window, purge and atmospheric transmission effects", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-06-240, title: "Long-term stability and drift monitoring", kind: skill, levelCeiling: 4, status: draft }

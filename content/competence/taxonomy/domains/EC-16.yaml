@@ -30,7 +30,7 @@ domains:
           condition and launch conditions dominate the measured loss.
         elements:
           - { id: EC-08-065, title: "Receiving inspection and functional check of fibre optic test equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-08-066, title: "Calibration configuration and stabilisation for fibre optic test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-066, title: "Calibration configuration and stabilization for fibre optic test equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-08-067, title: "Selecting the standards and fixturing for fibre optic test equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-068, title: "OTDR distance accuracy and group index setting", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-069, title: "OTDR loss and reflectance measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
@@ -44,24 +44,24 @@ domains:
           - { id: EC-08-077, title: "Conformity statement for fibre optic test equipment against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-08-A07
-        title: Optical Spectrum Analyser and Wavelength Meter Calibration
+        title: Optical Spectrum Analyzer and Wavelength Meter Calibration
         status: draft
         summary: >-
           Wavelength and level across the optical band, referenced to
-          gas cells and stabilised lasers.
+          gas cells and stabilized lasers.
         elements:
-          - { id: EC-08-078, title: "Receiving inspection and functional check of an optical spectrum analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-08-079, title: "Calibration configuration and stabilisation for an optical spectrum analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-08-080, title: "Selecting the standards and fixturing for an optical spectrum analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-078, title: "Receiving inspection and functional check of an optical spectrum analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-079, title: "Calibration configuration and stabilization for an optical spectrum analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-080, title: "Selecting the standards and fixturing for an optical spectrum analyzer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-081, title: "Wavelength accuracy against a reference laser or gas cell", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-08-082, title: "Level accuracy and polarisation dependence", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-082, title: "Level accuracy and polarization dependence", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-083, title: "Resolution bandwidth and dynamic range verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-084, title: "Wavelength meter accuracy and its reference", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-085, title: "Fibre input coupling and its effect on level", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-086, title: "Sweep linearity and repeatability", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-08-087, title: "Adjustment of an optical spectrum analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-08-088, title: "Uncertainty budget for an optical spectrum analyser calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-08-089, title: "Conformity statement for an optical spectrum analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-087, title: "Adjustment of an optical spectrum analyzer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-08-088, title: "Uncertainty budget for an optical spectrum analyzer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-089, title: "Conformity statement for an optical spectrum analyzer against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-08-A08
         title: Laser Power and Energy Meter Calibration
@@ -71,7 +71,7 @@ domains:
           pulse regime, with damage threshold as a real constraint.
         elements:
           - { id: EC-08-090, title: "Receiving inspection and functional check of a laser power meter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-08-091, title: "Calibration configuration and stabilisation for a laser power meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-091, title: "Calibration configuration and stabilization for a laser power meter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-08-092, title: "Selecting the standards and fixturing for a laser power meter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-093, title: "Power responsivity against wavelength", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-094, title: "Pulse energy measurement and pulse width dependence", kind: skill, levelCeiling: 4, status: draft }

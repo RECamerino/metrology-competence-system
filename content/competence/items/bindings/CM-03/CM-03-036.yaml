@@ -10,7 +10,7 @@ bindings:
       draws are restricted to statements that express a limit without a
       distribution — maximum permissible error, a tolerance band, a
       manufacturer's stated accuracy. At L2 the wording points clearly at a
-      limit, and the competence is recognising it and dividing by root three
+      limit, and the competence is recognizing it and dividing by root three
       rather than by two.
     parameterRanges:
       - name: statement

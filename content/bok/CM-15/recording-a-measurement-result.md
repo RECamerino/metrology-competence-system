@@ -237,7 +237,7 @@ A column heading that means something to whoever set the sheet up. "As usual",
 document.
 
 **Write the departure at the time.** Something always deviates from the
-procedure: an extra stabilisation period, a substituted lead, a reading
+procedure: an extra stabilization period, a substituted lead, a reading
 discarded and retaken. Recorded when it happens, it is an ordinary technical
 note. Reconstructed at the end of the day, it is incomplete, and reconstructed
 during an investigation it looks like an excuse.

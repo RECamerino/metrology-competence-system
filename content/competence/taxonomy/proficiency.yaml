@@ -79,7 +79,7 @@
 #
 # PROVISIONAL: the experience-hour thresholds and waiting periods below are a
 # steward judgement that has never been tested against a real career history.
-# They are the numbers most likely to move once practising metrologists review
+# They are the numbers most likely to move once practicing metrologists review
 # them, and they are blocked on that review with no timetable. Treat them as a
 # starting position, not a settled requirement — and note that every credential
 # pins the policy in force when it was issued (assessmentPolicyRef, decision
@@ -104,7 +104,7 @@
 # principle in CLAUDE.md.
 #
 # What that costs, stated honestly: a person arriving with an AAS in metrology
-# or a BSc holds knowledge the profession recognises, and this system will make
+# or a BSc holds knowledge the profession recognizes, and this system will make
 # them demonstrate it. That is friction, and it is accepted deliberately —
 # assessment is open-resource and unproctored, so demonstrating what you
 # already know is cheap, and the alternative is a credential that rests on
@@ -123,7 +123,7 @@ levels:
   - level: 1
     name: Novice
     descriptor: >-
-      Recognises the concept and can apply it by following a rule that someone
+      Recognizes the concept and can apply it by following a rule that someone
       else supplied, in a situation someone else framed. Depends on explicit
       instruction and does not yet distinguish the cases where the rule stops
       holding.
@@ -170,7 +170,7 @@ levels:
     name: Advanced Beginner
     descriptor: >-
       Applies the concept to familiar situations without step-by-step
-      direction, and recognises when a situation is NOT the familiar one — but
+      direction, and recognizes when a situation is NOT the familiar one — but
       escalates at that point rather than resolving it independently.
     assessedAt: element
     assessment:
@@ -192,7 +192,7 @@ levels:
     name: Competent
     descriptor: >-
       Works unsupervised on routine cases and produces a defensible result,
-      including in situations not seen before. Recognises the limits of their
+      including in situations not seen before. Recognizes the limits of their
       own competence and can say what would change their approach. This is the
       level at which independent laboratory work is normally entrusted.
     assessedAt: element

@@ -31,9 +31,9 @@ An assessable unit is one element at one level. Every level is assessed at eleme
 
 | | Level | What it means |
 |---|---|---|
-| **L1** | Novice | Recognises the concept and can apply it by following a rule that someone else supplied, in a situation someone else framed. Depends on explicit instruction and does not yet distinguish the cases where the rule stops holding. |
-| **L2** | Advanced Beginner | Applies the concept to familiar situations without step-by-step direction, and recognises when a situation is NOT the familiar one — but escalates at that point rather than resolving it independently. |
-| **L3** | Competent | Works unsupervised on routine cases and produces a defensible result, including in situations not seen before. Recognises the limits of their own competence and can say what would change their approach. This is the level at which independent laboratory work is normally entrusted. |
+| **L1** | Novice | Recognizes the concept and can apply it by following a rule that someone else supplied, in a situation someone else framed. Depends on explicit instruction and does not yet distinguish the cases where the rule stops holding. |
+| **L2** | Advanced Beginner | Applies the concept to familiar situations without step-by-step direction, and recognizes when a situation is NOT the familiar one — but escalates at that point rather than resolving it independently. |
+| **L3** | Competent | Works unsupervised on routine cases and produces a defensible result, including in situations not seen before. Recognizes the limits of their own competence and can say what would change their approach. This is the level at which independent laboratory work is normally entrusted. |
 | **L4** | Proficient | Handles the non-routine case, and sees the situation as a whole rather than as a set of rules to apply in turn. Diagnoses why an approach is failing, adapts it, and defends the adaptation against a peer who is actively looking for its weaknesses. |
 | **L5** | Expert | Advances the practice rather than only executing it: resolves cases where the established approach gives no answer, and can bring another person to competence in the same element. Expected to know where the field's own position is contested, and to hold a defensible view on it. |
 
@@ -95,7 +95,7 @@ Competencies every metrological role shares to some degree, including the adjace
 
 ## Discipline packs
 
-Measurement-discipline depth, organised by the QUANTITY measured. Separately versioned; a role profile selects from these rather than assuming them entire.
+Measurement-discipline depth, organized by the QUANTITY measured. Separately versioned; a role profile selects from these rather than assuming them entire.
 
 | Domain | Areas | Elements | K / S / J | L2 / L3 / L4 / L5 |
 |---|---|---|---|---|
@@ -113,7 +113,7 @@ Measurement-discipline depth, organised by the QUANTITY measured. Separately ver
 | [**DP-12** Photometry, Radiometry and Colorimetry](DP-12.md) | 6 | 61 | 20 / 39 / 2 | 0 / 14 / 41 / 6 |
 | [**DP-13** Spectroscopy, Lasers and Fibre Optics](DP-13.md) | 7 | 61 | 18 / 42 / 1 | 0 / 14 / 40 / 7 |
 | [**DP-14** Time, Frequency and Satellite Timing](DP-14.md) | 7 | 61 | 28 / 28 / 5 | 1 / 15 / 35 / 10 |
-| [**DP-15** Ionising Radiation, Dosimetry and Nuclear Instrumentation](DP-15.md) | 6 | 61 | 25 / 30 / 6 | 0 / 14 / 38 / 9 |
+| [**DP-15** Ionizing Radiation, Dosimetry and Nuclear Instrumentation](DP-15.md) | 6 | 61 | 25 / 30 / 6 | 0 / 14 / 38 / 9 |
 | [**DP-16** Analytical Chemistry, Reference Materials and Gas Metrology](DP-16.md) | 8 | 75 | 17 / 52 / 6 | 0 / 14 / 49 / 12 |
 | [**DP-17** Biological, Clinical and Medical Metrology](DP-17.md) | 6 | 58 | 19 / 34 / 5 | 0 / 13 / 37 / 8 |
 | [**DP-18** Nanometrology and Surface Science](DP-18.md) | 6 | 52 | 19 / 29 / 4 | 1 / 12 / 30 / 9 |
@@ -123,7 +123,7 @@ Measurement-discipline depth, organised by the QUANTITY measured. Separately ver
 
 ## Equipment-calibration packs
 
-Organised by the equipment TYPE that arrives on a bench, because that axis cuts across the quantity one: calibrating an oscilloscope is a single job spanning voltage, timing and bandwidth, and describing it inside any one discipline pack truncates it to the part that fits. This is where the technician works, the engineer designs, and the metrologist reads to judge whether a measurement was sound.
+Organized by the equipment TYPE that arrives on a bench, because that axis cuts across the quantity one: calibrating an oscilloscope is a single job spanning voltage, timing and bandwidth, and describing it inside any one discipline pack truncates it to the part that fits. This is where the technician works, the engineer designs, and the metrologist reads to judge whether a measurement was sound.
 
 | Domain | Areas | Elements | K / S / J | L2 / L3 / L4 / L5 |
 |---|---|---|---|---|
@@ -136,7 +136,7 @@ Organised by the equipment TYPE that arrives on a bench, because that axis cuts 
 | [**EC-07** Time, Frequency and Timing Device Calibration](EC-07.md) | 6 | 76 | 2 / 53 / 21 | 1 / 22 / 39 / 14 |
 | [**EC-08** Optical, Photometric and Radiometric Instrument Calibration](EC-08.md) | 7 | 90 | 2 / 65 / 23 | 0 / 23 / 57 / 10 |
 | [**EC-09** Chemical and Analytical Instrument Calibration](EC-09.md) | 13 | 168 | 2 / 119 / 47 | 0 / 36 / 120 / 12 |
-| [**EC-10** Ionising Radiation Instrument Calibration](EC-10.md) | 9 | 116 | 4 / 82 / 30 | 0 / 21 / 75 / 20 |
+| [**EC-10** Ionizing Radiation Instrument Calibration](EC-10.md) | 9 | 116 | 4 / 82 / 30 | 0 / 21 / 75 / 20 |
 | [**EC-11** Acoustic and Vibration Instrument Calibration](EC-11.md) | 10 | 135 | 0 / 104 / 31 | 0 / 21 / 96 / 18 |
 | [**EC-12** Medical and Biomedical Equipment Calibration](EC-12.md) | 12 | 170 | 3 / 126 / 41 | 0 / 29 / 138 / 3 |
 | [**EC-13** Electrical Power, Energy and High Voltage Equipment Calibration](EC-13.md) | 10 | 133 | 2 / 98 / 33 | 0 / 23 / 95 / 15 |
@@ -155,6 +155,6 @@ Organised by the equipment TYPE that arrives on a bench, because that axis cuts 
 
 `CM-03-014` — domain `CM-03`, element 014.
 
-**The prefix records where the element was first created and is historical.** The authoritative domain and competency area are fields on the element, so an element can be reorganised without renaming an ID. IDs are append-only and never change: a credential attesting `CM-03-014` must resolve to the same element permanently, or the person holding it loses their evidence.
+**The prefix records where the element was first created and is historical.** The authoritative domain and competency area are fields on the element, so an element can be reorganized without renaming an ID. IDs are append-only and never change: a credential attesting `CM-03-014` must resolve to the same element permanently, or the person holding it loses their evidence.
 
 *Generated by `npm run build:docs`. Do not edit these files — edit the YAML in `content/competence/taxonomy/domains/`.*

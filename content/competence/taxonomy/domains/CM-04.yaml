@@ -54,12 +54,12 @@ domains:
           - { id: CM-04-005, title: "Documented uncertainty at each link", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-04-006, title: "Traceability to a unit, to a reference procedure, and to a reference material", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-04-007, title: "Metrological traceability chain versus supply chain provenance", kind: knowledge, levelCeiling: 4, status: draft }
-          - { id: CM-04-008, title: "Traceability for quantities with no SI realisation", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-04-008, title: "Traceability for quantities with no SI realization", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: CM-04-A02
         title: Calibration Hierarchies and Dissemination
         status: draft
-        summary: How the unit travels from a primary realisation to a working instrument.
+        summary: How the unit travels from a primary realization to a working instrument.
         elements:
           - { id: CM-04-009, title: "Primary, reference, transfer and working standards", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-04-010, title: "Structure of a calibration hierarchy", kind: knowledge, levelCeiling: 4, status: draft }
@@ -74,7 +74,7 @@ domains:
         title: The CIPM MRA, KCDB and CMCs
         status: draft
         summary: >-
-          The mechanism by which a national measurement is recognised
+          The mechanism by which a national measurement is recognized
           internationally, and how a laboratory reads and uses it.
         elements:
           - { id: CM-04-017, title: "Purpose and structure of the CIPM MRA", kind: knowledge, levelCeiling: 4, status: draft }
@@ -104,7 +104,7 @@ domains:
           - { id: CM-04-032, title: "Selecting, storing and using reference materials correctly", kind: skill, levelCeiling: 4, status: draft }
 
       - id: CM-04-A05
-        title: Intrinsic Standards and Primary Realisations
+        title: Intrinsic Standards and Primary Realizations
         status: draft
         summary: >-
           Standards whose value derives from a physical phenomenon rather than
@@ -115,7 +115,7 @@ domains:
           - { id: CM-04-035, title: "Quantum Hall resistance standards", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: CM-04-036, title: "Atomic frequency standards as intrinsic references", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-04-037, title: "Fixed points and thermometric intrinsic standards", kind: knowledge, levelCeiling: 4, status: draft }
-          - { id: CM-04-038, title: "Stabilised lasers and optical frequency references", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-04-038, title: "Stabilized lasers and optical frequency references", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-04-039, title: "Traceability claims for an intrinsic standard and their evidence", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-04-040, title: "Quantum-based dissemination and the changing role of NMIs", kind: knowledge, levelCeiling: 5, status: draft }
 

@@ -99,7 +99,7 @@ citations:
   - source: JCGM-100-2008
     clause: "3.4.1"
     relevance: >-
-      That an evaluation can only account for the effects recognised, which is
+      That an evaluation can only account for the effects recognized, which is
       the limitation s01 describes and the reason a completeness search has to
       be generated from outside the budget.
   - source: JCGM-100-2008
@@ -168,7 +168,7 @@ different and much weaker exercise: it produces the sources the reader happens
 to think of, which correlate strongly with the sources the author thought of.
 
 The framework is explicit that an evaluation accounts for the effects that were
-recognised. It offers no method for the ones that were not, and there is none —
+recognized. It offers no method for the ones that were not, and there is none —
 only searches with better and worse coverage.
 
 ## Searching for what is not there {#s02}
@@ -177,7 +177,7 @@ Four searches, each generating candidates from a different starting point. They
 overlap, which is the point: a source missed by one is often caught by another.
 
 **The measurement walk-through.** Follow the measurement from the arrival of
-the item to the number on the certificate — setup, stabilisation, zeroing,
+the item to the number on the certificate — setup, stabilization, zeroing,
 each reading, each correction applied, the calculation, the rounding. At each
 step ask what could differ if the same measurement were repeated tomorrow by
 someone else. This finds procedural and operator contributions that no
@@ -240,7 +240,7 @@ an effect decides whether carrying that effect separately is duplication.
 The same physical effect can enter a budget twice under two different names,
 and the resulting budget reads as thorough rather than defective.
 
-It happens in a few recognisable ways. A quantity is carried both as its own
+It happens in a few recognizable ways. A quantity is carried both as its own
 line and inside a manufacturer's overall accuracy figure that already
 encompasses it. A correction is applied to the result *and* its full magnitude
 is carried as an uncertainty, when what belongs in the budget is the

@@ -24,7 +24,7 @@ sections:
   - id: s02
     heading: The best existing device
     covers: >-
-      Why a capability figure needs a device to be realisable against, what
+      Why a capability figure needs a device to be realizable against, what
       counts as the best existing device, the allowance for a repeatability
       contribution of zero, and the fixed contributions that remain even then.
   - id: s03
@@ -65,7 +65,7 @@ sections:
       ILAC P14 states the allowance and does not bound it. Whether a
       repeatability contribution of zero for the best existing device is
       the intended reading or an over-reach turns on what 'demonstrably
-      realisable' demands as evidence, which the policy leaves to the
+      realizable' demands as evidence, which the policy leaves to the
       reader.
     alternativeViews:
       - position: >-
@@ -87,9 +87,9 @@ sections:
           Taking the contribution as zero is defensible only where a device
           that behaves that way is actually seen in the laboratory, and
           otherwise produces a capability that is demonstrable on paper and
-          never realised.
+          never realized.
         basis: >-
-          The requirement is that the claim be demonstrably realisable, which
+          The requirement is that the claim be demonstrably realizable, which
           is a statement about evidence rather than about arithmetic. A zero
           taken from a device the laboratory has never calibrated cannot be
           demonstrated, and the resulting figure misleads a customer comparing
@@ -114,7 +114,7 @@ citations:
     clause: "4.3"
     relevance: >-
       That the CMC quoted shall include the contribution from a best existing
-      device such that the claim is demonstrably realisable, and that the
+      device such that the claim is demonstrably realizable, and that the
       figure is an expanded uncertainty at approximately 95 percent. The basis
       of s02.
   - source: ILAC-P14-2020
@@ -199,7 +199,7 @@ obstruct it. Everything about how it is derived follows from that, and so does
 everything about why the certificate figure differs.
 
 Older scopes carry the term *best measurement capability*. It is the same
-concept under the name used before ILAC and the BIPM harmonised the vocabulary
+concept under the name used before ILAC and the BIPM harmonized the vocabulary
 on CMC, and a scope still using it is not making a different claim.
 
 ## The best existing device {#s02}
@@ -223,7 +223,7 @@ budget, and a CMC that has quietly dropped them is not the figure the policy
 describes. Section s07 records a live disagreement about how far the allowance
 should be pushed.
 
-The governing test is that the CMC claimed be *demonstrably realisable*. That is
+The governing test is that the CMC claimed be *demonstrably realizable*. That is
 an evidential standard, not an arithmetical one. It asks whether the laboratory
 could show an assessor a calibration in which the figure was achieved, and a
 budget assembled from favourable assumptions about a device nobody has seen does
@@ -335,7 +335,7 @@ Both positions are set out in this article's `alternativeViews`. The reading
 that permits a zero repeatability contribution treats the allowance as
 deliberate and holds that conservatism belongs on the certificate, where the
 substitution puts it. The reading that restricts it holds that *demonstrably
-realisable* is an evidential test which a device nobody has calibrated cannot
+realizable* is an evidential test which a device nobody has calibrated cannot
 pass.
 
 What is not in dispute is narrower than the argument suggests, and is worth

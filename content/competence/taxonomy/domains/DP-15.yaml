@@ -1,11 +1,11 @@
 schemaVersion: 1
 domains:
   - id: DP-15
-    title: Ionising Radiation, Dosimetry and Nuclear Instrumentation
+    title: Ionizing Radiation, Dosimetry and Nuclear Instrumentation
     kind: discipline
     status: draft
     summary: >-
-      Measurement of ionising radiation and the dose it delivers. Unusual in
+      Measurement of ionizing radiation and the dose it delivers. Unusual in
       that the measurand of greatest interest — absorbed dose in tissue — is
       often not directly measurable, so the discipline is built on carefully
       justified chains of conversion. Counting statistics also give it a
@@ -28,7 +28,7 @@ domains:
           discipline that comes before any of them, because the
           instrument is used in a field that is itself the hazard.
         elements:
-          - { id: DP-15-048, title: "Ionising and non-ionising radiation distinguished", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-15-048, title: "Ionizing and non-ionizing radiation distinguished", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-15-049, title: "Alpha, beta, gamma and neutron radiation and their penetration", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-15-050, title: "Activity, absorbed dose and dose equivalent, and their units", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-15-051, title: "Dose rate against accumulated dose", kind: knowledge, levelCeiling: 3, status: draft }
@@ -47,7 +47,7 @@ domains:
         title: Radiation Physics and Quantities
         status: draft
         elements:
-          - { id: DP-15-001, title: "Types of ionising radiation and their interactions", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-15-001, title: "Types of ionizing radiation and their interactions", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-15-002, title: "Activity, decay and half-life", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-15-003, title: "Fluence, kerma and absorbed dose", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-15-004, title: "Equivalent dose, effective dose and radiation weighting", kind: knowledge, levelCeiling: 4, status: draft }
@@ -60,7 +60,7 @@ domains:
         title: Detectors and Instrumentation
         status: draft
         elements:
-          - { id: DP-15-009, title: "Ionisation chambers", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-15-009, title: "Ionization chambers", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: DP-15-010, title: "Proportional counters and Geiger-Muller tubes", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-15-011, title: "Scintillation detectors and photomultipliers", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-15-012, title: "Semiconductor detectors: HPGe, silicon and CdZnTe", kind: knowledge, levelCeiling: 4, status: draft }
@@ -77,10 +77,10 @@ domains:
         elements:
           - { id: DP-15-019, title: "Primary standards for air kerma and absorbed dose", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-15-020, title: "Graphite and water calorimetry", kind: skill, levelCeiling: 5, status: draft }
-          - { id: DP-15-021, title: "Free air ionisation chambers", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-15-021, title: "Free air ionization chambers", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-15-022, title: "Reference radiation fields and their establishment", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-15-023, title: "Calibration of dosimeters and survey instruments", kind: skill, levelCeiling: 4, status: draft }
-          - { id: DP-15-024, title: "Radionuclide standardisation and activity measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-15-024, title: "Radionuclide standardization and activity measurement", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-15-025, title: "Radioactive reference sources and their certification", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-15-026, title: "Secondary standard dosimetry laboratories", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-15-027, title: "Uncertainty evaluation with counting statistics", kind: skill, levelCeiling: 5, status: draft }
@@ -110,7 +110,7 @@ domains:
           - { id: DP-15-041, title: "Nuclear medicine activity measurement and dose calibrators", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-15-042, title: "Brachytherapy source strength measurement", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-15-043, title: "Industrial radiography and gauging measurement", kind: skill, levelCeiling: 4, status: draft }
-          - { id: DP-15-044, title: "Radiation processing and sterilisation dosimetry", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-15-044, title: "Radiation processing and sterilization dosimetry", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-15-045, title: "Nuclear power plant instrumentation and in-core measurement", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-15-046, title: "Nuclear material accountancy and safeguards measurement", kind: judgment, levelCeiling: 5, status: draft }
-          - { id: DP-15-047, title: "Decommissioning and waste characterisation measurement", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-15-047, title: "Decommissioning and waste characterization measurement", kind: judgment, levelCeiling: 4, status: draft }

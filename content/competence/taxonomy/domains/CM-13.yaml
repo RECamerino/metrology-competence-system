@@ -36,7 +36,7 @@ domains:
           - { id: CM-13-012, title: "Bridge circuits and their excitation", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-13-013, title: "Filtering and its effect on a measurement result", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-13-014, title: "Analogue-to-digital conversion architectures", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: CM-13-015, title: "Quantisation, resolution and effective number of bits", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: CM-13-015, title: "Quantization, resolution and effective number of bits", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-13-016, title: "Sampling, aliasing and the Nyquist criterion", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: CM-13-017, title: "Integrating converters and normal-mode rejection", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-13-018, title: "Multiplexing, settling and channel crosstalk", kind: knowledge, levelCeiling: 4, status: draft }
@@ -58,7 +58,7 @@ domains:
           - { id: CM-13-029, title: "Diagnosing an intermittent or noisy measurement", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: CM-13-A04
-        title: Instrument Behaviour and Characterisation
+        title: Instrument Behaviour and Characterization
         status: draft
         elements:
           - { id: CM-13-030, title: "Static and dynamic instrument characteristics", kind: knowledge, levelCeiling: 4, status: draft }
@@ -67,9 +67,9 @@ domains:
           - { id: CM-13-033, title: "Long-term drift and ageing mechanisms", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-13-034, title: "Temperature coefficients and environmental sensitivity", kind: skill, levelCeiling: 3, status: draft }
           - { id: CM-13-035, title: "Loading, impedance matching and source effects", kind: skill, levelCeiling: 4, status: draft }
-          - { id: CM-13-036, title: "Nonlinearity and its characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-13-036, title: "Nonlinearity and its characterization", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-13-037, title: "Interpreting a manufacturer specification sheet", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: CM-13-038, title: "Characterising an instrument beyond its specification", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-13-038, title: "Characterizing an instrument beyond its specification", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: CM-13-A05
         title: Underlying Physics for Metrologists
@@ -99,7 +99,7 @@ domains:
         elements:
           - { id: CM-13-049, title: "Instrument interfaces and communication standards", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-13-050, title: "Automated measurement sequences and their validation", kind: skill, levelCeiling: 4, status: draft }
-          - { id: CM-13-051, title: "Timing, synchronisation and latency in automated systems", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-13-051, title: "Timing, synchronization and latency in automated systems", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-13-052, title: "What automation removes and what it hides", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-13-053, title: "Automated systems and the loss of operator intuition", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-13-054, title: "Verification of an automated measurement against a manual one", kind: skill, levelCeiling: 4, status: draft }

@@ -6,7 +6,7 @@
  * `tools/kind-plan.json` — a per-competency-area default with named
  * per-element overrides, the same shape as the ceiling plan.
  *
- *   knowledge  the person can explain, relate and analyse it.
+ *   knowledge  the person can explain, relate and analyze it.
  *              Evidence is explanation.
  *   skill      the person can perform it. Evidence is a work product they
  *              produced; an account of how it would be done cannot

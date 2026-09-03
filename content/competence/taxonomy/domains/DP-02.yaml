@@ -45,12 +45,12 @@ domains:
           - { id: DP-02-080, title: "Recording a mass or force result with its conditions", kind: skill, levelCeiling: 3, status: draft }
 
       - id: DP-02-A01
-        title: Mass Standards and Realisation
+        title: Mass Standards and Realization
         status: draft
         elements:
           - { id: DP-02-001, title: "Definition of the kilogram from the Planck constant", kind: knowledge, levelCeiling: 5, status: draft }
-          - { id: DP-02-002, title: "Kibble balance realisation", kind: knowledge, levelCeiling: 4, status: draft }
-          - { id: DP-02-003, title: "X-ray crystal density realisation", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-02-002, title: "Kibble balance realization", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-02-003, title: "X-ray crystal density realization", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-02-004, title: "Dissemination of the kilogram after the redefinition", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-02-005, title: "Mass standards: classes, materials and construction", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-02-006, title: "Weight class specifications and their selection", kind: knowledge, levelCeiling: 4, status: draft }
@@ -64,7 +64,7 @@ domains:
         status: draft
         elements:
           - { id: DP-02-011, title: "Balance principles: electromagnetic force compensation and others", kind: knowledge, levelCeiling: 4, status: draft }
-          - { id: DP-02-012, title: "Mass comparators and their characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-012, title: "Mass comparators and their characterization", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-02-013, title: "Weighing designs and subdivision schemes", kind: skill, levelCeiling: 5, status: draft }
           - { id: DP-02-014, title: "Substitution weighing and Borda method", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-02-015, title: "Least squares analysis of a weighing design", kind: skill, levelCeiling: 4, status: draft }
@@ -80,7 +80,7 @@ domains:
         title: Force
         status: draft
         elements:
-          - { id: DP-02-023, title: "Force realisation by deadweight machines", kind: skill, levelCeiling: 5, status: draft }
+          - { id: DP-02-023, title: "Force realization by deadweight machines", kind: skill, levelCeiling: 5, status: draft }
           - { id: DP-02-024, title: "Local gravity determination and its uncertainty", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-02-025, title: "Lever, hydraulic and build-up force machines", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-02-026, title: "Force transducers: strain gauge and other principles", kind: knowledge, levelCeiling: 4, status: draft }
@@ -95,7 +95,7 @@ domains:
         title: Torque
         status: draft
         elements:
-          - { id: DP-02-033, title: "Torque realisation by lever and mass", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-02-033, title: "Torque realization by lever and mass", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-02-034, title: "Reference torque transducers", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-02-035, title: "Torque calibration machines and their verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-02-036, title: "Torque wrench and torque tool calibration", kind: skill, levelCeiling: 4, status: draft }
@@ -110,7 +110,7 @@ domains:
         summary: >-
           A method-defined, ordinal quantity. Understanding why hardness is not
           a physical property in the ordinary sense is more important than
-          memorising the scales.
+          memorizing the scales.
         elements:
           - { id: DP-02-041, title: "Hardness as a method-defined ordinal quantity", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: DP-02-042, title: "Rockwell scales and test principles", kind: skill, levelCeiling: 3, status: draft }
@@ -131,7 +131,7 @@ domains:
         summary: >-
           Measurement of gravitational acceleration as a discipline in its own
           right, not merely as a correction term. Local g enters force
-          realisation, pressure realisation and mass comparison, and a
+          realization, pressure realization and mass comparison, and a
           metrologist who treats it as a looked-up constant has an
           unacknowledged uncertainty contribution. Included here because
           gravimetry shares apparatus and traceability routes with mass and

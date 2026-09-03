@@ -5,7 +5,7 @@ domains:
     kind: discipline
     status: draft
     summary: >-
-      The most accurately realised quantity in the SI, and the one every other
+      The most accurately realized quantity in the SI, and the one every other
       unit increasingly depends on. Distinguished by its own statistical
       apparatus: ordinary standard deviation does not converge for the noise
       types found in oscillators, which is why Allan variance exists and why
@@ -34,7 +34,7 @@ domains:
           - { id: DP-14-054, title: "Warm-up and retrace after power cycling", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-14-055, title: "Reference standards: quartz, rubidium and caesium compared", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-14-056, title: "UTC, TAI and local time scales", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: DP-14-057, title: "Time synchronisation over a network in outline", kind: knowledge, levelCeiling: 3, status: draft }
+          - { id: DP-14-057, title: "Time synchronization over a network in outline", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-14-058, title: "Gate time, resolution and measurement duration", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-14-059, title: "Trigger level and its effect on a time measurement", kind: skill, levelCeiling: 3, status: draft }
           - { id: DP-14-060, title: "Cable delay and why it matters at nanosecond level", kind: knowledge, levelCeiling: 3, status: draft }
@@ -44,7 +44,7 @@ domains:
         title: Time and Frequency Fundamentals
         status: draft
         elements:
-          - { id: DP-14-001, title: "The second, its definition and realisation", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-14-001, title: "The second, its definition and realization", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: DP-14-002, title: "Time scales: TAI, UTC, UT1 and GPS time", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-14-003, title: "Leap seconds and their operational consequences", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-14-004, title: "Frequency, phase and time interval relationships", kind: knowledge, levelCeiling: 4, status: draft }
@@ -70,7 +70,7 @@ domains:
         title: Frequency Stability and Its Statistics
         status: draft
         summary: >-
-          The specialised statistics of this discipline. Boundary: general
+          The specialized statistics of this discipline. Boundary: general
           statistics is CM-05; these methods exist because ordinary variance
           does not converge for the noise processes involved.
         elements:
@@ -116,7 +116,7 @@ domains:
         elements:
           - { id: DP-14-042, title: "Network Time Protocol and its accuracy limits", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-14-043, title: "Precision Time Protocol and hardware timestamping", kind: skill, levelCeiling: 4, status: draft }
-          - { id: DP-14-044, title: "Timing in telecommunications and synchronisation networks", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-14-044, title: "Timing in telecommunications and synchronization networks", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-14-045, title: "Timing for power grids and synchrophasors", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-14-046, title: "Timing in financial transaction records and regulatory traceability", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-14-047, title: "Timing for scientific instrumentation and data acquisition", kind: skill, levelCeiling: 4, status: draft }

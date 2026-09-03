@@ -162,7 +162,7 @@ uncertainty comes from that shared contribution. This is usually the practical
 answer.
 
 **By bounding.** Where neither is available, evaluate the budget at the
-correlation that maximises the combined uncertainty and state that you have
+correlation that maximizes the combined uncertainty and state that you have
 done so. A defensible bound with its reasoning recorded is worth more than a
 precise-looking coefficient with no basis, and reviewers treat it that way.
 

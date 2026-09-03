@@ -178,7 +178,7 @@ The two parts exist because instrument errors come in two shapes.
 gain error — the instrument's scale factor being slightly off. Measure twice as
 much and this contribution doubles.
 
-**The counts part does not scale.** It covers offset, noise and quantisation —
+**The counts part does not scale.** It covers offset, noise and quantization —
 errors that are the same size whatever you are measuring.
 
 The consequence is the single most useful thing in this article: **the same

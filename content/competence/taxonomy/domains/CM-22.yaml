@@ -87,7 +87,7 @@ domains:
           - { id: CM-22-026, title: "Mechanical, lifting and crush hazards", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-22-027, title: "Chemical hazards and safe handling", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-22-028, title: "Laser and optical radiation safety", kind: skill, levelCeiling: 4, status: draft }
-          - { id: CM-22-029, title: "Ionising radiation safety and dose control", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-22-029, title: "Ionizing radiation safety and dose control", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-22-030, title: "Cryogenic, thermal and asphyxiation hazards", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-22-031, title: "Magnetic field and RF exposure hazards", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-22-032, title: "Permit to work, isolation and lockout", kind: skill, levelCeiling: 4, status: draft }

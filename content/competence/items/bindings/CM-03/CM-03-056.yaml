@@ -3,7 +3,7 @@ element: CM-03-056
 
 # NOT BOUND AT L1 OR L2, deliberately.
 #
-# This element is about judging when linearisation stops being adequate. At L1
+# This element is about judging when linearization stops being adequate. At L1
 # and L2 the archetype supplies the values and the model, which leaves nothing
 # of that judgement to observe — the candidate would be applying a higher-order
 # term they were told to apply. Those two levels want a different shape, and
@@ -72,12 +72,12 @@ bindings:
       Engages the disputed question at its hardest: neither first-order
       nor higher-order is defensible on the records, because the input
       distributions are not known well enough to justify the correction
-      the higher-order route assumes. Credit recognising that both routes
+      the higher-order route assumes. Credit recognizing that both routes
       fail and saying what evidence would rescue either. Never credit the
       route chosen.
     parameterRanges:
       - name: structural_feature
-        choices: [curvature significant but input distributions insufficiently characterised]
+        choices: [curvature significant but input distributions insufficiently characterized]
       - name: inputs_supplied
         choices: [raw records only]
       - name: resolvable

@@ -33,14 +33,14 @@ domains:
           - { id: CM-06-076, title: "Reading and following a calibration procedure", kind: skill, levelCeiling: 3, status: draft }
           - { id: CM-06-077, title: "Preparing a bench and staging the equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: CM-06-078, title: "Receiving an item: identification, condition and damage", kind: skill, levelCeiling: 3, status: draft }
-          - { id: CM-06-079, title: "Stabilisation, soak and warm-up before measurement", kind: skill, levelCeiling: 3, status: draft }
+          - { id: CM-06-079, title: "Stabilization, soak and warm-up before measurement", kind: skill, levelCeiling: 3, status: draft }
           - { id: CM-06-080, title: "Taking readings in the specified order and direction", kind: skill, levelCeiling: 3, status: draft }
           - { id: CM-06-081, title: "As-found and as-left data and why both are taken", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-06-082, title: "Recording raw data legibly and completely", kind: skill, levelCeiling: 3, status: draft }
           - { id: CM-06-083, title: "Environmental conditions and recording them", kind: skill, levelCeiling: 3, status: draft }
           - { id: CM-06-084, title: "Handling, cleanliness and protecting an item under test", kind: skill, levelCeiling: 3, status: draft }
           - { id: CM-06-085, title: "Labelling, status marking and segregation", kind: skill, levelCeiling: 3, status: draft }
-          - { id: CM-06-086, title: "Recognising a result that does not look right", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-06-086, title: "Recognizing a result that does not look right", kind: judgment, levelCeiling: 3, status: draft }
           - { id: CM-06-087, title: "Escalating an out-of-tolerance finding", kind: skill, levelCeiling: 3, status: draft }
           - { id: CM-06-088, title: "Returning an item and what goes with it", kind: skill, levelCeiling: 3, status: draft }
           - { id: CM-06-089, title: "Housekeeping, and leaving the bench fit for the next job", kind: skill, levelCeiling: 2, status: draft }
@@ -66,9 +66,9 @@ domains:
           - { id: CM-06-010, title: "Writing a procedure that a competent stranger can execute", kind: skill, levelCeiling: 5, status: draft }
           - { id: CM-06-011, title: "Selecting a measurement method for the required capability", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-06-012, title: "Number and placement of calibration points", kind: skill, levelCeiling: 4, status: draft }
-          - { id: CM-06-013, title: "Repetition, ordering and randomisation within a procedure", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-013, title: "Repetition, ordering and randomization within a procedure", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-06-014, title: "Hysteresis, loading sequence and directional effects", kind: skill, levelCeiling: 4, status: draft }
-          - { id: CM-06-015, title: "Stabilisation, soak time and thermal equilibrium", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-06-015, title: "Stabilization, soak time and thermal equilibrium", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-06-016, title: "Environmental control and monitoring within a procedure", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-06-017, title: "Adapting a published method to local conditions", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-06-018, title: "Procedure review, approval and version control", kind: skill, levelCeiling: 4, status: draft }
@@ -100,7 +100,7 @@ domains:
           - { id: CM-06-031, title: "Reverse traceability and impact assessment after an OOT", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-06-032, title: "Customer notification obligations", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-06-033, title: "Repair, refurbishment and their effect on calibration history", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: CM-06-034, title: "Recognising a failing instrument from its calibration history", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-06-034, title: "Recognizing a failing instrument from its calibration history", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: CM-06-A05
         title: Comparison and Transfer Techniques

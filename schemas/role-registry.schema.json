@@ -61,7 +61,7 @@
 
         "authorities": {
           "type": "array",
-          "description": "Formal authorities the role commonly carries — approving calibration certificates, acting as an approved signatory, conducting assessments. Recorded because authority and knowledge are different things: a person may understand a method thoroughly and still not be authorised to sign for it.",
+          "description": "Formal authorities the role commonly carries — approving calibration certificates, acting as an approved signatory, conducting assessments. Recorded because authority and knowledge are different things: a person may understand a method thoroughly and still not be authorized to sign for it.",
           "items": { "type": "string" }
         },
 

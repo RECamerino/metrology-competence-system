@@ -50,11 +50,11 @@ domains:
           - { id: DP-01-113, title: "When to stop and refer a measurement upward", kind: judgment, levelCeiling: 3, status: draft }
 
       - id: DP-01-A01
-        title: Length Standards and Realisation
+        title: Length Standards and Realization
         status: draft
         elements:
-          - { id: DP-01-001, title: "Definition and practical realisation of the metre", kind: knowledge, levelCeiling: 5, status: draft }
-          - { id: DP-01-002, title: "Iodine-stabilised lasers and recommended radiations", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-01-001, title: "Definition and practical realization of the metre", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-01-002, title: "Iodine-stabilized lasers and recommended radiations", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-01-003, title: "Gauge blocks: construction, grades and wringing", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-01-004, title: "Interferometric calibration of gauge blocks", kind: skill, levelCeiling: 5, status: draft }
           - { id: DP-01-005, title: "Mechanical comparison of gauge blocks", kind: skill, levelCeiling: 4, status: draft }

@@ -31,7 +31,7 @@ domains:
           the result.
         elements:
           - { id: EC-17-001, title: "Receiving inspection and functional check of a gaussmeter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-17-002, title: "Calibration configuration and stabilisation for a gaussmeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-17-002, title: "Calibration configuration and stabilization for a gaussmeter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-17-003, title: "Selecting the standards and fixturing for a gaussmeter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-17-004, title: "Flux density indication accuracy against a reference field", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-17-005, title: "Hall probe orientation, angular error and cosine effect", kind: skill, levelCeiling: 4, status: draft }
@@ -53,7 +53,7 @@ domains:
           coil area-turns product is the calibration.
         elements:
           - { id: EC-17-015, title: "Receiving inspection and functional check of a fluxmeter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-17-016, title: "Calibration configuration and stabilisation for a fluxmeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-17-016, title: "Calibration configuration and stabilization for a fluxmeter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-17-017, title: "Selecting the standards and fixturing for a fluxmeter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-17-018, title: "Flux integration accuracy and drift over time", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-17-019, title: "Search coil area-turns determination", kind: skill, levelCeiling: 4, status: draft }
@@ -69,11 +69,11 @@ domains:
         title: Magnetic Field Source and Coil System Calibration
         status: draft
         summary: >-
-          Helmholtz coils, solenoids and electromagnets characterised
+          Helmholtz coils, solenoids and electromagnets characterized
           for the field they generate rather than the current they draw.
         elements:
           - { id: EC-17-027, title: "Receiving inspection and functional check of a magnetic field source", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-17-028, title: "Calibration configuration and stabilisation for a magnetic field source", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-17-028, title: "Calibration configuration and stabilization for a magnetic field source", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-17-029, title: "Selecting the standards and fixturing for a magnetic field source calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-17-030, title: "Field per unit current determination", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-17-031, title: "Field uniformity across the working volume", kind: skill, levelCeiling: 4, status: draft }
@@ -95,13 +95,13 @@ domains:
           of the apparatus.
         elements:
           - { id: EC-17-040, title: "Receiving inspection and functional check of magnetic material test equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-17-041, title: "Calibration configuration and stabilisation for magnetic material test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-17-041, title: "Calibration configuration and stabilization for magnetic material test equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-17-042, title: "Selecting the standards and fixturing for magnetic material test equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-17-043, title: "Permeability and B-H loop measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-17-044, title: "Coercivity and remanence measurement verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-17-045, title: "Epstein frame and single sheet tester verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-17-046, title: "Core loss measurement accuracy against frequency", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-17-047, title: "Specimen preparation, demagnetisation and conditioning", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-17-047, title: "Specimen preparation, demagnetization and conditioning", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-17-048, title: "Vibrating sample magnetometer calibration", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-17-049, title: "Air flux compensation and its determination", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-17-050, title: "Adjustment of magnetic material test equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
@@ -116,7 +116,7 @@ domains:
           earth's field is the signal rather than the interference.
         elements:
           - { id: EC-17-053, title: "Receiving inspection and functional check of a magnetometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-17-054, title: "Calibration configuration and stabilisation for a magnetometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-17-054, title: "Calibration configuration and stabilization for a magnetometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-17-055, title: "Selecting the standards and fixturing for a magnetometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-17-056, title: "Scalar magnetometer accuracy against a proton or Overhauser reference", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-17-057, title: "Vector magnetometer orthogonality and axis alignment", kind: skill, levelCeiling: 5, status: draft }
@@ -138,13 +138,13 @@ domains:
           standard requires.
         elements:
           - { id: EC-17-066, title: "Receiving inspection and functional check of magnetic NDT equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-17-067, title: "Calibration configuration and stabilisation for magnetic NDT equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-17-067, title: "Calibration configuration and stabilization for magnetic NDT equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-17-068, title: "Selecting the standards and fixturing for magnetic NDT equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-17-069, title: "Tangential field strength measurement verification", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-17-070, title: "Magnetising current output and waveform verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-17-070, title: "Magnetizing current output and waveform verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-17-071, title: "Field indicator and pie gauge response verification", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-17-072, title: "Yoke lifting force and pole spacing verification", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-17-073, title: "Demagnetisation effectiveness verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-17-073, title: "Demagnetization effectiveness verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-17-074, title: "Light meter and UV intensity verification for inspection", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-17-075, title: "Adjustment of magnetic NDT equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-17-076, title: "Uncertainty budget for magnetic NDT equipment calibration", kind: skill, levelCeiling: 4, status: draft }

@@ -66,7 +66,7 @@ domains:
           - { id: CM-19-015, title: "Regional frameworks and the European measuring instruments directives", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-19-016, title: "Type approval and pattern evaluation", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-19-017, title: "Initial and subsequent verification of regulated instruments", kind: knowledge, levelCeiling: 4, status: draft }
-          - { id: CM-19-018, title: "Sealing, security and prevention of unauthorised adjustment", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-19-018, title: "Sealing, security and prevention of unauthorized adjustment", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-19-019, title: "Market surveillance and enforcement", kind: knowledge, levelCeiling: 3, status: draft }
 
       - id: CM-19-A03

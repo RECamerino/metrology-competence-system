@@ -7,7 +7,7 @@ domains:
     summary: >-
       Thermometry, the international temperature scale, and the thermal
       properties of materials. A discipline where the difference between the
-      thermodynamic temperature and its practical realisation is a live
+      thermodynamic temperature and its practical realization is a live
       technical issue rather than a footnote, and where the sensor almost always
       perturbs what it measures.
 
@@ -44,7 +44,7 @@ domains:
           - { id: DP-05-069, title: "Recording a temperature result with its conditions", kind: skill, levelCeiling: 3, status: draft }
 
       - id: DP-05-A01
-        title: Temperature Scales and Realisation
+        title: Temperature Scales and Realization
         status: draft
         elements:
           - { id: DP-05-001, title: "Thermodynamic temperature and the Boltzmann constant definition", kind: knowledge, levelCeiling: 5, status: draft }
@@ -52,7 +52,7 @@ domains:
           - { id: DP-05-003, title: "Interpolating instruments and sub-ranges of ITS-90", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-05-004, title: "Differences between ITS-90 and thermodynamic temperature", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-05-005, title: "PLTS-2000 and low temperature scales", kind: knowledge, levelCeiling: 4, status: draft }
-          - { id: DP-05-006, title: "Fixed point cells: construction, realisation and maintenance", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-05-006, title: "Fixed point cells: construction, realization and maintenance", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-05-007, title: "Triple point of water cells and their care", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-05-008, title: "Freezing and melting plateaux and their interpretation", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-05-009, title: "Primary thermometry methods", kind: knowledge, levelCeiling: 4, status: draft }
