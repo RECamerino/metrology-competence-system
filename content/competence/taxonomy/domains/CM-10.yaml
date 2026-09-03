@@ -106,7 +106,12 @@ domains:
           - { id: CM-10-042, title: "Preparing a laboratory for assessment", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-10-043, title: "Responding to findings and nonconformities", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-10-044, title: "Proficiency testing participation requirements", kind: knowledge, levelCeiling: 4, status: draft }
-          - { id: CM-10-045, title: "ILAC and IAF arrangements and cross-border recognition", kind: knowledge, levelCeiling: 4, status: draft }
+          # Retitled 2026-09-03. The ILAC MRA and the IAF MLA became a SINGLE
+          # arrangement under Global ACI on 2026-01-01. The plural in the old
+          # title was the substance of the element, not decoration — what a
+          # candidate must now know is one arrangement plus the transition, and
+          # that both predecessor marks remain valid meanwhile.
+          - { id: CM-10-045, title: "The Global ACI arrangement, the two it replaced, and cross-border recognition", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-10-046, title: "Suspension, withdrawal and reduction of scope", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-10-047, title: "Costs, benefits and the decision to seek accreditation", kind: judgment, levelCeiling: 4, status: draft }
 

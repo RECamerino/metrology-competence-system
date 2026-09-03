@@ -60,6 +60,7 @@ const credential: Credential = {
     // rule is applied as written rather than approximated.
     candidateOrganization: { name: 'Northfield Calibration', id: 'northfield-cal-2026' },
     experienceHours: 260,
+    distinctActivities: 4,
     // L4 is doubleScored, and nothing else on the credential could show it —
     // signer count cannot stand in, because scoring is not signing.
     scorerCount: 2,
@@ -888,6 +889,24 @@ test('hours below the threshold are rejected', () => {
     REAL_L4,
   );
   assert.ok(findings.some((f) => f.message.includes('records 199 experience hours')));
+});
+
+test('unrecorded breadth fails rather than passes unnoticed', () => {
+  // Hours alone cannot show range, and L4 asks for both.
+  const { distinctActivities, ...assessment } = credential.assessment as Record<string, unknown>;
+  const findings = checkCredential({ ...credential, assessment }, REAL_L4);
+  assert.ok(findings.some((f) => f.message.includes('distinct activities') && f.message.includes('records none')));
+});
+
+test('sufficient hours across too few activities are rejected', () => {
+  // The point of the threshold: 1000 hours on one repetitive task clears an
+  // hours bar and does not show the range the level actually claims.
+  const findings = checkCredential(
+    { ...credential, assessment: { ...credential.assessment as object, experienceHours: 5000, distinctActivities: 1 } },
+    REAL_L4,
+  );
+  assert.ok(findings.some((f) => f.message.includes('records 1 distinct activity')));
+  assert.ok(!findings.some((f) => f.message.includes('experience hours')));
 });
 
 test('two signers who scored once between them do not satisfy double scoring', () => {

@@ -119,6 +119,7 @@ export interface CredentialAssessment {
   attemptRef?: string;
   candidateOrganization?: OrganizationRef;
   experienceHours?: number;
+  distinctActivities?: number;
   scorerCount?: number;
   previousLevelAttainedOn?: string;
 }
@@ -309,6 +310,7 @@ export interface SignoffPolicy {
    * signoff rules must stay able to.
    */
   minExperienceHours?: number;
+  minDistinctActivities?: number;
   minDaysSincePreviousLevel?: number;
   requiresWorkProduct?: boolean;
   requiresCapstone?: boolean;
@@ -335,6 +337,7 @@ export function signoffPolicyFor(levelDefinition: Record<string, unknown>): Sign
     requiresCredentialedReviewer: signoff.requiresCredentialedReviewer as boolean | undefined,
     requiresCrossOrganizational: signoff.requiresCrossOrganizational as boolean | undefined,
     minExperienceHours: assessment.minExperienceHours as number | undefined,
+    minDistinctActivities: assessment.minDistinctActivities as number | undefined,
     minDaysSincePreviousLevel: assessment.minDaysSincePreviousLevel as number | undefined,
     requiresWorkProduct: assessment.requiresWorkProduct as boolean | undefined,
     requiresCapstone: assessment.requiresCapstone as boolean | undefined,
@@ -543,6 +546,31 @@ export function checkCredential(
     } else if (hours < policy.minExperienceHours) {
       findings.push(
         err(at(`records ${hours} experience hours; level ${credential.level} requires at least ${policy.minExperienceHours}.`)),
+      );
+    }
+  }
+
+  /*
+   * Breadth, which hours cannot express.
+   *
+   * An hours threshold is satisfied by endurance. LM-14 describes progression
+   * as several years of progressively more complex ASSIGNMENTS, and 1000 hours
+   * on one repetitive task clears a 1000-hour bar exactly as well as 1000
+   * hours across escalating work — at L5, whose whole claim is judgement in
+   * cases the holder has not met before.
+   *
+   * Enforced rather than declared, because a requirement nothing reads is the
+   * defect this project has now corrected twice.
+   */
+  if (typeof policy.minDistinctActivities === 'number' && policy.minDistinctActivities > 0) {
+    const activities = assessment.distinctActivities;
+    if (typeof activities !== 'number') {
+      findings.push(
+        err(at(`level ${credential.level} requires experience spanning at least ${policy.minDistinctActivities} distinct activities and the credential records none. Record assessment.distinctActivities; hours alone cannot show breadth.`)),
+      );
+    } else if (activities < policy.minDistinctActivities) {
+      findings.push(
+        err(at(`records ${activities} distinct activity/activities; level ${credential.level} requires at least ${policy.minDistinctActivities}. The hours may be sufficient and the range is not — that is the distinction this threshold exists for.`)),
       );
     }
   }

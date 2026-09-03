@@ -302,6 +302,11 @@ sources:
     notes: >-
       CONFIRM-WITH-COUNSEL — verify the current ILAC copyright statement.
       Governs CMC statements and reported uncertainty (CM-03, CM-04).
+      PUBLISHER: ILAC merged with IAF on 2026-01-01 into Global
+      Accreditation Cooperation Incorporated (Global ACI). The document
+      designation is UNCHANGED and citations against it stay correct — a
+      publication is not renamed by its publisher merging. Do not
+      retrospectively relabel this source.
 
   - id: ILAC-G8-2019
     designation: ILAC-G8:09/2019
@@ -323,6 +328,11 @@ sources:
     notes: >-
       CONFIRM-WITH-COUNSEL. Core source for decision rules and guardbanding
       (CM-08), read together with JCGM 106 and ISO/IEC 17025 §7.8.6.
+      PUBLISHER: ILAC merged with IAF on 2026-01-01 into Global
+      Accreditation Cooperation Incorporated (Global ACI). The document
+      designation is UNCHANGED and citations against it stay correct — a
+      publication is not renamed by its publisher merging. Do not
+      retrospectively relabel this source.
 
   - id: ILAC-P10-2020
     designation: ILAC P10:07/2020
@@ -341,7 +351,13 @@ sources:
       url: https://ilac.org/publications-and-resources/ilac-documents/
     termsBasis: Same ILAC publication terms as ILAC-P14-2020.
     termsReviewedOn: "2026-08-08"
-    notes: CONFIRM-WITH-COUNSEL. Controlling policy for CM-04.
+    notes: >-
+      CONFIRM-WITH-COUNSEL. Controlling policy for CM-04.
+      PUBLISHER: ILAC merged with IAF on 2026-01-01 into Global
+      Accreditation Cooperation Incorporated (Global ACI). The document
+      designation is UNCHANGED and citations against it stay correct — a
+      publication is not renamed by its publisher merging. Do not
+      retrospectively relabel this source.
 
   - id: BIPM-CIPM-MRA
     designation: CIPM MRA

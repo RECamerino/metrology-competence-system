@@ -84,6 +84,38 @@
 # starting position, not a settled requirement — and note that every credential
 # pins the policy in force when it was issued (assessmentPolicyRef, decision
 # 46), so revising them later does not silently rewrite what anybody earned.
+#
+# EDUCATION AND PRIOR CERTIFICATION ARE DELIBERATELY NOT INPUTS — declared
+# 2026-09-03, because an undeclared exclusion reads as an oversight.
+#
+# The profession treats formal education as SUBSTITUTABLE for experience.
+# NCSLI RP-17 (2007) 4.2.1 establishes knowledge of basic metrological concepts
+# through educational background OR through demonstrated proficiency testing,
+# at management's discretion; LM-14 (2010) sets out both routes and says years
+# of industrial experience may be substituted for the maths and physics
+# background, and the reverse. LM-13 (2012) makes establishing educational
+# requirements part of a manager's job. This ladder has no field for any of it,
+# and that is a choice.
+#
+# The reason: this system attests DEMONSTRATED COMPETENCE, not credentials. A
+# degree is evidence that someone was taught, which is the same distinction
+# rule 9 draws for training — teaching is not proving. Admitting education as a
+# route would also gate entry by ability to pay for it, against the first
+# principle in CLAUDE.md.
+#
+# What that costs, stated honestly: a person arriving with an AAS in metrology
+# or a BSc holds knowledge the profession recognises, and this system will make
+# them demonstrate it. That is friction, and it is accepted deliberately —
+# assessment is open-resource and unproctored, so demonstrating what you
+# already know is cheap, and the alternative is a credential that rests on
+# something nobody checked. The failure to avoid is somebody recording hours
+# that were not worked in order to smuggle a qualification in; hours are the
+# one experience field that IS checked, and corrupting it is worse than
+# omitting the education.
+#
+# Breadth is a separate matter and IS modelled: see minDistinctActivities at
+# L4 and L5. Hours measure duration, and LM-14's "progressively more complex
+# assignments" is a claim about range.
 
 schemaVersion: 1
 
@@ -214,6 +246,7 @@ levels:
       requiresWorkProduct: true
       doubleScored: true
       minExperienceHours: 200
+      minDistinctActivities: 3
       minDaysSincePreviousLevel: 180
     signoff:
       signerCount: 2
@@ -241,6 +274,7 @@ levels:
       requiresMentoring: true
       doubleScored: true
       minExperienceHours: 1000
+      minDistinctActivities: 5
       minDaysSincePreviousLevel: 365
     signoff:
       signerCount: 2
