@@ -31,7 +31,7 @@ domains:
           dominate.
         elements:
           - { id: EC-18-001, title: "Receiving inspection and functional check of a scanning probe microscope", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-18-002, title: "Calibration configuration and stabilisation for a scanning probe microscope", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-002, title: "Calibration configuration and stabilization for a scanning probe microscope", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-18-003, title: "Selecting the standards and fixturing for a scanning probe microscope calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-18-004, title: "Lateral X and Y scale calibration against a grating standard", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-18-005, title: "Z scale calibration against step height standards", kind: skill, levelCeiling: 5, status: draft }
@@ -54,7 +54,7 @@ domains:
           scale.
         elements:
           - { id: EC-18-015, title: "Receiving inspection and functional check of an electron microscope", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-18-016, title: "Calibration configuration and stabilisation for an electron microscope", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-016, title: "Calibration configuration and stabilization for an electron microscope", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-18-017, title: "Selecting the standards and fixturing for an electron microscope calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-18-018, title: "Magnification calibration against a certified pitch standard", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-18-019, title: "Distortion and linearity across the field of view", kind: skill, levelCeiling: 5, status: draft }
@@ -76,13 +76,13 @@ domains:
           diffraction.
         elements:
           - { id: EC-18-028, title: "Receiving inspection and functional check of a nanoscale transfer standard", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-18-029, title: "Calibration configuration and stabilisation for a nanoscale transfer standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-029, title: "Calibration configuration and stabilization for a nanoscale transfer standard", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-18-030, title: "Selecting the standards and fixturing for a nanoscale transfer standard calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-18-031, title: "Step height determination by interferometry", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-18-032, title: "Lateral pitch determination by optical diffraction", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-18-033, title: "Traceability of a pitch standard to the metre", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-18-034, title: "Uniformity and site-to-site variation of an artefact", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-18-035, title: "Roughness standard characterisation at the nanoscale", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-035, title: "Roughness standard characterization at the nanoscale", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-18-036, title: "Contamination, cleaning and handling of nanoscale artefacts", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-18-037, title: "Uncertainty budget for a nanoscale artefact", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-18-038, title: "Adjustment of a nanoscale transfer standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
@@ -97,10 +97,10 @@ domains:
           optical model is as much the measurement as the instrument.
         elements:
           - { id: EC-18-041, title: "Receiving inspection and functional check of a thin film measurement instrument", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-18-042, title: "Calibration configuration and stabilisation for a thin film measurement instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-042, title: "Calibration configuration and stabilization for a thin film measurement instrument", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-18-043, title: "Selecting the standards and fixturing for a thin film measurement instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-18-044, title: "Film thickness accuracy against reference films", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-18-045, title: "Ellipsometer polariser and analyser angular calibration", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-045, title: "Ellipsometer polarizer and analyzer angular calibration", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-18-046, title: "Optical constants and model dependence of a result", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-18-047, title: "X-ray reflectometry thickness and density determination", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-18-048, title: "Wavelength and angle-of-incidence calibration", kind: skill, levelCeiling: 4, status: draft }
@@ -117,7 +117,7 @@ domains:
           and intensity, where the sputter rate is its own measurement.
         elements:
           - { id: EC-18-053, title: "Receiving inspection and functional check of a surface analysis instrument", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-18-054, title: "Calibration configuration and stabilisation for a surface analysis instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-054, title: "Calibration configuration and stabilization for a surface analysis instrument", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-18-055, title: "Selecting the standards and fixturing for a surface analysis instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-18-056, title: "Binding energy scale calibration against reference materials", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-18-057, title: "Intensity and transmission function determination", kind: skill, levelCeiling: 5, status: draft }
@@ -138,13 +138,13 @@ domains:
           suspensions.
         elements:
           - { id: EC-18-065, title: "Receiving inspection and functional check of a nanoparticle measuring instrument", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-18-066, title: "Calibration configuration and stabilisation for a nanoparticle measuring instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-18-066, title: "Calibration configuration and stabilization for a nanoparticle measuring instrument", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-18-067, title: "Selecting the standards and fixturing for a nanoparticle measuring instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-18-068, title: "Size accuracy against certified nanoparticle standards", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-18-069, title: "Size distribution width and resolution verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-18-070, title: "Concentration and number accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-18-071, title: "Temperature and viscosity dependence in scattering methods", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-18-072, title: "Differential mobility analyser sizing verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-18-072, title: "Differential mobility analyzer sizing verification", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-18-073, title: "Sample preparation, dispersion and aggregation effects", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-18-074, title: "Adjustment of a nanoparticle measuring instrument, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-18-075, title: "Uncertainty budget for a nanoparticle measuring instrument calibration", kind: skill, levelCeiling: 4, status: draft }

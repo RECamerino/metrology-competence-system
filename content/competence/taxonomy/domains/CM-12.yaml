@@ -73,7 +73,7 @@ domains:
         title: Operational Workflow
         status: draft
         elements:
-          - { id: CM-12-020, title: "Job intake, scheduling and prioritisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-12-020, title: "Job intake, scheduling and prioritization", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-12-021, title: "Item receipt, identification and condition recording", kind: skill, levelCeiling: 3, status: draft }
           - { id: CM-12-022, title: "Work in progress tracking and turnaround", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-12-023, title: "Capacity planning and bottleneck management", kind: judgment, levelCeiling: 5, status: draft }
@@ -105,6 +105,6 @@ domains:
           - { id: CM-12-036, title: "Thermal effects of the operator on the measurement", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-12-037, title: "Setup, alignment and seating of artefacts", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-12-038, title: "Repeatable technique and eliminating operator-dependent variation", kind: skill, levelCeiling: 5, status: draft }
-          - { id: CM-12-039, title: "Recognising when something is wrong before the numbers say so", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-12-039, title: "Recognizing when something is wrong before the numbers say so", kind: judgment, levelCeiling: 3, status: draft }
           - { id: CM-12-040, title: "Contemporaneous recording and notebook discipline", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-12-041, title: "Housekeeping as a metrological control", kind: skill, levelCeiling: 3, status: draft }

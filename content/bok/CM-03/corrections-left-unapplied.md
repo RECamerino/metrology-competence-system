@@ -5,7 +5,7 @@ subjects:
   - CM-03
 status: draft
 summary: >-
-  The Guide assumes a result has been corrected for every recognised
+  The Guide assumes a result has been corrected for every recognized
   significant systematic effect, and most of uncertainty evaluation is written
   on that assumption. Real laboratories sometimes do not correct — because the
   correction varies across a range and only one figure can be quoted, or
@@ -18,7 +18,7 @@ sections:
   - id: s01
     heading: The default, and why the rest of the method depends on it
     covers: >-
-      That a recognised significant systematic effect is quantified and
+      That a recognized significant systematic effect is quantified and
       compensated by a correction, that the expectation of the residual error
       is then zero, and why almost every later step assumes this has been done.
   - id: s02
@@ -103,14 +103,14 @@ citations:
   - source: JCGM-100-2008
     clause: "3.2.3"
     relevance: >-
-      That a recognised systematic effect is quantified and compensated by a
+      That a recognized systematic effect is quantified and compensated by a
       correction or correction factor, and that the expectation of the error
       arising from it is then zero. The baseline s01 describes.
   - source: JCGM-100-2008
     clause: "3.2.4"
     relevance: >-
       The stated assumption that the result has been corrected for all
-      recognised significant systematic effects. Its second note is the pointer
+      recognized significant systematic effects. Its second note is the pointer
       to the two places the unapplied case is treated, and is why this article
       exists.
   - source: JCGM-100-2008
@@ -163,14 +163,14 @@ authoring:
 ---
 
 Almost everything written about uncertainty evaluation assumes the result has
-already been corrected for every recognised significant systematic effect. The
+already been corrected for every recognized significant systematic effect. The
 assumption is stated once, early, and then relied on throughout. Laboratories
 do not always meet it, and the interesting question is what happens to the
 uncertainty statement when they do not.
 
 ## The default, and why the rest of the method depends on it {#s01}
 
-A systematic effect arising from a recognised influence quantity can be
+A systematic effect arising from a recognized influence quantity can be
 quantified. Where it is significant relative to the accuracy the measurement
 requires, a correction or correction factor is applied to compensate for it,
 and after correction the expectation of the error arising from that effect is
@@ -186,7 +186,7 @@ displaced to one side of it.
 
 Correcting is also not optional in the sense a reader might assume from how
 briefly it is stated. The Guide assumes both that the result has been corrected
-for all recognised significant systematic effects, and that every effort has
+for all recognized significant systematic effects, and that every effort has
 been made to identify such effects in the first place. The two obligations are
 separate: an effect nobody looked for is a completeness failure, treated in
 `BOK-0004`, while an effect found, quantified and then not applied is this

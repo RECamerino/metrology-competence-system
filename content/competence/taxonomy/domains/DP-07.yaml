@@ -36,7 +36,7 @@ domains:
           - { id: DP-07-056, title: "Density, temperature and pressure correction", kind: skill, levelCeiling: 3, status: draft }
           - { id: DP-07-057, title: "Air or gas entrainment in a liquid line", kind: skill, levelCeiling: 3, status: draft }
           - { id: DP-07-058, title: "Pulsation and its effect on a flow reading", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: DP-07-059, title: "Totalisers, rate and the difference between them", kind: knowledge, levelCeiling: 2, status: draft }
+          - { id: DP-07-059, title: "Totalizers, rate and the difference between them", kind: knowledge, levelCeiling: 2, status: draft }
           - { id: DP-07-060, title: "Isolating, venting and safe work on a flow line", kind: skill, levelCeiling: 3, status: draft }
           - { id: DP-07-061, title: "Recording a flow result with its conditions", kind: skill, levelCeiling: 3, status: draft }
 
@@ -100,7 +100,7 @@ domains:
           - { id: DP-07-039, title: "Diagnostics and self-checking flow meters", kind: knowledge, levelCeiling: 4, status: draft }
 
       - id: DP-07-A05
-        title: Custody Transfer and Specialised Flow
+        title: Custody Transfer and Specialized Flow
         status: draft
         elements:
           - { id: DP-07-040, title: "Custody transfer measurement and its commercial stakes", kind: knowledge, levelCeiling: 4, status: draft }

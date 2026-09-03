@@ -118,7 +118,7 @@ the shape reliably because the shape is what it has seen.
 Whether that particular clause exists, and whether it says the thing, are
 different questions, and nothing in producing well-formed text answers them.
 
-The practical consequences are the ones to internalise:
+The practical consequences are the ones to internalize:
 
 - **A fabricated reference is not garbled.** It is formatted correctly, sits in
   the right numeric range, has a subject that fits the surrounding argument,
@@ -173,7 +173,7 @@ short of reading the clause passes it. Someone verifying the reference confirms
 it resolves and moves on, and the confirmation feels like verification while
 having tested nothing about the claim.
 
-It arises in recognisable forms:
+It arises in recognizable forms:
 
 - **A clause about a neighbouring subject.** The reference points at the
   requirement to identify uncertainty contributions and is cited for how to

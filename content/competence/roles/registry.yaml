@@ -21,7 +21,7 @@
 #
 # `authorities` records what a role is commonly PERMITTED to do. It is recorded
 # separately from competence on purpose: a person may understand a method
-# thoroughly and still not be authorised to sign for it. Nothing in this file
+# thoroughly and still not be authorized to sign for it. Nothing in this file
 # grants anyone anything.
 #
 # `roleType` says what KIND of thing each entry is, because this file listed
@@ -37,7 +37,7 @@
 # their occupational competence. Gap analysis reported shortfalls against it as
 # competence gaps, which invites reading "close these gaps" as the route to
 # signatory status. It is not: the authority is granted by a laboratory,
-# recognised at that laboratory for that scope, and ends on departure.
+# recognized at that laboratory for that scope, and ends on departure.
 #
 # TWO CALLS WORTH SEEING. technical-assessor carries real authority — it can
 # recommend withdrawal of an accreditation — and is classified occupational
@@ -72,7 +72,7 @@ roles:
     summary: >-
       Works unsupervised across a broader instrument set, including
       non-routine cases that the procedure does not fully cover. Applies
-      existing uncertainty budgets, recognises when one does not fit, and
+      existing uncertainty budgets, recognizes when one does not fit, and
       escalates rather than improvising.
     typicalScope: Multiple instrument families within one or two disciplines.
     authorities:
@@ -158,7 +158,7 @@ roles:
       - Acceptance of a laboratory's measurement capability statements
     notes: >-
       Added 2026-09-03. This role was missing and its absence was not neutral:
-      NCSLI LM-13 (2012) and LM-14 (2010) both organise the profession into
+      NCSLI LM-13 (2012) and LM-14 (2010) both organize the profession into
       three job families — Calibration Technician, Calibration Engineer,
       Metrologist — and LM-14's benchmarking table counts Metrologist,
       Associate Metrologist and Senior Metrologist as distinct positions. A
@@ -182,12 +182,12 @@ roles:
     seniority: 7
     summary: >-
       Develops new measurement capability rather than applying existing
-      capability. Realises or maintains standards, characterises novel
+      capability. Realizes or maintains standards, characterizes novel
       artefacts, and publishes. Typically found at a national metrology
       institute, a primary standards laboratory, or a research group.
     typicalScope: A measurement capability, often at national level.
     authorities:
-      - Approval of primary standard realisations
+      - Approval of primary standard realizations
     notes: >-
       The role most likely to work in elements where the field's own position
       is still contested, which is where L5 anchors actually apply.
@@ -261,7 +261,7 @@ roles:
       The type case for competence versus authorization. The competence this
       role requires is portable and travels with the person; the signatory
       authority does not, because the laboratory granted it and the
-      accreditation body recognised it AT THAT LABORATORY, FOR THAT SCOPE.
+      accreditation body recognized it AT THAT LABORATORY, FOR THAT SCOPE.
       See CM-11-A05 and docs/00-context.md.
 
   # -- Assessment -----------------------------------------------------------

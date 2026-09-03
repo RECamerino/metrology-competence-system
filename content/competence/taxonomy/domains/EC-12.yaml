@@ -12,13 +12,13 @@ domains:
     status: draft
     summary: >-
       Calibrating and performance-verifying medical devices, where the
-      measurand is a patient parameter, the analyser simulates a
+      measurand is a patient parameter, the analyzer simulates a
       physiology, and the acceptance criteria come from a clinical
       standard rather than a manufacturer's specification. Scope is the
       whole hospital inventory, not only what a laboratory receives on a
       bench — hence imaging systems, operating tables and in-situ safety
       testing. Boundaries: the measurement science is DP-17; calibrating
-      the safety analyser is EC-01, performing the test on a device is
+      the safety analyzer is EC-01, performing the test on a device is
       EC-12-A10.
 
     competencyAreas:
@@ -31,7 +31,7 @@ domains:
           each parameter has its own standard and its own failure mode.
         elements:
           - { id: EC-12-001, title: "Receiving inspection and functional check of a patient monitor", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-002, title: "Calibration configuration and stabilisation for a patient monitor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-002, title: "Calibration configuration and stabilization for a patient monitor", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-12-003, title: "Selecting the standards and fixturing for a patient monitor calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-004, title: "ECG amplitude, rate and waveform verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-005, title: "Non-invasive blood pressure accuracy and cuff behaviour", kind: skill, levelCeiling: 4, status: draft }
@@ -53,7 +53,7 @@ domains:
           bolus behaviour matter as much as steady-state accuracy.
         elements:
           - { id: EC-12-015, title: "Receiving inspection and functional check of an infusion device", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-016, title: "Calibration configuration and stabilisation for an infusion device", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-016, title: "Calibration configuration and stabilization for an infusion device", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-12-017, title: "Selecting the standards and fixturing for an infusion device calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-018, title: "Flow rate accuracy over the delivery range", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-019, title: "Delivered volume accuracy over a stated period", kind: skill, levelCeiling: 4, status: draft }
@@ -75,11 +75,11 @@ domains:
           part of the specification.
         elements:
           - { id: EC-12-028, title: "Receiving inspection and functional check of a defibrillator or electrosurgical unit", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-029, title: "Calibration configuration and stabilisation for a defibrillator or electrosurgical unit", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-029, title: "Calibration configuration and stabilization for a defibrillator or electrosurgical unit", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-12-030, title: "Selecting the standards and fixturing for a defibrillator or electrosurgical unit calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-031, title: "Delivered energy accuracy into a stated load", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-032, title: "Waveform shape, duration and peak current", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-12-033, title: "Charge time and synchronised discharge timing", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-033, title: "Charge time and synchronized discharge timing", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-034, title: "Pacing output amplitude, rate and pulse width", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-035, title: "Electrosurgical output power against load resistance", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-036, title: "Leakage current and patient isolation verification", kind: skill, levelCeiling: 4, status: draft }
@@ -97,7 +97,7 @@ domains:
           composition and the test lung compliance change the result.
         elements:
           - { id: EC-12-042, title: "Receiving inspection and functional check of a ventilator", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-043, title: "Calibration configuration and stabilisation for a ventilator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-043, title: "Calibration configuration and stabilization for a ventilator", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-12-044, title: "Selecting the standards and fixturing for a ventilator calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-045, title: "Delivered tidal volume accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-046, title: "Airway pressure accuracy: peak, plateau and PEEP", kind: skill, levelCeiling: 4, status: draft }
@@ -106,7 +106,7 @@ domains:
           - { id: EC-12-049, title: "Flow measurement and gas composition correction", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-050, title: "Test lung compliance and resistance settings", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-051, title: "Alarm verification: disconnection, pressure and apnoea", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-12-052, title: "Anaesthetic gas monitor and vaporiser verification", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-052, title: "Anaesthetic gas monitor and vaporizer verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-053, title: "Adjustment of a ventilator, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-054, title: "Uncertainty budget for a ventilator calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-055, title: "Conformity statement for a ventilator against its specification", kind: judgment, levelCeiling: 4, status: draft }
@@ -132,12 +132,12 @@ domains:
         # diagnostic X-ray SYSTEM QA is a qualified medical physicist's
         # regulated activity rather than a calibration function's, so this area
         # may be claiming a scope the pack should not hold. That would be a
-        # deprecate-and-supersede of the ionising half, not a summary edit, and
+        # deprecate-and-supersede of the ionizing half, not a summary edit, and
         # it needs a decision rather than an assumption. The ultrasound elements
         # are unaffected either way.
         elements:
           - { id: EC-12-056, title: "Receiving inspection and functional check of imaging equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-057, title: "Calibration configuration and stabilisation for imaging equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-057, title: "Calibration configuration and stabilization for imaging equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-12-058, title: "Selecting the standards and fixturing for imaging equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-059, title: "Tube output, kVp and exposure time verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-060, title: "Half value layer and beam quality determination", kind: skill, levelCeiling: 4, status: draft }
@@ -159,7 +159,7 @@ domains:
           an error reaches the patient's blood directly.
         elements:
           - { id: EC-12-070, title: "Receiving inspection and functional check of a dialysis machine", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-071, title: "Calibration configuration and stabilisation for a dialysis machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-071, title: "Calibration configuration and stabilization for a dialysis machine", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-12-072, title: "Selecting the standards and fixturing for a dialysis machine calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-073, title: "Dialysate conductivity and composition verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-074, title: "Dialysate temperature accuracy and alarm limits", kind: skill, levelCeiling: 4, status: draft }
@@ -173,16 +173,16 @@ domains:
           - { id: EC-12-082, title: "Conformity statement for a dialysis machine against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-12-A07
-        title: Steriliser and Decontamination Equipment Verification
+        title: Sterilizer and Decontamination Equipment Verification
         status: draft
         summary: >-
           Autoclaves and washer-disinfectors verified for the
           temperature-time-pressure condition the process is validated
           against.
         elements:
-          - { id: EC-12-083, title: "Receiving inspection and functional check of a steriliser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-084, title: "Calibration configuration and stabilisation for a steriliser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-085, title: "Selecting the standards and fixturing for a steriliser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-083, title: "Receiving inspection and functional check of a sterilizer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-084, title: "Calibration configuration and stabilization for a sterilizer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-085, title: "Selecting the standards and fixturing for a sterilizer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-086, title: "Chamber temperature uniformity during the hold period", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-087, title: "Pressure and saturated steam relationship verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-088, title: "Hold time and cycle timing accuracy", kind: skill, levelCeiling: 4, status: draft }
@@ -190,21 +190,21 @@ domains:
           - { id: EC-12-090, title: "Air removal and vacuum leak rate testing", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-091, title: "Washer-disinfector temperature and A0 verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-092, title: "Chart, printout and data logger agreement", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-093, title: "Adjustment of a steriliser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-12-094, title: "Uncertainty budget for a steriliser calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-12-095, title: "Conformity statement for a steriliser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-093, title: "Adjustment of a sterilizer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-094, title: "Uncertainty budget for a sterilizer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-095, title: "Conformity statement for a sterilizer against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-12-A08
-        title: Clinical Laboratory Analyser Verification
+        title: Clinical Laboratory Analyzer Verification
         status: draft
         summary: >-
-          Analysers whose result is a patient value, verified with
+          Analyzers whose result is a patient value, verified with
           controls and calibrators against the method's own acceptance
           criteria.
         elements:
-          - { id: EC-12-096, title: "Receiving inspection and functional check of a clinical analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-097, title: "Calibration configuration and stabilisation for a clinical analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-098, title: "Selecting the standards and fixturing for a clinical analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-096, title: "Receiving inspection and functional check of a clinical analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-097, title: "Calibration configuration and stabilization for a clinical analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-098, title: "Selecting the standards and fixturing for a clinical analyzer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-099, title: "Calibrator and control material traceability", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-100, title: "Analytical accuracy and bias against reference values", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-101, title: "Precision, repeatability and reproducibility verification", kind: skill, levelCeiling: 4, status: draft }
@@ -213,9 +213,9 @@ domains:
           - { id: EC-12-104, title: "Incubation temperature and timing verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-105, title: "Linearity and reportable range verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-106, title: "Point-of-care device verification against a laboratory method", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-12-107, title: "Adjustment of a clinical analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-12-108, title: "Uncertainty budget for a clinical analyser calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-12-109, title: "Conformity statement for a clinical analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-107, title: "Adjustment of a clinical analyzer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-12-108, title: "Uncertainty budget for a clinical analyzer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-109, title: "Conformity statement for a clinical analyzer against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-12-A09
         title: Surgical and Theatre Equipment Verification
@@ -243,7 +243,7 @@ domains:
         # the area by device family — stays available and is not done here.
         elements:
           - { id: EC-12-110, title: "Receiving inspection and functional check of theatre equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-111, title: "Calibration configuration and stabilisation for theatre equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-12-111, title: "Calibration configuration and stabilization for theatre equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-12-112, title: "Selecting the standards and fixturing for theatre equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-113, title: "Insufflator pressure and flow accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-114, title: "Suction and vacuum regulator accuracy", kind: skill, levelCeiling: 4, status: draft }
@@ -267,7 +267,7 @@ domains:
       #
       # Boundary, stated because two neighbours are close. EC-01 has an
       # Electrical Safety and Hipot Tester Calibration area: that is calibrating
-      # the ANALYSER, one rung up the traceability chain. This area is
+      # the ANALYZER, one rung up the traceability chain. This area is
       # performing the test on the device in front of you. DP-17-051 carries the
       # same subject as foundational KNOWLEDGE at L3 — explanation, not
       # performance — and cannot bear a performance attestation.
@@ -292,7 +292,7 @@ domains:
           deciding what its result means. Protective earth continuity,
           the three leakage currents and the applied-part discrimination
           that sets their limits, in normal and single-fault condition.
-          Boundary: calibrating the safety analyser is EC-01; this is
+          Boundary: calibrating the safety analyzer is EC-01; this is
           using one on a device. The competence this area exists for is
           the release decision, not the reading.
         elements:
@@ -306,7 +306,7 @@ domains:
           - { id: EC-12-130, title: "Mains voltage on the applied part, and when that test applies", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-131, title: "Insulation resistance and dielectric strength on a medical device", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-132, title: "Receiving inspection and functional check before a safety test", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-133, title: "Selecting the analyser, leads and fixturing for the device under test", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-133, title: "Selecting the analyzer, leads and fixturing for the device under test", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-134, title: "Selecting the limit set: standard edition, device class and applied-part type", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-135, title: "Uncertainty of a leakage current measurement", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-136, title: "Conformity statement for an electrical safety test against its limit set", kind: judgment, levelCeiling: 4, status: draft }
@@ -366,7 +366,7 @@ domains:
           - { id: EC-12-152, title: "Probe-fault, power-fail and airflow alarm verification", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-12-153, title: "Reconciling a skin-mode and air-mode disagreement, and the fitness decision", kind: judgment, levelCeiling: 5, status: draft }
           - { id: EC-12-154, title: "Receiving inspection and functional check of infant thermal equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-155, title: "Calibration configuration and stabilisation for infant thermal equipment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-155, title: "Calibration configuration and stabilization for infant thermal equipment", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-156, title: "Selecting the standards and fixturing for infant thermal equipment", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-157, title: "Adjustment of infant thermal equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-158, title: "Uncertainty budget for infant thermal equipment calibration", kind: skill, levelCeiling: 4, status: draft }
@@ -389,7 +389,7 @@ domains:
           - { id: EC-12-163, title: "Irradiance decay over lamp life and the replacement criterion", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-164, title: "Radiometer bandpass matching and spectral mismatch correction", kind: judgment, levelCeiling: 5, status: draft }
           - { id: EC-12-165, title: "Receiving inspection and functional check of phototherapy equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-12-166, title: "Calibration configuration and stabilisation for phototherapy equipment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-12-166, title: "Calibration configuration and stabilization for phototherapy equipment", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-167, title: "Selecting the standards and fixturing for phototherapy equipment", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-12-168, title: "Adjustment of phototherapy equipment, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-12-169, title: "Uncertainty budget for phototherapy equipment calibration", kind: skill, levelCeiling: 4, status: draft }

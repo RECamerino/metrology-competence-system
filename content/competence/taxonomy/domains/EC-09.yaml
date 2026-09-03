@@ -27,7 +27,7 @@ domains:
           condition matter more than the meter.
         elements:
           - { id: EC-09-001, title: "Receiving inspection and functional check of a pH meter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-002, title: "Calibration configuration and stabilisation for a pH meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-002, title: "Calibration configuration and stabilization for a pH meter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-003, title: "Selecting the standards and fixturing for a pH meter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-09-004, title: "Slope and offset determination from buffer solutions", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-005, title: "Buffer selection, bracketing and traceability", kind: skill, levelCeiling: 4, status: draft }
@@ -45,15 +45,15 @@ domains:
         status: draft
         summary: >-
           Cell constant determination against reference solutions, with
-          temperature and polarisation as the recurring problems.
+          temperature and polarization as the recurring problems.
         elements:
           - { id: EC-09-014, title: "Receiving inspection and functional check of a conductivity meter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-015, title: "Calibration configuration and stabilisation for a conductivity meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-015, title: "Calibration configuration and stabilization for a conductivity meter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-016, title: "Selecting the standards and fixturing for a conductivity meter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-09-017, title: "Cell constant determination against reference solutions", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-018, title: "Temperature compensation and reference temperature", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-019, title: "Range and decade linearity", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-09-020, title: "Polarisation and cell geometry effects", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: EC-09-020, title: "Polarization and cell geometry effects", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: EC-09-021, title: "Resistivity and TDS derived-value verification", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-022, title: "Dissolved oxygen and ORP instrument verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-023, title: "Adjustment of a conductivity meter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
@@ -61,15 +61,15 @@ domains:
           - { id: EC-09-025, title: "Conformity statement for a conductivity meter against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-09-A03
-        title: Gas Analyser and Detector Calibration
+        title: Gas Analyzer and Detector Calibration
         status: draft
         summary: >-
           Span gas and zero gas, where the delivery system and the
-          cross-sensitivity are as much the calibration as the analyser.
+          cross-sensitivity are as much the calibration as the analyzer.
         elements:
-          - { id: EC-09-026, title: "Receiving inspection and functional check of a gas analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-027, title: "Calibration configuration and stabilisation for a gas analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-028, title: "Selecting the standards and fixturing for a gas analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-026, title: "Receiving inspection and functional check of a gas analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-027, title: "Calibration configuration and stabilization for a gas analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-028, title: "Selecting the standards and fixturing for a gas analyzer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-09-029, title: "Zero and span calibration against certified gas mixtures", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-030, title: "Linearity across the measuring range", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-031, title: "Cross-sensitivity and interference from other species", kind: skill, levelCeiling: 4, status: draft }
@@ -78,9 +78,9 @@ domains:
           - { id: EC-09-034, title: "Bump testing versus full calibration", kind: judgment, levelCeiling: 3, status: draft }
           - { id: EC-09-035, title: "Portable gas detector and alarm threshold verification", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-036, title: "Sensor ageing and end-of-life behaviour", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-09-037, title: "Adjustment of a gas analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-09-038, title: "Uncertainty budget for a gas analyser calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-09-039, title: "Conformity statement for a gas analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-037, title: "Adjustment of a gas analyzer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-038, title: "Uncertainty budget for a gas analyzer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-039, title: "Conformity statement for a gas analyzer against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-09-A04
         title: Chromatograph and Analytical Separation Instrument Calibration
@@ -90,7 +90,7 @@ domains:
           and the injector drift independently of the detector.
         elements:
           - { id: EC-09-040, title: "Receiving inspection and functional check of a chromatograph", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-041, title: "Calibration configuration and stabilisation for a chromatograph", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-041, title: "Calibration configuration and stabilization for a chromatograph", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-042, title: "Selecting the standards and fixturing for a chromatograph calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-09-043, title: "Detector response calibration against standards", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-044, title: "Retention time repeatability and drift", kind: skill, levelCeiling: 4, status: draft }
@@ -112,7 +112,7 @@ domains:
           chemical quantity.
         elements:
           - { id: EC-09-053, title: "Receiving inspection and functional check of sample preparation equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-054, title: "Calibration configuration and stabilisation for sample preparation equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-054, title: "Calibration configuration and stabilization for sample preparation equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-055, title: "Selecting the standards and fixturing for sample preparation equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-09-056, title: "Centrifuge speed and timer verification", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-057, title: "Centrifuge temperature and rotor imbalance checks", kind: skill, levelCeiling: 3, status: draft }
@@ -135,7 +135,7 @@ domains:
           a standard rather than a physical quantity.
         elements:
           - { id: EC-09-066, title: "Receiving inspection and functional check of a fluid colour measuring instrument", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-067, title: "Calibration configuration and stabilisation for a fluid colour measuring instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-067, title: "Calibration configuration and stabilization for a fluid colour measuring instrument", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-068, title: "Selecting the standards and fixturing for a fluid colour measuring instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-09-069, title: "Colour scale determination: Gardner, Saybolt, Hazen and Lovibond", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-070, title: "Path length and cell verification for a colour measurement", kind: skill, levelCeiling: 4, status: draft }
@@ -151,7 +151,7 @@ domains:
           - { id: EC-09-080, title: "Conformity statement for a fluid colour measuring instrument against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-09-A07
-        title: Titrator and Automated Analyser Calibration
+        title: Titrator and Automated Analyzer Calibration
         status: draft
         summary: >-
           Dispensed volume, endpoint detection and the electrode
@@ -159,12 +159,12 @@ domains:
           independently.
         elements:
           - { id: EC-09-081, title: "Receiving inspection and functional check of an automated titrator", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-082, title: "Calibration configuration and stabilisation for an automated titrator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-082, title: "Calibration configuration and stabilization for an automated titrator", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-083, title: "Selecting the standards and fixturing for an automated titrator calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-09-084, title: "Burette dispensed volume accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-085, title: "Endpoint detection and inflection determination", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-086, title: "Electrode calibration within the titration system", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-09-087, title: "Titrant standardisation and its traceability", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-087, title: "Titrant standardization and its traceability", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-088, title: "Stirring, dosing rate and equilibration time", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-089, title: "Karl Fischer titration cell and drift determination", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-090, title: "Blank determination and its subtraction", kind: skill, levelCeiling: 4, status: draft }
@@ -173,27 +173,27 @@ domains:
           - { id: EC-09-093, title: "Conformity statement for an automated titrator against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-09-A08
-        title: Moisture and Water Content Analyser Calibration
+        title: Moisture and Water Content Analyzer Calibration
         status: draft
         summary: >-
           Loss-on-drying, Karl Fischer and dew-point methods, calibrated
           against reference materials and against each other.
         elements:
-          - { id: EC-09-094, title: "Receiving inspection and functional check of a moisture analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-095, title: "Calibration configuration and stabilisation for a moisture analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-096, title: "Selecting the standards and fixturing for a moisture analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-094, title: "Receiving inspection and functional check of a moisture analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-095, title: "Calibration configuration and stabilization for a moisture analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-096, title: "Selecting the standards and fixturing for a moisture analyzer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-09-097, title: "Moisture content against certified reference materials", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-09-098, title: "Balance and heating element verification in a loss-on-drying analyser", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-098, title: "Balance and heating element verification in a loss-on-drying analyzer", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-099, title: "Temperature programme and endpoint criteria", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-100, title: "Karl Fischer coulometric and volumetric verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-101, title: "Trace moisture in gas by dew point", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-102, title: "Sample size, homogeneity and preparation effects", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-09-103, title: "Adjustment of a moisture analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-09-104, title: "Uncertainty budget for a moisture analyser calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-09-105, title: "Conformity statement for a moisture analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-103, title: "Adjustment of a moisture analyzer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-104, title: "Uncertainty budget for a moisture analyzer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-105, title: "Conformity statement for a moisture analyzer against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-09-A09
-        title: Particle Counter and Size Analyser Calibration
+        title: Particle Counter and Size Analyzer Calibration
         status: draft
         summary: >-
           Counting efficiency and size accuracy against reference
@@ -201,7 +201,7 @@ domains:
           errors.
         elements:
           - { id: EC-09-106, title: "Receiving inspection and functional check of a particle counter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-107, title: "Calibration configuration and stabilisation for a particle counter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-107, title: "Calibration configuration and stabilization for a particle counter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-108, title: "Selecting the standards and fixturing for a particle counter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-09-109, title: "Size accuracy against certified reference particles", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-110, title: "Counting efficiency and the 50 percent threshold", kind: skill, levelCeiling: 4, status: draft }
@@ -223,7 +223,7 @@ domains:
           apparatus geometry.
         elements:
           - { id: EC-09-119, title: "Receiving inspection and functional check of physical property test apparatus", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-120, title: "Calibration configuration and stabilisation for physical property test apparatus", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-120, title: "Calibration configuration and stabilization for physical property test apparatus", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-121, title: "Selecting the standards and fixturing for physical property test apparatus calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-09-122, title: "Temperature measurement accuracy within the apparatus", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-123, title: "Heating rate control and its verification", kind: skill, levelCeiling: 4, status: draft }
@@ -236,25 +236,25 @@ domains:
           - { id: EC-09-130, title: "Conformity statement for physical property test apparatus against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-09-A11
-        title: Water Purity and Online Process Analyser Calibration
+        title: Water Purity and Online Process Analyzer Calibration
         status: draft
         summary: >-
           TOC, resistivity and continuous monitoring instruments,
           calibrated in place where the sample line is part of the
           measurement.
         elements:
-          - { id: EC-09-131, title: "Receiving inspection and functional check of an online process analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-132, title: "Calibration configuration and stabilisation for an online process analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-133, title: "Selecting the standards and fixturing for an online process analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-09-134, title: "TOC analyser response against reference standards", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-131, title: "Receiving inspection and functional check of an online process analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-132, title: "Calibration configuration and stabilization for an online process analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-133, title: "Selecting the standards and fixturing for an online process analyzer calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-134, title: "TOC analyzer response against reference standards", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-135, title: "Resistivity and conductivity cell verification at high purity", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-136, title: "System suitability and oxidation efficiency verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-137, title: "Sample line lag, carryover and representativeness", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-09-138, title: "Online versus grab sample agreement", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-09-139, title: "Continuous monitor drift and validation frequency", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-09-140, title: "Adjustment of an online process analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-09-141, title: "Uncertainty budget for an online process analyser calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-09-142, title: "Conformity statement for an online process analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-140, title: "Adjustment of an online process analyzer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-09-141, title: "Uncertainty budget for an online process analyzer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-09-142, title: "Conformity statement for an online process analyzer against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-09-A12
         title: Primary Reference Material Preparation and Certification
@@ -265,12 +265,12 @@ domains:
           stability are as much the certification as the assigned value.
         elements:
           - { id: EC-09-143, title: "Receiving inspection and functional check of a reference material", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-144, title: "Calibration configuration and stabilisation for a reference material", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-144, title: "Calibration configuration and stabilization for a reference material", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-145, title: "Selecting the standards and fixturing for a reference material calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-09-146, title: "Gravimetric preparation and its traceability to mass", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-09-147, title: "Homogeneity assessment and between-bottle variation", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-09-148, title: "Stability study design: long-term and transport", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-09-149, title: "Characterisation by primary method of measurement", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-09-149, title: "Characterization by primary method of measurement", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-09-150, title: "Assigned value determination and uncertainty statement", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-09-151, title: "Commutability assessment for a matrix material", kind: judgment, levelCeiling: 5, status: draft }
           - { id: EC-09-152, title: "Packaging, storage and shelf-life assignment", kind: skill, levelCeiling: 4, status: draft }
@@ -287,7 +287,7 @@ domains:
           gravimetry.
         elements:
           - { id: EC-09-156, title: "Receiving inspection and functional check of a gravimetric gas mixture", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-09-157, title: "Calibration configuration and stabilisation for a gravimetric gas mixture", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-09-157, title: "Calibration configuration and stabilization for a gravimetric gas mixture", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-09-158, title: "Selecting the standards and fixturing for a gravimetric gas mixture calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-09-159, title: "Gravimetric preparation and component mass determination", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-09-160, title: "Cylinder treatment, passivation and pre-conditioning", kind: skill, levelCeiling: 5, status: draft }

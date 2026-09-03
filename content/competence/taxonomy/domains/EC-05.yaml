@@ -27,7 +27,7 @@ domains:
           sweep never shows.
         elements:
           - { id: EC-05-001, title: "Receiving inspection and functional check of a pressure gauge", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-002, title: "Calibration configuration and stabilisation for a pressure gauge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-002, title: "Calibration configuration and stabilization for a pressure gauge", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-003, title: "Selecting the standards and fixturing for a pressure gauge calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-004, title: "Indication error in increasing and decreasing pressure", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-005, title: "Hysteresis and its reporting", kind: skill, levelCeiling: 4, status: draft }
@@ -50,7 +50,7 @@ domains:
           and local gravity all enter the generated pressure.
         elements:
           - { id: EC-05-016, title: "Receiving inspection and functional check of a deadweight tester", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-017, title: "Calibration configuration and stabilisation for a deadweight tester", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-017, title: "Calibration configuration and stabilization for a deadweight tester", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-018, title: "Selecting the standards and fixturing for a deadweight tester calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-019, title: "Effective area determination and its uncertainty", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-05-020, title: "Mass set calibration and its traceability", kind: skill, levelCeiling: 4, status: draft }
@@ -72,7 +72,7 @@ domains:
           internal sensor are separate questions.
         elements:
           - { id: EC-05-030, title: "Receiving inspection and functional check of a pressure controller", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-031, title: "Calibration configuration and stabilisation for a pressure controller", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-031, title: "Calibration configuration and stabilization for a pressure controller", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-032, title: "Selecting the standards and fixturing for a pressure controller calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-033, title: "Generated pressure accuracy across the range", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-034, title: "Control stability and settling at a setpoint", kind: skill, levelCeiling: 4, status: draft }
@@ -93,12 +93,12 @@ domains:
           capacitance standard.
         elements:
           - { id: EC-05-042, title: "Receiving inspection and functional check of a vacuum gauge", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-043, title: "Calibration configuration and stabilisation for a vacuum gauge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-043, title: "Calibration configuration and stabilization for a vacuum gauge", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-044, title: "Selecting the standards and fixturing for a vacuum gauge calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-045, title: "Indication error across pressure decades", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-046, title: "Applying gas species correction in a vacuum gauge calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-047, title: "Pirani, thermocouple and capacitance gauge specifics", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-05-048, title: "Ionisation gauge sensitivity and filament condition", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-048, title: "Ionization gauge sensitivity and filament condition", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-049, title: "Outgassing, pump-down and system cleanliness effects", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-050, title: "Spinning rotor gauge as a transfer standard", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-05-051, title: "Static expansion and continuous flow comparison methods", kind: skill, levelCeiling: 5, status: draft }
@@ -114,7 +114,7 @@ domains:
           fluid density are part of the pressure they indicate.
         elements:
           - { id: EC-05-108, title: "Receiving inspection and functional check of a manometer or barometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-109, title: "Calibration configuration and stabilisation for a manometer or barometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-109, title: "Calibration configuration and stabilization for a manometer or barometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-110, title: "Selecting the standards and fixturing for a manometer or barometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-111, title: "Indication error against a reference pressure", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-112, title: "Local gravity and fluid density corrections", kind: skill, levelCeiling: 4, status: draft }
@@ -136,7 +136,7 @@ domains:
           across it.
         elements:
           - { id: EC-05-121, title: "Receiving inspection and functional check of a leak detector", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-122, title: "Calibration configuration and stabilisation for a leak detector", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-122, title: "Calibration configuration and stabilization for a leak detector", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-123, title: "Selecting the standards and fixturing for a leak detector calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-124, title: "Calibrated leak rate determination and certification", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-05-125, title: "Helium mass spectrometer sensitivity and response", kind: skill, levelCeiling: 4, status: draft }
@@ -157,7 +157,7 @@ domains:
           opening event is transient and the medium changes the result.
         elements:
           - { id: EC-05-134, title: "Receiving inspection and functional check of valve test equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-135, title: "Calibration configuration and stabilisation for valve test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-135, title: "Calibration configuration and stabilization for valve test equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-136, title: "Selecting the standards and fixturing for valve test equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-137, title: "Set pressure indication accuracy on a test bench", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-138, title: "Pop, seat and reseat pressure determination", kind: skill, levelCeiling: 4, status: draft }
@@ -179,7 +179,7 @@ domains:
           instrument.
         elements:
           - { id: EC-05-147, title: "Receiving inspection and functional check of a viscometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-148, title: "Calibration configuration and stabilisation for a viscometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-148, title: "Calibration configuration and stabilization for a viscometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-149, title: "Selecting the standards and fixturing for a viscometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-150, title: "Kinematic viscosity by capillary against reference oils", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-151, title: "Rotational viscometer torque and speed verification", kind: skill, levelCeiling: 4, status: draft }
@@ -201,7 +201,7 @@ domains:
           reading.
         elements:
           - { id: EC-05-160, title: "Receiving inspection and functional check of a level measuring instrument", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-161, title: "Calibration configuration and stabilisation for a level measuring instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-161, title: "Calibration configuration and stabilization for a level measuring instrument", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-162, title: "Selecting the standards and fixturing for a level measuring instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-163, title: "Level indication accuracy against a reference height", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-164, title: "Density and specific gravity dependence of a level reading", kind: skill, levelCeiling: 4, status: draft }
@@ -222,7 +222,7 @@ domains:
           calibrated by comparison at a stated reference temperature.
         elements:
           - { id: EC-05-173, title: "Receiving inspection and functional check of a hydrometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-174, title: "Calibration configuration and stabilisation for a hydrometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-174, title: "Calibration configuration and stabilization for a hydrometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-175, title: "Selecting the standards and fixturing for a hydrometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-176, title: "Scale indication error by comparison or by Cuckow method", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-177, title: "Reference temperature and thermal correction", kind: skill, levelCeiling: 4, status: draft }
@@ -239,18 +239,18 @@ domains:
         status: draft
         summary: >-
           Gravimetric, volumetric and sonic nozzle standards that
-          realise flow from mass or volume and time.
+          realize flow from mass or volume and time.
         elements:
           - { id: EC-05-198, title: "Receiving inspection and functional check of a primary flow standard", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-05-199, title: "Calibration configuration and stabilisation for a primary flow standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-05-199, title: "Calibration configuration and stabilization for a primary flow standard", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-05-200, title: "Selecting the standards and fixturing for a primary flow standard calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-201, title: "Gravimetric flow standard operation and diverter timing", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-05-202, title: "Volumetric prover and pipe prover calibration by water draw", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-05-203, title: "Sonic nozzle characterisation and critical flow function", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-203, title: "Sonic nozzle characterization and critical flow function", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-05-204, title: "Bell prover and piston prover verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-205, title: "Diverter timing error and its determination", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-05-206, title: "Density, temperature and buoyancy corrections in flow realisation", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-05-207, title: "Uncertainty budget for a primary flow realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-05-206, title: "Density, temperature and buoyancy corrections in flow realization", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-05-207, title: "Uncertainty budget for a primary flow realization", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-05-208, title: "Adjustment of a primary flow standard, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-05-209, title: "Uncertainty budget for a primary flow standard calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-05-210, title: "Conformity statement for a primary flow standard against its specification", kind: judgment, levelCeiling: 4, status: draft }

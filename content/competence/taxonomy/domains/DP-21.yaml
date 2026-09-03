@@ -10,7 +10,7 @@ domains:
       resolve elevation change at the centimetre level, which makes the gravity
       potential a quantity a time and frequency laboratory measures — the
       boundary between geodesy and metrology has moved. Boundary: gravimetry
-      serving mass and force realisation is DP-02-A06; GNSS timing is DP-14;
+      serving mass and force realization is DP-02-A06; GNSS timing is DP-14;
       large-volume dimensional work is DP-01-A05.
 
     competencyAreas:
@@ -49,17 +49,17 @@ domains:
         summary: >-
           A coordinate is meaningless without the frame it is expressed in, and
           frames move. The most common failure in applied geodetic work is
-          combining coordinates from different realisations or epochs.
+          combining coordinates from different realizations or epochs.
         elements:
-          - { id: DP-21-001, title: "Terrestrial reference systems and their realisations", kind: knowledge, levelCeiling: 4, status: draft }
-          - { id: DP-21-002, title: "ITRF and its successive realisations", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: DP-21-001, title: "Terrestrial reference systems and their realizations", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-21-002, title: "ITRF and its successive realizations", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: DP-21-003, title: "Datums, epochs and why a coordinate needs both", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: DP-21-004, title: "Plate motion and time-dependent coordinates", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-21-005, title: "Regional and national reference frames", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-21-006, title: "Transformations between frames and their uncertainty", kind: skill, levelCeiling: 5, status: draft }
           - { id: DP-21-007, title: "Celestial reference frames and Earth orientation parameters", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: DP-21-008, title: "Map projections and the distortion they introduce", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: DP-21-009, title: "Errors caused by mixing frames, realisations or epochs", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-21-009, title: "Errors caused by mixing frames, realizations or epochs", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: DP-21-A02
         title: Positioning and Geodetic Networks
@@ -89,7 +89,7 @@ domains:
         elements:
           - { id: DP-21-023, title: "Ellipsoidal, orthometric and normal heights distinguished", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: DP-21-024, title: "Geoid, quasigeoid and reference surfaces", kind: knowledge, levelCeiling: 5, status: draft }
-          - { id: DP-21-025, title: "Vertical datums and their realisation", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-21-025, title: "Vertical datums and their realization", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-21-026, title: "Spirit levelling and its error accumulation", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-21-027, title: "Geopotential numbers and dynamic heights", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: DP-21-028, title: "Tide gauges and mean sea level determination", kind: knowledge, levelCeiling: 4, status: draft }

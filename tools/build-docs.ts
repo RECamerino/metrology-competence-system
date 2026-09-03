@@ -280,11 +280,11 @@ function indexDoc(): string {
     ],
     discipline: [
       '## Discipline packs',
-      'Measurement-discipline depth, organised by the QUANTITY measured. Separately versioned; a role profile selects from these rather than assuming them entire.',
+      'Measurement-discipline depth, organized by the QUANTITY measured. Separately versioned; a role profile selects from these rather than assuming them entire.',
     ],
     equipment: [
       '## Equipment-calibration packs',
-      'Organised by the equipment TYPE that arrives on a bench, because that axis cuts across the quantity one: calibrating an oscilloscope is a single job spanning voltage, timing and bandwidth, and describing it inside any one discipline pack truncates it to the part that fits. This is where the technician works, the engineer designs, and the metrologist reads to judge whether a measurement was sound.',
+      'Organized by the equipment TYPE that arrives on a bench, because that axis cuts across the quantity one: calibrating an oscilloscope is a single job spanning voltage, timing and bandwidth, and describing it inside any one discipline pack truncates it to the part that fits. This is where the technician works, the engineer designs, and the metrologist reads to judge whether a measurement was sound.',
     ],
   };
 
@@ -321,7 +321,7 @@ function indexDoc(): string {
   out.push(
     '**The prefix records where the element was first created and is historical.** ' +
       'The authoritative domain and competency area are fields on the element, so an element can be ' +
-      'reorganised without renaming an ID. IDs are append-only and never change: a credential attesting ' +
+      'reorganized without renaming an ID. IDs are append-only and never change: a credential attesting ' +
       '`CM-03-014` must resolve to the same element permanently, or the person holding it loses their evidence.',
   );
   out.push('');

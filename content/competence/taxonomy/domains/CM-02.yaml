@@ -16,7 +16,7 @@ domains:
         title: VIM Concepts and Terminological Discipline
         status: draft
         summary: >-
-          Using the controlled vocabulary correctly, and recognising when a
+          Using the controlled vocabulary correctly, and recognizing when a
           colleague, a supplier, or a standard is not.
         elements:
           - { id: CM-02-001, title: "Purpose and structure of the VIM", kind: knowledge, levelCeiling: 3, status: draft }
@@ -54,9 +54,9 @@ domains:
         elements:
           - { id: CM-02-019, title: "The seven defining constants", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-02-020, title: "Why the kilogram artefact was abandoned", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: CM-02-021, title: "Realisation of the kilogram: Kibble balance and X-ray crystal density", kind: knowledge, levelCeiling: 5, status: draft }
-          - { id: CM-02-022, title: "Realisation of the ampere from the elementary charge", kind: knowledge, levelCeiling: 4, status: draft }
-          - { id: CM-02-023, title: "Realisation of the kelvin from the Boltzmann constant", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-02-021, title: "Realization of the kilogram: Kibble balance and X-ray crystal density", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: CM-02-022, title: "Realization of the ampere from the elementary charge", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-02-023, title: "Realization of the kelvin from the Boltzmann constant", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-02-024, title: "Mise en pratique documents and their status", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-02-025, title: "Practical consequences of the redefinition for working laboratories", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-02-026, title: "Continuity of dissemination across the redefinition", kind: knowledge, levelCeiling: 3, status: draft }

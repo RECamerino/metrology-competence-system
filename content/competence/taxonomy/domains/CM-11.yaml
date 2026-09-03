@@ -37,7 +37,7 @@ domains:
           - { id: CM-11-012, title: "Witnessing a measurement and what to look for", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-11-013, title: "Vertical audit and traceability of a single result end to end", kind: skill, levelCeiling: 5, status: draft }
           - { id: CM-11-014, title: "Technical assessment of uncertainty budgets and CMCs", kind: skill, levelCeiling: 5, status: draft }
-          - { id: CM-11-015, title: "Recognising a management system that exists only on paper", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-11-015, title: "Recognizing a management system that exists only on paper", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-11-016, title: "Note-taking, traceable findings and the audit trail", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-11-017, title: "Closing meetings and delivering difficult findings", kind: skill, levelCeiling: 4, status: draft }
 
@@ -81,11 +81,11 @@ domains:
           - { id: CM-11-034, title: "What an approved signatory is undertaking", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-11-035, title: "Scope of signatory authority and its limits", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-11-036, title: "Technical review before signature", kind: skill, levelCeiling: 4, status: draft }
-          - { id: CM-11-037, title: "Recognising a result that should not be released", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-11-037, title: "Recognizing a result that should not be released", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-11-038, title: "Refusing to sign and the pressure to sign anyway", kind: judgment, levelCeiling: 5, status: draft }
-          - { id: CM-11-039, title: "Delegation, deputising and continuity of signatory coverage", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-11-039, title: "Delegation, deputizing and continuity of signatory coverage", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-11-040, title: "Becoming an approved signatory: evidence and appointment", kind: knowledge, levelCeiling: 4, status: draft }
-          - { id: CM-11-041, title: "Maintaining signatory competence and periodic reauthorisation", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-11-041, title: "Maintaining signatory competence and periodic reauthorization", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-11-042, title: "Liability, professional responsibility and personal exposure", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: CM-11-A06

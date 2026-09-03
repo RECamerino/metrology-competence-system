@@ -61,7 +61,7 @@ domains:
           - { id: CM-10-012, title: "Structural requirements and defining the laboratory", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-10-013, title: "Personnel competence requirements", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: CM-10-014, title: "Competence records and demonstrating competence", kind: skill, levelCeiling: 4, status: draft }
-          - { id: CM-10-015, title: "Authorisation of personnel for specific activities", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-10-015, title: "Authorization of personnel for specific activities", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-10-016, title: "Facilities and environmental condition requirements", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-10-017, title: "Equipment requirements and metrological traceability obligations", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-10-018, title: "Externally provided products and services", kind: knowledge, levelCeiling: 4, status: draft }

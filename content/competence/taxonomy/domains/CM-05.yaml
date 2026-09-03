@@ -48,7 +48,7 @@ domains:
           - { id: CM-05-003, title: "Sample versus population statistics", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-05-004, title: "Skewness, kurtosis and shape", kind: skill, levelCeiling: 3, status: draft }
           - { id: CM-05-005, title: "Quantiles, order statistics and empirical distributions", kind: skill, levelCeiling: 3, status: draft }
-          - { id: CM-05-006, title: "Summarising data without misleading the reader", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: CM-05-006, title: "Summarizing data without misleading the reader", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: CM-05-A02
         title: Probability and Distributions
@@ -119,7 +119,7 @@ domains:
         title: Design of Experiments
         status: draft
         elements:
-          - { id: CM-05-049, title: "Principles of experimental design: randomisation, replication, blocking", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: CM-05-049, title: "Principles of experimental design: randomization, replication, blocking", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: CM-05-050, title: "Factorial designs", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-05-051, title: "Fractional factorial and screening designs", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-05-052, title: "Response surface methodology", kind: skill, levelCeiling: 5, status: draft }

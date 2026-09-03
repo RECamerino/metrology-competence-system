@@ -27,7 +27,7 @@ domains:
           electrically.
         elements:
           - { id: EC-11-001, title: "Receiving inspection and functional check of a sound level meter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-11-002, title: "Calibration configuration and stabilisation for a sound level meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-002, title: "Calibration configuration and stabilization for a sound level meter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-11-003, title: "Selecting the standards and fixturing for a sound level meter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-004, title: "Acoustic sensitivity at the calibration frequency", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-005, title: "Frequency weighting: A, C and Z response verification", kind: skill, levelCeiling: 4, status: draft }
@@ -51,7 +51,7 @@ domains:
           dependence.
         elements:
           - { id: EC-11-016, title: "Receiving inspection and functional check of an acoustic calibrator", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-11-017, title: "Calibration configuration and stabilisation for an acoustic calibrator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-017, title: "Calibration configuration and stabilization for an acoustic calibrator", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-11-018, title: "Selecting the standards and fixturing for an acoustic calibrator calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-019, title: "Sound pressure level output accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-020, title: "Frequency accuracy of the output", kind: skill, levelCeiling: 4, status: draft }
@@ -71,13 +71,13 @@ domains:
           response that decides what the microphone is fit for.
         elements:
           - { id: EC-11-028, title: "Receiving inspection and functional check of a measurement microphone", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-11-029, title: "Calibration configuration and stabilisation for a measurement microphone", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-029, title: "Calibration configuration and stabilization for a measurement microphone", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-11-030, title: "Selecting the standards and fixturing for a measurement microphone calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-031, title: "Open-circuit sensitivity by comparison", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-032, title: "Primary calibration by reciprocity", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-11-033, title: "Free-field, diffuse-field and pressure response", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-034, title: "Frequency response across the working range", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-11-035, title: "Polarisation voltage and preamplifier loading", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-11-035, title: "Polarization voltage and preamplifier loading", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-036, title: "Environmental corrections for temperature and pressure", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-037, title: "Diaphragm condition, contamination and damage", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-038, title: "Adjustment of a measurement microphone, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
@@ -92,7 +92,7 @@ domains:
           interferometry, where the mounting is part of the transducer.
         elements:
           - { id: EC-11-041, title: "Receiving inspection and functional check of an accelerometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-11-042, title: "Calibration configuration and stabilisation for an accelerometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-042, title: "Calibration configuration and stabilization for an accelerometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-11-043, title: "Selecting the standards and fixturing for an accelerometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-044, title: "Sensitivity at a reference frequency by comparison", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-045, title: "Primary accelerometer calibration by laser interferometry", kind: skill, levelCeiling: 5, status: draft }
@@ -111,11 +111,11 @@ domains:
         status: draft
         summary: >-
           Whole-system verification and the exciters used to do it,
-          characterised for distortion and uniformity as well as
+          characterized for distortion and uniformity as well as
           amplitude.
         elements:
           - { id: EC-11-055, title: "Receiving inspection and functional check of a vibration measuring system", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-11-056, title: "Calibration configuration and stabilisation for a vibration measuring system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-056, title: "Calibration configuration and stabilization for a vibration measuring system", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-11-057, title: "Selecting the standards and fixturing for a vibration measuring system calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-058, title: "System sensitivity and indication error", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-059, title: "Velocity and displacement integration verification", kind: skill, levelCeiling: 4, status: draft }
@@ -136,7 +136,7 @@ domains:
           threshold levels because the result becomes a clinical record.
         elements:
           - { id: EC-11-068, title: "Receiving inspection and functional check of audiometric equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-11-069, title: "Calibration configuration and stabilisation for audiometric equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-069, title: "Calibration configuration and stabilization for audiometric equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-11-070, title: "Selecting the standards and fixturing for audiometric equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-071, title: "Output level accuracy at audiometric frequencies", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-072, title: "Reference equivalent threshold level verification", kind: skill, levelCeiling: 4, status: draft }
@@ -155,11 +155,11 @@ domains:
         status: draft
         summary: >-
           The exciters used to calibrate transducers and to run tests,
-          characterised for distortion, transverse motion and uniformity
+          characterized for distortion, transverse motion and uniformity
           in their own right.
         elements:
           - { id: EC-11-082, title: "Receiving inspection and functional check of a vibration exciter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-11-083, title: "Calibration configuration and stabilisation for a vibration exciter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-083, title: "Calibration configuration and stabilization for a vibration exciter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-11-084, title: "Selecting the standards and fixturing for a vibration exciter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-085, title: "Acceleration amplitude accuracy across frequency", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-086, title: "Total harmonic distortion of the motion", kind: skill, levelCeiling: 4, status: draft }
@@ -182,7 +182,7 @@ domains:
           the instrument.
         elements:
           - { id: EC-11-096, title: "Receiving inspection and functional check of ultrasonic NDT equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-11-097, title: "Calibration configuration and stabilisation for ultrasonic NDT equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-097, title: "Calibration configuration and stabilization for ultrasonic NDT equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-11-098, title: "Selecting the standards and fixturing for ultrasonic NDT equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-099, title: "Timebase linearity and range accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-100, title: "Vertical linearity and gain accuracy", kind: skill, levelCeiling: 4, status: draft }
@@ -204,7 +204,7 @@ domains:
           pairs and no reference microphone at all.
         elements:
           - { id: EC-11-110, title: "Receiving inspection and functional check of a reciprocity calibration apparatus", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-11-111, title: "Calibration configuration and stabilisation for a reciprocity calibration apparatus", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-111, title: "Calibration configuration and stabilization for a reciprocity calibration apparatus", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-11-112, title: "Selecting the standards and fixturing for a reciprocity calibration apparatus calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-113, title: "Coupler selection, volume determination and sealing", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-11-114, title: "Three-microphone reciprocity measurement execution", kind: skill, levelCeiling: 5, status: draft }
@@ -221,12 +221,12 @@ domains:
         title: Primary Vibration Calibration System Operation
         status: draft
         summary: >-
-          Laser interferometric calibration of accelerometers, realising
+          Laser interferometric calibration of accelerometers, realizing
           acceleration from displacement and time rather than by
           comparison.
         elements:
           - { id: EC-11-123, title: "Receiving inspection and functional check of a primary vibration calibration system", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-11-124, title: "Calibration configuration and stabilisation for a primary vibration calibration system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-11-124, title: "Calibration configuration and stabilization for a primary vibration calibration system", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-11-125, title: "Selecting the standards and fixturing for a primary vibration calibration system calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-126, title: "Fringe counting and sine approximation method execution", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-11-127, title: "Minimum point and fringe disappearance method", kind: skill, levelCeiling: 5, status: draft }
@@ -234,7 +234,7 @@ domains:
           - { id: EC-11-129, title: "Exciter distortion and transverse motion limits for primary work", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-11-130, title: "Phase shift determination against frequency", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-11-131, title: "Shock and low-frequency primary calibration", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-11-132, title: "Uncertainty budget for a primary vibration realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-11-132, title: "Uncertainty budget for a primary vibration realization", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-11-133, title: "Adjustment of a primary vibration calibration system, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-11-134, title: "Uncertainty budget for a primary vibration calibration system calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-11-135, title: "Conformity statement for a primary vibration calibration system against its specification", kind: judgment, levelCeiling: 4, status: draft }

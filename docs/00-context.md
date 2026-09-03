@@ -54,7 +54,7 @@ That produces neither thing well:
 - **The lifecycles collide.** Knowledge ages when a standard is revised. Competence expectations age when professional practice moves. One file cannot carry two review triggers.
 - **Publication is all-or-nothing.** The BOK is meant to be public and redistributable; item internals are not, because a rubric naming the defect classes injected into a budget tells a candidate exactly what to look for.
 
-So: `content/bok/` holds articles organised by **subject**, and `content/competence/` holds the taxonomy, elements, items, roles and training. `content/sources/` sits outside both, because both cite it.
+So: `content/bok/` holds articles organized by **subject**, and `content/competence/` holds the taxonomy, elements, items, roles and training. `content/sources/` sits outside both, because both cite it.
 
 **The join is section-level, and that is the whole design.** Articles are sized by subject coherence — one article may serve five elements, one element may draw on three articles. Each article declares stable section ids; each element carries `knowledgeRefs` pointing at the specific sections covering it, and at least one is required.
 
@@ -86,7 +86,7 @@ Once assessment is open-resource, **item design carries the integrity load inste
 
 That is what makes abolishing proctoring coherent rather than lax. Two further reasons:
 
-- **Authority recognition.** A Corporate or Principal Metrologist may not recognise the authority of whoever is available to invigilate. Requiring it creates friction precisely for the senior people the challenge exam exists to serve.
+- **Authority recognition.** A Corporate or Principal Metrologist may not recognize the authority of whoever is available to invigilate. Requiring it creates friction precisely for the senior people the challenge exam exists to serve.
 - **Privacy.** Browser-based proctoring is weak against a determined cheater and creates a significant PII burden that conflicts with the minimal-PII design.
 
 **Consequence, stated honestly:** organizations whose own quality system mandates proctored testing will not find that feature here. They can record their own supervision attestation as an ordinary evidence artifact through the overlay. No proctoring modality enters the core schema.
@@ -166,12 +166,12 @@ Two colleagues at one laboratory writing **"Northfield Calibration"** and **"Nor
 `organizationRef` replaces the string with `{ name, id? }`, and the comparison now runs in three layers with the validator reporting which one decided:
 
 1. **`id`** settles identity. Two organizations are the same iff their identifiers are — this also catches a *rename*, which no amount of name-matching can.
-2. **Normalised `name`**, when no identifier is present: case, punctuation and trailing legal suffixes collapse, so the example above is one organization. Only *trailing* corporate form is stripped, so "Co-ordinate Metrology Services Ltd" keeps its first token.
+2. **Normalized `name`**, when no identifier is present: case, punctuation and trailing legal suffixes collapse, so the example above is one organization. Only *trailing* corporate form is stripped, so "Co-ordinate Metrology Services Ltd" keeps its first token.
 3. **Neither.** A name that identifies nobody — "Independent", "self-employed", "none" — is not an organization. Two signers declaring different flavours of unaffiliated are two unaffiliated people, and counting them as two organizations satisfied the rule while proving nothing at all about separation.
 
 `id` is optional on purpose. Requiring one would mean a signer whose laboratory has never issued anything could not sign, which gates participation behind registration — the barrier this project exists to remove. The cost of that choice is that the comparison is sometimes nominal, and at L5 the validator says so rather than letting a name-matched result look like an identity-matched one.
 
-**The limit, stated because it does not go away.** Normalisation catches the accidental variant and the lazy one. It does not catch an abbreviation, and it does not catch a laboratory that gives its two divisions different names. Only `id` closes that, and only where an identifier exists to be recorded. The rule is stronger than it was and is not absolute; what changed is that a reader can now tell which they are holding.
+**The limit, stated because it does not go away.** Normalization catches the accidental variant and the lazy one. It does not catch an abbreviation, and it does not catch a laboratory that gives its two divisions different names. Only `id` closes that, and only where an identifier exists to be recorded. The rule is stronger than it was and is not absolute; what changed is that a reader can now tell which they are holding.
 
 One case deliberately still passes: an unaffiliated signer **is** outside a named candidate organization. A consultant belonging to nobody is plainly not a member of Northfield, and rejecting that would gate L5 behind employment.
 
@@ -295,7 +295,7 @@ The damage is not theoretical. Every element carries a rating for every role, so
 
 - A roleTarget is the **minimum proficiency required** for that role when the element falls within the person's deployment scope. **Normative**, not descriptive and not aspirational.
 - **It does not imply applicability.** Deployment scope determines applicability; the roleTarget determines the level once applicable.
-- **An element outside scope cannot produce a competence gap.** Not a small one, not a deprioritised one — none.
+- **An element outside scope cannot produce a competence gap.** Not a small one, not a deprioritized one — none.
 - **Scope must be machine-resolvable** from taxonomy and deployment data, which is why `deployment-scope.schema.json` exists and resolves domains, areas and named elements rather than describing scope in prose.
 - Personal aspirations are not roleTargets. Organizational authorization is not a roleTarget.
 
@@ -381,7 +381,7 @@ This is expensive to reverse: every credential already issued is signed with the
 |---|---|---|
 | 8 | ~12 reference roles, all data, fully org-overridable, each classified `occupational` or `authority-overlay` | The shipped set exists so the platform is useful on first run, not because these are the correct roles for anyone in particular. The classification is required because an overlay is a granted permission rather than a job, and listing the two kinds side by side unmarked made gap analysis report authority as competence. |
 | 17 | Full guardrail kit before the model handoff | Frozen schemas, immutable ID registry, authoring playbook, gold reference set, CI gate. See [`handoff-playbook.md`](handoff-playbook.md). |
-| 18 | `git init` locally; public GitHub | Every push is a separate, explicitly authorised action. |
+| 18 | `git init` locally; public GitHub | Every push is a separate, explicitly authorized action. |
 
 ---
 
@@ -415,7 +415,7 @@ So a person can hold verified L4 judgment in CMM task-specific uncertainty and s
 
 The split above is clean in the schemas — two objects, one portable and one not — and the role registry collapsed it anyway. `approved-signatory` sat beside `calibration-engineer` and `laboratory-manager` as though the three were the same kind of thing. Its own summary said otherwise from the start (*"a position of granted authority attached to a named scope, not a rank — commonly held alongside another role"*) and nothing acted on the words.
 
-The operational consequence, from an adversarial review: gap analysis reports "short of L3 for approved-signatory" as a **competence** gap. A laboratory reading a dashboard concludes that closing those gaps is the route to signatory status — and it is not. The authority is granted by the laboratory, recognised at that laboratory for that scope, and ends on departure. The dual-object model exists to prevent exactly that inference, and the role model was inviting it one layer up.
+The operational consequence, from an adversarial review: gap analysis reports "short of L3 for approved-signatory" as a **competence** gap. A laboratory reading a dashboard concludes that closing those gaps is the route to signatory status — and it is not. The authority is granted by the laboratory, recognized at that laboratory for that scope, and ends on departure. The dual-object model exists to prevent exactly that inference, and the role model was inviting it one layer up.
 
 **Every role now declares `roleType`.**
 
@@ -462,13 +462,13 @@ CI now refuses to publish a page containing a `fetch`, an `XMLHttpRequest`, a sc
 
 ## The taxonomy was missing an axis
 
-Raised by a practising metrologist after the foundational work landed: there is nothing to mark off whether somebody can calibrate a generic oscilloscope, nothing for calibrating an RF passive device. Checked, and correct — but the diagnosis is not "some elements are missing".
+Raised by a practicing metrologist after the foundational work landed: there is nothing to mark off whether somebody can calibrate a generic oscilloscope, nothing for calibrating an RF passive device. Checked, and correct — but the diagnosis is not "some elements are missing".
 
-**The corpus had two axes and both are measurement science.** `CM` organises by cross-cutting concept, `DP` by measured quantity. Neither is organised by *the work*. A technician's day is not "uncertainty, then traceability" — it is an oscilloscope, then a torque wrench, then an RF attenuator, and their competence is per equipment type. That axis did not exist.
+**The corpus had two axes and both are measurement science.** `CM` organizes by cross-cutting concept, `DP` by measured quantity. Neither is organized by *the work*. A technician's day is not "uncertainty, then traceability" — it is an oscilloscope, then a torque wrench, then an RF attenuator, and their competence is per equipment type. That axis did not exist.
 
-**The proof was already in the corpus.** `DP-08-052` is titled *Oscilloscope **DC and timebase** calibration*. It was truncated to the parts that fit a DC and low-frequency electrical domain: bandwidth belongs to `DP-10`, jitter and time-interval to `DP-14`. Calibrating a scope is one job, and a quantity-organised taxonomy could only describe a third of it. An element cut down to fit the shelf it was put on is what a missing axis looks like from the inside — and the same applies to an RF attenuator, whose physics is `DP-10`, whose DC resistance is `DP-08`, and whose calibration is neither.
+**The proof was already in the corpus.** `DP-08-052` is titled *Oscilloscope **DC and timebase** calibration*. It was truncated to the parts that fit a DC and low-frequency electrical domain: bandwidth belongs to `DP-10`, jitter and time-interval to `DP-14`. Calibrating a scope is one job, and a quantity-organized taxonomy could only describe a third of it. An element cut down to fit the shelf it was put on is what a missing axis looks like from the inside — and the same applies to an RF attenuator, whose physics is `DP-10`, whose DC resistance is `DP-08`, and whose calibration is neither.
 
-`EC` is the third axis, organised by the equipment type that arrives on a bench. It required widening the ID patterns in `common.schema.json`, a third `kind` on the taxonomy schema, and a third group in the generated docs and the viewer — all additive, and widening an ID pattern cannot invalidate an existing ID.
+`EC` is the third axis, organized by the equipment type that arrives on a bench. It required widening the ID patterns in `common.schema.json`, a third `kind` on the taxonomy schema, and a third group in the generated docs and the viewer — all additive, and widening an ID pattern cannot invalidate an existing ID.
 
 ### The boundary that keeps EC from swallowing CM-06
 
@@ -492,7 +492,7 @@ A third correction, and the one that changed what the pack is for. An equipment 
 
 The gap was structural and easy to miss because both ends existed. `DP` held the science of the standards: *Josephson effect and voltage standards*, *ITS-90 structure and defining fixed points*, *Microcalorimeters as primary power standards*, *Caesium beam and fountain clocks*. `EC` held the working instruments. **Nothing held the apparatus in between or above** — the torque transducer as a reference standard rather than a parameter inside the torque-wrench area, the force standard machine, the fixed-point cell as something you operate, the Josephson system as hardware somebody keeps running.
 
-So the chain read: working instrument → *nothing* → SI realisation.
+So the chain read: working instrument → *nothing* → SI realization.
 
 `EC` now carries three rungs in every discipline:
 
@@ -500,7 +500,7 @@ So the chain read: working instrument → *nothing* → SI realisation.
 |---|---|
 | Working instrument | Torque wrench and screwdriver calibration |
 | Reference standard | **Torque transducer and reference torque standard** |
-| SI realisation | **Torque standard machine**; **Kibble balance and primary mass dissemination** |
+| SI realization | **Torque standard machine**; **Kibble balance and primary mass dissemination** |
 
 **The boundary against `DP` is the same one that keeps `EC` out of `CM-06`, one tier up.** `DP-08-002` is knowledge of the Josephson effect. `EC-01-A15` is the competence to run the cryogenic system, select the Shapiro step, detect a mis-biased array, and defend a calibration made with it. One is what the standard *is*; the other is whether this person can *operate* it.
 
@@ -514,7 +514,7 @@ Four packs were also carrying two disciplines each. Those split — flow out of 
 
 That move exposed a bug of exactly the kind this session has been finding. `tools/apply-ceilings.ts` checked its overrides with `if (!area.startsWith(file.replace('.yaml','')))` — assuming an area lives in the domain file whose name its ID begins with. The project's own first rule denies that assumption, and the moment an area moved, the applier reported 31 perfectly correct overrides as typos. It now checks against every element the scan actually visited.
 
-**Both passes were generated, and that is a risk worth naming.** IDs are append-only, so 1185 titles are now permanent. The parameter lists are drawn from ordinary calibration practice and the boundary rule was applied throughout, but a practising metrologist reading their own discipline will find titles they would have worded differently, and a few they would not have included. Correcting a title is free; withdrawing an element means deprecating it. **This wants a discipline-by-discipline review before anything is authored against it**, and the review is cheaper than it looks because a whole equipment type is thirteen to twenty lines in one file.
+**Both passes were generated, and that is a risk worth naming.** IDs are append-only, so 1185 titles are now permanent. The parameter lists are drawn from ordinary calibration practice and the boundary rule was applied throughout, but a practicing metrologist reading their own discipline will find titles they would have worded differently, and a few they would not have included. Correcting a title is free; withdrawing an element means deprecating it. **This wants a discipline-by-discipline review before anything is authored against it**, and the review is cheaper than it looks because a whole equipment type is thirteen to twenty lines in one file.
 
 `EC-01-A01` — Oscilloscope Calibration, 26 elements — is the worked pattern, and the oscilloscope was chosen deliberately because it spans three quantity domains at once and so is the strongest available test of whether the axis is real. It is: none of those 26 elements can be placed in a single `DP` domain without losing part of the job.
 
@@ -528,7 +528,7 @@ That is what it costs to describe the work rather than the science. A competence
 
 ## The corpus started above where people start
 
-Raised by a practising metrologist, checked, and correct.
+Raised by a practicing metrologist, checked, and correct.
 
 `DP-08` — DC and Low Frequency Electrical Metrology, 52 elements — opened with *The ampere definition from the elementary charge* (L4) and *Josephson effect and voltage standards* (L5). It contained **no element for Ohm's law**, none for series or parallel circuit behaviour, and none for what a volt is. `CM-13-A05`, "Underlying Physics for Metrologists", covers thermal expansion, heat transfer, elasticity, fluid statics and wave optics — and has no electrical content at all, across four electrical discipline packs.
 
@@ -554,7 +554,7 @@ Each domain carries a foundational-knowledge area where one is appropriate, with
 
 Scope is bounded by a checkable test rather than by anyone's view of what a technician ought to know: an element belongs if a technician doing supervised work in that domain needs it, **or** if an element elsewhere in the domain is unintelligible without it. Ohm's law passes both — `DP-08-021`, Wheatstone and Kelvin bridge techniques, is not comprehensible without it. Maxwell's equations fail both. The test also gives `prerequisites` somewhere to bottom out; that field could previously only point within the professional tier, so the graph had no floor.
 
-Ceilings run lower here and that is the point. `DP-08-053` (charge, current, voltage and resistance as quantities) tops out at **L2**: applying a definition in a familiar situation and recognising an unfamiliar one is the whole competence, and there is no unsupervised novel-case practice above it. Ohm's law reaches L3 like anything else. Foundational does not mean shallow — it means the ceiling is set by the competence rather than by a floor in the plan.
+Ceilings run lower here and that is the point. `DP-08-053` (charge, current, voltage and resistance as quantities) tops out at **L2**: applying a definition in a familiar situation and recognizing an unfamiliar one is the whole competence, and there is no unsupervised novel-case practice above it. Ohm's law reaches L3 like anything else. Foundational does not mean shallow — it means the ceiling is set by the competence rather than by a floor in the plan.
 
 **Training is authored per domain, not per element.** Foundational knowledge is learned as a block, and thirteen modules for thirteen fundamentals would be an administrative fiction rather than a teaching decision. One module per foundational area. Note the ordering constraint that already applies: a module needs `knowledgeRefs` into the BOK, and no BOK article covers electrical fundamentals yet, so the module follows the article rather than the taxonomy.
 
@@ -564,7 +564,7 @@ Ceilings run lower here and that is the point. `DP-08-053` (charge, current, vol
 
 **Split by instrument class and use case.** The first draft had one element called *operating a digital multimeter*, which spanned a 3½-digit handheld, a 6½-digit bench meter, an 8½-digit reference, a null detector and a nanovoltmeter — different instruments, different jobs, under a heading too broad for any item to be bound to it. Each class is now its own element, and the ceilings differ accordingly: a handheld reaches L3, a reference DMM and a nanovoltmeter reach L4, because a twenty-year technician is still better at those than a two-year one. Foundational is not shallow.
 
-Every foundational area is titled **`Foundational Knowledge — <what it covers>`**. That is not decoration: it is one recognisable section repeated across 43 domains, and the first person to look for it searched the viewer for "Foundational" and found nothing, because the area had been given a descriptive name of its own instead.
+Every foundational area is titled **`Foundational Knowledge — <what it covers>`**. That is not decoration: it is one recognizable section repeated across 43 domains, and the first person to look for it searched the viewer for "Foundational" and found nothing, because the area had been given a descriptive name of its own instead.
 
 `DP-08-A07` — Foundational Knowledge — Electrical Quantities and Circuits — was the worked pattern, and **31 domains now carry one: all 21 disciplines and 10 of the core**, 395 further elements.
 
@@ -585,7 +585,7 @@ That was invisible while every authored element was in `CM-03`, because uncertai
 - **Authorable now.** Anything resting on units or on measurement vocabulary. `DP-08-081` (digits and counts) and `DP-08-094` (resolution, accuracy, precision) cite VIM entries; `DP-08-064` (computing a tolerance) cites the VIM's maximum permissible error. `DP-08-053` is citable against the SI Brochure.
 - **Not authorable.** Anything resting on the physics or the hazard. `DP-08-068` (current dividers and unintended shunt paths) is circuit behaviour and no registered source describes it. `DP-08-100` (arc flash and stored energy) needs an electrical-safety source and there is none. Both were attempted and abandoned rather than fitted to a strained citation.
 
-And it generalises, because every foundational area has the same shape. Mechanics for `DP-02`, thermodynamics for `DP-05`, fluid dynamics for `DP-07`, optics for `DP-12`, chemistry for `DP-16`. **443 elements across 31 areas, of which an unknown but substantial fraction cannot be cited against anything currently registered.**
+And it generalizes, because every foundational area has the same shape. Mechanics for `DP-02`, thermodynamics for `DP-05`, fluid dynamics for `DP-07`, optics for `DP-12`, chemistry for `DP-16`. **443 elements across 31 areas, of which an unknown but substantial fraction cannot be cited against anything currently registered.**
 
 Three things follow, and none of them is authoring work:
 
@@ -678,7 +678,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 ## Open items
 
 1. **Tier-2 quotation limits** — set at ≤25 words, ≤2 per source per element. Requires confirmation by counsel before Phase 4 authoring. Entries needing review are flagged `CONFIRM-WITH-COUNSEL` in the source register. Citations are unaffected.
-2. **Public GitHub remote** — created at `RECamerino/metrology-competence-system`, with the taxonomy viewer published to Pages. Each push remains a separately authorised action.
+2. **Public GitHub remote** — created at `RECamerino/metrology-competence-system`, with the taxonomy viewer published to Pages. Each push remains a separately authorized action.
 3. **Commons operation** — the software will be built; whether the project *operates* a public instance (PII custody, moderation, funding) is deferred governance.
 4. **Authority-tier issuer** — a neutral foundation as issuer of last resort is the strongest long-term credential but needs people and funding. Roadmap, not a dependency.
 5. **Recertification defaults** — per-level defaults proposed in `content/competence/taxonomy/proficiency.yaml` (L3 60 months, L4 48, L5 36; none below L3). Per-domain overrides remain open: a `CM-21` element ages far faster than a `CM-02` one, and `volatility` is the field that should drive it.

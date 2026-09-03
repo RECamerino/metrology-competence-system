@@ -57,7 +57,7 @@ parameters:
     visibility: generator
     description: >-
       What the budget must handle correctly — a correlated pair traceable to a
-      shared standard, a significant nonlinearity, a resolution or quantisation
+      shared standard, a significant nonlinearity, a resolution or quantization
       term, a pooled variance, a drift contribution between calibrations. THE
       BINDING SETS THIS, and it is what ties this shape to a specific element
       rather than to budget-building in general.

@@ -29,8 +29,8 @@ domains:
         elements:
           - { id: CM-20-007, title: "Designing a new measurement method from first principles", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-20-008, title: "Prototype apparatus design and iteration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: CM-20-009, title: "Establishing a new primary realisation", kind: judgment, levelCeiling: 5, status: draft }
-          - { id: CM-20-010, title: "Characterising a novel instrument with no reference to compare against", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-20-009, title: "Establishing a new primary realization", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-20-010, title: "Characterizing a novel instrument with no reference to compare against", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-20-011, title: "Uncertainty evaluation for a method that has never been evaluated", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-20-012, title: "Validating a new capability by independent route", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-20-013, title: "Transitioning a research method into routine service", kind: judgment, levelCeiling: 4, status: draft }
@@ -42,7 +42,7 @@ domains:
         elements:
           - { id: CM-20-015, title: "Experimental design for research rather than routine work", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-20-016, title: "Controlling and documenting variables in a developing experiment", kind: skill, levelCeiling: 4, status: draft }
-          - { id: CM-20-017, title: "Recognising and pursuing an anomalous result", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-20-017, title: "Recognizing and pursuing an anomalous result", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-20-018, title: "Guarding against confirmation bias in your own work", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-20-019, title: "Reproducibility and the replication of measurement research", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-20-020, title: "Laboratory notebooks and research record keeping", kind: skill, levelCeiling: 3, status: draft }
@@ -68,6 +68,6 @@ domains:
           - { id: CM-20-030, title: "Writing a research proposal", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-20-031, title: "Demonstrating impact of measurement research", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-20-032, title: "Intellectual property, patents and disclosure", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: CM-20-033, title: "Technology transfer and commercialisation", kind: judgment, levelCeiling: 3, status: draft }
+          - { id: CM-20-033, title: "Technology transfer and commercialization", kind: judgment, levelCeiling: 3, status: draft }
           - { id: CM-20-034, title: "Managing a research portfolio and balancing risk", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-20-035, title: "Emerging measurement needs and horizon scanning", kind: judgment, levelCeiling: 5, status: draft }

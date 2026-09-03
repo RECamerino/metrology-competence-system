@@ -33,7 +33,7 @@ domains:
           - { id: CM-07-004, title: "MSA vocabulary mapped onto VIM and GUM vocabulary", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: CM-07-005, title: "Relationship between an MSA result and an uncertainty budget", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: CM-07-006, title: "Choosing which MSA study a situation calls for", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: CM-07-007, title: "Planning a study: parts, appraisers, trials and randomisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-07-007, title: "Planning a study: parts, appraisers, trials and randomization", kind: skill, levelCeiling: 4, status: draft }
 
       - id: CM-07-A02
         title: Gauge Repeatability and Reproducibility
@@ -100,7 +100,7 @@ domains:
           Ongoing demonstration that a measurement system remains capable of
           producing trustworthy results between calibrations. Distinct from
           calibration, which is a point in time, and from MSA, which
-          characterises a system once. Components of assurance appear across
+          characterizes a system once. Components of assurance appear across
           CM-06, CM-09, CM-10 and CM-12; this area is the discipline that
           composes them into a programme, and it is what an assessor is
           actually probing when they ask how you know your results are still

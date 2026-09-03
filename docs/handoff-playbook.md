@@ -220,7 +220,7 @@ tested. NOT the explanation — that lives in the BOK article above.
 
 **`knowledgeRefs` is required, and points at sections rather than whole articles.** The person following it is usually not learning the subject from scratch; they demonstrated this competence months ago and have forgotten one detail. Send them to the passage, not the article.
 
-**The anchors above are performance, not understanding, because `kind` is `skill`.** "Recognises that inputs may be correlated" would be a knowledge anchor and wrong for this element — see [Write the anchors to match the element's kind](#write-the-anchors-to-match-the-elements-kind).
+**The anchors above are performance, not understanding, because `kind` is `skill`.** "Recognizes that inputs may be correlated" would be a knowledge anchor and wrong for this element — see [Write the anchors to match the element's kind](#write-the-anchors-to-match-the-elements-kind).
 
 ### 3. Validate
 
@@ -297,7 +297,7 @@ Every element declares a `kind`. It is not decoration — it says what evidence 
 
 | Kind | Anchors describe | Anchors must not describe |
 |---|---|---|
-| `knowledge` | What the person can explain, relate, analyse, or distinguish | Performing a task |
+| `knowledge` | What the person can explain, relate, analyze, or distinguish | Performing a task |
 | `skill` | What the person can be observed producing or doing | Understanding the theory behind it |
 | `judgment` | What decision the person makes under ambiguity, and how they defend it | Recalling the rule that decides it for them |
 

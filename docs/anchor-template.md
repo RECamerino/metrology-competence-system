@@ -12,7 +12,7 @@ What separates L1 from L5 is not "more knowledge". It is four things, and a good
 
 | Axis | L1 | L5 |
 |---|---|---|
-| **Who frames the problem** | Framed for them, and they are told what to look for | They frame it, including recognising there is a problem |
+| **Who frames the problem** | Framed for them, and they are told what to look for | They frame it, including recognizing there is a problem |
 | **What is supplied** | Inputs, values and method all given | They select inputs and method, and justify the selection |
 | **How covered the case is** | Routine, and the procedure covers it | No established approach settles it |
 | **What they answer for** | Nothing — someone else checks | They defend it under challenge, and can bring another person to the same standard |
@@ -35,7 +35,7 @@ The element's `kind` decides what evidence proves attainment, so it decides what
 
 | Kind | The anchor describes | Verbs that fit | Never |
 |---|---|---|---|
-| `knowledge` | What they can explain, relate, distinguish, analyse | explains, distinguishes, relates, derives, traces, contrasts | Performing a task |
+| `knowledge` | What they can explain, relate, distinguish, analyze | explains, distinguishes, relates, derives, traces, contrasts | Performing a task |
 | `skill` | What they can be observed producing or doing | constructs, produces, performs, measures, sets up, demonstrates | Understanding the theory |
 | `judgment` | What they decide under ambiguity and how they defend it | decides, selects and defends, resolves, concedes, weighs | Recalling the rule that decides it for them |
 
@@ -54,7 +54,7 @@ So the two halves of this document contradict each other for a knowledge element
 | | `skill` / `judgment` | `knowledge` |
 |---|---|---|
 | **L4** | Handles the case the procedure does not cover, and defends the treatment | **Explains why the established accounts diverge on this case**, contrasts what each treats as the thing that matters, and traces the divergence to its actual source rather than to one being stricter |
-| **L5** | Resolves the case no approach settles, states what the assumption costs | **Gives an account of a genuinely unsettled question** — states each position as its holders would recognise it, says what turns on each, and says what evidence would settle it and why none currently does |
+| **L5** | Resolves the case no approach settles, states what the assumption costs | **Gives an account of a genuinely unsettled question** — states each position as its holders would recognize it, says what turns on each, and says what evidence would settle it and why none currently does |
 
 L5 still requires mentoring, on knowledge exactly as on the others.
 

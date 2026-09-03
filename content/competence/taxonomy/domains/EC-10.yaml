@@ -7,7 +7,7 @@
 schemaVersion: 1
 domains:
   - id: EC-10
-    title: Ionising Radiation Instrument Calibration
+    title: Ionizing Radiation Instrument Calibration
     kind: equipment
     status: draft
     summary: >-
@@ -28,7 +28,7 @@ domains:
           error.
         elements:
           - { id: EC-10-001, title: "Receiving inspection and functional check of a radiation survey meter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-10-002, title: "Calibration configuration and stabilisation for a radiation survey meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-002, title: "Calibration configuration and stabilization for a radiation survey meter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-10-003, title: "Selecting the standards and fixturing for a radiation survey meter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-10-004, title: "Dose rate indication error against a reference field", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-10-005, title: "Energy response across the photon energy range", kind: skill, levelCeiling: 4, status: draft }
@@ -50,7 +50,7 @@ domains:
           phantoms in operational quantities rather than in free air.
         elements:
           - { id: EC-10-015, title: "Receiving inspection and functional check of a personal dosimeter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-10-016, title: "Calibration configuration and stabilisation for a personal dosimeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-016, title: "Calibration configuration and stabilization for a personal dosimeter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-10-017, title: "Selecting the standards and fixturing for a personal dosimeter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-10-018, title: "Personal dose equivalent response on a phantom", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-10-019, title: "Operational quantity selection and conversion", kind: knowledge, levelCeiling: 4, status: draft }
@@ -72,7 +72,7 @@ domains:
           one.
         elements:
           - { id: EC-10-028, title: "Receiving inspection and functional check of a contamination monitor", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-10-029, title: "Calibration configuration and stabilisation for a contamination monitor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-029, title: "Calibration configuration and stabilization for a contamination monitor", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-10-030, title: "Selecting the standards and fixturing for a contamination monitor calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-10-031, title: "Detection efficiency against reference sources", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-10-032, title: "Nuclide and emission type dependence of efficiency", kind: skill, levelCeiling: 4, status: draft }
@@ -92,7 +92,7 @@ domains:
           accuracy, linearity and geometry with a decaying source.
         elements:
           - { id: EC-10-040, title: "Receiving inspection and functional check of an activity meter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-10-041, title: "Calibration configuration and stabilisation for an activity meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-041, title: "Calibration configuration and stabilization for an activity meter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-10-042, title: "Selecting the standards and fixturing for an activity meter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-10-043, title: "Accuracy against certified reference sources", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-10-044, title: "Linearity determination by decay or shield method", kind: skill, levelCeiling: 4, status: draft }
@@ -112,7 +112,7 @@ domains:
           calibrated for beam quality and dose in the geometry of use.
         elements:
           - { id: EC-10-052, title: "Receiving inspection and functional check of X-ray QA equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-10-053, title: "Calibration configuration and stabilisation for X-ray QA equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-053, title: "Calibration configuration and stabilization for X-ray QA equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-10-054, title: "Selecting the standards and fixturing for X-ray QA equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-10-055, title: "kVp meter accuracy and waveform capture", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-10-056, title: "Dose and dose-area-product meter calibration", kind: skill, levelCeiling: 4, status: draft }
@@ -133,7 +133,7 @@ domains:
           of the calibration source rarely matches the workplace field.
         elements:
           - { id: EC-10-065, title: "Receiving inspection and functional check of a neutron detector", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-10-066, title: "Calibration configuration and stabilisation for a neutron detector", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-066, title: "Calibration configuration and stabilization for a neutron detector", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-10-067, title: "Selecting the standards and fixturing for a neutron detector calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-10-068, title: "Neutron dose equivalent response against a reference field", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-10-069, title: "Energy response across the neutron spectrum", kind: skill, levelCeiling: 5, status: draft }
@@ -154,7 +154,7 @@ domains:
           chambers where the background is comparable to the signal.
         elements:
           - { id: EC-10-078, title: "Receiving inspection and functional check of an environmental radiation monitor", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-10-079, title: "Calibration configuration and stabilisation for an environmental radiation monitor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-079, title: "Calibration configuration and stabilization for an environmental radiation monitor", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-10-080, title: "Selecting the standards and fixturing for an environmental radiation monitor calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-10-081, title: "Radon chamber concentration reference and traceability", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-10-082, title: "Detector response at environmental levels", kind: skill, levelCeiling: 4, status: draft }
@@ -168,36 +168,36 @@ domains:
           - { id: EC-10-090, title: "Conformity statement for an environmental radiation monitor against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-10-A08
-        title: Primary Standard Ionisation Chamber Operation
+        title: Primary Standard Ionization Chamber Operation
         status: draft
         summary: >-
-          Free-air and cavity chambers that realise air kerma and
+          Free-air and cavity chambers that realize air kerma and
           exposure, operated with the correction factors that make the
-          realisation defensible.
+          realization defensible.
         elements:
-          - { id: EC-10-091, title: "Receiving inspection and functional check of a primary standard ionisation chamber", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-10-092, title: "Calibration configuration and stabilisation for a primary standard ionisation chamber", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-10-093, title: "Selecting the standards and fixturing for a primary standard ionisation chamber calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-091, title: "Receiving inspection and functional check of a primary standard ionization chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-092, title: "Calibration configuration and stabilization for a primary standard ionization chamber", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-093, title: "Selecting the standards and fixturing for a primary standard ionization chamber calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-10-094, title: "Free-air chamber operation and collecting volume definition", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-10-095, title: "Cavity chamber operation and Bragg-Gray application", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-10-096, title: "Correction factor determination: recombination, polarity, humidity", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-10-097, title: "Air density, temperature and pressure correction", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-10-098, title: "Beam quality specification and its effect on the realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-098, title: "Beam quality specification and its effect on the realization", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-10-099, title: "Scatter, attenuation and electron loss corrections", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-10-100, title: "Dissemination to secondary standard chambers", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-10-101, title: "Adjustment of a primary standard ionisation chamber, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-10-102, title: "Uncertainty budget for a primary standard ionisation chamber calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-10-103, title: "Conformity statement for a primary standard ionisation chamber against its specification", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-101, title: "Adjustment of a primary standard ionization chamber, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-10-102, title: "Uncertainty budget for a primary standard ionization chamber calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-10-103, title: "Conformity statement for a primary standard ionization chamber against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-10-A09
         title: Calorimetric Absorbed Dose Standard Operation
         status: draft
         summary: >-
-          Graphite and water calorimeters that realise absorbed dose
+          Graphite and water calorimeters that realize absorbed dose
           directly from a temperature rise.
         elements:
           - { id: EC-10-104, title: "Receiving inspection and functional check of an absorbed dose calorimeter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-10-105, title: "Calibration configuration and stabilisation for an absorbed dose calorimeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-10-105, title: "Calibration configuration and stabilization for an absorbed dose calorimeter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-10-106, title: "Selecting the standards and fixturing for an absorbed dose calorimeter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-10-107, title: "Graphite calorimeter operation and core thermal isolation", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-10-108, title: "Water calorimeter operation and heat defect assessment", kind: skill, levelCeiling: 5, status: draft }
@@ -205,7 +205,7 @@ domains:
           - { id: EC-10-110, title: "Heat transfer and gap correction determination", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-10-111, title: "Conversion from graphite to water absorbed dose", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-10-112, title: "Comparison against ionometric standards", kind: judgment, levelCeiling: 5, status: draft }
-          - { id: EC-10-113, title: "Uncertainty budget for an absorbed dose realisation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-10-113, title: "Uncertainty budget for an absorbed dose realization", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-10-114, title: "Adjustment of an absorbed dose calorimeter, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-10-115, title: "Uncertainty budget for an absorbed dose calorimeter calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-10-116, title: "Conformity statement for an absorbed dose calorimeter against its specification", kind: judgment, levelCeiling: 4, status: draft }

@@ -26,7 +26,7 @@ domains:
           response and the cosine correction are the calibration.
         elements:
           - { id: EC-08-001, title: "Receiving inspection and functional check of an illuminance meter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-08-002, title: "Calibration configuration and stabilisation for an illuminance meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-002, title: "Calibration configuration and stabilization for an illuminance meter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-08-003, title: "Selecting the standards and fixturing for an illuminance meter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-004, title: "Illuminance indication error against a reference source", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-005, title: "Spectral mismatch and f1' determination", kind: skill, levelCeiling: 5, status: draft }
@@ -47,7 +47,7 @@ domains:
           wavelength because responsivity is not flat.
         elements:
           - { id: EC-08-014, title: "Receiving inspection and functional check of an optical power meter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-08-015, title: "Calibration configuration and stabilisation for an optical power meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-015, title: "Calibration configuration and stabilization for an optical power meter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-08-016, title: "Selecting the standards and fixturing for an optical power meter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-017, title: "Responsivity and power accuracy against wavelength", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-018, title: "Linearity over the dynamic range", kind: skill, levelCeiling: 4, status: draft }
@@ -69,7 +69,7 @@ domains:
           absorbance.
         elements:
           - { id: EC-08-027, title: "Receiving inspection and functional check of a spectrophotometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-08-028, title: "Calibration configuration and stabilisation for a spectrophotometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-028, title: "Calibration configuration and stabilization for a spectrophotometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-08-029, title: "Selecting the standards and fixturing for a spectrophotometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-030, title: "Wavelength accuracy and repeatability", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-031, title: "Photometric accuracy and absorbance scale linearity", kind: skill, levelCeiling: 4, status: draft }
@@ -92,7 +92,7 @@ domains:
           calibration.
         elements:
           - { id: EC-08-041, title: "Receiving inspection and functional check of an optical instrument", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-08-042, title: "Calibration configuration and stabilisation for an optical instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-042, title: "Calibration configuration and stabilization for an optical instrument", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-08-043, title: "Selecting the standards and fixturing for an optical instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-044, title: "Refractive index indication against reference liquids", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-08-045, title: "Temperature control and compensation in a refractometer", kind: skill, levelCeiling: 4, status: draft }
@@ -112,7 +112,7 @@ domains:
           standards, where the geometry defines the scale.
         elements:
           - { id: EC-08-053, title: "Receiving inspection and functional check of a gloss meter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-08-054, title: "Calibration configuration and stabilisation for a gloss meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-054, title: "Calibration configuration and stabilization for a gloss meter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-08-055, title: "Selecting the standards and fixturing for a gloss meter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-056, title: "Gloss value against certified reference tiles", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-08-057, title: "Measurement geometry: 20, 60 and 85 degree verification", kind: skill, levelCeiling: 4, status: draft }
@@ -128,26 +128,26 @@ domains:
         title: Cryogenic Radiometer and Absolute Detector Operation
         status: draft
         summary: >-
-          The electrical substitution radiometer that realises optical
+          The electrical substitution radiometer that realizes optical
           power, and the detector chain that carries it to a working
           meter.
         elements:
           - { id: EC-08-103, title: "Receiving inspection and functional check of a cryogenic radiometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-08-104, title: "Calibration configuration and stabilisation for a cryogenic radiometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-104, title: "Calibration configuration and stabilization for a cryogenic radiometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-08-105, title: "Selecting the standards and fixturing for a cryogenic radiometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-106, title: "Cryogenic radiometer operation and electrical substitution", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-08-107, title: "Cavity absorptance and non-equivalence determination", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-08-108, title: "Laser power stabilisation and beam handling", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-08-109, title: "Trap detector characterisation against the radiometer", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-08-110, title: "Spectral responsivity scale realisation and interpolation", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-08-111, title: "Window transmission and polarisation corrections", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-08-112, title: "Uncertainty budget for a realised optical power scale", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-08-108, title: "Laser power stabilization and beam handling", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-08-109, title: "Trap detector characterization against the radiometer", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-08-110, title: "Spectral responsivity scale realization and interpolation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-08-111, title: "Window transmission and polarization corrections", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-08-112, title: "Uncertainty budget for a realized optical power scale", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-08-113, title: "Adjustment of a cryogenic radiometer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-114, title: "Uncertainty budget for a cryogenic radiometer calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-115, title: "Conformity statement for a cryogenic radiometer against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-08-A10
-        title: Standard Lamp and Photometric Scale Realisation
+        title: Standard Lamp and Photometric Scale Realization
         status: draft
         summary: >-
           Luminous intensity and spectral irradiance standards, whose
@@ -155,15 +155,15 @@ domains:
           carry.
         elements:
           - { id: EC-08-116, title: "Receiving inspection and functional check of a standard lamp", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-08-117, title: "Calibration configuration and stabilisation for a standard lamp", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-08-117, title: "Calibration configuration and stabilization for a standard lamp", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-08-118, title: "Selecting the standards and fixturing for a standard lamp calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-119, title: "Lamp operating current and voltage setting accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-120, title: "Luminous intensity determination and distance geometry", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-08-121, title: "Spectral irradiance scale realisation and transfer", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-08-121, title: "Spectral irradiance scale realization and transfer", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-08-122, title: "Lamp ageing, seasoning and burn-hours tracking", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-123, title: "Alignment, orientation and baffling in a photometric bench", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-124, title: "Stray light and ambient rejection on a bench", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-08-125, title: "Candela realisation from detector-based radiometry", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: EC-08-125, title: "Candela realization from detector-based radiometry", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: EC-08-126, title: "Adjustment of a standard lamp, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-08-127, title: "Uncertainty budget for a standard lamp calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-08-128, title: "Conformity statement for a standard lamp against its specification", kind: judgment, levelCeiling: 4, status: draft }

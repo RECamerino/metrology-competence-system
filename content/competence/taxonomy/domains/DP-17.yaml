@@ -53,14 +53,14 @@ domains:
           - { id: DP-17-004, title: "The JCTLM database and listed reference materials", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-17-005, title: "Commutability in clinical reference materials", kind: judgment, levelCeiling: 5, status: draft }
           - { id: DP-17-006, title: "International units and conventionally defined biological activity", kind: knowledge, levelCeiling: 5, status: draft }
-          - { id: DP-17-007, title: "Standardisation and harmonisation of clinical assays", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-17-007, title: "Standardization and harmonization of clinical assays", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-17-008, title: "Biological variation and its effect on interpretation", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: DP-17-A02
         title: Clinical Laboratory Measurement
         status: draft
         elements:
-          - { id: DP-17-009, title: "Clinical chemistry analysers and their calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-17-009, title: "Clinical chemistry analyzers and their calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-17-010, title: "Immunoassay principles and calibration challenges", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-17-011, title: "Haematology and cell counting measurement", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-17-012, title: "Blood gas, electrolyte and point of care measurement", kind: skill, levelCeiling: 4, status: draft }

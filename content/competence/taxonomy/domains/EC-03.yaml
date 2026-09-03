@@ -28,7 +28,7 @@ domains:
           check it does not deserve.
         elements:
           - { id: EC-03-001, title: "Receiving inspection and functional check of a caliper", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-002, title: "Calibration configuration and stabilisation for a caliper", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-002, title: "Calibration configuration and stabilization for a caliper", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-003, title: "Selecting the standards and fixturing for a caliper calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-004, title: "Indication error across the measuring range", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-005, title: "External jaw parallelism and flatness", kind: skill, levelCeiling: 3, status: draft }
@@ -52,7 +52,7 @@ domains:
           instrument does.
         elements:
           - { id: EC-03-016, title: "Receiving inspection and functional check of a micrometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-017, title: "Calibration configuration and stabilisation for a micrometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-017, title: "Calibration configuration and stabilization for a micrometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-018, title: "Selecting the standards and fixturing for a micrometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-019, title: "Indication error over the screw travel", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-020, title: "Anvil and spindle flatness", kind: skill, levelCeiling: 4, status: draft }
@@ -73,7 +73,7 @@ domains:
           calibrated by mechanical comparison or by interferometry.
         elements:
           - { id: EC-03-029, title: "Receiving inspection and functional check of a gauge block", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-030, title: "Calibration configuration and stabilisation for a gauge block", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-030, title: "Calibration configuration and stabilization for a gauge block", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-031, title: "Selecting the standards and fixturing for a gauge block calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-032, title: "Central length by mechanical comparison", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-033, title: "Length by interferometry", kind: skill, levelCeiling: 5, status: draft }
@@ -95,7 +95,7 @@ domains:
           which a two-point check will never find.
         elements:
           - { id: EC-03-043, title: "Receiving inspection and functional check of a dial indicator", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-044, title: "Calibration configuration and stabilisation for a dial indicator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-044, title: "Calibration configuration and stabilization for a dial indicator", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-045, title: "Selecting the standards and fixturing for a dial indicator calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-046, title: "Indication error over one revolution and over full travel", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-047, title: "Periodic error within a revolution", kind: skill, levelCeiling: 4, status: draft }
@@ -117,7 +117,7 @@ domains:
           errors.
         elements:
           - { id: EC-03-056, title: "Receiving inspection and functional check of a coordinate measuring machine", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-057, title: "Calibration configuration and stabilisation for a coordinate measuring machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-057, title: "Calibration configuration and stabilization for a coordinate measuring machine", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-058, title: "Selecting the standards and fixturing for a coordinate measuring machine calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-059, title: "Length measurement error along and across the volume", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-060, title: "Probing error: form, size and location", kind: skill, levelCeiling: 4, status: draft }
@@ -140,7 +140,7 @@ domains:
           measurements.
         elements:
           - { id: EC-03-070, title: "Receiving inspection and functional check of a surface plate", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-071, title: "Calibration configuration and stabilisation for a surface plate", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-071, title: "Calibration configuration and stabilization for a surface plate", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-072, title: "Selecting the standards and fixturing for a surface plate calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-073, title: "Flatness by repeat reading and Moody analysis", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-074, title: "Local flatness and repeat measurement error", kind: skill, levelCeiling: 4, status: draft }
@@ -160,7 +160,7 @@ domains:
           size and a form and a wear judgement at once.
         elements:
           - { id: EC-03-082, title: "Receiving inspection and functional check of a fixed limit gauge", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-083, title: "Calibration configuration and stabilisation for a fixed limit gauge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-083, title: "Calibration configuration and stabilization for a fixed limit gauge", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-084, title: "Selecting the standards and fixturing for a fixed limit gauge calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-085, title: "Plug gauge diameter and roundness", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-086, title: "Ring gauge diameter and taper", kind: skill, levelCeiling: 4, status: draft }
@@ -181,7 +181,7 @@ domains:
           precision levels, calibrated by closure and by comparison.
         elements:
           - { id: EC-03-095, title: "Receiving inspection and functional check of an angle measuring instrument", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-096, title: "Calibration configuration and stabilisation for an angle measuring instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-096, title: "Calibration configuration and stabilization for an angle measuring instrument", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-097, title: "Selecting the standards and fixturing for an angle measuring instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-098, title: "Angle gauge block and combination accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-099, title: "Sine bar and sine plate roll centre distance", kind: skill, levelCeiling: 4, status: draft }
@@ -202,7 +202,7 @@ domains:
           and the cut-off choice change the reported parameter.
         elements:
           - { id: EC-03-108, title: "Receiving inspection and functional check of a surface texture instrument", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-109, title: "Calibration configuration and stabilisation for a surface texture instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-109, title: "Calibration configuration and stabilization for a surface texture instrument", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-110, title: "Selecting the standards and fixturing for a surface texture instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-111, title: "Roughness parameter accuracy against reference specimens", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-112, title: "Stylus tip radius and condition verification", kind: skill, levelCeiling: 4, status: draft }
@@ -223,7 +223,7 @@ domains:
           illumination and edge detection are part of the measurement.
         elements:
           - { id: EC-03-121, title: "Receiving inspection and functional check of an optical measuring system", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-122, title: "Calibration configuration and stabilisation for an optical measuring system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-122, title: "Calibration configuration and stabilization for an optical measuring system", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-123, title: "Selecting the standards and fixturing for an optical measuring system calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-124, title: "Magnification accuracy and distortion across the field", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-125, title: "Stage travel indication error in X and Y", kind: skill, levelCeiling: 4, status: draft }
@@ -245,14 +245,14 @@ domains:
           result directly.
         elements:
           - { id: EC-03-134, title: "Receiving inspection and functional check of a laser measuring system", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-135, title: "Calibration configuration and stabilisation for a laser measuring system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-135, title: "Calibration configuration and stabilization for a laser measuring system", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-136, title: "Selecting the standards and fixturing for a laser measuring system calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-137, title: "Laser wavelength and frequency stability verification", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-03-138, title: "Environmental compensation: air refractive index correction", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-139, title: "Linear displacement accuracy over the measuring range", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-140, title: "Angular and straightness optics verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-141, title: "Laser tracker volumetric performance verification", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-03-142, title: "Retroreflector and target characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-142, title: "Retroreflector and target characterization", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-143, title: "Beam alignment, cosine error and dead path", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-144, title: "Adjustment of a laser measuring system, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-145, title: "Uncertainty budget for a laser measuring system calibration", kind: skill, levelCeiling: 4, status: draft }
@@ -266,7 +266,7 @@ domains:
           temperature, which is what makes the number reproducible.
         elements:
           - { id: EC-03-147, title: "Receiving inspection and functional check of a rule or tape measure", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-148, title: "Calibration configuration and stabilisation for a rule or tape measure", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-148, title: "Calibration configuration and stabilization for a rule or tape measure", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-149, title: "Selecting the standards and fixturing for a rule or tape measure calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-150, title: "Graduation interval error along the length", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-151, title: "Total length error under stated tension", kind: skill, levelCeiling: 3, status: draft }
@@ -289,7 +289,7 @@ domains:
           standard instrument procedure fits.
         elements:
           - { id: EC-03-159, title: "Receiving inspection and functional check of a custom fixture or gauge", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-160, title: "Calibration configuration and stabilisation for a custom fixture or gauge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-160, title: "Calibration configuration and stabilization for a custom fixture or gauge", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-161, title: "Selecting the standards and fixturing for a custom fixture or gauge calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-162, title: "Reading the print: datums, tolerances and the feature to be verified", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-163, title: "Determining what on a fixture is dimensionally significant", kind: judgment, levelCeiling: 5, status: draft }
@@ -316,7 +316,7 @@ domains:
           artefact.
         elements:
           - { id: EC-03-177, title: "Receiving inspection and functional check of a machine tool", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-178, title: "Calibration configuration and stabilisation for a machine tool", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-178, title: "Calibration configuration and stabilization for a machine tool", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-179, title: "Selecting the standards and fixturing for a machine tool calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-180, title: "Linear positioning accuracy and repeatability per axis", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-181, title: "Backlash, reversal and bidirectional repeatability", kind: skill, levelCeiling: 4, status: draft }
@@ -325,7 +325,7 @@ domains:
           - { id: EC-03-184, title: "Spindle runout, taper and thermal growth", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-185, title: "Rotary axis and trunnion verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-186, title: "Volumetric compensation verification", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-03-187, title: "Thermal drift and warm-up characterisation of a machine", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-187, title: "Thermal drift and warm-up characterization of a machine", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-188, title: "Adjustment of a machine tool, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-189, title: "Uncertainty budget for a machine tool calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-190, title: "Conformity statement for a machine tool against its specification", kind: judgment, levelCeiling: 4, status: draft }
@@ -339,7 +339,7 @@ domains:
           gear standard.
         elements:
           - { id: EC-03-191, title: "Receiving inspection and functional check of gear and thread measuring equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-192, title: "Calibration configuration and stabilisation for gear and thread measuring equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-192, title: "Calibration configuration and stabilization for gear and thread measuring equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-193, title: "Selecting the standards and fixturing for gear and thread measuring equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-194, title: "Gear measuring machine verification against a master gear", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-195, title: "Involute, lead and pitch measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
@@ -360,7 +360,7 @@ domains:
           where the substrate and the couplant change the reading.
         elements:
           - { id: EC-03-204, title: "Receiving inspection and functional check of a thickness gauge", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-205, title: "Calibration configuration and stabilisation for a thickness gauge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-205, title: "Calibration configuration and stabilization for a thickness gauge", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-206, title: "Selecting the standards and fixturing for a thickness gauge calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-207, title: "Ultrasonic wall thickness accuracy and velocity setting", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-208, title: "Couplant, surface condition and probe wear effects", kind: skill, levelCeiling: 4, status: draft }
@@ -368,7 +368,7 @@ domains:
           - { id: EC-03-210, title: "Substrate thickness and curvature effects", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-211, title: "Calibration foils, shims and reference standards", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-212, title: "Magnetic and eddy-current method selection", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-03-213, title: "Paint, plating and galvanising measurement specifics", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-213, title: "Paint, plating and galvanizing measurement specifics", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-214, title: "Adjustment of a thickness gauge, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-215, title: "Uncertainty budget for a thickness gauge calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-216, title: "Conformity statement for a thickness gauge against its specification", kind: judgment, levelCeiling: 4, status: draft }
@@ -382,7 +382,7 @@ domains:
           performance.
         elements:
           - { id: EC-03-217, title: "Receiving inspection and functional check of a portable measuring system", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-218, title: "Calibration configuration and stabilisation for a portable measuring system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-218, title: "Calibration configuration and stabilization for a portable measuring system", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-219, title: "Selecting the standards and fixturing for a portable measuring system calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-220, title: "Single-point articulation and repeatability test", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-03-221, title: "Volumetric length performance against a reference artefact", kind: skill, levelCeiling: 4, status: draft }
@@ -403,7 +403,7 @@ domains:
           thickness and a form and a wear judgement.
         elements:
           - { id: EC-03-230, title: "Receiving inspection and functional check of a template or feeler gauge", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-231, title: "Calibration configuration and stabilisation for a template or feeler gauge", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-231, title: "Calibration configuration and stabilization for a template or feeler gauge", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-232, title: "Selecting the standards and fixturing for a template or feeler gauge calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-233, title: "Feeler gauge blade thickness and parallelism", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-234, title: "Radius gauge form and edge condition", kind: skill, levelCeiling: 3, status: draft }
@@ -416,37 +416,37 @@ domains:
           - { id: EC-03-241, title: "Conformity statement for a template or feeler gauge against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-03-A19
-        title: Stabilised Laser and Realisation of the Metre
+        title: Stabilized Laser and Realization of the Metre
         status: draft
         summary: >-
-          The light source that realises the metre, its frequency locked
+          The light source that realizes the metre, its frequency locked
           to an atomic or molecular transition, and the comparison that
           verifies it.
         elements:
-          - { id: EC-03-242, title: "Receiving inspection and functional check of a stabilised laser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-243, title: "Calibration configuration and stabilisation for a stabilised laser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-244, title: "Selecting the standards and fixturing for a stabilised laser calibration", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-03-245, title: "Iodine-stabilised and frequency-stabilised laser operation", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-242, title: "Receiving inspection and functional check of a stabilized laser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-243, title: "Calibration configuration and stabilization for a stabilized laser", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-244, title: "Selecting the standards and fixturing for a stabilized laser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-245, title: "Iodine-stabilized and frequency-stabilized laser operation", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-03-246, title: "Locking, servo behaviour and loss-of-lock detection", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-03-247, title: "Beat frequency comparison against a reference laser", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-03-248, title: "Frequency comb comparison and absolute frequency measurement", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-03-249, title: "Recommended radiation selection and its stated uncertainty", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: EC-03-250, title: "Wavelength in air and refractive index correction", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-03-251, title: "Uncertainty budget for a realised length", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-03-252, title: "Adjustment of a stabilised laser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-03-253, title: "Uncertainty budget for a stabilised laser calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-03-254, title: "Conformity statement for a stabilised laser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-251, title: "Uncertainty budget for a realized length", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-03-252, title: "Adjustment of a stabilized laser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-03-253, title: "Uncertainty budget for a stabilized laser calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-03-254, title: "Conformity statement for a stabilized laser against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-03-A20
         title: Interferometric Comparator and Line Scale Calibration
         status: draft
         summary: >-
-          The machines that transfer realised length onto gauge blocks
+          The machines that transfer realized length onto gauge blocks
           and line scales, where the comparator's own errors are the
           calibration.
         elements:
           - { id: EC-03-255, title: "Receiving inspection and functional check of an interferometric comparator", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-03-256, title: "Calibration configuration and stabilisation for an interferometric comparator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-03-256, title: "Calibration configuration and stabilization for an interferometric comparator", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-03-257, title: "Selecting the standards and fixturing for an interferometric comparator calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-03-258, title: "Gauge block interferometer operation and fringe fraction", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-03-259, title: "Phase change on reflection and wringing film correction", kind: skill, levelCeiling: 5, status: draft }

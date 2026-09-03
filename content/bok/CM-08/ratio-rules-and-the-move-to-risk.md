@@ -232,7 +232,7 @@ read off a purchase order.
 "ISO/IEC 17025 requires the decision rule to be agreed and recorded, and JCGM
 106 supplies the risk model."
 
-Collapsing them produces two recognisable failures. **Teaching a withdrawn
+Collapsing them produces two recognizable failures. **Teaching a withdrawn
 requirement as a live one** — a trainee who leaves believing 4:1 is what
 ISO/IEC 17025 asks for, and who will apply it where no contract requires it and
 where it is not the best available answer. And the mirror error, **dismissing a

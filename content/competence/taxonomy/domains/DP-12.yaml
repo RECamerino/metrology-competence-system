@@ -37,7 +37,7 @@ domains:
           - { id: DP-12-056, title: "Cosine response and the angle of incident light", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-12-057, title: "Stray light and ambient rejection", kind: skill, levelCeiling: 3, status: draft }
           - { id: DP-12-058, title: "Detector fatigue, warm-up and drift", kind: skill, levelCeiling: 3, status: draft }
-          - { id: DP-12-059, title: "Source stabilisation and lamp warm-up", kind: skill, levelCeiling: 3, status: draft }
+          - { id: DP-12-059, title: "Source stabilization and lamp warm-up", kind: skill, levelCeiling: 3, status: draft }
           - { id: DP-12-060, title: "Laser and optical radiation safety in outline", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-12-061, title: "Recording a photometric result with its geometry", kind: skill, levelCeiling: 3, status: draft }
 
@@ -67,7 +67,7 @@ domains:
           - { id: DP-12-015, title: "Detector linearity, spatial uniformity and temperature dependence", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-12-016, title: "Standard lamps and source standards", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-12-017, title: "Lamp ageing, seasoning and operating conditions", kind: skill, levelCeiling: 4, status: draft }
-          - { id: DP-12-018, title: "Integrating spheres and their characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-12-018, title: "Integrating spheres and their characterization", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-12-019, title: "Stray light and its control", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-12-A03

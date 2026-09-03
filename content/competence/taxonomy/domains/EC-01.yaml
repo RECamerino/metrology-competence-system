@@ -1,8 +1,8 @@
 # Equipment-calibration pack: electrical test and measurement instruments.
 #
-# WHY A THIRD AXIS EXISTS. The corpus had two, and both are organised by
+# WHY A THIRD AXIS EXISTS. The corpus had two, and both are organized by
 # measurement science: CM by cross-cutting concept, DP by measured quantity.
-# Neither is organised by the work. A technician's day is not "uncertainty,
+# Neither is organized by the work. A technician's day is not "uncertainty,
 # then traceability" — it is an oscilloscope, then a torque wrench, then an RF
 # attenuator, and their competence is per equipment type.
 #
@@ -10,7 +10,7 @@
 # titled "Oscilloscope DC and timebase calibration", truncated to the parts
 # that fit a DC and low-frequency electrical domain: bandwidth belongs to
 # DP-10, jitter and time-interval to DP-14. Calibrating a scope is ONE job, and
-# a quantity-organised taxonomy could only describe a third of it. That is what
+# a quantity-organized taxonomy could only describe a third of it. That is what
 # a missing axis looks like from the inside.
 #
 # WHAT AN EC ELEMENT IS, AND IS NOT. It is the competence to calibrate a class
@@ -34,9 +34,9 @@ domains:
     kind: equipment
     status: draft
     summary: >-
-      Calibrating the instruments that measure electrical quantities, organised
+      Calibrating the instruments that measure electrical quantities, organized
       by the instrument that arrives on the bench rather than by the quantity
-      it measures. Oscilloscopes, multimeters, sources, generators and analysers
+      it measures. Oscilloscopes, multimeters, sources, generators and analyzers
       each present a whole job: several parameters, several standards, and
       failure modes that belong to the instrument rather than to any one
       quantity. Boundary: the physics and the measurement science are DP-08,
@@ -99,7 +99,7 @@ domains:
           functions each with its own standard and its own failure mode.
         elements:
           - { id: EC-01-027, title: "Receiving inspection and functional check of a digital multimeter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-028, title: "Calibration configuration and stabilisation for a digital multimeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-028, title: "Calibration configuration and stabilization for a digital multimeter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-029, title: "Selecting the standards and fixturing for a digital multimeter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-030, title: "DC voltage accuracy across ranges", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-031, title: "AC voltage accuracy against frequency", kind: skill, levelCeiling: 4, status: draft }
@@ -135,7 +135,7 @@ domains:
           furthest through a laboratory.
         elements:
           - { id: EC-01-046, title: "Receiving inspection and functional check of a multifunction calibrator", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-047, title: "Calibration configuration and stabilisation for a multifunction calibrator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-047, title: "Calibration configuration and stabilization for a multifunction calibrator", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-048, title: "Selecting the standards and fixturing for a multifunction calibrator calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-049, title: "DC voltage output accuracy and range coverage", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-050, title: "AC voltage output accuracy against frequency and amplitude", kind: skill, levelCeiling: 4, status: draft }
@@ -160,7 +160,7 @@ domains:
           behaviour that a bench generator is actually bought for.
         elements:
           - { id: EC-01-063, title: "Receiving inspection and functional check of a waveform generator", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-064, title: "Calibration configuration and stabilisation for a waveform generator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-064, title: "Calibration configuration and stabilization for a waveform generator", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-065, title: "Selecting the standards and fixturing for a waveform generator calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-066, title: "Frequency accuracy and resolution across the output range", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-067, title: "Output amplitude accuracy into 50 Ω and into high impedance", kind: skill, levelCeiling: 4, status: draft }
@@ -184,7 +184,7 @@ domains:
           supply that meets specification unloaded stops meeting it.
         elements:
           - { id: EC-01-079, title: "Receiving inspection and functional check of a power supply or electronic load", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-080, title: "Calibration configuration and stabilisation for a power supply or electronic load", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-080, title: "Calibration configuration and stabilization for a power supply or electronic load", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-081, title: "Selecting the standards and fixturing for a power supply or electronic load calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-082, title: "Output voltage programming and readback accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-083, title: "Output current programming, readback and limit accuracy", kind: skill, levelCeiling: 4, status: draft }
@@ -200,7 +200,7 @@ domains:
           - { id: EC-01-093, title: "Conformity statement for a power supply or electronic load against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-01-A06
-        title: LCR Meter and Impedance Analyser Calibration
+        title: LCR Meter and Impedance Analyzer Calibration
         status: draft
         summary: >-
           Complex impedance across frequency and level, where the
@@ -208,7 +208,7 @@ domains:
           as the instrument.
         elements:
           - { id: EC-01-094, title: "Receiving inspection and functional check of an LCR meter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-095, title: "Calibration configuration and stabilisation for an LCR meter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-095, title: "Calibration configuration and stabilization for an LCR meter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-096, title: "Selecting the standards and fixturing for an LCR meter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-097, title: "Capacitance accuracy across decades and frequency", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-098, title: "Inductance accuracy across decades and frequency", kind: skill, levelCeiling: 4, status: draft }
@@ -232,7 +232,7 @@ domains:
           account for both.
         elements:
           - { id: EC-01-109, title: "Receiving inspection and functional check of a clamp meter or current probe", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-110, title: "Calibration configuration and stabilisation for a clamp meter or current probe", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-110, title: "Calibration configuration and stabilization for a clamp meter or current probe", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-111, title: "Selecting the standards and fixturing for a clamp meter or current probe calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-112, title: "AC current accuracy across ranges", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-113, title: "DC current accuracy for Hall-effect clamps", kind: skill, levelCeiling: 4, status: draft }
@@ -255,7 +255,7 @@ domains:
           the measurement.
         elements:
           - { id: EC-01-123, title: "Receiving inspection and functional check of a data acquisition system", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-124, title: "Calibration configuration and stabilisation for a data acquisition system", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-124, title: "Calibration configuration and stabilization for a data acquisition system", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-125, title: "Selecting the standards and fixturing for a data acquisition system calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-126, title: "Per-channel accuracy and channel-to-channel consistency", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-127, title: "Scanner and multiplexer switching offsets", kind: skill, levelCeiling: 4, status: draft }
@@ -278,7 +278,7 @@ domains:
           unusual.
         elements:
           - { id: EC-01-137, title: "Receiving inspection and functional check of an insulation tester", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-138, title: "Calibration configuration and stabilisation for an insulation tester", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-138, title: "Calibration configuration and stabilization for an insulation tester", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-139, title: "Selecting the standards and fixturing for an insulation tester calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-140, title: "Insulation resistance accuracy at each test voltage", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-141, title: "Test voltage accuracy under load", kind: skill, levelCeiling: 4, status: draft }
@@ -299,19 +299,19 @@ domains:
           calibrated where an undetected error has a consequence beyond
           a wrong number.
         elements:
-          - { id: EC-01-150, title: "Receiving inspection and functional check of an electrical safety analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-151, title: "Calibration configuration and stabilisation for an electrical safety analyser", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-152, title: "Selecting the standards and fixturing for an electrical safety analyser calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-150, title: "Receiving inspection and functional check of an electrical safety analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-151, title: "Calibration configuration and stabilization for an electrical safety analyzer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-152, title: "Selecting the standards and fixturing for an electrical safety analyzer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-153, title: "AC and DC hipot output voltage accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-154, title: "Trip current threshold and timing accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-155, title: "Ground bond current and resistance accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-156, title: "Leakage current measurement accuracy and patient-lead functions", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-157, title: "Ramp rate and dwell time verification", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-158, title: "Load and dummy-device standards for safety analysers", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-158, title: "Load and dummy-device standards for safety analyzers", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-159, title: "Working safely on a hipot tester under calibration", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: EC-01-160, title: "Adjustment of an electrical safety analyser, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-01-161, title: "Uncertainty budget for an electrical safety analyser calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-01-162, title: "Conformity statement for an electrical safety analyser against its specification", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-160, title: "Adjustment of an electrical safety analyzer, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-01-161, title: "Uncertainty budget for an electrical safety analyzer calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-162, title: "Conformity statement for an electrical safety analyzer against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-01-A11
         title: Process and Loop Calibrator Calibration
@@ -321,7 +321,7 @@ domains:
           measures at once and is calibrated for both directions.
         elements:
           - { id: EC-01-163, title: "Receiving inspection and functional check of a process calibrator", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-164, title: "Calibration configuration and stabilisation for a process calibrator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-164, title: "Calibration configuration and stabilization for a process calibrator", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-165, title: "Selecting the standards and fixturing for a process calibrator calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-166, title: "mA source and measure accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-167, title: "Voltage source and measure accuracy at process levels", kind: skill, levelCeiling: 4, status: draft }
@@ -343,7 +343,7 @@ domains:
           usually calibrated in place with the loop connected.
         elements:
           - { id: EC-01-177, title: "Receiving inspection and functional check of a panel instrument or recorder", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-178, title: "Calibration configuration and stabilisation for a panel instrument or recorder", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-178, title: "Calibration configuration and stabilization for a panel instrument or recorder", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-179, title: "Selecting the standards and fixturing for a panel instrument or recorder calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-180, title: "Indicated value accuracy across the scale", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-181, title: "Scale linearity and turn-down behaviour", kind: skill, levelCeiling: 3, status: draft }
@@ -365,7 +365,7 @@ domains:
           calibration.
         elements:
           - { id: EC-01-198, title: "Receiving inspection and functional check of a standard resistor", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-199, title: "Calibration configuration and stabilisation for a standard resistor", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-199, title: "Calibration configuration and stabilization for a standard resistor", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-200, title: "Selecting the standards and fixturing for a standard resistor calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-201, title: "Resistance value by substitution against a reference", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-202, title: "Temperature coefficient determination", kind: skill, levelCeiling: 4, status: draft }
@@ -383,18 +383,18 @@ domains:
         title: Voltage Reference and Zener Standard Calibration
         status: draft
         summary: >-
-          Solid-state voltage references characterised for drift,
+          Solid-state voltage references characterized for drift,
           temperature and pressure sensitivity, and carried between
           laboratories as transfer standards.
         elements:
           - { id: EC-01-212, title: "Receiving inspection and functional check of a voltage reference standard", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-213, title: "Calibration configuration and stabilisation for a voltage reference standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-213, title: "Calibration configuration and stabilization for a voltage reference standard", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-214, title: "Selecting the standards and fixturing for a voltage reference standard calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-215, title: "Output voltage against a reference standard", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-216, title: "Drift rate determination and predicted value", kind: judgment, levelCeiling: 5, status: draft }
           - { id: EC-01-217, title: "Temperature coefficient of a Zener reference", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-218, title: "Barometric pressure sensitivity", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-01-219, title: "Transport behaviour and re-stabilisation after shipping", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-01-219, title: "Transport behaviour and re-stabilization after shipping", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-220, title: "1 V and 10 V output relationship and scaling", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-221, title: "Noise and short-term stability at the microvolt level", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-01-222, title: "Josephson comparison and its interpretation", kind: knowledge, levelCeiling: 5, status: draft }
@@ -410,7 +410,7 @@ domains:
           EMF and the contact are the whole problem.
         elements:
           - { id: EC-01-226, title: "Receiving inspection and functional check of a micro-ohmmeter", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-227, title: "Calibration configuration and stabilisation for a micro-ohmmeter", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-227, title: "Calibration configuration and stabilization for a micro-ohmmeter", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-228, title: "Selecting the standards and fixturing for a micro-ohmmeter calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-229, title: "Resistance accuracy at micro- and milli-ohm levels", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-230, title: "Test current accuracy and its heating effect", kind: skill, levelCeiling: 4, status: draft }
@@ -431,7 +431,7 @@ domains:
           guarding and triaxial cabling dominate everything else.
         elements:
           - { id: EC-01-239, title: "Receiving inspection and functional check of an electrometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-240, title: "Calibration configuration and stabilisation for an electrometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-240, title: "Calibration configuration and stabilization for an electrometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-241, title: "Selecting the standards and fixturing for an electrometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-242, title: "Current accuracy at picoamp and femtoamp levels", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-01-243, title: "High resistance measurement to teraohms", kind: skill, levelCeiling: 5, status: draft }
@@ -448,11 +448,11 @@ domains:
         title: Battery and Cell Test Equipment Calibration
         status: draft
         summary: >-
-          Chargers, analysers and cyclers, calibrated for voltage,
+          Chargers, analyzers and cyclers, calibrated for voltage,
           current and capacity integration over time.
         elements:
           - { id: EC-01-252, title: "Receiving inspection and functional check of battery test equipment", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-253, title: "Calibration configuration and stabilisation for battery test equipment", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-253, title: "Calibration configuration and stabilization for battery test equipment", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-254, title: "Selecting the standards and fixturing for battery test equipment calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-255, title: "Charge and discharge current accuracy", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-256, title: "Cell and stack voltage measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
@@ -469,11 +469,11 @@ domains:
         title: Cable Test and Time Domain Reflectometer Calibration
         status: draft
         summary: >-
-          Fault location and cable characterisation, where the velocity
+          Fault location and cable characterization, where the velocity
           factor and the pulse are the measurement.
         elements:
           - { id: EC-01-265, title: "Receiving inspection and functional check of a cable test set", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-266, title: "Calibration configuration and stabilisation for a cable test set", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-266, title: "Calibration configuration and stabilization for a cable test set", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-267, title: "Selecting the standards and fixturing for a cable test set calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-268, title: "Distance-to-fault accuracy and velocity factor", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-269, title: "Pulse width, rise time and resolution verification", kind: skill, levelCeiling: 4, status: draft }
@@ -489,13 +489,13 @@ domains:
         title: Josephson Voltage Standard System Operation
         status: draft
         summary: >-
-          Running the apparatus that realises the volt, and using it to
+          Running the apparatus that realizes the volt, and using it to
           calibrate. DP-08 holds the physics; this is the competence to
           operate the system, keep it in specification, and defend a
           calibration made with it.
         elements:
           - { id: EC-01-277, title: "Receiving inspection and functional check of a Josephson voltage standard", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-278, title: "Calibration configuration and stabilisation for a Josephson voltage standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-278, title: "Calibration configuration and stabilization for a Josephson voltage standard", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-279, title: "Selecting the standards and fixturing for a Josephson voltage standard calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-280, title: "Cryogenic system operation, cooldown and helium management", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-01-281, title: "Microwave bias, Shapiro step selection and array operation", kind: skill, levelCeiling: 5, status: draft }
@@ -513,15 +513,15 @@ domains:
         title: Quantum Hall Resistance Standard System Operation
         status: draft
         summary: >-
-          Operating the apparatus that realises the ohm, including the
+          Operating the apparatus that realizes the ohm, including the
           plateau criteria and the cryogenic current comparator that
           scales from it.
         elements:
           - { id: EC-01-291, title: "Receiving inspection and functional check of a quantum Hall resistance standard", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-292, title: "Calibration configuration and stabilisation for a quantum Hall resistance standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-292, title: "Calibration configuration and stabilization for a quantum Hall resistance standard", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-293, title: "Selecting the standards and fixturing for a quantum Hall resistance standard calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-294, title: "Cryogenic and magnet system operation", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-01-295, title: "Plateau identification and quantisation criteria verification", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-295, title: "Plateau identification and quantization criteria verification", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-01-296, title: "Device selection, contact quality and breakdown current", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-01-297, title: "Cryogenic current comparator bridge operation", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-01-298, title: "Scaling from the quantum Hall value to working resistances", kind: skill, levelCeiling: 5, status: draft }
@@ -540,11 +540,11 @@ domains:
           quantity.
         elements:
           - { id: EC-01-304, title: "Receiving inspection and functional check of an AC-DC transfer standard", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-305, title: "Calibration configuration and stabilisation for an AC-DC transfer standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-305, title: "Calibration configuration and stabilization for an AC-DC transfer standard", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-306, title: "Selecting the standards and fixturing for an AC-DC transfer standard calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-307, title: "AC-DC difference determination against frequency", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-01-308, title: "Single-junction and multi-junction thermal converter operation", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-01-309, title: "Range resistor and shunt characterisation for AC-DC transfer", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-01-309, title: "Range resistor and shunt characterization for AC-DC transfer", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-01-310, title: "Thermal converter reversal and settling technique", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-01-311, title: "Frequency and voltage dependence of the AC-DC difference", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-01-312, title: "Calibrating an AC source or meter by transfer", kind: skill, levelCeiling: 4, status: draft }
@@ -561,7 +561,7 @@ domains:
           bridge against a calculable or quantum-derived value.
         elements:
           - { id: EC-01-317, title: "Receiving inspection and functional check of a capacitance or inductance standard", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-01-318, title: "Calibration configuration and stabilisation for a capacitance or inductance standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-01-318, title: "Calibration configuration and stabilization for a capacitance or inductance standard", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-01-319, title: "Selecting the standards and fixturing for a capacitance or inductance standard calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-01-320, title: "Capacitance value by transformer ratio bridge", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-01-321, title: "Frequency and voltage dependence of a capacitance standard", kind: skill, levelCeiling: 4, status: draft }

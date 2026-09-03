@@ -84,7 +84,7 @@ domains:
           - { id: CM-03-018, title: "Cause-and-effect analysis for uncertainty sources", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-03-019, title: "Completeness: finding the sources you have missed", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-03-020, title: "Validating a measurement model against reality", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: CM-03-021, title: "Nonlinear models and when linearisation fails", kind: judgment, levelCeiling: 5, status: draft }
+          - { id: CM-03-021, title: "Nonlinear models and when linearization fails", kind: judgment, levelCeiling: 5, status: draft }
           - { id: CM-03-022, title: "Implicit, staged and chained measurement models", kind: judgment, levelCeiling: 5, status: draft }
 
       - id: CM-03-A03
@@ -119,7 +119,7 @@ domains:
           - { id: CM-03-038, title: "Assigning a normal distribution from a stated confidence", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-03-039, title: "Assigning a U-shaped or arcsine distribution", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-03-040, title: "Choosing between distributions and defending the choice", kind: judgment, levelCeiling: 5, status: draft }
-          - { id: CM-03-041, title: "Resolution and quantisation contributions", kind: skill, levelCeiling: 4, status: draft }
+          - { id: CM-03-041, title: "Resolution and quantization contributions", kind: skill, levelCeiling: 4, status: draft }
           - { id: CM-03-042, title: "Drift and stability contributions between calibrations", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-03-043, title: "Environmental effects as Type B contributions", kind: judgment, levelCeiling: 4, status: draft }
           - { id: CM-03-044, title: "Operator and procedural effects", kind: judgment, levelCeiling: 4, status: draft }

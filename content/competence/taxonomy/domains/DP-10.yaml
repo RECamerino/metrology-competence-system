@@ -74,24 +74,24 @@ domains:
         title: Network Analysis and S-Parameters
         status: draft
         elements:
-          - { id: DP-10-019, title: "Vector network analyser architecture", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-10-019, title: "Vector network analyzer architecture", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-10-020, title: "Error models and systematic error terms", kind: knowledge, levelCeiling: 5, status: draft }
           - { id: DP-10-021, title: "SOLT calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-10-022, title: "TRL and LRM calibration techniques", kind: skill, levelCeiling: 5, status: draft }
           - { id: DP-10-023, title: "Calibration kit definitions and standard models", kind: skill, levelCeiling: 4, status: draft }
-          - { id: DP-10-024, title: "Verification of a network analyser calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-10-024, title: "Verification of a network analyzer calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-10-025, title: "De-embedding and fixture removal", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-10-026, title: "On-wafer and probe-station measurement", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-10-027, title: "Time domain reflectometry and gating", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-10-028, title: "Uncertainty evaluation for S-parameter measurement", kind: skill, levelCeiling: 5, status: draft }
-          - { id: DP-10-029, title: "Nonlinear device characterisation and large-signal measurement", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-10-029, title: "Nonlinear device characterization and large-signal measurement", kind: skill, levelCeiling: 4, status: draft }
 
       - id: DP-10-A04
         title: Signal Generation, Analysis and Noise
         status: draft
         elements:
-          - { id: DP-10-030, title: "Signal generator characterisation and calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: DP-10-031, title: "Spectrum analyser architecture and calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-10-030, title: "Signal generator characterization and calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-10-031, title: "Spectrum analyzer architecture and calibration", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-10-032, title: "Attenuation measurement and standards", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-10-033, title: "Modulation measurement and analysis", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-10-034, title: "Noise figure and noise temperature", kind: knowledge, levelCeiling: 4, status: draft }
@@ -104,7 +104,7 @@ domains:
         title: Antennas and Field Measurement
         status: draft
         elements:
-          - { id: DP-10-039, title: "Antenna parameters: gain, pattern, polarisation, efficiency", kind: knowledge, levelCeiling: 4, status: draft }
+          - { id: DP-10-039, title: "Antenna parameters: gain, pattern, polarization, efficiency", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-10-040, title: "Antenna gain measurement methods", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-10-041, title: "Near-field and far-field regions", kind: knowledge, levelCeiling: 4, status: draft }
           - { id: DP-10-042, title: "Anechoic chambers and antenna ranges", kind: skill, levelCeiling: 4, status: draft }

@@ -115,7 +115,7 @@ domains:
           - { id: DP-16-037, title: "Reference material production planning", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-16-038, title: "Homogeneity assessment and between-bottle variability", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-16-039, title: "Short-term and long-term stability studies", kind: skill, levelCeiling: 4, status: draft }
-          - { id: DP-16-040, title: "Characterisation approaches and value assignment", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-16-040, title: "Characterization approaches and value assignment", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-16-041, title: "Uncertainty of a certified value", kind: skill, levelCeiling: 5, status: draft }
           - { id: DP-16-042, title: "Commutability assessment", kind: judgment, levelCeiling: 5, status: draft }
           - { id: DP-16-043, title: "Certification reporting and the certificate content", kind: skill, levelCeiling: 4, status: draft }

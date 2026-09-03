@@ -5,7 +5,7 @@
  * The first taxonomy pass set 54 percent of elements at ceiling 5, against a
  * stated intent that most would sit at 3. That inflation is not free: every L5
  * element generates three per-element assessable units, each needing training
- * content, an item bank deep enough to resist memorisation, and a rubric. It
+ * content, an item bank deep enough to resist memorization, and a rubric. It
  * also devalues Level 5, which is supposed to mean something rare.
  *
  * This applies `tools/ceiling-plan.json` — a per-competency-area default with

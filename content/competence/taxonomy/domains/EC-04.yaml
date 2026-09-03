@@ -28,7 +28,7 @@ domains:
           check.
         elements:
           - { id: EC-04-001, title: "Receiving inspection and functional check of a balance", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-002, title: "Calibration configuration and stabilisation for a balance", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-002, title: "Calibration configuration and stabilization for a balance", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-003, title: "Selecting the standards and fixturing for a balance calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-004, title: "Repeatability at the test loads", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-005, title: "Eccentricity and off-centre loading error", kind: skill, levelCeiling: 3, status: draft }
@@ -52,7 +52,7 @@ domains:
           design and the environment.
         elements:
           - { id: EC-04-016, title: "Receiving inspection and functional check of a mass standard", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-017, title: "Calibration configuration and stabilisation for a mass standard", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-017, title: "Calibration configuration and stabilization for a mass standard", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-018, title: "Selecting the standards and fixturing for a mass standard calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-019, title: "Substitution weighing designs and their execution", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-04-020, title: "Conventional mass and true mass distinguished", kind: knowledge, levelCeiling: 4, status: draft }
@@ -75,7 +75,7 @@ domains:
           uncertainty.
         elements:
           - { id: EC-04-030, title: "Receiving inspection and functional check of a force measuring instrument", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-031, title: "Calibration configuration and stabilisation for a force measuring instrument", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-031, title: "Calibration configuration and stabilization for a force measuring instrument", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-032, title: "Selecting the standards and fixturing for a force measuring instrument calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-033, title: "Indication error in increasing and decreasing force", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-04-034, title: "Hysteresis and its treatment", kind: skill, levelCeiling: 4, status: draft }
@@ -98,7 +98,7 @@ domains:
           the measurement.
         elements:
           - { id: EC-04-044, title: "Receiving inspection and functional check of a torque tool or transducer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-045, title: "Calibration configuration and stabilisation for a torque tool or transducer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-045, title: "Calibration configuration and stabilization for a torque tool or transducer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-046, title: "Selecting the standards and fixturing for a torque tool or transducer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-047, title: "Torque wrench indication error across the range", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-048, title: "Click-type wrench trip point and repeatability", kind: skill, levelCeiling: 3, status: draft }
@@ -122,7 +122,7 @@ domains:
           block.
         elements:
           - { id: EC-04-059, title: "Receiving inspection and functional check of a hardness tester", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-060, title: "Calibration configuration and stabilisation for a hardness tester", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-060, title: "Calibration configuration and stabilization for a hardness tester", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-061, title: "Selecting the standards and fixturing for a hardness tester calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-062, title: "Direct verification of test force", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-04-063, title: "Indenter geometry and condition verification", kind: skill, levelCeiling: 4, status: draft }
@@ -145,7 +145,7 @@ domains:
           is part of every result it reports.
         elements:
           - { id: EC-04-074, title: "Receiving inspection and functional check of a materials testing machine", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-075, title: "Calibration configuration and stabilisation for a materials testing machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-075, title: "Calibration configuration and stabilization for a materials testing machine", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-076, title: "Selecting the standards and fixturing for a materials testing machine calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-077, title: "Force indication verification in tension and compression", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-04-078, title: "Extensometer calibration and classification", kind: skill, levelCeiling: 4, status: draft }
@@ -166,7 +166,7 @@ domains:
           force, the indenter and the timing define the scale.
         elements:
           - { id: EC-04-087, title: "Receiving inspection and functional check of a durometer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-088, title: "Calibration configuration and stabilisation for a durometer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-088, title: "Calibration configuration and stabilization for a durometer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-089, title: "Selecting the standards and fixturing for a durometer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-090, title: "Indenter geometry and extension verification", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-091, title: "Spring force calibration against the scale", kind: skill, levelCeiling: 4, status: draft }
@@ -188,7 +188,7 @@ domains:
           numbers.
         elements:
           - { id: EC-04-100, title: "Receiving inspection and functional check of an impact testing machine", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-101, title: "Calibration configuration and stabilisation for an impact testing machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-101, title: "Calibration configuration and stabilization for an impact testing machine", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-102, title: "Selecting the standards and fixturing for an impact testing machine calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-103, title: "Potential energy and striker velocity verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-04-104, title: "Friction and windage loss determination", kind: skill, levelCeiling: 4, status: draft }
@@ -209,7 +209,7 @@ domains:
           calibrated in the direction and rate of use.
         elements:
           - { id: EC-04-113, title: "Receiving inspection and functional check of a spring or tension tester", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-114, title: "Calibration configuration and stabilisation for a spring or tension tester", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-114, title: "Calibration configuration and stabilization for a spring or tension tester", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-115, title: "Selecting the standards and fixturing for a spring or tension tester calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-116, title: "Force indication error in tension and compression", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-117, title: "Displacement and travel measurement accuracy", kind: skill, levelCeiling: 4, status: draft }
@@ -230,7 +230,7 @@ domains:
           oscillating tube, where temperature is inside every result.
         elements:
           - { id: EC-04-126, title: "Receiving inspection and functional check of density measuring apparatus", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-127, title: "Calibration configuration and stabilisation for density measuring apparatus", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-127, title: "Calibration configuration and stabilization for density measuring apparatus", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-128, title: "Selecting the standards and fixturing for density measuring apparatus calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-129, title: "Hydrostatic weighing kit verification", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-04-130, title: "Oscillating tube densitometer calibration", kind: skill, levelCeiling: 4, status: draft }
@@ -251,11 +251,11 @@ domains:
           reference standards rather than as working tools. This is the
           tier a torque wrench calibration is traceable through, and it
           is a different job from checking a wrench: the transducer is
-          characterised for interpolation, rotational position, and the
+          characterized for interpolation, rotational position, and the
           parasitic components its mounting introduces.
         elements:
           - { id: EC-04-139, title: "Receiving inspection and functional check of a reference torque transducer", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-140, title: "Calibration configuration and stabilisation for a reference torque transducer", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-140, title: "Calibration configuration and stabilization for a reference torque transducer", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-141, title: "Selecting the standards and fixturing for a reference torque transducer calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-142, title: "Calibration in clockwise and anticlockwise directions", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-04-143, title: "Repeatability with and without rotation about the torque axis", kind: skill, levelCeiling: 4, status: draft }
@@ -276,12 +276,12 @@ domains:
         title: Torque Standard Machine Verification
         status: draft
         summary: >-
-          The machines that realise torque from mass and lever arm, or
+          The machines that realize torque from mass and lever arm, or
           by reference transducer, verified for the quantities they
           generate rather than the ones they read.
         elements:
           - { id: EC-04-156, title: "Receiving inspection and functional check of a torque standard machine", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-157, title: "Calibration configuration and stabilisation for a torque standard machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-157, title: "Calibration configuration and stabilization for a torque standard machine", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-158, title: "Selecting the standards and fixturing for a torque standard machine calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-159, title: "Lever arm length determination and its uncertainty", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-04-160, title: "Mass set calibration and local gravity application", kind: skill, levelCeiling: 5, status: draft }
@@ -304,7 +304,7 @@ domains:
           geometry rather than through an indicator.
         elements:
           - { id: EC-04-170, title: "Receiving inspection and functional check of a force standard machine", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-171, title: "Calibration configuration and stabilisation for a force standard machine", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-171, title: "Calibration configuration and stabilization for a force standard machine", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-172, title: "Selecting the standards and fixturing for a force standard machine calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-173, title: "Deadweight force generation and its computation", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-04-174, title: "Local gravity determination and application", kind: skill, levelCeiling: 5, status: draft }
@@ -327,7 +327,7 @@ domains:
           design assumes.
         elements:
           - { id: EC-04-184, title: "Receiving inspection and functional check of a mass comparator", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-185, title: "Calibration configuration and stabilisation for a mass comparator", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-185, title: "Calibration configuration and stabilization for a mass comparator", kind: skill, levelCeiling: 3, status: draft }
           - { id: EC-04-186, title: "Selecting the standards and fixturing for a mass comparator calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-187, title: "Discrimination and repeatability at the working load", kind: skill, levelCeiling: 4, status: draft }
           - { id: EC-04-188, title: "Sensitivity determination with a sensitivity weight", kind: skill, levelCeiling: 4, status: draft }
@@ -341,23 +341,23 @@ domains:
           - { id: EC-04-196, title: "Conformity statement for a mass comparator against its specification", kind: judgment, levelCeiling: 4, status: draft }
 
       - id: EC-04-A15
-        title: Realisation of the Kilogram and Primary Mass Dissemination
+        title: Realization of the Kilogram and Primary Mass Dissemination
         status: draft
         summary: >-
-          Kibble balance and X-ray crystal density realisation, and the
-          dissemination chain from a realised kilogram to a laboratory's
+          Kibble balance and X-ray crystal density realization, and the
+          dissemination chain from a realized kilogram to a laboratory's
           reference set.
         elements:
-          - { id: EC-04-197, title: "Receiving inspection and functional check of a primary mass realisation", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-198, title: "Calibration configuration and stabilisation for a primary mass realisation", kind: skill, levelCeiling: 3, status: draft }
-          - { id: EC-04-199, title: "Selecting the standards and fixturing for a primary mass realisation calibration", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-197, title: "Receiving inspection and functional check of a primary mass realization", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-198, title: "Calibration configuration and stabilization for a primary mass realization", kind: skill, levelCeiling: 3, status: draft }
+          - { id: EC-04-199, title: "Selecting the standards and fixturing for a primary mass realization calibration", kind: judgment, levelCeiling: 4, status: draft }
           - { id: EC-04-200, title: "Kibble balance operation: weighing and velocity modes", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-04-201, title: "Alignment, coil geometry and magnet system stability", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-04-202, title: "Vacuum operation and buoyancy elimination", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-04-203, title: "X-ray crystal density realisation and sphere characterisation", kind: knowledge, levelCeiling: 5, status: draft }
-          - { id: EC-04-204, title: "Dissemination from a realised kilogram to reference standards", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-203, title: "X-ray crystal density realization and sphere characterization", kind: knowledge, levelCeiling: 5, status: draft }
+          - { id: EC-04-204, title: "Dissemination from a realized kilogram to reference standards", kind: skill, levelCeiling: 5, status: draft }
           - { id: EC-04-205, title: "Surface effects, sorption and cleaning in primary mass work", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-04-206, title: "Uncertainty budget for a primary mass realisation", kind: skill, levelCeiling: 5, status: draft }
-          - { id: EC-04-207, title: "Adjustment of a primary mass realisation, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
-          - { id: EC-04-208, title: "Uncertainty budget for a primary mass realisation calibration", kind: skill, levelCeiling: 4, status: draft }
-          - { id: EC-04-209, title: "Conformity statement for a primary mass realisation against its specification", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-206, title: "Uncertainty budget for a primary mass realization", kind: skill, levelCeiling: 5, status: draft }
+          - { id: EC-04-207, title: "Adjustment of a primary mass realization, and what it does to as-found data", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: EC-04-208, title: "Uncertainty budget for a primary mass realization calibration", kind: skill, levelCeiling: 4, status: draft }
+          - { id: EC-04-209, title: "Conformity statement for a primary mass realization against its specification", kind: judgment, levelCeiling: 4, status: draft }

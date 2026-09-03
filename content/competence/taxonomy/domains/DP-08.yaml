@@ -19,7 +19,7 @@ domains:
       # are what a minority go on to. An entry section stuck at the end of the
       # domain is an entry section nobody finds.
       #
-      # Added after a practising metrologist pointed out that this domain began
+      # Added after a practicing metrologist pointed out that this domain began
       # at the ampere definition and the Josephson effect and had no element
       # for Ohm's law, so prior education was an unstated entry requirement in
       # a project whose first principle is that nothing gates entry.
@@ -92,7 +92,7 @@ domains:
           - { id: DP-08-064, title: "Computing a tolerance from a stated accuracy specification", kind: skill, levelCeiling: 2, status: draft }
           - { id: DP-08-095, title: "When a specification applies: warm-up, temperature and time since calibration", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-08-096, title: "Recording a measurement result: units, digits and what to write down", kind: skill, levelCeiling: 3, status: draft }
-          - { id: DP-08-097, title: "Recognising an implausible reading, and what to do about it", kind: judgment, levelCeiling: 4, status: draft }
+          - { id: DP-08-097, title: "Recognizing an implausible reading, and what to do about it", kind: judgment, levelCeiling: 4, status: draft }
           - { id: DP-08-065, title: "Electrical safety for measurement work", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-08-098, title: "Measurement categories CAT I to CAT IV, and choosing the instrument", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: DP-08-099, title: "Working limits, isolation and lock-out for measurement work", kind: knowledge, levelCeiling: 3, status: draft }
@@ -145,7 +145,7 @@ domains:
         status: draft
         elements:
           - { id: DP-08-028, title: "DC current measurement by shunt and by transfer", kind: skill, levelCeiling: 4, status: draft }
-          - { id: DP-08-029, title: "Current shunts and their characterisation", kind: skill, levelCeiling: 4, status: draft }
+          - { id: DP-08-029, title: "Current shunts and their characterization", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-08-030, title: "Current comparators", kind: skill, levelCeiling: 4, status: draft }
           - { id: DP-08-031, title: "Low current and femtoamp measurement", kind: skill, levelCeiling: 5, status: draft }
           - { id: DP-08-032, title: "High current measurement techniques", kind: skill, levelCeiling: 4, status: draft }

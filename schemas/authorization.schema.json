@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://metrology-bok.org/schemas/authorization.schema.json",
   "title": "Authorization — what an organization permits, which is never what a person earned",
-  "description": "A first-class object, deliberately NOT a kind of credential. Knowledge, skill and judgment are earned and are properties of a person; authority is granted, and is a relationship between a person, an organization and a scope of work. An approved signatory who leaves a laboratory keeps every competency they demonstrated and loses the signatory authority, because the laboratory granted it and the accreditation body recognised it AT THAT LABORATORY, FOR THAT SCOPE. A wallet that treated the two identically would let someone arrive at a new employer holding what looks like signing authority — a defect in the credential model, not in the taxonomy. This schema exists so that defect is structurally impossible rather than merely discouraged: `portable` and `walletExportable` are const false and cannot be authored otherwise.",
+  "description": "A first-class object, deliberately NOT a kind of credential. Knowledge, skill and judgment are earned and are properties of a person; authority is granted, and is a relationship between a person, an organization and a scope of work. An approved signatory who leaves a laboratory keeps every competency they demonstrated and loses the signatory authority, because the laboratory granted it and the accreditation body recognized it AT THAT LABORATORY, FOR THAT SCOPE. A wallet that treated the two identically would let someone arrive at a new employer holding what looks like signing authority — a defect in the credential model, not in the taxonomy. This schema exists so that defect is structurally impossible rather than merely discouraged: `portable` and `walletExportable` are const false and cannot be authored otherwise.",
 
   "type": "object",
   "required": [
@@ -45,7 +45,7 @@
         },
         "accreditationRecognition": {
           "type": "string",
-          "description": "Where an accreditation body recognises this authority, the scope reference under which it does. Recognition is bounded by that scope and does not travel outside it."
+          "description": "Where an accreditation body recognizes this authority, the scope reference under which it does. Recognition is bounded by that scope and does not travel outside it."
         }
       }
     },
@@ -66,7 +66,7 @@
         "ranges": {
           "type": "array",
           "items": { "type": "string" },
-          "description": "Measurement ranges the authority covers. A signatory authorised for gauge blocks to 100 mm is not authorised at 500 mm, and the range is where that is recorded."
+          "description": "Measurement ranges the authority covers. A signatory authorized for gauge blocks to 100 mm is not authorized at 500 mm, and the range is where that is recorded."
         },
         "locations": { "type": "array", "items": { "type": "string" } }
       }
