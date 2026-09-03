@@ -8,8 +8,16 @@
 #
 # COST OF ADDING A ROLE: every element must carry a roleTarget for every role
 # in this registry — the validator rejects silence, because "not rated" and
-# "not applicable" are different claims. At 2232 elements, each role here is
-# 2232 more authored ratings. Twelve is a deliberate ceiling, not an accident.
+# "not applicable" are different claims. At 5459 elements, each role here is
+# 5459 more authored ratings once the corpus is fully written. Thirteen is a
+# deliberate ceiling, not an accident.
+#
+# That figure read 2232 until 2026-09-03, which was the corpus size when the
+# note was written and is now short by a factor of 2.4. It matters because it
+# is the number a reader uses to judge whether adding a role is affordable —
+# the argument that kept this registry at twelve. The cost TODAY is smaller
+# than either figure suggests: only authored elements carry roleTargets, and
+# there are 21, so a new role is 21 ratings now and 5459 eventually.
 #
 # `authorities` records what a role is commonly PERMITTED to do. It is recorded
 # separately from competence on purpose: a person may understand a method
@@ -131,6 +139,41 @@ roles:
       - Approval of measurement uncertainty budgets
 
   # -- Scientific -----------------------------------------------------------
+
+  - id: metrologist
+    title: Metrologist
+    roleType: occupational
+    family: scientific
+    seniority: 6
+    summary: >-
+      The profession's own apex practice title, and the modal mid-career
+      metrology job. Holds the full capability of the calibration technician
+      and of the calibration engineer, and adds responsibility for the
+      laboratory's standards and for maintaining a qualified staff. Answers for
+      whether a measurement was sound rather than only whether a procedure was
+      followed, and is usually the person an assessor ends up talking to.
+    typicalScope: A laboratory's technical capability across its scope.
+    authorities:
+      - Approval of calibration procedures across disciplines
+      - Acceptance of a laboratory's measurement capability statements
+    notes: >-
+      Added 2026-09-03. This role was missing and its absence was not neutral:
+      NCSLI LM-13 (2012) and LM-14 (2010) both organise the profession into
+      three job families — Calibration Technician, Calibration Engineer,
+      Metrologist — and LM-14's benchmarking table counts Metrologist,
+      Associate Metrologist and Senior Metrologist as distinct positions. A
+      laboratory mapping its real org chart had to send a person titled
+      Metrologist to research-metrologist (typically a national institute),
+      principal-metrologist (enterprise technical authority), or
+      laboratory-manager, whose summary explicitly says the role does NOT
+      construct the technical argument. All three misdescribe the job, and the
+      gap dashboard for the profession's commonest senior title therefore ran
+      against a profile that did not fit it.
+
+      Seniority 6 places it between metrology-engineer and
+      research-metrologist, which is LM-14's ordering. Family `scientific`
+      rather than a new one: it is the entry to that family, not a fourth kind
+      of work.
 
   - id: research-metrologist
     title: Research Metrologist
