@@ -83,7 +83,20 @@ roles:
     typicalScope: A discipline's bench operations across a laboratory.
     authorities:
       - Release of calibration results within a defined scope
-      - Witness signoff for technician-level competence
+      - Witness signoff at L1 and L2, which require no held level
+    notes: >-
+      The second authority read "witness signoff for technician-level
+      competence" until 2026-09-03, which claimed more than the role can
+      deliver. L1 and L2 set witnessMustHoldLevel to null, so this role can
+      witness them in any element, and that covers most of what
+      metrology-technician-i and -ii are targeted at. From L3 the witness must
+      hold L4 IN THE SAME ELEMENT — signer standing is element-scoped, see
+      credentials.ts — and this role's authored targets reach L4 on one
+      element. So it cannot witness an L3 attestation across most of the
+      corpus, including the elements where metrology-technician-ii is itself
+      targeted at L3. That is a consequence of element-scoped signer standing
+      rather than of this role being rated too low, and it is open decision 26,
+      not something a role target can fix.
 
   # -- Engineering ----------------------------------------------------------
 
@@ -235,14 +248,30 @@ roles:
     family: education
     seniority: 5
     summary: >-
-      Brings others to competence: designs and delivers training, builds
-      assessments, and judges whether a learner has actually attained a level.
-      Requires genuine depth in the subject plus instructional competence,
-      which is a distinct body of knowledge and is why CM-20 exists.
+      Brings others to competence: designs and delivers training and builds
+      assessments. Does NOT judge whether a learner has attained a level —
+      that is a signoff, and this role's authority is deliberately the other
+      thing. Requires genuine depth in the subject plus instructional
+      competence, which is a distinct body of knowledge and is why CM-17
+      exists.
     typicalScope: A training programme across a site or an enterprise.
     authorities:
       - Attesting completion of training, distinct from attesting competence
     notes: >-
       Attesting that someone attended training is not attesting that they are
       competent. The distinction is deliberate and the wording here is load
-      bearing.
+      bearing — rule 9, and `attestsCompetence` is `const false` on every
+      training record.
+
+      Two corrections on 2026-09-03. The summary said this role "judges whether
+      a learner has actually attained a level", which contradicted both the
+      authority below it and this note; judging attainment is a signoff and
+      this role does not make one. And the summary pointed at CM-20 for
+      instructional competence, which is Research, Development and Innovation
+      — the teaching domain is CM-17.
+
+      A consequence worth stating, because a reader will look for it: this role
+      therefore does NOT need to hold L5, and the fact that its targets never
+      reach 5 is correct rather than a gap. L5 is where the ladder places
+      bringing another person to competence; attesting that training happened
+      needs no level at all.
