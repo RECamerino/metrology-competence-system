@@ -173,6 +173,17 @@ because a scope entry is meant to be comparable across laboratories and across
 economies; a figure that meant something different in each would not support
 the comparison it exists for.
 
+The names have moved and the concept has not. On 1 January 2026 ILAC and the
+International Accreditation Forum merged into Global Accreditation Cooperation
+Incorporated, and the ILAC Arrangement and the IAF Multilateral Recognition
+Arrangement became a single Global ACI arrangement. P14 was written before that
+and still says *ILAC Arrangement*, so this article uses the policy's own wording
+where it cites the policy — a document is not renamed by its publisher merging.
+A reader working today should take *a signatory to the ILAC Arrangement* to mean
+a signatory to the arrangement that succeeded it, and should expect to keep
+meeting both predecessor marks: they remain valid until the Global ACI mark is
+fully adopted.
+
 A scope entry expresses four things: the measurand, the calibration method or
 procedure and the type of instrument it applies to, the measurement range with
 any additional parameters, and the measurement uncertainty. All four are load

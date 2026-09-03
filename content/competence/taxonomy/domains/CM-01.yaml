@@ -107,7 +107,14 @@ domains:
           - { id: CM-01-040, title: "National Metrology Institutes and Designated Institutes", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-01-041, title: "Regional Metrology Organizations", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-01-042, title: "OIML and the legal metrology infrastructure", kind: knowledge, levelCeiling: 3, status: draft }
-          - { id: CM-01-043, title: "Accreditation bodies, ILAC and IAF", kind: knowledge, levelCeiling: 3, status: draft }
+          # Retitled 2026-09-03. ILAC and IAF merged on 2026-01-01 into Global
+          # Accreditation Cooperation Incorporated (Global ACI), so the previous
+          # title named an organizational landscape that no longer exists. The
+          # predecessors stay in the title because a practitioner still meets
+          # both names daily — on older certificates, on accreditation marks
+          # valid until the new mark is fully adopted, and throughout the
+          # document set, none of which was renamed by the merger.
+          - { id: CM-01-043, title: "Accreditation bodies, and Global ACI formed from ILAC and IAF", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-01-044, title: "Standards development organizations and how a standard is made", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-01-045, title: "Professional bodies and the metrology community", kind: knowledge, levelCeiling: 3, status: draft }
           - { id: CM-01-046, title: "How a measurement on a factory floor connects to the SI", kind: knowledge, levelCeiling: 4, status: draft }
