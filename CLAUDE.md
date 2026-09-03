@@ -119,12 +119,13 @@ content/competence/
   taxonomy/id-registry.lock       Every ID ever issued — taxonomy, BOK, modules,
                                   archetypes. Append-only.
   taxonomy/proficiency.yaml       The 5-level ladder. Steward-controlled.
-  roles/registry.yaml             12 reference roles — 11 occupational, 1
+  roles/registry.yaml             13 reference roles — 12 occupational, 1
                                   authority overlay. Every element needs a
                                   roleTarget for EVERY role — each one added is
-                                  now 5407 more authored ratings.
-  elements/                       ASSESSABLE CLAIMS, not prose. 10 authored,
-                                  all in CM-03.
+                                  now 5459 more authored ratings.
+  elements/                       ASSESSABLE CLAIMS, not prose. 21 authored,
+                                  across CM-03, CM-08, CM-15, CM-21, DP-08,
+                                  DP-20 and EC-01.
   items/archetypes/               Reusable parameterized item SHAPES. ARC-nnnn.
   items/bindings/                 One archetype × one (element×level). Scales here.
   items/rubrics/                  Ships in the same commit as its item.
@@ -263,7 +264,7 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 ## What Phase 2 has to produce
 
-**Done:** proficiency ladder · 12 reference roles · **per-element anchor template** ([`docs/anchor-template.md`](docs/anchor-template.md), with a CI lint rejecting unobservable phrasing, and separate upper-rung guidance for `knowledge` — its L4/L5 rows were phrased for `skill` and `judgment`, which made them unfollowable for the 108 knowledge elements at ceiling 5) · item parameterization format (archetypes + bindings, decision 36) · rubric format · experience hours and waiting periods (decision 37) · recertification defaults per level.
+**Done:** proficiency ladder · 13 reference roles · **per-element anchor template** ([`docs/anchor-template.md`](docs/anchor-template.md), with a CI lint rejecting unobservable phrasing, and separate upper-rung guidance for `knowledge` — its L4/L5 rows were phrased for `skill` and `judgment`, which made them unfollowable for the 108 knowledge elements at ceiling 5) · item parameterization format (archetypes + bindings, decision 36) · rubric format · experience hours and waiting periods (decision 37) · recertification defaults per level.
 
 **Also done:** credential schema and provenance tiers · **authorization as a first-class object** · attempt ledger, challenge-exam no-retake rule, and exposure control.
 
@@ -297,7 +298,7 @@ The reason it keeps happening is worth internalising: **a missing equipment type
 |---|---|
 | `BOK-0001` | `correlation-and-covariance.md` — five sections, one marked `contested` with both positions recorded |
 | `BOK-0002`–`0004` | Type B distributions, sensitivity coefficients and linearisation, completeness and double-counting. Written to serve the eight elements below, each carries one `contested` section, and between them they closed two of the three gaps `CM-03-052` recorded against itself |
-| `CM-03-053` | `skill`, ceiling 5, `demonstration: desk`, five performance anchors, twelve role targets, bound at every level |
+| `CM-03-053` | `skill`, ceiling 5, `demonstration: desk`, five performance anchors, thirteen role targets, bound at every level |
 | `CM-03-052` | The second element, authored AFTER its items existed. `skill`, ceiling 4. Read its closing note: it records what the new articles closed, what is still missing (the coverage factor in the REPORTING direction, which belongs to `CM-03-060`), and why it still cannot go `stable` |
 | `CM-03-019`, `036`, `038`, `040`, `046`, `050`, `051`, `056` | The eight that had bindings and no definition — a binding claiming to test a competence with no anchors to test against. Authored to close that. Four `skill`, three `judgment`, ceilings 4 and 5 |
 | `BOK-0012` + `CM-03-120` | Known corrections left **unapplied** — the case the method's own founding assumption excludes. `CM-03-016` represents a correction and `CM-03-115` applies one; both assume it is applied, so the corpus held both halves of the default and nothing of the departure. Article carries a `contested` section on a tension **inside the GUM itself**, which describes the added-maxima practice in one place and warns against its general form in another. The element's closing note forbids scoring an item on which side a candidate takes |
