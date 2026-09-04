@@ -123,8 +123,8 @@ test('flipping the demonstration mode changes the hash, with the anchor untouche
   // The pathological case this closes: change `desk` to `equipment`, leave the
   // anchor alone, and the pin still matched. A verifier read "definition
   // unchanged" while what counts as valid evidence for the claim had inverted.
-  const desk: ElementLike = { ...element, kind: 'skill', demonstration: 'desk' };
-  const bench: ElementLike = { ...element, kind: 'skill', demonstration: 'equipment' };
+  const desk: ElementLike = { ...element, kind: 'skill', demonstration: ['desk'] };
+  const bench: ElementLike = { ...element, kind: 'skill', demonstration: ['equipment'] };
 
   assert.equal(desk.anchors['4'], bench.anchors['4'], 'the anchor must be identical for this to test anything');
   assert.notEqual(elementDefinitionHash(desk, 4), elementDefinitionHash(bench, 4));
@@ -134,14 +134,43 @@ test('stating the default explicitly is not drift, because it changes nothing', 
   // `demonstration` defaults to `desk`. An author who later writes it out has
   // altered no meaning, and must not make every credential look drifted.
   const implicit: ElementLike = { ...element, kind: 'skill' };
-  const explicit: ElementLike = { ...element, kind: 'skill', demonstration: 'desk' };
+  const explicit: ElementLike = { ...element, kind: 'skill', demonstration: ['desk'] };
   assert.equal(elementDefinitionHash(implicit, 4), elementDefinitionHash(explicit, 4));
 });
 
+test('route ORDER is not meaning, so reordering is not drift', () => {
+  // `demonstration` is a set. Which order an author happened to write the
+  // routes in says nothing about the competence, and a pin reporting it would
+  // be exactly the noise this projection exists to keep out — reviewers who
+  // see spurious drift learn to ignore real drift.
+  const ab: ElementLike = { ...element, kind: 'skill', demonstration: ['desk', 'equipment'] };
+  const ba: ElementLike = { ...element, kind: 'skill', demonstration: ['equipment', 'desk'] };
+  assert.equal(elementDefinitionHash(ab, 4), elementDefinitionHash(ba, 4));
+});
+
+test('a scalar and its one-element array are the same definition', () => {
+  // The field was a scalar before it was a set. `desk` and `['desk']` are the
+  // same statement, and hashing them apart would manufacture drift out of a
+  // change in notation rather than a change in meaning.
+  const scalar: ElementLike = { ...element, kind: 'skill', demonstration: 'desk' };
+  const array: ElementLike = { ...element, kind: 'skill', demonstration: ['desk'] };
+  assert.equal(elementDefinitionHash(scalar, 4), elementDefinitionHash(array, 4));
+});
+
+test('ADDING a route is drift, because admissible evidence widened', () => {
+  // Reordering is notation; adding is meaning. An element that admitted only
+  // desk work and now admits bench work has changed what evidence backs the
+  // claim, and a reader of the older credential must be told the definition
+  // moved — which is the whole reason `demonstration` sits inside the pin.
+  const desk: ElementLike = { ...element, kind: 'skill', demonstration: ['desk'] };
+  const both: ElementLike = { ...element, kind: 'skill', demonstration: ['desk', 'equipment'] };
+  assert.notEqual(elementDefinitionHash(desk, 4), elementDefinitionHash(both, 4));
+});
+
 test('drift in the demonstration mode is reported to the reader', () => {
-  const desk: ElementLike = { ...element, kind: 'skill', demonstration: 'desk' };
+  const desk: ElementLike = { ...element, kind: 'skill', demonstration: ['desk'] };
   const { definitionRef } = pinDefinition(desk, 4, REFS, [article]);
-  const bench: ElementLike = { ...desk, demonstration: 'equipment' };
+  const bench: ElementLike = { ...desk, demonstration: ['equipment'] };
 
   const findings = checkDefinitionDrift(credential({ definitionRef }), bench, [article]);
   assert.ok(

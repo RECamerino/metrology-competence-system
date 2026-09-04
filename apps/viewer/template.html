@@ -621,7 +621,7 @@
         <h4>Status</h4>
         <div class="facts">
           <span>${esc(d.st)}</span>
-          <span>demonstration: ${esc(d.dm)}</span>
+          <span>demonstration: ${esc((d.dm ?? ['desk']).join(' or '))}</span>
           ${links.map((l) => `<span>${esc(l)}</span>`).join('')}
         </div>
       </div>`;

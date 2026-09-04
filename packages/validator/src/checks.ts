@@ -19,7 +19,7 @@ import {
   indexStubs,
   roleIds,
 } from './corpus.ts';
-import { sectionHash } from './definitions.ts';
+import { demonstrationRoutes, sectionHash } from './definitions.ts';
 import { formatErrors, validatorFor } from './schema.ts';
 
 export interface Finding {
@@ -752,23 +752,25 @@ function checkModules(corpus: Corpus): Finding[] {
         );
       }
 
-      // Keyed off the ELEMENT's demonstration mode, not its kind. `skill`
-      // means the evidence is observable performance rather than explanation;
-      // it does not mean the performance happens at a bench. Constructing an
+      // Keyed off the ELEMENT's declared ROUTES, not its kind. `skill` means
+      // the evidence is observable performance rather than explanation; it
+      // does not mean the performance happens at a bench. Constructing an
       // uncertainty budget is a skill and is desk work.
       //
       // Getting this wrong in either direction invents or hides a barrier:
-      // omitting an equipment element tells a learner a simulation finished
-      // something it cannot, and listing a desk element tells them they are
+      // omitting an equipment target tells a learner a simulation finished
+      // something it cannot, and listing a desk target tells them they are
       // blocked on access they never needed.
       const authored = authoredElements.get(target.element);
       // Undefined when the element has no authored definition — and that is
-      // NOT the same as 'desk'. Defaulting an unknown to desk would silently
+      // NOT the same as ['desk']. Defaulting an unknown to desk would silently
       // hide a real equipment blocker on a skill element nobody has written up
       // yet, which is the direction that harms a learner.
-      const mode = authored ? ((authored.demonstration as string | undefined) ?? 'desk') : undefined;
+      const routes = authored ? demonstrationRoutes(authored) : undefined;
+      const listed = physical.has(target.element);
+      const declaredRoute = target.route as string | undefined;
 
-      if (stub.kind === 'skill' && mode === undefined) {
+      if (stub.kind === 'skill' && routes === undefined) {
         // Unknown, and the two readings are not equally safe. Listing it is the
         // cautious one and is accepted; omitting it may hide a real blocker, so
         // that is the one that gets named.
@@ -779,24 +781,62 @@ function checkModules(corpus: Corpus): Finding[] {
         );
       }
 
-      if (stub.kind === 'skill' && mode === 'equipment' && !physical.has(target.element)) {
-        findings.push(
-          err(at(`prepares for '${target.element}', whose demonstration requires equipment, without listing it in requiresPhysicalDemonstration. A simulation does not substitute for witnessed work on real apparatus; training toward it leaves the element pending demonstration, not complete.`)),
-        );
-      }
+      // `routes === undefined` is deliberately NOT swept into the checks below.
+      // It means the element has no authored definition, and an earlier version
+      // of this code read `mode !== 'equipment'`, which caught that case and
+      // told the author "its demonstration mode is 'undefined' — no equipment
+      // is needed": an assertion that no equipment is needed, made immediately
+      // after warning that the mode is unknown. It left omission as the only
+      // permitted move on an unauthored element, which is the direction that
+      // hides a blocker — exactly what refusing to default it to desk avoids.
+      if (routes !== undefined) {
+        // Two routes means the element admits both and the competence is the
+        // same in either: which one is available is a property of the
+        // LABORATORY rather than of the element.
+        const multi = routes.length > 1;
 
-      // `mode === undefined` is deliberately NOT rejected here. It means the
-      // element has no authored definition, and this check previously read
-      // `mode !== 'equipment'`, which swept that case in and told the author
-      // "its demonstration mode is 'undefined' — no equipment is needed": an
-      // assertion that no equipment is needed, made immediately after warning
-      // that the mode is unknown. It left omission as the only permitted move
-      // on an unauthored element, which is the direction that hides a blocker —
-      // exactly what refusing to default the mode to `desk` was meant to avoid.
-      if (mode !== undefined && mode !== 'equipment' && physical.has(target.element)) {
-        findings.push(
-          err(at(`lists '${target.element}' in requiresPhysicalDemonstration, but its demonstration mode is '${mode}' — no equipment is needed. Claiming a blocker that does not exist tells a learner they are waiting for access they never required.`)),
-        );
+        // A module states its route ONLY where the element leaves the question
+        // open. Where the element declares a single route it has already
+        // answered it, and a restatement is a second copy of one fact that can
+        // fall out of agreement with the element after an edit — an author
+        // reading the two files would then be told different things by each,
+        // with nothing saying which one the validator believes.
+        if (!multi && declaredRoute !== undefined) {
+          findings.push(
+            err(at(`states route '${declaredRoute}' for '${target.element}', which declares exactly one route ('${routes[0]}'). The element already answers this, and restating it here is a second copy of one fact that can drift out of agreement with it.`)),
+          );
+        }
+
+        // ...and MUST state it where the element does not. Both routes are
+        // admissible for such an element, so neither listing the target nor
+        // omitting it is inherently wrong, and a module that said nothing would
+        // validate cleanly while leaving a learner bound for the bench with no
+        // warning that access is coming. The choice may not be made by silence.
+        if (multi && declaredRoute === undefined) {
+          findings.push(
+            err(at(`prepares for '${target.element}', which admits both a desk and an equipment route, without stating which one in the route field. Both are admissible for the element, so omission cannot be read as either — and read as desk work it would leave a learner who needs bench access unwarned.`)),
+          );
+        }
+
+        // The route actually prepared: the module's choice where there is one
+        // to make, and otherwise the single route the element declares.
+        // Undefined only in the case reported directly above.
+        const prepared = multi ? declaredRoute : routes[0];
+
+        if (stub.kind === 'skill' && prepared === 'equipment' && !listed) {
+          findings.push(
+            err(at(`prepares '${target.element}' by the equipment route without listing it in requiresPhysicalDemonstration. A simulation does not substitute for witnessed work on real apparatus; training toward it leaves the element pending demonstration, not complete.`)),
+          );
+        }
+
+        if (prepared !== undefined && prepared !== 'equipment' && listed) {
+          const because = multi
+            ? `this module prepares it by the '${prepared}' route`
+            : `its only route is '${prepared}'`;
+          findings.push(
+            err(at(`lists '${target.element}' in requiresPhysicalDemonstration, but ${because} — no equipment is needed. Claiming a blocker that does not exist tells a learner they are waiting for access they never required.`)),
+          );
+        }
       }
     }
 

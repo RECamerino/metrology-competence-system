@@ -640,7 +640,7 @@ Both halves have to be said together. The first is what makes this worth buildin
 
 ## Some elements have two evidence routes
 
-Open item 10. Found by authoring `CM-03-051` — the sixth time authoring against the design has surfaced something reading the schema did not.
+**Closed 2026-09-04, inside the freeze window: `demonstration` is a set.** Found by authoring `CM-03-051` — the sixth time authoring against the design has surfaced something reading the schema did not.
 
 `demonstration: desk | equipment` is a single enum on the element, and it answers a question that sounds like it has one answer: is this competence observable with ordinary working tools, or does it need apparatus the learner may not be able to reach?
 
@@ -655,15 +655,23 @@ Forcing one value is wrong in both directions, and neither error is silent for t
 - **`equipment`** invents a barrier for every learner who could demonstrate this tomorrow against a routine. That is the failure rule 11 names explicitly, and it lands on exactly the person the Personal edition exists for — no employer, no bench, no budget.
 - **`desk`** — the value the element currently carries — means a module preparing someone for the instrument route cannot list it in `requiresPhysicalDemonstration`, so a learner who will need access is told nothing about it. Rule 11's other half, hiding a real barrier.
 
-**This is a schema-freeze question rather than a content one**, which is why it is recorded here rather than fixed. `demonstration` sits inside the definition pin — it was added to the projection when an adversarial review found that flipping `desk` to `equipment` left the hash matching while what counts as admissible evidence had inverted. That was the right fix, and its consequence is that **correcting this later reads as drift on every credential already issued against the element.** Cheap now; permanent after Phase 3.
+**This was a schema-freeze question rather than a content one**, which is why it was fixed rather than worked around. `demonstration` sits inside the definition pin — it was added to the projection when an adversarial review found that flipping `desk` to `equipment` left the hash matching while what counts as admissible evidence had inverted. That was the right fix, and its consequence is that **correcting this after the freeze would have read as drift on every credential already issued against the element.** It was cheap at 21 authored elements and no issued credential, and it would have been permanent after Phase 3.
 
-Three shapes are worth weighing, and none is chosen here:
+Three shapes were weighed. **Shape 1 was taken:**
 
 1. **Make it a set.** `demonstration: [desk, equipment]` — both routes admissible, and a module declares which one it prepares for. Most honest, and the largest change: every consumer of the field currently assumes a scalar.
 2. **Keep the scalar as the *minimum* route** and let the module carry the rest. Smallest change; leaves the element unable to say that the harder route exists at all.
 3. **Split the element.** Rejected on the reasoning already in rule 14 — one competence, two routes to evidencing it, and splitting would create two elements a person could hold separately for work that is not separate. It is not the *Oscilloscope DC and timebase* case; nothing here is truncated.
 
-**Note the shape of the defect, because it is a repeat.** The element records the ambiguity in a YAML comment explaining why `desk` was chosen. A human reads that comment; no code does. That is open item 22 in [`../CLAUDE.md`](../CLAUDE.md) — `knowledgeRefs` proving a link resolves while proving nothing about coverage — appearing in a second field, and the two should probably be answered together: **the corpus has several places where an author knows something true about an element and has nowhere to put it that participates in anything.**
+What it took, and what each piece is for:
+
+- **`demonstration` is an array** of `desk`, `equipment` or both — `minItems: 1`, unique, defaulting to `[desk]`. One canonical representation, because two ways of saying the same thing would hash apart.
+- **The pin sorts the routes before hashing.** Author ordering is not meaning, and a pin that reported `[equipment, desk]` as drift from `[desk, equipment]` would be the noise the projection exists to keep out. A scalar is still normalized into a one-element array for the same reason: `desk` and `[desk]` are the same statement, and manufacturing drift out of a change in notation would be the same error in a different place. **Adding** a route is real drift and reports as such — what evidence is admissible has widened.
+- **A module states which route it prepares**, in `route` on the `preparesFor` entry, and only where the element leaves the question open. Required for a multi-route target: both routes are admissible, so omission cannot be read as either, and read as desk work — the only way a validator could read it — it would leave a learner bound for the bench unwarned while the module validated cleanly. Forbidden where the element declares a single route: it has already answered, and a copy beside it can fall out of agreement after an edit.
+- **`requiresPhysicalDemonstration` is derived and checked in both directions**, against the route prepared rather than the element alone. The same element now reaches `prepared` through one module and `pending-demonstration` through another, honestly, which is the state the scalar could not express.
+- **`CM-03-051` carries `[desk, equipment]`.** It is the only multi-route element in the corpus so far, and the reason the field moved.
+
+**Note the shape of the defect, because it is a repeat — and note what actually closed it.** The element used to record the ambiguity in a YAML comment explaining why `desk` was chosen. A human read that comment; no code did. What closed it was not writing the comment more carefully but giving the knowledge somewhere to go that participates in something: the field widened, and the module-side rule now derives from it. That is open item 22 in [`../CLAUDE.md`](../CLAUDE.md) — `knowledgeRefs` proving a link resolves while proving nothing about coverage — appearing in a second field, and this is the remedy the others want too: **the corpus has several places where an author knows something true about an element and has nowhere to put it that participates in anything**, and the answer each time is a field, not a note.
 
 ## The one rule that cannot be waived
 
@@ -685,7 +693,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 6. **Experience-hour thresholds and waiting periods** — proposed per level in `content/competence/taxonomy/proficiency.yaml` (L3 40h/30d, L4 200h/180d, L5 1000h/365d). The attribution rule is settled as decision 37; the numbers themselves are a steward judgement and have not been tested against a real career history.
 8. **Consented disclosure to an employer** — an organization's view of a person's record is a disclosure, not a read, and there is no model for it. Decision 34 built one for accreditation assessors; the workforce gap dashboard has nothing. Follows from [Who owns a person's competency record](#who-owns-a-persons-competency-record). Needs a schema before Phase 9 or 10 settles it by default.
 9. **A holder's counter-statement to revocation** — the issuer can revoke and the subject cannot contest it in the data. Pairs with the trust-registry and status-list work.
-10. **`demonstration` is a scalar, and for some elements the evidence route is not** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). A schema-freeze question, not a content one.
+10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **`authoring.goldReference` is author-declared** — an element can be marked as the exemplar others are held to, by the person who wrote it, with no review recorded. Unused so far. This is the shape decision 8b removed from `bootstrapAuthority`, and Phase 3 is where gold references get created, so it wants a control before then rather than after.
 7. **Skeleton scale** — resolved. Landed at 2232 elements across 257 areas and 43 domains, against a 2000+ target.

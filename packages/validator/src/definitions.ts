@@ -43,6 +43,28 @@ export interface ElementLike {
 }
 
 /**
+ * The element's evidence routes, normalized.
+ *
+ * `demonstration` is a SET: some competences have two genuine routes, the
+ * competence is the same in both, and which one is available is a property of
+ * the laboratory rather than of the element. Three notations therefore have to
+ * hash alike, because all three are the same statement — omitting the field,
+ * stating the schema default explicitly, and writing the routes in a different
+ * order. Author ordering is not meaning, so it is sorted away.
+ *
+ * A scalar is accepted and lifted into a one-element array. The schema no longer
+ * permits one, and content is rejected separately if it uses it — but `desk` and
+ * `[desk]` are the same definition, and hashing them differently would
+ * manufacture drift out of a change in notation.
+ */
+export function demonstrationRoutes(element: { demonstration?: unknown; [key: string]: unknown }): string[] {
+  const raw = element.demonstration;
+  if (raw === undefined || raw === null) return ['desk'];
+  const list = Array.isArray(raw) ? (raw as unknown[]) : [raw];
+  return [...new Set(list.map(String))].sort();
+}
+
+/**
  * Hash of the element definition, for one attested level.
  *
  * The projection is the point. Only the fields that change what the credential
@@ -60,8 +82,13 @@ export interface ElementLike {
  * still matched: a verifier read "definition unchanged" while what counts as
  * valid evidence for that very claim had inverted, and a credential earned by
  * desk work now sat under a definition demanding witnessed work at a bench.
- * Normalised through the schema default so that an author later writing
- * `desk` explicitly — which changes nothing — does not manufacture drift.
+ * Normalized through the schema default AND SORTED, so that omitting the field,
+ * writing `[desk]` explicitly, and reordering a multi-route set all hash alike:
+ * each is the same definition, and reporting any of them as drift would be
+ * noise reviewers learn to ignore. It is a SET because some competences have two
+ * genuine routes and which one is available is a property of the laboratory
+ * rather than of the element. ADDING a route widens what evidence is admissible
+ * and is real drift; the order an author wrote them in is not.
  *
  * WHY THREE OTHER MEANING-BEARING FIELDS ARE STILL OUT. Each was considered and
  * each is excluded for its own reason, not by oversight:
@@ -87,9 +114,10 @@ export function elementDefinitionHash(element: ElementLike, level: number): stri
     levelCeiling: element.levelCeiling,
     level,
     anchor: element.anchors?.[String(level)] ?? null,
-    // Schema default, applied here so that omitting the field and stating
-    // `desk` produce the same hash. They mean the same thing.
-    demonstration: (element.demonstration as string | undefined) ?? 'desk',
+    // Normalized and sorted, so that omitting the field, stating `[desk]`, and
+    // reordering a multi-route set all produce the same hash. They mean the
+    // same thing.
+    demonstration: demonstrationRoutes(element),
   });
 }
 

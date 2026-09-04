@@ -850,20 +850,20 @@ test('a well-formed module produces no errors', () => {
 test('a module preparing for an EQUIPMENT skill element must declare the bench requirement', () => {
   // CM-01-002 is `skill`. Training toward it leaves it pending demonstration,
   // never complete — a simulation does not substitute for witnessed work.
-  const bench = element({ id: 'CM-01-002', kind: 'skill', levelCeiling: 2, demonstration: 'equipment', anchors: { '1': LONG, '2': LONG }, roleTargets: { 'test-technician': 2, 'test-engineer': 2 } });
+  const bench = element({ id: 'CM-01-002', kind: 'skill', levelCeiling: 2, demonstration: ['equipment'], anchors: { '1': LONG, '2': LONG }, roleTargets: { 'test-technician': 2, 'test-engineer': 2 } });
   const errors = errorsOf(
     corpus([bench], LOCK_WITH_MODULE, {
       modules: [moduleFile({ preparesFor: [{ element: 'CM-01-002', level: 2 }] })],
     }),
   );
   assert.ok(
-    errors.some((e) => e.includes('requires equipment') && e.includes('CM-01-002')),
+    errors.some((e) => e.includes('by the equipment route') && e.includes('CM-01-002')),
     `expected a skill-demonstration error, got: ${JSON.stringify(errors)}`,
   );
 });
 
 test('declaring the physical demonstration makes it acceptable', () => {
-  const bench = element({ id: 'CM-01-002', kind: 'skill', levelCeiling: 2, demonstration: 'equipment', anchors: { '1': LONG, '2': LONG }, roleTargets: { 'test-technician': 2, 'test-engineer': 2 } });
+  const bench = element({ id: 'CM-01-002', kind: 'skill', levelCeiling: 2, demonstration: ['equipment'], anchors: { '1': LONG, '2': LONG }, roleTargets: { 'test-technician': 2, 'test-engineer': 2 } });
   const errors = errorsOf(
     corpus([bench], LOCK_WITH_MODULE, {
       modules: [
@@ -1007,15 +1007,15 @@ test('an equipment element must be declared, a desk element must not', () => {
   // `skill` says the evidence is performance; it does not say the performance
   // happens at a bench. Constructing a budget is a skill and is desk work, and
   // claiming a bench blocker for it invents a barrier the learner never had.
-  const equipmentElement = element({ id: 'CM-01-002', kind: 'skill', levelCeiling: 2, demonstration: 'equipment', anchors: { '1': LONG, '2': LONG }, roleTargets: { 'test-technician': 2, 'test-engineer': 2 } });
-  const deskElement = element({ id: 'CM-01-002', kind: 'skill', levelCeiling: 2, demonstration: 'desk', anchors: { '1': LONG, '2': LONG }, roleTargets: { 'test-technician': 2, 'test-engineer': 2 } });
+  const equipmentElement = element({ id: 'CM-01-002', kind: 'skill', levelCeiling: 2, demonstration: ['equipment'], anchors: { '1': LONG, '2': LONG }, roleTargets: { 'test-technician': 2, 'test-engineer': 2 } });
+  const deskElement = element({ id: 'CM-01-002', kind: 'skill', levelCeiling: 2, demonstration: ['desk'], anchors: { '1': LONG, '2': LONG }, roleTargets: { 'test-technician': 2, 'test-engineer': 2 } });
   const prepares = { preparesFor: [{ element: 'CM-01-002', level: 2 }] };
 
   const missing = errorsOf(
     corpus([equipmentElement], LOCK_WITH_MODULE, { modules: [moduleFile(prepares)] }),
   );
   assert.ok(
-    missing.some((e) => e.includes('requires equipment')),
+    missing.some((e) => e.includes('by the equipment route')),
     `expected an undeclared-equipment error, got: ${JSON.stringify(missing)}`,
   );
 
@@ -1027,6 +1027,123 @@ test('an equipment element must be declared, a desk element must not', () => {
   assert.ok(
     invented.some((e) => e.includes('no equipment is needed')),
     `expected an invented-barrier error, got: ${JSON.stringify(invented)}`,
+  );
+});
+
+/*
+ * The multi-route case.
+ *
+ * `demonstration` is a SET because some competences have two genuine routes:
+ * the competence is the same in both, and which one is available is a property
+ * of the LABORATORY rather than of the element. Numerical estimation of a
+ * sensitivity coefficient is the worked case — perturb a correction routine
+ * (desk) or perturb the instrument itself (bench), and JCGM 100 contemplates
+ * both.
+ *
+ * Forcing one value was wrong in both directions. What replaces it must not
+ * quietly reintroduce either error, so both are tested from both sides.
+ */
+
+const bothRoutes = () =>
+  element({
+    id: 'CM-01-002',
+    kind: 'skill',
+    levelCeiling: 2,
+    demonstration: ['desk', 'equipment'],
+    anchors: { '1': LONG, '2': LONG },
+    roleTargets: { 'test-technician': 2, 'test-engineer': 2 },
+  });
+
+test('a multi-route element makes the module say which route it prepares', () => {
+  // Both routes are admissible for the element, so omission cannot be read as
+  // either one. Read as desk work — the only way a validator could read it —
+  // it would leave a learner bound for the bench with no warning that access
+  // is coming, while the module validated perfectly cleanly. The choice may
+  // not be made by silence, which is the whole reason `route` exists.
+  const errors = errorsOf(
+    corpus([bothRoutes()], LOCK_WITH_MODULE, {
+      modules: [moduleFile({ preparesFor: [{ element: 'CM-01-002', level: 2 }] })],
+    }),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('without stating which one in the route field')),
+    `expected a missing-route error, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('preparing a multi-route element by the equipment route must be declared', () => {
+  const undeclared = errorsOf(
+    corpus([bothRoutes()], LOCK_WITH_MODULE, {
+      modules: [moduleFile({ preparesFor: [{ element: 'CM-01-002', level: 2, route: 'equipment' }] })],
+    }),
+  );
+  assert.ok(
+    undeclared.some((e) => e.includes('by the equipment route')),
+    `expected an undeclared-equipment error, got: ${JSON.stringify(undeclared)}`,
+  );
+
+  const declared = errorsOf(
+    corpus([bothRoutes()], LOCK_WITH_MODULE, {
+      modules: [
+        moduleFile({
+          preparesFor: [{ element: 'CM-01-002', level: 2, route: 'equipment' }],
+          requiresPhysicalDemonstration: ['CM-01-002'],
+        }),
+      ],
+    }),
+  );
+  assert.deepEqual(declared, []);
+});
+
+test('the same element reaches `prepared` through its desk route', () => {
+  // Not a hidden barrier: this module prepares the route that does not have
+  // one. Listing it would invent for THIS learner the barrier the bench-route
+  // module legitimately declares for its own — the same element, two honest
+  // modules, two different states on the training record.
+  const desk = errorsOf(
+    corpus([bothRoutes()], LOCK_WITH_MODULE, {
+      modules: [moduleFile({ preparesFor: [{ element: 'CM-01-002', level: 2, route: 'desk' }] })],
+    }),
+  );
+  assert.deepEqual(desk, []);
+
+  const invented = errorsOf(
+    corpus([bothRoutes()], LOCK_WITH_MODULE, {
+      modules: [
+        moduleFile({
+          preparesFor: [{ element: 'CM-01-002', level: 2, route: 'desk' }],
+          requiresPhysicalDemonstration: ['CM-01-002'],
+        }),
+      ],
+    }),
+  );
+  assert.ok(
+    invented.some((e) => e.includes('no equipment is needed')),
+    `expected an invented-barrier error, got: ${JSON.stringify(invented)}`,
+  );
+});
+
+test('a single-route element may not have its route restated by a module', () => {
+  // One fact, one place. A copy beside the element can fall out of agreement
+  // with it after an edit, and an author reading the two files would then be
+  // told different things by each with nothing saying which the validator
+  // believes. This is the shape decision 8b removed from `bootstrapAuthority`.
+  const deskOnly = element({
+    id: 'CM-01-002',
+    kind: 'skill',
+    levelCeiling: 2,
+    demonstration: ['desk'],
+    anchors: { '1': LONG, '2': LONG },
+    roleTargets: { 'test-technician': 2, 'test-engineer': 2 },
+  });
+  const errors = errorsOf(
+    corpus([deskOnly], LOCK_WITH_MODULE, {
+      modules: [moduleFile({ preparesFor: [{ element: 'CM-01-002', level: 2, route: 'desk' }] })],
+    }),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('declares exactly one route')),
+    `expected a restated-route error, got: ${JSON.stringify(errors)}`,
   );
 });
 
