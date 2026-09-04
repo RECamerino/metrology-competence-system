@@ -1276,12 +1276,18 @@ test('a proficiency-test result is admissible from L3 upward', () => {
 const AUTHOR = 'Dale Okoro';
 const REVIEWER = 'Priya Raman';
 
+const STANDING = {
+  basis: 'stated',
+  statement: 'Twenty years in dimensional calibration; UKAS technical assessor since 2019.',
+};
+
 const reviewOf = (
   data: Record<string, unknown>,
   levels: number[],
   overrides: Record<string, unknown> = {},
 ): Record<string, unknown> => ({
   reviewer: { name: REVIEWER },
+  standing: STANDING,
   reviewType: 'technical',
   reviewedOn: '2026-09-01',
   disposition: 'accepted',
@@ -1398,4 +1404,100 @@ test('an element claiming nothing needs no reviews, and is silent', () => {
   // provenance tier is. Being reviewed obliges nobody to nominate you, and
   // 5459 elements must not each acquire a review obligation by existing.
   assert.deepEqual(errorsOf(corpus([element()])), []);
+});
+
+
+/* -- Reviewer standing: two bases resolve, one does not --------------------- */
+
+/*
+ * `reviewer` is a name and an optional DID, so the corpus could establish that
+ * X reviewed something on a date and could not establish that X had any
+ * standing to. That is the gap decision 47 closed for credential signers — an
+ * unbacked `heldLevel: 4` stopped counting as evidence — and it had never been
+ * applied to the people reviewing the corpus itself.
+ *
+ * Nothing can prove a `stated` basis and nothing tries to. What the checks buy
+ * is that the three bases stop being indistinguishable, and that the two which
+ * claim to RESOLVE actually do.
+ */
+
+test('claiming a held credential without pinning it is refused', () => {
+  // Overstating is refused; understating is silent. The same rule
+  // provenanceTier applies to a signer, applied to a reviewer.
+  const errors = errorsOf(
+    corpus([
+      goldElement([
+        reviewOf(BASELINE, [1, 2, 3], {
+          standing: { basis: 'held-credential', credentialId: 'urn:uuid:whatever' },
+        }),
+      ]),
+    ]),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('without both naming and pinning it')),
+    `expected an unpinned credential claim to be refused, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('founding-cohort standing resolves against a roster that convenes nobody', () => {
+  // Membership resolves against the published roster or it is not membership.
+  // The shipped cohort is empty, so this basis correctly resolves for no one —
+  // the same answer every other roster-backed claim gives today.
+  const errors = errorsOf(
+    corpus([
+      goldElement([
+        reviewOf(BASELINE, [1, 2, 3], {
+          reviewer: { name: REVIEWER, did: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH' },
+          standing: { basis: 'founding-cohort' },
+        }),
+      ]),
+    ]),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('is not on the roster')),
+    `expected cohort standing to be refused against an empty roster, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('a stated basis with nothing to weigh is refused', () => {
+  const errors = errorsOf(
+    corpus([
+      goldElement([reviewOf(BASELINE, [1, 2, 3], { standing: { basis: 'stated', statement: '   ' } })]),
+    ]),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('nothing here to weigh')),
+    `expected an empty stated basis to be refused, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('a gold reference may not rest on a name alone', () => {
+  // Satisfiable today with a `stated` basis, so this asks for the case to be
+  // written down — not for standing nobody can currently hold.
+  const noStanding = reviewOf(BASELINE, [1, 2, 3]);
+  delete (noStanding as Record<string, unknown>).standing;
+
+  const errors = errorsOf(corpus([goldElement([noStanding])]));
+  assert.ok(
+    errors.some((e) => e.includes('records no standing for its reviewer')),
+    `expected a standingless gold reference to be refused, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('an ordinary review needs no standing at all', () => {
+  // Requiring a case for every editorial review would make recording one
+  // harder than not recording it, which is how review records stop being
+  // written. Standing is required only where a claim rests on it.
+  const plain = element({
+    reviews: [
+      {
+        reviewer: { name: REVIEWER },
+        reviewType: 'editorial',
+        reviewedOn: '2026-09-01',
+        disposition: 'accepted',
+        covers: [{ level: 1, definitionRef: elementDefinitionHash(BASELINE as ElementLike, 1) }],
+      },
+    ],
+  });
+  assert.deepEqual(errorsOf(corpus([plain])), []);
 });

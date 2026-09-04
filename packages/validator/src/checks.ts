@@ -531,6 +531,11 @@ function checkPrerequisiteGraph(corpus: Corpus): Finding[] {
  */
 function checkBok(corpus: Corpus): Finding[] {
   const findings: Finding[] = [];
+  const bokCohortDids = new Set(
+    ((corpus.bootstrapCohort?.members ?? []) as Array<Record<string, any>>)
+      .map((m) => String(m?.did ?? '').trim())
+      .filter((did) => did.length > 0),
+  );
   const articles = new Map<string, { path: string; sections: Set<string> }>();
   const seen = new Map<string, string>();
 
@@ -614,6 +619,8 @@ function checkBok(corpus: Corpus): Finding[] {
     for (const review of (d.reviews ?? []) as Array<Record<string, any>>) {
       const who = review?.reviewer?.name ?? 'unknown reviewer';
 
+      findings.push(...reviewStandingFindings(review, who, at, bokCohortDids));
+
       for (const covered of (review?.covers ?? []) as Array<Record<string, any>>) {
         if (!declared.has(covered?.section)) {
           findings.push(
@@ -622,7 +629,7 @@ function checkBok(corpus: Corpus): Finding[] {
           continue;
         }
 
-        const current = sectionHash(article.body, covered.section);
+        const current = sectionHash({ id, body: article.body, sections: d.sections }, covered.section);
         if (current !== null && current !== covered.sectionRef) {
           findings.push(
             warn(at(`section '${covered.section}' has been rewritten since ${who} reviewed it on ${review.reviewedOn}. That review no longer covers what is there — re-review, or narrow its scope.`)),
@@ -665,6 +672,81 @@ function checkBok(corpus: Corpus): Finding[] {
         warn(`${article.path}: article '${id}' is not referenced by any element. Legitimate for background material; check it is not an orphan.`),
       );
     }
+  }
+
+  return findings;
+}
+
+/* ------------------------------------------------------------------------ */
+
+/**
+ * Reviewer standing, on an article review or an element review alike.
+ *
+ * `reviewer` is a name and an optional DID. Without `standing`, the corpus can
+ * establish that X reviewed a section on a date and cannot establish that X had
+ * any standing to review it — the exact gap decision 47 closed for credential
+ * signers, where an unbacked `heldLevel: 4` stopped counting as evidence of
+ * anything. The rule had never been applied to the people reviewing the corpus
+ * itself, which is the half of the project that decides what everybody else is
+ * assessed against.
+ *
+ * TWO OF THE THREE BASES RESOLVE AND ONE DOES NOT, and the checks here exist to
+ * stop the three being indistinguishable. Nothing can prove a `stated` basis;
+ * what a reader gets is the knowledge that it is stated rather than resolvable,
+ * and something substantive to weigh. `stated` is the only basis available while
+ * nobody holds a credential and the cohort convenes nobody, so it is the normal
+ * case rather than the degraded one.
+ *
+ * Standing is OPTIONAL in general. An editorial review recorded for the audit
+ * trail needs no case made for it, and requiring one everywhere would make
+ * recording a review harder than not recording it — which is how review records
+ * stop being written. It is required only where a claim rests on it.
+ */
+function reviewStandingFindings(
+  review: Record<string, any>,
+  who: string,
+  at: (msg: string) => string,
+  cohortDids: Set<string>,
+): Finding[] {
+  const standing = review?.standing as Record<string, any> | undefined;
+  if (standing === undefined) return [];
+
+  const findings: Finding[] = [];
+  const basis = String(standing.basis);
+
+  // Overstating is refused; this is `provenanceTier`'s rule in a second place.
+  // Claiming the resolvable basis without the thing that resolves it is worse
+  // than claiming nothing, because it reads as evidence and is not.
+  if (basis === 'held-credential') {
+    const named = String(standing.credentialId ?? '').trim().length > 0;
+    const pinned = String(standing.credentialRef ?? '').trim().length > 0;
+    if (!named || !pinned) {
+      findings.push(
+        err(at(`review by ${who} claims standing from a held credential without both naming and pinning it. The resolvable basis may not be claimed without the thing that resolves it.`)),
+      );
+    }
+  }
+
+  // Membership resolves against the published roster or it is not membership —
+  // decision 8b, reaching the reviewer. The shipped roster convenes nobody, so
+  // this basis correctly resolves for no one today.
+  if (basis === 'founding-cohort') {
+    const did = String(review?.reviewer?.did ?? '').trim();
+    if (did.length === 0) {
+      findings.push(
+        err(at(`review by ${who} claims founding-cohort standing, but the reviewer carries no did, so there is nothing to resolve against the roster.`)),
+      );
+    } else if (!cohortDids.has(did)) {
+      findings.push(
+        err(at(`review by ${who} claims founding-cohort standing, and ${did} is not on the roster in content/competence/bootstrap-cohort.yaml.`)),
+      );
+    }
+  }
+
+  if (basis === 'stated' && String(standing.statement ?? '').trim().length === 0) {
+    findings.push(
+      err(at(`review by ${who} states external standing without saying what it is. A reader weighs a stated basis rather than resolving it, and there is nothing here to weigh.`)),
+    );
   }
 
   return findings;
@@ -716,12 +798,19 @@ function checkElementReviews(corpus: Corpus): Finding[] {
   const QUALIFYING_DISPOSITION = new Set(['accepted', 'accepted-with-changes']);
   const norm = (name: unknown): string => String(name ?? '').trim().toLowerCase();
 
+  const cohortDids = new Set(
+    ((corpus.bootstrapCohort?.members ?? []) as Array<Record<string, any>>)
+      .map((m) => String(m?.did ?? '').trim())
+      .filter((did) => did.length > 0),
+  );
+
   for (const file of corpus.elements) {
     const d = file.data as Record<string, any>;
     const at = (msg: string) => `${file.path}: ${msg}`;
     if (!d.id) continue;
 
     const authoring = (d.authoring ?? {}) as Record<string, any>;
+    const gold = authoring.goldReference === true;
     const authors = new Set(
       ((authoring.authors ?? []) as Array<Record<string, any>>)
         .map((a) => norm(a?.name))
@@ -754,10 +843,24 @@ function checkElementReviews(corpus: Corpus): Finding[] {
         );
       }
 
-      const qualifies =
+      findings.push(...reviewStandingFindings(review, who, at, cohortDids));
+
+      const qualifiesOnMerit =
         !selfReview &&
         QUALIFYING_TYPE.has(String(review?.reviewType)) &&
         QUALIFYING_DISPOSITION.has(String(review?.disposition));
+
+      // The exemplar the whole corpus is held to may not rest on a name alone.
+      // Satisfiable today with a `stated` basis, so this asks for the case to
+      // be written down rather than for standing nobody can currently hold.
+      const hasStanding = review?.standing !== undefined;
+      if (gold && qualifiesOnMerit && !hasStanding) {
+        findings.push(
+          err(at(`review by ${who} would carry this element's gold reference, but records no standing for its reviewer. A reader can weigh a stated basis; they cannot weigh a name.`)),
+        );
+      }
+
+      const qualifies = qualifiesOnMerit && hasStanding;
 
       for (const covered of (review?.covers ?? []) as Array<Record<string, any>>) {
         const level = covered?.level;
@@ -781,7 +884,7 @@ function checkElementReviews(corpus: Corpus): Finding[] {
       }
     }
 
-    if (authoring.goldReference !== true) continue;
+    if (!gold) continue;
 
     if (authors.size === 0) {
       findings.push(

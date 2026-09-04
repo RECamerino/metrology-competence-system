@@ -28,7 +28,7 @@
  * made years later.
  */
 
-import { sha256Of, sha256OfText } from './canonical.ts';
+import { sha256Of } from './canonical.ts';
 import type { Finding } from './checks.ts';
 
 const warn = (message: string): Finding => ({ level: 'warn', message });
@@ -186,9 +186,71 @@ export function extractSection(body: string, sectionId: string): string | null {
   return collected.join('\n').trimEnd();
 }
 
-export function sectionHash(body: string, sectionId: string): string | null {
-  const text = extractSection(body, sectionId);
-  return text === null ? null : sha256OfText(text);
+/**
+ * The pin for one BOK section.
+ *
+ * IT USED TO COVER THE PROSE AND NOTHING ELSE, which left it pinning what a
+ * section SAYS while ignoring what it CLAIMS ABOUT ITSELF. Flip `consensus`
+ * from `established` to `contested` and every byte of prose is untouched: the
+ * hash still matched, so a reviewer's attestation silently survived a change
+ * to how the passage must be read, and a credential resting on it reported no
+ * drift while the knowledge behind the claim had moved from settled to
+ * disputed. Those are not small edits — they are the difference between a
+ * reader acting on the passage and a reader knowing they must not.
+ *
+ * WHAT IS IN, and why each earns its place:
+ *
+ *   `prose` — the section body, headings included.
+ *
+ *   `consensus` — whether competent practitioners agree. The single fact that
+ *   most changes what a reader should do with the passage, and it lives in
+ *   front matter rather than in the body, which is exactly how it slipped the
+ *   pin. Normalized through the schema default so that writing `established`
+ *   explicitly, which changes nothing, does not manufacture drift.
+ *
+ *   `contestedBasis` — WHERE the disagreement lives, and therefore what would
+ *   settle it. A section contested because its source is self-conflicting and
+ *   one contested because no source reaches the question call for different
+ *   things from a reader, and only the first is resolved by a revision.
+ *
+ *   `alternativeViews` — the competing positions themselves, stated in their
+ *   strongest form. Substantive argument that lives OUTSIDE the body, required
+ *   whenever a section is contested, and rewritable in full without touching a
+ *   word of prose. The same defect as `consensus`, in the field that carries
+ *   the actual content of the disagreement.
+ *
+ * WHAT IS STILL OUT, each for its own reason rather than by oversight:
+ *
+ *   `covers` and `contestedBasisNote` — a one-line orientation and the
+ *   rationale for a basis choice. Editorial, in the same sense that an
+ *   element's summary is: a reworded note must not make every credential
+ *   resting on the section look like it drifted, or the signal becomes noise
+ *   and readers learn to ignore it.
+ *
+ *   `deprecated` and `supersededBy` — lifecycle, excluded on exactly the
+ *   argument that keeps an element's `status` out of the definition pin.
+ *   Superseding a section would otherwise light up every credential ever
+ *   issued against it at the moment of supersession, which punishes a holder
+ *   for an editorial act years later. A reader is served here by following the
+ *   `supersededBy` pointer, not by a drift warning.
+ *
+ *   `id` and `heading` — identity rather than content. The pin is looked up by
+ *   id, and the heading is already inside the extracted prose.
+ */
+export function sectionHash(article: ArticleLike, sectionId: string): string | null {
+  const prose = extractSection(article.body, sectionId);
+  if (prose === null) return null;
+
+  const section = (article.sections ?? []).find((s) => s?.id === sectionId);
+
+  return sha256Of({
+    prose,
+    // Schema default, applied here so that omitting the field and stating
+    // `established` produce the same hash. They mean the same thing.
+    consensus: (section?.consensus as string | undefined) ?? 'established',
+    contestedBasis: (section?.contestedBasis as string | undefined) ?? null,
+    alternativeViews: section?.alternativeViews ?? [],
+  });
 }
 
 /* ------------------------------------------------------------------------ */
@@ -209,9 +271,28 @@ export interface PinnedCredential {
   [key: string]: unknown;
 }
 
+/**
+ * One declared section's front matter, as far as the pin cares about it.
+ * Loose on purpose: the schema is the contract, and this only needs the fields
+ * `sectionHash` projects.
+ */
+export interface SectionLike {
+  id: string;
+  consensus?: string;
+  contestedBasis?: string;
+  alternativeViews?: unknown;
+  [key: string]: unknown;
+}
+
 export interface ArticleLike {
   id: string;
   body: string;
+  /**
+   * Optional so a caller with only prose still typechecks — and when it is
+   * absent every section pins as `established` with no alternatives, which is
+   * the schema default and therefore the right reading of silence.
+   */
+  sections?: SectionLike[];
 }
 
 /**
@@ -273,7 +354,7 @@ export function checkDefinitionDrift(
       continue;
     }
 
-    const current = sectionHash(article.body, pin.section);
+    const current = sectionHash(article, pin.section);
     if (current === null) {
       findings.push(
         warn(at(`${pin.article}#${pin.section} no longer exists. The refresher path for this credential is broken — the section should have been deprecated with a supersededBy pointer rather than removed.`)),
@@ -323,7 +404,7 @@ export function pinDefinition(
       continue;
     }
 
-    const hash = sectionHash(article.body, ref.section);
+    const hash = sectionHash(article, ref.section);
     if (!hash) {
       findings.push(
         err(`${element.id}: cannot pin ${ref.article}#${ref.section} — that article declares no such section. The element's knowledgeRef is broken and must be fixed before a credential rests on it.`),
