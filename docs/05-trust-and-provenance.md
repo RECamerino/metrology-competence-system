@@ -10,7 +10,7 @@ Recorded in [`00-context.md`](00-context.md) and enforced in `schemas/credential
 
 - **Five provenance tiers**, always visible on the credential: self-study, peer-reviewed, organization, accredited-body, authority. A reader sees not only what was demonstrated but who stood behind it. Suppressing the tier in a renderer defeats the design. **Evidenced rather than declared** — `checkProvenanceTier` computes the highest tier a credential's own evidence supports and rejects anything above it; `authority` cannot currently be issued at all, because no such issuer exists. See [`00-context.md`](00-context.md).
 - **Offline verification** against a signed issuer trust registry distributed as a file. No ledger, no network call to the issuer.
-- **ECDSA P-256**, for FIPS 140-3 environments. Adding a suite is possible; removing one effectively never is.
+- **ECDSA P-256**, for FIPS 140-3 environments. Adding a suite is possible; removing one effectively never is. The suite is **`ecdsa-jcs-2019`** — JSON Canonicalization Scheme, RFC 8785 — because nothing this project signs is JSON-LD and `ecdsa-rdfc-2019` would require an `@context` and the resolution of one. **The curve is not part of that identifier**, so it is enforced on the registry key's `publicKeyMultibase` instead; see [`00-context.md`](00-context.md).
 - **Semantic pinning** — `definitionRef` and `knowledgeSnapshot`, decision 39. A credential records what the element meant and what knowledge it rested on at the time it was issued.
 
 ## The registry, and the promise it cannot keep

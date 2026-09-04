@@ -51,7 +51,7 @@ const credential: VerifiableCredential = {
   subject: HOLDER,
   attainedOn: '2028-05-01',
   issuer: { did: ISSUER_DID, name: 'Northfield Calibration', trustRegistryEntry: 'northfield-cal-2026' },
-  proof: { cryptosuite: 'ecdsa-rdfc-2019-p256', verificationMethod: KEY },
+  proof: { cryptosuite: 'ecdsa-jcs-2019', verificationMethod: KEY },
 };
 
 const errorsOf = (findings: { level: string; message: string }[]): string[] =>
@@ -248,4 +248,86 @@ test('a newer snapshot replaces freely', () => {
 test('two different files claiming one sequence number is an error', () => {
   const forked: TrustRegistry = { ...registry, issuedOn: '2028-06-02' };
   assert.ok(checkRegistryReplacement(registry, forked).some((f) => f.message.includes('not what it says')));
+});
+
+/* -- The curve, which the suite identifier cannot state --------------------- */
+
+/*
+ * `ecdsa-jcs-2019` names ECDSA and not a curve: the curve is read from the
+ * verification method's Multikey. So the P-256 requirement the FIPS argument
+ * rests on is enforced by the shape of `publicKeyMultibase` or it is enforced
+ * nowhere — and until now it was neither. It was asserted in a `-p256` suffix
+ * bolted onto a cryptosuite identifier that no implementation recognises,
+ * which is a constraint written where nothing would ever read it.
+ *
+ * The prefix is RECOMPUTED below rather than pasted from a specification,
+ * because it is a claim about the outside world and those are the ones this
+ * project has repeatedly found to be wrong.
+ */
+
+const BASE58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+
+const multikey = (header: number[], point: number[]): string => {
+  let n = 0n;
+  for (const b of [...header, ...point]) n = (n << 8n) | BigInt(b);
+  let out = '';
+  while (n > 0n) {
+    out = BASE58.charAt(Number(n % 58n)) + out;
+    n /= 58n;
+  }
+  return `z${out}`;
+};
+
+// multicodec 0x1200 -> varint 0x8024, then a 33-byte compressed point.
+const p256 = (tag: number, fill: number) => multikey([0x80, 0x24], [tag, ...Array<number>(32).fill(fill)]);
+// multicodec 0x1201 -> varint 0x8124, then a 49-byte compressed point.
+const p384 = (tag: number, fill: number) => multikey([0x81, 0x24], [tag, ...Array<number>(48).fill(fill)]);
+
+const registryWithKey = (publicKeyMultibase: string): unknown => ({
+  ...registry,
+  issuers: [
+    {
+      entry: 'northfield-cal-2026',
+      did: ISSUER_DID,
+      name: 'Northfield Calibration',
+      admittedOn: '2026-01-01',
+      keys: [{ id: KEY, validFrom: '2026-01-01', status: 'active', publicKeyMultibase }],
+    },
+  ],
+});
+
+test('every P-256 multikey is admitted, and the bound is computed not assumed', () => {
+  const validate = validatorFor('trust-registry');
+
+  // base58 is order-preserving at a fixed length, so every valid P-256
+  // encoding lies between these two extremes. Admitting both ends admits
+  // everything in between — which is what makes a prefix check sound rather
+  // than a guess that happens to have worked on the examples to hand.
+  const lowest = p256(0x02, 0x00);
+  const highest = p256(0x03, 0xff);
+  // The published example from the ECDSA cryptosuite specification.
+  const spec = 'zDnaembgSGUhZULN2Caob4HLJPaxBh92N7rtH21TErzqf8HQo';
+
+  for (const key of [lowest, highest, spec]) {
+    assert.equal(key.length, 49, `expected a 49-character P-256 multikey, got ${key}`);
+    assert.ok(key.startsWith('zDnae'), `expected the P-256 prefix, got ${key}`);
+    assert.ok(validate(registryWithKey(key)), `expected a P-256 multikey to be admitted: ${key}`);
+  }
+});
+
+test('a key on any other curve is refused, not silently admitted', () => {
+  // P-384 is a perfectly good curve and simply is not the one the FIPS
+  // argument was made about. Ed25519 is the ecosystem default this project
+  // deliberately did not take. Admitting either would make the curve choice
+  // documentation rather than a rule, which is what it was until now.
+  const validate = validatorFor('trust-registry');
+  const ed25519 = 'z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK';
+
+  for (const key of [p384(0x02, 0x00), p384(0x03, 0xff), ed25519]) {
+    assert.equal(
+      validate(registryWithKey(key)),
+      false,
+      `expected a non-P-256 multikey to be refused: ${key}`,
+    );
+  }
 });

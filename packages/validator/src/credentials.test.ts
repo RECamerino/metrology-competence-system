@@ -125,7 +125,7 @@ const credential: Credential = {
   ],
   issuer: { did: REVIEWER_A, name: 'Northfield Calibration', trustRegistryEntry: 'northfield-cal-2026' },
   portable: true,
-  proof: { cryptosuite: 'ecdsa-rdfc-2019-p256' },
+  proof: { cryptosuite: 'ecdsa-jcs-2019' },
 };
 
 const authorization: Authorization = {
