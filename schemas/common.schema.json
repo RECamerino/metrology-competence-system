@@ -167,6 +167,33 @@
       "description": "Content-addressed reference to an archived artifact. Hashing is what makes a credential re-reviewable years later."
     },
 
+    "reviewerStanding": {
+      "type": "object",
+      "required": ["basis"],
+      "additionalProperties": false,
+      "description": "How a reader can satisfy themselves that this reviewer was in a position to review this. Two of the three bases RESOLVE and one does not, and telling them apart is the entire point of the field.\n\n`reviewer` is a name and an optional DID. Without this, the corpus could establish that X reviewed a section on a date and could not establish that X had any standing to — the exact gap decision 47 closed for credential signers, where an unbacked `heldLevel: 4` stopped counting as evidence of anything. The same rule had never been applied to the people reviewing the corpus itself.\n\nIt cannot PROVE the third case, and nothing could. What it does is stop the three being indistinguishable.",
+      "properties": {
+        "basis": {
+          "enum": ["held-credential", "founding-cohort", "stated"],
+          "description": "`held-credential` — the reviewer holds a credential in this system, named and pinned by content. A reader resolves it offline exactly as they resolve any other credential. EVIDENCED, and it requires both `credentialId` and `credentialRef`: claiming the resolvable basis without the thing that resolves it is the overstatement `provenanceTier` already refuses.\n\n`founding-cohort` — the reviewer sits on the published founding cohort, which a reader resolves against `content/competence/bootstrap-cohort.yaml` the same way a verifier does. EVIDENCED, and it requires the reviewer's `did` to appear on that roster. The shipped roster convenes nobody, so this basis resolves for no one today — the correct state while steward appointment is outstanding, and the same answer every other roster-backed claim gives.\n\n`stated` — external standing described in prose: practice, publication, a post held. A reader WEIGHS it rather than resolving it, exactly as they weigh the name of a reviewer on a paper. ASSERTED, and honest about being so. It is the only basis available while nobody holds a credential and the cohort is empty, which is why it exists and why it is not second-class."
+        },
+        "credentialId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The credential the reviewer holds. Named rather than described, so a reader can go and look."
+        },
+        "credentialRef": {
+          "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/contentRef",
+          "description": "That credential pinned by content, so the standing cannot be claimed from a credential that has since been revised."
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 40,
+          "description": "What the standing IS, for a `stated` basis. Long enough to be weighable: 'twenty years in dimensional calibration, UKAS technical assessor' tells a reader something, and 'expert' does not."
+        }
+      }
+    },
+
     "person": {
       "type": "object",
       "required": ["name"],

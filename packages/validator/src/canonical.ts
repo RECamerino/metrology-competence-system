@@ -30,7 +30,7 @@ export function sha256Of(value: unknown): string {
   return `sha256:${createHash('sha256').update(canonical(value), 'utf8').digest('hex')}`;
 }
 
-/** Hash of a raw string rather than a structure — used for prose. */
+/** Hash of a raw string rather than a structure. */
 export function sha256OfText(text: string): string {
   return `sha256:${createHash('sha256').update(text, 'utf8').digest('hex')}`;
 }

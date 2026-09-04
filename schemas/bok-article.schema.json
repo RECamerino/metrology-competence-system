@@ -178,6 +178,7 @@
         "additionalProperties": false,
         "properties": {
           "reviewer": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/person" },
+          "standing": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/reviewerStanding" },
           "reviewType": {
             "enum": ["technical", "educational", "editorial"],
             "description": "Technical review says the metrology is right. Educational review says it can be learned from. Editorial says it reads well. They are different competencies and conflating them lets a copy-edit masquerade as a technical endorsement."
@@ -190,7 +191,7 @@
           "covers": {
             "type": "array",
             "minItems": 1,
-            "description": "WHICH SECTIONS WERE ACTUALLY REVIEWED, pinned by content. Scoped rather than whole-article because articles grow: a reviewer who read four sections in 2026 has not endorsed a fifth added in 2028, and an unscoped review would silently claim they had. The content pin makes a later rewrite detectable, so a review cannot keep vouching for prose its reviewer never saw.",
+            "description": "WHICH SECTIONS WERE ACTUALLY REVIEWED, pinned by content. Scoped rather than whole-article because articles grow: a reviewer who read four sections in 2026 has not endorsed a fifth added in 2028, and an unscoped review would silently claim they had. The content pin makes a later rewrite detectable, so a review cannot keep vouching for prose its reviewer never saw.\n\nTHE PIN COVERS CLAIM STATE, NOT ONLY PROSE. It once hashed the section body alone, which meant flipping `consensus` from `established` to `contested` left every byte of prose untouched and the hash matching — a reviewer's attestation silently surviving a change to how the passage must be read, and a credential resting on it reporting no drift while the knowledge behind it moved from settled to disputed. `consensus`, `contestedBasis` and `alternativeViews` are inside the pin for that reason. `covers`, `contestedBasisNote`, `deprecated` and `supersededBy` are deliberately outside it; `sectionHash` in the validator carries the argument for each.",
             "items": {
               "type": "object",
               "required": ["section", "sectionRef"],

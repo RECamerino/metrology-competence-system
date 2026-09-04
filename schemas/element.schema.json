@@ -185,6 +185,7 @@
         "additionalProperties": false,
         "properties": {
           "reviewer": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/person" },
+          "standing": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/reviewerStanding" },
           "reviewType": {
             "enum": ["technical", "assessment", "editorial"],
             "description": "Technical review says the metrology is right. ASSESSMENT review says the anchors are observable, gradeable, and describe the level they sit on — a different competence, and the one a gold reference is actually exemplary at. Editorial says it reads well.\n\nKept apart for the reason the article schema gives: conflating them lets a copy-edit masquerade as a technical endorsement. The split matters more on an element than on an article, because an element with impeccable metrology and an unassessable L4 anchor is not a defect a technical reviewer is looking for."

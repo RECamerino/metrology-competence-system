@@ -82,7 +82,7 @@ test('a section is extracted from its anchor to the next heading', () => {
 
 test('an absent section extracts as null rather than throwing', () => {
   assert.equal(extractSection(article.body, 's99'), null);
-  assert.equal(sectionHash(article.body, 's99'), null);
+  assert.equal(sectionHash(article, 's99'), null);
 });
 
 /* -- What the definition hash covers, and what it deliberately ignores ----- */
@@ -332,4 +332,80 @@ test('a partial pin still reports the ref it lost', () => {
   assert.equal(pins.knowledgeSnapshot.length, 1);
   assert.equal(pins.findings.length, 1);
   assert.ok(pins.findings[0]!.message.includes('BOK-0004'));
+});
+
+
+/* -- What a SECTION pin covers, and what it deliberately ignores ----------- */
+
+/*
+ * It hashed the prose and nothing else, which left it pinning what a section
+ * SAYS while ignoring what it CLAIMS ABOUT ITSELF. Flip `consensus` from
+ * `established` to `contested` and not one byte of prose moves: the hash
+ * matched, so a reviewer's attestation survived a change to how the passage
+ * must be read, and a credential resting on it reported no drift while the
+ * knowledge behind the claim went from settled to disputed.
+ */
+
+const sectioned = (section: Record<string, unknown>): ArticleLike => ({
+  ...article,
+  sections: [{ id: 's01', ...section }],
+});
+
+test('flipping a section from established to contested changes its pin', () => {
+  const settled = sectioned({ consensus: 'established' });
+  const disputed = sectioned({
+    consensus: 'contested',
+    contestedBasis: 'source-conflicting',
+    alternativeViews: [{ position: 'The other reading, stated at its strongest.', basis: 'JCGM 100 §5.1.4' }],
+  });
+  assert.notEqual(sectionHash(settled, 's01'), sectionHash(disputed, 's01'));
+});
+
+test('an unstated consensus is the same pin as the default stated outright', () => {
+  // `established` is the schema default, so writing it out changes nothing and
+  // must not manufacture drift — the rule the definition pin already follows.
+  assert.equal(sectionHash(sectioned({}), 's01'), sectionHash(sectioned({ consensus: 'established' }), 's01'));
+  assert.equal(sectionHash(sectioned({}), 's01'), sectionHash({ ...article }, 's01'));
+});
+
+test('rewriting the alternative views changes the pin, with the prose untouched', () => {
+  // The competing positions are substantive argument living OUTSIDE the body,
+  // and they can be rewritten in full without a word of prose changing.
+  const before = sectioned({
+    consensus: 'contested',
+    contestedBasis: 'source-silent',
+    alternativeViews: [{ position: 'The first reading, stated at its strongest.', basis: 'A' }],
+  });
+  const after = sectioned({
+    consensus: 'contested',
+    contestedBasis: 'source-silent',
+    alternativeViews: [{ position: 'A materially different reading altogether.', basis: 'A' }],
+  });
+  assert.notEqual(sectionHash(before, 's01'), sectionHash(after, 's01'));
+});
+
+test('where the disagreement lives is part of the claim', () => {
+  // `source-silent` and `source-conflicting` call for different things from a
+  // reader, and only one of them is settled by a revision.
+  const views = [{ position: 'The other reading, stated at its strongest.', basis: 'A' }];
+  const silent = sectioned({ consensus: 'contested', contestedBasis: 'source-silent', alternativeViews: views });
+  const conflicting = sectioned({ consensus: 'contested', contestedBasis: 'source-conflicting', alternativeViews: views });
+  assert.notEqual(sectionHash(silent, 's01'), sectionHash(conflicting, 's01'));
+});
+
+test('editorial and lifecycle fields stay outside the pin', () => {
+  // `covers` and `contestedBasisNote` are editorial: a reworded note must not
+  // make every credential resting on the section look like it drifted.
+  // `deprecated` is lifecycle, excluded on the argument that keeps an
+  // element's `status` out — superseding a section would otherwise light up
+  // every credential ever issued against it, punishing a holder for an
+  // editorial act years later.
+  const plain = sectioned({});
+  const dressed = sectioned({
+    covers: 'A one-line orientation for somebody arriving cold.',
+    contestedBasisNote: 'A sentence or two naming the clause that is silent, written later.',
+    deprecated: true,
+    supersededBy: 's04',
+  });
+  assert.equal(sectionHash(plain, 's01'), sectionHash(dressed, 's01'));
 });
