@@ -72,7 +72,11 @@
                   "minLength": 1,
                   "description": "Matches the credential's `proof.verificationMethod`."
                 },
-                "publicKeyMultibase": { "type": "string" },
+                "publicKeyMultibase": {
+                  "type": "string",
+                  "pattern": "^zDnae[1-9A-HJ-NP-Za-km-z]{44}$",
+                  "description": "The issuer's public key, as a Multibase-encoded Multikey.\n\nTHIS IS WHERE THE P-256 REQUIREMENT LIVES, and it is the only place it can live. The curve is not part of the cryptosuite identifier — it is read from the key — so the suite string cannot state it, and the `-p256` this project used to append to its cryptosuite name was asserting a constraint in a field no verifier consults. The FIPS argument in `docs/00-context.md` is specifically about P-256; without this pattern nothing anywhere would stop a P-384 or a secp256k1 key being admitted under it.\n\nA P-256 Multikey is the two-byte multicodec header `0x8024` — the varint of `0x1200` — followed by the 33-byte compressed point, base58btc-encoded and prefixed `z`. That is always 49 characters beginning `zDnae`. P-384 (`0x1201`) encodes to `z82L…` and Ed25519 to `z6Mk…`; neither matches, which is the point.\n\nThe prefix is DERIVED, not assumed from convention. base58 is order-preserving at fixed length, so every valid P-256 encoding lies between the minimum (`0x8024 02 00…00`) and the maximum (`0x8024 03 ff…ff`), and those two share `zDnae` — so every value between them does too. The check in `trust.test.ts` recomputes it rather than trusting this note."
+                },
                 "validFrom": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
                 "status": {
                   "enum": ["active", "retired", "compromised"],
@@ -121,7 +125,10 @@
       "additionalProperties": true,
       "description": "The registry is itself signed, or it is a text file anybody can edit on the way to the air gap.",
       "properties": {
-        "cryptosuite": { "const": "ecdsa-rdfc-2019-p256" }
+        "cryptosuite": {
+          "const": "ecdsa-jcs-2019",
+          "description": "The same suite the credentials use, and for the same reasons — see `credential.schema.json`, which carries the argument. It must not diverge: a verifier that can check a credential and not the registry it resolves against has verified nothing."
+        }
       }
     }
   }
