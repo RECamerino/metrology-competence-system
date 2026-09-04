@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/disclosure.schema.json",
+  "title": "Consented disclosure of competence evidence",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "subject",
+    "organization",
+    "purpose",
+    "scopeRef",
+    "grantedOn",
+    "expiresOn",
+    "entries"
+  ],
+  "additionalProperties": false,
+  "description": "A person's consent for one organization to see part of their competence record, for one purpose, for a bounded time.\n\nWHY THIS EXISTS. `computeGaps(elements, scope, held)` took what somebody holds as a plain map, with no record of where it came from or what they agreed to share — so the workforce gap dashboard, which is the feature an organization actually buys, would have been built on the assumption that an employer may read everything a person holds. That includes credentials earned elsewhere, before this job, in domains this job never touches, which are none of the employer's business. The individual owns the record; an organization holds a copy of what it was given, under a retention obligation. **A view of somebody's record is a disclosure, not a read.**\n\nDECISION 34 DECIDED THIS AND NOTHING BUILT IT. \"Consented, scoped disclosure; every view audit-logged and visible to the assessor\" was a row in a decision table describing the accreditation-assessor case. There was no schema and no code, so there was no model to copy for the employer case — this is the first one, and it serves both, which is why `purpose` names the case rather than the schema doing so.\n\nWHAT IT IS NOT FOR. A person looking at their own gaps needs no disclosure and never will. That is a read, of their own record, by its owner. `computeGaps` remains available unguarded for exactly that case; `gapsFromDisclosure` is the organizational path, and it refuses to compute anything at all from a disclosure that does not hold up.",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject": {
+      "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did",
+      "description": "Whose record this discloses — and who grants it. The proof is the SUBJECT's, not the organization's: a disclosure an organization can mint for itself is not consent, it is a record of having decided to look."
+    },
+    "organization": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/organizationRef",
+      "description": "Who may see it. One organization per disclosure: consent to be seen by an employer is not consent to be seen by whoever they share a group with."
+    },
+    "purpose": {
+      "enum": [
+        "workforce-gap-analysis",
+        "assessor-scope-matching",
+        "audit-response"
+      ],
+      "description": "What the organization may use it for, named because a disclosure granted for one purpose is not a disclosure for another. `workforce-gap-analysis` is the employer dashboard; `assessor-scope-matching` is the accreditation-body case decision 34 described; `audit-response` is showing an assessor the competence evidence behind a specific finding.\n\nNot enforced by this schema, because software cannot check what somebody did with data it handed over. Recorded so that a use outside the stated purpose is a breach of something written down, rather than of an assumption nobody made explicit."
+    },
+    "scopeRef": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/contentRef",
+      "description": "The deployment scope this disclosure is bounded by, pinned by content.\n\nPINNED, NOT NAMED, and this is the load-bearing part. The organization owns the deployment scope — it is the one artifact in the system that it does own — so a disclosure bounded by a scope it can edit is bounded by nothing. Widening a job description would silently widen what the employer may see of somebody's record, without anybody consenting to anything. With the scope pinned, adding elements to the job invalidates the disclosure and requires a new one, which is the correct outcome: the person consented to a scope, not to a role name.\n\nThe hash covers what determines visibility — subject, role, overlays, includes, excludes — and not `notes`, `assignedBy` or the effective dates, on the same reasoning that keeps editorial fields out of a credential's `definitionRef`."
+    },
+    "grantedOn": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate"
+    },
+    "expiresOn": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate",
+      "description": "REQUIRED. A standing, indefinite grant is not consent — it is a decision made once and never revisited, by somebody who may since have left. The person re-grants or the organization stops seeing."
+    },
+    "revokedOn": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate",
+      "description": "Withdrawn by the subject, who may do so at any time and needs no reason. Recorded rather than deleted, because the organization's copies were made under a retention obligation and a reader needs to know the grant they were made under has ended."
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "description": "What is being disclosed: one entry per credential the person is letting this organization see.\n\nEVERY ENTRY MUST BE IN SCOPE, and the validator refuses the disclosure otherwise. An element outside the deployment scope cannot produce a gap, so a credential for one cannot inform this organization's dashboard — it can only tell them something about the person they had no business learning. This is the rule that makes the disclosure meaningfully bounded rather than a formality wrapped around a full record.",
+      "items": {
+        "type": "object",
+        "required": [
+          "element",
+          "level"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "element": {
+            "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId"
+          },
+          "level": {
+            "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel"
+          },
+          "credentialId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "credentialRef": {
+            "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/contentRef",
+            "description": "The credential itself, pinned, so the organization can verify what it was shown rather than trusting a level somebody typed."
+          }
+        }
+      }
+    },
+    "proof": {
+      "type": "object",
+      "required": [
+        "cryptosuite"
+      ],
+      "additionalProperties": true,
+      "description": "Signed by the SUBJECT. The whole document is worthless unsigned: an unsigned disclosure is an organization's assertion that it was permitted to look.",
+      "properties": {
+        "cryptosuite": {
+          "const": "ecdsa-jcs-2019"
+        }
+      }
+    }
+  }
+}

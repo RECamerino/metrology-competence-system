@@ -65,6 +65,7 @@ export type SchemaName =
   | 'training-module'
   | 'training-record'
   | 'deployment-scope'
+  | 'disclosure'
   | 'bootstrap-cohort'
   | 'trust-registry';
 
