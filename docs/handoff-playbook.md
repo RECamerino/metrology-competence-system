@@ -10,7 +10,7 @@ The operating manual for adding content to the corpus. Follow it exactly; where 
 
 1. `npm run validate` must be green on a clean checkout. If it is not, fix that first — you cannot tell your errors from pre-existing ones otherwise.
 2. Read [`00-context.md`](00-context.md). Especially the parts explaining *why* proctoring is gone and *why* IDs are append-only.
-3. Read two or three gold reference elements (`authoring.goldReference: true`). They are the bar.
+3. Read two or three gold reference elements (`authoring.goldReference: true`). They are the bar. **None exist yet.** The flag is evidenced rather than declared — an element earns it by carrying reviews that cover every attainable level — and creating the set is Phase 3 work. Until then the worked references in CLAUDE.md's schema-probe table are the nearest thing to a bar.
 
 ---
 
@@ -365,6 +365,8 @@ Name the framework you are speaking in — "in the AIAG sense" — and where it 
 *Authored in Phase 3, before content authoring begins at volume.*
 
 Twenty to thirty elements spanning the hardest domains, marked `authoring.goldReference: true`. They are the quality bar and the few-shot reference for later authoring. They are reviewed to a higher standard and changed reluctantly.
+
+**Both of those are now executable, and they cost more than they read.** The flag is refused unless the element names its `authoring.authors` and EVERY attainable level is covered by a current `technical` or `assessment` review, accepted, by somebody who is not an author. So the review effort is proportional to the ceiling rather than to the element: twenty-five elements at ceiling 4 is a hundred level-reviews, not twenty-five sign-offs. And because each review pins the level by the same hash a credential's `definitionRef` uses, **rewriting an anchor lapses the gold status until somebody reviews it again** — which is what 'changed reluctantly' turns into when it stops being an instruction and starts being a check. Plan the reviewer time before picking the elements.
 
 When they exist, this section will list them by ID. Until then, this document plus the schemas are the specification.
 

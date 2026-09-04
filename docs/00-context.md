@@ -681,6 +681,31 @@ What it took, and what each piece is for:
 
 **Note the shape of the defect, because it is a repeat — and note what actually closed it.** The element used to record the ambiguity in a YAML comment explaining why `desk` was chosen. A human read that comment; no code did. What closed it was not writing the comment more carefully but giving the knowledge somewhere to go that participates in something: the field widened, and the module-side rule now derives from it. That is open item 22 in [`../CLAUDE.md`](../CLAUDE.md) — `knowledgeRefs` proving a link resolves while proving nothing about coverage — appearing in a second field, and this is the remedy the others want too: **the corpus has several places where an author knows something true about an element and has nowhere to put it that participates in anything**, and the answer each time is a field, not a note.
 
+## A gold reference cannot be self-declared
+
+**Closed 2026-09-04, inside the freeze window.** Open item 12.
+
+`authoring.goldReference` was a bare boolean with a default of `false`. An author could mark their own element as the exemplar every other element in the corpus is held to, with no review recorded anywhere, and nothing would object. It was unused, which is the only reason it had not yet done any harm — and Phase 3's deliverable is precisely the creation of twenty to thirty of them.
+
+**The project had already refused this shape twice, by name.** Decision 8b removed it from `bootstrapAuthority`, which was a field a signer wrote about their own standing. And `bok-article.schema.json` says it outright: there is deliberately no `authoritative: true` field anywhere, *because content asserting its own authority is the "trust me" problem this project exists to solve*. The article schema said that, and the element schema did the opposite, in a field named for exemplary quality.
+
+**The obvious reading of 8b was the wrong fix.** A roster — `gold-references.yaml`, steward-controlled, alongside the bootstrap cohort and the trust registry — is what the analogy suggests, and it fails on two counts. A bootstrap cohort publishes because a VERIFIER has to resolve it offline; a gold reference never leaves the project and no verifier ever asks about one. Worse, steward appointment is blocked with no timetable, so gating designation on a steward act would have put a *new* blocker on the critical path of the very phase that has to produce them. The control has to work with nobody appointed.
+
+**So it is derived from review, and that required elements to have review provenance at all.** They had none. `authoring.lastReviewedOn` is a date with nobody attached to it: it records that somebody looked, not who, not at what, and not what they concluded — the same "a fact nothing stands behind" shape one layer down. Elements now carry `reviews`, mirroring the article array that already existed, with one addition: `reviewType` is `technical | assessment | editorial` rather than the article's `technical | educational | editorial`. **Assessment review is the one a gold reference is actually exemplary at** — whether the anchors are observable, gradeable, and describe the level they sit on — and it is a different competence from whether the metrology is right. An element with impeccable metrology and an unassessable L4 anchor is not a defect a technical reviewer is looking for.
+
+`goldReference: true` is now admitted only where four things hold, and the validator computes each:
+
+- the element names its `authoring.authors`, because *the reviewer is not an author* cannot be decided against an element that names none — and an exemplar nobody will put their name to is not one;
+- **every** attainable level, 1 through `levelCeiling`, is covered by a qualifying review. A reviewer who saw three rungs of a five-rung ladder has not made the top two exemplary, which is the article schema's scoped-review argument applied to levels instead of sections;
+- each covering review still matches the element as it stands. The pin is `elementDefinitionHash` — **the same projection a credential's `definitionRef` uses** — so a review and a credential go stale on exactly the same edits, and a typo fix disturbs neither;
+- and no review counts if its reviewer is one of the authors. That is the no-self-signoff rule, which the credential model has enforced from the start and the corpus never did.
+
+**The fourth of those is the one that changes behaviour rather than paperwork.** "Gold references are changed reluctantly" was an instruction in the playbook that nothing enforced. It is now arithmetic: rewrite an anchor and the status lapses until somebody reviews it again. And the review cost is proportional to the ceiling, not to the element — twenty-five elements at ceiling 4 is a hundred level-reviews. That belongs in the Phase 3 estimate and was not in it.
+
+**Understating stays permitted and silent**, exactly as it is for a provenance tier. Plenty of well-reviewed elements are not the teaching example, being reviewed obliges nobody to nominate you, and 5459 elements must not acquire a review obligation merely by existing.
+
+**One thing this does NOT close.** `reviewer` is a `person` — a name, optionally a DID. The corpus can now establish *X reviewed this element on this date*, and still not *X had the standing to review it*. That is open item 16, unchanged, and it is now the same gap in two places rather than one.
+
 ## The one rule that cannot be waived
 
 **IDs are append-only.** `content/competence/taxonomy/domains/*.yaml` and `content/competence/taxonomy/id-registry.lock` may grow. Nothing in them may ever be renamed or removed.
@@ -703,5 +728,5 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 9. **A holder's counter-statement to revocation** — the issuer can revoke and the subject cannot contest it in the data. Pairs with the trust-registry and status-list work.
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
-12. **`authoring.goldReference` is author-declared** — an element can be marked as the exemplar others are held to, by the person who wrote it, with no review recorded. Unused so far. This is the shape decision 8b removed from `bootstrapAuthority`, and Phase 3 is where gold references get created, so it wants a control before then rather than after.
+12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
 7. **Skeleton scale** — resolved. Landed at 2232 elements across 257 areas and 43 domains, against a 2000+ target.

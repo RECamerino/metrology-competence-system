@@ -14,6 +14,7 @@ import assert from 'node:assert/strict';
 import type { Corpus, ElementFile, ItemFile } from './corpus.ts';
 import { runAllChecks } from './checks.ts';
 import { validatorFor } from './schema.ts';
+import { type ElementLike, elementDefinitionHash } from './definitions.ts';
 
 /* -- Fixtures ------------------------------------------------------------ */
 
@@ -1254,4 +1255,147 @@ test('a proficiency-test result is admissible from L3 upward', () => {
       `expected L${level} to accept the modality`,
     );
   }
+});
+
+
+/* -- Gold reference: evidenced, not declared -------------------------------- */
+
+/*
+ * `authoring.goldReference` was a bare boolean. An author could mark their own
+ * element as the exemplar every other element is held to, with no review
+ * recorded anywhere. That is the shape decision 8b removed from
+ * `bootstrapAuthority`, and the shape `bok-article` refuses by name when it
+ * says there is deliberately no `authoritative: true` field — the article
+ * schema said it and the element schema did the opposite.
+ *
+ * The baseline element is ceiling 3, so an exemplary one needs L1, L2 and L3
+ * all covered. A reviewer who saw two rungs of a three-rung ladder has not made
+ * the third exemplary, and the tests below are mostly about that.
+ */
+
+const AUTHOR = 'Dale Okoro';
+const REVIEWER = 'Priya Raman';
+
+const reviewOf = (
+  data: Record<string, unknown>,
+  levels: number[],
+  overrides: Record<string, unknown> = {},
+): Record<string, unknown> => ({
+  reviewer: { name: REVIEWER },
+  reviewType: 'technical',
+  reviewedOn: '2026-09-01',
+  disposition: 'accepted',
+  covers: levels.map((level) => ({
+    level,
+    definitionRef: elementDefinitionHash(data as ElementLike, level),
+  })),
+  ...overrides,
+});
+
+const goldElement = (
+  reviews: Record<string, unknown>[],
+  elementOverrides: Record<string, unknown> = {},
+): ElementFile =>
+  element({
+    reviews,
+    authoring: {
+      createdOn: '2026-08-01',
+      authors: [{ name: AUTHOR }],
+      goldReference: true,
+    },
+    ...elementOverrides,
+  });
+
+// The projection excludes `reviews` and `authoring`, so a review's pin can be
+// computed against the plain baseline and stays valid once it is attached.
+const BASELINE = element().data;
+
+test('a gold reference with no review at all is refused', () => {
+  const errors = errorsOf(corpus([goldElement([])]));
+  assert.ok(
+    errors.some((e) => e.includes('goldReference') && e.includes('L1, L2, L3')),
+    `expected an unevidenced gold reference to be refused, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('an author reviewing their own element is not a review', () => {
+  // The no-self-signoff rule reaching the corpus. The credential model has
+  // always refused to let somebody attest their own competence; nothing
+  // stopped an author attesting the quality of their own element.
+  const errors = errorsOf(
+    corpus([goldElement([reviewOf(BASELINE, [1, 2, 3], { reviewer: { name: AUTHOR } })])]),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('is not a review')),
+    `expected a self-review to be refused, got: ${JSON.stringify(errors)}`,
+  );
+  assert.ok(
+    errors.some((e) => e.includes('goldReference')),
+    'a self-review must also fail to support the claim resting on it',
+  );
+});
+
+test('a gold reference covered at every level by somebody else is accepted', () => {
+  assert.deepEqual(errorsOf(corpus([goldElement([reviewOf(BASELINE, [1, 2, 3])])])), []);
+});
+
+test('a reviewer who saw two rungs of three has not made the third exemplary', () => {
+  const errors = errorsOf(corpus([goldElement([reviewOf(BASELINE, [1, 2])])]));
+  assert.ok(
+    errors.some((e) => e.includes('goldReference') && e.includes('L3')),
+    `expected the uncovered level to be named, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('rewriting an anchor lapses the gold reference until it is reviewed again', () => {
+  // This is what makes "gold references are changed reluctantly" executable
+  // rather than aspirational. The pin is the same projection a credential's
+  // definitionRef uses, so a review and a credential go stale on exactly the
+  // same edits — and neither is disturbed by a typo fix elsewhere.
+  const rewritten = goldElement([reviewOf(BASELINE, [1, 2, 3])], {
+    anchors: { '1': LONG, '2': LONG, '3': `${LONG} And a materially different L3.` },
+  });
+  const errors = errorsOf(corpus([rewritten]));
+  assert.ok(
+    errors.some((e) => e.includes('goldReference') && e.includes('L3')),
+    `expected the rewritten level to stop being supported, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('an editorial review does not make an element exemplary', () => {
+  // Conflating the review types is what lets a copy-edit masquerade as a
+  // technical endorsement, which is why the article schema keeps them apart
+  // and why only technical and assessment reviews count here.
+  const errors = errorsOf(
+    corpus([goldElement([reviewOf(BASELINE, [1, 2, 3], { reviewType: 'editorial' })])]),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('goldReference')),
+    `expected an editorial review not to carry a gold reference, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('a disputed review does not carry the claim, and must say why', () => {
+  const errors = errorsOf(
+    corpus([goldElement([reviewOf(BASELINE, [1, 2, 3], { disposition: 'disputed' })])]),
+  );
+  assert.ok(
+    errors.some((e) => e.includes("is 'disputed' with no note")),
+    `expected a bare dispute to be refused, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('a review cannot cover a level the element does not reach', () => {
+  const errors = errorsOf(corpus([goldElement([reviewOf(BASELINE, [1, 2, 3, 5])])]));
+  assert.ok(
+    errors.some((e) => e.includes('covers L5') && e.includes('ceiling of 3')),
+    `expected a review above the ceiling to be refused, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('an element claiming nothing needs no reviews, and is silent', () => {
+  // Leaving the flag false is always permitted, exactly as understating a
+  // provenance tier is. Being reviewed obliges nobody to nominate you, and
+  // 5459 elements must not each acquire a review obligation by existing.
+  assert.deepEqual(errorsOf(corpus([element()])), []);
 });

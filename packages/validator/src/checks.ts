@@ -19,7 +19,7 @@ import {
   indexStubs,
   roleIds,
 } from './corpus.ts';
-import { demonstrationRoutes, sectionHash } from './definitions.ts';
+import { type ElementLike, demonstrationRoutes, elementDefinitionHash, sectionHash } from './definitions.ts';
 import { formatErrors, validatorFor } from './schema.ts';
 
 export interface Finding {
@@ -673,6 +673,140 @@ function checkBok(corpus: Corpus): Finding[] {
 /* ------------------------------------------------------------------------ */
 
 /**
+ * Element review provenance, and the gold reference that rests on it.
+ *
+ * THE DEFECT THIS CLOSES. `authoring.goldReference` was a bare boolean. An
+ * author could mark their own element as the exemplar every other element is
+ * held to, with no review recorded anywhere, and nothing would object. That is
+ * the shape decision 8b removed from `bootstrapAuthority` — a field a person
+ * writes about their own standing — and it is the shape `bok-article` refuses
+ * BY NAME when it says there is deliberately no `authoritative: true` field,
+ * because content asserting its own authority is the "trust me" problem this
+ * project exists to solve. The article schema said it and the element schema
+ * did the opposite.
+ *
+ * WHY THE ANSWER IS NOT A STEWARD-CONTROLLED ROSTER. That was the obvious read
+ * of decision 8b, and it is wrong here. A bootstrap cohort publishes because a
+ * VERIFIER has to resolve it offline; a gold reference never leaves the project
+ * and no verifier ever asks about one. Worse, steward appointment is blocked
+ * with no timetable, and Phase 3's deliverable IS the gold reference set — so
+ * gating designation on stewards would have made the control a blocker on the
+ * critical path. Derived-from-review needs nobody appointed.
+ *
+ * WHAT MAKES IT DERIVABLE. Elements had no review provenance at all:
+ * `authoring.lastReviewedOn` is a date with nobody attached to it, recording
+ * that somebody looked but not who, not at what, and not what they concluded.
+ * So `reviews` is the mechanism and the gold reference is a consequence of it,
+ * rather than a second parallel record that exists only to justify a flag.
+ *
+ * THE PIN IS THE SAME ONE A CREDENTIAL USES. A review covers LEVELS, each
+ * pinned with `elementDefinitionHash`, so a review and a credential go stale on
+ * exactly the same edits and neither is disturbed by a typo fix. That is what
+ * turns "gold references are changed reluctantly" from a wish in the playbook
+ * into something that happens: rewrite an anchor and the gold status lapses
+ * until somebody reviews it again.
+ */
+function checkElementReviews(corpus: Corpus): Finding[] {
+  const findings: Finding[] = [];
+
+  // `editorial` is deliberately not here. A copy-edit is worth recording and is
+  // not evidence that an element is exemplary, which is the whole reason the
+  // three review types are kept apart.
+  const QUALIFYING_TYPE = new Set(['technical', 'assessment']);
+  const QUALIFYING_DISPOSITION = new Set(['accepted', 'accepted-with-changes']);
+  const norm = (name: unknown): string => String(name ?? '').trim().toLowerCase();
+
+  for (const file of corpus.elements) {
+    const d = file.data as Record<string, any>;
+    const at = (msg: string) => `${file.path}: ${msg}`;
+    if (!d.id) continue;
+
+    const authoring = (d.authoring ?? {}) as Record<string, any>;
+    const authors = new Set(
+      ((authoring.authors ?? []) as Array<Record<string, any>>)
+        .map((a) => norm(a?.name))
+        .filter((n) => n.length > 0),
+    );
+    const ceiling = typeof d.levelCeiling === 'number' ? d.levelCeiling : 0;
+
+    // Levels a qualifying review still covers, as the element stands today.
+    const supported = new Set<number>();
+
+    for (const review of (d.reviews ?? []) as Array<Record<string, any>>) {
+      const who = review?.reviewer?.name ?? 'unknown reviewer';
+      const selfReview = authors.has(norm(review?.reviewer?.name));
+
+      // No-self-signoff, reaching the corpus. The credential model has always
+      // refused to let somebody attest their own competence; nothing stopped
+      // an author attesting the quality of their own element.
+      if (selfReview) {
+        findings.push(
+          err(at(`review by ${who} names one of this element's own authors. An author reviewing their own work is not a review — it is the assertion a review exists to test.`)),
+        );
+      }
+
+      if (
+        (review?.disposition === 'disputed' || review?.disposition === 'rejected') &&
+        String(review?.note ?? '').trim().length === 0
+      ) {
+        findings.push(
+          err(at(`review by ${who} is '${review.disposition}' with no note. A disagreement with no stated substance is unusable to a reader and unfair to the author.`)),
+        );
+      }
+
+      const qualifies =
+        !selfReview &&
+        QUALIFYING_TYPE.has(String(review?.reviewType)) &&
+        QUALIFYING_DISPOSITION.has(String(review?.disposition));
+
+      for (const covered of (review?.covers ?? []) as Array<Record<string, any>>) {
+        const level = covered?.level;
+        if (typeof level !== 'number') continue;
+
+        if (level > ceiling) {
+          findings.push(
+            err(at(`review by ${who} covers L${level}, above this element's ceiling of ${ceiling}. There is nothing at that level for anybody to have reviewed.`)),
+          );
+          continue;
+        }
+
+        if (elementDefinitionHash(d as ElementLike, level) !== covered?.definitionRef) {
+          findings.push(
+            warn(at(`L${level} has changed since ${who} reviewed it on ${review?.reviewedOn}. That review no longer covers what is there — re-review it, or narrow its scope.`)),
+          );
+          continue;
+        }
+
+        if (qualifies) supported.add(level);
+      }
+    }
+
+    if (authoring.goldReference !== true) continue;
+
+    if (authors.size === 0) {
+      findings.push(
+        err(at(`is marked goldReference with no authoring.authors. Whether the reviewer is one of the authors cannot be decided against an element that names none, and an exemplar nobody will put their name to is not one.`)),
+      );
+    }
+
+    const missing: number[] = [];
+    for (let level = 1; level <= ceiling; level += 1) {
+      if (!supported.has(level)) missing.push(level);
+    }
+
+    if (missing.length > 0) {
+      findings.push(
+        err(at(`is marked goldReference, but ${missing.map((l) => `L${l}`).join(', ')} ${missing.length === 1 ? 'is' : 'are'} not covered by a current, accepted technical or assessment review from somebody who is not an author. A reviewer who saw three rungs of a five-rung ladder has not made the top two exemplary — gold reference is evidenced, not declared.`)),
+      );
+    }
+  }
+
+  return findings;
+}
+
+/* ------------------------------------------------------------------------ */
+
+/**
  * Training modules.
  *
  * The rule doing the work here: a module that prepares for an element whose
@@ -1102,6 +1236,7 @@ export function runAllChecks(corpus: Corpus): Finding[] {
     ...checkDuplicateTitles(corpus),
     ...checkElementIntegrity(corpus),
     ...checkPrerequisiteGraph(corpus),
+    ...checkElementReviews(corpus),
     ...checkBok(corpus),
     ...checkModules(corpus),
     ...checkItemBank(corpus),

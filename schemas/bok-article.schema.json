@@ -161,9 +161,9 @@
       "properties": {
         "createdOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
         "lastUpdated": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
-        "authors": { "type": "array", "items": { "$ref": "#/$defs/person" } },
+        "authors": { "type": "array", "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/person" } },
         "maintainer": {
-          "$ref": "#/$defs/person",
+          "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/person",
           "description": "Who is responsible for keeping it current. An article with a volatility of `volatile` and no maintainer is a liability."
         }
       }
@@ -177,7 +177,7 @@
         "required": ["reviewer", "reviewType", "reviewedOn", "disposition", "covers"],
         "additionalProperties": false,
         "properties": {
-          "reviewer": { "$ref": "#/$defs/person" },
+          "reviewer": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/person" },
           "reviewType": {
             "enum": ["technical", "educational", "editorial"],
             "description": "Technical review says the metrology is right. Educational review says it can be learned from. Editorial says it reads well. They are different competencies and conflating them lets a copy-edit masquerade as a technical endorsement."
@@ -219,20 +219,6 @@
             "then": { "required": ["note"] }
           }
         ]
-      }
-    }
-  },
-
-  "$defs": {
-    "person": {
-      "type": "object",
-      "required": ["name"],
-      "additionalProperties": false,
-      "description": "A named human. `name` rather than only a DID because the BOK's reviewers are practitioners whose names carry weight in the field, and a bare identifier tells a reader nothing. The DID is optional and links the person to their own credentials where they hold them.",
-      "properties": {
-        "name": { "type": "string", "minLength": 1 },
-        "did": { "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did" },
-        "affiliation": { "type": "string" }
       }
     }
   }
