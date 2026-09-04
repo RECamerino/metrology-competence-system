@@ -165,6 +165,18 @@
       "type": "string",
       "pattern": "^sha256:[a-f0-9]{64}$",
       "description": "Content-addressed reference to an archived artifact. Hashing is what makes a credential re-reviewable years later."
+    },
+
+    "person": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "description": "A named human. `name` rather than only a DID because the people who review this corpus are practitioners whose names carry weight in the field, and a bare identifier tells a reader nothing. The DID is optional and links the person to their own credentials where they hold them.\n\nShared between articles and elements deliberately. It lived on `bok-article` alone, and an element had no way to name anybody at all — which is how an element could be marked as the exemplar others are held to with nobody recorded as having written it and nobody recorded as having read it.",
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "did": { "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did" },
+        "affiliation": { "type": "string" }
+      }
     }
   }
 }

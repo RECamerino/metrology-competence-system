@@ -176,6 +176,50 @@
       }
     },
 
+    "reviews": {
+      "type": "array",
+      "description": "Review provenance for the element itself, distinct from the metrology sources it cites and from the reviews on the BOK articles behind it.\n\nNOT A STATUS FLAG. `bok-article` says it plainly and the reasoning is identical here: there is deliberately no field by which content asserts its own authority, because that is the 'trust me' problem this project exists to solve. An element's standing is DERIVED from who reviewed it, in what capacity, and what they concluded — which is why `authoring.goldReference` is now computed against this array rather than believed.\n\nElements had no review provenance at all until this existed. `authoring.lastReviewedOn` is a date with nobody attached to it: it records that somebody looked, not who, not at what, and not what they concluded. It is kept for ordinary housekeeping and is not evidence of anything.",
+      "items": {
+        "type": "object",
+        "required": ["reviewer", "reviewType", "reviewedOn", "disposition", "covers"],
+        "additionalProperties": false,
+        "properties": {
+          "reviewer": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/person" },
+          "reviewType": {
+            "enum": ["technical", "assessment", "editorial"],
+            "description": "Technical review says the metrology is right. ASSESSMENT review says the anchors are observable, gradeable, and describe the level they sit on — a different competence, and the one a gold reference is actually exemplary at. Editorial says it reads well.\n\nKept apart for the reason the article schema gives: conflating them lets a copy-edit masquerade as a technical endorsement. The split matters more on an element than on an article, because an element with impeccable metrology and an unassessable L4 anchor is not a defect a technical reviewer is looking for."
+          },
+          "reviewedOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+          "disposition": {
+            "enum": ["accepted", "accepted-with-changes", "disputed", "rejected"],
+            "description": "`disputed` is a legitimate outcome and not a failure state: a reviewer who disagrees on substance has told a reader something worth knowing. It does not support a gold reference, which is a different question from whether it is worth recording."
+          },
+          "covers": {
+            "type": "array",
+            "minItems": 1,
+            "description": "WHICH LEVELS WERE ACTUALLY REVIEWED, pinned by the element definition at that level. Scoped rather than whole-element for the reason an article review is scoped to sections: a reviewer who validated the L1 to L3 anchors in 2026 has not endorsed an L5 anchor rewritten in 2028, and an unscoped review would silently claim they had.\n\nThe pin is the same projection a credential's `definitionRef` uses, so a review and a credential go stale on exactly the same edits and neither is disturbed by a typo fix. This is what makes 'gold references are changed reluctantly' executable rather than aspirational: rewrite an anchor and the gold status lapses until somebody reviews it again.",
+            "items": {
+              "type": "object",
+              "required": ["level", "definitionRef"],
+              "additionalProperties": false,
+              "properties": {
+                "level": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel" },
+                "definitionRef": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/contentRef" }
+              }
+            }
+          },
+          "note": {
+            "type": "string",
+            "description": "Required when the disposition is `disputed` or `rejected`. A disagreement with no stated substance is unusable to a reader and unfair to the author."
+          },
+          "conflictDisclosed": {
+            "type": "string",
+            "description": "Any commercial or professional interest the reviewer disclosed, per GOVERNANCE.md. Recorded on the element rather than in a side channel, because a reader weighing the review needs it."
+          }
+        }
+      }
+    },
+
     "authoring": {
       "type": "object",
       "description": "Provenance of the content itself, distinct from the metrology sources it cites.",
@@ -183,10 +227,16 @@
       "properties": {
         "createdOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
         "lastReviewedOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+        "authors": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/person" },
+          "description": "Who wrote this element. Optional in general and REQUIRED for a gold reference, because \"the reviewer is not the author\" cannot be checked against an element that names no author — and an exemplar nobody will put their name to is not one."
+        },
         "goldReference": {
           "type": "boolean",
           "default": false,
-          "description": "Marks an element authored as a quality exemplar. Gold references are the standard other elements are held to and the few-shot reference for later authoring — they are reviewed to a higher bar and changed reluctantly."
+          "description": "Marks an element as a quality exemplar: the standard other elements are held to, and the few-shot reference for later authoring.\n\nEVIDENCED, NOT DECLARED. It was a bare boolean an author could set on their own work with no review recorded anywhere — the shape decision 8b removed from `bootstrapAuthority`, and the shape `bok-article` refuses by name when it says there is deliberately no `authoritative: true` field. Setting it true is permitted only where `reviews` can carry it, and the validator computes that rather than believing it:\n\n  - the element names its `authoring.authors`;\n  - EVERY attainable level, 1 through `levelCeiling`, is covered by a review of type `technical` or `assessment` whose disposition is `accepted` or `accepted-with-changes`. A reviewer who saw three rungs of a five-rung ladder has not made the top two exemplary;\n  - each such review still matches the element as it stands, so a later rewrite lapses the claim until somebody reviews it again;\n  - and no review counts if its reviewer is one of the authors, which is the no-self-signoff rule reaching the corpus.\n\nLeaving it false is always permitted and silent, exactly as understating a provenance tier is: plenty of well-reviewed elements are not the teaching example, and being reviewed obliges nobody to nominate you."
         }
       }
     }
