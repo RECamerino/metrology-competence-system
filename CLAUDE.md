@@ -43,7 +43,7 @@ Three principles held in tension deliberately:
 | Phase | What | State |
 |---|---|---|
 | 0 | Foundation — scaffold, licences, schemas, CI, source register | Done |
-| 1 | Taxonomy skeleton + gate review + revision | **Done** — but the skeleton that passed the gate was 2232 elements, and it is now 5407. See *The corpus tripled* below. |
+| 1 | Taxonomy skeleton + gate review + revision | **Done** — but the skeleton that passed the gate was 2232 elements, and it is now 5459. See *The corpus tripled* below. |
 | 2 | Proficiency rubric, roles, evidence model, credential + exchange + authorization design | **In progress** |
 | 3 | Guardrail kit, gold reference elements, schema freeze | Not started |
 | 4 | Cross-cutting core `CM-01`…`CM-22` — BOK articles first, then the elements that reference them | Not started |
@@ -286,7 +286,7 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 ### The corpus tripled, and most of it is unreviewed
 
-**2232 → 5407 elements in one session.** The `EC` axis (21 packs, 203 equipment types, 2732 elements) and 31 `Foundational Knowledge` areas were **generated in passes** from hand-written per-type specifications. Read that as a warning label, not a boast.
+**2232 → 5407 elements in one session**, and 5459 today. The `EC` axis (21 packs, 203 equipment types, 2732 elements) and 31 `Foundational Knowledge` areas were **generated in passes** from hand-written per-type specifications. Read that as a warning label, not a boast.
 
 **Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 262 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
 
@@ -321,6 +321,42 @@ The reason it keeps happening is worth internalizing: **a missing equipment type
 **What the corpus says about itself.** Run `npm run report:coverage` first — its `ITEM GAPS` section names the next content work rather than requiring you to infer it, and it is authoritative where this file has gone stale. Two shapes to expect. Elements carrying items with **no authored definition** — a binding claiming to test a competence that has no anchors to test against — which stood at eight and is now **zero**. And elements with items only at upper levels, a candidate unable to climb to an L4 they have no L3 item for, which is still real: eight elements have unbound attainable levels. Several of those are **deliberate and documented in the binding file**, because at L1 the archetype supplies the values the element exists to obtain, and padding `ARC-0004` into the slot would inflate the reuse figure while assessing nothing. Read the binding's comment before treating a gap as work.
 
 **The highest-value engineering work is authoring something real against the design.** That exercise has found a genuine flaw **five times out of five** — the BOK/competence split, the generator-parameter leak, the missing level pin, the undefined `roleTarget`, and `knowledgeRefs` proving that a link RESOLVES while proving nothing about whether it COVERS (open decision 22). Reading the schemas has never found one. If you are choosing what to do next and nothing else is pressing, author an element or bind one and see what breaks.
+
+### What four adversarial reviews taught, and how to use the next one
+
+Four external reviews were worked through in September 2026 — CM-03, foundational
+ceilings, EC-12, and the proficiency ladder with the role registry. Roughly
+twenty-five findings. **Eleven were confirmed as filed. Four were refuted or
+materially narrowed by checking. Two got LARGER.** That split was consistent
+enough to be predictive, and it is the reason to verify before acting:
+
+**Claims about the corpus held up almost every time.** Every "grep returns zero
+hits" was accurate. Absences are demonstrable, and a reviewer who says an
+element does not exist is nearly always right.
+
+**Claims about the outside world, and about what the code does, often did not.**
+The failures were an NCSLI document misattributed by number; a falsification
+test the reviewer stated but never ran; a rule cited from the wrong file
+(`CM-17` for `CM-20`); and twice a mechanism assumed missing that was present
+and already tested — `provenanceTier` for witness standing, and the
+`authorities` field that made a role's supposed contradiction disappear.
+
+**Two findings grew under checking, and both were worth more than what they
+displaced.** Tracing EC-12's ceiling complaint produced open decision 26: the
+problem was corpus-wide, not one pack's. Grading one foundational area revealed
+that nine of the ten already-graded areas had overridden ceilings DOWNWARD only,
+making the missing L4 question — not the missing L2 — the commoner defect.
+
+**Checking also found three defects no review caught**: the `CM-20`/`CM-17`
+mis-reference, `EC-12-A09`'s summary naming a device class the area does not
+contain, and a false claim about DP budget elements that a PR of this project's
+own had introduced.
+
+So: **verify each finding against the files before acting, and say plainly which
+ones do not survive.** A refuted finding is a result, not a failure — and the
+reviewer is usually pointing at something real even when the stated consequence
+is wrong.
+
 
 **Do not raise stewards or experience-hour validation as next actions.** Both are blocked on people, with no timetable. See the note under Open decisions.
 
