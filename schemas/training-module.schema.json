@@ -44,7 +44,11 @@
         "additionalProperties": false,
         "properties": {
           "element": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
-          "level": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel" }
+          "level": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel" },
+          "route": {
+            "enum": ["desk", "equipment"],
+            "description": "Which evidence route this module prepares, for a target element that declares MORE THAN ONE in `demonstration`. Required there, and forbidden anywhere else: where the element declares a single route it has already answered the question, and restating it here creates a second copy of one fact that can drift out of agreement with the element after an edit.\n\nTHE MULTI-ROUTE CASE IS THE ONE SILENCE GETS WRONG. Both routes are admissible for such an element, so neither listing the target in `requiresPhysicalDemonstration` nor omitting it is inherently an error — and a module that simply said nothing would leave a learner bound for the instrument route with no warning that bench access is coming, while validating perfectly cleanly. Stating the route is what makes `requiresPhysicalDemonstration` checkable rather than decided by omission."
+          }
         }
       }
     },
@@ -52,7 +56,7 @@
     "requiresPhysicalDemonstration": {
       "type": "array",
       "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
-      "description": "Elements in `preparesFor` whose demonstration requires EQUIPMENT the learner may not have access to — see `demonstration` on the element. The validator requires every such element to appear here: a module claiming to complete one by simulation is asserting that a simulation substitutes for the bench, and it does not.\n\nNOT every skill element. `skill` means the evidence is observable performance rather than explanation; it does not mean the performance happens at a bench. Constructing an uncertainty budget is a skill and is desk work, and listing it here would tell a learner they are waiting for access they never needed. The validator rejects that too — inventing a barrier is as wrong as hiding one.\n\nCompleting the module puts the elements listed here into `pending-demonstration` on the training record: the knowledge is done, the demonstration is not. That is an accurate statement of position rather than an encouraging one, which is what makes it useful — a mentor or a laboratory reading it knows exactly what is being asked for."
+      "description": "Elements in `preparesFor` that this module prepares by the EQUIPMENT route — physical apparatus the learner may not have access to. See `demonstration` on the element, which declares the routes by which the competence can be evidenced at all.\n\nWHICH TARGETS BELONG HERE IS DERIVED, NOT DECLARED, and the validator checks it in both directions. Where the element declares `[equipment]` alone it must appear here: a module claiming to complete such an element by simulation is asserting that a simulation substitutes for the bench, and it does not — the failure would otherwise be invisible, because the module would look complete and the learner would believe they had finished something they have never done. Where the element declares `[desk]` alone it must NOT appear here: inventing a barrier is as wrong as hiding one, and listing it tells a learner they are waiting for access they never needed. Where the element declares BOTH routes, this list must agree with the `route` stated on the `preparesFor` entry.\n\nNOT every skill element. `skill` means the evidence is observable performance rather than explanation; it does not mean the performance happens at a bench. Constructing an uncertainty budget is a skill and is desk work.\n\nCompleting the module puts the elements listed here into `pending-demonstration` on the training record: the knowledge is done, the demonstration is not. That is an accurate statement of position rather than an encouraging one, which is what makes it useful — a mentor or a laboratory reading it knows exactly what is being asked for."
     },
 
     "cannotConvey": {

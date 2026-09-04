@@ -73,7 +73,7 @@ function loadAuthoredElements(): Map<string, Record<string, unknown>> {
     found.set(data.id, {
       s: data.summary ?? '',
       st: data.status ?? '',
-      dm: data.demonstration ?? 'desk',
+      dm: Array.isArray(data.demonstration) ? data.demonstration : [data.demonstration ?? 'desk'],
       a: data.anchors ?? {},
       r: data.roleTargets ?? {},
       ci: (data.citations ?? []).map((c: Record<string, any>) => ({ s: c.source, c: c.clause, r: c.relevance ?? '' })),
