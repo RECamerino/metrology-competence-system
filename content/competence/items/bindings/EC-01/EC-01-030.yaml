@@ -1,0 +1,142 @@
+# EC-01-030 has been authored since August and had no items at all. It was not
+# an oversight and it was not backlog: until ARC-0005 introduced the witnessed
+# item type there was no shape in the bank that could assess an element whose
+# demonstration route is `equipment`, and after ARC-0005 there was still none
+# for a multimeter, because that archetype is a weighing-instrument shape.
+#
+# ARC-0006 is the second witnessed archetype and this is its first binding.
+
+schemaVersion: 1
+element: EC-01-030
+
+bindings:
+  - level: 1
+    archetype: ARC-0006
+    status: draft
+    justification: >-
+      The connection exists and the points are specified, so nothing is selected
+      and the item is about execution: applying each point, letting the
+      indication settle, and recording the deviation with its sign. The standard
+      is comfortably adequate and the instrument is well behaved, because a
+      candidate at this level has not yet been asked to understand either
+      problem and should not be failed by one.
+    witnessRequirement: >-
+      Whether each indication was allowed to SETTLE before it was recorded. On
+      the millivolt ranges a reading taken on arrival captures a thermal
+      transient and reports it as a deviation of the meter, and the number
+      written down is indistinguishable from a settled one. Also whether the
+      candidate read the source's own display rather than assuming the value
+      they dialled in.
+    parameterRanges:
+      - name: function
+        choices: [DC voltage]
+      - name: stated_procedure
+        choices:
+          - "connection made, test points supplied, both polarities specified"
+      - name: confounder
+        choices: [none]
+      - name: standard_adequacy
+        choices: [adequate at every point]
+
+  - level: 2
+    archetype: ARC-0006
+    status: draft
+    justification: >-
+      The candidate builds the connection themselves from a supplied procedure
+      and works a specified list across the ranges, including both polarities
+      and the shorted-input zero. The zero check is what makes this level worth
+      assessing: it is the single most common omission on this element and it is
+      the thing that decides whether the low points mean anything at all.
+    witnessRequirement: >-
+      Whether the SHORTED-INPUT ZERO was actually taken, with the leads as they
+      would be for the measurement, at the time — not entered afterwards as a
+      figure that looks right. Nothing in the record distinguishes an observed
+      zero from a plausible one, and without it there is no evidence the
+      connection was good enough for the low ranges to carry meaning. Also
+      whether the leads were left undisturbed between the zero and the points it
+      is supposed to qualify.
+    parameterRanges:
+      - name: function
+        choices: [DC voltage]
+      - name: stated_procedure
+        choices:
+          - "procedure supplied; candidate makes the connection and works the stated points"
+      - name: confounder
+        choices: [none]
+      - name: standard_adequacy
+        choices: [adequate at every point]
+
+  - level: 3
+    archetype: ARC-0006
+    status: draft
+    justification: >-
+      No list. The points come from the meter's specification and the
+      laboratory's scope, and the candidate has to cover the ranges and the
+      within-range behaviour rather than testing near full scale where the gain
+      term dominates and the offset term is left almost unmeasured. The recorded
+      justification for the selection becomes an assessable artifact alongside
+      the data, which is what separates this level from L2.
+    witnessRequirement: >-
+      As at L2 for the zero, and in addition whether the candidate CONSULTED THE
+      SPECIFICATION AND THE SCOPE before choosing points, or picked the round
+      numbers. The recorded justification reads the same either way, and only
+      one of them is the competence this level names. Also whether the
+      connection technique changed between the high and low ranges, since a
+      technique adequate at ten volts is not necessarily adequate at ten
+      millivolts and a candidate who uses one approach throughout has decided
+      something without recording it.
+    parameterRanges:
+      - name: function
+        choices: [DC voltage]
+      - name: stated_procedure
+        choices:
+          - "not stated — select the points from the specification and the scope, and record why"
+      - name: instrument_class
+        choices:
+          - 6½-digit bench multimeter
+          - 8½-digit reference multimeter
+      - name: confounder
+        choices: [none]
+      - name: standard_adequacy
+        choices: [adequate at every point]
+
+  - level: 4
+    archetype: ARC-0006
+    status: draft
+    justification: >-
+      The case the procedure does not reach, drawn from either of the two the
+      element names. Where the standard cannot verify the meter's specification
+      at an adequate ratio on some range, the honest outcome is a restricted
+      claim stating what was established and what would be needed — not a
+      verification reported as though the ratio held. Where the indication
+      drifts across the dwell, no single reading represents it and the candidate
+      has to characterize the behaviour rather than choose a number. Both draws
+      end with a reviewer probing whether the result was reported as a clean
+      pass the data does not support, which is the failure this level exists to
+      catch.
+    witnessRequirement: >-
+      Whether the candidate ESTABLISHED THE RATIO before verifying rather than
+      after — looked up the meter's specification at the point and compared it
+      against the source's uncertainty — or verified first and reasoned about
+      adequacy when the numbers looked awkward. The written defence is
+      indistinguishable between the two, and only the first is the competence.
+      Where the draw is a drifting indication, whether they observed the drift
+      across a real dwell or inferred it from two readings taken close together.
+    parameterRanges:
+      - name: function
+        choices: [DC voltage]
+      - name: stated_procedure
+        choices:
+          - "not stated — select the points, the connection and the treatment, and record why"
+      - name: instrument_class
+        choices:
+          - 6½-digit bench multimeter
+          - 8½-digit reference multimeter
+      - name: confounder
+        choices:
+          - indication drifts across the dwell so no single reading represents it
+          - none
+      - name: standard_adequacy
+        choices:
+          - inadequate ratio on one range against the meter's specification
+          - adequate at every point
