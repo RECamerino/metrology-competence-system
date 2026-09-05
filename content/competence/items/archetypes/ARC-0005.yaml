@@ -1,0 +1,110 @@
+# ARC-0005 — Witnessed eccentricity test on a weighing instrument
+#
+# THE FIRST WITNESSED ARCHETYPE, AND THE FIRST OUTSIDE CM-03. It exists because
+# authoring EC-04-005 and trying to bind it found that the item bank could not
+# express an assessment for an element whose demonstration route is `equipment`
+# at all: every itemType was a desk item served as a prompt, `lookupResistance`
+# was required of all of them, and the two authored equipment-route elements in
+# the corpus consequently had zero bindings between them.
+#
+# What is assessed here is not the table the candidate hands over. It is the
+# handful of things that decide whether that table means anything, every one of
+# which is invisible once the load is off the pan.
+
+id: ARC-0005
+title: Witnessed eccentricity test on a weighing instrument
+itemType: witnessed-performance
+kinds:
+  - skill
+levels: [1, 2, 3]
+status: draft
+
+prompt: >-
+  A {{instrument_class}} is set up on the bench, with a test load and the load
+  positions available to you. Method to use: {{stated_method}}.
+
+  Carry out the eccentricity test and record the indications. Produce the
+  eccentricity result — the difference for each off-centre position — and hand
+  over the record you would put in front of a reviewer.
+
+  Where the method is not stated, select it and record why before you begin.
+  State anything you decided about the test load or the positions that the
+  record itself would not show.
+
+parameters:
+  - name: instrument_class
+    type: choice
+    description: >-
+      The instrument provided — a top-loading balance with a rectangular
+      receptor, an analytical balance with a small round pan, a platform scale.
+      Varies what the candidate has to adapt the position pattern to, which is
+      part of the competence rather than decoration.
+  - name: stated_method
+    type: choice
+    description: >-
+      Which of the four procedural variants the candidate is told to use, or
+      that the choice is theirs. THE BINDING SETS THIS, and it is the main
+      difficulty knob: a stated method makes the item about execution, an
+      unstated one makes it about selecting against the instrument's behaviour.
+  - name: drift_present
+    type: choice
+    # Never rendered. Telling the candidate the instrument drifts hands over
+    # the method choice, which is the entire L3 competence.
+    visibility: generator
+    description: >-
+      Whether the instrument provided drifts appreciably across the duration of
+      the test. Decides whether an interleaved method is the right answer.
+    constraint: >-
+      Only meaningful where `stated_method` leaves the choice to the candidate.
+      Setting it true under a stated method produces an instrument whose
+      behaviour contradicts its instructions, which tests nothing and is unfair.
+  - name: dual_purpose
+    type: choice
+    # Never rendered. Saying the indications will also determine errors of
+    # indication announces that the test load has to be a calibrated weight.
+    visibility: generator
+    description: >-
+      Whether the same indications will also be used to determine the errors of
+      indication. When they are, the test load stops being an arbitrary mass and
+      becomes a reference value that must be calibrated — the requirement most
+      often missed, precisely because the combination saves a loading.
+
+scoring:
+  method: rubric
+  rubricRef: content/competence/items/rubrics/ARC-0005.md
+
+witnessRequirement: >-
+  Three things decide whether this test was done, and not one of them survives
+  into the record. Whether the zero-setting and zero-tracking devices were
+  actually switched off before a taring method began — the device removes the
+  differences as they appear, so a candidate who forgot hands over a small,
+  uniform and entirely plausible set of numbers. Whether the load was placed by
+  its centre of gravity or by its footprint, which is visible only while it is
+  being placed and matters most with the large awkward weight a candidate is
+  most likely to reach for. And whether, on an interleaved method, the centre
+  indication was genuinely re-taken for each off-centre position rather than one
+  reading being reused — the handed-over table is identical either way. A
+  reviewer holding only the result cannot reach any of the three, which is the
+  whole reason this element carries an equipment route.
+
+citations:
+  - source: EURAMET-CG-18
+    clause: "5.3"
+    relevance: >-
+      The test the candidate is performing: positions, load size, the four
+      procedural variants, and the zero-device requirement attached to two of
+      them.
+  - source: EURAMET-CG-18
+    clause: "6.3"
+    relevance: >-
+      Turning the indications into the eccentricity result, including which
+      centre indication each off-centre indication is differenced against.
+
+# Higher than a desk archetype's, deliberately. Exposure control exists because
+# a candidate who has seen a desk item before has an advantage on it; nobody
+# gains an advantage on placing a weight correctly from having been told what
+# the task is. The integrity here is carried by the witness, not by novelty.
+exposureLimit: 12
+
+authoring:
+  createdOn: "2026-09-05"

@@ -5,7 +5,7 @@
   "description": "Governs content/competence/items/archetypes/<id>.yaml. An archetype is an assessment SHAPE, not an item about a particular element: 'construct a budget containing a correlated pair', 'diagnose a defective certificate', 'defend a decision rule against a stated alternative'. It is bound to specific assessable units by an item binding, which supplies the element's own parameters and rubric. One archetype may serve twenty to fifty units, and that ratio is the only reason a 9096-unit item bank is finishable at all — see decision 36 in docs/00-context.md. Archetypes are expensive and few; bindings are cheap and many. Write accordingly: an archetype that can only ever serve one element is a binding wearing the wrong hat.",
 
   "type": "object",
-  "required": ["id", "title", "itemType", "kinds", "levels", "status", "prompt", "parameters", "scoring", "lookupResistance"],
+  "required": ["id", "title", "itemType", "kinds", "levels", "status", "prompt", "parameters", "scoring"],
   "additionalProperties": false,
 
   "properties": {
@@ -20,9 +20,10 @@
         "scenario-judgment",
         "data-analysis",
         "position-and-defend",
-        "multiple-choice"
+        "multiple-choice",
+        "witnessed-performance"
       ],
-      "description": "Listed in the order the authoring playbook prefers them. multiple-choice is permitted ONLY for genuine terminology and convention checks; anything else expressed as MCQ is a defective item, because the candidate has the internet open."
+      "description": "Listed in the order the authoring playbook prefers them. multiple-choice is permitted ONLY for genuine terminology and convention checks; anything else expressed as MCQ is a defective item, because the candidate has the internet open.\n\n`witnessed-performance` is the exception to everything above: the candidate is OBSERVED doing the work rather than answering a prompt about it. It is the only shape that can assess an element whose `demonstration` route is `equipment`, and it arrived late — every other value here serves a desk item, and the consequence was that the corpus's authored equipment-route elements could not be bound to anything at all. Found by authoring EC-04-005 and trying to bind it. See `witnessRequirement`, which replaces `lookupResistance` for this type."
     },
 
     "kinds": {
@@ -104,6 +105,12 @@
       }
     },
 
+    "witnessRequirement": {
+      "type": "string",
+      "minLength": 80,
+      "description": "REQUIRED for a `witnessed-performance` archetype, and the field most likely to get one rejected. State what the witness must OBSERVE that the finished record cannot show.\n\nTHIS REPLACES `lookupResistance` RATHER THAN JOINING IT, because the two answer the same question for different item types. On a desk item, integrity lives in the answer not being lookupable or pasteable into an assistant. On a witnessed item it lives in the witness — and asking an author to explain why moving a weight across a load receptor resists an AI assistant produces a sentence written to satisfy a validator. A required field that reliably attracts filler is worse than the silence it replaced.\n\nWHAT MAKES A WITNESSED ITEM DEFENSIBLE is that the observation catches something the artifact does not. If everything the witness would see can be recovered from the record afterwards, the item does not need a witness — and the element probably did not need an equipment route either. Writing this sentence honestly is the check on both."
+    },
+
     "lookupResistance": {
       "type": "string",
       "minLength": 80,
@@ -129,5 +136,17 @@
       "additionalProperties": true,
       "description": "Provenance for the archetype itself: who wrote it, when, and when it was last reviewed."
     }
-  }
+  },
+
+  "allOf": [
+    {
+      "$comment": "Which unfakeable sentence an archetype owes depends on how it is delivered. A desk item's integrity rests on the answer not being lookupable; a witnessed item's rests on the witness. Requiring both would guarantee that one of them is filler.",
+      "if": {
+        "properties": { "itemType": { "const": "witnessed-performance" } },
+        "required": ["itemType"]
+      },
+      "then": { "required": ["witnessRequirement"] },
+      "else": { "required": ["lookupResistance"] }
+    }
+  ]
 }

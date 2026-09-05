@@ -1113,6 +1113,16 @@ function checkItemBank(corpus: Corpus): Finding[] {
   const archetypes = indexArchetypes(corpus.archetypes);
   const seenArchetypes = new Map<string, string>();
 
+  // Authored definitions, for the demonstration routes. An unauthored element
+  // has no routes to check against, and silence there is not evidence that the
+  // work can be done at a desk.
+  const authoredElements = new Map<string, Record<string, unknown>>(
+    corpus.elements
+      .map((e) => e.data as Record<string, any>)
+      .filter((d) => d.id)
+      .map((d) => [d.id as string, d]),
+  );
+
   // -- Archetypes ----------------------------------------------------------
   for (const file of corpus.archetypes) {
     const d = file.data as Record<string, any>;
@@ -1266,6 +1276,31 @@ function checkItemBank(corpus: Corpus): Finding[] {
       if (!archetype.kinds.includes(stub.kind)) {
         findings.push(
           err(at(`${label} binds a '${stub.kind}' element to ${archetype.id}, which serves ${archetype.kinds.join('/')}. Kind determines what evidence proves attainment, so this asks the candidate for the wrong sort of thing entirely.`)),
+        );
+      }
+
+      // A SUBMITTED ARTIFACT CANNOT EVIDENCE WORK THAT ONLY EXISTS WHILE IT IS
+      // BEING DONE. Where an element's only route is `equipment`, the failures
+      // that matter — a zero-tracking device left on, a load placed by its
+      // footprint, a centre reading reused instead of re-taken — are all
+      // invisible in the record the candidate hands over, because it is exactly
+      // the record somebody who did it correctly also produces. Binding a desk
+      // archetype to such an element produces an assessment that looks complete
+      // and tests the wrong thing, which is the same failure the kind check
+      // above catches one level up. Without this the witnessed item type would
+      // be optional decoration.
+      const authored = authoredElements.get(d.element as string);
+      const routes = authored ? demonstrationRoutes(authored) : undefined;
+
+      if (
+        stub.kind === 'skill' &&
+        routes !== undefined &&
+        routes.length === 1 &&
+        routes[0] === 'equipment' &&
+        archetype.itemType !== 'witnessed-performance'
+      ) {
+        findings.push(
+          err(at(`${label} binds ${archetype.id}, which is a '${archetype.itemType}' item, to an element whose only demonstration route is equipment. The work exists while it is being done; a submitted artifact is the same artifact whether or not it was produced correctly, so this assessment would look complete and test the wrong thing.`)),
         );
       }
 

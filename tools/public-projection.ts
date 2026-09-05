@@ -42,6 +42,12 @@ export const RESTRICTED_KEYS = [
   'prompt',
   'parameters',
   'lookupResistance',
+  // The counterpart of lookupResistance for a witnessed item, and restricted for
+  // the same reason. The ELEMENT publishes where the work goes wrong, because
+  // teaching that is what the corpus is for; the archetype says what the witness
+  // is scoring and how, which is an assessment internal. Publishing it converts
+  // an observation of practice into a checklist to perform.
+  'witnessRequirement',
   'scoring',
   'toleranceBand',
   'toleranceOverride',

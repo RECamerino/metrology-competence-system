@@ -34,9 +34,9 @@ Three principles held in tension deliberately:
 | Assessable units | 21314 |
 | Ceilings — L2 / L3 / L4 / L5 | 0.7% / 23.1% / 61.3% / 14.9% |
 | Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
-| Content authored | **21 elements** · **12 BOK articles** · **2 modules** — 8 domains, all three axes |
-| Item bank | 4 archetypes · 28 bindings · **0.1%** of units covered |
-| Checks | 0 errors · 319/319 tests · typecheck clean |
+| Content authored | **22 elements** · **13 BOK articles** · **2 modules** — 8 domains, all three axes |
+| Item bank | 5 archetypes · 31 bindings · **0.1%** of units covered |
+| Checks | 0 errors · 324/324 tests · typecheck clean |
 
 ### Phases
 
@@ -125,9 +125,9 @@ content/competence/
                                   authority overlay. Every element needs a
                                   roleTarget for EVERY role — each one added is
                                   now 5459 more authored ratings.
-  elements/                       ASSESSABLE CLAIMS, not prose. 21 authored,
+  elements/                       ASSESSABLE CLAIMS, not prose. 22 authored,
                                   across CM-03, CM-08, CM-15, CM-21, DP-08,
-                                  DP-20 and EC-01.
+                                  DP-20, EC-01 and EC-04.
   items/archetypes/               Reusable parameterized item SHAPES. ARC-nnnn.
   items/bindings/                 One archetype × one (element×level). Scales here.
   items/rubrics/                  Ships in the same commit as its item.
@@ -171,7 +171,7 @@ Eighteen schemas, and the ones that are not obvious from their names:
 | `proficiency`, `role-registry`, `source-registry` | The frames content is written into |
 | `bootstrap-cohort` | The founding roster — makes "closed, time-limited" resolvable rather than asserted |
 | `trust-registry` | Who may issue, which keys were theirs, and how old this snapshot is |
-| `item-archetype`, `item-binding` | The item bank (decision 36) |
+| `item-archetype`, `item-binding` | The item bank (decision 36). `itemType` includes `witnessed-performance`, which is the only shape that can assess an element whose demonstration route is `equipment` |
 | `credential`, `authorization` | What travels with a person, and what never does. An authorization's scope is computable on every dimension, because the question an accreditation body asks of it is a comparison and not a reading |
 | `attempt-ledger` | No-retake rule and exposure control |
 | `deployment-scope` | Which elements apply to a person — pairs with `roleTargets` |
@@ -183,7 +183,7 @@ Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
 
 | Module | The rule it enforces |
 |---|---|
-| `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules, duplicate titles, that a role never needs an element whose prerequisite is `null` for it, that a contested section says WHERE the disagreement lives, that an item bound to disputed knowledge declares what its scoring must not credit, that a proficiency-test result is not admitted below L3, that a gold reference is carried by review rather than asserted, and that a reviewer claiming a resolvable standing can actually be resolved |
+| `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules, duplicate titles, that a role never needs an element whose prerequisite is `null` for it, that a contested section says WHERE the disagreement lives, that an item bound to disputed knowledge declares what its scoring must not credit, that a proficiency-test result is not admitted below L3, that a gold reference is carried by review rather than asserted, that a reviewer claiming a resolvable standing can actually be resolved, and that a desk archetype is never bound to work that only exists while it is being done |
 | `credentials.ts` | No self-signoff, signoff policy, the wallet boundary, draft-status attestability, evidenced provenance tier, founding-cohort authority, dual custody, and why the evidence was enough |
 | `trust.ts` | Offline verification against a registry snapshot, and the age of the answer |
 | `ledger.ts` | Hash chain, no-retake, exposure count, trust horizon |
@@ -205,7 +205,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 319 guardrail tests
+npm test                  # 324 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:foundational # which foundational areas a person has actually graded
@@ -230,7 +230,7 @@ Changing ceilings or kinds: edit `tools/ceiling-plan.json` or `tools/kind-plan.j
 
 **Blocked on people, not on work — do not raise these as next actions.** Steward appointment and validation of the experience-hour thresholds both need input the project does not yet have, with no timetable. The operating rule while that persists is in [`docs/stewards.md`](docs/stewards.md): design and authoring proceed, issuance does not. Nothing has issued a credential, so nothing decided so far has harmed anybody.
 
-1. **Legal review of the source register.** Priority order: ISO/IEC 17025, the JCGM copyright statement, ASME Y14.5, then ILAC/UKAS/EURAMET/OIML. Blocks Phase 4 quotation authoring only — citations and all other work are unaffected. No quotations exist yet, so nothing is currently exposed.
+1. **Legal review of the source register.** Priority order: ISO/IEC 17025, the JCGM copyright statement, ASME Y14.5, then ILAC/UKAS/EURAMET/OIML. **One register entry is already known to be wrong on its own terms**: `EURAMET-CG-18` records `termsBasis` as "published free of charge… cite freely; quote briefly with commentary", and the document's own copyright page says extracts may be taken only with the permission of the EURAMET Secretariat — which is stricter than "quote briefly". Nothing is exposed, because `blockedPendingCounsel` already refuses every quotation against it and no quotation exists anywhere in the corpus; but the recorded terms are an assessment nobody had checked against the document, and the other 35 entries were assessed the same way. Found by opening cg-18 to author `EC-04-005`. Blocks Phase 4 quotation authoring only — citations and all other work are unaffected. No quotations exist yet, so nothing is currently exposed.
 2. **L5 ceiling review.** Still open, and now has a second test alongside anchor writing: if no *item* can be bound to an element at L5 that a competent practitioner could genuinely fail, it is not L5. `ARC-0003` exists for exactly this shape — an element that cannot support a defensible disagreement probably does not have expert practice in it.
 3. **Commons operation.** The software will be built; whether the project *operates* a public instance (PII custody, moderation, funding) is deferred governance.
 4. **Authority-tier issuer.** A neutral foundation as issuer of last resort would be the strongest long-term credential. Needs people and funding. Roadmap, not a dependency.
@@ -322,13 +322,16 @@ The reason it keeps happening is worth internalizing: **a missing equipment type
 | `BOK-0008` + `CM-21-012` | **`interpretation`** + `volatile`. Its subject is fabricated clause references, which is a defect this corpus's own CI cannot detect |
 | `BOK-0009` + `CM-08-038` | **`historical`** — a withdrawn standard still contractually binding. Article carries the only `jurisdiction-dependent` section |
 | `BOK-0010` + `DP-20-002` | **`emerging`** + the only `recertificationMonths`. `knowledge` at ceiling 5 |
+| `BOK-0013` + `EC-04-005` + `ARC-0005` | **The witnessed-performance case, and the first binding outside `CM-03`.** The eccentricity test on a weighing instrument, authored against `EURAMET cg-18` §5.3 and §6.3 — the one registered source that is an equipment-calibration guideline. Read it for what authoring it FOUND: the item bank could not express an assessment for an equipment-route element at all, which is why `EC-01-030` had no bindings either |
 | `MOD-0001` | Prepares for a `desk` element and deliberately declares NO physical demonstration |
 | `MOD-0002` | Prepares for an `equipment` element and MUST declare it. The two modules are the two halves of rule 11, and CI enforces both directions — verified by deliberately breaking each |
-| `ARC-0001`–`0004` | `ARC-0004` is the one built to span a family; the other three are narrow. **No archetype yet binds anything outside `CM-03`** |
+| `ARC-0001`–`0005` | `ARC-0004` is the one built to span a family; `ARC-0001`–`0003` are narrow. **`ARC-0005` is the first witnessed archetype and the first to bind outside `CM-03`** — see the EC-04 row above for why it had to exist |
 
 **What the corpus says about itself.** Run `npm run report:coverage` first — its `ITEM GAPS` section names the next content work rather than requiring you to infer it, and it is authoritative where this file has gone stale. Two shapes to expect. Elements carrying items with **no authored definition** — a binding claiming to test a competence that has no anchors to test against — which stood at eight and is now **zero**. And elements with items only at upper levels, a candidate unable to climb to an L4 they have no L3 item for, which is still real: eight elements have unbound attainable levels. Several of those are **deliberate and documented in the binding file**, because at L1 the archetype supplies the values the element exists to obtain, and padding `ARC-0004` into the slot would inflate the reuse figure while assessing nothing. Read the binding's comment before treating a gap as work.
 
-**The highest-value engineering work is authoring something real against the design.** That exercise has found a genuine flaw **five times out of five** — the BOK/competence split, the generator-parameter leak, the missing level pin, the undefined `roleTarget`, and `knowledgeRefs` proving that a link RESOLVES while proving nothing about whether it COVERS (open decision 22). Reading the schemas has never found one. If you are choosing what to do next and nothing else is pressing, author an element or bind one and see what breaks.
+**The highest-value engineering work is authoring something real against the design.** That exercise has found a genuine flaw **six times out of six** — the BOK/competence split, the generator-parameter leak, the missing level pin, the undefined `roleTarget`, `knowledgeRefs` proving that a link RESOLVES while proving nothing about whether it COVERS (open decision 22), and **the item bank having no shape for work that is watched rather than submitted**. Reading the schemas has never found one.
+
+**The sixth is the one to learn the lesson from, because it had been sitting in plain sight as a number.** Every `itemType` was a desk item served as a prompt and `lookupResistance` was required of all of them, so no element whose `demonstration` route is `equipment` could be bound to anything. The evidence was already on the coverage report — `EC-01-030`, the corpus's only EC element, had zero bindings — and it read as *not done yet* rather than *not possible*. Six passes over the schemas did not find it. Authoring `EC-04-005` and trying to bind it found it in minutes, because the binding is where the two halves are forced to meet. If you are choosing what to do next and nothing else is pressing, author an element or bind one and see what breaks.
 
 ### What four adversarial reviews taught, and how to use the next one
 
