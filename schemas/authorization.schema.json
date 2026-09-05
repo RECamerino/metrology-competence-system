@@ -52,23 +52,86 @@
 
     "scope": {
       "type": "object",
-      "required": ["activities"],
+      "required": ["activities", "measurement"],
       "additionalProperties": false,
-      "description": "What the person may actually do. An authorization with no scope is meaningless — 'authorized' unqualified is the failure mode this object exists to prevent.",
+      "description": "What the person may actually do. An authorization with no scope is meaningless — \"authorized\" unqualified is the failure mode this object exists to prevent.\n\nEVERY DIMENSION IS COMPUTABLE, and none of it used to be. `activities`, `methods`, `ranges` and `locations` were four arrays of free prose, so the scope-matching engine an accreditation body needs — *does this authorization cover this method, at this range, at this site* — could only be answered by a person reading the strings. \"Signing certificates\", \"certificate signing\" and \"sign accredited certs\" are three spellings of one activity and no comparison finds that.\n\nA scope that participates in computation cannot exist only as prose. `deployment-scope.schema.json` is the model, and `measurement` shares its selector definitions rather than copying them.",
       "properties": {
         "activities": {
           "type": "array",
           "minItems": 1,
-          "items": { "type": "string" },
-          "description": "Signing accredited certificates, releasing results, approving methods, conducting assessments."
+          "uniqueItems": true,
+          "items": {
+            "enum": ["sign-accredited-certificate", "release-results", "approve-method", "conduct-assessment"]
+          },
+          "description": "What the grant permits, from a closed list. Adding a value is a deliberate schema change, which is the point: a free string let one activity be spelled three ways and matched none of them.\n\n`sign-accredited-certificate` — signing under the laboratory's accreditation. `release-results` — issuing results to a customer. `approve-method` — admitting a method to the laboratory's scope. `conduct-assessment` — assessing somebody else's competence.\n\nFour, because those are the four the profession names and this schema described in prose before it could check any of them. A grant that needs a fifth is a request to widen the enum, not a reason to reopen free text."
         },
-        "methods": { "type": "array", "items": { "type": "string" } },
+        "measurement": {
+          "type": "object",
+          "required": ["includes"],
+          "additionalProperties": false,
+          "description": "Which measurement work the authority covers, resolved against the taxonomy exactly as a deployment scope is.\n\nRequired, and it is the dimension that carries the most weight: an authorization is a permission to do measurement work, so a grant that does not say WHICH is not bounded by anything a machine can check. `methods`, `ranges` and `locations` narrow it further and are optional — an absent dimension is unbounded, which is a real and common grant rather than an omission.",
+          "properties": {
+            "includes": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/taxonomyIncludes" },
+            "excludes": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/taxonomyExcludes" }
+          }
+        },
+        "methods": {
+          "type": "array",
+          "description": "The methods the authority covers, IDENTIFIED rather than described. A scope of accreditation names methods — a published standard, or a laboratory procedure — and \"does this authorization cover ISO 6789-2:2017\" has to be answerable by comparison.\n\n`revision` refines the match: stated here it must match exactly, because a revision can change what the method IS. Left off, the grant covers any revision — the reading most laboratory scopes intend, and its cost is that a revision materially changing the method does not automatically narrow the grant. That is a policy the organization has to manage, and it is at least now visible rather than buried in a string.",
+          "items": {
+            "type": "object",
+            "required": ["identifier"],
+            "additionalProperties": false,
+            "properties": {
+              "identifier": {
+                "type": "string",
+                "minLength": 1,
+                "description": "The method as the laboratory's scope names it — \"ISO 6789-2:2017\", \"CP-014\". Compared exactly."
+              },
+              "source": {
+                "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/sourceId",
+                "description": "The registered source, where the method is a published standard the corpus already knows about."
+              },
+              "revision": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
         "ranges": {
           "type": "array",
-          "items": { "type": "string" },
-          "description": "Measurement ranges the authority covers. A signatory authorized for gauge blocks to 100 mm is not authorized at 500 mm, and the range is where that is recorded."
+          "description": "Measurement ranges the authority covers. A signatory authorized for gauge blocks to 100 mm is not authorized at 500 mm, and this is where that is recorded.\n\nSTRUCTURED, BECAUSE THE COMPARISON IS ARITHMETIC. It was a list of strings, so \"up to 100 mm\" could be matched only by somebody reading it.\n\nTHE UNIT IS PART OF THE COMPARISON AND IS NEVER CONVERTED. A scope of 0–100 mm and a job at 0.5 m compare as 0.5 < 100 the moment units are ignored, which authorizes signing a certificate five times outside the granted range. This project does not ship a unit-conversion table to close that: a half-right conversion inside a metrology system is worse than none, and the failure would be silent. A unit mismatch makes the question UNDECIDABLE and says so — a real answer here, because \"not covered\" would wrongly block work and \"covered\" would wrongly permit signing.",
+          "items": {
+            "type": "object",
+            "required": ["quantity", "unit", "min", "max"],
+            "additionalProperties": false,
+            "properties": {
+              "quantity": {
+                "type": "string",
+                "minLength": 1,
+                "description": "What is measured — `torque`, `dc-voltage`, `length`. Compared exactly, so a laboratory has to spell it the same way twice; that is a lower price than a fuzzy match that quietly succeeds."
+              },
+              "unit": {
+                "type": "string",
+                "minLength": 1,
+                "description": "The unit the bounds are expressed in. NEVER converted — see the note on this array. Write the SI unit symbol as the BIPM brochure gives it."
+              },
+              "min": { "type": "number" },
+              "max": { "type": "number" }
+            }
+          }
         },
-        "locations": { "type": "array", "items": { "type": "string" } }
+        "locations": {
+          "type": "array",
+          "description": "Sites the authority covers. Identified rather than named in prose, for the same reason as everything else here: a grant valid at one site and not another is only enforceable if the two can be told apart by comparison.",
+          "items": {
+            "type": "object",
+            "required": ["id"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "name": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
       }
     },
 
