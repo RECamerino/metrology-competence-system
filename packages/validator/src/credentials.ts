@@ -985,6 +985,8 @@ export function checkAttestableStatus(
  * and nothing that passes through here carries an authorization.
  */
 export interface WalletExport {
+  /** The holder's answers to revocations. Theirs, so they travel. */
+  counterStatements: Array<Record<string, unknown>>;
   credentials: Credential[];
   /** Always empty. Present so the omission is explicit rather than an oversight. */
   authorizations: never[];
@@ -998,9 +1000,21 @@ export interface WalletExport {
 export function walletExport(
   credentials: Credential[],
   authorizations: Authorization[] = [],
+  counterStatements: Array<Record<string, unknown>> = [],
 ): WalletExport {
+  const exported = new Set(credentials.filter((c) => c.portable === true).map((c) => c.id));
+
   return {
     credentials: credentials.filter((c) => c.portable === true),
+    // A counter-statement is the holder's own account of their own record, so
+    // it travels — the exact opposite of an authorization, which is an
+    // organization's grant and never does. Both rules come from the same
+    // principle read in the same direction: the individual owns the record.
+    // Leaving these behind would export a wallet in which every revocation is
+    // the issuer's word and nothing else.
+    counterStatements: counterStatements.filter(
+      (c) => typeof c.credential === 'string' && exported.has(c.credential),
+    ),
     authorizations: [],
     withheld: {
       authorizations: authorizations.length,

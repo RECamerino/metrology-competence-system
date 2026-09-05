@@ -97,6 +97,23 @@ export interface TrustBasis {
   statement: string;
 }
 
+/**
+ * The holder's answer to a revocation. Signed by them, held by them, presented
+ * by them — see counter-statement.schema.json for why it cannot live in the
+ * registry alongside the revocation it answers.
+ */
+export interface CounterStatement {
+  id: string;
+  credential: string;
+  subject: string;
+  answers: { revokedOn: string; reason: string };
+  basis: string;
+  statement: string;
+  signedOn: string;
+  proof?: { cryptosuite?: string; [key: string]: unknown };
+  [key: string]: unknown;
+}
+
 export interface TrustVerdict {
   findings: Finding[];
   basis: TrustBasis;
@@ -121,10 +138,70 @@ function didMethodOf(did: string): string {
  * reproducible and testable, and so an auditor re-running a decision years
  * later gets the answer that was actually given rather than today's.
  */
+/**
+ * Is this counter-statement one this credential's holder actually made, about
+ * the revocation it claims to answer?
+ *
+ * It never decides whether the holder is RIGHT. Nothing in this system is
+ * competent to adjudicate a dispute between an issuer and a holder, and a field
+ * recording an outcome would be read as a verdict by every renderer that met
+ * it. What is checkable is narrower and worth checking: that the person
+ * speaking is the subject, that the revocation they answer is the one that
+ * happened, and that they signed.
+ */
+export function checkCounterStatement(
+  statement: CounterStatement,
+  credential: VerifiableCredential,
+  revocation: Revocation | undefined,
+): Finding[] {
+  const findings: Finding[] = [];
+  const at = (msg: string) => `${statement.id}: ${msg}`;
+
+  if (statement.credential !== credential.id) {
+    findings.push(err(at(`answers ${statement.credential}, which is not the credential presented (${credential.id}).`)));
+    return findings;
+  }
+
+  // Nobody speaks for somebody else's record. This is the ownership principle
+  // pointing where it always points, and it is the one check that matters most
+  // — a counter-statement written by the disputing party would otherwise read
+  // exactly like one written by the holder.
+  if (statement.subject !== credential.subject) {
+    findings.push(
+      err(at('is not signed by the subject of the credential it answers. Nobody speaks for somebody else\'s record, least of all the party they are disputing with.')),
+    );
+  }
+
+  if (!statement.proof?.cryptosuite) {
+    findings.push(
+      err(at('is unsigned. An unsigned counter-statement is an assertion anybody could have written on the holder\'s behalf.')),
+    );
+  }
+
+  if (!revocation) {
+    findings.push(
+      err(at('answers a revocation this registry does not record. A statement against a revocation that has not happened would sit on a live credential implying one had.')),
+    );
+    return findings;
+  }
+
+  if (
+    statement.answers?.revokedOn !== revocation.revokedOn ||
+    statement.answers?.reason !== revocation.reason
+  ) {
+    findings.push(
+      err(at(`answers a revocation dated ${statement.answers?.revokedOn} for ${statement.answers?.reason}, and the one on record is dated ${revocation.revokedOn} for ${revocation.reason}. An issuer who revokes again on different grounds has not been pre-answered.`)),
+    );
+  }
+
+  return findings;
+}
+
 export function verifyAgainstRegistry(
   credential: VerifiableCredential,
   registry: TrustRegistry,
   asOf: string,
+  counterStatements: CounterStatement[] = [],
 ): TrustVerdict {
   const findings: Finding[] = [];
   const at = (msg: string) => `${credential.id}: ${msg}`;
@@ -169,6 +246,36 @@ export function verifyAgainstRegistry(
   if (revoked) {
     findings.push(
       err(at(`was revoked on ${revoked.revokedOn} (${revoked.reason}), per this registry snapshot. Revocation is for fraud and demonstrable assessment defect; it does not mean the competence was never demonstrated.`)),
+    );
+  }
+
+  // -- The holder's answer, where they have made one ------------------------
+  // IT DOES NOT CHANGE THE VERDICT. The error above stands and the credential
+  // stays revoked: a holder's statement that could lift a revocation would make
+  // revocation negotiable, and the fraud case is exactly the one that cannot
+  // afford that. What it changes is what a reader is told, which is the same
+  // shape as drift — a pin that no longer matches does not invalidate anything
+  // and does oblige a renderer to say what moved.
+  for (const statement of counterStatements) {
+    if (statement.credential !== credential.id) continue;
+
+    const problems = checkCounterStatement(statement, credential, revoked);
+    if (problems.length > 0) {
+      findings.push(...problems);
+      continue;
+    }
+
+    findings.push(
+      warn(at(`the holder has answered this revocation (${statement.basis}, ${statement.signedOn}). It does not lift the revocation and is not adjudicated here; show it to a reader alongside the issuer's grounds, because one party wrote the rest of this record.`)),
+    );
+  }
+
+  // A verifier resolving only the registry sees only the issuer's account. That
+  // asymmetry is real, and saying nothing about it would let a reader take the
+  // absence of an answer for the absence of a dispute.
+  if (revoked && counterStatements.every((c) => c.credential !== credential.id)) {
+    findings.push(
+      warn(at('no counter-statement from the holder was presented with this credential. That is not evidence the revocation is uncontested — a counter-statement travels with the holder, and a verifier reading only the registry would never see one.')),
     );
   }
 

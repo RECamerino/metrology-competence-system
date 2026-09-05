@@ -642,7 +642,7 @@ Six mechanisms, none of which was designed with this section in front of it, all
 
 ### What follows, and is not built
 
-Two consequences fall straight out of the principle. One now has a mechanism; the other is still recorded in the open items.
+Two consequences fall straight out of the principle, and both now have mechanisms.
 
 **An organization's view of a person's record is a disclosure, not a read — built 2026-09-04.** `computeGaps(elements, scope, held)` took what the person holds as a plain map, with no record of where it came from or what was consented to. Left there, the workforce dashboard — the feature an organization actually buys — would have been built on the assumption that an employer may see everything a person holds, including credentials earned elsewhere, before this job, in domains this job never touches.
 
@@ -656,7 +656,16 @@ A disclosure is granted by the **subject**, to **one** organization, for **one**
 
 **A person reading their own gaps needs none of this.** That is a read, of their own record, by its owner. `computeGaps` stays available unguarded for exactly that case and always will; `gapsFromDisclosure` is the organizational path.
 
-**Revocation is currently one-sided.** The issuer sets `status.revoked` and the subject has no way to contest it in the data. The intent is stated plainly, but `fraud` is unfalsifiable from the holder's side and the status list a verifier consults belongs to the issuer. Whether a holder's counter-statement travels with the credential is undecided.
+**Revocation was one-sided — answered 2026-09-05.** The issuer set `status.revoked` and the subject had no way to contest it in the data. The intent is stated plainly, but `fraud` is unfalsifiable from the holder's side and the status list a verifier consults belongs to the issuer: one party wrote the whole record of a dispute between two.
+
+`counter-statement.schema.json` is the holder's answer, signed by them and travelling with them. Four things decide its shape:
+
+- **It does not un-revoke, and must not.** The credential stays revoked and the verifier still reports the revocation as an error. A holder's statement that could lift one would make revocation negotiable, and the fraud case is precisely the one that cannot afford that. What it changes is what a READER IS TOLD — the same shape as drift, where a credential whose pins no longer match is not false and the right response is to show what moved.
+- **It cannot live in the registry.** That file carries the issuer's revocations and is the issuer's and the stewards' document; a holder cannot write into it, and building a route for them to would need governance nobody has appointed. So it is a separate signed document the holder presents, exactly as a disclosure is.
+- **It travels in the wallet**, which is the exact opposite of an authorization and comes from the same principle read the same way. An organization's grant never travels; the holder's account of their own record always does. A wallet without them exports one in which every revocation is the issuer's word and nothing else.
+- **Nothing adjudicates it.** There is no field recording whether the counter-statement was accepted, because nothing in this system is competent to decide that and a field implying otherwise would be read as a verdict by every renderer that met it.
+
+**The limit that follows is real and is stated rather than hidden.** A counter-statement travels with the holder, so a verifier resolving only the registry sees only the issuer's account. The same shape as the staleness bound: the honest answer is not to pretend both parties reach every reader, but to show the holder's answer to a reader who receives it — and to tell a reader who does not that silence is not evidence the revocation is uncontested.
 
 ### The claim this licenses, stated precisely
 
@@ -745,7 +754,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 5. **Recertification defaults** — per-level defaults proposed in `content/competence/taxonomy/proficiency.yaml` (L3 60 months, L4 48, L5 36; none below L3). Per-domain overrides remain open: a `CM-21` element ages far faster than a `CM-02` one, and `volatility` is the field that should drive it.
 6. **Experience-hour thresholds and waiting periods** — proposed per level in `content/competence/taxonomy/proficiency.yaml` (L3 40h/30d, L4 200h/180d, L5 1000h/365d). The attribution rule is settled as decision 37; the numbers themselves are a steward judgement and have not been tested against a real career history.
 8. **CLOSED 2026-09-04 — consented disclosure to an employer** — `disclosure.schema.json`, granted by the subject, bounded by a pinned deployment scope, and refusing to compute anything at all when it does not hold up. Decision 34 turned out to have DECIDED the model rather than built it, so this is the first one and it serves the assessor case too. See [Who owns a person's competency record](#who-owns-a-persons-competency-record).
-9. **A holder's counter-statement to revocation** — the issuer can revoke and the subject cannot contest it in the data. Pairs with the trust-registry and status-list work.
+9. **CLOSED 2026-09-05 — a holder's counter-statement to revocation** — `counter-statement.schema.json`, signed by the subject, travelling in the wallet, surfaced by the verifier and adjudicated by nobody. It does not lift the revocation. See [Who owns a person's competency record](#who-owns-a-persons-competency-record).
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
