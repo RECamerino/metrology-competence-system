@@ -1,0 +1,118 @@
+# ARC-0006 — Witnessed verification of an indicating instrument against applied values
+#
+# THE SECOND WITNESSED ARCHETYPE, AND THE TEST OF WHETHER THE FIRST GENERALIZES.
+# ARC-0005 exists for weighing instruments and could not serve EC-01-030, which
+# is why that element still had zero bindings after a witnessed shape existed at
+# all. This is what a witnessed archetype for a different equipment class looks
+# like, and the answer is: recognizably related, and generalizing along a
+# DIFFERENT AXIS.
+#
+# ARC-0005 spans several TESTS on one instrument — repeatability, eccentricity,
+# errors of indication — because cg-18 defines three distinct methods for a
+# balance. This one spans one test across several FUNCTIONS, because verifying a
+# multimeter is the same procedure applied to DC voltage, DC current, resistance
+# and AC voltage in turn. The family is whatever an equipment class's procedures
+# actually share, and it is found per class rather than derived from a template.
+#
+# NO CITATIONS, DELIBERATELY, and the absence is the point rather than an
+# oversight. ARC-0005 cites the cg-18 clauses defining the tests it serves. The
+# source register contains no equipment-calibration guideline for electrical
+# instruments — EC-01-030's own currency note says it plainly: the obligations
+# in ISO/IEC 17025 are normative, and no clause specifies test points, polarity
+# coverage or connection technique. A citation here would have to be either a
+# clause about traceability in general, which does not anchor this procedure, or
+# one invented to fill the field. ARC-0003 carries no citations either.
+
+id: ARC-0006
+title: Witnessed verification of an indicating instrument against applied values
+itemType: witnessed-performance
+kinds:
+  - skill
+levels: [1, 2, 3, 4]
+status: draft
+
+prompt: >-
+  A {{instrument_class}} is on the bench with a source of known uncertainty
+  available to you. Function to verify: {{function}}. Procedure:
+  {{stated_procedure}}.
+
+  Apply each point, record what the instrument indicates, and produce the
+  as-found record you would put in front of a reviewer, with the deviation at
+  each point carrying its sign.
+
+  Where the procedure is not stated, select the points and the connection and
+  record why before you begin. State anything you decided about the standard,
+  the connection or the dwell that the record itself would not show.
+
+parameters:
+  - name: instrument_class
+    type: choice
+    description: >-
+      The instrument provided — a 3½-digit handheld, a 6½-digit bench meter, an
+      8½-digit reference divider. Decides what the candidate has to adapt to and
+      how much the connection technique matters, which is competence rather than
+      decoration.
+  - name: function
+    type: choice
+    description: >-
+      Which function is being verified. THE BINDING SETS THIS, and it is what
+      ties the item to its element: DC voltage for EC-01-030, and the other
+      functions as their elements are authored. This is the axis this archetype
+      generalizes along, where ARC-0005 generalizes across tests.
+  - name: stated_procedure
+    type: choice
+    description: >-
+      What the candidate is told and what is left to them — the points and the
+      connection supplied, a procedure to work from, or nothing. The main
+      difficulty knob, as on ARC-0005.
+  - name: confounder
+    type: choice
+    # Never rendered. Naming the behaviour the candidate is supposed to notice
+    # is the competence at the top of every element this serves.
+    visibility: generator
+    description: >-
+      A behaviour of the instrument the candidate has to notice and respond to —
+      an indication that drifts across the dwell so no single reading represents
+      it, a range whose settling time is far longer than the others, a function
+      whose reading depends on how long the input has been applied.
+    constraint: >-
+      Must be a behaviour the bound element actually concerns and one the
+      candidate has the authority to respond to. A confounder a candidate can
+      only observe and not act on is testing helplessness.
+  - name: standard_adequacy
+    type: choice
+    # Never rendered. Announcing that the standard is inadequate at a range
+    # hands over the L4 judgement entirely.
+    visibility: generator
+    description: >-
+      Whether the source available achieves an adequate uncertainty ratio
+      against the instrument's specification at every point being verified. Where
+      it does not, the honest answer is a restricted claim or a refusal rather
+      than a verification reported as though the ratio held — which is the case
+      the procedure does not cover and the one L4 exists for.
+
+scoring:
+  method: rubric
+  rubricRef: content/competence/items/rubrics/ARC-0006.md
+
+witnessRequirement: >-
+  Three things are true of every verification in this family and none of them
+  survives into the record. Whether the CONNECTION was actually built as the
+  method requires and its adequacy demonstrated at the time — a shorted-input or
+  zero check taken while the witness watched, rather than a plausible figure
+  entered afterwards — because on the low ranges the connection is comparable to
+  what is being judged and the handed-over table looks identical either way.
+  Whether each indication was allowed to SETTLE rather than read on arrival,
+  which turns a thermal or charging transient into a recorded deviation and is
+  invisible once the number is written down. And whether the applied value was
+  CONFIRMED AT THE SOURCE rather than the nominal being recorded because that is
+  what the source was set to. What a witness must see for a PARTICULAR function
+  is a property of that procedure and is stated on the binding.
+
+# Matches ARC-0005's reasoning: nobody gains an advantage on making a good
+# connection from having been told what the task is. Integrity is carried by
+# the witness rather than by novelty.
+exposureLimit: 12
+
+authoring:
+  createdOn: "2026-09-05"
