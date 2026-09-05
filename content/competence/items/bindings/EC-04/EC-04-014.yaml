@@ -1,0 +1,90 @@
+# THE FIRST CROSS-AXIS BINDING IN THE CORPUS. ARC-0004 was written for CM-03
+# and is the archetype built to span a family of budget-construction elements;
+# this is the test of whether that family crosses an axis boundary rather than
+# only a subject one.
+#
+# NOT BOUND AT L1, deliberately. At L1 the archetype supplies every contribution
+# already evaluated and the work is combination — which is a real level of this
+# element, but ARC-0004's draw would supply the very things that make the item
+# about a BALANCE calibration rather than about combining a table. The coverage
+# report will show L1 as a gap and that is accurate: this level wants a narrower
+# shape, and padding ARC-0004 into the slot would inflate the reuse figure while
+# assessing nothing this element names.
+
+schemaVersion: 1
+element: EC-04-014
+
+bindings:
+  - level: 2
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      The pack supplies the test results and the weights' certificate with every
+      value present, and the candidate assembles the budget from them. What ties
+      this to EC-04-014 rather than to budget construction generally is the
+      structural feature: the contributions are an instrument's own rounding,
+      repeatability and reference mass, so a candidate has to know which of them
+      are relative to the indication and which are absolute — the distinction
+      the L2 anchor names and the one a generic budget item never exercises.
+    parameterRanges:
+      - name: measurement_context
+        choices:
+          - the calibration of a non-automatic weighing instrument
+      - name: structural_feature
+        choices: [contributions mixing absolute and indication-relative terms]
+      - name: inputs_supplied
+        choices: [values supplied]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 3
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      Raw records only: the repeatability test at more than one load, an
+      error-of-indication test whose indications are means of several readings,
+      and a weights certificate. The selections are the item — which
+      repeatability standard deviation applies to the indication being reported,
+      whether the divisor for a mean is owed, and whether an eccentricity term
+      arises at all given how the test load was made up. Each has a right answer
+      in the guide and none is visible without reading the records.
+    parameterRanges:
+      - name: measurement_context
+        choices:
+          - the calibration of a non-automatic weighing instrument
+      - name: structural_feature
+        choices:
+          - repeatability determined at several test loads, indication between two of them
+          - indications recorded as means of several readings
+          - single-body test load, so no eccentricity contribution arises
+      - name: inputs_supplied
+        choices: [raw records only]
+      - name: resolvable
+        choices: [yes]
+
+  - level: 4
+    archetype: ARC-0004
+    status: draft
+    justification: >-
+      The correlated case. The test load is built from several standard weights,
+      so their uncertainties must be summed arithmetically rather than in
+      quadrature, and a candidate who assumes independence produces a budget
+      that is well-formed, internally consistent and understated. The draw also
+      reaches the instrument whose repeatability varies across the range, where
+      no single uncertainty may be quoted for the whole of it — the second
+      assumption most laboratory templates carry without checking. `resolvable`
+      varies here: on some draws the correlation cannot be quantified from the
+      records at all, and saying so with what would be needed is the correct
+      answer rather than a failure to complete.
+    parameterRanges:
+      - name: measurement_context
+        choices:
+          - the calibration of a non-automatic weighing instrument
+      - name: structural_feature
+        choices:
+          - test load built from several standard weights whose uncertainties are correlated
+          - repeatability varying across the range, so no single figure covers it
+      - name: inputs_supplied
+        choices: [raw records only]
+      - name: resolvable
+        choices: [yes, no]
