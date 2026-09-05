@@ -34,9 +34,9 @@ Three principles held in tension deliberately:
 | Assessable units | 21314 |
 | Ceilings — L2 / L3 / L4 / L5 | 0.7% / 23.1% / 61.3% / 14.9% |
 | Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
-| Content authored | **22 elements** · **13 BOK articles** · **2 modules** — 8 domains, all three axes |
-| Item bank | 5 archetypes · 31 bindings · **0.1%** of units covered |
-| Checks | 0 errors · 324/324 tests · typecheck clean |
+| Content authored | **23 elements** · **14 BOK articles** · **2 modules** — 8 domains, all three axes |
+| Item bank | 5 archetypes · 34 bindings · **0.2%** of units covered |
+| Checks | 0 errors · 326/326 tests · typecheck clean |
 
 ### Phases
 
@@ -125,7 +125,7 @@ content/competence/
                                   authority overlay. Every element needs a
                                   roleTarget for EVERY role — each one added is
                                   now 5459 more authored ratings.
-  elements/                       ASSESSABLE CLAIMS, not prose. 22 authored,
+  elements/                       ASSESSABLE CLAIMS, not prose. 23 authored,
                                   across CM-03, CM-08, CM-15, CM-21, DP-08,
                                   DP-20, EC-01 and EC-04.
   items/archetypes/               Reusable parameterized item SHAPES. ARC-nnnn.
@@ -171,7 +171,7 @@ Eighteen schemas, and the ones that are not obvious from their names:
 | `proficiency`, `role-registry`, `source-registry` | The frames content is written into |
 | `bootstrap-cohort` | The founding roster — makes "closed, time-limited" resolvable rather than asserted |
 | `trust-registry` | Who may issue, which keys were theirs, and how old this snapshot is |
-| `item-archetype`, `item-binding` | The item bank (decision 36). `itemType` includes `witnessed-performance`, which is the only shape that can assess an element whose demonstration route is `equipment` |
+| `item-archetype`, `item-binding` | The item bank (decision 36). `itemType` includes `witnessed-performance`, the only shape that can assess an element whose demonstration route is `equipment`. **What the witness must observe is two-layer**: the archetype states what its whole family of procedures requires, the binding states what THIS test adds |
 | `credential`, `authorization` | What travels with a person, and what never does. An authorization's scope is computable on every dimension, because the question an accreditation body asks of it is a comparison and not a reading |
 | `attempt-ledger` | No-retake rule and exposure control |
 | `deployment-scope` | Which elements apply to a person — pairs with `roleTargets` |
@@ -183,7 +183,7 @@ Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
 
 | Module | The rule it enforces |
 |---|---|
-| `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules, duplicate titles, that a role never needs an element whose prerequisite is `null` for it, that a contested section says WHERE the disagreement lives, that an item bound to disputed knowledge declares what its scoring must not credit, that a proficiency-test result is not admitted below L3, that a gold reference is carried by review rather than asserted, that a reviewer claiming a resolvable standing can actually be resolved, and that a desk archetype is never bound to work that only exists while it is being done |
+| `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules, duplicate titles, that a role never needs an element whose prerequisite is `null` for it, that a contested section says WHERE the disagreement lives, that an item bound to disputed knowledge declares what its scoring must not credit, that a proficiency-test result is not admitted below L3, that a gold reference is carried by review rather than asserted, that a reviewer claiming a resolvable standing can actually be resolved, and that a desk archetype is never bound to work that only exists while it is being done, and that a witnessed binding says what the witness must see for its own test |
 | `credentials.ts` | No self-signoff, signoff policy, the wallet boundary, draft-status attestability, evidenced provenance tier, founding-cohort authority, dual custody, and why the evidence was enough |
 | `trust.ts` | Offline verification against a registry snapshot, and the age of the answer |
 | `ledger.ts` | Hash chain, no-retake, exposure count, trust horizon |
@@ -205,7 +205,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 324 guardrail tests
+npm test                  # 326 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:foundational # which foundational areas a person has actually graded
@@ -322,10 +322,10 @@ The reason it keeps happening is worth internalizing: **a missing equipment type
 | `BOK-0008` + `CM-21-012` | **`interpretation`** + `volatile`. Its subject is fabricated clause references, which is a defect this corpus's own CI cannot detect |
 | `BOK-0009` + `CM-08-038` | **`historical`** — a withdrawn standard still contractually binding. Article carries the only `jurisdiction-dependent` section |
 | `BOK-0010` + `DP-20-002` | **`emerging`** + the only `recertificationMonths`. `knowledge` at ceiling 5 |
-| `BOK-0013` + `EC-04-005` + `ARC-0005` | **The witnessed-performance case, and the first binding outside `CM-03`.** The eccentricity test on a weighing instrument, authored against `EURAMET cg-18` §5.3 and §6.3 — the one registered source that is an equipment-calibration guideline. Read it for what authoring it FOUND: the item bank could not express an assessment for an equipment-route element at all, which is why `EC-01-030` had no bindings either |
+| `BOK-0013`/`0014` + `EC-04-005`/`004` + `ARC-0005` | **The witnessed-performance pair, and the first bindings outside `CM-03`.** Eccentricity and repeatability on a weighing instrument, authored against `EURAMET cg-18` §5.1, §5.3, §6.1 and §6.3 — the one registered source that is an equipment-calibration guideline. Read them for what authoring them FOUND, twice: the item bank could not express an assessment for an equipment-route element at all (which is why `EC-01-030` had no bindings either), and then that a witnessed archetype written for one test cannot state a witness requirement for a family |
 | `MOD-0001` | Prepares for a `desk` element and deliberately declares NO physical demonstration |
 | `MOD-0002` | Prepares for an `equipment` element and MUST declare it. The two modules are the two halves of rule 11, and CI enforces both directions — verified by deliberately breaking each |
-| `ARC-0001`–`0005` | `ARC-0004` is the one built to span a family; `ARC-0001`–`0003` are narrow. **`ARC-0005` is the first witnessed archetype and the first to bind outside `CM-03`** — see the EC-04 row above for why it had to exist |
+| `ARC-0001`–`0005` | `ARC-0004` and `ARC-0005` span families; `ARC-0001`–`0003` are narrow. **`ARC-0005` is the first witnessed archetype and the first to bind outside `CM-03`.** It was written for one test and widened to cg-18's family of measurement methods when a second element landed beside it — see the EC-04 row above |
 
 **What the corpus says about itself.** Run `npm run report:coverage` first — its `ITEM GAPS` section names the next content work rather than requiring you to infer it, and it is authoritative where this file has gone stale. Two shapes to expect. Elements carrying items with **no authored definition** — a binding claiming to test a competence that has no anchors to test against — which stood at eight and is now **zero**. And elements with items only at upper levels, a candidate unable to climb to an L4 they have no L3 item for, which is still real: eight elements have unbound attainable levels. Several of those are **deliberate and documented in the binding file**, because at L1 the archetype supplies the values the element exists to obtain, and padding `ARC-0004` into the slot would inflate the reuse figure while assessing nothing. Read the binding's comment before treating a gap as work.
 
@@ -378,5 +378,7 @@ Authored against `CM-03` and validated. Findings that change downstream estimate
 **Rubric-scoring is the norm, not the exception.** Writing `lookupResistance` honestly forces it — for a Type B assignment item the arithmetic *is* lookupable and an AI produces it instantly, so the numeric part carries 20% and the justification carries the item. Two of three archetypes are rubric-scored. Human reviewer effort across the bank is therefore higher than the phase plan assumed. This is a real cost of abolishing proctoring, and it lands in Phase 7.
 
 **The reuse ratio is moving, and the mean is the wrong statistic.** `report:coverage` now prints units per archetype individually. `ARC-0004` — construct a budget from records, with the structural feature as a *generator* parameter — reaches **18 units across five elements**, while the three narrow archetypes sit at 2–5. The mean (7.0) averages those and understates the shape that matters. **Read decision 36's 20–50 target per archetype, not as a mean:** a shape built to span a family plausibly reaches it; one built for a single subject never will.
+
+**A witnessed archetype spans, and it has to.** `ARC-0005` was written for one test and reached 3 units. Widening it to the family cg-18 groups under its measurement methods took it to **6 across two elements** — second only to `ARC-0004` — and the arithmetic is what forced it rather than tidiness: the `EC` axis is 2732 elements, and one archetype per test is not a bank anybody can build. **What widening cost is worth knowing**, because it is the first real constraint the witnessed shape has shown. `witnessRequirement` on an archetype can only state what every procedure in its family requires; what a witness must watch for a particular test is a property of that procedure, and the binding is where the procedure is chosen. So the field is now two-layer, and a binding to a witnessed archetype owes its own half. Found by authoring the second element, not by looking at the first.
 
 Parameters carry `visibility: prompt | generator`. A generator parameter rendered into the prompt destroys the item *while leaving the file looking perfectly well-formed*; that is why it is validated rather than left to review.

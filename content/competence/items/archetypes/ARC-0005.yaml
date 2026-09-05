@@ -1,18 +1,26 @@
-# ARC-0005 — Witnessed eccentricity test on a weighing instrument
+# ARC-0005 — Witnessed measurement-method test on a weighing instrument
 #
 # THE FIRST WITNESSED ARCHETYPE, AND THE FIRST OUTSIDE CM-03. It exists because
 # authoring EC-04-005 and trying to bind it found that the item bank could not
 # express an assessment for an element whose demonstration route is `equipment`
 # at all: every itemType was a desk item served as a prompt, `lookupResistance`
-# was required of all of them, and the two authored equipment-route elements in
-# the corpus consequently had zero bindings between them.
+# was required of all of them, and the corpus's equipment-route elements
+# consequently had zero bindings between them.
 #
-# What is assessed here is not the table the candidate hands over. It is the
-# handful of things that decide whether that table means anything, every one of
-# which is invisible once the load is off the pan.
+# IT WAS WRITTEN FOR ONE TEST AND WIDENED TO A FAMILY. Authoring EC-04-004 next
+# to it showed that eccentricity and repeatability are the same shape — the same
+# instrument, the same bench, the same test-load provision, and failures that are
+# invisible in the record either way. cg-18 groups them itself, under measurement
+# methods, and the errors-of-indication test belongs to the same family. An axis
+# with 2732 equipment elements cannot afford one archetype per test.
+#
+# Widening cost something, and it is worth knowing what: `witnessRequirement`
+# below can now only state what EVERY test in the family requires. What a witness
+# must see for a PARTICULAR test is a property of the procedure, and the binding
+# is where the procedure is chosen — so the binding carries the other half.
 
 id: ARC-0005
-title: Witnessed eccentricity test on a weighing instrument
+title: Witnessed measurement-method test on a weighing instrument
 itemType: witnessed-performance
 kinds:
   - skill
@@ -20,16 +28,15 @@ levels: [1, 2, 3]
 status: draft
 
 prompt: >-
-  A {{instrument_class}} is set up on the bench, with a test load and the load
-  positions available to you. Method to use: {{stated_method}}.
+  A {{instrument_class}} is set up on the bench, with a test load available to
+  you. Test to perform: {{test}}. Procedure: {{stated_procedure}}.
 
-  Carry out the eccentricity test and record the indications. Produce the
-  eccentricity result — the difference for each off-centre position — and hand
-  over the record you would put in front of a reviewer.
+  Carry out the test, record the indications, and produce the result the test
+  calls for. Hand over the record you would put in front of a reviewer.
 
-  Where the method is not stated, select it and record why before you begin.
-  State anything you decided about the test load or the positions that the
-  record itself would not show.
+  Where the procedure is not stated, select it and record why before you begin.
+  State anything you decided about the test load, the number of readings or the
+  positions that the record itself would not show.
 
 parameters:
   - name: instrument_class
@@ -37,27 +44,39 @@ parameters:
     description: >-
       The instrument provided — a top-loading balance with a rectangular
       receptor, an analytical balance with a small round pan, a platform scale.
-      Varies what the candidate has to adapt the position pattern to, which is
-      part of the competence rather than decoration.
-  - name: stated_method
+      Decides what the candidate has to adapt to, which is part of the
+      competence rather than decoration.
+  - name: test
     type: choice
     description: >-
-      Which of the four procedural variants the candidate is told to use, or
-      that the choice is theirs. THE BINDING SETS THIS, and it is the main
-      difficulty knob: a stated method makes the item about execution, an
-      unstated one makes it about selecting against the instrument's behaviour.
-  - name: drift_present
+      Which of cg-18's measurement methods is being performed. THE BINDING SETS
+      THIS, and it is what ties the item to its element: repeatability for
+      EC-04-004, eccentricity for EC-04-005, errors of indication for EC-04-007
+      when it is authored.
+  - name: stated_procedure
     type: choice
-    # Never rendered. Telling the candidate the instrument drifts hands over
-    # the method choice, which is the entire L3 competence.
+    description: >-
+      What the candidate is told and what is left to them — the procedural
+      variant for an eccentricity test, the load and number of depositions for a
+      repeatability test, or that the choice is theirs. The main difficulty knob:
+      stated makes the item about execution, unstated makes it about selecting
+      against the instrument in front of them.
+  - name: confounder
+    type: choice
+    # Never rendered. Naming the thing the candidate is supposed to notice is
+    # the whole competence at the top level of every element in this family.
     visibility: generator
     description: >-
-      Whether the instrument provided drifts appreciably across the duration of
-      the test. Decides whether an interleaved method is the right answer.
+      The property of the instrument or the setup that the candidate has to
+      notice and respond to — drift across the duration of an eccentricity test,
+      a multiple-range instrument whose smallest scale interval is not in the
+      largest range, a test load that would push a repeatability test over the
+      threshold where fewer depositions are permitted.
     constraint: >-
-      Only meaningful where `stated_method` leaves the choice to the candidate.
-      Setting it true under a stated method produces an instrument whose
-      behaviour contradicts its instructions, which tests nothing and is unfair.
+      Must be a confounder the bound element actually concerns, and must be
+      reachable by the procedure the binding leaves open. A binding that sets a
+      confounder the candidate has no authority to respond to is testing
+      helplessness.
   - name: dual_purpose
     type: choice
     # Never rendered. Saying the indications will also determine errors of
@@ -65,44 +84,45 @@ parameters:
     visibility: generator
     description: >-
       Whether the same indications will also be used to determine the errors of
-      indication. When they are, the test load stops being an arbitrary mass and
-      becomes a reference value that must be calibrated — the requirement most
-      often missed, precisely because the combination saves a loading.
+      indication. cg-18 attaches the identical provision to every test in this
+      family: the test load need not be calibrated UNLESS it does, at which
+      point it becomes a reference value. The requirement most often missed,
+      because the combination saves a loading.
 
 scoring:
   method: rubric
   rubricRef: content/competence/items/rubrics/ARC-0005.md
 
 witnessRequirement: >-
-  Three things decide whether this test was done, and not one of them survives
-  into the record. Whether the zero-setting and zero-tracking devices were
-  actually switched off before a taring method began — the device removes the
-  differences as they appear, so a candidate who forgot hands over a small,
-  uniform and entirely plausible set of numbers. Whether the load was placed by
-  its centre of gravity or by its footprint, which is visible only while it is
-  being placed and matters most with the large awkward weight a candidate is
-  most likely to reach for. And whether, on an interleaved method, the centre
-  indication was genuinely re-taken for each off-centre position rather than one
-  reading being reused — the handed-over table is identical either way. A
-  reviewer holding only the result cannot reach any of the three, which is the
-  whole reason this element carries an equipment route.
+  Three things are true of every test in this family, and not one of them
+  survives into the record. Whether the load was actually MANIPULATED as the
+  method requires — lifted clear and deposited again, or moved between positions
+  — rather than the display being read repeatedly while it sat where it was; the
+  handed-over table is identical either way and its scatter is smaller than the
+  truth. Whether the instrument's automatic zero aids were configured as the
+  method requires BEFORE the first reading, which is decided in the seconds
+  before the test starts and cannot be recovered from the numbers afterwards.
+  And whether the handling was genuinely held constant across the readings —
+  placement, speed, and the interval before each reading — since every variation
+  is reported as though it belonged to the instrument. What a witness must see
+  for a PARTICULAR test is a property of that procedure and is stated on the
+  binding.
 
 citations:
   - source: EURAMET-CG-18
+    clause: "5.1"
+    relevance: >-
+      The repeatability test — repeated deposition under identical handling, the
+      number of depositions, and the zero check between them.
+  - source: EURAMET-CG-18
     clause: "5.3"
     relevance: >-
-      The test the candidate is performing: positions, load size, the four
-      procedural variants, and the zero-device requirement attached to two of
-      them.
-  - source: EURAMET-CG-18
-    clause: "6.3"
-    relevance: >-
-      Turning the indications into the eccentricity result, including which
-      centre indication each off-centre indication is differenced against.
+      The eccentricity test — positions, load size, the four procedural
+      variants, and the zero-device requirement attached to two of them.
 
 # Higher than a desk archetype's, deliberately. Exposure control exists because
 # a candidate who has seen a desk item before has an advantage on it; nobody
-# gains an advantage on placing a weight correctly from having been told what
+# gains an advantage on depositing a weight correctly from having been told what
 # the task is. The integrity here is carried by the witness, not by novelty.
 exposureLimit: 12
 

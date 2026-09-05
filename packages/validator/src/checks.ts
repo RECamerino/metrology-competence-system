@@ -1304,6 +1304,27 @@ function checkItemBank(corpus: Corpus): Finding[] {
         );
       }
 
+      // The witness requirement is two-layer, and the binding owns the half
+      // that depends on the procedure. A witnessed archetype spans a family of
+      // tests — an axis with 2732 equipment elements cannot afford one
+      // archetype per test — so what the witness must watch is decided where
+      // the test is chosen, which is here. Derived from the archetype rather
+      // than declared by the binding's author, like positionNeutrality.
+      const witnessed = archetype.itemType === 'witnessed-performance';
+      const bindingWitness = String(binding?.witnessRequirement ?? '').trim();
+
+      if (witnessed && bindingWitness.length === 0) {
+        findings.push(
+          err(at(`${label} binds a witnessed archetype without saying what the witness must observe for THIS test. The archetype states what every test in its family requires; a binding has to add what this one does, or the witness is watching a procedure nobody described.`)),
+        );
+      }
+
+      if (!witnessed && bindingWitness.length > 0) {
+        findings.push(
+          err(at(`${label} states a witness requirement, but ${archetype.id} is a '${archetype.itemType}' item and has no witness. Nobody would ever act on it.`)),
+        );
+      }
+
       if (typeof level === 'number' && !archetype.levels.includes(level)) {
         findings.push(
           err(at(`${label} uses ${archetype.id}, which declares levels ${archetype.levels.join(', ')}`)),

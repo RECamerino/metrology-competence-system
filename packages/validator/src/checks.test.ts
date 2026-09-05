@@ -1564,15 +1564,61 @@ test('a desk archetype cannot assess an element whose only route is equipment', 
   );
 });
 
+const BINDING_WITNESS = 'Whether the load was lifted clear and deposited again for every reading, rather than left in place while the display was read repeatedly.';
+
 test('a witnessed archetype can', () => {
   assert.deepEqual(
     errorsOf(
       corpus([benchElement()], LOCK_WITNESSED, {
         archetypes: [witnessedArchetype()],
-        bindings: [bindingFile({ level: 2, archetype: 'ARC-0002' }, 'CM-01-002')],
+        bindings: [
+          bindingFile(
+            { level: 2, archetype: 'ARC-0002', witnessRequirement: BINDING_WITNESS },
+            'CM-01-002',
+          ),
+        ],
       }),
     ),
     [],
+  );
+});
+
+/*
+ * The witness requirement is two-layer, and the split was forced by the second
+ * element rather than designed up front. ARC-0005 was written for the
+ * eccentricity test; authoring EC-04-004 beside it showed the archetype should
+ * span cg-18's family of measurement methods — and that widening it left the
+ * archetype able to state only what EVERY test in the family requires. What a
+ * witness must watch for a PARTICULAR test is a property of the procedure, and
+ * the binding is where the procedure is chosen.
+ *
+ * An axis with 2732 equipment elements cannot afford one archetype per test,
+ * so the alternative to this split was a bank nobody could build.
+ */
+
+test('a witnessed binding must say what the witness sees for THIS test', () => {
+  const errors = errorsOf(
+    corpus([benchElement()], LOCK_WITNESSED, {
+      archetypes: [witnessedArchetype()],
+      bindings: [bindingFile({ level: 2, archetype: 'ARC-0002' }, 'CM-01-002')],
+    }),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('what the witness must observe for THIS test')),
+    `expected a witnessed binding with no requirement to be refused, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('a binding on a submitted item may not state one, because nobody would act on it', () => {
+  const errors = errorsOf(
+    corpus([element()], LOCK_DESK, {
+      archetypes: [archetypeFile()],
+      bindings: [bindingFile({ witnessRequirement: BINDING_WITNESS })],
+    }),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('has no witness')),
+    `expected a witness requirement on a desk item to be refused, got: ${JSON.stringify(errors)}`,
   );
 });
 

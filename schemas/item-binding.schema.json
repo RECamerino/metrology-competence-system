@@ -69,6 +69,12 @@
           "description": "Replaces the archetype's tolerance band where this element demands something different. A tighter band at L4 than L2 on the same archetype is normal and expected."
         },
 
+        "witnessRequirement": {
+          "type": "string",
+          "minLength": 80,
+          "description": "What the witness must observe FOR THIS TEST that the finished record cannot show.\n\nREQUIRED where the bound archetype is a `witnessed-performance`, and refused anywhere else — a submitted item has no witness, so a requirement on one is a sentence nobody will ever act on. The obligation is derived from what the binding targets rather than declared by its author, exactly as `positionNeutrality` is.\n\nWHY IT LIVES HERE AS WELL AS ON THE ARCHETYPE. A witnessed archetype spans a family of procedures — the measurement methods cg-18 groups together are one such family — and what a witness has to watch is a property of the PROCEDURE, which the binding chooses. The archetype states what every test in its family requires; this states what this one adds. Keeping only the archetype's half would force every witnessed archetype to be written for a single test, and on an axis with 2732 equipment elements that is not a bank anybody can build.\n\nThe same test applies as on the archetype: name something the record cannot recover. \"The candidate follows the procedure\" is not an observation, it is a restatement of the task."
+        },
+
         "positionNeutrality": {
           "type": "string",
           "minLength": 60,
