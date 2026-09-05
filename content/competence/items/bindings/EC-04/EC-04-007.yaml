@@ -1,0 +1,116 @@
+# The third element bound to ARC-0005, and the one the archetype was widened to
+# accommodate rather than the one it was written for. If the widening was sound,
+# this binding needed no schema work at all — and it did not.
+#
+# Read it beside EC-04-004.yaml and EC-04-005.yaml. Same archetype, same three
+# levels, same instrument on the same bench, and a third distinct set of things
+# the witness has to see.
+
+schemaVersion: 1
+element: EC-04-007
+
+bindings:
+  - level: 1
+    archetype: ARC-0005
+    status: draft
+    justification: >-
+      At L1 the test loads, the points and the loading sequence are all stated
+      and the reference values are supplied, so nothing is selected and the item
+      is about execution: applying each load in the given order, letting the
+      indication settle, and computing the error at each point. Sequence 1 is
+      fixed — increasing with unloading between steps — because it is the one
+      that matches ordinary single-load use, and because a candidate who has not
+      yet been taught what creep does should not be assessed on a sequence that
+      admits it.
+    witnessRequirement: >-
+      Whether the instrument was actually UNLOADED between the steps that the
+      stated sequence requires it to be. The record is a list of indications
+      against loads either way, and a candidate who added weights without
+      returning to zero has performed a different test — one whose results
+      include creep — while producing a table indistinguishable from a correct
+      one. Also whether each indication was allowed to settle before it was
+      taken, which at the top of the range is where a hurried candidate loses
+      most.
+    parameterRanges:
+      - name: test
+        choices: [errors of indication]
+      - name: stated_procedure
+        choices:
+          - "sequence 1 — increasing by steps, unloading between them; loads and points supplied"
+      - name: confounder
+        choices: [none]
+      - name: dual_purpose
+        choices: [true]
+
+  - level: 2
+    archetype: ARC-0005
+    status: draft
+    justification: >-
+      L2 supplies a procedure and assesses the two things it cannot perform for
+      the candidate: checking that the weights actually available satisfy the
+      deviation AND spacing conditions of the pattern being used — the pair is
+      what stops the deviation allowance being used to collapse two points
+      together — and stating whether nominal or conventional values were used as
+      the reference. The sequence varies between one that unloads and one that
+      does not, so the candidate has to follow what they were given rather than
+      what they are used to.
+    witnessRequirement: >-
+      As at L1, whether the unloading actually matched the stated sequence. In
+      addition, whether the loads placed on the instrument were the STANDARD
+      WEIGHTS the procedure names, rather than convenient masses of the same
+      nominal value — the recorded table shows nominal values and nothing about
+      the provenance of the metal, and for this test the mass is a reference
+      value rather than an arbitrary load. Nothing downstream recovers it.
+    parameterRanges:
+      - name: test
+        choices: [errors of indication]
+      - name: stated_procedure
+        choices:
+          - "sequence 1 — increasing by steps, unloading between them"
+          - "sequence 2 — continuously increasing by steps, without unloading"
+      - name: confounder
+        choices: [none]
+      - name: dual_purpose
+        choices: [true]
+
+  - level: 3
+    archetype: ARC-0005
+    status: draft
+    justification: >-
+      L3 states nothing. The candidate selects the test points across the range,
+      chooses the loading sequence from how the instrument is actually used, and
+      decides whether the weights' nominal values will serve as reference values
+      or whether their conventional values are needed. The confounder is what
+      makes each of those a judgement: an instrument used as a hopper weigher
+      makes the decreasing sequence the honest choice, a weight set that cannot
+      meet the spacing condition forces the reduced-range pattern or a different
+      set, and an instrument fine enough that the corrections matter settles the
+      reference-value question in the other direction. What separates a pass
+      from a fail is the recorded reasoning rather than the choice.
+    witnessRequirement: >-
+      Whether the candidate ESTABLISHED HOW THE INSTRUMENT IS USED before
+      choosing the sequence — asked, or read the procedure it is operated under
+      — or picked the sequence they always pick. Both produce the same recorded
+      justification and only one is the competence. Then, whether they inspected
+      the weights they were given rather than assuming the set was what the
+      label said, since the reference-value decision rests on corrections they
+      have to have looked at.
+    parameterRanges:
+      - name: test
+        choices: [errors of indication]
+      - name: stated_procedure
+        choices:
+          - "not stated — select the test points, the sequence and the reference values, and record why"
+      - name: instrument_class
+        choices:
+          - top-loading balance with a rectangular receptor
+          - analytical balance with a small round pan
+          - platform scale with a large rectangular deck
+      - name: confounder
+        choices:
+          - instrument operated for subtractive weighing rather than single loads
+          - weight set that cannot meet the spacing condition at the standard points
+          - instrument fine enough that the weights' corrections are not negligible
+          - none
+      - name: dual_purpose
+        choices: [true]

@@ -11,8 +11,12 @@
 # to it showed that eccentricity and repeatability are the same shape — the same
 # instrument, the same bench, the same test-load provision, and failures that are
 # invisible in the record either way. cg-18 groups them itself, under measurement
-# methods, and the errors-of-indication test belongs to the same family. An axis
-# with 2732 equipment elements cannot afford one archetype per test.
+# methods. An axis with 2732 equipment elements cannot afford one archetype per
+# test.
+#
+# EC-04-007 then bound to it with NO change to this file or to any schema, which
+# is the evidence the widening was sound rather than convenient. A shape that
+# has to be adjusted for every new member was not a family shape.
 #
 # Widening cost something, and it is worth knowing what: `witnessRequirement`
 # below can now only state what EVERY test in the family requires. What a witness
@@ -51,8 +55,9 @@ parameters:
     description: >-
       Which of cg-18's measurement methods is being performed. THE BINDING SETS
       THIS, and it is what ties the item to its element: repeatability for
-      EC-04-004, eccentricity for EC-04-005, errors of indication for EC-04-007
-      when it is authored.
+      EC-04-004, eccentricity for EC-04-005, errors of indication for EC-04-007.
+      All three are authored and bound, which is the evidence that the widening
+      was sound — the third took no schema change at all.
   - name: stated_procedure
     type: choice
     description: >-
@@ -114,6 +119,12 @@ citations:
     relevance: >-
       The repeatability test — repeated deposition under identical handling, the
       number of depositions, and the zero check between them.
+  - source: EURAMET-CG-18
+    clause: "5.2"
+    relevance: >-
+      The test for errors of indication — the distribution of test loads, the
+      four loading sequences, and the requirement that the loads be standard
+      weights, which is the provision the other two tests defer to.
   - source: EURAMET-CG-18
     clause: "5.3"
     relevance: >-
