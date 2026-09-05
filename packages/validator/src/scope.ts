@@ -57,16 +57,38 @@ export interface ElementStubLike {
  * exception is the deliberate part.
  */
 export function inScope(element: ElementStubLike, scope: DeploymentScope): boolean {
+  return matchesSelectors(element, scope.includes, scope.excludes);
+}
+
+/**
+ * The selector resolution itself, without the deployment scope around it.
+ *
+ * Extracted because an AUTHORIZATION scope bounds measurement work with the
+ * same selectors, resolved against the same taxonomy, and two implementations
+ * of "is this element inside this selector set" would eventually disagree — at
+ * which point a person's job would contain an element their authorization did
+ * not cover, or the reverse, for no reason anybody could find. The schemas
+ * share `taxonomyIncludes` and `taxonomyExcludes` for the same reason.
+ *
+ * The two questions remain different: which elements apply to this person's
+ * job, and which measurement work this grant permits. Only the resolution is
+ * common.
+ */
+export function matchesSelectors(
+  element: ElementStubLike,
+  includes: ScopeSelectors,
+  excludes?: Omit<ScopeSelectors, 'domains'>,
+): boolean {
   const included =
-    (scope.includes.domains ?? []).includes(element.domain) ||
-    (scope.includes.areas ?? []).includes(element.competencyArea) ||
-    (scope.includes.elements ?? []).includes(element.id);
+    (includes.domains ?? []).includes(element.domain) ||
+    (includes.areas ?? []).includes(element.competencyArea) ||
+    (includes.elements ?? []).includes(element.id);
 
   if (!included) return false;
 
   const excluded =
-    (scope.excludes?.areas ?? []).includes(element.competencyArea) ||
-    (scope.excludes?.elements ?? []).includes(element.id);
+    (excludes?.areas ?? []).includes(element.competencyArea) ||
+    (excludes?.elements ?? []).includes(element.id);
 
   return !excluded;
 }

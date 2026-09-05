@@ -147,11 +147,15 @@ const authorization: Authorization = {
     grantedByPerson: REVIEWER_A,
     accreditationRecognition: 'Schedule of Accreditation 1234, dimensional',
   },
+  // Every dimension is compared, not read. This fixture used to hold
+  // 'Signing accredited calibration certificates' and '0.5 mm to 100 mm',
+  // which is exactly the prose the scope-matching engine could not evaluate.
   scope: {
-    activities: ['Signing accredited calibration certificates'],
-    methods: ['Gauge block comparison'],
-    ranges: ['0.5 mm to 100 mm'],
-    locations: ['Northfield site'],
+    activities: ['sign-accredited-certificate'],
+    measurement: { includes: { areas: ['CM-03-A04'] } },
+    methods: [{ identifier: 'Gauge block comparison' }],
+    ranges: [{ quantity: 'length', unit: 'mm', min: 0.5, max: 100 }],
+    locations: [{ id: 'northfield-main', name: 'Northfield site' }],
   },
   grantedOn: '2026-08-09',
   basis: [{ element: 'CM-03-046', level: 4, credentialId: credential.id }],

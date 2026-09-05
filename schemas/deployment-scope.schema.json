@@ -24,43 +24,9 @@
       "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/roleId" }
     },
 
-    "includes": {
-      "type": "object",
-      "minProperties": 1,
-      "additionalProperties": false,
-      "description": "What is in scope, resolved against the taxonomy. Selectors are unioned. Machine-resolvable by construction: every value names a domain, an area or an element that the taxonomy either contains or does not.",
-      "properties": {
-        "domains": {
-          "type": "array",
-          "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/domainId" }
-        },
-        "areas": {
-          "type": "array",
-          "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/competencyAreaId" }
-        },
-        "elements": {
-          "type": "array",
-          "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
-          "description": "Individually named elements, for the case a person's work crosses a boundary the taxonomy draws elsewhere."
-        }
-      }
-    },
+    "includes": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/taxonomyIncludes" },
 
-    "excludes": {
-      "type": "object",
-      "additionalProperties": false,
-      "description": "Removed after the includes are unioned. For the common case of 'this whole domain except the part we send out to a subcontractor'.",
-      "properties": {
-        "areas": {
-          "type": "array",
-          "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/competencyAreaId" }
-        },
-        "elements": {
-          "type": "array",
-          "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" }
-        }
-      }
-    },
+    "excludes": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/taxonomyExcludes" },
 
     "assignedBy": {
       "type": "object",

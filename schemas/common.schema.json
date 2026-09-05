@@ -167,6 +167,32 @@
       "description": "Content-addressed reference to an archived artifact. Hashing is what makes a credential re-reviewable years later."
     },
 
+    "taxonomyIncludes": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "description": "What is in scope, resolved against the taxonomy. Selectors are unioned, and every value names a domain, an area or an element that the taxonomy either contains or does not — which is what makes a scope MACHINE-RESOLVABLE rather than a description somebody has to read.\n\nShared between a deployment scope and an authorization scope deliberately. They answer different questions — which elements apply to this person's job, and which measurement work this grant covers — but both are resolved by the same operation against the same taxonomy, and two implementations of \"is this element inside this selector set\" would disagree eventually.",
+      "properties": {
+        "domains": { "type": "array", "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/domainId" } },
+        "areas": { "type": "array", "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/competencyAreaId" } },
+        "elements": {
+          "type": "array",
+          "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
+          "description": "Individually named elements, for the case the work crosses a boundary the taxonomy draws elsewhere."
+        }
+      }
+    },
+
+    "taxonomyExcludes": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Removed after the includes are unioned. For the common case of \"this whole domain except the part we send out to a subcontractor\".\n\nThere is deliberately no `domains` here. Excluding a whole domain you had to include first is a longer way of not including it, and permitting both spellings would leave two scopes that read differently and resolve identically.",
+      "properties": {
+        "areas": { "type": "array", "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/competencyAreaId" } },
+        "elements": { "type": "array", "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" } }
+      }
+    },
+
     "reviewerStanding": {
       "type": "object",
       "required": ["basis"],
