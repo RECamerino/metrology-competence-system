@@ -34,8 +34,8 @@ Three principles held in tension deliberately:
 | Assessable units | 21314 |
 | Ceilings — L2 / L3 / L4 / L5 | 0.7% / 23.1% / 61.3% / 14.9% |
 | Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
-| Content authored | **25 elements** · **16 BOK articles** · **2 modules** — 8 domains, all three axes |
-| Item bank | 5 archetypes · 40 bindings · **0.2%** of units covered |
+| Content authored | **26 elements** · **17 BOK articles** · **2 modules** — 8 domains, all three axes |
+| Item bank | 5 archetypes · 41 bindings · **0.2%** of units covered |
 | Checks | 0 errors · 326/326 tests · typecheck clean |
 
 ### Phases
@@ -125,7 +125,7 @@ content/competence/
                                   authority overlay. Every element needs a
                                   roleTarget for EVERY role — each one added is
                                   now 5459 more authored ratings.
-  elements/                       ASSESSABLE CLAIMS, not prose. 25 authored,
+  elements/                       ASSESSABLE CLAIMS, not prose. 26 authored,
                                   across CM-03, CM-08, CM-15, CM-21, DP-08,
                                   DP-20, EC-01 and EC-04.
   items/archetypes/               Reusable parameterized item SHAPES. ARC-nnnn.
@@ -324,6 +324,7 @@ The reason it keeps happening is worth internalizing: **a missing equipment type
 | `BOK-0010` + `DP-20-002` | **`emerging`** + the only `recertificationMonths`. `knowledge` at ceiling 5 |
 | `BOK-0013`–`0015` + `EC-04-004`/`005`/`007` + `ARC-0005` | **The witnessed-performance family, and the first bindings outside `CM-03`.** cg-18's three measurement methods — repeatability, eccentricity, errors of indication — on a weighing instrument, authored against §5.1, §5.2, §5.3, §6.1, §6.2 and §6.3 of the one registered source that is an equipment-calibration guideline. Read them for what authoring them FOUND: the item bank could not express an assessment for an equipment-route element at all (which is why `EC-01-030` had no bindings either), then that a witnessed archetype written for one test cannot state a witness requirement for a family — and then, on the third, nothing, which is the result that mattered. **`EC-04-007` is also the sequencing trap**: the other two tests' loads need not be calibrated *unless the data also serves this one*, and that cannot be decided after the loading |
 | `BOK-0016` + `EC-04-014` | **The first `demonstration: [desk]` element in `EC`, and the first cross-axis binding.** The uncertainty budget the three tests above feed. `EC` is organized by the equipment being calibrated, NOT by where the work happens — given the records, this budget is built at a table, and marking it `equipment` because its neighbours are would invent a barrier for the learner who can obtain records far more easily than a balance. Bound to `ARC-0004`, from `CM-03`. Its L4 is the correlated case: several standard weights whose uncertainties sum arithmetically, where assuming independence understates and always in the same direction |
+| `BOK-0017` + `EC-04-013` | **The first `judgment` element in `EC`, and the one `ARC-0005` cannot serve.** Whether to adjust a balance before calibrating it. `demonstration: [desk]` follows from `kind` rather than from a call about benches — the element schema says knowledge and judgment are evidenced by explanation and defence. Bound at **L4 only**, to `ARC-0003`, and the three levels below are a documented gap: a position-and-defend item needs a position worth defending, which L1–L3 do not supply. Carries the only `contested` section in `EC`, on what "as found" is being asked to mean |
 | `MOD-0001` | Prepares for a `desk` element and deliberately declares NO physical demonstration |
 | `MOD-0002` | Prepares for an `equipment` element and MUST declare it. The two modules are the two halves of rule 11, and CI enforces both directions — verified by deliberately breaking each |
 | `ARC-0001`–`0005` | `ARC-0004` and `ARC-0005` span families; `ARC-0001`–`0003` are narrow. **`ARC-0005` is the first witnessed archetype and the first to bind outside `CM-03`.** Written for one test, widened to cg-18's family of measurement methods when a second element landed beside it, and the third then bound to it **with no schema change and no new test** — which is what tells you a family shape from a convenient one |
@@ -381,6 +382,8 @@ Authored against `CM-03` and validated. Findings that change downstream estimate
 **The reuse ratio is moving, and the mean is the wrong statistic.** `report:coverage` prints units per archetype individually. `ARC-0004` — construct a budget from records, with the structural feature as a *generator* parameter — now reaches **21 units across six elements**, while the three narrow archetypes sit at 2–5. The mean (8.0) averages those and understates the shape that matters. **Read decision 36's 20–50 target per archetype, not as a mean:** a shape built to span a family plausibly reaches it; one built for a single subject never will.
 
 **`ARC-0004` is the first archetype to reach that target, and it got there by crossing an AXIS.** Its sixth element is `EC-04-014`, the uncertainty budget for a balance calibration — a `CM-03` archetype serving an `EC` element, which is the first cross-axis binding in the corpus and took no change to the archetype. That is the second reuse result in two authoring passes and it points the opposite way from the first: `ARC-0005` spans a family of *procedures* within one area, `ARC-0004` spans a *subject* across two axes. **The bank's economics do not rest on one kind of generalization**, which matters at 21314 assessable units.
+
+**But a witnessed archetype spans an EQUIPMENT CLASS, not the axis**, and the coverage report says so plainly: `EC-01-030` still has no items. A witnessed archetype now exists, and it cannot serve a multimeter verification because `ARC-0005` is a weighing-instrument shape — the procedures it spans are cg-18's, and cg-18 is about one class of instrument. So the `EC` axis needs roughly **one witnessed archetype per equipment-class family**: far fewer than 2732, and considerably more than one. That is a Phase 7 estimate nobody has made, and it is the first number the item bank has produced about its own eventual size rather than about its current coverage. `EC-01-030` sitting unbound beside three bound EC-04 elements is what makes it visible.
 
 **A witnessed archetype spans, and it has to.** `ARC-0005` was written for one test and reached 3 units. Widening it to the family cg-18 groups under its measurement methods took it to 6 across two elements, and the third took it to **9** — second only to `ARC-0004`. The arithmetic is what forced it rather than tidiness: the `EC` axis is 2732 elements, and one archetype per test is not a bank anybody can build. **What widening cost is worth knowing**, because it is the first real constraint the witnessed shape has shown. `witnessRequirement` on an archetype can only state what every procedure in its family requires; what a witness must watch for a particular test is a property of that procedure, and the binding is where the procedure is chosen. So the field is two-layer, and a binding to a witnessed archetype owes its own half. Found by authoring the second element, not by looking at the first.
 

@@ -1,0 +1,66 @@
+# The second cross-axis binding, and the first to ARC-0003. Also the first EC
+# element that ARC-0005 CANNOT serve — what is assessed here is a decision, and
+# watching somebody decide tells you less than their defence of it does.
+#
+# BOUND AT L4 ONLY, and the gap below it is real rather than an oversight.
+# ARC-0003 declares levels 4 and 5 because a position-and-defend item needs a
+# position worth defending, which L1 to L3 of this element do not supply: at L1
+# the candidate reads a record, at L2 they apply a default, at L3 they establish
+# a fact about the client and refer a conflict. Those want a scenario-judgment
+# shape the bank does not yet have. The coverage report will show three
+# unbound attainable levels here and that is accurate.
+#
+# Padding ARC-0003 downward would produce items asking a candidate to defend a
+# position they were never asked to take, which assesses argumentation rather
+# than this element.
+
+schemaVersion: 1
+element: EC-04-013
+
+bindings:
+  - level: 4
+    archetype: ARC-0003
+    status: draft
+    justification: >-
+      L4 is an argument across a genuine divide, which is exactly what this
+      archetype is for. The scenario puts the candidate in the case where the
+      two readings of as-found data conflict — a client who must evaluate work
+      already done, and an instrument whose in-service state is the adjusted one
+      — and the counter-position is the other reading in its strongest form,
+      taken from the contested section of BOK-0017 rather than invented for the
+      item. Both outcomes are acceptable: the archetype scores whether the
+      candidate engages the strongest form of the opposing argument, states the
+      conditions under which they would change position, and identifies what
+      evidence would settle it. What ties this to EC-04-013 rather than to
+      argument in general is that the asymmetry is real and checkable — one of
+      the two losses is irreversible and the other is not — so a defence that
+      treats them as symmetrical trade-offs is wrong on the substance, not
+      merely unpersuasive.
+    positionNeutrality: >-
+      The scoring credits the quality of the engagement and MUST NOT credit
+      arriving at either position. Both are held by competent practitioners and
+      BOK-0017 §s06 records both with their bases. What the rubric may credit is
+      recognizing that the two losses differ in kind — a certificate describing
+      an unused state can be remade, and destroyed as-found evidence cannot —
+      because that is a property of the case rather than a preference between
+      the camps. A candidate who concludes "adjust first" and one who concludes
+      "capture first" can both score full marks; a candidate who does not notice
+      the irreversibility can score full marks on neither.
+    parameterRanges:
+      - name: scenario
+        choices:
+          - a routinely adjusted analytical balance whose client has questioned results issued over the last six months
+          - a high-resolution balance adjusted immediately before every use, arriving for its annual calibration with no stated concern
+          - a production platform scale whose client has just failed an internal audit finding on equipment control
+      - name: position
+        choices:
+          - adjust before calibrating, per the guide's default
+          - capture as-found data before touching the instrument
+      - name: counter_position
+        choices:
+          - capture as-found data before touching the instrument
+          - adjust before calibrating, per the guide's default
+      - name: counter_argument
+        choices:
+          - a certificate describing a state the instrument never occupies in service does not support the inference the user needs
+          - adjusting destroys the only evidence of how the instrument performed during a period that has already happened, and nothing recovers it
