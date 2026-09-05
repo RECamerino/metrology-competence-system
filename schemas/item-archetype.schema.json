@@ -63,6 +63,12 @@
         "properties": {
           "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
           "type": { "enum": ["real", "integer", "choice", "dataset"] },
+          "exposureRelevant": {
+            "type": "boolean",
+            "default": true,
+            "description": "Does varying THIS parameter alone produce a materially different item? Two draws are the same exposure when they agree on every exposure-relevant parameter, so this is the field that decides how big the bank actually is.\n\nDEFAULTS TO TRUE, which is the conservative reading: every parameter counts until somebody says otherwise, so an unconsidered archetype over-counts exposures and the limit bites sooner than it needs to. Under-counting is the direction that lets a candidate meet one shape repeatedly, which is what `exposureLimit` exists to prevent, so the default errs the other way.\n\nIT IS NOT THE SAME QUESTION AS `visibility`, and conflating them was the obvious mistake. `visibility` asks whether rendering the parameter hands the candidate the answer. This asks whether varying it gives them a different problem. A generator parameter is almost always both — it carries the structural feature — but a PROMPT parameter can be either: `measurement_context` on ARC-0002 varies the surface and nothing else, while `stated_procedure` on ARC-0005 changes what the candidate is actually asked to do and is the difficulty knob between levels. Deciding exposure from `visibility` would have collapsed the second case with the first."
+          },
+
           "visibility": {
             "enum": ["prompt", "generator"],
             "default": "prompt",
@@ -126,7 +132,7 @@
     "exposureLimit": {
       "type": "integer",
       "minimum": 1,
-      "description": "Maximum times this archetype may be served to one candidate across all their bindings, before the bank must offer a different shape. Guards against a candidate meeting the same shape at every level of every element and learning the archetype rather than the competence."
+      "description": "Maximum times this archetype may be served to one candidate across all their bindings, before the bank must offer a different shape. Guards against a candidate meeting the same shape at every level of every element and learning the archetype rather than the competence. Counted in EXPOSURES rather than in servings: two draws agreeing on every exposure-relevant parameter are one exposure however different they look, and two differing on any of them are two. See `exposureRelevant` on a parameter, which is what makes that computable rather than a matter of whether an author wrote an `exposureGroup` string."
     },
 
     "notes": { "type": "string" },

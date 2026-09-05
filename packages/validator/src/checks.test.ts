@@ -1656,3 +1656,194 @@ test('a desk archetype still owes its lookupResistance', () => {
   delete desk.lookupResistance;
   assert.equal(validate(desk), false);
 });
+
+
+/* -- Binding review, and two levels that are one exposure ------------------ */
+
+/*
+ * CI proves a binding is structurally POSSIBLE — kinds match, level in range,
+ * parameters exist, no generator parameter renders. None of that reaches
+ * whether the item assesses THIS element or the archetype's generic shape,
+ * which is a judgement and is invisible in both files when it goes wrong.
+ */
+
+const BINDING_REVIEW = {
+  reviewer: { name: 'Priya Raman' },
+  standing: STANDING,
+  reviewedOn: '2026-09-01',
+  disposition: 'accepted',
+};
+
+test('a binding may leave draft only with a review', () => {
+  const errors = errorsOf(
+    corpus([element()], LOCK_DESK, {
+      archetypes: [archetypeFile()],
+      bindings: [bindingFile({ status: 'stable' })],
+    }),
+  );
+  assert.ok(
+    errors.some((e) => e.includes("is 'stable' with no review")),
+    `expected an unreviewed stable binding to be refused, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('a reviewed one may', () => {
+  assert.deepEqual(
+    errorsOf(
+      corpus([element()], LOCK_DESK, {
+        archetypes: [archetypeFile()],
+        bindings: [bindingFile({ status: 'stable', review: BINDING_REVIEW })],
+      }),
+    ),
+    [],
+  );
+});
+
+test('a draft binding needs no review at all', () => {
+  // The parallel is rule 7: a draft is a proposal, and requiring signoff on
+  // every proposal is how proposals stop being written.
+  assert.deepEqual(
+    errorsOf(
+      corpus([element()], LOCK_DESK, {
+        archetypes: [archetypeFile()],
+        bindings: [bindingFile()],
+      }),
+    ),
+    [],
+  );
+});
+
+test('a binding a reviewer would not stand behind may be kept, not served', () => {
+  const note = 'The archetype would assess budget reading in general rather than this element at this level.';
+  const kept = errorsOf(
+    corpus([element()], LOCK_DESK, {
+      archetypes: [archetypeFile()],
+      bindings: [bindingFile({ review: { ...BINDING_REVIEW, disposition: 'rejected', note } })],
+    }),
+  );
+  assert.deepEqual(kept, []);
+
+  const served = errorsOf(
+    corpus([element()], LOCK_DESK, {
+      archetypes: [archetypeFile()],
+      bindings: [
+        bindingFile({ status: 'stable', review: { ...BINDING_REVIEW, disposition: 'rejected', note } }),
+      ],
+    }),
+  );
+  assert.ok(served.some((e) => e.includes('may not be served')));
+});
+
+test('a rejection with no note is refused', () => {
+  const errors = errorsOf(
+    corpus([element()], LOCK_DESK, {
+      archetypes: [archetypeFile()],
+      bindings: [bindingFile({ review: { ...BINDING_REVIEW, disposition: 'disputed' } })],
+    }),
+  );
+  assert.ok(errors.some((e) => e.includes("'disputed' review with no note")));
+});
+
+test("a binding may not be reviewed by the element's own author", () => {
+  const authored = element({
+    authoring: { createdOn: '2026-08-01', authors: [{ name: 'Priya Raman' }] },
+  });
+  const errors = errorsOf(
+    corpus([authored], LOCK_DESK, {
+      archetypes: [archetypeFile()],
+      bindings: [bindingFile({ review: BINDING_REVIEW })],
+    }),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('who authored the element it binds')),
+    `expected a self-reviewed binding to be refused, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('two levels pinning every exposure-relevant parameter alike are one item', () => {
+  // Both bindings are well formed and the archetype is fine; the defect is that
+  // the two draws can only ever be identical, so a candidate climbing from one
+  // level to the other meets the same shape twice.
+  const arch = archetypeFile({
+    parameters: [
+      { name: 'u_a', type: 'real' },
+      { name: 'surface', type: 'choice', exposureRelevant: false },
+    ],
+    prompt: 'Given a standard uncertainty of {{u_a}} in {{surface}}, determine the combined value.',
+  });
+  const errors = errorsOf(
+    corpus([element()], LOCK_DESK, {
+      archetypes: [arch],
+      bindings: [
+        {
+          path: 'content/competence/items/bindings/CM-01/CM-01-001.yaml',
+          data: {
+            schemaVersion: 1,
+            element: 'CM-01-001',
+            bindings: [
+              {
+                level: 2,
+                archetype: 'ARC-0001',
+                status: 'draft',
+                justification: LONG,
+                parameterRanges: [{ name: 'u_a', choices: [0.5] }, { name: 'surface', choices: ['a'] }],
+              },
+              {
+                level: 3,
+                archetype: 'ARC-0001',
+                status: 'draft',
+                justification: LONG,
+                parameterRanges: [{ name: 'u_a', choices: [0.5] }, { name: 'surface', choices: ['b'] }],
+              },
+            ],
+          },
+        },
+      ],
+    }),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('can only ever draw one and the same item')),
+    `expected an exposure collision, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('varying one exposure-relevant parameter is enough to separate them', () => {
+  const arch = archetypeFile({
+    parameters: [
+      { name: 'u_a', type: 'real' },
+      { name: 'surface', type: 'choice', exposureRelevant: false },
+    ],
+    prompt: 'Given a standard uncertainty of {{u_a}} in {{surface}}, determine the combined value.',
+  });
+  const errors = errorsOf(
+    corpus([element()], LOCK_DESK, {
+      archetypes: [arch],
+      bindings: [
+        {
+          path: 'content/competence/items/bindings/CM-01/CM-01-001.yaml',
+          data: {
+            schemaVersion: 1,
+            element: 'CM-01-001',
+            bindings: [
+              {
+                level: 2,
+                archetype: 'ARC-0001',
+                status: 'draft',
+                justification: LONG,
+                parameterRanges: [{ name: 'u_a', choices: [0.5] }, { name: 'surface', choices: ['a'] }],
+              },
+              {
+                level: 3,
+                archetype: 'ARC-0001',
+                status: 'draft',
+                justification: LONG,
+                parameterRanges: [{ name: 'u_a', choices: [0.9] }, { name: 'surface', choices: ['a'] }],
+              },
+            ],
+          },
+        },
+      ],
+    }),
+  );
+  assert.deepEqual(errors, []);
+});

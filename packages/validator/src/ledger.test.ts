@@ -410,3 +410,80 @@ test('the ordinary assessment route is untouched by any of this', () => {
   const ordinary = { ...challengeCredential().credential, assessment: { modality: ['open-resource-parameterized'] } };
   assert.deepEqual(checkChallengeProvenance(ordinary, ledger), []);
 });
+
+
+/* -- When are two differently parameterized items the same exposure? -------- */
+
+/*
+ * Until this was decided, `exposureGroup` was the only lever: an entry carrying
+ * one collapsed with every other entry carrying it, and an entry without one
+ * counted alone. So a binding collapsed either all of its draws into a single
+ * exposure or none of them, decided by whether an author had written a string.
+ * Two authors following the same instructions produced banks of different
+ * effective sizes, which is the "decided by accident" the open item named.
+ *
+ * Two draws are one exposure when they agree on every exposure-relevant
+ * parameter. The served draw is hashed over those values alone.
+ */
+
+const STRUCTURAL_A = 'sha256:1111111111111111111111111111111111111111111111111111111111111111';
+const STRUCTURAL_B = 'sha256:2222222222222222222222222222222222222222222222222222222222222222';
+
+const served = (
+  element: string,
+  extra: Record<string, unknown>,
+): Parameters<typeof appendAttempt>[1] =>
+  ({
+    element,
+    level: 3,
+    mode: 'assessment',
+    archetype: 'ARC-0001',
+    servedOn: '2026-03-01',
+    outcome: 'passed',
+    ...extra,
+  }) as Parameters<typeof appendAttempt>[1];
+
+test('the same structural draw twice is ONE exposure, however different the surface', () => {
+  // The case the open item asked about. Two items from one archetype with the
+  // same injected structure and different surrounding numbers teach the
+  // candidate the shape once.
+  let ledger = appendAttempt(empty, served('CM-03-036', { structuralRef: STRUCTURAL_A }));
+  ledger = appendAttempt(ledger, served('CM-03-038', { structuralRef: STRUCTURAL_A }));
+  assert.equal(exposureCount(ledger, 'ARC-0001'), 1);
+});
+
+test('a different structural draw is a different exposure', () => {
+  let ledger = appendAttempt(empty, served('CM-03-036', { structuralRef: STRUCTURAL_A }));
+  ledger = appendAttempt(ledger, served('CM-03-038', { structuralRef: STRUCTURAL_B }));
+  assert.equal(exposureCount(ledger, 'ARC-0001'), 2);
+});
+
+test('an exposure group NAMESPACES rather than collapsing', () => {
+  // Two bindings in one group still count as two where their structural draws
+  // differ. The group's own description always said it collapsed near-identical
+  // items; it used to collapse every item, identical or not.
+  let ledger = appendAttempt(
+    empty,
+    served('CM-03-036', { exposureGroup: 'type-b-assignment', structuralRef: STRUCTURAL_A }),
+  );
+  ledger = appendAttempt(
+    ledger,
+    served('CM-03-038', { exposureGroup: 'type-b-assignment', structuralRef: STRUCTURAL_B }),
+  );
+  assert.equal(exposureCount(ledger, 'ARC-0001'), 2);
+
+  const same = appendAttempt(
+    ledger,
+    served('CM-03-041', { exposureGroup: 'type-b-assignment', structuralRef: STRUCTURAL_A }),
+  );
+  assert.equal(exposureCount(same, 'ARC-0001'), 2);
+});
+
+test('an entry with no structural draw still counts on its own', () => {
+  // The safe direction, and the old behaviour preserved for entries recorded
+  // before the field existed: over-counting makes the limit bite sooner, and
+  // under-counting is what lets a candidate meet one shape at every level.
+  let ledger = appendAttempt(empty, served('CM-03-036', {}));
+  ledger = appendAttempt(ledger, served('CM-03-038', {}));
+  assert.equal(exposureCount(ledger, 'ARC-0001'), 2);
+});

@@ -389,6 +389,8 @@ export interface ArchetypeEntry {
   kinds: string[];
   /** How the item is delivered. `witnessed-performance` is observed, not submitted. */
   itemType?: string;
+  /** Parameters whose variation makes a materially different item. Drives exposure. */
+  exposureRelevantParams: string[];
   levels: number[];
   parameterNames: string[];
   scoringMethod: string;
@@ -411,6 +413,10 @@ export function indexArchetypes(archetypes: ItemFile[]): Map<string, ArchetypeEn
       parameterNames: ((d.parameters ?? []) as Array<Record<string, any>>)
         .map((p) => p?.name)
         .filter(Boolean),
+      // Defaults to true, so a parameter counts until somebody says otherwise.
+      exposureRelevantParams: ((d.parameters ?? []) as Array<Record<string, any>>)
+        .filter((p) => p?.name && p?.exposureRelevant !== false)
+        .map((p) => p.name as string),
       scoringMethod: d.scoring?.method,
       status: d.status,
     });

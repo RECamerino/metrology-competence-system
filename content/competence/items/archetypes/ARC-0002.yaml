@@ -26,11 +26,20 @@ prompt: >-
 
 parameters:
   - name: budget
+    # Surface for exposure purposes. It varies every draw and exists so the
+    # item can be RECONSTRUCTED years later, not to make the item harder —
+    # leaving it exposure-relevant would make every serving a fresh exposure
+    # and the limit could never bite.
+    exposureRelevant: false
     type: dataset
     description: >-
       The budget itself, archived and hashed so the item can be reconstructed
       exactly when a credential is re-reviewed years later.
   - name: measurement_context
+    # Surface only. Two draws differing in this alone are the SAME exposure:
+    # the candidate has met the shape, and what they met it with does not
+    # change what was assessed. See exposureRelevant in the archetype schema.
+    exposureRelevant: false
     type: choice
     description: >-
       The measurement the budget belongs to. Varies the surface without
