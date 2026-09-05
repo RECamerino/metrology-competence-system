@@ -52,6 +52,7 @@ export interface Attempt {
   mode: AttemptMode;
   archetype?: string;
   exposureGroup?: string;
+  structuralRef?: string;
   drawHash?: string;
   servedOn: string;
   outcome: AttemptOutcome;
@@ -216,19 +217,50 @@ export function canAttempt(
 }
 
 /**
- * How many times a candidate has met an archetype, counting an exposure group
- * as one shape. Drives the archetype's `exposureLimit`.
+ * How many times a candidate has met an archetype AS A SHAPE. Drives the
+ * archetype's `exposureLimit`.
+ *
+ * WHEN ARE TWO DIFFERENTLY PARAMETERIZED ITEMS THE SAME EXPOSURE? Until this
+ * was decided, `exposureGroup` was the only lever: an entry carrying one
+ * collapsed with every other entry carrying it, and an entry without one
+ * counted on its own. So a binding either collapsed all of its draws into a
+ * single exposure or none of them, decided by whether an author had written a
+ * string — and two authors following the same instructions produced banks of
+ * different effective sizes.
+ *
+ * The answer is that two draws are one exposure when they agree on every
+ * EXPOSURE-RELEVANT parameter, which each archetype declares per parameter.
+ * That is not the same question as `visibility`: a generator parameter carries
+ * the structural feature and is almost always exposure-relevant, but a prompt
+ * parameter may be either — `measurement_context` varies the surface and
+ * nothing else, while `stated_procedure` changes what the candidate is asked
+ * to do. The served draw is hashed over the exposure-relevant values alone and
+ * recorded as `structuralRef`.
+ *
+ * THE GROUP NAMESPACES; THE STRUCTURAL DRAW DISTINGUISHES WITHIN IT. Two
+ * bindings sharing a group still count as two exposures where their structural
+ * draws differ, and as one where they agree — which is what the group was
+ * always described as doing and never quite did.
+ *
+ * An entry with no `structuralRef` counts on its own unless it carries a group,
+ * which is the old behaviour and the safe direction: over-counting exposures
+ * makes the limit bite sooner, and under-counting is what lets a candidate meet
+ * one shape at every level and learn the archetype rather than the competence.
  */
 export function exposureCount(ledger: Ledger, archetype: string): number {
-  const groupsSeen = new Set<string>();
-  let ungrouped = 0;
+  const seen = new Set<string>();
+  let unidentifiable = 0;
 
   for (const entry of ledger.entries) {
     if (entry.archetype !== archetype || entry.mode === 'practice') continue;
-    if (entry.exposureGroup) groupsSeen.add(entry.exposureGroup);
-    else ungrouped += 1;
+
+    const namespace = entry.exposureGroup ?? archetype;
+    if (entry.structuralRef) seen.add(`${namespace}::${entry.structuralRef}`);
+    else if (entry.exposureGroup) seen.add(namespace);
+    else unidentifiable += 1;
   }
-  return groupsSeen.size + ungrouped;
+
+  return seen.size + unidentifiable;
 }
 
 /* ------------------------------------------------------------------------ */

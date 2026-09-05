@@ -81,6 +81,11 @@
           "description": "Copied from the binding. Bindings sharing a group count as one exposure, so near-identical items drawn from one archetype across adjacent elements cannot be served repeatedly."
         },
 
+        "structuralRef": {
+          "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/contentRef",
+          "description": "Hash of the EXPOSURE-RELEVANT parameter values in the draw served. Two attempts agreeing on this met the same item for exposure purposes, however different the prompts looked.\n\nHASHED RATHER THAN RECORDED, because the values themselves are item internals — the injected defect, the confounder the candidate was supposed to notice — and this ledger is held by the candidate. Recording them in the clear would hand over the answer to every item they have been served. The engine compares hashes; nobody reads them.\n\nDistinct from `drawHash`, which covers the WHOLE draw including the surface parameters and exists so an item can be reconstructed years later. Two attempts differing only in surface have different `drawHash` values and the same `structuralRef`, which is exactly the case exposure control has to get right."
+        },
+
         "drawHash": {
           "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/contentRef",
           "description": "Hash of the exact parameter draw served. Lets an item be reconstructed years later when a credential is re-reviewed, and proves two candidates did not receive the same numbers."

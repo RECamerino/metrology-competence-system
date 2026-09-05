@@ -86,10 +86,31 @@
           "description": "Rubric for this binding, where the archetype's generic rubric is not specific enough. Ships in the same commit as the binding."
         },
 
+        "review": {
+          "type": "object",
+          "required": ["reviewer", "reviewedOn", "disposition"],
+          "additionalProperties": false,
+          "description": "Who decided this binding was professionally valid, and what they concluded.\n\nCI CAN ONLY PROVE A BINDING IS STRUCTURALLY POSSIBLE. It checks that the kinds match, that the level is within the archetype's declared range, that the parameters exist and that a generator parameter does not render. None of that reaches the question that decides whether the item is any good: does this archetype, with these parameter ranges, at this level, assess THIS element — or does it assess the archetype's generic shape while looking perfectly well formed? That failure is invisible in the archetype, which may be excellent, and invisible in the binding, which may be well formed.\n\nREQUIRED BEFORE A BINDING MAY LEAVE `draft`, and not before. The parallel is rule 7: nothing above L2 rests on a draft element, because that is where independent work is entrusted. A draft binding is somebody's proposal and needs no signoff; a stable one is being served to candidates.\n\n`reviewer` may not be an author of the element the binding targets, for the reason no-self-signoff exists: the person who built the thing is the last one who can tell whether it assesses something other than itself.",
+          "properties": {
+            "reviewer": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/person" },
+            "standing": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/reviewerStanding" },
+            "reviewedOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+            "disposition": {
+              "enum": ["accepted", "accepted-with-changes", "disputed", "rejected"],
+              "description": "`disputed` and `rejected` are legitimate outcomes and both require a `note`. A binding a reviewer rejected is worth keeping in the record with its reason — the next author to reach for that archetype at that level needs to know somebody already tried."
+            },
+            "note": {
+              "type": "string",
+              "minLength": 40,
+              "description": "Required when the disposition is `disputed` or `rejected`. What the reviewer thought the item would actually assess, which is the part a later author needs."
+            }
+          }
+        },
+
         "exposureGroup": {
           "type": "string",
           "maxLength": 60,
-          "description": "Bindings sharing a group are treated as the same exposure for control purposes, so a candidate cannot be served three near-identical items drawn from one archetype across adjacent elements."
+          "description": "Bindings sharing a group are treated as the same exposure for control purposes, so a candidate cannot be served three near-identical items drawn from one archetype across adjacent elements.\n\nIT NAMESPACES, IT DOES NOT COLLAPSE. Exposure identity is the group together with the exposure-relevant parameter values, so two bindings in one group still count as two exposures where their structural draws differ, and as one where they agree. It used to be the only lever there was, which meant a binding collapsed either all of its draws into a single exposure or none of them — decided by whether an author happened to write a string, with no rule anywhere about when to."
         },
 
         "notes": { "type": "string" }

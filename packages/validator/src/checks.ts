@@ -1123,6 +1123,12 @@ function checkItemBank(corpus: Corpus): Finding[] {
       .map((d) => [d.id as string, d]),
   );
 
+  const bindingCohortDids = new Set(
+    ((corpus.bootstrapCohort?.members ?? []) as Array<Record<string, any>>)
+      .map((m) => String(m?.did ?? '').trim())
+      .filter((did) => did.length > 0),
+  );
+
   // -- Archetypes ----------------------------------------------------------
   for (const file of corpus.archetypes) {
     const d = file.data as Record<string, any>;
@@ -1231,6 +1237,10 @@ function checkItemBank(corpus: Corpus): Finding[] {
     const at = (msg: string) => `${file.path}: ${msg}`;
     if (!elementId) continue;
 
+    // Exposure signatures are per ELEMENT: the harm is a candidate meeting one
+    // shape twice while climbing this element's levels.
+    const exposureSignatures = new Map<string, number>();
+
     const stub = stubs.get(elementId);
     if (!stub) {
       findings.push(err(at(`binds unknown element '${elementId}'`)));
@@ -1310,6 +1320,58 @@ function checkItemBank(corpus: Corpus): Finding[] {
       // archetype per test — so what the witness must watch is decided where
       // the test is chosen, which is here. Derived from the archetype rather
       // than declared by the binding's author, like positionNeutrality.
+      // -- Who said this binding was any good ------------------------------
+      // CI proves a binding is structurally POSSIBLE: kinds match, the level is
+      // in range, the parameters exist, a generator parameter does not render.
+      // None of that reaches whether the item assesses THIS element or the
+      // archetype's generic shape, which is a judgement and is invisible in
+      // both files when it goes wrong. Required before a binding leaves draft
+      // and not before — the parallel is rule 7, where a draft element carries
+      // nothing above L2 because that is where independent work is entrusted.
+      const review = binding?.review as Record<string, any> | undefined;
+      const bindingStatus = String(binding?.status ?? 'draft');
+
+      if (bindingStatus !== 'draft' && !review) {
+        findings.push(
+          err(at(`${label} is '${bindingStatus}' with no review. A draft binding is a proposal and needs no signoff; anything beyond draft is being served to candidates, and CI can only show the binding is structurally possible.`)),
+        );
+      }
+
+      if (review) {
+        const who = review?.reviewer?.name ?? 'unknown reviewer';
+        findings.push(...reviewStandingFindings(review, who, at, bindingCohortDids));
+
+        if (
+          (review.disposition === 'disputed' || review.disposition === 'rejected') &&
+          String(review.note ?? '').trim().length === 0
+        ) {
+          findings.push(
+            err(at(`${label} has a '${review.disposition}' review with no note. What the reviewer thought the item would actually assess is the part the next author needs.`)),
+          );
+        }
+
+        if (
+          bindingStatus !== 'draft' &&
+          (review.disposition === 'disputed' || review.disposition === 'rejected')
+        ) {
+          findings.push(
+            err(at(`${label} is '${bindingStatus}' on a review that ${review.disposition} it. A binding a reviewer would not stand behind may be kept with its reason; it may not be served.`)),
+          );
+        }
+
+        const authors = new Set(
+          (((authoredElements.get(elementId)?.authoring as Record<string, any>)?.authors ??
+            []) as Array<Record<string, any>>)
+            .map((a) => String(a?.name ?? '').trim().toLowerCase())
+            .filter((n) => n.length > 0),
+        );
+        if (authors.has(String(review?.reviewer?.name ?? '').trim().toLowerCase())) {
+          findings.push(
+            err(at(`${label} was reviewed by ${who}, who authored the element it binds. The person who built the thing is the last one who can tell whether it assesses something other than itself.`)),
+          );
+        }
+      }
+
       const witnessed = archetype.itemType === 'witnessed-performance';
       const bindingWitness = String(binding?.witnessRequirement ?? '').trim();
 
@@ -1329,6 +1391,39 @@ function checkItemBank(corpus: Corpus): Finding[] {
         findings.push(
           err(at(`${label} uses ${archetype.id}, which declares levels ${archetype.levels.join(', ')}`)),
         );
+      }
+
+      // -- Two levels that are one exposure --------------------------------
+      // A binding pins parameters; two entries whose EXPOSURE-RELEVANT pins are
+      // all single and all equal can only ever draw the same item, so a
+      // candidate climbing from one level to the next meets the identical shape
+      // twice. That is what `exposureLimit` exists to prevent, and it is
+      // invisible: both bindings are well formed and the archetype is fine.
+      //
+      // Only single-choice pins collide. A parameter left unpinned, or pinned
+      // to several choices or a numeric range, can vary between the draws, so
+      // no collision is guaranteed and none is reported — the check refuses to
+      // guess in the direction that would produce false positives.
+      const pins = new Map<string, string>();
+      for (const range of (binding?.parameterRanges ?? []) as Array<Record<string, any>>) {
+        const choices = range?.choices as unknown[] | undefined;
+        if (Array.isArray(choices) && choices.length === 1) {
+          pins.set(String(range?.name), JSON.stringify(choices[0]));
+        }
+      }
+
+      const relevant = archetype.exposureRelevantParams;
+      const allPinned = relevant.length > 0 && relevant.every((name) => pins.has(name));
+      if (allPinned) {
+        const signature = [archetype.id, ...relevant.map((n) => `${n}=${pins.get(n)}`)].join('|');
+        const twin = exposureSignatures.get(signature);
+        if (twin !== undefined) {
+          findings.push(
+            err(at(`${label} pins every exposure-relevant parameter of ${archetype.id} to the same values as L${twin}, so both levels can only ever draw one and the same item. A candidate climbing from one to the other meets the identical shape twice, which is what exposureLimit exists to prevent — vary an exposure-relevant parameter, or bind a different archetype.`)),
+          );
+        } else if (typeof level === 'number') {
+          exposureSignatures.set(signature, level);
+        }
       }
 
       if (archetype.status === 'deprecated') {
