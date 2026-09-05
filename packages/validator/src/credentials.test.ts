@@ -23,6 +23,7 @@ import {
   checkAttestableStatus,
   checkBootstrapAuthority,
   checkCredential,
+  checkEvidenceSufficiency,
   checkCustody,
   checkProvenanceTier,
   checkReciprocity,
@@ -41,6 +42,13 @@ const HOLDER = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
 const REVIEWER_A = 'did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK';
 const REVIEWER_B = 'did:key:z6MkjchhfUsD6mmvni8mCdXHw216Xrm9bQe2mBH1P5RDjVJG';
 const HASH = 'sha256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08';
+
+const SUFFICIENCY = {
+  decidedBy: REVIEWER_B,
+  decidedOn: '2026-08-01',
+  rationale:
+    'Retained the contribution the template drops, showed what it did to the combined figure, and defended the inclusion when pressed on whether it had been chosen to reach a wanted result.',
+};
 
 const credential: Credential = {
   schemaVersion: 1,
@@ -93,11 +101,13 @@ const credential: Credential = {
       retentionBasis: 'ISO/IEC 17025:2017 §8.4.2',
     },
   ],
+  // Sufficiency is decided by a SIGNER: a judgement from anybody else is not
+  // part of the attestation, however plausible it reads on the page.
   // L4 requires a capstone AND a real archived deliverable. The two are not the
   // same artifact: a capstone is assessment work, a work product is the job.
   evidence: [
-    { type: 'capstone', ref: HASH, archivedOn: '2026-07-30' },
-    { type: 'work-product', ref: HASH, archivedOn: '2026-06-18' },
+    { type: 'capstone', ref: HASH, archivedOn: '2026-07-30', sufficiency: SUFFICIENCY },
+    { type: 'work-product', ref: HASH, archivedOn: '2026-06-18', sufficiency: SUFFICIENCY },
   ],
   signers: [
     {
@@ -923,7 +933,7 @@ test('two signers who scored once between them do not satisfy double scoring', (
 
 test('a capstone does not stand in for a work product', () => {
   const findings = checkCredential(
-    { ...credential, evidence: [{ type: 'capstone', ref: HASH, archivedOn: '2026-07-30' }] },
+    { ...credential, evidence: [{ type: 'capstone', ref: HASH, archivedOn: '2026-07-30', sufficiency: SUFFICIENCY }] },
     REAL_L4,
   );
   assert.ok(findings.some((f) => f.message.includes("type 'work-product'")));
@@ -1077,5 +1087,64 @@ test('L1 sets no cost requirements, so none are imposed', () => {
     },
     signoffPolicyFor(levelEntry(1)),
   );
+  assert.deepEqual(findings, []);
+});
+
+
+/* -- Why the evidence was enough ------------------------------------------- */
+
+/*
+ * Hashing proves an artifact has not changed. It says nothing about why it was
+ * SUFFICIENT. The archive exists so a credential can be independently
+ * re-reviewed years later — including by somebody challenging it — and a
+ * re-reviewer handed a hash and a date can confirm the artifact is the one
+ * submitted while having no way to discover what the reviewer thought it
+ * demonstrated. There is nothing there to disagree with.
+ */
+
+test('a hashed artifact with no sufficiency decision is refused', () => {
+  const findings = checkCredential(
+    { ...credential, evidence: [{ type: 'work-product', ref: HASH, archivedOn: '2026-06-18' }] },
+    REAL_L5,
+  );
+  assert.ok(
+    findings.some((f) => f.level === 'error' && f.message.includes('no sufficiency decision')),
+    `expected an unexplained artifact to be refused, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('a sufficiency decision by somebody who did not sign is refused', () => {
+  // It would sit on the credential reading as though it carried the weight of
+  // the signature beside it, with nothing on the document saying otherwise.
+  const outsider = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+  const findings = checkCredential(
+    {
+      ...credential,
+      evidence: [
+        { type: 'capstone', ref: HASH, archivedOn: '2026-07-30', sufficiency: SUFFICIENCY },
+        {
+          type: 'work-product',
+          ref: HASH,
+          archivedOn: '2026-06-18',
+          sufficiency: { ...SUFFICIENCY, decidedBy: outsider },
+        },
+      ],
+    },
+    REAL_L5,
+  );
+  assert.ok(
+    findings.some((f) => f.level === 'error' && f.message.includes('is not among the signers')),
+    `expected an outsider's judgement to be refused, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('an attempt pointer needs no sufficiency rationale', () => {
+  // A ledger pointer records what happened rather than an artifact somebody
+  // decided was enough. Requiring a rationale there would reliably produce a
+  // sentence written to satisfy a validator, which is worse than silence.
+  const findings = checkEvidenceSufficiency({
+    ...credential,
+    evidence: [{ type: 'attempt', ref: HASH, archivedOn: '2026-06-18' }],
+  });
   assert.deepEqual(findings, []);
 });

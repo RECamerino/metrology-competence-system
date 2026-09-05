@@ -124,10 +124,17 @@ export interface CredentialAssessment {
   previousLevelAttainedOn?: string;
 }
 
+export interface EvidenceSufficiency {
+  decidedBy: string;
+  decidedOn: string;
+  rationale: string;
+}
+
 export interface CredentialEvidence {
   type: 'work-product' | 'capstone' | 'defense-record' | 'mentoring-record' | 'attempt';
   ref: string;
   archivedOn?: string;
+  sufficiency?: EvidenceSufficiency;
 }
 
 export interface CredentialIssuer {
@@ -291,6 +298,60 @@ export function checkProvenanceTier(credential: Credential): Finding[] {
  * steward-controlled and changing it must change behaviour here without a code
  * edit.
  */
+
+/**
+ * Why the evidence was enough.
+ *
+ * HASHING PROVES AN ARTIFACT HAS NOT CHANGED. It says nothing about why it was
+ * SUFFICIENT. The archive exists so that any credential can be independently
+ * re-reviewed years later — including by somebody challenging it — and a
+ * re-reviewer handed `sha256:…` and a date can confirm the artifact is the one
+ * submitted while having no way to discover what the reviewer thought it
+ * demonstrated. There is nothing there to disagree with, which makes the
+ * archive far less useful than it looks: it supports authentication and not
+ * review.
+ *
+ * WHY `attempt` IS EXEMPT. A ledger pointer records what happened rather than
+ * an artifact somebody decided was enough. Requiring a rationale for it would
+ * produce a sentence written to satisfy a validator, and a required field that
+ * reliably attracts filler is worse than the silence it replaced — the other
+ * four types are things a human looked at and formed a judgement about.
+ *
+ * WHY THE DECIDER MUST BE A SIGNER. A sufficiency judgement by somebody who did
+ * not sign is not part of this attestation. It would sit on the credential
+ * reading as though it carried the weight of the signature beside it, and
+ * nothing on the document would say otherwise. This is the no-self-signoff
+ * instinct pointed at a different seam: what a credential asserts is exactly
+ * what somebody put their name to.
+ */
+export function checkEvidenceSufficiency(credential: Credential): Finding[] {
+  const findings: Finding[] = [];
+  const at = (msg: string) => `${credential.id}: ${msg}`;
+
+  const judged = new Set(['work-product', 'capstone', 'defense-record', 'mentoring-record']);
+  const signerDids = new Set((credential.signers ?? []).map((s) => s.did));
+
+  for (const item of credential.evidence ?? []) {
+    if (!judged.has(item.type)) continue;
+
+    const sufficiency = item.sufficiency;
+    if (!sufficiency) {
+      findings.push(
+        err(at(`carries ${item.type} evidence with no sufficiency decision. The hash proves the artifact has not changed and says nothing about why it was enough; a re-reviewer needs the original judgement to test.`)),
+      );
+      continue;
+    }
+
+    if (!signerDids.has(sufficiency.decidedBy)) {
+      findings.push(
+        err(at(`the sufficiency of its ${item.type} evidence was decided by ${sufficiency.decidedBy}, who is not among the signers. A judgement by somebody who did not sign is not part of this attestation, and on the document it reads as though it were.`)),
+      );
+    }
+  }
+
+  return findings;
+}
+
 export interface SignoffPolicy {
   signerCount: number;
   witnessMustHoldLevel: number | null;
@@ -391,6 +452,7 @@ export function checkCredential(
   findings.push(...checkBootstrapAuthority(credential, cohort, bootstrapContext));
 
   findings.push(...checkCustody(credential));
+  findings.push(...checkEvidenceSufficiency(credential));
 
   // -- Is the signer's own standing evidenced, or merely stated? -----------
   // A system built to replace "trust me, he's competent" should not rest on

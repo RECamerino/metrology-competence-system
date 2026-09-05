@@ -19,7 +19,16 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { validatorFor } from './schema.ts';
 import type { Corpus } from './corpus.ts';
-import { type DeploymentScope, checkScope, computeGaps, inScope } from './scope.ts';
+import {
+  type DeploymentScope,
+  type Disclosure,
+  checkDisclosure,
+  checkScope,
+  computeGaps,
+  deploymentScopeHash,
+  gapsFromDisclosure,
+  inScope,
+} from './scope.ts';
 
 const HOLDER = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
 const LONG = 'A deliberately long enough string to satisfy the schema minimum length constraints.';
@@ -248,4 +257,146 @@ test('a scope that includes nothing is rejected by the schema', () => {
   // competence rather than as an unset scope.
   const validate = validatorFor('deployment-scope');
   assert.equal(validate({ ...scope, includes: {} }), false);
+});
+
+
+/* -- Disclosure: a view of somebody's record is not a read ------------------ */
+
+/*
+ * `computeGaps` took what a person holds as a plain map, with no record of
+ * where it came from or what they agreed to share. Left there, the workforce
+ * dashboard would have been built assuming an employer may see everything a
+ * person holds — including credentials earned elsewhere, before this job, in
+ * domains this job never touches.
+ *
+ * Decision 34 decided a consented, scoped, audit-logged model for accreditation
+ * assessors. It was a row in a decision table: no schema and no code, so there
+ * was nothing here to copy. These cover the first one.
+ */
+
+const ORG = { name: 'Northfield Calibration', id: 'northfield-cal-2026' };
+
+const disclosure = (overrides: Partial<Disclosure> = {}): Disclosure => ({
+  schemaVersion: 1,
+  id: 'urn:uuid:0a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d',
+  subject: HOLDER,
+  organization: ORG,
+  purpose: 'workforce-gap-analysis',
+  scopeRef: deploymentScopeHash(scope),
+  grantedOn: '2026-09-01',
+  expiresOn: '2027-09-01',
+  entries: [{ element: 'CM-03-053', level: 2 }],
+  ...overrides,
+});
+
+test('the worked disclosure validates', () => {
+  const validate = validatorFor('disclosure');
+  assert.ok(validate(disclosure()), JSON.stringify(validate.errors, null, 2));
+});
+
+test('a disclosure may not carry a credential from outside the scope', () => {
+  // The rule that makes a disclosure bounded rather than a formality wrapped
+  // around a full record. DP-21 is not this engineer's job, so a credential in
+  // it tells the employer nothing they need and something they have no
+  // business knowing.
+  const findings = checkDisclosure(
+    disclosure({ entries: [{ element: 'CM-03-053', level: 2 }, { element: 'DP-21-004', level: 3 }] }),
+    scope,
+    elements,
+  );
+  assert.ok(
+    findings.some((f) => f.message.includes('DP-21-004') && f.message.includes('outside this deployment scope')),
+    `expected an out-of-scope disclosure to be refused, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('widening the job description does not widen the consent', () => {
+  // The organization OWNS the deployment scope, so a disclosure bounded by a
+  // scope it can edit is bounded by nothing. The person consented to a scope,
+  // not to a role name.
+  const widened: DeploymentScope = { ...scope, includes: { domains: ['CM-03', 'DP-21'] } };
+  const findings = checkDisclosure(disclosure(), widened, elements);
+  assert.ok(
+    findings.some((f) => f.message.includes('has since changed')),
+    `expected a widened scope to invalidate the disclosure, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('reordering the selectors is not widening', () => {
+  // The order somebody listed two domains in is not a fact about scope, and a
+  // re-consent prompt triggered by a cosmetic edit teaches people to click
+  // through re-consent prompts.
+  const a: DeploymentScope = { ...scope, includes: { domains: ['CM-03', 'DP-21'] } };
+  const b: DeploymentScope = { ...scope, includes: { domains: ['DP-21', 'CM-03'] } };
+  assert.equal(deploymentScopeHash(a), deploymentScopeHash(b));
+});
+
+test('an administrative edit does not invalidate consent', () => {
+  // `notes` and the effective dates do not determine what is visible. If they
+  // invalidated a disclosure, re-consent would become routine and stop meaning
+  // anything — the same reasoning that keeps editorial fields out of a
+  // credential's definitionRef.
+  const annotated: DeploymentScope = { ...scope, notes: LONG, effectiveTo: '2029-01-01' };
+  assert.equal(deploymentScopeHash(scope), deploymentScopeHash(annotated));
+});
+
+test("one person's consent does not bound another person's record", () => {
+  const findings = checkDisclosure(
+    disclosure({ subject: 'did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK' }),
+    scope,
+    elements,
+  );
+  assert.ok(findings.some((f) => f.message.includes('does not bound')));
+});
+
+test('an expired or withdrawn disclosure permits nothing', () => {
+  const expired = checkDisclosure(disclosure(), scope, elements, '2028-01-01');
+  assert.ok(expired.some((f) => f.message.includes('expired on 2027-09-01')));
+
+  const withdrawn = checkDisclosure(disclosure({ revokedOn: '2026-10-01' }), scope, elements);
+  assert.ok(withdrawn.some((f) => f.message.includes('withdrawn by its subject')));
+});
+
+test('a refusal is null, not an empty gap list', () => {
+  // An empty array would read as "no gaps found", which is the most dangerous
+  // possible rendering of "you were not permitted to look".
+  const { gaps, findings } = gapsFromDisclosure(
+    elements,
+    scope,
+    disclosure({ revokedOn: '2026-10-01' }),
+  );
+  assert.equal(gaps, null);
+  assert.ok(findings.some((f) => f.level === 'error'));
+});
+
+test('one out-of-scope entry refuses the whole view rather than trimming it', () => {
+  // Silently dropping the offending entry would teach an integrator that
+  // over-disclosing is free and gets corrected downstream.
+  const { gaps } = gapsFromDisclosure(
+    elements,
+    scope,
+    disclosure({ entries: [{ element: 'CM-03-053', level: 2 }, { element: 'DP-21-004', level: 3 }] }),
+  );
+  assert.equal(gaps, null);
+});
+
+test('a sound disclosure computes exactly the gaps the scope allows', () => {
+  const { gaps, findings } = gapsFromDisclosure(
+    elements,
+    scope,
+    disclosure({ entries: [{ element: 'CM-03-053', level: 2 }, { element: 'CM-03-036', level: 3 }] }),
+    '2026-11-01',
+  );
+  assert.deepEqual(findings, []);
+  // CM-03-053 needs 4 and shows 2; CM-03-036 needs 3 and shows 3; DP-21 is out
+  // of scope and cannot produce a gap however little is disclosed about it.
+  assert.deepEqual(gaps, [
+    { element: 'CM-03-053', role: 'calibration-engineer', required: 4, held: 2, basis: 'occupational' },
+  ]);
+});
+
+test('a person reading their own gaps needs no disclosure', () => {
+  // That is a read, of their own record, by its owner. computeGaps stays
+  // available unguarded for exactly this, and always will.
+  assert.deepEqual(computeGaps(elements, scope, { 'CM-03-053': 4, 'CM-03-036': 3 }), []);
 });

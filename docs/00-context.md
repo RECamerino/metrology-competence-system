@@ -634,9 +634,19 @@ Six mechanisms, none of which was designed with this section in front of it, all
 
 ### What follows, and is not built
 
-Two consequences fall straight out of the principle and have no mechanism yet. Both are recorded in the open items.
+Two consequences fall straight out of the principle. One now has a mechanism; the other is still recorded in the open items.
 
-**An organization's view of a person's record is a disclosure, not a read.** `computeGaps(elements, scope, held)` takes what the person holds as a plain map, with no record of where it came from or what was consented to. Decision 34 already built the consented, scoped, audit-logged disclosure model for accreditation assessors; the employer case — the workforce dashboard above — has nothing equivalent, and will otherwise assume it can see everything a person holds, including credentials earned elsewhere that are none of its business.
+**An organization's view of a person's record is a disclosure, not a read — built 2026-09-04.** `computeGaps(elements, scope, held)` took what the person holds as a plain map, with no record of where it came from or what was consented to. Left there, the workforce dashboard — the feature an organization actually buys — would have been built on the assumption that an employer may see everything a person holds, including credentials earned elsewhere, before this job, in domains this job never touches.
+
+**Decision 34 decided the model and nothing built it.** "Consented, scoped disclosure; every view audit-logged and visible to the assessor" was a row in a decision table about accreditation assessors: no schema, no code. So there was nothing to copy for the employer case, and `disclosure.schema.json` is the first one. It serves both, which is why the case is named in `purpose` rather than in the shape of the document.
+
+A disclosure is granted by the **subject**, to **one** organization, for **one** purpose, until a **required** expiry. Three properties do the work:
+
+- **It is bounded by the deployment scope, pinned by content.** The organization *owns* the deployment scope — the one artifact in the system that it does own — so a disclosure bounded by a scope the organization can edit is bounded by nothing. Widening a job description would otherwise widen what the employer may see, with nobody consenting to anything. The pin covers what determines visibility and not `notes`, `assignedBy` or the effective dates: an administrative edit that forced re-consent would make re-consent routine, and a prompt people click through is not consent either.
+- **Every entry must be in scope**, and one that is not refuses the whole disclosure. An element outside scope cannot produce a gap, so a credential for one tells the organization nothing it needs and something it had no business learning. Trimming the offending entry silently would teach an integrator that over-disclosing is free.
+- **A refusal returns `null`, not an empty gap list.** "No gaps found" is the most dangerous possible rendering of "you were not permitted to look", and the type says so rather than a comment asking a caller to remember.
+
+**A person reading their own gaps needs none of this.** That is a read, of their own record, by its owner. `computeGaps` stays available unguarded for exactly that case and always will; `gapsFromDisclosure` is the organizational path.
 
 **Revocation is currently one-sided.** The issuer sets `status.revoked` and the subject has no way to contest it in the data. The intent is stated plainly, but `fraud` is unfalsifiable from the holder's side and the status list a verifier consults belongs to the issuer. Whether a holder's counter-statement travels with the credential is undecided.
 
@@ -726,7 +736,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 4. **Authority-tier issuer** — a neutral foundation as issuer of last resort is the strongest long-term credential but needs people and funding. Roadmap, not a dependency.
 5. **Recertification defaults** — per-level defaults proposed in `content/competence/taxonomy/proficiency.yaml` (L3 60 months, L4 48, L5 36; none below L3). Per-domain overrides remain open: a `CM-21` element ages far faster than a `CM-02` one, and `volatility` is the field that should drive it.
 6. **Experience-hour thresholds and waiting periods** — proposed per level in `content/competence/taxonomy/proficiency.yaml` (L3 40h/30d, L4 200h/180d, L5 1000h/365d). The attribution rule is settled as decision 37; the numbers themselves are a steward judgement and have not been tested against a real career history.
-8. **Consented disclosure to an employer** — an organization's view of a person's record is a disclosure, not a read, and there is no model for it. Decision 34 built one for accreditation assessors; the workforce gap dashboard has nothing. Follows from [Who owns a person's competency record](#who-owns-a-persons-competency-record). Needs a schema before Phase 9 or 10 settles it by default.
+8. **CLOSED 2026-09-04 — consented disclosure to an employer** — `disclosure.schema.json`, granted by the subject, bounded by a pinned deployment scope, and refusing to compute anything at all when it does not hold up. Decision 34 turned out to have DECIDED the model rather than built it, so this is the first one and it serves the assessor case too. See [Who owns a person's competency record](#who-owns-a-persons-competency-record).
 9. **A holder's counter-statement to revocation** — the issuer can revoke and the subject cannot contest it in the data. Pairs with the trust-registry and status-list work.
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
