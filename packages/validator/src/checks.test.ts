@@ -1501,3 +1501,112 @@ test('an ordinary review needs no standing at all', () => {
   });
   assert.deepEqual(errorsOf(corpus([plain])), []);
 });
+
+
+/* -- Witnessed performance: work that only exists while it is being done ---- */
+
+/*
+ * Found by authoring EC-04-005 and trying to bind it. Every `itemType` was a
+ * desk item served as a prompt and `lookupResistance` was required of all of
+ * them, so the item bank could not express an assessment for an element whose
+ * demonstration route is `equipment` — and the corpus's authored equipment-route
+ * elements had zero bindings between them, which had read as "not done yet".
+ *
+ * The failures that matter on such an element — a zero-tracking device left on,
+ * a load placed by its footprint, a centre reading reused instead of re-taken —
+ * are all invisible in the record the candidate hands over, because it is
+ * exactly the record somebody who did it correctly also produces.
+ */
+
+const WITNESS = 'The witness has to see the zero devices switched off before the first taring, which nothing in the handed-over record can show afterwards.';
+
+const benchElement = (overrides: Record<string, unknown> = {}): ElementFile =>
+  element({
+    id: 'CM-01-002',
+    kind: 'skill',
+    levelCeiling: 2,
+    demonstration: ['equipment'],
+    anchors: { '1': LONG, '2': LONG },
+    roleTargets: { 'test-technician': 2, 'test-engineer': 2 },
+    ...overrides,
+  });
+
+const witnessedArchetype = (overrides: Record<string, unknown> = {}): ItemFile =>
+  archetypeFile({
+    id: 'ARC-0002',
+    itemType: 'witnessed-performance',
+    kinds: ['skill'],
+    levels: [1, 2],
+    witnessRequirement: WITNESS,
+    lookupResistance: undefined,
+    ...overrides,
+  });
+
+const BENCH_BASE = ['CM-01', 'CM-01-A01', 'CM-01-001', 'CM-01-002', 'BOK-0001'];
+// The lock is append-only, so it must name exactly the archetypes the corpus
+// under test actually supplies — otherwise the missing-ID check fires first.
+const LOCK_DESK = [...BENCH_BASE, 'ARC-0001'];
+const LOCK_WITNESSED = [...BENCH_BASE, 'ARC-0002'];
+
+test('a desk archetype cannot assess an element whose only route is equipment', () => {
+  // The submitted artifact is the same artifact whether or not the work was
+  // done correctly, so this assessment would look complete and test the wrong
+  // thing — the kind check's failure, one level up.
+  const errors = errorsOf(
+    corpus([benchElement()], LOCK_DESK, {
+      archetypes: [archetypeFile({ kinds: ['skill'] })],
+      bindings: [bindingFile({ level: 2 }, 'CM-01-002')],
+    }),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('only demonstration route is equipment')),
+    `expected a desk archetype to be refused, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('a witnessed archetype can', () => {
+  assert.deepEqual(
+    errorsOf(
+      corpus([benchElement()], LOCK_WITNESSED, {
+        archetypes: [witnessedArchetype()],
+        bindings: [bindingFile({ level: 2, archetype: 'ARC-0002' }, 'CM-01-002')],
+      }),
+    ),
+    [],
+  );
+});
+
+test('an element that also has a desk route may be assessed either way', () => {
+  // Where the laboratory decides the route, the item bank must not decide it
+  // instead. This is the multi-route case rule 11 exists for.
+  assert.deepEqual(
+    errorsOf(
+      corpus([benchElement({ demonstration: ['desk', 'equipment'] })], LOCK_DESK, {
+        archetypes: [archetypeFile({ kinds: ['skill'] })],
+        bindings: [bindingFile({ level: 2 }, 'CM-01-002')],
+      }),
+    ),
+    [],
+  );
+});
+
+test('a witnessed archetype must say what the witness sees that the record cannot', () => {
+  // The counterpart of lookupResistance, and required in its place rather than
+  // beside it: asking why a bench task resists an AI assistant produces a
+  // sentence written to satisfy a validator.
+  const validate = validatorFor('item-archetype');
+  const withoutWitness = { ...(witnessedArchetype().data as Record<string, unknown>) };
+  delete withoutWitness.witnessRequirement;
+  assert.equal(validate(withoutWitness), false);
+
+  assert.ok(validate(witnessedArchetype().data), JSON.stringify(validate.errors, null, 2));
+});
+
+test('a desk archetype still owes its lookupResistance', () => {
+  // Guards the else branch: making one conditional must not quietly excuse the
+  // other, which is the whole integrity argument for an unproctored desk item.
+  const validate = validatorFor('item-archetype');
+  const desk = { ...(archetypeFile().data as Record<string, unknown>) };
+  delete desk.lookupResistance;
+  assert.equal(validate(desk), false);
+});

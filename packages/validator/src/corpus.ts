@@ -387,6 +387,8 @@ export interface ArchetypeEntry {
   id: string;
   path: string;
   kinds: string[];
+  /** How the item is delivered. `witnessed-performance` is observed, not submitted. */
+  itemType?: string;
   levels: number[];
   parameterNames: string[];
   scoringMethod: string;
@@ -404,6 +406,7 @@ export function indexArchetypes(archetypes: ItemFile[]): Map<string, ArchetypeEn
       id: d.id,
       path: file.path,
       kinds: (d.kinds ?? []) as string[],
+      itemType: d.itemType as string | undefined,
       levels: (d.levels ?? []) as number[],
       parameterNames: ((d.parameters ?? []) as Array<Record<string, any>>)
         .map((p) => p?.name)
