@@ -1,0 +1,108 @@
+# The second element bound to ARC-0005, and the reason the archetype was widened
+# from a single test to the family cg-18 groups under its measurement methods.
+# Read this beside EC-04-005.yaml: the same archetype, the same instrument, the
+# same three levels — and a completely different set of things the witness has
+# to watch, which is why the witness requirement is two-layer.
+
+schemaVersion: 1
+element: EC-04-004
+
+bindings:
+  - level: 1
+    archetype: ARC-0005
+    status: draft
+    justification: >-
+      At L1 the test load, the test point and the number of depositions are all
+      given, so nothing is selected and the item is about execution: lifting the
+      load clear each time, letting the indication settle, recording each
+      reading, and checking the no-load indication after every removal. The
+      number of depositions is fixed at five, below the threshold where the
+      concession to three applies, so the candidate is never in a position to
+      take it without understanding it.
+    witnessRequirement: >-
+      Whether the load was LIFTED CLEAR of the receptor and deposited again for
+      every reading, rather than left in place while the display was read five
+      times. This is the failure the whole element is built around and it is
+      invisible afterwards: five indications, a mean and a standard deviation
+      are produced either way, and the scatter from the second is smaller than
+      the truth because it contains none of the mechanical variability the test
+      exists to capture. Also whether the no-load indication was actually checked
+      after each removal rather than at the end.
+    parameterRanges:
+      - name: test
+        choices: [repeatability]
+      - name: stated_procedure
+        choices:
+          - "test load and test point supplied; five depositions"
+      - name: confounder
+        choices: [none]
+      - name: dual_purpose
+        choices: [false]
+
+  - level: 2
+    archetype: ARC-0005
+    status: draft
+    justification: >-
+      L2 supplies a procedure and assesses the two things a procedure cannot
+      perform on the candidate's behalf: recording the status of the
+      zero-setting or zero-tracking device, which this test requires to be
+      RECORDED rather than switched off, and computing the standard deviation
+      with the correct divisor. `dual_purpose` varies, so whether the load has to
+      be a calibrated weight is live without being announced. The distinction
+      from EC-04-005 is deliberate and is where candidates who know one test
+      misapply it to the other.
+    witnessRequirement: >-
+      As at L1, whether the load was genuinely lifted and re-deposited each time.
+      In addition, whether the HANDLING was held constant across the depositions
+      — the same placement on the receptor, the same speed of setting down, the
+      same interval before the reading — because each variation adds a component
+      that the recorded standard deviation reports as though it belonged to the
+      instrument, and none of it can be recovered from the numbers.
+    parameterRanges:
+      - name: test
+        choices: [repeatability]
+      - name: stated_procedure
+        choices:
+          - "test load supplied; depositions per the laboratory procedure"
+      - name: confounder
+        choices: [none]
+      - name: dual_purpose
+        choices: [true, false]
+
+  - level: 3
+    archetype: ARC-0005
+    status: draft
+    justification: >-
+      L3 states nothing: the candidate sizes the test load against the
+      instrument's capacity and scale interval and decides how many depositions
+      it calls for. The confounder is what makes that a judgement rather than a
+      recital — a multiple-range instrument whose smallest scale interval sits
+      in a range below capacity puts the right load somewhere other than near
+      Max, and a load at or above the threshold in cg-18 permits fewer
+      depositions, which is a concession rather than an equivalence. A candidate
+      who takes it on a lighter load has weakened their own uncertainty budget
+      and should be able to say why that matters.
+    witnessRequirement: >-
+      Whether the candidate READ THE INSTRUMENT before choosing the load — its
+      capacity, its scale interval, and on a multiple-range instrument which
+      range carries the smallest interval — or reached for the weight that was
+      nearest. The recorded justification reads the same either way. Then, as at
+      L2, whether the depositions were real and the handling constant.
+    parameterRanges:
+      - name: test
+        choices: [repeatability]
+      - name: stated_procedure
+        choices:
+          - "not stated — select the test load and the number of depositions, and record why"
+      - name: instrument_class
+        choices:
+          - top-loading balance with a rectangular receptor
+          - analytical balance with a small round pan
+          - platform scale with a large rectangular deck
+      - name: confounder
+        choices:
+          - multiple-range instrument whose smallest scale interval is not in the largest range
+          - test load at or above the threshold where fewer depositions are permitted
+          - none
+      - name: dual_purpose
+        choices: [true, false]

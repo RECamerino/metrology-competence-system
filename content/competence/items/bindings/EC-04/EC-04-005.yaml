@@ -2,6 +2,11 @@
 # demonstration route is `equipment`. See ARC-0005 for why neither existed
 # before: the item bank had no shape for work that is watched rather than
 # submitted, so the corpus's equipment-route elements could not be bound at all.
+#
+# `witnessRequirement` below is the half of the observation that belongs to THIS
+# test. The archetype carries what every measurement-method test on a weighing
+# instrument requires; eccentricity adds the two below, and repeatability adds
+# different ones.
 
 schemaVersion: 1
 element: EC-04-005
@@ -11,19 +16,28 @@ bindings:
     archetype: ARC-0005
     status: draft
     justification: >-
-      At L1 the method is stated, the load is supplied and the positions are
+      At L1 the procedure is stated, the load is supplied and the positions are
       marked, so nothing is left for the candidate to decide and the item is
       about execution: placing by the centre of gravity, letting the indication
       settle, and recording each reading against the position it belongs to.
       Method 1 is fixed here because it does not tare — the zero-device
       requirement belongs to L2, and loading it onto L1 would fail a candidate
       for missing a precondition nobody had yet asked them to understand.
+    witnessRequirement: >-
+      Whether the load's CENTRE OF GRAVITY took each marked position, rather than
+      its footprint or its nearest edge — visible only while it is being placed,
+      and most often wrong with the large awkward weight a candidate is most
+      likely to reach for. The recorded indications are the same either way, and
+      an eccentricity result obtained from loads that were never really at the
+      corners is a result about somewhere else on the receptor.
     parameterRanges:
-      - name: stated_method
+      - name: test
+        choices: [eccentricity]
+      - name: stated_procedure
         choices:
           - "method 1 — zero, then move the load between positions"
-      - name: drift_present
-        choices: [false]
+      - name: confounder
+        choices: [none]
       - name: dual_purpose
         choices: [false]
 
@@ -31,22 +45,32 @@ bindings:
     archetype: ARC-0005
     status: draft
     justification: >-
-      L2 fixes the method to one of the taring variants, which is what makes the
-      zero-setting and zero-tracking requirement bite: those are the two methods
-      it attaches to, and a candidate who does not switch the devices off
-      produces the plausible small uniform result the witness exists to catch.
-      Method 4 additionally forces the pairing question — each off-centre
+      L2 fixes the procedure to one of the taring variants, which is what makes
+      the zero-setting and zero-tracking requirement bite: those are the two
+      methods it attaches to, and a candidate who does not switch the devices
+      off produces the plausible small uniform result the witness exists to
+      catch. Method 4 additionally forces the pairing question — each off-centre
       indication has its own centre reading — so a candidate who collapses them
       into one shared value is caught on arithmetic rather than on observation.
       `dual_purpose` varies, so the calibrated-weight requirement is live
       without being announced.
+    witnessRequirement: >-
+      Whether the zero-setting and zero-tracking devices were switched OFF before
+      the first taring — for these two variants cg-18 requires it, and a device
+      left on removes the differences as they appear, so the candidate hands over
+      a small, uniform, entirely plausible table and the instrument reads as
+      well-behaved. And on method 4, whether the centre indication was genuinely
+      re-taken for each off-centre position rather than one reading being reused;
+      the reported result is identical either way.
     parameterRanges:
-      - name: stated_method
+      - name: test
+        choices: [eccentricity]
+      - name: stated_procedure
         choices:
           - "method 2 — tare at the centre, then move the load"
           - "method 4 — return to the centre between positions"
-      - name: drift_present
-        choices: [false]
+      - name: confounder
+        choices: [none]
       - name: dual_purpose
         choices: [true, false]
 
@@ -54,19 +78,28 @@ bindings:
     archetype: ARC-0005
     status: draft
     justification: >-
-      L3 states no method, which is the whole difference: the candidate has to
+      L3 states no procedure, which is the whole difference: the candidate has to
       notice how the instrument in front of them behaves and choose accordingly.
-      `drift_present` varies across the draw, so neither answer is safe — an
+      The confounder varies across the draw, so neither answer is safe — an
       interleaved method chosen on a stable instrument is defensible and costs
       only time, while a non-interleaved one chosen on a drifting instrument
       reports an eccentricity that is partly a clock. The receptor shape varies
       too, so the position pattern has to be adapted rather than recited, and
       `dual_purpose` decides whether the test load must be a calibrated weight.
-      What separates a pass from a fail at this level is the recorded reasoning,
-      not the choice: a candidate who starts on method 1, observes the drift,
-      stops and restarts has demonstrated more than one who guessed right.
+      What separates a pass from a fail here is the recorded reasoning, not the
+      choice: a candidate who starts on method 1, observes the drift, stops and
+      restarts has demonstrated more than one who guessed right.
+    witnessRequirement: >-
+      Whether the candidate actually OBSERVED the instrument before choosing —
+      watched a loaded indication for long enough to see whether it drifts — or
+      selected a method and began. Both produce the same recorded justification,
+      and only one of them is the competence. Then, as at L2, whether the zero
+      devices were configured as the chosen method requires, and whether the
+      centre indication was re-taken per position on an interleaved method.
     parameterRanges:
-      - name: stated_method
+      - name: test
+        choices: [eccentricity]
+      - name: stated_procedure
         choices:
           - "not stated — select the method and record why before you begin"
       - name: instrument_class
@@ -74,7 +107,7 @@ bindings:
           - top-loading balance with a rectangular receptor
           - analytical balance with a small round pan
           - platform scale with a large rectangular deck
-      - name: drift_present
-        choices: [true, false]
+      - name: confounder
+        choices: [drift across the duration of the test, none]
       - name: dual_purpose
         choices: [true, false]
