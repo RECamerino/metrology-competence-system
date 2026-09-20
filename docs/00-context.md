@@ -1083,6 +1083,28 @@ What there is an honest way to do is say so, which is the same move every verdic
 
 **What this is not:** an issuance engine, and it does not decide whether to issue. That is Phase 6 and `packages/credentials` is still empty. It composes the checks that exist so that forgetting one stops being possible.
 
+## A credential that says it is revoked
+
+**Closed 2026-09-20, inside the freeze window.** External adversarial review, finding A-12.
+
+Nothing read the credential's **own** `expiresOn` or `status`. Only the trust registry's revocation list was consulted — so a holder presenting a credential that says **on its own face** that it is revoked, to a verifier with no registry to hand, got a clean answer.
+
+The sharp part is that the mechanism already existed: `inForce()` was written days earlier, for exactly this question, and was applied to a signer's BACKING credential and never to the credential under examination. Another check that existed and was not reached.
+
+### Revocation and expiry are not the same kind of fact, and the schema already said so
+
+Both were unread, and they needed opposite treatments — which the schema settles rather than leaving to be decided here.
+
+**Revocation** *“exists for fraud and for demonstrable assessment failure”*. It says the attestation should not stand, so it is an **error**, and it does not depend on a registry being to hand: a document asserting its own revocation is evidence enough to refuse it.
+
+**Expiry** says: *“An expired credential is not a false one: it remains true that the competence was demonstrated on the date it was demonstrated. Verifiers decide what weight to give currency.”* So it is a **warning** that states precisely what lapsed and what did not, and says it must not be rendered as current. That is the drift treatment and the counter-statement treatment arriving a third time: the system reports, and does not adjudicate.
+
+### Which half belongs where
+
+**Internal contradictions** are true of the document whenever anybody reads it, so they belong to `checkCredential`: an `expiresOn` on or before `attainedOn` (a recertification date that arrives with the credential), a revocation dated before the credential existed, and **a revocation with no date at all** — refused for the reason the trust registry has required a date on a compromised key all along, since without one nothing can separate a revocation that preceded a signoff resting on this credential from one that followed the work it is read against.
+
+**Currency** is a question asked at a time. It needs the reader's date, so it belongs to `verifyCredential` as a `lifecycle` layer, and **a caller who does not say when they are asking has not asked** — they get `not-supplied` and a finding, not a quiet pass.
+
 ## A gold reference cannot be self-declared
 
 **Closed 2026-09-04, inside the freeze window.** Open item 12.
@@ -1131,6 +1153,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
+25. **CLOSED 2026-09-20 — a credential's own revocation and expiry are read** — only the registry's list was consulted, so a credential revoked on its face passed clean. See [A credential that says it is revoked](#a-credential-that-says-it-is-revoked).
 24. **CLOSED 2026-09-20 — one entry point for one credential** — seventeen exported checks, six composed by nothing, and `npm run validate` reading as more than it was. See [A rule enforced only by the code that happens to call it](#a-rule-enforced-only-by-the-code-that-happens-to-call-it).
 23. **CLOSED 2026-09-20 — two scorers are two people** — `scorerCount: 2` was satisfied by one person scoring twice, and the disagreement-resolution path the policy asks for was recorded nowhere. See [Two scorers are two people](#two-scorers-are-two-people-and-an-integer-could-not-say-so).
 22. **CLOSED 2026-09-20 — the corpus admits no symbolic links** — `statSync` followed them, and the publication boundary scans for content rather than paths. See [A symlink is a path](#a-symlink-is-a-path-and-the-leak-check-scans-for-content).

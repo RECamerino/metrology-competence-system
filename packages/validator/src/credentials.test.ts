@@ -1427,6 +1427,56 @@ test('an activity that does not say what it demonstrated is refused by the schem
   );
 });
 
+/* -- A credential's own lifecycle dates ------------------------------------ */
+
+/*
+ * The internal contradictions — true of the document whenever anybody reads it,
+ * and therefore separate from whether it is still CURRENT, which needs the
+ * reader's date and belongs to verifyCredential.
+ */
+
+test('a recertification date that arrives with the credential is not one', () => {
+  const errors = errorsOf(
+    checkCredential(
+      { ...credential, expiresOn: credential.attainedOn } as typeof credential,
+      undefined,
+      undefined,
+      undefined,
+      BACKING,
+    ),
+  ).map((f) => f.message);
+  assert.ok(errors.some((m) => m.includes('on or before the day it was attained')));
+});
+
+test('A REVOCATION WITH NO DATE IS REFUSED, for the reason a compromised key needs one', () => {
+  // Without a date nothing can tell a revocation that preceded a signoff
+  // resting on this credential from one that followed the work it is read
+  // against — the argument the trust registry has made about keys all along.
+  const errors = errorsOf(
+    checkCredential(
+      { ...credential, status: { revoked: true } } as typeof credential,
+      undefined,
+      undefined,
+      undefined,
+      BACKING,
+    ),
+  ).map((f) => f.message);
+  assert.ok(errors.some((m) => m.includes('is revoked and records no date')));
+});
+
+test('nothing was revoked before it existed', () => {
+  const errors = errorsOf(
+    checkCredential(
+      { ...credential, status: { revoked: true, revokedOn: '2000-01-01', reason: 'fraud' } } as typeof credential,
+      undefined,
+      undefined,
+      undefined,
+      BACKING,
+    ),
+  ).map((f) => f.message);
+  assert.ok(errors.some((m) => m.includes('before it was attained')));
+});
+
 /* -- Scorers are people, not a count --------------------------------------- */
 
 /*
