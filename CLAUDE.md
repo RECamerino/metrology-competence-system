@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 17.5% / 60.9% / 21.6% |
 | Content authored | **26 elements** · **17 BOK articles** · **2 modules** — 8 domains, all three axes |
 | Item bank | 6 archetypes · 46 bindings across 45 units · **0.2%** of units covered |
-| Checks | 0 errors · 439/439 tests · typecheck clean |
+| Checks | 0 errors · 444/444 tests · typecheck clean |
 
 ### Phases
 
@@ -146,7 +146,7 @@ content/trust-registry.yaml       Issuer trust registry. Steward-controlled.
                                   verifies.
 
 schemas/                          19 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 439 tests.
+packages/validator/               The ONLY implemented package. 444 tests.
 apps/viewer/                      The only implemented app. TWO templates and a
                                   build script; output is an index page plus one
                                   page per domain, none committed. Every page is
@@ -193,6 +193,7 @@ Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
 | `scope.ts` | Gap analysis. **An element outside scope cannot produce a gap**, an authority overlay is not an occupation, and an organization computes gaps only through a disclosure that holds up |
 | `canonical.ts` | The one hashing function. Changing it invalidates every hash ever computed |
 | `preparation.ts` | Every route to an assessment, and the fact that none of them is required. What a preparation record owes, and **`pending-demonstration` derived from the element rather than from a module** — so the person who taught themselves an equipment-route element can say they owe bench time |
+| `verify.ts` | **ONE entry point for one credential.** Seventeen exported checks and six of them composed by nothing, so validating a credential meant remembering the no-retake rule, the drift check and the trust verdict by hand. A verdict records a state PER LAYER — `checked`, `not-supplied`, `not-applicable` — and **`not-supplied` is never silently a pass**: it is in the layer states AND in a finding, because a renderer that drops either must still be unable to call it verified |
 | `reports.ts` | Coverage, per-element item gaps, per-archetype reuse, and **how many elements the knowledge accounting cannot fail on** — stated rather than warned, because the shape is often honest and nothing computable tells the honest one from the careless one |
 
 **Every element must carry at least one `knowledgeRefs` entry**, pointing at an article AND a section. This is the refresher path: someone credentialed eight months ago who has forgotten one detail will not retrain, they will look it up, and that link has to land on the passage covering *that detail*. Section ids are append-only for the same reason element IDs are. It also means the article must be written before the element — knowledge before the claim that someone has mastered it.
@@ -212,8 +213,10 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 ## Commands
 
 ```bash
-npm run validate          # schema + integrity. Must be green.
-npm test                  # 439 guardrail tests
+npm run validate          # schema + integrity of the CORPUS. Must be green.
+                          # It says what it does NOT cover; credentials are
+                          # verifyCredential() in packages/validator/src/verify.ts
+npm test                  # 444 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:foundational # which foundational areas a person has actually graded
@@ -314,7 +317,7 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 **2232 → 5407 elements in one session**, and 5459 today. The `EC` axis (21 packs, 203 equipment types, 2732 elements) and 31 `Foundational Knowledge` areas were **generated in passes** from hand-written per-type specifications. Read that as a warning label, not a boast.
 
-**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 439 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
+**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 444 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
 
 **Coverage is the thing that is not proven.** A practicing metrologist reviewed the equipment axis four times and found real gaps every time — fixture-to-print calibration absent entirely, cal kits present only as parameters, magnetics claimed by a pack that contained none of it, the whole reference-and-primary tier missing between a working instrument and the SI. Each round changed the design rather than adding to it.
 

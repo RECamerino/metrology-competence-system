@@ -2,6 +2,10 @@
 /**
  * Corpus validator CLI.
  *
+ * CORPUS, and the word is load-bearing. This command does not validate a
+ * credential, a ledger or any other runtime artifact — see the note in
+ * `report()` and `verify.ts` for the entry point that does.
+ *
  *   node packages/validator/src/cli.ts validate       schema + integrity checks
  *   node packages/validator/src/cli.ts coverage       where the corpus is thin
  *   node packages/validator/src/cli.ts quotes         legal-review manifest
@@ -31,6 +35,24 @@ function report(findings: Finding[]): number {
   } else {
     console.log(`${errors.length} error(s), ${warnings.length} warning(s).`);
   }
+
+  /*
+   * What this command did NOT do.
+   *
+   * External review finding A-19: `runAllChecks` is a CORPUS validator, and
+   * "npm run validate" reads as "the system is valid" when it means "the corpus
+   * is". Credentials, ledgers, authorizations, disclosures and preparation
+   * records are runtime artifacts — none exists in this repository, so there is
+   * nothing here for this command to check and no honest way to make it check
+   * them. What there is an honest way to do is say so, which is the same move
+   * every verdict in this validator now makes.
+   */
+  console.log('');
+  console.log('This validates the CORPUS — taxonomy, BOK, elements, items, modules, sources.');
+  console.log('It does not validate credentials, ledgers, authorizations, disclosures or');
+  console.log('preparation records: those are runtime artifacts and none is in this repository.');
+  console.log('A credential is checked by verifyCredential() in packages/validator/src/verify.ts,');
+  console.log('which reports which layers it could check and which the caller supplied nothing for.');
 
   return errors.length > 0 ? 1 : 0;
 }
