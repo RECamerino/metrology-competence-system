@@ -370,6 +370,118 @@ export function checkEvidenceSufficiency(credential: Credential): Finding[] {
   return findings;
 }
 
+/**
+ * What is actually known about a signer's standing, as opposed to what the
+ * credential says about it.
+ *
+ * THE DEFECT THIS CLOSES, and it was the sharpest finding of an external
+ * adversarial review. `witnessMustHoldLevel` asks for a signer holding a level
+ * IN THIS ELEMENT, and the check read `heldLevel >= required` — a number the
+ * issuer typed. Two lines earlier the same function had already said, of the
+ * same signer, "Asserted, not proven." **The validator knew the claim was
+ * unsupported and let it satisfy the requirement anyway.** Demonstrated: an L5
+ * credential whose two signers claimed L5 and reviewer authority backed by
+ * nothing produced zero errors.
+ *
+ * WHAT STOPPED IT BEING WORSE was `highestSupportedTier`, which caps such a
+ * credential at `self-study` — so the review's stated attack, manufacturing a
+ * high-tier credential, does not work. What DID work was an L5 credential at
+ * `self-study`: the tier was honest and the rung was not, and the ladder's
+ * whole claim is that an L5 was signed by somebody holding L5.
+ *
+ * SO A CLAIM IS NOT A STATE, and these are the states:
+ *
+ *   `proven`       — a backing credential was supplied, is the signer's own,
+ *                    and attests what the entry claims.
+ *   `contradicted` — it was supplied and does not.
+ *   `unresolved`   — the entry names one and the caller did not supply it.
+ *                    A fact about the CALLER, not about the credential.
+ *   `asserted`     — no backing credential is named at all.
+ *   `bootstrap`    — the signer signs under founding-cohort authority, which
+ *                    is the designed answer to a ladder that cannot start.
+ *
+ * ONLY `proven` AND `bootstrap` SATISFY A REQUIREMENT. `unresolved` fails, and
+ * that is deliberate rather than harsh: if it passed, the ordinary call — the
+ * one with no backing supplied — would satisfy the requirement on nothing, and
+ * the defect would be exactly where it started. It is the `signatureVerified`
+ * argument in a second place: the honest answer is a fact about what the caller
+ * had in front of them, and a requirement demanding proof is not met by a
+ * caller who did not look.
+ *
+ * The rule the review stated, which is worth keeping as a rule: **a warning
+ * saying "asserted, not proven" must never coexist with successful
+ * satisfaction of a requirement whose predicate requires proof.**
+ */
+export type StandingState = 'proven' | 'contradicted' | 'unresolved' | 'asserted' | 'bootstrap';
+
+export interface SignerStanding {
+  heldLevel: StandingState;
+  /** The level PROVEN, where one was. Never the asserted `heldLevel`. */
+  provenLevel?: number;
+  reviewerAuthority: StandingState;
+}
+
+/**
+ * Resolve one signer's standing against whatever backing the caller supplied.
+ *
+ * `element` is the element being signed off: a held level in a different
+ * element is not evidence here, which the signoff policy has always said.
+ */
+export function signerStanding(
+  signer: Signer,
+  element: string,
+  backing: Credential[] = [],
+): SignerStanding {
+  if (signer.bootstrapAuthority) {
+    return { heldLevel: 'bootstrap', reviewerAuthority: 'bootstrap' };
+  }
+
+  const byId = new Map(backing.map((c) => [c.id, c]));
+
+  const resolve = (basis: SignerAuthority['basis']): { state: StandingState; level?: number } => {
+    const entries = (signer.authority ?? []).filter((a) => a.basis === basis);
+    if (entries.length === 0) return { state: 'asserted' };
+
+    let seen: StandingState = 'unresolved';
+    for (const entry of entries) {
+      const held = byId.get(entry.credentialId);
+      if (!held) continue;
+
+      // Somebody else's credential is not evidence about this signer, and a
+      // level held elsewhere is not evidence in this element.
+      if (held.subject !== signer.did) return { state: 'contradicted' };
+      if (entry.element !== undefined && held.element !== entry.element) return { state: 'contradicted' };
+      if (entry.level !== undefined && held.level !== entry.level) return { state: 'contradicted' };
+      if (basis === 'held-level' && held.element !== element) return { state: 'contradicted' };
+
+      seen = 'proven';
+      return { state: 'proven', level: held.level };
+    }
+    return { state: seen };
+  };
+
+  const level = resolve('held-level');
+  return {
+    heldLevel: level.state,
+    provenLevel: level.level,
+    reviewerAuthority: resolve('reviewer-authority').state,
+  };
+}
+
+/** Why a requirement was not met, in the words that fit the actual state. */
+function unmet(state: StandingState, what: string): string {
+  switch (state) {
+    case 'asserted':
+      return `${what} is asserted on the credential and backed by no credential at all. An assertion does not satisfy a requirement that asks for competence to be held.`;
+    case 'unresolved':
+      return `${what} names a backing credential that was not supplied, so it could not be established. That is a fact about what this caller had in front of them rather than about the credential — supply the signer's credentials to resolve it.`;
+    case 'contradicted':
+      return `${what} is contradicted by the credential it names.`;
+    default:
+      return `${what} was not established.`;
+  }
+}
+
 export interface SignoffPolicy {
   signerCount: number;
   witnessMustHoldLevel: number | null;
@@ -565,31 +677,55 @@ export function checkCredential(
     );
   }
 
+  const standings = credential.signers.map((signer) => ({
+    signer,
+    standing: signerStanding(signer, credential.element, backing),
+  }));
+
   if (policy.witnessMustHoldLevel !== null && policy.witnessMustHoldLevel !== undefined) {
     const required = policy.witnessMustHoldLevel;
-    const qualified = credential.signers.filter(
-      (s) => typeof s.heldLevel === 'number' && s.heldLevel >= required,
-    );
-    const bootstrapped = credential.signers.filter((s) => s.bootstrapAuthority);
 
-    if (qualified.length === 0 && bootstrapped.length === 0) {
+    const proven = standings.filter(
+      ({ standing }) => standing.heldLevel === 'proven' && (standing.provenLevel ?? 0) >= required,
+    );
+    const bootstrapped = standings.filter(({ standing }) => standing.heldLevel === 'bootstrap');
+
+    if (proven.length === 0 && bootstrapped.length === 0) {
+      // Every reason this can fail, named for the signer it belongs to — the
+      // author has to be able to tell "nobody named a credential" from "you
+      // did not supply the one they named".
+      const why = standings
+        .map(({ signer, standing }) => `${signer.did}: ${unmet(standing.heldLevel, `level ${signer.heldLevel ?? '?'} in ${credential.element}`)}`)
+        .join(' ');
       findings.push(
-        err(at(`no signer held level ${required} or above in ${credential.element}. From L3 the signer judges quality rather than merely observing, so they must be at least this competent in the same element.`)),
+        err(at(`no signer is PROVEN to hold level ${required} or above in ${credential.element}. From L3 the signer judges quality rather than merely observing, so they must be at least this competent in the same element — and a number on the credential is not that. ${why}`)),
       );
-    } else if (qualified.length === 0) {
+    } else if (proven.length === 0) {
       // Accepted, and never silent. The founding cohort exists because the
       // ladder cannot otherwise start, but a bootstrap-signed credential is a
       // weaker claim than a peer-signed one and a reader must be told.
       findings.push(
-        warn(at(`signed under founding-cohort authority — no signer held level ${required} in ${credential.element}. Legitimate while the cohort is open; the credential must display this permanently and must not be presented as peer-signed.`)),
+        warn(at(`signed under founding-cohort authority — no signer proved level ${required} in ${credential.element}. Legitimate while the cohort is open; the credential must display this permanently and must not be presented as peer-signed.`)),
       );
     }
   }
 
-  if (policy.requiresCredentialedReviewer && !credential.signers.some((s) => s.credentialedReviewer)) {
-    findings.push(
-      err(at('no signer holds the reviewer-competence credential, which this level requires.')),
-    );
+  if (policy.requiresCredentialedReviewer) {
+    const proven = standings.filter(({ standing }) => standing.reviewerAuthority === 'proven');
+    const bootstrapped = standings.filter(({ standing }) => standing.reviewerAuthority === 'bootstrap');
+
+    if (proven.length === 0 && bootstrapped.length === 0) {
+      const why = standings
+        .map(({ signer, standing }) => `${signer.did}: ${unmet(standing.reviewerAuthority, 'reviewer authority')}`)
+        .join(' ');
+      findings.push(
+        err(at(`no signer is PROVEN to hold reviewer authority, which this level requires. \`credentialedReviewer: true\` is a claim the credential makes about its own signer and cannot satisfy it. ${why}`)),
+      );
+    } else if (proven.length === 0) {
+      findings.push(
+        warn(at('reviewer authority rests on founding-cohort standing rather than a reviewer-authority credential. Legitimate while the cohort is open, and it must not be presented as peer-reviewed.')),
+      );
+    }
   }
 
   if (policy.requiresCrossOrganizational) {

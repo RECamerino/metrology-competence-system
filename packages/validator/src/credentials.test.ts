@@ -195,6 +195,39 @@ const credential: Credential = {
   },
 };
 
+/*
+ * The signers' own credentials.
+ *
+ * Every test below that asks whether a signoff satisfies its policy now has to
+ * supply these, because an asserted `heldLevel` no longer satisfies a
+ * requirement that asks for competence to be HELD. That is the whole of the
+ * fix: before it, seven tests passed while proving nothing about the signers.
+ */
+const backingFor = (subject: string, id: string, element: string, level: number) =>
+  ({
+    ...credential,
+    id,
+    subject,
+    element,
+    level,
+  }) as unknown as Parameters<typeof checkCredential>[4] extends (infer T)[] ? T : never;
+
+const SIGNER_A = 'did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK';
+const SIGNER_B = 'did:key:z6MkjchhfUsD6mmvni8mCdXHw216Xrm9bQe2mBH1P5RDjVJG';
+
+const BACKING = [
+  backingFor(SIGNER_A, 'urn:uuid:11111111-1111-4111-8111-111111111111', 'CM-03-046', 5),
+  backingFor(SIGNER_A, 'urn:uuid:22222222-2222-4222-8222-222222222222', 'CM-20-001', 4),
+  backingFor(SIGNER_B, 'urn:uuid:33333333-3333-4333-8333-333333333333', 'CM-03-046', 5),
+  backingFor(SIGNER_B, 'urn:uuid:44444444-4444-4444-8444-444444444444', 'CM-20-001', 4),
+];
+
+/** A signoff check with the signers' standing actually resolvable. */
+const checkProven = (
+  c: Parameters<typeof checkCredential>[0],
+  policy: Parameters<typeof checkCredential>[1],
+) => checkCredential(c, policy, undefined, undefined, BACKING);
+
 const authorization: Authorization = {
   schemaVersion: 1,
   id: 'urn:uuid:8c4d1e7f-2a6b-4c3d-8e5f-1b9a7c2d4e6f',
@@ -311,7 +344,7 @@ test('a well-formed L5 signoff passes its policy', () => {
   // Errors, not findings. Every authority entry on this credential names a
   // backing credential that was not supplied, and saying so is the point of
   // F-05 — silence on an unresolved chain is what used to be available.
-  assert.deepEqual(errorsOf(checkCredential(credential, L5_POLICY)), []);
+  assert.deepEqual(errorsOf(checkProven(credential, L5_POLICY)), []);
 });
 
 test('single-organization signing is rejected at a level requiring cross-organizational', () => {
@@ -743,6 +776,92 @@ const backingCredential = (overrides: Record<string, unknown> = {}) => ({
   ...overrides,
 });
 
+/* -- Asserted is not proven ------------------------------------------------ */
+
+/*
+ * The sharpest finding of an external adversarial review, and the attack it
+ * described, run here so it cannot come back.
+ *
+ * `witnessMustHoldLevel` asks for a signer holding that level IN THIS ELEMENT.
+ * The check read `heldLevel >= required` — a number the issuer typed — two
+ * lines after the same function had said of the same signer "Asserted, not
+ * proven." The validator knew the claim was unsupported and let it satisfy the
+ * requirement.
+ */
+
+const unbackedSigner = (did: string, organization: Record<string, string>) => ({
+  did,
+  heldLevel: 5,
+  credentialedReviewer: true,
+  organization,
+});
+
+const allClaim = {
+  ...credential,
+  signers: [
+    unbackedSigner(SIGNER_A, { name: 'Northfield Calibration', id: 'northfield-cal-2026' }),
+    unbackedSigner(SIGNER_B, { name: 'Ardleigh Metrology', id: 'ardleigh-met-2025' }),
+  ],
+} as unknown as Parameters<typeof checkCredential>[0];
+
+test('A SIGNER WHO MERELY CLAIMS L5 NO LONGER SATISFIES THE L5 RUNG', () => {
+  const errors = errorsOf(checkCredential(allClaim, L5_POLICY)).map((f) => f.message);
+  assert.ok(
+    errors.some((m) => m.includes('no signer is PROVEN to hold level 5') && m.includes('backed by no credential at all')),
+    `expected the assertion to be refused, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('...and `credentialedReviewer: true` no longer satisfies reviewer authority', () => {
+  // The identical hole beside the first one. The review filed them separately;
+  // they are one defect in one loop.
+  const errors = errorsOf(checkCredential(allClaim, L5_POLICY)).map((f) => f.message);
+  assert.ok(
+    errors.some((m) => m.includes('no signer is PROVEN to hold reviewer authority')),
+    `expected the reviewer claim to be refused, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('THE ATTACK THAT USED TO PRODUCE ZERO ERRORS: an L5 at self-study', () => {
+  // The tier cap was never the whole defence. `highestSupportedTier` correctly
+  // held this to `self-study`, so the review's stated attack — manufacturing a
+  // HIGH-tier credential — did not work. Declaring `self-study` was honest
+  // about the witness and left the rung asserting an L5 nobody proved.
+  const errors = errorsOf(
+    checkCredential({ ...allClaim, provenanceTier: 'self-study' }, L5_POLICY),
+  );
+  assert.notDeepEqual(errors, [], 'an L5 signed on assertions must not pass at any tier');
+});
+
+test('a founding-cohort signer still satisfies both, because the ladder cannot otherwise start', () => {
+  // The designed escape hatch, and the reason this can be a hard error at all.
+  const findings = checkCredential(
+    {
+      ...allClaim,
+      signers: (allClaim.signers as unknown as Array<Record<string, unknown>>).map((sg) => ({
+        ...sg,
+        bootstrapAuthority: { cohort: 'founding', admittedOn: '2026-01-01' },
+      })),
+    } as unknown as Parameters<typeof checkCredential>[0],
+    L5_POLICY,
+  );
+  assert.deepEqual(
+    errorsOf(findings).filter((f) => f.message.includes('PROVEN')),
+    [],
+  );
+});
+
+test('a PROVEN standing below the required level does not satisfy it either', () => {
+  // Resolving the chain is not the same as clearing the bar.
+  const tooLow = BACKING.map((c) =>
+    (c as Record<string, unknown>).element === 'CM-03-046' ? { ...(c as object), level: 3 } : c,
+  ) as typeof BACKING;
+  const errors = errorsOf(
+    checkCredential(credential, L5_POLICY, undefined, undefined, tooLow),
+  ).map((f) => f.message);
+  assert.ok(errors.some((m) => m.includes('no signer is PROVEN to hold level 5')));
+});
+
 test('AN UNRESOLVED CHAIN IS A CLAIM, AND THE VERDICT SAYS WHICH', () => {
   const findings = checkCredential(credential, L5_POLICY);
   assert.ok(
@@ -751,13 +870,21 @@ test('AN UNRESOLVED CHAIN IS A CLAIM, AND THE VERDICT SAYS WHICH', () => {
     ),
     `expected the claim to be legible and named unresolved, got: ${JSON.stringify(findings.map((f) => f.message))}`,
   );
-  assert.deepEqual(errorsOf(findings), []);
 });
 
-test('...and supplying the backing credential resolves it', () => {
-  const findings = checkCredential(credential, L5_POLICY, undefined, undefined, [
-    backingCredential() as unknown as Parameters<typeof checkCredential>[0],
-  ]);
+test('...AND AN UNRESOLVED CHAIN DOES NOT SATISFY THE POLICY', () => {
+  // The fix. This assertion used to be `errorsOf(findings) === []`: the chain
+  // was unresolved, the verdict said so, and the requirement was satisfied
+  // anyway. A caller who did not look has not established anything.
+  const errors = errorsOf(checkCredential(credential, L5_POLICY)).map((f) => f.message);
+  assert.ok(
+    errors.some((m) => m.includes('no signer is PROVEN to hold level 5') && m.includes('not supplied')),
+    `expected the unmet requirement to name the cause, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('...and supplying the backing credentials resolves it', () => {
+  const findings = checkProven(credential, L5_POLICY);
   assert.deepEqual(
     findings.filter((f) => f.message.includes(BACKING_ID) && f.message.includes('not supplied')),
     [],
@@ -810,14 +937,14 @@ test("A WALLET NEVER CARRIES THE SIGNERS' CREDENTIALS, AND THAT IS THE LIMIT", (
 
 test('a signer outside the candidate organization satisfies the rule', () => {
   // Northfield is the candidate's own lab; Ardleigh is not.
-  assert.deepEqual(errorsOf(checkCredential(credential, L5_POLICY)), []);
+  assert.deepEqual(errorsOf(checkProven(credential, L5_POLICY)), []);
 });
 
 test('two signers from one EXTERNAL organization also satisfy it', () => {
   // The old check counted distinct signer organizations, which wrongly rejected
   // this: both signers are outside the candidate's organization, which is
   // exactly what the rule asks for.
-  const findings = checkCredential(
+  const findings = checkProven(
     {
       ...credential,
       signers: credential.signers.map((s) => ({ ...s, organization: { name: 'Ardleigh Metrology', id: 'ardleigh-met-2025' } })),
@@ -921,7 +1048,7 @@ test('an unaffiliated signer IS outside a named candidate organization', () => {
   // The rule asks for a signer outside the candidate's organization, and a
   // consultant at no organization plainly is. Rejecting this would gate L5
   // behind employment, which is the barrier the project refuses.
-  const findings = checkCredential(
+  const findings = checkProven(
     {
       ...credential,
       signers: [
@@ -954,7 +1081,7 @@ test('a name-only comparison says so, at the level where it matters', () => {
 
 test('identifiers everywhere means no such warning', () => {
   assert.deepEqual(
-    checkCredential(credential, L5_POLICY).filter((f) => f.message.includes('organization NAMES')),
+    checkProven(credential, L5_POLICY).filter((f) => f.message.includes('organization NAMES')),
     [],
   );
 });
@@ -1000,6 +1127,8 @@ const PROFICIENCY = parseYaml(
 ) as { levels: Array<Record<string, unknown>> };
 
 const levelEntry = (level: number) => PROFICIENCY.levels.find((l) => l.level === level)!;
+
+
 
 /* -- What "nothing gates entry" currently reaches --------------------------- */
 
@@ -1074,7 +1203,7 @@ test('the policy is flattened from BOTH blocks, not just signoff', () => {
 });
 
 test('the worked L4 credential satisfies the real L4 policy', () => {
-  assert.deepEqual(errorsOf(checkCredential({ ...credential, level: 4 }, REAL_L4)), []);
+  assert.deepEqual(errorsOf(checkProven({ ...credential, level: 4 }, REAL_L4)), []);
 });
 
 test('THE HEADLINE CASE: L5 the day after L4, no hours, no work product, no mentoring', () => {
