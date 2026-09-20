@@ -113,13 +113,28 @@ export function organizationKey(org: OrganizationRef): string {
   return org.id?.trim() ? `id:${org.id.trim()}` : `name:${normalizeOrganization(org.name ?? '')}`;
 }
 
+/**
+ * One piece of work, credited to every element it genuinely exercised.
+ *
+ * `id` is holder-chosen and resolves nowhere. It exists so one activity counts
+ * as one — within a credential, and across a wallet where the same work is
+ * written on every credential it credits.
+ */
+export interface ExperienceActivity {
+  id?: string;
+  hours?: number;
+  account?: string;
+  demonstrates?: string;
+  ref?: string;
+  [key: string]: unknown;
+}
+
 export interface CredentialAssessment {
   modality?: string[];
   archetypes?: string[];
   attemptRef?: string;
   candidateOrganization?: OrganizationRef;
-  experienceHours?: number;
-  distinctActivities?: number;
+  activities?: ExperienceActivity[];
   scorerCount?: number;
   previousLevelAttainedOn?: string;
 }
@@ -599,40 +614,79 @@ export function checkCredential(
     }
   }
 
-  if (typeof policy.minExperienceHours === 'number' && policy.minExperienceHours > 0) {
-    const hours = assessment.experienceHours;
-    if (typeof hours !== 'number') {
+  /*
+   * Experience, and what the two integers could not say.
+   *
+   * `experienceHours` and `distinctActivities` used to be declared totals.
+   * Decision 37 is right that one activity credits every element it genuinely
+   * exercises, and the inverse risk is the one a total cannot touch: forty
+   * hours claimed against seventeen elements with nothing recording which part
+   * of the work demonstrated which. Seventeen credentials each reading
+   * `experienceHours: 40` look identical whether the activity exercised all
+   * seventeen or exercised two and the rest were claimed by association.
+   *
+   * BOTH TOTALS ARE NOW DERIVED. Hours are the sum, breadth is the count of
+   * distinct ids, and neither is separately declared — two copies of one fact
+   * drift after an edit, and it is the copy a reader trusts that would be
+   * wrong. What the author writes instead is `demonstrates`, per activity, per
+   * element: it cannot prove the activity exercised the element, and it makes
+   * somebody say how, which is the difference between an unreviewable number
+   * and reviewable evidence.
+   */
+  const activities = assessment.activities;
+  const needsExperience =
+    (typeof policy.minExperienceHours === 'number' && policy.minExperienceHours > 0) ||
+    (typeof policy.minDistinctActivities === 'number' && policy.minDistinctActivities > 0);
+
+  if (needsExperience && (!Array.isArray(activities) || activities.length === 0)) {
+    const asked = [
+      typeof policy.minExperienceHours === 'number' && policy.minExperienceHours > 0
+        ? `${policy.minExperienceHours} experience hours`
+        : null,
+      typeof policy.minDistinctActivities === 'number' && policy.minDistinctActivities > 0
+        ? `${policy.minDistinctActivities} distinct activities`
+        : null,
+    ].filter(Boolean);
+    findings.push(
+      err(at(`level ${credential.level} requires ${asked.join(' across at least ')} and the credential records no activities at all. Record assessment.activities; a total nobody can look behind is not reviewable evidence, and silence is not evidence of compliance.`)),
+    );
+  } else if (Array.isArray(activities)) {
+    // One activity counts as one. Two entries under one id are a single piece
+    // of work written twice, and counting them twice is exactly the inflation a
+    // breadth threshold exists to stop.
+    const byId = new Map<string, number>();
+    for (const activity of activities) {
+      const id = String(activity?.id ?? '').trim();
+      if (!id) continue;
+      byId.set(id, (byId.get(id) ?? 0) + 1);
+    }
+    for (const [id, count] of byId) {
+      if (count > 1) {
+        findings.push(
+          err(at(`lists activity '${id}' ${count} times. One piece of work is one activity however many entries describe it, and counting it twice is the inflation the breadth threshold exists to stop.`)),
+        );
+      }
+    }
+
+    const hours = activities.reduce((total, a) => total + (typeof a?.hours === 'number' ? a.hours : 0), 0);
+    if (typeof policy.minExperienceHours === 'number' && hours < policy.minExperienceHours) {
       findings.push(
-        err(at(`level ${credential.level} requires at least ${policy.minExperienceHours} experience hours and the credential records none. Record assessment.experienceHours; an unrecorded claim cannot be reviewed, which is the whole point of declaring hours.`)),
-      );
-    } else if (hours < policy.minExperienceHours) {
-      findings.push(
-        err(at(`records ${hours} experience hours; level ${credential.level} requires at least ${policy.minExperienceHours}.`)),
+        err(at(`its activities total ${hours} hours; level ${credential.level} requires at least ${policy.minExperienceHours}.`)),
       );
     }
-  }
 
-  /*
-   * Breadth, which hours cannot express.
-   *
-   * An hours threshold is satisfied by endurance. LM-14 describes progression
-   * as several years of progressively more complex ASSIGNMENTS, and 1000 hours
-   * on one repetitive task clears a 1000-hour bar exactly as well as 1000
-   * hours across escalating work — at L5, whose whole claim is judgement in
-   * cases the holder has not met before.
-   *
-   * Enforced rather than declared, because a requirement nothing reads is the
-   * defect this project has now corrected twice.
-   */
-  if (typeof policy.minDistinctActivities === 'number' && policy.minDistinctActivities > 0) {
-    const activities = assessment.distinctActivities;
-    if (typeof activities !== 'number') {
+    /*
+     * Breadth, which hours cannot express.
+     *
+     * An hours threshold is satisfied by endurance. LM-14 describes progression
+     * as several years of progressively more complex ASSIGNMENTS, and 1000
+     * hours on one repetitive task clears a 1000-hour bar exactly as well as
+     * 1000 hours across escalating work — at L5, whose whole claim is judgement
+     * in cases the holder has not met before.
+     */
+    if (typeof policy.minDistinctActivities === 'number' && byId.size < policy.minDistinctActivities) {
       findings.push(
-        err(at(`level ${credential.level} requires experience spanning at least ${policy.minDistinctActivities} distinct activities and the credential records none. Record assessment.distinctActivities; hours alone cannot show breadth.`)),
-      );
-    } else if (activities < policy.minDistinctActivities) {
-      findings.push(
-        err(at(`records ${activities} distinct activity/activities; level ${credential.level} requires at least ${policy.minDistinctActivities}. The hours may be sufficient and the range is not — that is the distinction this threshold exists for.`)),
+        err(at(`its activities span ${byId.size} distinct piece(s) of work; level ${credential.level} requires at least ${policy.minDistinctActivities}. The hours may be sufficient and the range is not — that is the distinction this threshold exists for.`)),
       );
     }
   }
@@ -970,6 +1024,63 @@ export function checkAttestableStatus(
       `${credential.id}: ${credential.element} is '${elementStatus}', and L${credential.level} may only be attested against a 'stable' element. L1 and L2 are witnessed observation and may rest on a draft; from L3 the definition must have stopped moving.`,
     ),
   ];
+}
+
+/**
+ * One activity, described the same way everywhere it is claimed.
+ *
+ * THE CHECK A DECLARED TOTAL COULD NEVER HAVE SUPPORTED. Decision 37 is right
+ * that one piece of work credits every element it genuinely exercised, so the
+ * same activity legitimately appears on several credentials — and what differs
+ * between them is `demonstrates`, which is the point and is never compared
+ * here. What must not differ is the work itself.
+ *
+ * The failure this catches lives BETWEEN documents, where no single one looks
+ * wrong: ninety hours on the credential that needed sixty, a hundred and forty
+ * on the one that needed a hundred and twenty, the same id on both. Each
+ * credential clears its own threshold, each is internally consistent, and the
+ * inflation is visible only when they are read together — which is exactly what
+ * a wallet is for.
+ *
+ * It is a check over a wallet rather than a rule inside one credential, because
+ * a credential verifies offline and alone. A verifier holding one document
+ * cannot run this and is not expected to; a reader holding the set can.
+ */
+export function checkExperienceAcrossCredentials(credentials: Credential[]): Finding[] {
+  const findings: Finding[] = [];
+  const seen = new Map<string, { hours?: number; account?: string; credential?: string }>();
+
+  for (const credential of credentials) {
+    const activities = (credential.assessment as CredentialAssessment | undefined)?.activities ?? [];
+    for (const activity of activities) {
+      const id = String(activity?.id ?? '').trim();
+      if (!id) continue;
+
+      const first = seen.get(id);
+      if (!first) {
+        seen.set(id, { hours: activity.hours, account: activity.account, credential: credential.id });
+        continue;
+      }
+
+      const where = `activity '${id}' is claimed on ${first.credential} and ${credential.id}`;
+
+      if (first.hours !== activity.hours) {
+        findings.push(
+          err(`${where} with ${first.hours} hours on one and ${activity.hours} on the other. One piece of work took one length of time; a figure that grows to meet whichever threshold is in front of it is the inflation no single credential can show.`),
+        );
+      }
+
+      // `demonstrates` is DELIBERATELY not compared. It differs by element and
+      // is the whole reason the activity is written out on each credential.
+      if (String(first.account ?? '').trim() !== String(activity.account ?? '').trim()) {
+        findings.push(
+          err(`${where} with two different accounts of what the work was. If these are two pieces of work they need two ids; if they are one, the account cannot be rewritten to suit the element it is credited to.`),
+        );
+      }
+    }
+  }
+
+  return findings;
 }
 
 /**

@@ -755,6 +755,29 @@ What it took:
 
 **What it costs, stated:** the system can say very little about how well anybody prepared. A person who read one section and a person who worked through a mentored year both hold a record saying they prepared, and both have to demonstrate the same thing to the same standard. Rigour lives in the assessment rather than in the route to it, which is also what makes the assessment worth defending.
 
+## An experience claim has to say which part demonstrated what
+
+**Closed 2026-09-20, inside the freeze window.** Open item 19, and the last thing standing before the Phase 3 schema freeze.
+
+Decision 37 settled the attribution rule and it is right: **one activity credits every element it genuinely exercises.** A week rebuilding a budget from raw records exercises the combination, the distribution assignments, the sensitivity coefficients and the completeness search, and making somebody split their hours between them would be an accounting fiction.
+
+**The inverse risk is the one the model could not touch.** The claim was two integers — `experienceHours` and `distinctActivities` — so forty hours could be claimed against seventeen elements with nothing anywhere recording which part of the work demonstrated which. Seventeen credentials each reading `experienceHours: 40` look identical whether the activity genuinely exercised all seventeen or exercised two and the remaining fifteen were claimed by association. **A declaration is reviewable evidence only if there is something to review**, and a total is not something to review.
+
+What it took:
+
+- **`assessment.activities`** replaces both integers. Each activity carries an `id`, its `hours`, an `account` of what the work actually was, and — the field this item exists for — **`demonstrates`: what this activity showed about THIS element**, written against the anchor at the level being claimed.
+- **Both totals are derived and neither is declared.** Hours are the sum; breadth is the count of distinct ids. A total carried alongside the list is two copies of one fact that drift after an edit, and it is the copy a reader trusts that would be wrong.
+- **One piece of work is one activity, however many entries describe it.** Two entries sharing an `id` are a single job written twice, and counting them as two is exactly the inflation a breadth threshold exists to stop. That check was not available while breadth was an integer somebody typed.
+- **The same activity is written out on every credential it credits**, under the same id, because a credential verifies offline and has to stand alone. What differs between them is `demonstrates`, which is the point.
+
+**`checkExperienceAcrossCredentials` is the payoff for giving an activity an id at all.** The failure it catches lives BETWEEN documents, where no single one looks wrong: ninety hours on the credential that needed sixty, a hundred and forty on the one that needed a hundred and twenty, the same id on both. Each credential clears its own threshold and each is internally consistent. It is a wallet-level check rather than a rule inside one credential, because a verifier holding one document cannot run it and is not expected to — a reader holding the set can. `demonstrates` is deliberately never compared.
+
+**What this does not do**, said plainly: it cannot prove an activity exercised an element. Nothing can. It makes somebody say HOW — and an activity that genuinely exercised two elements and was claimed against seventeen produces fifteen `demonstrates` entries a reviewer can read and find thin. That is the same standing `positionNeutrality` and `knowledgeRefs[].supports` carry, for the same reason, and it is the difference between an unreviewable number and reviewable evidence.
+
+**What it costs:** an L5 claim of 1000 hours across five activities is now five written accounts rather than two integers. That is real authoring effort at the top of the ladder, and it is proportionate — L1 and L2 set no hours threshold and acquire nothing, and the level whose whole claim is judgement in unfamiliar cases is the one that should have to describe the unfamiliar cases.
+
+**Left open deliberately: nothing checks WHEN the activity happened.** An activity list could carry dates, and a checker could then ask whether the hours fell after the previous level was attained. Decision 37 does not say they must, and asserting it would be a new policy rather than an enforcement of an existing one. The waiting period is still measured from `previousLevelAttainedOn`, which is unaffected.
+
 ## A gold reference cannot be self-declared
 
 **Closed 2026-09-04, inside the freeze window.** Open item 12.
@@ -803,5 +826,6 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
+14. **CLOSED 2026-09-20 — an experience claim names its activities** — `assessment.activities` replaces two declared integers, both totals are derived from it, and `demonstrates` records what each piece of work showed about THIS element. See [An experience claim has to say which part demonstrated what](#an-experience-claim-has-to-say-which-part-demonstrated-what).
 13. **CLOSED 2026-09-20 — many routes reach one assessment** — `route` on the preparation record, `pending-demonstration` derived from the element rather than from a module, and the principle declared in `proficiency.yaml`. See [Many routes reach one assessment, and none of them is required](#many-routes-reach-one-assessment-and-none-of-them-is-required).
 7. **Skeleton scale** — resolved. Landed at 2232 elements across 257 areas and 43 domains, against a 2000+ target.

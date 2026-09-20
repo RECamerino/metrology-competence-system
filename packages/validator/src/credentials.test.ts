@@ -18,6 +18,8 @@ import { join } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 import { validatorFor } from './schema.ts';
 import {
+  type ExperienceActivity,
+  checkExperienceAcrossCredentials,
   type Authorization,
   type Credential,
   checkAttestableStatus,
@@ -50,6 +52,51 @@ const SUFFICIENCY = {
     'Retained the contribution the template drops, showed what it did to the combined figure, and defended the inclusion when pressed on whether it had been chosen to reach a wanted result.',
 };
 
+/**
+ * A worked experience claim: four pieces of work totalling 260 hours, credited
+ * to CM-03-046 at L4.
+ *
+ * `demonstrates` is the field open decision 19 exists for. The same four
+ * activities appear on every credential they credit, under the same ids, and
+ * only this line differs — an activity that genuinely exercised two elements
+ * and was claimed against seventeen produces fifteen of these that a reviewer
+ * can read and find thin.
+ */
+const ACTIVITIES = [
+  {
+    id: 'ilc-2026-mass-round',
+    hours: 90,
+    account:
+      'Prepared and analysed this laboratory submission to a regional mass comparison at 1 kg and 100 g, including the budget, the loop closure and the response to the pilot report.',
+    demonstrates:
+      'The comparison result disagreed with the budget, which is the L4 case: a repeatability line and a carried specification both covered the same short-term variation, and the overlap was removed and defended against the pilot.',
+  },
+  {
+    id: 'proc-rev-torque-2026',
+    hours: 70,
+    account:
+      'Reviewed and rewrote the torque transducer calibration procedure after a scope extension, working from the previous budgets and the standards certificates rather than from the earlier procedure text.',
+    demonstrates:
+      'Two lines drawn from documents written to different conventions turned out to name one physical effect. Retaining or removing either was defensible and the decision had to be argued from the records.',
+  },
+  {
+    id: 'cust-dispute-2025-11',
+    hours: 60,
+    account:
+      'Investigated a customer challenge to a reported uncertainty on a pressure calibration, working from the as-found data, the standards history and the method as actually performed.',
+    demonstrates:
+      'The customer was right that a term was double counted and wrong about which one. Reaching that required establishing what the observations had actually varied before comparing it against what each specification claimed.',
+  },
+  {
+    id: 'newstarter-budgets-2026',
+    hours: 40,
+    account:
+      'Worked through four of the laboratory budgets with a new starter over six weeks, rebuilding each from the raw records rather than explaining the finished tables.',
+    demonstrates:
+      'Explaining why a Type A line and a carried specification may not coexist, to somebody who had not met the distinction, exposed two budgets of our own where they did.',
+  },
+];
+
 const credential: Credential = {
   schemaVersion: 1,
   id: 'urn:uuid:3f2b8c1a-5d4e-4f6a-9b2c-7e1d0a3f5b8c',
@@ -67,8 +114,10 @@ const credential: Credential = {
     // The candidate's own laboratory. Recorded so the cross-organizational
     // rule is applied as written rather than approximated.
     candidateOrganization: { name: 'Northfield Calibration', id: 'northfield-cal-2026' },
-    experienceHours: 260,
-    distinctActivities: 4,
+    // FOUR PIECES OF WORK, NOT TWO INTEGERS. Each says what it was and what it
+    // showed about THIS element — the part that differs between the several
+    // credentials one activity legitimately credits.
+    activities: ACTIVITIES,
     // L4 is doubleScored, and nothing else on the credential could show it —
     // signer count cannot stand in, because scoring is not signing.
     scorerCount: 2,
@@ -873,7 +922,7 @@ test('THE HEADLINE CASE: L5 the day after L4, no hours, no work product, no ment
       assessment: {
         modality: ['reviewer-conducted-defense'],
         candidateOrganization: { name: 'Northfield Calibration', id: 'northfield-cal-2026' },
-        experienceHours: 0,
+        activities: [],
         scorerCount: 1,
         previousLevelAttainedOn: '2026-08-09',
       },
@@ -891,36 +940,77 @@ test('THE HEADLINE CASE: L5 the day after L4, no hours, no work product, no ment
   }
 });
 
-test('unrecorded experience hours fail rather than pass unnoticed', () => {
-  const { experienceHours, ...assessment } = credential.assessment as Record<string, unknown>;
-  const findings = checkCredential({ ...credential, assessment }, REAL_L4);
-  assert.ok(findings.some((f) => f.message.includes('records none')));
+test('the worked experience claim validates against the schema', () => {
+  const validate = validatorFor('credential');
+  assert.ok(validate(credential), JSON.stringify(validate.errors, null, 2));
 });
 
-test('hours below the threshold are rejected', () => {
+test('unrecorded experience fails rather than passes unnoticed', () => {
+  const { activities, ...assessment } = credential.assessment as Record<string, unknown>;
+  const findings = checkCredential({ ...credential, assessment }, REAL_L4);
+  assert.ok(findings.some((f) => f.message.includes('records no activities')));
+});
+
+test('hours below the threshold are rejected, and the total is DERIVED', () => {
+  // Nothing on the credential declares 260. Two copies of one fact drift after
+  // an edit, and it is the copy a reader trusts that would be wrong.
   const findings = checkCredential(
-    { ...credential, assessment: { ...credential.assessment as object, experienceHours: 199 } },
+    { ...credential, assessment: { ...(credential.assessment as object), activities: ACTIVITIES.slice(0, 2) } },
     REAL_L4,
   );
-  assert.ok(findings.some((f) => f.message.includes('records 199 experience hours')));
-});
-
-test('unrecorded breadth fails rather than passes unnoticed', () => {
-  // Hours alone cannot show range, and L4 asks for both.
-  const { distinctActivities, ...assessment } = credential.assessment as Record<string, unknown>;
-  const findings = checkCredential({ ...credential, assessment }, REAL_L4);
-  assert.ok(findings.some((f) => f.message.includes('distinct activities') && f.message.includes('records none')));
+  assert.ok(
+    findings.some((f) => f.message.includes('total 160 hours')),
+    `expected the summed total, got: ${JSON.stringify(findings.map((f) => f.message))}`,
+  );
 });
 
 test('sufficient hours across too few activities are rejected', () => {
   // The point of the threshold: 1000 hours on one repetitive task clears an
   // hours bar and does not show the range the level actually claims.
   const findings = checkCredential(
-    { ...credential, assessment: { ...credential.assessment as object, experienceHours: 5000, distinctActivities: 1 } },
+    {
+      ...credential,
+      assessment: {
+        ...(credential.assessment as object),
+        activities: [{ ...ACTIVITIES[0], hours: 5000 }],
+      },
+    },
     REAL_L4,
   );
-  assert.ok(findings.some((f) => f.message.includes('records 1 distinct activity')));
-  assert.ok(!findings.some((f) => f.message.includes('experience hours')));
+  assert.ok(findings.some((f) => f.message.includes('span 1 distinct piece')));
+  assert.ok(!findings.some((f) => f.message.includes('total')));
+});
+
+test('ONE PIECE OF WORK IS ONE ACTIVITY, however many entries describe it', () => {
+  // The inflation a breadth threshold exists to stop, and the thing a declared
+  // integer could never have caught: three entries, one id, one job.
+  const first = ACTIVITIES[0]!;
+  const twice = [
+    first,
+    { ...ACTIVITIES[1]!, id: first.id },
+    { ...ACTIVITIES[2]!, id: first.id },
+    ACTIVITIES[3]!,
+  ];
+  const findings = checkCredential(
+    { ...credential, assessment: { ...(credential.assessment as object), activities: twice } },
+    REAL_L4,
+  );
+  assert.ok(findings.some((f) => f.message.includes("lists activity 'ilc-2026-mass-round' 3 times")));
+  assert.ok(findings.some((f) => f.message.includes('span 2 distinct piece')));
+});
+
+test('an activity that does not say what it demonstrated is refused by the schema', () => {
+  // The whole of open decision 19. Hours and an account say what was done; only
+  // this says what it showed about THIS element.
+  const validate = validatorFor('credential');
+  const { demonstrates, ...silent } = ACTIVITIES[0] as Record<string, unknown>;
+  assert.equal(
+    validate({
+      ...credential,
+      assessment: { ...(credential.assessment as object), activities: [silent, ...ACTIVITIES.slice(1)] },
+    }),
+    false,
+  );
 });
 
 test('two signers who scored once between them do not satisfy double scoring', () => {
@@ -1165,4 +1255,61 @@ test("a wallet export carries the holder's own answers, and only for what it exp
   const wallet = walletExport([credential], [], [mine, somebodyElses]);
   assert.deepEqual(wallet.counterStatements, [mine]);
   assert.deepEqual(wallet.authorizations, []);
+});
+
+
+/* -- One activity, described the same way everywhere it is claimed --------- */
+
+/*
+ * The payoff of giving an activity an id at all. Decision 37 is right that one
+ * piece of work credits every element it genuinely exercised, so the same
+ * activity legitimately appears on several credentials — and the failure it
+ * opens lives BETWEEN them, where no single document looks wrong.
+ */
+
+const other = (activities: ExperienceActivity[]) => ({
+  ...credential,
+  id: 'urn:uuid:9c8b7a65-4321-4f6a-9b2c-7e1d0a3f5b8c',
+  element: 'CM-03-052',
+  assessment: { ...(credential.assessment as object), activities },
+});
+
+test('THE SAME WORK ON TWO CREDENTIALS IS NOT A FINDING — that is decision 37', () => {
+  // What differs between them is `demonstrates`, and it is never compared.
+  const elsewhere = ACTIVITIES.map((a) => ({
+    ...a,
+    demonstrates:
+      'Building each budget from the raw records meant deriving every standard uncertainty from the certificates before anything could be combined, which is what this element asks for at L3 and above.',
+  }));
+  assert.deepEqual(checkExperienceAcrossCredentials([credential, other(elsewhere)]), []);
+});
+
+test('hours that grow to meet whichever threshold is in front of them are caught', () => {
+  // Ninety hours on the credential that needed sixty, a hundred and forty on
+  // the one that needed a hundred and twenty. Each clears its own bar.
+  const inflated = ACTIVITIES.map((a, n) => (n === 0 ? { ...a, hours: 140 } : a));
+  const findings = checkExperienceAcrossCredentials([credential, other(inflated)]);
+  assert.ok(
+    findings.some((f) => f.message.includes("activity 'ilc-2026-mass-round'") && f.message.includes('90 hours on one and 140')),
+    `expected the inflation to be named, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('an account rewritten to suit the element it is credited to is caught', () => {
+  const rewritten = ACTIVITIES.map((a, n) =>
+    n === 0
+      ? {
+          ...a,
+          account:
+            'Ran the whole of the laboratory mass programme for the year, including the scope extension, the intermediate checks and the customer work across every range on the certificate.',
+        }
+      : a,
+  );
+  const findings = checkExperienceAcrossCredentials([credential, other(rewritten)]);
+  assert.ok(findings.some((f) => f.message.includes('two different accounts of what the work was')));
+});
+
+test('different work under different ids is exactly what breadth looks like', () => {
+  const distinct = ACTIVITIES.map((a) => ({ ...a, id: `${a.id}-b` }));
+  assert.deepEqual(checkExperienceAcrossCredentials([credential, other(distinct)]), []);
 });
