@@ -939,6 +939,36 @@ The review stated it better than the code did, and it is now the test's name:
 
 Seven existing tests broke on this change. Every one of them had asserted that a policy was satisfied while proving nothing about the signers; each now supplies the backing credentials and tests what it meant to.
 
+## A true identifier beside a false one bought the false one everything
+
+**Closed 2026-09-20, inside the freeze window.** External adversarial review, finding A-06.
+
+The issuer lookup was an **OR**:
+
+```ts
+const issuer = registry.issuers.find(
+  (i) => (entry && i.entry === entry) || (did && i.did === credential.issuer.did),
+);
+```
+
+So a credential naming `trustRegistryEntry: northfield-cal-2026` beside `issuer.did: did:key:zAttacker` **resolved Northfield's registry entry** — by the half that matched — and then read Northfield's keys, admission date, removal date and accreditation out of it. The DID the credential actually claimed to be signed by was never compared with anything.
+
+Either identifier could select the issuer on its own, so **supplying a true one alongside a false one cost nothing and bought the false one everything the true one is trusted for.**
+
+**It is latent today only because no signature is verified yet.** The moment one is, this is the seam between *the registry says who this issuer is* and *the credential says who signed it*, and the two have to be the same party. Every identifier the credential supplies must now agree, and the credential is refused when they do not.
+
+### The disagreement gets its own finding
+
+Falling through to "unknown issuer" would have been a refusal too, and the wrong one. They are different facts with different remedies: one says nobody by that name was admitted, the other says **this document names two different parties as its issuer**. Collapsing them hides the only case that is an attack rather than a typo. Three shapes, three messages:
+
+- registry entry resolves and the DID does not match it;
+- the DID resolves and the entry does not match it;
+- both resolve, to **different** registered issuers.
+
+A credential carrying only one identifier still resolves on it — nothing here requires both — and a test holds that open.
+
+**No existing test exercised the mismatch**, which is why it survived. That is the same shape as the `relevance`/`supports` guard added the same day: the population a check protects is often the one nobody has written a case for yet.
+
 ## A gold reference cannot be self-declared
 
 **Closed 2026-09-04, inside the freeze window.** Open item 12.
@@ -987,6 +1017,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
+19. **CLOSED 2026-09-20 — an issuer's identifiers must agree** — the registry lookup was an OR, so a true entry beside a false DID resolved the true issuer and inherited its keys and dates. See [A true identifier beside a false one](#a-true-identifier-beside-a-false-one-bought-the-false-one-everything).
 18. **CLOSED 2026-09-20 — an assertion does not satisfy a requirement asking for proof** — `heldLevel` and `credentialedReviewer` were numbers and booleans the issuer typed, and they satisfied the L3–L5 signoff rungs. Standing is now one of five states and only `proven` or `bootstrap` counts. See [An assertion does not satisfy a requirement that asks for proof](#an-assertion-does-not-satisfy-a-requirement-that-asks-for-proof).
 17. **CLOSED 2026-09-20 — a signer's authority chain says what it claims** — `element` and `level` on the entry, resolved by `checkCredential` when the caller holds the backing credentials and named unresolved when they do not. A wallet cannot supply them: a signer's record is the signer's. See [A signer's authority chain says what it claims](#a-signers-authority-chain-says-what-it-claims-and-a-wallet-cannot-resolve-it).
 16. **DECLARED 2026-09-20 — what "nothing gates entry" currently reaches** — L2, because L3 up needs a signer holding the level in that element and holding reviewer authority. The mechanism is decisions 24, 32 and 33 and it is unbuilt; L5's cross-organizational rule is a residue it will not lift. See ["Nothing gates entry" reaches L2](#nothing-gates-entry-reaches-l2-and-the-thing-that-lifts-it-is-designed-and-unbuilt).
