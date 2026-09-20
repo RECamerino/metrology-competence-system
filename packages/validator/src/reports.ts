@@ -220,6 +220,51 @@ export function coverageReport(corpus: Corpus): string {
     lines.push('');
   }
 
+  /* -- How much of the coverage map could actually fail -------------------- */
+
+  /*
+   * `report:foundational` exists because 21 flat-L3 areas could not be told
+   * apart from 21 decisions without a number. This is the same shape: a
+   * knowledgeRef claiming every attainable level satisfies the coverage
+   * accounting on its own, so every other ref's `supports` on that element is
+   * decorative and the check cannot fail there. The shape is often honest and
+   * nothing computable separates the honest one from the careless one — so the
+   * corpus reports the rate instead of warning on each instance.
+   */
+  const unfalsifiable: string[] = [];
+  for (const [id, file] of authored) {
+    const d = file.data as Record<string, any>;
+    const ceiling: number = d.levelCeiling ?? 0;
+    const refs = (d.knowledgeRefs ?? []) as Array<Record<string, any>>;
+    if (ceiling < 1 || refs.length < 2) continue;
+
+    const whole = new Set<number>();
+    for (let level = 1; level <= ceiling; level += 1) whole.add(level);
+
+    const covering = refs.filter((ref) => {
+      const claimed = new Set(((ref?.supports ?? []) as unknown[]).filter((v): v is number => typeof v === 'number'));
+      return [...whole].every((level) => claimed.has(level));
+    });
+    if (covering.length > 0) {
+      unfalsifiable.push(`${id} (${covering[0]!.article}#${covering[0]!.section})`);
+    }
+  }
+
+  if (authored.size > 0) {
+    const multiRef = [...authored.values()].filter(
+      (f) => (((f.data as Record<string, any>).knowledgeRefs ?? []) as unknown[]).length >= 2,
+    ).length;
+    lines.push('KNOWLEDGE COVERAGE');
+    lines.push('-'.repeat(78));
+    lines.push(
+      `  Elements where the coverage accounting cannot fail: ${unfalsifiable.length} of ${multiRef} multi-ref`,
+    );
+    lines.push('    One ref claims every attainable level, so the others\' supports are decorative.');
+    lines.push('    Often honest. Nothing computable tells the honest one from the careless one.');
+    if (unfalsifiable.length > 0) lines.push(`    ${listOf(unfalsifiable, 8)}`);
+    lines.push('');
+  }
+
   /* -- Gaps worth acting on ---------------------------------------------- */
 
   const orphans = [...authored.keys()].filter((id) => !stubs.has(id));

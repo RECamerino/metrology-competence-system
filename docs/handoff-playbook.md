@@ -240,7 +240,9 @@ knowledgeGaps:
     awaiting: A section on judging a contribution negligible against the target.
 ```
 
-This does not prove coverage and is not meant to — no check reads prose. It proves you looked at every rung, and it turns an unserved one from a silence into an error. **An open gap keeps the element in `draft`**, which under rule 7 means it can be assessed at L1 and L2 and not above. That is the intended cost: write the material, or leave the status alone.
+**Write `supports` against the ANCHOR at each rung, not against the element's title, and the test that makes it mean something is: which rungs would still be served if this ref were deleted?** A ref that serves every rung is sometimes exactly right and is more often a ref nobody narrowed — and if any one ref claims every rung, the accounting on that element cannot fail and the rest of the map is decorative. That is the shape 23 of the 26 authored elements currently have; `npm run report:coverage` prints the number.
+
+This does not prove coverage and is not meant to — no check reads prose. It proves you looked at every rung, and it turns an unserved one from a silence into an error where the map was narrow enough for that to bite. **An open gap keeps the element in `draft`**, which under rule 7 means it can be assessed at L1 and L2 and not above. That is the intended cost: write the material, or leave the status alone.
 
 **The anchors above are performance, not understanding, because `kind` is `skill`.** "Recognizes that inputs may be correlated" would be a knowledge anchor and wrong for this element — see [Write the anchors to match the element's kind](#write-the-anchors-to-match-the-elements-kind).
 
