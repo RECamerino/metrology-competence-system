@@ -139,7 +139,9 @@ export interface CredentialAssessment {
   attemptRef?: string;
   candidateOrganization?: OrganizationRef;
   activities?: ExperienceActivity[];
-  scorerCount?: number;
+  scorers?: Array<{ did?: string; scoredOn?: string }>;
+  scoreOutcome?: 'agreed' | 'resolved';
+  scoreResolution?: string;
   previousLevelAttainedOn?: string;
 }
 
@@ -1054,15 +1056,74 @@ export function checkCredential(
     }
   }
 
+  /*
+   * Double scoring, which was a number somebody typed.
+   *
+   * `proficiency.yaml` states the rule as "independent scoring by two reviewers
+   * with a documented disagreement-resolution path". `scorerCount: 2`
+   * establishes none of the three — it is satisfied by one person scoring
+   * twice, by two who conferred, or by nobody at all. The field's own
+   * description made the sharp half of the argument (SCORING IS NOT SIGNING, so
+   * a signer count cannot stand in) and then could not tell two scorers from
+   * one counted twice.
+   *
+   * What a document can carry is identity and a resolution; what it cannot
+   * carry is whether they conferred before scoring, and nothing here pretends
+   * otherwise — that is inter-rater reliability, and it is open decision 11.
+   */
   if (policy.doubleScored) {
-    const scorers = assessment.scorerCount;
-    if (typeof scorers !== 'number') {
+    const scorers = assessment.scorers ?? [];
+    const dids = scorers.map((sc) => String(sc?.did ?? '').trim()).filter((d) => d.length > 0);
+    const distinct = new Set(dids);
+
+    if (scorers.length === 0) {
       findings.push(
-        err(at(`level ${credential.level} is double-scored and the credential does not record how many scorers there were. Record assessment.scorerCount.`)),
+        err(at(`level ${credential.level} is double-scored and the credential records no scorers. Record assessment.scorers — who scored it, not how many.`)),
       );
-    } else if (scorers < 2) {
+    } else if (distinct.size < 2) {
+      // The case the integer could never see.
       findings.push(
-        err(at(`records ${scorers} scorer(s); level ${credential.level} is double-scored and requires at least 2. Scoring is not signing — two signers who scored once over do not satisfy this.`)),
+        err(
+          at(
+            dids.length >= 2
+              ? `records ${dids.length} scoring entries under ${distinct.size} person. Double scoring asks for two reviewers, and one person scoring twice is one reviewer however many rows describe it.`
+              : `records ${distinct.size} distinct scorer(s); level ${credential.level} is double-scored and requires two. Scoring is not signing — two signers who scored the work once between them do not satisfy this.`,
+          ),
+        ),
+      );
+    }
+
+    if (distinct.has(credential.subject)) {
+      findings.push(
+        err(at(`records the subject as one of its scorers. Nobody scores their own assessment, for the reason nobody signs off their own competence.`)),
+      );
+    }
+
+    // Permitted, and named. A scoring pool with one authorized signatory is an
+    // ordinary arrangement; the cost is that a judgement by somebody who did
+    // not sign reads on the document as though it were part of the attestation,
+    // which is the argument `evidence[].sufficiency` settles the other way.
+    const signerDids = new Set(credential.signers.map((sg) => sg.did));
+    const unsigned = [...distinct].filter((didValue) => !signerDids.has(didValue));
+    if (unsigned.length > 0) {
+      findings.push(
+        warn(at(`scored by ${unsigned.join(', ')}, who did not sign. That is permitted — the policy asks for two reviewers rather than two signers — but their judgement is not part of the attestation the signers made, and on the document it reads as though it were.`)),
+      );
+    }
+
+    // Silence is not 'they agreed'. The enum costs one word in the common case,
+    // so the honest answer is cheaper than filler.
+    if (!assessment.scoreOutcome) {
+      findings.push(
+        err(at(`is double-scored and does not say whether the scorers agreed. Record assessment.scoreOutcome — the policy asks for a documented disagreement-resolution path, and nothing recorded whether the path was ever walked.`)),
+      );
+    } else if (assessment.scoreOutcome === 'resolved' && !String(assessment.scoreResolution ?? '').trim()) {
+      findings.push(
+        err(at(`records that the scorers disagreed and does not say how it was reconciled. What makes double scoring defensible in an audit is that the difference was settled by a stated process rather than by whoever spoke last.`)),
+      );
+    } else if (assessment.scoreOutcome === 'agreed' && String(assessment.scoreResolution ?? '').trim()) {
+      findings.push(
+        err(at(`records that the scorers agreed and also carries a resolution. One of the two is wrong and a reader cannot tell which.`)),
       );
     }
   }

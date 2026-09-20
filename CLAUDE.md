@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 17.5% / 60.9% / 21.6% |
 | Content authored | **26 elements** · **17 BOK articles** · **2 modules** — 8 domains, all three axes |
 | Item bank | 6 archetypes · 46 bindings across 45 units · **0.2%** of units covered |
-| Checks | 0 errors · 432/432 tests · typecheck clean |
+| Checks | 0 errors · 439/439 tests · typecheck clean |
 
 ### Phases
 
@@ -146,7 +146,7 @@ content/trust-registry.yaml       Issuer trust registry. Steward-controlled.
                                   verifies.
 
 schemas/                          19 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 432 tests.
+packages/validator/               The ONLY implemented package. 439 tests.
 apps/viewer/                      The only implemented app. TWO templates and a
                                   build script; output is an index page plus one
                                   page per domain, none committed. Every page is
@@ -172,7 +172,7 @@ Nineteen schemas, and the ones that are not obvious from their names:
 | `bootstrap-cohort` | The founding roster — makes "closed, time-limited" resolvable rather than asserted |
 | `trust-registry` | Who may issue, which keys were theirs, and how old this snapshot is |
 | `item-archetype`, `item-binding` | The item bank (decision 36). `itemType` includes `witnessed-performance`, the only shape that can assess an element whose demonstration route is `equipment`. **What the witness must observe is two-layer**: the archetype states what its whole family of procedures requires, the binding states what THIS test adds. A parameter declares `exposureRelevant` — whether varying it makes a materially different item, which is what decides how big the bank actually is — and a binding carries the `review` that says somebody judged it professionally valid |
-| `credential`, `authorization` | What travels with a person, and what never does. An experience claim names its **activities** — each with what it demonstrated about THIS element, and either an account of the work or a pinned record of it — rather than carrying a total nobody can look behind. **A holder is not compelled to describe a customer's business on a document they hand to that customer's competitor**, and nothing on a credential can be redacted later: this suite has no selective disclosure and the one that does is RDF-based, which rule 5 forbids. An authorization's scope is computable on every dimension, because the question an accreditation body asks of it is a comparison and not a reading |
+| `credential`, `authorization` | What travels with a person, and what never does. **Double scoring names the SCORERS** — `proficiency.yaml` asks for two reviewers and a documented disagreement-resolution path, and `scorerCount: 2` was satisfied by one person scoring twice; the count is derived, the scorers are distinct, none is the subject, and silence is not 'they agreed'. An experience claim names its **activities** — each with what it demonstrated about THIS element, and either an account of the work or a pinned record of it — rather than carrying a total nobody can look behind. **A holder is not compelled to describe a customer's business on a document they hand to that customer's competitor**, and nothing on a credential can be redacted later: this suite has no selective disclosure and the one that does is RDF-based, which rule 5 forbids. An authorization's scope is computable on every dimension, because the question an accreditation body asks of it is a comparison and not a reading |
 | `attempt-ledger` | No-retake rule and exposure control. An attempt records `structuralRef` — the draw hashed over its exposure-relevant values alone — because the values themselves are item internals and the candidate holds this ledger |
 | `deployment-scope` | Which elements apply to a person — pairs with `roleTargets` |
 | `disclosure` | What a person has consented one organization to see, for one purpose, until one date. An organization's view of a record is a disclosure, not a read |
@@ -213,7 +213,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 432 guardrail tests
+npm test                  # 439 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:foundational # which foundational areas a person has actually graded
@@ -314,7 +314,7 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 **2232 → 5407 elements in one session**, and 5459 today. The `EC` axis (21 packs, 203 equipment types, 2732 elements) and 31 `Foundational Knowledge` areas were **generated in passes** from hand-written per-type specifications. Read that as a warning label, not a boast.
 
-**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 432 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
+**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 439 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
 
 **Coverage is the thing that is not proven.** A practicing metrologist reviewed the equipment axis four times and found real gaps every time — fixture-to-print calibration absent entirely, cal kits present only as parameters, magnetics claimed by a pack that contained none of it, the whole reference-and-primary tier missing between a working instrument and the SI. Each round changed the design rather than adding to it.
 
