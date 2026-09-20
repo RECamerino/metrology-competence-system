@@ -116,6 +116,50 @@
 # Breadth is a separate matter and IS modelled: see minDistinctActivities at
 # L4 and L5. Hours measure duration, and LM-14's "progressively more complex
 # assignments" is a claim about range.
+#
+# MANY ROUTES REACH ONE ASSESSMENT, NONE OF THEM IS PRIVILEGED, AND NONE OF
+# THEM IS REQUIRED — declared 2026-09-20.
+#
+# Nothing in this ladder, and nothing anywhere in the system, may be reached
+# only by taking a course. Self-study from the BOK, a standard or a textbook;
+# mentoring; a commercial course; and learning the job by doing it are all
+# legitimate ways to arrive at the same assessment, and the assessment does not
+# ask which one somebody took. The competence definition is independent of any
+# learning provider, and stays so: an element states what a person can do, and
+# a module states what it prepares somebody for and never what it qualifies
+# them for.
+#
+# The reason is the first principle in CLAUDE.md. Nothing gates entry — no
+# employer, no budget, no professional network — and a mandatory course is
+# every one of those gates at once. It is also the difference between a body of
+# knowledge and a curriculum: a curriculum has an owner who decides who has
+# finished it, and this corpus is meant to be usable by people who will never
+# meet anybody involved in writing it.
+#
+# What this rules out, concretely and permanently:
+#
+#   * No field may express a training prerequisite. `preparesFor` on a module
+#     says so in terms, and there is deliberately no `requires` beside it.
+#   * A preparation record is not evidence on a credential. The `evidence`
+#     enum on `credential.schema.json` has no entry for one and must not gain
+#     one; `attestsCompetence` is const false so it cannot be made into one.
+#   * The route somebody took is not an input to anything. `provenanceTier`
+#     describes the standing of the WITNESS at assessment, and has never
+#     described how the candidate learned. Reading `self-study` on a record as
+#     weaker preparation than `course` is reading in something that is not
+#     there.
+#
+# What it costs, stated honestly: the system can say very little about how well
+# anybody prepared. A person who read one section and a person who worked
+# through a mentored year both hold a record saying they prepared, and both
+# have to demonstrate the same thing to the same standard. That is the trade
+# accepted — rigour lives in the assessment, not in the route to it, which is
+# also what makes the assessment worth defending.
+#
+# The record-side half is `route` on `training-record.schema.json`, which lets
+# the other four routes be written down at all; before 2026-09-20 a module was
+# the only preparation that had an object, which is how a route becomes the
+# path without anybody deciding it.
 
 schemaVersion: 1
 

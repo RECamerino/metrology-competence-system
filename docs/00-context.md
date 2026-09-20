@@ -135,6 +135,8 @@ Decision 45. The training layer was an empty directory and a phase number until 
 
 A person can read everything ever written about a CMM and still be unable to run one. That is a fact about the competence, not a defect in the software, and it is a defensible line to hold. Softening skill evidence so a simulation counts would not be inclusive — it would issue an attestation that somebody can operate equipment they have never touched, and the person most harmed by that is the holder, standing in front of the machine on their first day.
 
+**And a module is one route among several, which the schema did not say until 2026-09-20.** See [Many routes reach one assessment, and none of them is required](#many-routes-reach-one-assessment-and-none-of-them-is-required) — the training record admitted only modules, so the one state a self-taught learner most needs was reachable only by completing one.
+
 So training modules are **not** a workaround for equipment access. They are preparation, so that when access does come — bought, borrowed, or on the job — the bench time is spent well rather than spent learning what a book could have taught. Whether somebody obtains equipment and finds a credentialed witness is their business and their route; the system's job is to define the competence, supply the knowledge freely, and verify the demonstration honestly. It is not to procure hardware.
 
 So the validator requires that a module preparing for an element whose `demonstration` is `equipment` declares it in `requiresPhysicalDemonstration`. A module claiming to complete such an element by simulation is asserting that a simulation substitutes for the bench, and the failure would otherwise be invisible: the module would look complete and the learner would believe they had finished something they have never done.
@@ -730,6 +732,29 @@ CI checked that a `knowledgeRef` **resolved** — the article exists, the sectio
 
 **The proof that it does something is what the pass found.** `CM-03-052` is the element the open item was filed against, and its closing note had said for weeks that `BOK-0003` §s05 was "now in `knowledgeRefs` above". It never was. Three things were wrong in one sentence: the ref is absent, the ref that *is* there covers RECORDING which contributions were dismissed rather than deciding it, and §s05 is a section about where the first-order approximation stops being safe that states the principle only in its closing paragraph. So the gap is declared rather than patched, and the remedy is a section nobody has written. `CM-03-040` failed the same way in the other direction: an element about choosing between distributions, whose L2 names the rectangular and the normal-from-a-coverage-claim by name, pointed at neither section. Both were invisible to CI, to six schema passes and to the authors, and both surfaced within an hour of being made to say which rung each ref serves.
 
+## Many routes reach one assessment, and none of them is required
+
+**Closed 2026-09-20, inside the freeze window.** Open item 7.
+
+`BOK → module → assessment` must never harden into a mandatory linear course. That was stated in the phase plan, in `preparesFor` ("PREPARES FOR, not qualifies for, and not a prerequisite — nothing here may be required before an assessment"), in `alternativeRoutes`, and in the training record's own description. **Four prose statements, and the schema admitted one route.**
+
+**Nothing ever REQUIRED a module, and that was not the problem.** No field anywhere can express a training prerequisite; a check looking for one finds nothing to check, and this pass looked. What the schema did was narrower and harder to see: `training-record` required `module` and `moduleRef`, so the only preparation anybody could write down was a module they had finished. Self-study, mentoring, a commercial course and prior practice — all named as legitimate — had no object at all. **A route that is the only one recordable becomes the path without anybody deciding it**, which is exactly how `blockedPendingCounsel` spent months as a correct position nobody could act on.
+
+**What was actually lost was `pending-demonstration`.** That state is the one that turns "I have no employer" into a specific request: the knowledge is done, the witnessed performance on real apparatus is not. It was derived from a module's `requiresPhysicalDemonstration` — so the person who taught themselves an `equipment`-route element had no way to say they owed bench time. The honest position was reachable only by somebody who had completed a module, which is precisely backwards: the person with no employer is who the Personal edition exists for.
+
+What it took:
+
+- **`route` on the preparation record** — `module`, `self-study`, `mentoring`, `course`, `workplace-practice`. `module` and `moduleRef` are required for the first and forbidden for the rest; every other route owes an `account` of what the person actually did, because "self-study, 2027-03-04" is a date attached to a word.
+- **The state is derived from the ELEMENT, not from the route somebody took.** How a person prepared has nothing to do with whether a bench is owed. That generalizes the existing rule rather than replacing it — a module record is checked exactly as before, and every other record is now checked the same way, in `preparation.ts`.
+- **`knowledgeCovered` pins BOK sections**, on any route and most usefully on self-study. **The free route is the one this project can pin**, because the corpus is the only material it owns: somebody with no employer and no budget who worked through `BOK-0001` §s03 can record exactly that, hashed. No commercial course can offer that and this project cannot offer it on their behalf.
+- **`provider` is permitted on a course or a mentoring record and confers nothing.** Vendor neutrality constrains what the CORPUS steers people toward; refusing a person somewhere to write down what they actually attended would be the corpus imposing its neutrality on somebody else's history. The individual owns the record.
+- **`alternativeRoutes` is now required on a module**, with the same argument `cannotConvey` already carries: a module naming no alternative is the only route its reader can see.
+- **The principle is declared in `proficiency.yaml`**, beside the education exclusion, with what it rules out and what it costs. An undeclared position reads as an oversight, and this one had been stated everywhere except where a reader would look for it.
+
+**Nothing here ranks the routes, and a test holds that.** Five records differing only in `route` produce byte-identical findings. `provenanceTier` describes the standing of the WITNESS at assessment and has never described how the candidate learned; if a check ever starts treating `self-study` as weaker than `course`, the principle has been lost in the implementation rather than in the schema.
+
+**What it costs, stated:** the system can say very little about how well anybody prepared. A person who read one section and a person who worked through a mentored year both hold a record saying they prepared, and both have to demonstrate the same thing to the same standard. Rigour lives in the assessment rather than in the route to it, which is also what makes the assessment worth defending.
+
 ## A gold reference cannot be self-declared
 
 **Closed 2026-09-04, inside the freeze window.** Open item 12.
@@ -778,4 +803,5 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
+13. **CLOSED 2026-09-20 — many routes reach one assessment** — `route` on the preparation record, `pending-demonstration` derived from the element rather than from a module, and the principle declared in `proficiency.yaml`. See [Many routes reach one assessment, and none of them is required](#many-routes-reach-one-assessment-and-none-of-them-is-required).
 7. **Skeleton scale** — resolved. Landed at 2232 elements across 257 areas and 43 domains, against a 2000+ target.

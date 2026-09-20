@@ -1,11 +1,33 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://metrology-bok.org/schemas/training-record.schema.json",
-  "title": "Training record — objective evidence that somebody learned, not that they can do",
-  "description": "What completing a training module produces. It is deliberately NOT a credential, and `attestsCompetence` is const false so it cannot be made into one.\n\nThe distinction is the project's founding objection. 'Completed Advanced Metrology Training' is the claim this system exists to replace, and a training layer that quietly issued competence claims would rebuild the problem inside the solution. A training record says one thing honestly: this person did this work on this date.\n\nWHY IT MAY BE SELF-ATTESTED, WHEN A CREDENTIAL MAY NOT. Completing a module is a fact about participation. Demonstrating competence is a claim about ability, and claims about ability need somebody else to stand behind them — hence no self-signoff anywhere on a credential. Applying that rigour here would gate learning behind a witness, which punishes exactly the person with no employer and no professional network. So training records may be self-attested, and they carry correspondingly little weight, and both of those facts are visible.\n\nTHE USEFUL PART IS `pending-demonstration`. An element being prepared by the `equipment` route cannot be finished by simulation, and the requirement to perform the work on real apparatus is not a barrier the system should be trying to dissolve. This state records position precisely: the knowledge is done, the demonstration is not. A mentor or a laboratory reading it knows exactly what is being asked for, and the holder is never left believing the training finished the job.\n\nIt is keyed off `demonstration` and NOT off `kind`. A `skill` element that is desk work reaches `prepared`, because there is no bench to wait for. Where an element admits BOTH routes, the state follows the route the module prepared rather than the element alone: the same element reaches `prepared` through one module and `pending-demonstration` through another, and recording which is the whole reason a module states its route.",
+  "title": "Preparation record — objective evidence that somebody learned, not that they can do",
+  "description": "What PREPARING for an assessment produces, by whatever route somebody prepared. It is deliberately NOT a credential, and `attestsCompetence` is const false so it cannot be made into one.\n\nThe distinction is the project's founding objection. 'Completed Advanced Metrology Training' is the claim this system exists to replace, and a training layer that quietly issued competence claims would rebuild the problem inside the solution. A preparation record says one thing honestly: this person did this work on this date.\n\nMANY ROUTES REACH ONE ASSESSMENT, AND THIS FILE USED TO ADMIT ONE. `module` and `moduleRef` were required, so the only preparation anybody could write down was a module they had completed. Nothing ever REQUIRED a module \u2014 `preparesFor` says so in terms and no field could express a training prerequisite \u2014 but the module was the only route with an object, and a route that is the only one recordable becomes the path without anybody deciding it. Self-study, mentoring, a commercial course and prior practice were named as legitimate in four prose descriptions and represented nowhere. `route` is what closes that, and the corollary is the honest one: the record of a person who taught themselves is as real, and as weak, as the record of a person who took a module.\n\nWHY IT MAY BE SELF-ATTESTED, WHEN A CREDENTIAL MAY NOT. Preparing is a fact about participation. Demonstrating competence is a claim about ability, and claims about ability need somebody else to stand behind them \u2014 hence no self-signoff anywhere on a credential. Applying that rigour here would gate learning behind a witness, which punishes exactly the person with no employer and no professional network. So preparation records may be self-attested, and they carry correspondingly little weight, and both of those facts are visible.\n\nTHE USEFUL PART IS `pending-demonstration`. An element evidenced by the `equipment` route cannot be finished by reading or by simulation, and the requirement to perform the work on real apparatus is not a barrier the system should be trying to dissolve. This state records position precisely: the knowledge is done, the demonstration is not. A mentor or a laboratory reading it knows exactly what is being asked for, and the holder is never left believing preparation finished the job.\n\nIT IS DERIVED FROM THE ELEMENT AND NOT FROM THE ROUTE SOMEBODY TOOK. It used to be checked against a module's `requiresPhysicalDemonstration`, which meant the self-taught learner who owed bench time had no way to say so \u2014 the one state that turns 'I have no employer' into a specific request was reachable only by completing a module. It is keyed off `demonstration` on the element, and off `kind` least of all: a `skill` element that is desk work reaches `prepared`, because there is no bench to wait for. Where an element admits BOTH routes the state follows the route prepared, which is why `preparedFor` states it.",
 
   "type": "object",
-  "required": ["schemaVersion", "id", "subject", "module", "moduleRef", "completedOn", "attestsCompetence"],
+  "required": ["schemaVersion", "id", "subject", "route", "completedOn", "attestsCompetence"],
+
+  "allOf": [
+    {
+      "if": { "type": "object", "properties": { "route": { "const": "module" } }, "required": ["route"] },
+      "then": { "type": "object", "required": ["module", "moduleRef"] },
+      "else": {
+        "type": "object",
+        "required": ["account"],
+        "properties": { "module": false, "moduleRef": false }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": { "route": { "enum": ["course", "mentoring"] } },
+        "required": ["route"]
+      },
+      "then": true,
+      "else": { "type": "object", "properties": { "provider": false } }
+    }
+  ],
+
   "additionalProperties": false,
 
   "properties": {
@@ -18,6 +40,11 @@
 
     "subject": { "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did" },
 
+    "route": {
+      "enum": ["module", "self-study", "mentoring", "course", "workplace-practice"],
+      "description": "HOW THIS PERSON PREPARED. Required, and every value is equally legitimate \u2014 the enum exists to make the other routes writable, not to rank them.\n\n`module` \u2014 a module in this corpus; `module` and `moduleRef` are then required and nothing else may carry them.\n`self-study` \u2014 the BOK, a standard, a textbook. The route the Personal edition exists for, and the only one this project can pin, because the corpus is the only material it owns: see `knowledgeCovered`.\n`mentoring` \u2014 worked through with somebody more experienced. NOT the same thing as the `mentoring-record` in a credential's `evidence`: that is an artifact a SIGNER judged sufficient at assessment, and this is the holder's own account of how they prepared. Two documents, two authors, and only one of them is part of an attestation.\n`course` \u2014 anything taught by anybody else, commercial or otherwise.\n`workplace-practice` \u2014 learned by doing the job. The commonest route in this profession and the one a training layer is likeliest to forget.\n\nWHAT THE ROUTE DOES NOT DO. It does not change what the assessment asks, what evidence it accepts, or what the credential says \u2014 `provenanceTier` on the credential describes the standing of the WITNESS and has never described how the candidate learned. A reader who treats `self-study` here as a weaker preparation than `course` has read something into it that is not there. Somebody who learned it on the bench twenty years ago sits the same assessment as somebody who finished MOD-0001 yesterday."
+    },
+
     "module": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/moduleId" },
 
     "moduleRef": {
@@ -25,7 +52,29 @@
       "description": "Hash of the module as it stood when completed. Same reasoning as `definitionRef` on a credential: an append-only ID keeps `MOD-0001` resolving, and only a content pin keeps it MEANING what it meant. A module rewritten in 2030 does not retrospectively change what somebody did in 2027."
     },
 
-    "completedOn": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate" },
+    "account": {
+      "type": "string",
+      "minLength": 80,
+      "maxLength": 1200,
+      "description": "The person's own account of what they actually did. REQUIRED on every route except `module`, where the module and its content hash say it already.\n\nWithout it a non-module record asserts nothing a reader can weigh: 'self-study, 2027-03-04' is a date attached to a word. With it, the record is reviewable evidence in the sense decision 37 means \u2014 something somebody could examine and disagree with."
+    },
+
+    "provider": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Who taught it, on a `course` or `mentoring` record. Permitted nowhere else.\n\nTHIS IS THE HOLDER'S STATEMENT ABOUT THEIR OWN RECORD AND CONFERS NOTHING. It is not validated, not resolved, not endorsed, and no course anywhere is registered with this project. Vendor neutrality is a constraint on what the CORPUS steers people toward; refusing a person somewhere to write down what they actually attended would be the corpus imposing its own neutrality on somebody else's history, which is not what it is for \u2014 and the individual owns the record (rule 6b)."
+    },
+
+    "knowledgeCovered": {
+      "type": "array",
+      "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/sectionPin" },
+      "description": "BOK sections this preparation covered, pinned by content. Optional on every route and most useful on `self-study`.\n\nTHE FREE ROUTE IS THE ONE THIS PROJECT CAN PIN, because the corpus is the only material it owns. A person with no employer and no budget who worked through BOK-0001 \u00a7s03 can record exactly that, hashed, and a reader years later can tell whether the passage they worked through is the passage that is there now. No commercial course can offer that and this project cannot offer it on their behalf.\n\nIt is not a competence claim and not a coverage claim: it records what was READ, not what was learned, and nothing derives from it."
+    },
+
+    "completedOn": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate",
+      "description": "When the preparation finished. For a route with no end \u2014 workplace practice, an open reading list \u2014 it is the date the person drew the line and wrote this down."
+    },
 
     "attestsCompetence": {
       "const": false,
@@ -49,7 +98,7 @@
 
     "preparedFor": {
       "type": "array",
-      "description": "The assessable units this module prepared the person for, and where each now stands. Never an attainment — the credential is the only thing that attests attainment.",
+      "description": "The assessable units this preparation reached, and where each now stands. Never an attainment \u2014 the credential is the only thing that attests attainment, whatever the route.",
       "items": {
         "type": "object",
         "required": ["element", "level", "state"],
@@ -57,6 +106,10 @@
         "properties": {
           "element": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/elementId" },
           "level": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proficiencyLevel" },
+          "route": {
+            "enum": ["desk", "equipment"],
+            "description": "Which evidence route this preparation reached, for an element that declares MORE THAN ONE in `demonstration`. Required there and forbidden anywhere else \u2014 the same rule, for the same reason, as `route` on a module's `preparesFor` entry: where the element declares a single route it has already answered, and a second copy of one fact can drift out of agreement after an edit.\n\nIt is stated on the RECORD rather than only on the module because the record is the document that travels. A reader holding it alone has to be able to tell whether bench time is still owed, and for a route with no module there is nothing else to ask."
+          },
           "state": {
             "enum": ["prepared", "pending-demonstration"],
             "description": "`prepared` — the person has done the training and may sit the assessment. `pending-demonstration` — the module prepared this element by the `equipment` route, the training is done, and witnessed performance on real apparatus has not happened. Why it has not happened is not recorded and is not the system's business: equipment may be unavailable, or simply not yet used. The state asserts one thing only, which is that preparation is not attainment.\n\nKEYED OFF THE ROUTE PREPARED, NOT `kind`. A `skill` element that is desk work — constructing an uncertainty budget, drafting a procedure — is `prepared` once the training is done, not `pending-demonstration`. Putting it in this state would tell the holder they are waiting on access they never needed, and a record that invents a barrier is as misleading as one that hides a real one."
