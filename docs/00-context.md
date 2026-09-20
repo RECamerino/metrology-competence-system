@@ -867,6 +867,34 @@ No schema, no code, no change to any threshold — the ladder is steward-control
 
 **What this is not** is an argument for lowering any of it. Rigour is the third principle and these requirements are most of what carries it. Recording the cost is not a proposal to pay less of it; the routes out, if stewards ever want them, are the four decision 26 already lists.
 
+## A signer's authority chain says what it claims, and a wallet cannot resolve it
+
+**Closed 2026-09-20, inside the freeze window.** Review finding F-05.
+
+Decision 47 removed "trust me" from the signer: `heldLevel: 4` unbacked is an assertion, and `authority` was the fix — the signer's own credentials, named by id and pinned by content hash.
+
+**The entry carried an identifier and a hash and nothing a reader could read.** No element, no level. So the field's promise — *"a verifier can establish a chain offline: this DID holds credential X, X covers this element at or above the required level"* — was true only once X had arrived, by a route the system never defined, and the description ended **"Nothing in that requires contacting anybody."** That sentence ran two things together: what is free of the network is the CHECKING. Obtaining the document is not.
+
+### The obvious repair is refused, and that is the interesting part
+
+Export the signers' credentials alongside the holder's, and the chain resolves from the wallet.
+
+**No.** A signer's competence record is the SIGNER'S record. Rule 6b is not a rule about one person, and conscripting a third party's credential into somebody else's wallet — to be shown to whoever that person shows it to, forever — is precisely the disclosure this project built `disclosure.schema.json` to prevent. A narrower derived proof would need selective disclosure, which `ecdsa-jcs-2019` does not have and `ecdsa-sd-2023` cannot supply here because its mechanism is RDF-based (see finding F-04).
+
+**So a resolvable chain is something the SIGNER consents to hand over, and it is not something `walletExport` can manufacture.** That is a structural limit rather than a missing feature, and it is now written down where the promise used to be.
+
+### What the entry does instead
+
+`element` and `level` are required on it. They make the claim **legible** to a verifier who does not hold the backing credential, and **falsifiable** to one who later does — the hash pins the document, so a claim that disagrees with it is a detectable lie rather than an unexaminable assertion. Before, there was nothing to read and nothing to contradict.
+
+`checkCredential` takes the backing credentials when a caller has them, on the same argument as `signatureVerified` on a trust verdict: **the honest answer is a fact about what the caller had in front of them.** Unresolved is a warning, because that is about the caller; a wrong claim is an error, because that is about the credential. Resolved, it answers three questions the chain could never be asked before:
+
+- **is the backing credential the signer's own** — nobody backs their own standing with somebody else's;
+- **does it attest what the entry says** — element and level, against the document;
+- **is it in THIS element** — signer standing is scoped to the element, which the signoff policy has always said and nothing could previously check.
+
+**Four tests that asserted silence now assert no errors.** They were never about the chain; what they were relying on was that an unresolved chain said nothing at all, which is the defect.
+
 ## A gold reference cannot be self-declared
 
 **Closed 2026-09-04, inside the freeze window.** Open item 12.
@@ -915,6 +943,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
+17. **CLOSED 2026-09-20 — a signer's authority chain says what it claims** — `element` and `level` on the entry, resolved by `checkCredential` when the caller holds the backing credentials and named unresolved when they do not. A wallet cannot supply them: a signer's record is the signer's. See [A signer's authority chain says what it claims](#a-signers-authority-chain-says-what-it-claims-and-a-wallet-cannot-resolve-it).
 16. **DECLARED 2026-09-20 — what "nothing gates entry" currently reaches** — L2, because L3 up needs a signer holding the level in that element and holding reviewer authority. The mechanism is decisions 24, 32 and 33 and it is unbuilt; L5's cross-organizational rule is a residue it will not lift. See ["Nothing gates entry" reaches L2](#nothing-gates-entry-reaches-l2-and-the-thing-that-lifts-it-is-designed-and-unbuilt).
 15. **CLOSED 2026-09-20 — the proof can carry a signature, and a verdict says when none was checked** — one shared `proof` definition with `proofValue` required, `proof` required on every document that asserts something, and `verifyAgainstRegistry` reporting that no signature was verified. See [The proof could not carry a signature, and nothing verified one](#the-proof-could-not-carry-a-signature-and-nothing-verified-one).
 14. **CLOSED 2026-09-20 — an experience claim names its activities** — `assessment.activities` replaces two declared integers, both totals are derived from it, and `demonstrates` records what each piece of work showed about THIS element. See [An experience claim has to say which part demonstrated what](#an-experience-claim-has-to-say-which-part-demonstrated-what).

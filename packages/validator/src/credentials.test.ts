@@ -167,8 +167,8 @@ const credential: Credential = {
       // Without these the signer's own standing is an assertion, which is the
       // "trust me" this system exists to eliminate, one level up.
       authority: [
-        { basis: 'held-level', credentialId: 'urn:uuid:11111111-1111-4111-8111-111111111111', credentialRef: HASH },
-        { basis: 'reviewer-authority', credentialId: 'urn:uuid:22222222-2222-4222-8222-222222222222', credentialRef: HASH },
+        { basis: 'held-level', credentialId: 'urn:uuid:11111111-1111-4111-8111-111111111111', credentialRef: HASH, element: 'CM-03-046', level: 5 },
+        { basis: 'reviewer-authority', credentialId: 'urn:uuid:22222222-2222-4222-8222-222222222222', credentialRef: HASH, element: 'CM-20-001', level: 4 },
       ],
     },
     {
@@ -177,8 +177,8 @@ const credential: Credential = {
       credentialedReviewer: true,
       organization: { name: 'Ardleigh Metrology', id: 'ardleigh-met-2025' },
       authority: [
-        { basis: 'held-level', credentialId: 'urn:uuid:33333333-3333-4333-8333-333333333333', credentialRef: HASH },
-        { basis: 'reviewer-authority', credentialId: 'urn:uuid:44444444-4444-4444-8444-444444444444', credentialRef: HASH },
+        { basis: 'held-level', credentialId: 'urn:uuid:33333333-3333-4333-8333-333333333333', credentialRef: HASH, element: 'CM-03-046', level: 5 },
+        { basis: 'reviewer-authority', credentialId: 'urn:uuid:44444444-4444-4444-8444-444444444444', credentialRef: HASH, element: 'CM-20-001', level: 4 },
       ],
     },
   ],
@@ -303,8 +303,15 @@ test('the same signer counted twice is rejected', () => {
 
 /* -- Level signoff policy -------------------------------------------------- */
 
+/** Errors only. An unresolved authority chain is a warning, not a defect. */
+const errorsOf = (findings: Array<{ level: string; message: string }>) =>
+  findings.filter((f) => f.level === 'error');
+
 test('a well-formed L5 signoff passes its policy', () => {
-  assert.deepEqual(checkCredential(credential, L5_POLICY), []);
+  // Errors, not findings. Every authority entry on this credential names a
+  // backing credential that was not supplied, and saying so is the point of
+  // F-05 — silence on an unresolved chain is what used to be available.
+  assert.deepEqual(errorsOf(checkCredential(credential, L5_POLICY)), []);
 });
 
 test('single-organization signing is rejected at a level requiring cross-organizational', () => {
@@ -710,11 +717,100 @@ test('a founding-cohort signer is not expected to carry a held-level credential'
   assert.ok(!findings.some((f) => f.message.includes('Asserted, not proven')));
 });
 
+/* -- Resolving the signer's authority chain -------------------------------- */
+
+/*
+ * Review finding F-05. The entry carried an id and a hash and nothing a reader
+ * without the backing credential could read — so "a verifier can establish a
+ * chain offline" was true only once that document had arrived by a route the
+ * system did not define, and the field description ended "Nothing in that
+ * requires contacting anybody".
+ *
+ * The obvious repair, exporting the signers' credentials in the holder's
+ * wallet, is refused: a signer's competence record is the SIGNER'S record, and
+ * conscripting a third party's credential into somebody else's wallet is the
+ * disclosure this project built a schema to prevent.
+ */
+
+const BACKING_ID = 'urn:uuid:11111111-1111-4111-8111-111111111111';
+
+const backingCredential = (overrides: Record<string, unknown> = {}) => ({
+  ...credential,
+  id: BACKING_ID,
+  subject: (credential.signers[0] as { did: string }).did,
+  element: 'CM-03-046',
+  level: 5,
+  ...overrides,
+});
+
+test('AN UNRESOLVED CHAIN IS A CLAIM, AND THE VERDICT SAYS WHICH', () => {
+  const findings = checkCredential(credential, L5_POLICY);
+  assert.ok(
+    findings.some(
+      (f) => f.level === 'warn' && f.message.includes('claimed to attest CM-03-046 @ L5') && f.message.includes('not supplied'),
+    ),
+    `expected the claim to be legible and named unresolved, got: ${JSON.stringify(findings.map((f) => f.message))}`,
+  );
+  assert.deepEqual(errorsOf(findings), []);
+});
+
+test('...and supplying the backing credential resolves it', () => {
+  const findings = checkCredential(credential, L5_POLICY, undefined, undefined, [
+    backingCredential() as unknown as Parameters<typeof checkCredential>[0],
+  ]);
+  assert.deepEqual(
+    findings.filter((f) => f.message.includes(BACKING_ID) && f.message.includes('not supplied')),
+    [],
+  );
+  assert.deepEqual(errorsOf(findings), []);
+});
+
+test('NOBODY BACKS THEIR OWN STANDING WITH SOMEBODY ELSE\'S CREDENTIAL', () => {
+  const findings = checkCredential(credential, L5_POLICY, undefined, undefined, [
+    backingCredential({ subject: 'did:key:z6MksomebodyElseEntirely00000000000000000000' }) as unknown as Parameters<typeof checkCredential>[0],
+  ]);
+  assert.ok(
+    errorsOf(findings).some((f) => f.message.includes('A credential earned by somebody else')),
+    `expected the substitution to be refused, got: ${JSON.stringify(findings.map((f) => f.message))}`,
+  );
+});
+
+test('a claim that disagrees with the document it names is an error', () => {
+  // The hash pins the document, so this is a claim anybody holding it can read.
+  const findings = checkCredential(credential, L5_POLICY, undefined, undefined, [
+    backingCredential({ level: 3 }) as unknown as Parameters<typeof checkCredential>[0],
+  ]);
+  assert.ok(errorsOf(findings).some((f) => f.message.includes('attests L3')));
+});
+
+test('a held level in a DIFFERENT element is not evidence here', () => {
+  // Signer standing is scoped to the element — the rule the signoff policy
+  // states and the chain could not previously be asked about.
+  const findings = checkCredential(credential, L5_POLICY, undefined, undefined, [
+    backingCredential({ element: 'CM-15-046' }) as unknown as Parameters<typeof checkCredential>[0],
+  ]);
+  assert.ok(errorsOf(findings).some((f) => f.message.includes('Signer standing is scoped to the element')));
+});
+
+test("A WALLET NEVER CARRIES THE SIGNERS' CREDENTIALS, AND THAT IS THE LIMIT", () => {
+  // The reason the chain cannot be made to resolve from the holder's wallet.
+  // Rule 6b is not a rule about one person: a signer's record is theirs, and a
+  // narrower derived proof would need selective disclosure this suite has not.
+  const signerCredential = backingCredential() as unknown as Parameters<typeof walletExport>[0][number];
+  const wallet = walletExport([credential as Parameters<typeof walletExport>[0][number], signerCredential]);
+
+  // Both are portable credentials, so the export carries both — as the HOLDER'S
+  // own, which is the only basis on which anything is in a wallet. Nothing
+  // reaches in and adds a signer's record on the holder's behalf.
+  assert.equal(wallet.credentials.length, 2);
+  assert.deepEqual(wallet.authorizations, []);
+});
+
 /* -- Cross-organizational signing, as written rather than approximated ----- */
 
 test('a signer outside the candidate organization satisfies the rule', () => {
   // Northfield is the candidate's own lab; Ardleigh is not.
-  assert.deepEqual(checkCredential(credential, L5_POLICY), []);
+  assert.deepEqual(errorsOf(checkCredential(credential, L5_POLICY)), []);
 });
 
 test('two signers from one EXTERNAL organization also satisfy it', () => {
@@ -857,7 +953,10 @@ test('a name-only comparison says so, at the level where it matters', () => {
 });
 
 test('identifiers everywhere means no such warning', () => {
-  assert.deepEqual(checkCredential(credential, L5_POLICY), []);
+  assert.deepEqual(
+    checkCredential(credential, L5_POLICY).filter((f) => f.message.includes('organization NAMES')),
+    [],
+  );
 });
 
 test('without the candidate organization the check says it approximated', () => {
@@ -975,7 +1074,7 @@ test('the policy is flattened from BOTH blocks, not just signoff', () => {
 });
 
 test('the worked L4 credential satisfies the real L4 policy', () => {
-  assert.deepEqual(checkCredential({ ...credential, level: 4 }, REAL_L4), []);
+  assert.deepEqual(errorsOf(checkCredential({ ...credential, level: 4 }, REAL_L4)), []);
 });
 
 test('THE HEADLINE CASE: L5 the day after L4, no hours, no work product, no mentoring', () => {

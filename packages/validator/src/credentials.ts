@@ -28,6 +28,9 @@ export interface SignerAuthority {
   basis: 'held-level' | 'reviewer-authority';
   credentialId: string;
   credentialRef: string;
+  /** What the backing credential is CLAIMED to attest. Checked against it when it is supplied. */
+  element?: string;
+  level?: number;
 }
 
 export interface OrganizationRef {
@@ -435,6 +438,12 @@ export function checkCredential(
   policy?: SignoffPolicy,
   cohort?: BootstrapCohort,
   bootstrapContext?: BootstrapContext,
+  /**
+   * The signers' own credentials, where the caller has them. Supplying them
+   * turns every `authority` entry from a legible claim into a resolved one;
+   * omitting them is the ordinary case and says so rather than passing over it.
+   */
+  backing: Credential[] = [],
 ): Finding[] {
   const findings: Finding[] = [];
   const at = (msg: string) => `${credential.id}: ${msg}`;
@@ -474,6 +483,8 @@ export function checkCredential(
   // "trust me, I'm an L4 reviewer". Warned rather than rejected because no
   // credentials exist yet to reference, and a founding-cohort signer holds
   // none by definition — this becomes an error once chains can be resolved.
+  const byId = new Map(backing.map((c) => [c.id, c]));
+
   for (const signer of credential.signers) {
     if (signer.bootstrapAuthority) continue;
     const backed = new Set((signer.authority ?? []).map((a) => a.basis));
@@ -487,6 +498,62 @@ export function checkCredential(
       findings.push(
         warn(at(`signer ${signer.did} is marked a credentialed reviewer with no reviewer-authority credential referenced. Asserted, not proven.`)),
       );
+    }
+
+    /*
+     * Resolving the chain, where the caller had the documents to resolve it
+     * with.
+     *
+     * The entry names an id, a hash, and what it CLAIMS the backing credential
+     * attests. A verifier who does not hold that credential can read the claim
+     * and knows it is a claim; a verifier who does can find out whether it is
+     * true. Before `element` and `level` were on the entry there was nothing to
+     * read and nothing to contradict — an identifier and a hash tell a reader
+     * without the document precisely nothing.
+     *
+     * Unresolved is a WARNING and a wrong claim is an ERROR, because those are
+     * different facts: the first is about what the caller had in front of them,
+     * the second is about the credential.
+     */
+    for (const entry of signer.authority ?? []) {
+      const claim = `${entry.element ?? '?'} @ L${entry.level ?? '?'}`;
+      const held = byId.get(entry.credentialId);
+
+      if (!held) {
+        findings.push(
+          warn(at(`signer ${signer.did} backs their standing with ${entry.credentialId}, claimed to attest ${claim}, which was not supplied. The claim is legible and unresolved — a hash is opaque to anybody without the document it hashes, and obtaining that document is not something the holder's wallet can do for you: it is the signer's record, not theirs.`)),
+        );
+        continue;
+      }
+
+      // Nobody backs their own standing with somebody else's credential.
+      if (held.subject !== signer.did) {
+        findings.push(
+          err(at(`signer ${signer.did} backs their standing with ${entry.credentialId}, which attests ${held.subject}. A credential earned by somebody else is not evidence about this signer.`)),
+        );
+        continue;
+      }
+
+      if (entry.element !== undefined && held.element !== entry.element) {
+        findings.push(
+          err(at(`signer ${signer.did} claims ${entry.credentialId} attests ${entry.element}; it attests ${held.element}. The hash pins the document, so a claim that disagrees with it is a claim about a document anybody holding it can read.`)),
+        );
+      }
+
+      if (entry.level !== undefined && held.level !== entry.level) {
+        findings.push(
+          err(at(`signer ${signer.did} claims ${entry.credentialId} attests L${entry.level}; it attests L${held.level}.`)),
+        );
+      }
+
+      // The question the signoff policy actually asks, answered rather than
+      // asserted: is this signer competent in THIS element, at or above the
+      // level the rung requires?
+      if (entry.basis === 'held-level' && held.element !== credential.element) {
+        findings.push(
+          err(at(`signer ${signer.did} backs a held level with a credential in ${held.element}, and this signoff is for ${credential.element}. Signer standing is scoped to the element; a level held elsewhere is not evidence here.`)),
+        );
+      }
     }
   }
 
