@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 17.6% / 60.8% / 21.5% |
 | Content authored | **26 elements** · **17 BOK articles** · **2 modules** — 8 domains, all three axes |
 | Item bank | 6 archetypes · 45 bindings · **0.2%** of units covered |
-| Checks | 0 errors · 400/400 tests · typecheck clean |
+| Checks | 0 errors · 406/406 tests · typecheck clean |
 
 ### Phases
 
@@ -185,7 +185,7 @@ Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
 | Module | The rule it enforces |
 |---|---|
 | `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules, duplicate titles, that a role never needs an element whose prerequisite is `null` for it, that a contested section says WHERE the disagreement lives, that an item bound to disputed knowledge declares what its scoring must not credit, that a proficiency-test result is not admitted below L3, that a gold reference is carried by review rather than asserted, that a reviewer claiming a resolvable standing can actually be resolved, that every attainable level is reached by some section of the BOK or declared unreached, and that a desk archetype is never bound to work that only exists while it is being done, and that a witnessed binding says what the witness must see for its own test, that a binding does not leave draft unreviewed, and that two levels of one element cannot pin their way into being the same item |
-| `credentials.ts` | No self-signoff, signoff policy, the wallet boundary, draft-status attestability, evidenced provenance tier, founding-cohort authority, dual custody, why the evidence was enough, and **what the experience actually consisted of** — hours and breadth derived from the activities rather than declared, and one activity described the same way on every credential it credits |
+| `credentials.ts` | No self-signoff, signoff policy, **the signer's authority chain — what it CLAIMS the backing credential attests, resolved when the caller holds it and named unresolved when they do not** — the wallet boundary, draft-status attestability, evidenced provenance tier, founding-cohort authority, dual custody, why the evidence was enough, and **what the experience actually consisted of** — hours and breadth derived from the activities rather than declared, and one activity described the same way on every credential it credits |
 | `trust.ts` | Offline verification against a registry snapshot, **what the answer does not establish** — no signature is verified anywhere yet and every verdict says so — the age of the answer, and the holder's counter-statement — surfaced to a reader, adjudicated by nobody, and never lifting the revocation |
 | `ledger.ts` | Hash chain, no-retake, trust horizon, and **what counts as one exposure**: two draws agreeing on every exposure-relevant parameter, with `exposureGroup` namespacing rather than collapsing |
 | `definitions.ts` | Semantic pinning — `definitionRef`, `assessmentPolicyRef`, drift, what a section pin covers besides its prose, and that a credential pins the knowledge behind ITS level rather than everything the element points at |
@@ -211,7 +211,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 400 guardrail tests
+npm test                  # 406 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:foundational # which foundational areas a person has actually graded
