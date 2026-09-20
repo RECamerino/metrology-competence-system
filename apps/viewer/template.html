@@ -597,8 +597,16 @@
     const citations = d.ci.map((c) => `
       <li><code>${esc(c.s)} §${esc(c.c)}</code>${c.r ? ` — <em>${esc(c.r.trim())}</em>` : ''}</li>`).join('');
 
+    const lvls = (l) => (l ?? []).length ? `<b>L${(l ?? []).join(', L')}</b> ` : '';
+
     const knowledge = d.kr.map((k) => `
-      <li><code>${esc(k.a)} #${esc(k.s)}</code>${k.r ? ` — <em>${esc(k.r.trim())}</em>` : ''}</li>`).join('');
+      <li>${lvls(k.l)}<code>${esc(k.a)} #${esc(k.s)}</code>${k.r ? ` — <em>${esc(k.r.trim())}</em>` : ''}</li>`).join('');
+
+    // Declared holes in the refresher path. A reader who followed a link and
+    // did not find what they had forgotten is the person this element exists
+    // for, and telling them the gap is known beats letting them hunt.
+    const gaps = (d.kg ?? []).map((g) => `
+      <li>${lvls(g.l)}${esc(String(g.m).trim())}${g.w ? ` <em>Awaiting: ${esc(String(g.w).trim())}</em>` : ''}</li>`).join('');
 
     const links = [...(d.pre ?? []).map((p) => `prerequisite ${p}`), ...(d.rel ?? []).map((r) => `related ${r}`)];
 
@@ -612,8 +620,9 @@
         <h4>Role targets — the minimum a role needs, if the element is in scope</h4>
         <div class="targets">${targets}</div>
 
-        <h4>Knowledge</h4>
+        <h4>Knowledge — which level each section serves</h4>
         <ul class="reflist">${knowledge}</ul>
+        ${gaps ? `<h4>Not covered yet</h4><ul class="reflist">${gaps}</ul>` : ''}
 
         <h4>Sources</h4>
         <ul class="reflist">${citations}</ul>

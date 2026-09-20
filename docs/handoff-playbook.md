@@ -22,6 +22,7 @@ These fail the build. They are not style guidance.
 |---|---|
 | Every element has ≥1 clause-level citation | `citations: []` or absent |
 | Every element reaches the knowledge behind it | `knowledgeRefs` absent, or pointing at an article or section that does not exist |
+| Every LEVEL reaches the knowledge behind it | a level served by no `knowledgeRefs[].supports` and declared in no `knowledgeGaps` |
 | Every BOK section is reachable | A declared section with no `{#sNN}` anchor, or an anchor with no declared section |
 | A deprecated section points forward | `deprecated: true` with no `supersededBy` |
 | Every cited source is in the register | Citation to an unregistered `sourceId` |
@@ -196,10 +197,16 @@ citations:
 knowledgeRefs:
   - article: BOK-0001
     section: s03
+    supports: [2, 3, 4, 5]
     relevance: The covariance term and how to lay it out in a budget table.
   - article: BOK-0001
     section: s04
+    supports: [3, 4, 5]
     relevance: Where the correlation coefficient comes from.
+  - article: BOK-0001
+    section: s01
+    supports: [1, 2, 3, 4, 5]
+    relevance: The physical mechanisms that make inputs correlated.
 currency:
   authorityStatus: normative
   volatility: controlled
@@ -219,6 +226,19 @@ tested. NOT the explanation — that lives in the BOK article above.
 ```
 
 **`knowledgeRefs` is required, and points at sections rather than whole articles.** The person following it is usually not learning the subject from scratch; they demonstrated this competence months ago and have forgotten one detail. Send them to the passage, not the article.
+
+**Every ref says which LEVELS it serves, and every attainable level has to be served by one or declared in `knowledgeGaps`.** Write `supports` by reading the anchor, not the title: the rung is the question, and a ref that carries the whole of L1 may carry none of L4. Where nothing in the corpus reaches a rung, say so:
+
+```yaml
+knowledgeGaps:
+  - levels: [4]
+    missing: >-
+      What makes a negligibility judgement defensible against a stated target
+      rather than against the dominant term. Nothing covers making the call.
+    awaiting: A section on judging a contribution negligible against the target.
+```
+
+This does not prove coverage and is not meant to — no check reads prose. It proves you looked at every rung, and it turns an unserved one from a silence into an error. **An open gap keeps the element in `draft`**, which under rule 7 means it can be assessed at L1 and L2 and not above. That is the intended cost: write the material, or leave the status alone.
 
 **The anchors above are performance, not understanding, because `kind` is `skill`.** "Recognizes that inputs may be correlated" would be a knowledge anchor and wrong for this element — see [Write the anchors to match the element's kind](#write-the-anchors-to-match-the-elements-kind).
 

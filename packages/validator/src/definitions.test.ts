@@ -321,6 +321,88 @@ test('pinning NOTHING is an error in its own right, not merely an empty result',
   );
 });
 
+/* -- A credential pins the knowledge behind ITS level ---------------------- */
+
+/*
+ * Open decision 22's consequence at issue time. A ref declares which rungs it
+ * serves, so a credential rests on the sections behind the level it was issued
+ * at rather than on everything the element points at.
+ */
+
+const SERVES_L1 = { article: 'BOK-0001', section: 's03', supports: [1] };
+const SERVES_L4 = { article: 'BOK-0001', section: 's01', supports: [4] };
+
+test('only the refs serving this level are pinned', () => {
+  const pins = pinDefinition(element, 1, [SERVES_L1, SERVES_L4], [article]);
+  assert.deepEqual(
+    pins.knowledgeSnapshot.map((k) => k.section),
+    ['s03'],
+  );
+  assert.deepEqual(pins.findings, []);
+});
+
+test('AN L1 CREDENTIAL DOES NOT DRIFT ON A SECTION THAT ONLY EVER SERVED L4', () => {
+  // Pinning the whole list made this a true statement about the element and a
+  // false one about the claim. A drift warning about knowledge the holder never
+  // rested on is how a reader learns to ignore drift warnings.
+  const pins = pinDefinition(element, 1, [SERVES_L1, SERVES_L4], [article]);
+
+  const rewritten: ArticleLike = {
+    ...article,
+    body: article.body.replace(
+      'Shared reference standards are the commonest cause.',
+      'Rewritten from the ground up after a revision.',
+    ),
+  };
+
+  const findings = checkDefinitionDrift(
+    credential({
+      level: 1,
+      definitionRef: elementDefinitionHash(element, 1),
+      knowledgeSnapshot: pins.knowledgeSnapshot,
+    }),
+    element,
+    [rewritten],
+    PROFICIENCY,
+  );
+
+  assert.deepEqual(findings.filter((f) => f.message.includes('s01')), []);
+
+  // Not vacuous: the mechanism is live, and the section this credential DID
+  // rest on still reports drift when it moves.
+  const alsoRewritten: ArticleLike = {
+    ...rewritten,
+    body: rewritten.body.replace('The combined variance gains a cross term.', 'Replaced.'),
+  };
+  const live = checkDefinitionDrift(
+    credential({
+      level: 1,
+      definitionRef: elementDefinitionHash(element, 1),
+      knowledgeSnapshot: pins.knowledgeSnapshot,
+    }),
+    element,
+    [alsoRewritten],
+    PROFICIENCY,
+  );
+  assert.ok(live.some((f) => f.message.includes('s03') && f.message.includes('rewritten')));
+});
+
+test('a ref that claims no levels is pinned at every level', () => {
+  // It says nothing about rungs, so there is no ground to exclude it. The
+  // schema requires the field, so this is the hand-built caller, not the corpus.
+  const pins = pinDefinition(element, 2, REFS, [article]);
+  assert.equal(pins.knowledgeSnapshot.length, 1);
+});
+
+test('a level with nothing serving it is an error, not a smaller pin', () => {
+  const pins = pinDefinition(element, 2, [SERVES_L1, SERVES_L4], [article]);
+  assert.deepEqual(pins.knowledgeSnapshot, []);
+  assert.ok(
+    pins.findings.some((f) => f.level === 'error' && f.message.includes('serves L2')),
+    `expected the unserved level to be refused, got: ${JSON.stringify(pins.findings)}`,
+  );
+});
+
 test('a partial pin still reports the ref it lost', () => {
   // The surviving pin must not make the lost one look acceptable.
   const pins = pinDefinition(

@@ -384,18 +384,44 @@ export function checkDefinitionDrift(
  * Findings are returned rather than thrown: the caller decides whether a
  * partial pin is issuable, and that is an issuance decision rather than a
  * hashing one. But it can no longer be made by accident.
+ *
+ * ONLY THE REFS SERVING THIS LEVEL ARE PINNED. A ref declares `supports` — the
+ * rungs of the element it serves — and a credential rests on the knowledge
+ * behind the level it was issued at, not on everything the element points at.
+ * Pinning the whole list meant an L1 credential reported drift when a section
+ * that only ever served L4 was rewritten: a true statement about the element
+ * and a false one about that claim, and a drift warning that fires about
+ * knowledge the holder never rested on is how readers learn to ignore them.
+ *
+ * A ref with no `supports` is pinned at every level. It claims nothing about
+ * rungs, so there is no ground to exclude it — and the schema requires the
+ * field, so this is the hand-built caller rather than the corpus.
+ *
+ * A LEVEL WITH NOTHING SERVING IT IS AN ERROR HERE, not a smaller pin. The
+ * corpus-wide check catches it at authoring time; this catches the issuer who
+ * was handed a subset of the refs, and it is the same finding either way — a
+ * claim about somebody's competence resting on reference material that does not
+ * reach the rung being claimed.
  */
 export function pinDefinition(
   element: ElementLike,
   level: number,
-  refs: Array<{ article: string; section: string }>,
+  refs: Array<{ article: string; section: string; supports?: number[] }>,
   articles: ArticleLike[],
 ): { definitionRef: string; knowledgeSnapshot: KnowledgeSnapshotEntry[]; findings: Finding[] } {
   const byId = new Map(articles.map((a) => [a.id, a]));
   const knowledgeSnapshot: KnowledgeSnapshotEntry[] = [];
   const findings: Finding[] = [];
 
-  for (const ref of refs) {
+  const serving = refs.filter((ref) => !Array.isArray(ref.supports) || ref.supports.includes(level));
+
+  if (refs.length > 0 && serving.length === 0) {
+    findings.push(
+      err(`${element.id}: none of its ${refs.length} knowledgeRef(s) serves L${level}. A credential issued here would pin knowledge that does not reach the level being claimed.`),
+    );
+  }
+
+  for (const ref of serving) {
     const article = byId.get(ref.article);
     if (!article) {
       findings.push(
@@ -415,9 +441,9 @@ export function pinDefinition(
     knowledgeSnapshot.push({ article: ref.article, section: ref.section, sectionRef: hash });
   }
 
-  if (knowledgeSnapshot.length === 0) {
+  if (knowledgeSnapshot.length === 0 && serving.length > 0) {
     findings.push(
-      err(`${element.id}: nothing could be pinned from ${refs.length} knowledgeRef(s). A credential issued on this would carry an empty knowledgeSnapshot, which pins the knowledge in shape only.`),
+      err(`${element.id}: nothing could be pinned from ${serving.length} knowledgeRef(s) serving L${level}. A credential issued on this would carry an empty knowledgeSnapshot, which pins the knowledge in shape only.`),
     );
   }
 

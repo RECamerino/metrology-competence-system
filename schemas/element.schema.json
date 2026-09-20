@@ -95,8 +95,43 @@
     "knowledgeRefs": {
       "type": "array",
       "minItems": 1,
-      "items": { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/knowledgeRef" },
-      "description": "REQUIRED, at least one. Where a person goes to learn this, and — more importantly — where they go to REMIND themselves. Someone credentialed eight months ago who has forgotten one detail will not retrain; they will look it up, and this is the link that has to work. Section-level rather than article-level for exactly that reason.\n\nThis imposes an ordering on authoring, deliberately: the reference material must exist before the claim that someone has mastered it. An element that cannot point at an explanation is an element nobody can prepare for."
+      "items": {
+        "allOf": [
+          { "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/knowledgeRef" },
+          { "type": "object", "required": ["supports"] }
+        ]
+      },
+      "description": "REQUIRED, at least one, and each one must say which of this element's levels it serves \u2014 see `supports`. That requirement is imposed here rather than on the shared definition, because a training module points into the BOK through the same shape and has no levels of its own.\n\nAt least one. Where a person goes to learn this, and — more importantly — where they go to REMIND themselves. Someone credentialed eight months ago who has forgotten one detail will not retrain; they will look it up, and this is the link that has to work. Section-level rather than article-level for exactly that reason.\n\nThis imposes an ordering on authoring, deliberately: the reference material must exist before the claim that someone has mastered it. An element that cannot point at an explanation is an element nobody can prepare for."
+    },
+
+    "knowledgeGaps": {
+      "type": "array",
+      "description": "WHAT THE REFERENCE MATERIAL DOES NOT REACH, DECLARED RATHER THAN NOTED. The negative half of `knowledgeRefs[].supports`, and the second half of open decision 22.\n\nEvery attainable level must be accounted for: served by at least one knowledgeRef, or named here. A level that is neither is an error, because that is the failure this pair exists to catch \u2014 an element whose refresher path is broken for a rung, schema-valid, CI-clean, and invisible to everybody except the holder who followed the link eight months later and did not find what they had forgotten.\n\nA level may appear in BOTH. Partial coverage is the common case and the honest one: CM-03-052's L2 is served for laying out and combining a budget and unserved for what a stated coverage factor asserts. Declaring the gap does not withdraw the refs.\n\nAN OPEN GAP BLOCKS `stable`, WHICH IS WHAT MAKES THE FIELD PARTICIPATE. Under rule 7, `stable` is what lets L3 and above be attested at all, so an element with a hole in its knowledge can still be assessed at L1 and L2 and cannot carry the levels where independent work is entrusted. This is blunt on purpose \u2014 a gap at L5 blocks the whole element, not just L5 \u2014 and it is the same bluntness `goldReference` already uses when it refuses an element whose top two rungs nobody reviewed. Per-level attestability would be a larger change to the credential path than this needs.\n\nRemoving an entry is a claim that somebody wrote the missing material and checked that it covers. It is not a way to unblock a promotion.",
+      "items": {
+        "type": "object",
+        "required": ["levels", "missing"],
+        "additionalProperties": false,
+        "properties": {
+          "levels": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "description": "The levels this gap leaves unserved. Above the element's ceiling is an error, as it is for a knowledgeRef."
+          },
+          "missing": {
+            "type": "string",
+            "minLength": 60,
+            "maxLength": 600,
+            "description": "What a person at these levels will not find, specifically enough that somebody could go and write it. Not 'coverage is thin' \u2014 name the thing. The reader who needs this sentence is the author of the article that would close it."
+          },
+          "awaiting": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "What would close the gap, where that is known: an element whose article does not exist yet, a source that is not registered, a section somebody is drafting. Optional, because 'nobody has written this' is a complete answer."
+          }
+        }
+      }
     },
 
     "demonstration": {
