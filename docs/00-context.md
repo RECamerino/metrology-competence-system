@@ -1038,6 +1038,27 @@ Four recursive walkers decided "is this a directory" with `statSync`, which **fo
 
 **The test plants a real link rather than trusting the reasoning.** Windows refuses a plain symlink without developer mode, so it falls back to a directory JUNCTION, which needs no privilege and which `lstat` reports as a symbolic link — the same predicate and the same refusal. CI runs on Linux and takes the first branch. The first draft of the test skipped on Windows and said so honestly; finding the junction was better than accepting an unexercised check.
 
+## Two scorers are two people, and an integer could not say so
+
+**Closed 2026-09-20, inside the freeze window.** External adversarial review, finding A-11 — the last schema-shaped item the review raised, and therefore the last thing standing between the review and the freeze.
+
+`proficiency.yaml` states the rule as **“independent scoring by two reviewers with a documented disagreement-resolution path”**. The credential recorded `scorerCount: 2`.
+
+That integer establishes none of the three. It is satisfied by one person scoring twice, by two people who conferred before scoring, or by nobody at all. **The field's own description made the sharp half of the argument** — *scoring is not signing, so a signer count cannot stand in* — and then could not tell two scorers from one counted twice.
+
+What a document can carry, and now does:
+
+- **`scorers`**, one entry each, with the count **derived** rather than declared. Two entries under one `did` is one reviewer however many rows describe it, which is the case the integer could never see. It is also the `activities` lesson again: one piece of work is one activity however many entries describe it.
+- **Distinct, and none of them the subject.** Nobody scores their own assessment, for the reason nobody signs off their own competence.
+- **`scoreOutcome`**, `agreed` or `resolved`, required wherever the level is double-scored — because the policy asks for a documented disagreement-resolution path and nothing recorded whether the path was ever walked. An enum rather than an optional note, because **absence would otherwise read as “they agreed”**, which is the conflation of silence with a claim that `positionNeutrality` and `knowledgeGaps` were both built to stop. `agreed` costs one word, so the honest answer is cheaper than filler.
+- **`scoreResolution`** where they disagreed. What makes double scoring defensible in an audit is that the difference was settled by a stated process rather than by whoever spoke last.
+
+### What it deliberately does not do
+
+**A scorer who is not a signer is permitted, and is reported.** A laboratory with a scoring pool and one authorized signatory is an ordinary arrangement, and requiring every scorer to sign would refuse it. But `evidence[].sufficiency` requires its decider to be a signer, on the argument that a judgement by somebody who did not sign is not part of the attestation and reads on the document as though it were — and a score is that same kind of judgement. The policy asks for two REVIEWERS rather than two signers, so this is a weakness a reader is told about rather than a requirement satisfied on an assertion.
+
+**And it cannot establish that they scored independently.** Whether two people conferred before scoring is not a fact a document carries, and nothing here pretends otherwise. That is inter-rater reliability, it is empirical work, and it is open decision 11 — the strongest thing this project could take to NCSL and the one thing CI will never prove.
+
 ## A gold reference cannot be self-declared
 
 **Closed 2026-09-04, inside the freeze window.** Open item 12.
@@ -1086,6 +1107,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
+23. **CLOSED 2026-09-20 — two scorers are two people** — `scorerCount: 2` was satisfied by one person scoring twice, and the disagreement-resolution path the policy asks for was recorded nowhere. See [Two scorers are two people](#two-scorers-are-two-people-and-an-integer-could-not-say-so).
 22. **CLOSED 2026-09-20 — the corpus admits no symbolic links** — `statSync` followed them, and the publication boundary scans for content rather than paths. See [A symlink is a path](#a-symlink-is-a-path-and-the-leak-check-scans-for-content).
 21. **CLOSED 2026-09-20 — the provenance tier is resolved, not read off the document** — all three upper rungs took the credential's word about itself, including an accreditation the registry schema already said should be compared. See [The provenance tier is resolved](#the-provenance-tier-is-resolved-not-read-off-the-document).
 20. **CLOSED 2026-09-20 — standing must have been in force when it was used** — the authority chain checked no dates, so a 2028 signoff could rest on a 2030 credential. Revocation departs from the key-compromise rule, and says why. See [Standing is only standing if it was in force](#standing-is-only-standing-if-it-was-in-force-on-the-day-it-was-used).

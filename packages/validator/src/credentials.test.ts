@@ -118,9 +118,14 @@ const credential: Credential = {
     // showed about THIS element — the part that differs between the several
     // credentials one activity legitimately credits.
     activities: ACTIVITIES,
-    // L4 is doubleScored, and nothing else on the credential could show it —
-    // signer count cannot stand in, because scoring is not signing.
-    scorerCount: 2,
+    // L4 is doubleScored. Two NAMED people, because an integer is satisfied by
+    // one person scoring twice — and whether they agreed, because silence would
+    // otherwise read as 'they did'.
+    scorers: [
+      { did: 'did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK', scoredOn: '2026-08-08' },
+      { did: 'did:key:z6MkjchhfUsD6mmvni8mCdXHw216Xrm9bQe2mBH1P5RDjVJG', scoredOn: '2026-08-08' },
+    ],
+    scoreOutcome: 'agreed',
     // L4 requires 180 days since L3. Recorded here so a verifier holding this
     // credential and nothing else can check the waiting period offline.
     previousLevelAttainedOn: '2025-11-14',
@@ -1331,7 +1336,8 @@ test('THE HEADLINE CASE: L5 the day after L4, no hours, no work product, no ment
         modality: ['reviewer-conducted-defense'],
         candidateOrganization: { name: 'Northfield Calibration', id: 'northfield-cal-2026' },
         activities: [],
-        scorerCount: 1,
+        scorers: [{ did: 'did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK', scoredOn: '2026-08-09' }],
+        scoreOutcome: 'agreed',
         previousLevelAttainedOn: '2026-08-09',
       },
       evidence: [],
@@ -1421,10 +1427,113 @@ test('an activity that does not say what it demonstrated is refused by the schem
   );
 });
 
+/* -- Scorers are people, not a count --------------------------------------- */
+
+/*
+ * External review finding A-11. `proficiency.yaml` states the rule as
+ * "independent scoring by two reviewers with a documented disagreement-
+ * resolution path", and the credential recorded an integer. `scorerCount: 2` is
+ * satisfied by one person scoring twice, by two who conferred, or by nobody.
+ */
+
+const scoredBy = (...dids: string[]) => ({
+  ...credential,
+  assessment: {
+    ...(credential.assessment as object),
+    scorers: dids.map((did) => ({ did, scoredOn: '2026-08-08' })),
+    scoreOutcome: 'agreed' as const,
+  },
+});
+
+test('ONE PERSON SCORING TWICE IS ONE REVIEWER, HOWEVER MANY ROWS SAY SO', () => {
+  // The case the integer could never see: two entries, one human.
+  const errors = errorsOf(checkCredential(scoredBy(SIGNER_A, SIGNER_A), REAL_L4, undefined, undefined, BACKING))
+    .map((f) => f.message);
+  assert.ok(
+    errors.some((m) => m.includes('one person scoring twice is one reviewer')),
+    `expected the duplicate scorer to be refused, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('two distinct scorers satisfy it', () => {
+  const errors = errorsOf(
+    checkCredential(scoredBy(SIGNER_A, SIGNER_B), REAL_L4, undefined, undefined, BACKING),
+  );
+  assert.deepEqual(errors, []);
+});
+
+test('nobody scores their own assessment', () => {
+  const errors = errorsOf(
+    checkCredential(scoredBy(SIGNER_A, credential.subject), REAL_L4, undefined, undefined, BACKING),
+  ).map((f) => f.message);
+  assert.ok(errors.some((m) => m.includes('Nobody scores their own assessment')));
+});
+
+test('a scorer who did not sign is permitted, and the cost is named', () => {
+  // A scoring pool with one authorized signatory is ordinary. Requiring every
+  // scorer to sign would refuse it; saying nothing would let a judgement by
+  // somebody who did not sign read as part of the attestation.
+  const outsider = 'did:key:z6MkoutsiderScorer0000000000000000000000000';
+  const findings = checkCredential(scoredBy(SIGNER_A, outsider), REAL_L4, undefined, undefined, BACKING);
+  assert.deepEqual(errorsOf(findings), []);
+  assert.ok(
+    findings.some((f) => f.level === 'warn' && f.message.includes('who did not sign')),
+    `expected the weakness to be named, got: ${JSON.stringify(findings.map((f) => f.message))}`,
+  );
+});
+
+test('SILENCE IS NOT "THEY AGREED"', () => {
+  const { scoreOutcome, ...assessment } = scoredBy(SIGNER_A, SIGNER_B).assessment as Record<string, unknown>;
+  const errors = errorsOf(
+    checkCredential({ ...credential, assessment } as typeof credential, REAL_L4, undefined, undefined, BACKING),
+  ).map((f) => f.message);
+  assert.ok(
+    errors.some((m) => m.includes('does not say whether the scorers agreed')),
+    `expected the outcome to be required, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('a disagreement with no stated resolution is refused', () => {
+  const base = scoredBy(SIGNER_A, SIGNER_B);
+  const errors = errorsOf(
+    checkCredential(
+      { ...base, assessment: { ...(base.assessment as object), scoreOutcome: 'resolved' } } as typeof credential,
+      REAL_L4,
+      undefined,
+      undefined,
+      BACKING,
+    ),
+  ).map((f) => f.message);
+  assert.ok(errors.some((m) => m.includes('does not say how it was reconciled')));
+});
+
+test('...and agreement carrying a resolution is a contradiction', () => {
+  const base = scoredBy(SIGNER_A, SIGNER_B);
+  const errors = errorsOf(
+    checkCredential(
+      {
+        ...base,
+        assessment: { ...(base.assessment as object), scoreResolution: 'x'.repeat(100) },
+      } as typeof credential,
+      REAL_L4,
+      undefined,
+      undefined,
+      BACKING,
+    ),
+  ).map((f) => f.message);
+  assert.ok(errors.some((m) => m.includes('also carries a resolution')));
+});
+
 test('two signers who scored once between them do not satisfy double scoring', () => {
   // Scoring is not signing, and the credential must say so in its own field.
   const findings = checkCredential(
-    { ...credential, assessment: { ...credential.assessment as object, scorerCount: 1 } },
+    {
+      ...credential,
+      assessment: {
+        ...(credential.assessment as object),
+        scorers: [{ did: SIGNER_A, scoredOn: '2026-08-08' }],
+      },
+    },
     REAL_L4,
   );
   assert.ok(
