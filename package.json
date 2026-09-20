@@ -26,7 +26,8 @@
     "check:leak": "node tools/check-leak.ts",
     "report:foundational": "node tools/report-foundational.ts",
     "report:reachability": "node tools/report-reachability.ts",
-    "check:spelling": "node tools/check-spelling.ts"
+    "check:spelling": "node tools/check-spelling.ts",
+    "check:counts": "node tools/check-counts.ts"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
