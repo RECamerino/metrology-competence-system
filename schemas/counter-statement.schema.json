@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://metrology-bok.org/schemas/counter-statement.schema.json",
+  "title": "Holder's counter-statement to a revocation",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "credential",
+    "subject",
+    "answers",
+    "basis",
+    "statement",
+    "signedOn",
+    "proof"
+  ],
+  "additionalProperties": false,
+  "description": "The holder's answer to a revocation, signed by them and travelling with them.\n\nWHY IT EXISTS. The issuer sets `status.revoked` and the subject had no way to contest it in the data. The intent behind revocation is stated plainly — it is for fraud and demonstrable assessment defect, not for an employer who has fallen out with the holder — but `fraud` is unfalsifiable from the holder's side, and the status list a verifier consults belongs to the issuer. One party wrote the whole record of a dispute between two.\n\nIT DOES NOT UN-REVOKE, AND MUST NOT. A revoked credential stays revoked, the verdict is unchanged, and `verifyAgainstRegistry` still reports the revocation as an error. If a holder's statement could lift a revocation then revocation would be negotiable and the fraud case would fail — which is the case it exists for. What this changes is what a READER IS TOLD: the same shape as drift, where a credential whose pins no longer match is not false and the correct response is to show the reader what moved rather than to invalidate anything.\n\nWHERE IT LIVES, AND WHY NOT IN THE REGISTRY. The trust registry carries the issuer's revocations, and it is the issuer's and the stewards' document — a holder cannot write into it, and building a route for them to would need governance nobody has appointed. So this is a separate document the holder holds and presents, signed by them, exactly as a disclosure is.\n\nTHE LIMIT THAT FOLLOWS IS REAL AND IS STATED RATHER THAN HIDDEN. A counter-statement travels with the holder, so a verifier resolving only the registry sees only the issuer's account. That is the same shape as the staleness bound on offline verification: the honest answer is not to pretend both parties reach every reader, but to make sure that a reader who receives the holder's answer is shown it, and that one who does not is not told the dispute is settled.",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "credential": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The credential whose revocation this answers."
+    },
+    "subject": {
+      "$ref": "https://metrology-bok.org/schemas/credential.schema.json#/$defs/did",
+      "description": "Whose credential it is, and who signs this. The validator refuses a counter-statement whose subject is not the credential's — nobody speaks for somebody else's record, which is the ownership principle pointing the same way it always does."
+    },
+    "answers": {
+      "type": "object",
+      "required": [
+        "revokedOn",
+        "reason"
+      ],
+      "additionalProperties": false,
+      "description": "WHICH revocation this answers, pinned by the date and reason the issuer recorded. An issuer who revokes again on different grounds has not been pre-answered, and a statement written against one set of grounds must not silently attach itself to another.",
+      "properties": {
+        "revokedOn": {
+          "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate"
+        },
+        "reason": {
+          "enum": [
+            "fraud",
+            "assessment-defect",
+            "issuer-error",
+            "holder-request"
+          ]
+        }
+      }
+    },
+    "basis": {
+      "enum": [
+        "disputes-facts",
+        "disputes-grounds",
+        "disputes-process",
+        "accepts-with-context"
+      ],
+      "description": "What the holder is contesting, because the four are different claims and a reader weighs them differently.\n\n`disputes-facts` — the grounds stated are untrue. `disputes-grounds` — the facts are accepted and do not warrant revocation. `disputes-process` — the revocation may be right on the merits and was not arrived at properly.\n\n`accepts-with-context` is not a contest and belongs here anyway. An `assessment-defect` revocation is nobody's fault: the item was bad, and the holder may want to say so plainly rather than leave a reader to assume the worst reason on the list. Admitting a voice only to those who disagree would be its own asymmetry."
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 120,
+      "description": "The holder's account, in their own words. Long enough to be weighed: a reader deciding what to make of a revoked credential needs something they can assess, and 'this is wrong' gives them nothing. It is not adjudicated by anybody — no field here records whether the counter-statement was accepted, because nothing in this system is competent to decide that and a field implying otherwise would be read as a verdict."
+    },
+    "signedOn": {
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate"
+    },
+    "proof": {
+      "type": "object",
+      "required": [
+        "cryptosuite"
+      ],
+      "additionalProperties": true,
+      "description": "Signed by the SUBJECT. An unsigned counter-statement is an assertion anybody could have written on the holder's behalf, including the party they are disputing with.",
+      "properties": {
+        "cryptosuite": {
+          "const": "ecdsa-jcs-2019"
+        }
+      }
+    }
+  }
+}

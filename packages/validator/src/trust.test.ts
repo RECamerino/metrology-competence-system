@@ -19,6 +19,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { validatorFor } from './schema.ts';
 import {
+  type CounterStatement,
   type TrustRegistry,
   type VerifiableCredential,
   checkRegistryReplacement,
@@ -330,4 +331,123 @@ test('a key on any other curve is refused, not silently admitted', () => {
       `expected a non-P-256 multikey to be refused: ${key}`,
     );
   }
+});
+
+
+/* -- The holder's answer to a revocation ----------------------------------- */
+
+/*
+ * The issuer set `status.revoked` and the subject had no way to contest it in
+ * the data. Revocation is for fraud and demonstrable assessment defect, not for
+ * an employer who has fallen out with the holder — but `fraud` is unfalsifiable
+ * from the holder's side, and the status list a verifier consults belongs to
+ * the issuer. One party wrote the whole record of a dispute between two.
+ *
+ * The most important test here is the first one: the answer does NOT lift the
+ * revocation, and must not. A statement that could would make revocation
+ * negotiable, and the fraud case is the one that cannot afford that.
+ */
+
+const REVOKED: TrustRegistry = {
+  ...registry,
+  revocations: [{ credential: credential.id, revokedOn: '2028-05-20', reason: 'fraud' }],
+};
+
+const answer = (overrides: Partial<CounterStatement> = {}): CounterStatement => ({
+  id: 'urn:uuid:7c2e5a91-3b4d-4e6f-8a1b-2c3d4e5f6a7b',
+  credential: credential.id,
+  subject: HOLDER,
+  answers: { revokedOn: '2028-05-20', reason: 'fraud' },
+  basis: 'disputes-facts',
+  statement:
+    'The work the finding rests on was performed by a colleague using my login while I was on leave, and the laboratory holds the roster and the access log that show it.',
+  signedOn: '2028-06-01',
+  proof: { cryptosuite: 'ecdsa-jcs-2019' },
+  ...overrides,
+});
+
+test('the worked counter-statement validates', () => {
+  const validate = validatorFor('counter-statement');
+  const doc = { schemaVersion: 1, ...answer() };
+  assert.ok(validate(doc), JSON.stringify(validate.errors, null, 2));
+});
+
+test('A COUNTER-STATEMENT DOES NOT LIFT THE REVOCATION', () => {
+  // If it could, revocation would be negotiable. The credential stays revoked
+  // and the error stands; what changes is what the reader is told.
+  const findings = verifyAgainstRegistry(credential, REVOKED, '2028-06-15', [answer()]).findings;
+  assert.ok(
+    errorsOf(findings).some((m) => m.includes('was revoked on 2028-05-20')),
+    `expected the revocation to stand, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('...and it is shown to the reader', () => {
+  const findings = verifyAgainstRegistry(credential, REVOKED, '2028-06-15', [answer()]).findings;
+  assert.ok(
+    findings.some((f) => f.level === 'warn' && f.message.includes('the holder has answered this revocation')),
+    `expected the answer to be surfaced, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('nobody speaks for somebody else\'s record', () => {
+  // The check that matters most: a counter-statement written by the disputing
+  // party would otherwise read exactly like one written by the holder.
+  const findings = verifyAgainstRegistry(credential, REVOKED, '2028-06-15', [
+    answer({ subject: ISSUER_DID }),
+  ]).findings;
+  assert.ok(errorsOf(findings).some((m) => m.includes('not signed by the subject')));
+});
+
+test('an unsigned answer is refused', () => {
+  const unsigned = answer();
+  delete (unsigned as Record<string, unknown>).proof;
+  const findings = verifyAgainstRegistry(credential, REVOKED, '2028-06-15', [unsigned]).findings;
+  assert.ok(errorsOf(findings).some((m) => m.includes('is unsigned')));
+});
+
+test('an answer to a revocation that has not happened is refused', () => {
+  // It would otherwise sit on a live credential implying one had.
+  const findings = verifyAgainstRegistry(credential, registry, '2028-06-15', [answer()]).findings;
+  assert.ok(errorsOf(findings).some((m) => m.includes('does not record')));
+});
+
+test('an issuer who revokes again on different grounds has not been pre-answered', () => {
+  const findings = verifyAgainstRegistry(credential, REVOKED, '2028-06-15', [
+    answer({ answers: { revokedOn: '2027-01-01', reason: 'assessment-defect' } }),
+  ]).findings;
+  assert.ok(errorsOf(findings).some((m) => m.includes('has not been pre-answered')));
+});
+
+test('silence is not evidence that a revocation is uncontested', () => {
+  // A counter-statement travels with the holder, so a verifier reading only the
+  // registry would never see one. Saying nothing would let a reader take the
+  // absence of an answer for the absence of a dispute.
+  const findings = verifyAgainstRegistry(credential, REVOKED, '2028-06-15').findings;
+  assert.ok(
+    findings.some((f) => f.level === 'warn' && f.message.includes('travels with the holder')),
+    `expected the asymmetry to be stated, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('accepting a revocation with context is a legitimate answer', () => {
+  // An assessment-defect revocation is nobody's fault. Admitting a voice only
+  // to those who disagree would be its own asymmetry.
+  const defect: TrustRegistry = {
+    ...registry,
+    revocations: [{ credential: credential.id, revokedOn: '2028-05-20', reason: 'assessment-defect' }],
+  };
+  const findings = verifyAgainstRegistry(credential, defect, '2028-06-15', [
+    answer({
+      basis: 'accepts-with-context',
+      answers: { revokedOn: '2028-05-20', reason: 'assessment-defect' },
+      statement:
+        'The item bound at this level was withdrawn after review found it assessed the archetype rather than the element. I accept the revocation and have re-sat the assessment under the replacement item.',
+    }),
+  ]).findings;
+  assert.deepEqual(
+    errorsOf(findings).filter((m) => m.includes('counter') || m.includes('answered')),
+    [],
+  );
+  assert.ok(findings.some((f) => f.message.includes('accepts-with-context')));
 });

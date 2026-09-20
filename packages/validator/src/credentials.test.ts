@@ -1152,3 +1152,17 @@ test('an attempt pointer needs no sufficiency rationale', () => {
   });
   assert.deepEqual(findings, []);
 });
+
+
+test("a wallet export carries the holder's own answers, and only for what it exports", () => {
+  // The exact opposite of an authorization, from the same principle read the
+  // same way: the organization's grant never travels, and the holder's account
+  // of their own record always does. A wallet without them exports one in which
+  // every revocation is the issuer's word and nothing else.
+  const mine = { credential: credential.id, basis: 'disputes-facts' };
+  const somebodyElses = { credential: 'urn:uuid:not-in-this-wallet', basis: 'disputes-facts' };
+
+  const wallet = walletExport([credential], [], [mine, somebodyElses]);
+  assert.deepEqual(wallet.counterStatements, [mine]);
+  assert.deepEqual(wallet.authorizations, []);
+});
