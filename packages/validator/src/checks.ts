@@ -910,6 +910,110 @@ function checkElementReviews(corpus: Corpus): Finding[] {
 /* ------------------------------------------------------------------------ */
 
 /**
+ * Which rungs the reference material serves, and which rungs nothing serves.
+ *
+ * THE DEFECT THIS CLOSES. `knowledgeRefs` proved that a link RESOLVES — the
+ * article exists, the section is declared — and proved nothing at all about
+ * whether it COVERS what the element assesses. It still cannot: no check reads
+ * prose and decides whether a passage explains a competence, and nothing here
+ * pretends to. What was actually missing is narrower and is computable: a
+ * LEVEL WITH NO KNOWLEDGE BEHIND IT AND NOBODY SAYING SO.
+ *
+ * CM-03-052 is the worked case. Four refs, all resolving, all honest, and an L2
+ * anchor asking what a reported figure means at a stated coverage factor with
+ * no section anywhere in the corpus explaining how to choose and state one. The
+ * author knew. They wrote it in a closing note, and the note ends by saying the
+ * judgement is recorded there because there is nowhere in the data to put it.
+ *
+ * WHY THE OTHER THREE OF THIS FAMILY DID NOT NEED THIS SHAPE. `sectionHash`,
+ * `reviewer` and `demonstration` were each closed by widening a field until the
+ * knowledge participated in something. This one was filed as resisting that
+ * remedy, on the grounds that what is missing is not a place to record coverage
+ * but a way to compute it. Both halves turn out to be true: no field makes
+ * coverage computable, and a field does make its ABSENCE computable — which is
+ * the part that was harming anybody. The element states which rung each section
+ * serves and declares the rungs nothing serves, and the arithmetic is the union.
+ *
+ * WHAT IT PROVES. That the author accounted for every attainable level — the
+ * same standing `positionNeutrality` has, and stated in the same words, because
+ * an author who writes every rung on every ref without looking has satisfied
+ * this and nothing else. What is gained is that silence is no longer available.
+ */
+function checkKnowledgeCoverage(corpus: Corpus): Finding[] {
+  const findings: Finding[] = [];
+
+  for (const file of corpus.elements) {
+    const d = file.data as Record<string, any>;
+    const at = (msg: string) => `${file.path}: ${msg}`;
+    if (!d.id) continue;
+
+    const ceiling = typeof d.levelCeiling === 'number' ? d.levelCeiling : 0;
+    const levels = (raw: unknown): number[] =>
+      ((raw ?? []) as unknown[]).filter((v): v is number => typeof v === 'number');
+
+    const served = new Set<number>();
+    for (const ref of (d.knowledgeRefs ?? []) as Array<Record<string, any>>) {
+      const where = `${ref?.article}#${ref?.section}`;
+      for (const level of levels(ref?.supports)) {
+        if (level > ceiling) {
+          findings.push(
+            err(at(`knowledgeRef ${where} claims to serve L${level}, above this element's ceiling of ${ceiling}. There is no such assessable unit for it to serve.`)),
+          );
+          continue;
+        }
+        served.add(level);
+      }
+    }
+
+    // A gap is the author's declaration of a hole. It does not withdraw the
+    // refs, and a level may legitimately be both served and gapped: partial
+    // coverage is the common case and the honest one.
+    const gapped = new Set<number>();
+    for (const gap of (d.knowledgeGaps ?? []) as Array<Record<string, any>>) {
+      for (const level of levels(gap?.levels)) {
+        if (level > ceiling) {
+          findings.push(
+            err(at(`knowledgeGap names L${level}, above this element's ceiling of ${ceiling}. Nothing is assessed there, so nothing can be missing from it.`)),
+          );
+          continue;
+        }
+        gapped.add(level);
+      }
+    }
+
+    const unaccounted: number[] = [];
+    for (let level = 1; level <= ceiling; level += 1) {
+      if (!served.has(level) && !gapped.has(level)) unaccounted.push(level);
+    }
+
+    if (unaccounted.length > 0) {
+      findings.push(
+        err(
+          at(
+            `${unaccounted.map((l) => `L${l}`).join(', ')} ${unaccounted.length === 1 ? 'is' : 'are'} served by no knowledgeRef and declared in no knowledgeGap. Point it at a section, or say in knowledgeGaps what a person at that level will not find. An unserved rung is a broken refresher path, and it is invisible to everybody except the holder who followed the link months later looking for the one detail they had forgotten.`,
+          ),
+        ),
+      );
+    }
+
+    const open = ((d.knowledgeGaps ?? []) as unknown[]).length;
+    if (d.status === 'stable' && open > 0) {
+      findings.push(
+        err(
+          at(
+            `is 'stable' with ${open} open knowledge gap${open === 1 ? '' : 's'}. Under rule 7 that status is what admits L3 and above, where independent work is entrusted, and an element may not carry a hole in its reference material there. It may stay in 'draft' and be assessed at L1 and L2 — write the missing material, or leave the status alone.`,
+          ),
+        ),
+      );
+    }
+  }
+
+  return findings;
+}
+
+/* ------------------------------------------------------------------------ */
+
+/**
  * Training modules.
  *
  * The rule doing the work here: a module that prepares for an element whose
@@ -1492,6 +1596,7 @@ export function runAllChecks(corpus: Corpus): Finding[] {
     ...checkPrerequisiteGraph(corpus),
     ...checkElementReviews(corpus),
     ...checkBok(corpus),
+    ...checkKnowledgeCoverage(corpus),
     ...checkModules(corpus),
     ...checkItemBank(corpus),
     ...checkProficiencyPolicy(corpus),

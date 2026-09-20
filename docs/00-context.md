@@ -60,6 +60,8 @@ So: `content/bok/` holds articles organized by **subject**, and `content/compete
 
 The requirement driving section granularity rather than article granularity is concrete: **someone who demonstrated competence eight months ago and has forgotten one detail will not retrain.** They will look it up. They have to land on the passage covering that detail, not on an article vaguely about the area with it buried inside. A `knowledgeRef` that resolves to the wrong altitude is a broken refresher path, and it fails silently for exactly the person who most needs it.
 
+**Each ref says which LEVELS of the element it serves, and an unserved level is an error.** See [What a knowledgeRef proves](#what-a-knowledgeref-proves-and-what-nothing-can-prove).
+
 Section ids therefore inherit the append-only discipline, one layer below element IDs, and BOK article ids share the same lock file.
 
 Taken now because **zero element prose existed.** After Phase 4 this restructure would have been ruinous; at 0 authored elements it cost a directory move and a schema field. It does impose an ordering on authoring, deliberately: the reference material must exist before the claim that somebody has mastered it.
@@ -708,7 +710,25 @@ What it took, and what each piece is for:
 - **`requiresPhysicalDemonstration` is derived and checked in both directions**, against the route prepared rather than the element alone. The same element now reaches `prepared` through one module and `pending-demonstration` through another, honestly, which is the state the scalar could not express.
 - **`CM-03-051` carries `[desk, equipment]`.** It is the only multi-route element in the corpus so far, and the reason the field moved.
 
-**Note the shape of the defect, because it is a repeat — and note what actually closed it.** The element used to record the ambiguity in a YAML comment explaining why `desk` was chosen. A human read that comment; no code did. What closed it was not writing the comment more carefully but giving the knowledge somewhere to go that participates in something: the field widened, and the module-side rule now derives from it. That is open item 22 in [`../CLAUDE.md`](../CLAUDE.md) — `knowledgeRefs` proving a link resolves while proving nothing about coverage — appearing in a second field, and this is the remedy the others want too: **the corpus has several places where an author knows something true about an element and has nowhere to put it that participates in anything**, and the answer each time is a field, not a note.
+**Note the shape of the defect, because it is a repeat — and note what actually closed it.** The element used to record the ambiguity in a YAML comment explaining why `desk` was chosen. A human read that comment; no code did. What closed it was not writing the comment more carefully but giving the knowledge somewhere to go that participates in something: the field widened, and the module-side rule now derives from it. That is item 22 — `knowledgeRefs` proving a link resolves while proving nothing about coverage — appearing in a second field, and it is the remedy the others wanted too: **the corpus has several places where an author knows something true about an element and has nowhere to put it that participates in anything**, and the answer each time is a field, not a note. Item 22 itself is closed below, and it is the one where the field could not be the whole answer.
+
+## What a knowledgeRef proves, and what nothing can prove
+
+**Closed 2026-09-20, inside the freeze window.** Open item 22, and the last of the family that included decisions 15, 16 and 23.
+
+CI checked that a `knowledgeRef` **resolved** — the article exists, the section is declared. It could not check that those sections **covered** what the element assesses, and it still cannot: no check reads prose and decides whether a passage explains a competence. The item was filed as resisting the remedy its three siblings got, on the grounds that what was missing is not a place to record coverage but a way to compute it.
+
+**Both halves of that turn out to be true, and the second half was not the part doing harm.** Nothing makes coverage computable. A field does make its ABSENCE computable, and the absence is what broke a refresher path: a LEVEL WITH NO KNOWLEDGE BEHIND IT AND NOBODY SAYING SO.
+
+- **`knowledgeRefs[].supports`** names the rungs of this element a section serves. Required on an element and not on a training module, which points into the BOK through the same shape and has no rungs of its own.
+- **`knowledgeGaps`** is the declared negative: the levels nothing serves, what a person there will not find, and what would close it. A level may be in both — partial coverage is the common case and the honest one.
+- **Every attainable level must be in one or the other.** A level in neither is an error, and that is the whole computation.
+- **An open gap blocks `stable`.** Under rule 7 that status is what admits L3 and above, so an element with a hole can still be assessed at L1 and L2 and cannot carry the levels where independent work is entrusted. Blunt on purpose, and the same bluntness `goldReference` already uses.
+- **A credential pins the knowledge behind ITS level.** `pinDefinition` takes the refs serving the level being issued, so an L1 credential no longer reports drift when a section that only ever served L4 is rewritten — a true statement about the element and a false one about the claim.
+
+**What it proves is that the author accounted for every level, and not that the section covers it.** That is exactly the standing `positionNeutrality` has, and it is stated here in the same words rather than quietly upgraded. An author who writes every rung on every ref without looking has satisfied the schema and nothing else.
+
+**The proof that it does something is what the pass found.** `CM-03-052` is the element the open item was filed against, and its closing note had said for weeks that `BOK-0003` §s05 was "now in `knowledgeRefs` above". It never was. Three things were wrong in one sentence: the ref is absent, the ref that *is* there covers RECORDING which contributions were dismissed rather than deciding it, and §s05 is a section about where the first-order approximation stops being safe that states the principle only in its closing paragraph. So the gap is declared rather than patched, and the remedy is a section nobody has written. `CM-03-040` failed the same way in the other direction: an element about choosing between distributions, whose L2 names the rectangular and the normal-from-a-coverage-claim by name, pointed at neither section. Both were invisible to CI, to six schema passes and to the authors, and both surfaced within an hour of being made to say which rung each ref serves.
 
 ## A gold reference cannot be self-declared
 

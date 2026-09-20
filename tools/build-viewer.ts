@@ -77,7 +77,8 @@ function loadAuthoredElements(): Map<string, Record<string, unknown>> {
       a: data.anchors ?? {},
       r: data.roleTargets ?? {},
       ci: (data.citations ?? []).map((c: Record<string, any>) => ({ s: c.source, c: c.clause, r: c.relevance ?? '' })),
-      kr: (data.knowledgeRefs ?? []).map((k: Record<string, any>) => ({ a: k.article, s: k.section, r: k.relevance ?? '' })),
+      kr: (data.knowledgeRefs ?? []).map((k: Record<string, any>) => ({ a: k.article, s: k.section, r: k.relevance ?? '', l: k.supports ?? [] })),
+      kg: (data.knowledgeGaps ?? []).map((g: Record<string, any>) => ({ l: g.levels ?? [], m: g.missing ?? '', w: g.awaiting ?? '' })),
       pre: data.prerequisites ?? [],
       rel: data.relatedElements ?? [],
     });

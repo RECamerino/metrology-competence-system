@@ -58,7 +58,7 @@ function element(id: string, levelCeiling: number): ElementFile {
       roleTargets: {},
       citations: [{ source: 'OPEN-SOURCE-1', clause: '1' }],
       currency: { authorityStatus: 'normative', volatility: 'controlled' },
-      knowledgeRefs: [{ article: 'BOK-0001', section: 's01' }],
+      knowledgeRefs: [{ article: 'BOK-0001', section: 's01', supports: [1, 2, 3] }],
     },
   };
 }

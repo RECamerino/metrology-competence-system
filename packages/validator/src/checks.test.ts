@@ -86,6 +86,11 @@ const sources = {
 };
 
 function element(overrides: Record<string, unknown> = {}): ElementFile {
+  // The baseline ref serves every rung the element declares. A fixture that
+  // lowers the ceiling lowers what its knowledge can claim to reach with it:
+  // claiming a level the element does not have is itself an error now.
+  const ceiling = (overrides.levelCeiling as number | undefined) ?? 3;
+  const everyLevel = Array.from({ length: ceiling }, (_, i) => i + 1);
   return {
     path: `content/competence/elements/CM-01/${(overrides.id as string) ?? 'CM-01-001'}.md`,
     body: 'Body prose.',
@@ -102,7 +107,7 @@ function element(overrides: Record<string, unknown> = {}): ElementFile {
       roleTargets: { 'test-technician': 2, 'test-engineer': 3 },
       citations: [{ source: 'OPEN-SOURCE-1', clause: '5.1.2' }],
       currency: { authorityStatus: 'normative', volatility: 'controlled' },
-      knowledgeRefs: [{ article: 'BOK-0001', section: 's01' }],
+      knowledgeRefs: [{ article: 'BOK-0001', section: 's01', supports: everyLevel }],
       ...overrides,
     },
   };
@@ -649,7 +654,7 @@ test('a rubricRef pointing at a nonexistent file is rejected', () => {
 
 test('an element pointing at a nonexistent article is rejected', () => {
   const errors = errorsOf(
-    corpus([element({ knowledgeRefs: [{ article: 'BOK-9999', section: 's01' }] })]),
+    corpus([element({ knowledgeRefs: [{ article: 'BOK-9999', section: 's01', supports: [1, 2, 3] }] })]),
   );
   assert.ok(errors.some((e) => e.includes("unknown article 'BOK-9999'")));
 });
@@ -658,7 +663,7 @@ test('an element pointing at a section the article does not declare is rejected'
   // The refresher path for someone who has forgotten one detail. Broken, it
   // fails silently for exactly the person who most needs it.
   const errors = errorsOf(
-    corpus([element({ knowledgeRefs: [{ article: 'BOK-0001', section: 's07' }] })]),
+    corpus([element({ knowledgeRefs: [{ article: 'BOK-0001', section: 's07', supports: [1, 2, 3] }] })]),
   );
   assert.ok(
     errors.some((e) => e.includes('BOK-0001#s07') && e.includes('fails silently')),
@@ -1844,6 +1849,82 @@ test('varying one exposure-relevant parameter is enough to separate them', () =>
         },
       ],
     }),
+  );
+  assert.deepEqual(errors, []);
+});
+
+
+/* -- Which rungs the knowledge reaches ------------------------------------- */
+
+/*
+ * Open decision 22. `knowledgeRefs` proved a link RESOLVES and proved nothing
+ * about whether it COVERS, and it still proves nothing about coverage — no
+ * check reads prose. What these tests hold is the part that was doing harm: a
+ * LEVEL WITH NO KNOWLEDGE BEHIND IT AND NOBODY SAYING SO.
+ */
+
+test('a level served by no knowledgeRef and declared in no gap is rejected', () => {
+  const errors = errorsOf(
+    corpus([element({ knowledgeRefs: [{ article: 'BOK-0001', section: 's01', supports: [1, 2] }] })]),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('L3') && e.includes('served by no knowledgeRef')),
+    `expected the unserved rung to be named, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('...and declaring it as a gap accounts for it', () => {
+  const errors = errorsOf(
+    corpus([
+      element({
+        knowledgeRefs: [{ article: 'BOK-0001', section: 's01', supports: [1, 2] }],
+        knowledgeGaps: [{ levels: [3], missing: LONG.slice(0, 200) }],
+      }),
+    ]),
+  );
+  assert.deepEqual(errors.filter((e) => e.includes('served by no knowledgeRef')), []);
+});
+
+test('a level may be both served and gapped, because partial coverage is the normal case', () => {
+  // CM-03-052's L2 is served for laying a budget out and unserved for what a
+  // stated coverage factor asserts. Declaring the gap does not withdraw the ref.
+  const errors = errorsOf(
+    corpus([
+      element({
+        knowledgeRefs: [{ article: 'BOK-0001', section: 's01', supports: [1, 2, 3] }],
+        knowledgeGaps: [{ levels: [2], missing: LONG.slice(0, 200) }],
+      }),
+    ]),
+  );
+  assert.deepEqual(errors, []);
+});
+
+test('a knowledgeRef claiming a level above the ceiling is rejected', () => {
+  const errors = errorsOf(
+    corpus([element({ knowledgeRefs: [{ article: 'BOK-0001', section: 's01', supports: [1, 2, 3, 5] }] })]),
+  );
+  assert.ok(errors.some((e) => e.includes('claims to serve L5')));
+});
+
+test('a knowledgeGap naming a level above the ceiling is rejected', () => {
+  const errors = errorsOf(
+    corpus([element({ knowledgeGaps: [{ levels: [4], missing: LONG.slice(0, 200) }] })]),
+  );
+  assert.ok(errors.some((e) => e.includes('knowledgeGap names L4')));
+});
+
+test('A STABLE ELEMENT MAY NOT CARRY AN OPEN KNOWLEDGE GAP', () => {
+  // The rule 7 parallel, and what makes the field participate rather than
+  // record: `stable` is what admits L3 and above.
+  const errors = errorsOf(
+    corpus([element({ status: 'stable', knowledgeGaps: [{ levels: [2], missing: LONG.slice(0, 200) }] })]),
+  );
+  assert.ok(errors.some((e) => e.includes('open knowledge gap')));
+});
+
+test('...and a draft one may, which is the whole point of declaring it', () => {
+  const errors = errorsOf(
+    corpus([element({ status: 'draft', knowledgeGaps: [{ levels: [2], missing: LONG.slice(0, 200) }] })]),
   );
   assert.deepEqual(errors, []);
 });
