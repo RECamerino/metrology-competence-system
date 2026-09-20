@@ -225,6 +225,8 @@ Short body: notes for assessors and item authors about how this claim is
 tested. NOT the explanation — that lives in the BOK article above.
 ```
 
+**A module must name what else would do.** `alternativeRoutes` is required, for the same reason `cannotConvey` is: a module that names no alternative is the only route its reader can see. Name them generically — a textbook, a standard, a mentor, a course, prior practice — and never as an endorsement.
+
 **`knowledgeRefs` is required, and points at sections rather than whole articles.** The person following it is usually not learning the subject from scratch; they demonstrated this competence months ago and have forgotten one detail. Send them to the passage, not the article.
 
 **Every ref says which LEVELS it serves, and every attainable level has to be served by one or declared in `knowledgeGaps`.** Write `supports` by reading the anchor, not the title: the rung is the question, and a ref that carries the whole of L1 may carry none of L4. Where nothing in the corpus reaches a rung, say so:

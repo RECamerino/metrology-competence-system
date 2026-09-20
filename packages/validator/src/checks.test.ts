@@ -842,6 +842,9 @@ function moduleFile(overrides: Record<string, unknown> = {}): ItemFile {
       summary: LONG,
       knowledgeRefs: [{ article: 'BOK-0001', section: 's01' }],
       cannotConvey: LONG,
+      // Required: a module naming no alternative is the only route its reader
+      // can see, and a route nobody chose becomes the path by default.
+      alternativeRoutes: LONG,
       ...overrides,
     },
   };
@@ -923,6 +926,7 @@ test('a training record cannot be made to attest competence', () => {
     schemaVersion: 1,
     id: 'urn:uuid:7a1b2c3d-4e5f-4a6b-8c9d-0e1f2a3b4c5d',
     subject: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
+    route: 'module',
     module: 'MOD-0001',
     moduleRef: `sha256:${'a'.repeat(64)}`,
     completedOn: '2026-08-10',
@@ -940,6 +944,7 @@ test('a training record can carry pending-demonstration for a skill element', ()
       schemaVersion: 1,
       id: 'urn:uuid:7a1b2c3d-4e5f-4a6b-8c9d-0e1f2a3b4c5d',
       subject: 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH',
+      route: 'module',
       module: 'MOD-0001',
       moduleRef: `sha256:${'a'.repeat(64)}`,
       completedOn: '2026-08-10',
