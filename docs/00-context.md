@@ -969,6 +969,35 @@ A credential carrying only one identifier still resolves on it — nothing here 
 
 **No existing test exercised the mismatch**, which is why it survived. That is the same shape as the `relevance`/`supports` guard added the same day: the population a check protects is often the one nobody has written a case for yet.
 
+## Standing is only standing if it was in force on the day it was used
+
+**Closed 2026-09-20, inside the freeze window.** External adversarial review, finding A-13 — and the part of it that lands on code written the same day.
+
+The authority chain resolution checked subject, element and level, and **no dates at all**. A signoff dated 2028 could rest on a credential its signer did not attain until 2030, or on one that had expired two years earlier, and nothing objected.
+
+**That was harmless for exactly as long as an asserted `heldLevel` satisfied the rung anyway.** The moment `proven` became the only thing that counts, an unchecked date became the obvious way to manufacture one — which is what makes this a consequence of the previous fix rather than an independent defect.
+
+A backing credential now has to have been in force:
+
+- **attained before the signoff** — nobody signs on standing they did not yet have;
+- **not expired** on that day;
+- **not revoked** on or before it.
+
+A standing that fails any of these is `contradicted`, so it does not satisfy the rung — the state and the finding agree, rather than the finding being a comment beside a satisfied requirement.
+
+### Revocation is the one that needed a decision, and it deliberately departs from the key rule
+
+Rule 8c says a signature made before a key was compromised **stands**, because the key was sound until the breach and invalidating it would punish a holder for something that happened afterwards.
+
+**A competence credential is different.** It is revoked for fraud or demonstrable assessment defect — and both of those say the attestation should never have existed, not that it went bad later. So the symmetry is only apparent.
+
+What is done instead: a revocation dated **on or before** the signoff is an error, because the signer was not competent when they signed. A revocation dated **after** it is a **warning** — not because the standing is fine, but because **nothing in this system adjudicates a revocation**, which is the same reason a holder's counter-statement lifts nothing. The reader is told and weighs it.
+
+### Two smaller temporal holes in the same finding
+
+- **`sufficiency.decidedOn` was compared with nothing.** A judgement dated after the credential was attained is not the judgement the credential rests on; it may be a perfectly good later re-review, and it is not what the signers had in front of them.
+- **Custody intervals were only checked at one end.** Retention ending before attainment was caught — the §6.2 failure. An interval that ends before it begins, or custody of a credential that did not yet exist, was not.
+
 ## A gold reference cannot be self-declared
 
 **Closed 2026-09-04, inside the freeze window.** Open item 12.
@@ -1017,6 +1046,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
+20. **CLOSED 2026-09-20 — standing must have been in force when it was used** — the authority chain checked no dates, so a 2028 signoff could rest on a 2030 credential. Revocation departs from the key-compromise rule, and says why. See [Standing is only standing if it was in force](#standing-is-only-standing-if-it-was-in-force-on-the-day-it-was-used).
 19. **CLOSED 2026-09-20 — an issuer's identifiers must agree** — the registry lookup was an OR, so a true entry beside a false DID resolved the true issuer and inherited its keys and dates. See [A true identifier beside a false one](#a-true-identifier-beside-a-false-one-bought-the-false-one-everything).
 18. **CLOSED 2026-09-20 — an assertion does not satisfy a requirement asking for proof** — `heldLevel` and `credentialedReviewer` were numbers and booleans the issuer typed, and they satisfied the L3–L5 signoff rungs. Standing is now one of five states and only `proven` or `bootstrap` counts. See [An assertion does not satisfy a requirement that asks for proof](#an-assertion-does-not-satisfy-a-requirement-that-asks-for-proof).
 17. **CLOSED 2026-09-20 — a signer's authority chain says what it claims** — `element` and `level` on the entry, resolved by `checkCredential` when the caller holds the backing credentials and named unresolved when they do not. A wallet cannot supply them: a signer's record is the signer's. See [A signer's authority chain says what it claims](#a-signers-authority-chain-says-what-it-claims-and-a-wallet-cannot-resolve-it).

@@ -360,6 +360,15 @@ export function checkEvidenceSufficiency(credential: Credential): Finding[] {
       continue;
     }
 
+    // A judgement dated after the credential was issued is not the judgement
+    // the credential rests on. It may be a perfectly good later re-review; it
+    // is not what the signers had in front of them when they signed.
+    if (credential.attainedOn && sufficiency.decidedOn && sufficiency.decidedOn > credential.attainedOn) {
+      findings.push(
+        err(at(`the sufficiency of its ${item.type} evidence is dated ${sufficiency.decidedOn}, after the credential was attained on ${credential.attainedOn}. A judgement made afterwards is not the one this attestation rests on.`)),
+      );
+    }
+
     if (!signerDids.has(sufficiency.decidedBy)) {
       findings.push(
         err(at(`the sufficiency of its ${item.type} evidence was decided by ${sufficiency.decidedBy}, who is not among the signers. A judgement by somebody who did not sign is not part of this attestation, and on the document it reads as though it were.`)),
@@ -431,6 +440,8 @@ export function signerStanding(
   signer: Signer,
   element: string,
   backing: Credential[] = [],
+  /** The day the signoff happened. Standing is only standing if it was in force. */
+  asOf?: string,
 ): SignerStanding {
   if (signer.bootstrapAuthority) {
     return { heldLevel: 'bootstrap', reviewerAuthority: 'bootstrap' };
@@ -454,6 +465,10 @@ export function signerStanding(
       if (entry.level !== undefined && held.level !== entry.level) return { state: 'contradicted' };
       if (basis === 'held-level' && held.element !== element) return { state: 'contradicted' };
 
+      // And it has to have been IN FORCE on the day they signed. Resolving a
+      // chain is not the same as the standing existing at the time it was used.
+      if (asOf && !inForce(held, asOf).ok) return { state: 'contradicted' };
+
       seen = 'proven';
       return { state: 'proven', level: held.level };
     }
@@ -466,6 +481,64 @@ export function signerStanding(
     provenLevel: level.level,
     reviewerAuthority: resolve('reviewer-authority').state,
   };
+}
+
+/**
+ * Was this credential in force on a given day?
+ *
+ * THE DEFECT THIS CLOSES. The authority chain checked subject, element and
+ * level, and no dates at all — so a signoff dated 2028 could rest on a
+ * credential its signer did not attain until 2030, or on one that had expired
+ * two years earlier. That was harmless while an asserted `heldLevel` satisfied
+ * the rung anyway; the moment `proven` became the only thing that counts, an
+ * unchecked date became the obvious way to manufacture one.
+ *
+ * REVOCATION IS THE ONE THAT NEEDED A DECISION, and it deliberately does NOT
+ * follow the key-compromise rule. A signature made before a key was compromised
+ * stands, because the key was sound until the breach. A competence credential
+ * is revoked for fraud or demonstrable assessment defect — both of which say
+ * the attestation should never have existed, not that it went bad later. So a
+ * revocation dated AFTER the signoff does not silently invalidate it, because
+ * nothing here adjudicates the revocation either; it is reported so a reader
+ * can weigh it, which is the same treatment the holder's counter-statement
+ * gets. A revocation dated BEFORE the signoff is not a judgement call at all.
+ */
+export function inForce(
+  held: Credential,
+  asOf: string,
+): { ok: boolean; why?: string; severity?: 'error' | 'warn' } {
+  const attained = held.attainedOn;
+  if (attained && attained > asOf) {
+    return {
+      ok: false,
+      severity: 'error',
+      why: `was not attained until ${attained}. Nobody signs on standing they did not yet have.`,
+    };
+  }
+
+  const expires = held.expiresOn as string | undefined;
+  if (expires && expires < asOf) {
+    return { ok: false, severity: 'error', why: `expired on ${expires}, before this signoff.` };
+  }
+
+  const status = held.status as { revoked?: boolean; revokedOn?: string; reason?: string } | undefined;
+  if (status?.revoked) {
+    const on = status.revokedOn;
+    if (!on || on <= asOf) {
+      return {
+        ok: false,
+        severity: 'error',
+        why: `was revoked${on ? ` on ${on}` : ''}, on or before this signoff. The signer was not competent at the time they signed.`,
+      };
+    }
+    return {
+      ok: true,
+      severity: 'warn',
+      why: `was revoked on ${on}, after this signoff. Unlike a compromised key — which was sound until the breach — a competence credential is revoked for fraud or demonstrable assessment defect, and both say the attestation should never have existed. This signoff is not invalidated here, because nothing in this system adjudicates a revocation; a reader should weigh it.`,
+    };
+  }
+
+  return { ok: true };
 }
 
 /** Why a requirement was not met, in the words that fit the actual state. */
@@ -666,6 +739,17 @@ export function checkCredential(
           err(at(`signer ${signer.did} backs a held level with a credential in ${held.element}, and this signoff is for ${credential.element}. Signer standing is scoped to the element; a level held elsewhere is not evidence here.`)),
         );
       }
+
+      // Standing is only standing if it was in force on the day it was used.
+      if (credential.attainedOn) {
+        const force = inForce(held, credential.attainedOn);
+        if (force.why) {
+          const finding = force.severity === 'warn' ? warn : err;
+          findings.push(
+            finding(at(`signer ${signer.did} backs their standing with ${entry.credentialId}, which ${force.why}`)),
+          );
+        }
+      }
     }
   }
 
@@ -679,7 +763,7 @@ export function checkCredential(
 
   const standings = credential.signers.map((signer) => ({
     signer,
-    standing: signerStanding(signer, credential.element, backing),
+    standing: signerStanding(signer, credential.element, backing, credential.attainedOn),
   }));
 
   if (policy.witnessMustHoldLevel !== null && policy.witnessMustHoldLevel !== undefined) {
@@ -994,6 +1078,28 @@ export function checkCustody(credential: Credential): Finding[] {
 
   if (holders.length > 1) {
     findings.push(err(at('records more than one holder. There is one subject and therefore one holder.')));
+  }
+
+  /*
+   * A custody interval has to be an interval, and it cannot start before the
+   * thing it holds exists.
+   *
+   * The existing check caught retention ENDING before attainment, which is the
+   * §6.2 failure. It did not catch an interval that ends before it begins, or
+   * custody of a credential that did not yet exist — both of which make the
+   * retention obligation unreadable rather than merely short.
+   */
+  for (const entry of custody) {
+    if (entry.retentionUntil && entry.since && entry.retentionUntil < entry.since) {
+      findings.push(
+        err(at(`records custody by ${entry.custodian} from ${entry.since} until ${entry.retentionUntil}, which ends before it begins. A retention obligation nobody can read is not one anybody can meet.`)),
+      );
+    }
+    if (credential.attainedOn && entry.since && entry.since < credential.attainedOn) {
+      findings.push(
+        err(at(`records custody by ${entry.custodian} from ${entry.since}, before the credential was attained on ${credential.attainedOn}. Nobody held this before it existed.`)),
+      );
+    }
   }
 
   // The organization side is required exactly where an organization is
