@@ -154,3 +154,22 @@ test('per-archetype reuse is printed, not only the mean', () => {
   assert.match(report, /Units per archetype:/);
   assert.match(report, /ARC-0001\s+3/);
 });
+
+
+test('THE CORPUS STATES HOW MUCH OF ITS COVERAGE MAP COULD FAIL', () => {
+  // The remedy for a claim that outran the code. A number the corpus reports
+  // about itself is worth more than a sentence in a document saying otherwise,
+  // which is the same argument report:foundational already rests on.
+  const one = element('CM-01-001', 3);
+  (one.data as Record<string, unknown>).knowledgeRefs = [
+    // The first claims every rung, so the second's supports cannot change the
+    // outcome — which is what makes the accounting on this element inert.
+    { article: 'BOK-0001', section: 's01', supports: [1, 2, 3] },
+    { article: 'BOK-0001', section: 's01', supports: [3] },
+  ];
+  const report = coverageReport(corpus([one], []));
+
+  assert.match(report, /KNOWLEDGE COVERAGE/);
+  assert.match(report, /cannot fail: 1 of 1 multi-ref/);
+  assert.match(report, /CM-01-001 \(BOK-0001#s01\)/);
+});

@@ -1927,6 +1927,104 @@ test('A STABLE ELEMENT MAY NOT CARRY AN OPEN KNOWLEDGE GAP', () => {
   assert.ok(errors.some((e) => e.includes('open knowledge gap')));
 });
 
+/*
+ * THE ONE THING ON A COVERAGE MAP THAT IS CHECKABLE.
+ *
+ * The accounting above can only fail where an author NARROWED a ref and left a
+ * rung unserved, and 23 of the 26 authored elements carry a ref claiming every
+ * rung, which satisfies it outright. So the check that earns its place is not
+ * about coverage at all: `relevance` and `supports` state one fact in two
+ * fields, 44 of the corpus's 97 refs name a rung in the prose, and two fields
+ * stating one fact is the shape that drifts when somebody edits one of them.
+ */
+
+test('a ref whose prose names a rung its supports omits is rejected', () => {
+  const errors = errorsOf(
+    corpus([
+      element({
+        knowledgeRefs: [
+          {
+            article: 'BOK-0001',
+            section: 's01',
+            supports: [1, 2, 3],
+            relevance: 'The four searches, and the recording the L3 anchor asks for unprompted.',
+          },
+          {
+            article: 'BOK-0001',
+            section: 's01',
+            supports: [1],
+            relevance: 'What a coefficient carries \u2014 the L2 anchor turns on this.',
+          },
+        ],
+      }),
+    ]),
+  );
+  assert.ok(
+    errors.some((e) => e.includes('says in its relevance that it serves L2')),
+    `expected the contradiction to be named, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('...and prose naming a rung the supports DOES claim is fine', () => {
+  const errors = errorsOf(
+    corpus([
+      element({
+        knowledgeRefs: [
+          {
+            article: 'BOK-0001',
+            section: 's01',
+            supports: [1, 2, 3],
+            relevance: 'The selection the L3 anchor asks for, and the L1 anchor\'s whole content.',
+          },
+        ],
+      }),
+    ]),
+  );
+  assert.deepEqual(errors, []);
+});
+
+test('SUPPORTS CLAIMING MORE THAN THE PROSE NAMES IS NOT A CONTRADICTION', () => {
+  // One direction only, deliberately. `relevance` is a summary written for a
+  // reader rather than an exhaustive list, and firing on this would fire on
+  // most of the corpus — which is how a reader learns to ignore findings.
+  const errors = errorsOf(
+    corpus([
+      element({
+        knowledgeRefs: [
+          {
+            article: 'BOK-0001',
+            section: 's01',
+            supports: [1, 2, 3],
+            relevance: 'The four methods and what drift does to the choice \u2014 the L3 anchor\'s central decision.',
+          },
+        ],
+      }),
+    ]),
+  );
+  assert.deepEqual(errors, []);
+});
+
+test('a rung named in prose above the ceiling is not read as a claim', () => {
+  // The element cannot have an L5, so an "L5" in prose is discussing something
+  // else — a neighbouring element, a level of detail — and reading it as a
+  // coverage claim would manufacture a contradiction out of ordinary writing.
+  const errors = errorsOf(
+    corpus([
+      element({
+        knowledgeRefs: [
+          {
+            article: 'BOK-0001',
+            section: 's01',
+            supports: [1, 2, 3],
+            relevance: 'Where this bites, including the L5 case that belongs to CM-03-053 rather than here.',
+          },
+        ],
+      }),
+    ]),
+  );
+  assert.deepEqual(errors, []);
+});
+
 test('...and a draft one may, which is the whole point of declaring it', () => {
   const errors = errorsOf(
     corpus([element({ status: 'draft', knowledgeGaps: [{ levels: [2], missing: LONG.slice(0, 200) }] })]),

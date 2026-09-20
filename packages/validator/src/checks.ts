@@ -934,10 +934,28 @@ function checkElementReviews(corpus: Corpus): Finding[] {
  * the part that was harming anybody. The element states which rung each section
  * serves and declares the rungs nothing serves, and the arithmetic is the union.
  *
- * WHAT IT PROVES. That the author accounted for every attainable level — the
- * same standing `positionNeutrality` has, and stated in the same words, because
- * an author who writes every rung on every ref without looking has satisfied
- * this and nothing else. What is gained is that silence is no longer available.
+ * WHAT IT PROVES, AND HOW LITTLE THAT IS — measured rather than asserted.
+ * That the author accounted for every attainable level. The accounting below
+ * can only fail where an author NARROWED a ref and then left a rung unserved,
+ * so a single ref claiming every rung satisfies it outright and makes every
+ * other ref's `supports` on that element decorative. **That is the shape 23 of
+ * the 26 authored elements have**, and both defects the authoring pass found
+ * — CM-03-040's L2 and CM-03-052's L4 — would have passed this check. What
+ * found them was writing the map against the anchors, not running the code.
+ *
+ * SO THE HONEST ACCOUNT IS: this makes an author look at every rung, and it
+ * catches the narrowed map with a hole in it. It does not make coverage
+ * computable and the earlier claim that it made the ABSENCE computable was
+ * too strong. `report:coverage` prints how many elements the accounting cannot
+ * fail on, because a number the corpus states about itself is worth more than
+ * a sentence in a document claiming otherwise.
+ *
+ * A WARNING ON THE VACUOUS SHAPE WAS CONSIDERED AND REJECTED ON ITS OWN
+ * EVIDENCE. It would fire on 23 of 26 elements, and a warning that fires on
+ * seven elements in eight teaches a reader to ignore warnings — which is the
+ * failure this project already names about drift. The shape is often honest:
+ * `BOK-0007#s02` genuinely serves all three rungs of `CM-15-046`, and nothing
+ * computable separates that from a ref widened without looking.
  */
 function checkKnowledgeCoverage(corpus: Corpus): Finding[] {
   const findings: Finding[] = [];
@@ -954,6 +972,7 @@ function checkKnowledgeCoverage(corpus: Corpus): Finding[] {
     const served = new Set<number>();
     for (const ref of (d.knowledgeRefs ?? []) as Array<Record<string, any>>) {
       const where = `${ref?.article}#${ref?.section}`;
+      const claimed = new Set<number>();
       for (const level of levels(ref?.supports)) {
         if (level > ceiling) {
           findings.push(
@@ -962,6 +981,34 @@ function checkKnowledgeCoverage(corpus: Corpus): Finding[] {
           continue;
         }
         served.add(level);
+        claimed.add(level);
+      }
+
+      /*
+       * The one thing on a coverage map that IS checkable.
+       *
+       * `relevance` is prose and `supports` is a set, and on 44 of this
+       * corpus's 97 refs the prose names a rung outright — "the L3 anchor's
+       * central selection", "the L4 anchor rests entirely on this section".
+       * Two fields on one object stating one fact is the shape that drifts:
+       * somebody narrows the prose, or widens it, and the set beside it is not
+       * touched. Nothing else about a coverage map can be verified at all, so
+       * the part that can be is.
+       *
+       * ONE DIRECTION ONLY. Prose naming a rung the set omits is a
+       * contradiction. The set claiming MORE than the prose names is not —
+       * `relevance` is a summary written for a reader, not an exhaustive list,
+       * and firing on that would fire on most of the corpus.
+       */
+      const mentioned = [...String(ref?.relevance ?? '').matchAll(/\bL([1-5])\b/g)]
+        .map((m) => Number(m[1]))
+        .filter((level) => level <= ceiling);
+      const unclaimed = [...new Set(mentioned)].filter((level) => !claimed.has(level)).sort();
+
+      if (unclaimed.length > 0 && claimed.size > 0) {
+        findings.push(
+          err(at(`knowledgeRef ${where} says in its relevance that it serves ${unclaimed.map((l) => `L${l}`).join(', ')}, and its supports does not claim ${unclaimed.length === 1 ? 'it' : 'them'}. One of the two is wrong and a reader cannot tell which — the prose is what a person follows, the set is what the corpus counts.`)),
+        );
       }
     }
 

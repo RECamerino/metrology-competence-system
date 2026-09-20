@@ -720,7 +720,9 @@ What it took, and what each piece is for:
 
 CI checked that a `knowledgeRef` **resolved** — the article exists, the section is declared. It could not check that those sections **covered** what the element assesses, and it still cannot: no check reads prose and decides whether a passage explains a competence. The item was filed as resisting the remedy its three siblings got, on the grounds that what was missing is not a place to record coverage but a way to compute it.
 
-**Both halves of that turn out to be true, and the second half was not the part doing harm.** Nothing makes coverage computable. A field does make its ABSENCE computable, and the absence is what broke a refresher path: a LEVEL WITH NO KNOWLEDGE BEHIND IT AND NOBODY SAYING SO.
+**Both halves of that turn out to be true, and the second half was not the part doing harm.** Nothing makes coverage computable. What a field does is make an author look at every rung and say which ones a section reaches, and the rung nobody looked at is what broke a refresher path.
+
+**This paragraph originally said the field made the ABSENCE computable, and that was too strong — corrected 2026-09-20 after an adversarial review measured it.** See *What the check actually catches* below.
 
 - **`knowledgeRefs[].supports`** names the rungs of this element a section serves. Required on an element and not on a training module, which points into the BOK through the same shape and has no rungs of its own.
 - **`knowledgeGaps`** is the declared negative: the levels nothing serves, what a person there will not find, and what would close it. A level may be in both — partial coverage is the common case and the honest one.
@@ -729,6 +731,16 @@ CI checked that a `knowledgeRef` **resolved** — the article exists, the sectio
 - **A credential pins the knowledge behind ITS level.** `pinDefinition` takes the refs serving the level being issued, so an L1 credential no longer reports drift when a section that only ever served L4 is rewritten — a true statement about the element and a false one about the claim.
 
 **What it proves is that the author accounted for every level, and not that the section covers it.** That is exactly the standing `positionNeutrality` has, and it is stated here in the same words rather than quietly upgraded. An author who writes every rung on every ref without looking has satisfied the schema and nothing else.
+
+### What the check actually catches
+
+Measured, because the claim above was originally written without measuring. The accounting is `served ∪ gapped ⊇ {1..ceiling}`, so **a single ref claiming every rung satisfies it outright** and every other ref's `supports` on that element becomes decorative. **23 of the 26 authored elements have exactly that shape** — including both elements this pass found defects in. `CM-03-040`'s L2 was served by `BOK-0002` §s01 at `[1,2,3,4,5]`, and `CM-03-052`'s L4 by `BOK-0001` §s03 at `[1,2,3,4]`. **Neither defect would have been caught by the check.** What caught them was being made to write the map against the anchors, which is the project's standing lesson arriving one more time.
+
+So the accounting fails only where an author NARROWED a ref and then left a rung unserved. That is a real population and a narrow one, and it is what the check is for.
+
+**A warning on the vacuous shape was considered and rejected on its own evidence.** It would fire on 23 elements in 26, and a warning that fires on seven cases in eight teaches a reader to ignore warnings — the failure this project already names about drift. The shape is often honest: `BOK-0007` §s02 genuinely carries all three rungs of `CM-15-046`, and nothing computable separates that from a ref widened without looking.
+
+**Two things are done instead.** `report:coverage` prints the rate, on the same argument `report:foundational` rests on: a number the corpus states about itself beats a document claiming otherwise. And the one genuinely checkable thing about a coverage map is checked — **where `relevance` names a rung in prose, `supports` must claim it.** 44 of the corpus's 97 refs name a rung outright, two fields stating one fact is the shape that drifts, and the prose is what a person follows while the set is what the corpus counts. One direction only: `supports` claiming more than the prose names is not a contradiction, because `relevance` is a summary and firing on it would fire on most of the corpus.
 
 **The proof that it does something is what the pass found.** `CM-03-052` is the element the open item was filed against, and its closing note had said for weeks that `BOK-0003` §s05 was "now in `knowledgeRefs` above". It never was. Three things were wrong in one sentence: the ref is absent, the ref that *is* there covers RECORDING which contributions were dismissed rather than deciding it, and §s05 is a section about where the first-order approximation stops being safe that states the principle only in its closing paragraph. So the gap is declared rather than patched, and the remedy is a section nobody has written. `CM-03-040` failed the same way in the other direction: an element about choosing between distributions, whose L2 names the rectangular and the normal-from-a-coverage-claim by name, pointed at neither section. Both were invisible to CI, to six schema passes and to the authors, and both surfaced within an hour of being made to say which rung each ref serves.
 
