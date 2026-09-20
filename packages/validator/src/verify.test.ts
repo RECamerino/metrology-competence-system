@@ -10,6 +10,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { type VerificationLayer, verifyCredential } from './verify.ts';
+import type { TrustRegistry } from './trust.ts';
 
 const HASH = `sha256:${'a'.repeat(64)}`;
 const SUBJECT = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
@@ -41,6 +42,28 @@ const credential = {
     proofValue: `z${'2'.repeat(87)}`,
   },
 } as unknown as Parameters<typeof verifyCredential>[0];
+
+/*
+ * An entirely ordinary registry: cut AFTER the credential was attained, which is
+ * true of every current snapshot for every credential already in a wallet. That
+ * is the shape finding R-04 turns on.
+ */
+const registry: TrustRegistry = {
+  schemaVersion: 1,
+  issuedOn: '2028-06-01',
+  sequence: 12,
+  nextExpectedUpdate: '2028-07-01',
+  didMethods: ['did:key'],
+  issuers: [
+    {
+      entry: 'northfield',
+      did: SIGNER,
+      name: 'Northfield Calibration',
+      admittedOn: '2026-01-01',
+      keys: [{ id: `${SIGNER}#key-1`, validFrom: '2026-01-01', status: 'active' }],
+    },
+  ],
+};
 
 const layersIn = (state: string, verdict: ReturnType<typeof verifyCredential>) =>
   (Object.keys(verdict.layers) as VerificationLayer[]).filter((l) => verdict.layers[l] === state);
@@ -94,6 +117,51 @@ test('a layer the caller supplies stops being reported as unchecked', () => {
     withWallet.findings.filter((f) => f.message.includes('was NOT checked')).length <
       bare.findings.filter((f) => f.message.includes('was NOT checked')).length,
   );
+});
+
+/* -- The date the question is asked, and the age of the answer ------------- */
+
+/*
+ * External review finding R-04. This composed `verifyAgainstRegistry` with
+ * `inputs.asOf ?? credential.attainedOn ?? ''`, and dropped `TrustBasis`
+ * entirely from the verdict it returned.
+ */
+
+test('A REGISTRY WITH NO DATE TO READ IT AT IS NOT A CHECKED ISSUER LAYER', () => {
+  const verdict = verifyCredential(credential, { registry });
+  assert.equal(verdict.layers['issuer-trust'], 'not-supplied');
+  assert.equal(verdict.basis, undefined);
+});
+
+test('...and the reason names the date, because the caller DID supply a registry', () => {
+  // The generic sentence says the caller "supplied nothing to check it
+  // against", which would send them looking for the thing they already have.
+  const verdict = verifyCredential(credential, { registry });
+  const finding = verdict.findings.find((f) => f.message.includes('the issuer against a trust registry'));
+  assert.ok(finding, 'the layer should still produce a finding, not only a state');
+  assert.match(finding.message, /supplied a registry snapshot but not `asOf`/);
+  assert.doesNotMatch(finding.message, /supplied nothing to check it against/);
+});
+
+test('THE OLD DEFAULT WOULD HAVE REPORTED A NEGATIVE AGE ON AN ORDINARY CALL', () => {
+  // `attainedOn` is the date of the answer being questioned, not the date of
+  // the question. Substituting it put the registry 152 days in the future.
+  const verdict = verifyCredential(credential, { registry, asOf: '2028-06-15' });
+  assert.equal(verdict.layers['issuer-trust'], 'checked');
+  assert.equal(verdict.basis?.registryAgeDays, 14);
+  assert.equal(verdict.basis?.fromTheFuture, false);
+});
+
+test('the verdict CARRIES the age, which rule 8c says a verdict may never drop', () => {
+  const verdict = verifyCredential(credential, { registry, asOf: '2028-06-15' });
+  assert.match(verdict.statement, /14 day\(s\) old/);
+  assert.equal(verdict.basis?.registryIssuedOn, '2028-06-01');
+});
+
+test('a verdict with no registry claims no age at all', () => {
+  const verdict = verifyCredential(credential);
+  assert.equal(verdict.basis, undefined);
+  assert.doesNotMatch(verdict.statement, /day\(s\) old/);
 });
 
 /* -- Revoked on its face, and expired -------------------------------------- */

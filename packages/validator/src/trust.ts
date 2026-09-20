@@ -90,6 +90,14 @@ export interface TrustBasis {
   registrySequence: number;
   /** True when the snapshot is past the date its own publisher said to replace it. */
   overdue: boolean;
+
+  /**
+   * True when the snapshot was cut AFTER the date the question was asked, which
+   * makes `registryAgeDays` negative and makes the whole staleness apparatus
+   * meaningless. A renderer branches on this rather than on the sign of a
+   * number, for the reason `overdue` is a field and not a comparison.
+   */
+  fromTheFuture: boolean;
   /**
    * The plain-language statement a verifier must not suppress. Present in every
    * result, including clean ones.
@@ -252,6 +260,29 @@ export function verifyAgainstRegistry(
   const age = days(registry.issuedOn, asOf);
   const overdue = Boolean(registry.nextExpectedUpdate && asOf > registry.nextExpectedUpdate);
 
+  /*
+   * A SNAPSHOT CUT AFTER THE QUESTION CANNOT ANSWER IT.
+   *
+   * External review finding R-04. `asOf` is documented above as the date the
+   * verification is being MADE, passed rather than read from the clock so an
+   * auditor re-running a decision gets the answer that was actually given. A
+   * registry issued after that date is not a stale snapshot and not a fresh
+   * one — it is knowledge the verifier being reconstructed did not have.
+   *
+   * Everything this module says about staleness inverts. `age` goes negative,
+   * and the sentence built from it read "N day(s) old. Anything that changed
+   * since then does not appear here", which is backwards in both halves.
+   * `overdue` inverts too and is the more dangerous of the two, because it is
+   * a boolean a renderer trusts: a registry years past its own replacement
+   * date reports `overdue: false` when read at an earlier date.
+   *
+   * It is not a corner case. `verifyCredential` used to default `asOf` to the
+   * credential's own `attainedOn`, and every current snapshot postdates every
+   * credential already in a wallet — so the ORDINARY path through the project's
+   * own entry point produced a negative age and a false `overdue`.
+   */
+  const fromTheFuture = Boolean(asOf && registry.issuedOn > asOf);
+
   const registrySigned = Boolean(String((registry as { proof?: { proofValue?: string } }).proof?.proofValue ?? '').trim());
 
   // The verb is the whole point. "Verified" was doing work no code here has
@@ -269,9 +300,12 @@ export function verifyAgainstRegistry(
     registryIssuedOn: registry.issuedOn,
     registrySequence: registry.sequence,
     overdue,
+    fromTheFuture,
     signatureVerified,
     registrySigned,
-    statement: (overdue
+    statement: (fromTheFuture
+      ? `${verb} against trust registry #${registry.sequence}, issued ${registry.issuedOn} — ${-age} day(s) AFTER ${asOf}, the date this question was asked. That is not a measure of staleness and must not be shown as one: the snapshot carries decisions taken after the moment being verified.`
+      : overdue
       ? `${verb} against trust registry #${registry.sequence}, issued ${registry.issuedOn} — ${age} day(s) old, and ${days(registry.nextExpectedUpdate!, asOf)} day(s) past the update it was expected to receive. A key compromised, an issuer removed, or a credential revoked since then does not appear here.`
       : `${verb} against trust registry #${registry.sequence}, issued ${registry.issuedOn} — ${age} day(s) old. Anything that changed since then does not appear here.`) + unsigned + unsignedRegistry,
   };
@@ -291,6 +325,12 @@ export function verifyAgainstRegistry(
   if (!String(credential.proof?.proofValue ?? '').trim()) {
     findings.push(
       err(at('carries no proof.proofValue, so there is no signature on it to verify at all. Every other field of the proof DESCRIBES a signature; only that one IS one.')),
+    );
+  }
+
+  if (fromTheFuture) {
+    findings.push(
+      err(at(`was checked as of ${asOf} against trust registry #${registry.sequence}, which was issued ${registry.issuedOn} — ${-age} day(s) later. A snapshot cut after the question was asked cannot answer it, and nothing here will pretend otherwise by reporting a negative age as an age. Either ask the question as of a date this snapshot precedes, or check against the snapshot that was current then.`)),
     );
   }
 

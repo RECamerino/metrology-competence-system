@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 17.5% / 60.9% / 21.6% |
 | Content authored | **26 elements** · **17 BOK articles** · **2 modules** — 8 domains, all three axes |
 | Item bank | 6 archetypes · 46 bindings across 45 units · **0.2%** of units covered |
-| Checks | 0 errors · 451/451 tests · typecheck clean |
+| Checks | 0 errors · 460/460 tests · typecheck clean |
 
 ### Phases
 
@@ -146,7 +146,7 @@ content/trust-registry.yaml       Issuer trust registry. Steward-controlled.
                                   verifies.
 
 schemas/                          19 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 451 tests.
+packages/validator/               The ONLY implemented package. 460 tests.
 apps/viewer/                      The only implemented app. TWO templates and a
                                   build script; output is an index page plus one
                                   page per domain, none committed. Every page is
@@ -186,14 +186,14 @@ Rules JSON Schema cannot express are executable, in `packages/validator/src/`:
 |---|---|
 | `checks.ts` | Everything corpus-wide: IDs, citations, anchors, BOK refs, item bank, modules, duplicate titles, that a role never needs an element whose prerequisite is `null` for it, that a contested section says WHERE the disagreement lives, that an item bound to disputed knowledge declares what its scoring must not credit, that a proficiency-test result is not admitted below L3, that a gold reference is carried by review rather than asserted, that a reviewer claiming a resolvable standing can actually be resolved, that every attainable level is reached by some section of the BOK or declared unreached, and that a desk archetype is never bound to work that only exists while it is being done, and that a witnessed binding says what the witness must see for its own test, that a binding does not leave draft unreviewed, and that two levels of one element cannot pin their way into being the same item |
 | `credentials.ts` | No self-signoff, signoff policy, **standing as a STATE rather than a claim — `proven`, `contradicted`, `unresolved`, `asserted` or `bootstrap`, and only the first and last satisfy a rung — and only where it was IN FORCE on the day it was used**, the signer's authority chain — what it CLAIMS the backing credential attests, resolved when the caller holds it and named unresolved when they do not** — the wallet boundary, draft-status attestability, evidenced provenance tier, founding-cohort authority, dual custody, why the evidence was enough, and **what the experience actually consisted of** — hours and breadth derived from the activities rather than declared, and one activity described the same way on every credential it credits |
-| `trust.ts` | Offline verification against a registry snapshot, **every identifier the credential supplies about its issuer having to agree** — the lookup was an OR, so a true registry entry beside a false DID resolved the true issuer and inherited its keys — **what the answer does not establish** — no signature is verified anywhere yet and every verdict says so — the age of the answer, and the holder's counter-statement — surfaced to a reader, adjudicated by nobody, and never lifting the revocation |
+| `trust.ts` | Offline verification against a registry snapshot, **every identifier the credential supplies about its issuer having to agree** — the lookup was an OR, so a true registry entry beside a false DID resolved the true issuer and inherited its keys — **what the answer does not establish** — no signature is verified anywhere yet and every verdict says so — the age of the answer — and that **a snapshot cut AFTER the question cannot answer it**, because every staleness statement inverts and `overdue` inverts to the reassuring side — and the holder's counter-statement — surfaced to a reader, adjudicated by nobody, and never lifting the revocation |
 | `ledger.ts` | Hash chain, no-retake, trust horizon, and **what counts as one exposure**: two draws agreeing on every exposure-relevant parameter, with `exposureGroup` namespacing rather than collapsing |
 | `definitions.ts` | Semantic pinning — `definitionRef`, `assessmentPolicyRef`, drift, what a section pin covers besides its prose, and that a credential pins the knowledge behind ITS level rather than everything the element points at |
 | `authorizations.ts` | Does this authorization cover this work? Three answers — `covered`, `not-covered`, **`undecidable`** — and **units are never converted**, because a grant of 0–100 mm against a job at 0.5 m reads as `0.5 < 100` the moment they are |
 | `scope.ts` | Gap analysis. **An element outside scope cannot produce a gap**, an authority overlay is not an occupation, and an organization computes gaps only through a disclosure that holds up |
 | `canonical.ts` | The one hashing function. Changing it invalidates every hash ever computed |
 | `preparation.ts` | Every route to an assessment, and the fact that none of them is required. What a preparation record owes, and **`pending-demonstration` derived from the element rather than from a module** — so the person who taught themselves an equipment-route element can say they owe bench time |
-| `verify.ts` | **ONE entry point for one credential**, and where a credential's own REVOCATION and EXPIRY are read — nothing did, so a credential revoked on its own face passed clean for a verifier with no registry. Revocation is an error; **expiry is not, because the schema says an expired credential is not a false one and verifiers decide what weight to give currency** — so it is reported and not ruled on. Seventeen exported checks and six of them composed by nothing, so validating a credential meant remembering the no-retake rule, the drift check and the trust verdict by hand. A verdict records a state PER LAYER — `checked`, `not-supplied`, `not-applicable` — and **`not-supplied` is never silently a pass**: it is in the layer states AND in a finding, because a renderer that drops either must still be unable to call it verified |
+| `verify.ts` | **ONE entry point for one credential**, and where a credential's own REVOCATION and EXPIRY are read — nothing did, so a credential revoked on its own face passed clean for a verifier with no registry. Revocation is an error; **expiry is not, because the schema says an expired credential is not a false one and verifiers decide what weight to give currency** — so it is reported and not ruled on. Seventeen exported checks and six of them composed by nothing, so validating a credential meant remembering the no-retake rule, the drift check and the trust verdict by hand. A verdict records a state PER LAYER — `checked`, `not-supplied`, `not-applicable` — and **`not-supplied` is never silently a pass**: it is in the layer states AND in a finding, because a renderer that drops either must still be unable to call it verified. **A verdict also CARRIES the age it was decided at**, which rule 8c says a verdict may never drop and which this type dropped on the floor — the entry point built to be authoritative reintroduced the exact defect the rule was written about. And **the date of the question is an input, never a substitution**: this passed the credential’s own `attainedOn` when a caller supplied no `asOf`, so the ORDINARY call reported a negative registry age and `overdue: false` on a snapshot years past its replacement date |
 | `reports.ts` | Coverage, per-element item gaps, per-archetype reuse, and **how many elements the knowledge accounting cannot fail on** — stated rather than warned, because the shape is often honest and nothing computable tells the honest one from the careless one |
 
 **Every element must carry at least one `knowledgeRefs` entry**, pointing at an article AND a section. This is the refresher path: someone credentialed eight months ago who has forgotten one detail will not retrain, they will look it up, and that link has to land on the passage covering *that detail*. Section ids are append-only for the same reason element IDs are. It also means the article must be written before the element — knowledge before the claim that someone has mastered it.
@@ -216,7 +216,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 npm run validate          # schema + integrity of the CORPUS. Must be green.
                           # It says what it does NOT cover; credentials are
                           # verifyCredential() in packages/validator/src/verify.ts
-npm test                  # 451 guardrail tests
+npm test                  # 460 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:foundational # which foundational areas a person has actually graded
@@ -317,7 +317,7 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 **2232 → 5407 elements in one session**, and 5459 today. The `EC` axis (21 packs, 203 equipment types, 2732 elements) and 31 `Foundational Knowledge` areas were **generated in passes** from hand-written per-type specifications. Read that as a warning label, not a boast.
 
-**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 451 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
+**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 460 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
 
 **Coverage is the thing that is not proven.** A practicing metrologist reviewed the equipment axis four times and found real gaps every time — fixture-to-print calibration absent entirely, cal kits present only as parameters, magnetics claimed by a pack that contained none of it, the whole reference-and-primary tier missing between a working instrument and the SI. Each round changed the design rather than adding to it.
 
