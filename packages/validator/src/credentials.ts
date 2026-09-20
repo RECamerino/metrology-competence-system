@@ -14,6 +14,7 @@
  */
 
 import type { Finding } from './checks.ts';
+import type { TrustRegistry } from './trust.ts';
 
 const err = (message: string): Finding => ({ level: 'error', message });
 const warn = (message: string): Finding => ({ level: 'warn', message });
@@ -255,15 +256,81 @@ const TIER_ORDER: ProvenanceTier[] = [
  *                   it needs a neutral foundation with funding and legal
  *                   existence, which is open decision 4 and a roadmap item.
  */
-export function highestSupportedTier(credential: Credential): ProvenanceTier {
-  const standing = credential.signers.some(
-    (s) => s.bootstrapAuthority !== undefined || (s.authority ?? []).length > 0,
-  );
-  if (!standing) return 'self-study';
-
+/**
+ * Does the credential's own account of its issuer say an ORGANIZATION stands
+ * behind it?
+ *
+ * Deliberately separate from the tier, and deliberately not resolved. The §6.2
+ * retention obligation follows from a laboratory having issued the credential,
+ * which is a fact about the arrangement rather than about what a verifier could
+ * confirm — so a caller who supplies no registry must not thereby switch the
+ * custody requirement off. Tying the two together would have made a missing
+ * argument silently excuse a missing obligation.
+ */
+function claimsOrganizationalIssuer(credential: Credential): boolean {
   const issuer = credential.issuer;
-  if (!issuer?.name?.trim() || !issuer?.trustRegistryEntry?.trim()) return 'peer-reviewed';
-  if (!issuer.accreditationRecognition?.trim()) return 'organization';
+  return Boolean(issuer?.name?.trim() && issuer?.trustRegistryEntry?.trim());
+}
+
+/**
+ * The registry entry this credential's issuer resolves to, if any.
+ *
+ * Both identifiers must agree where both are present — the same rule
+ * `verifyAgainstRegistry` enforces with precise diagnostics. Here only the
+ * boolean matters: an issuer whose identifiers disagree resolves to nobody.
+ */
+function registeredIssuer(credential: Credential, registry?: TrustRegistry) {
+  if (!registry) return undefined;
+  const entry = credential.issuer?.trustRegistryEntry?.trim() || undefined;
+  const did = credential.issuer?.did?.trim() || undefined;
+
+  return registry.issuers.find(
+    (i) =>
+      (entry === undefined || i.entry === entry) &&
+      (did === undefined || i.did === did) &&
+      (entry !== undefined || did !== undefined),
+  );
+}
+
+export function highestSupportedTier(
+  credential: Credential,
+  /**
+   * The registry, where the caller has it. The top two rungs are claims ABOUT
+   * the registry, so without it they cannot be supported — the same argument as
+   * `signatureVerified` and as an unresolved authority chain.
+   */
+  registry?: TrustRegistry,
+  /** The signers' own credentials, for the same reason `checkCredential` takes them. */
+  backing: Credential[] = [],
+): ProvenanceTier {
+  // `peer-reviewed` says the standing is EVIDENCED. This used to test that an
+  // authority array was non-empty, which is the presence of a claim rather than
+  // a resolved one — the same defect the rung itself had.
+  const evidenced = credential.signers.some((signer) => {
+    const standing = signerStanding(signer, credential.element, backing, credential.attainedOn);
+    return (
+      standing.heldLevel === 'proven' ||
+      standing.heldLevel === 'bootstrap' ||
+      standing.reviewerAuthority === 'proven' ||
+      standing.reviewerAuthority === 'bootstrap'
+    );
+  });
+  if (!evidenced) return 'self-study';
+
+  if (!claimsOrganizationalIssuer(credential)) return 'peer-reviewed';
+
+  // `organization` says the issuer IS a registered entity. The credential
+  // naming a registry entry is the credential's word for it.
+  const registered = registeredIssuer(credential, registry);
+  if (!registered) return 'peer-reviewed';
+
+  // `accredited-body` says the issuer's own accreditation is RECORDED. The
+  // trust-registry schema says so in terms — "recorded here as well as on the
+  // credential so a verifier can check the claim against the registry rather
+  // than taking the credential's word for it" — and nothing did.
+  const claimed = credential.issuer?.accreditationRecognition?.trim();
+  const recorded = registered.accreditationRecognition?.trim();
+  if (!claimed || !recorded || claimed !== recorded) return 'organization';
 
   return 'accredited-body';
 }
@@ -282,7 +349,11 @@ export function highestSupportedTier(credential: Credential): ProvenanceTier {
  * an organization with house rules about when it will claim its own name is
  * making a decision this validator has no business overriding.
  */
-export function checkProvenanceTier(credential: Credential): Finding[] {
+export function checkProvenanceTier(
+  credential: Credential,
+  registry?: TrustRegistry,
+  backing: Credential[] = [],
+): Finding[] {
   const at = (msg: string) => `${credential.id}: ${msg}`;
   const declared = credential.provenanceTier;
   if (!declared) return [];
@@ -293,7 +364,7 @@ export function checkProvenanceTier(credential: Credential): Finding[] {
     ];
   }
 
-  const supported = highestSupportedTier(credential);
+  const supported = highestSupportedTier(credential, registry, backing);
   if (TIER_ORDER.indexOf(declared) <= TIER_ORDER.indexOf(supported)) return [];
 
   const reason =
@@ -629,6 +700,11 @@ export function checkCredential(
    * omitting them is the ordinary case and says so rather than passing over it.
    */
   backing: Credential[] = [],
+  /**
+   * The trust registry, where the caller has it. The top two provenance tiers
+   * are claims ABOUT the registry and cannot be supported without it.
+   */
+  registry?: TrustRegistry,
 ): Finding[] {
   const findings: Finding[] = [];
   const at = (msg: string) => `${credential.id}: ${msg}`;
@@ -653,7 +729,7 @@ export function checkCredential(
   // Called from inside rather than exported for the caller to remember. The
   // tier needs nothing but the credential itself, and a check that depends on
   // being invoked is how provenanceTier came to be read by nothing at all.
-  findings.push(...checkProvenanceTier(credential));
+  findings.push(...checkProvenanceTier(credential, registry, backing));
 
   // Same reasoning. Without a roster this warns rather than passing, so a
   // caller who has one and forgets to pass it is told, and a bootstrap claim is
@@ -1106,8 +1182,7 @@ export function checkCustody(credential: Credential): Finding[] {
   // standing behind the credential. Below that tier there is no laboratory,
   // no §6.2 obligation, and single custody is the honest arrangement rather
   // than a defect — a self-study credential has nobody to retain anything.
-  const supported = highestSupportedTier(credential);
-  const organizational = supported === 'organization' || supported === 'accredited-body';
+  const organizational = claimsOrganizationalIssuer(credential);
 
   const organizations = custody.filter((c) => c.role !== 'holder');
 

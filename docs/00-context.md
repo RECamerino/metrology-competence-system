@@ -998,6 +998,34 @@ What is done instead: a revocation dated **on or before** the signoff is an erro
 - **`sufficiency.decidedOn` was compared with nothing.** A judgement dated after the credential was attained is not the judgement the credential rests on; it may be a perfectly good later re-review, and it is not what the signers had in front of them.
 - **Custody intervals were only checked at one end.** Retention ending before attainment was caught — the §6.2 failure. An interval that ends before it begins, or custody of a credential that did not yet exist, was not.
 
+## The provenance tier is resolved, not read off the document
+
+**Closed 2026-09-20, inside the freeze window.** External adversarial review, finding A-05 — and the two rungs either side of it, which had the identical defect.
+
+Decision 47 made `provenanceTier` evidenced rather than declared: each step up requires something a reader can check. **What it checked was the credential's own account of itself.**
+
+| Rung | What it asked | What that actually is |
+|---|---|---|
+| `peer-reviewed` | is the `authority` array non-empty? | the presence of a CLAIM, not a resolved one |
+| `organization` | does the credential name a `trustRegistryEntry`? | the credential's word that it is registered |
+| `accredited-body` | does the credential carry an `accreditationRecognition` string? | the credential's word that it is accredited |
+
+**The trust-registry schema had said the answer for months.** Its own `accreditationRecognition` field reads: *"Recorded here as well as on the credential so a verifier can check the claim against the registry rather than taking the credential's word for it — the `accredited-body` provenance tier rests on this."* The field existed. The comparison did not.
+
+All three now resolve:
+
+- **`peer-reviewed`** takes a standing of `proven` or `bootstrap` from `signerStanding`, the same states the signoff rungs take. An authority chain nobody resolved reaches `self-study`.
+- **`organization`** requires the registry to *contain* the issuer, with both identifiers agreeing where both are present.
+- **`accredited-body`** requires the registry to *record* an accreditation, and requires it to be the one the credential claims. A string the registry does not carry, or carries differently, is not an accreditation.
+
+The upper two are claims **about the registry**, so a caller who supplies none cannot support them. That is the `signatureVerified` argument in a third place, and it is now consistent across the module: standing, dates and tier all answer what the caller actually established.
+
+### The §6.2 obligation is deliberately NOT tied to this
+
+The custody check used to read the tier: if the credential supported `organization` or better, organizational custody was required. Under the change that would have meant **a caller who supplied no registry silently switched off a laboratory's retention obligation** — a missing argument excusing a missing duty.
+
+So the two questions are separated. `claimsOrganizationalIssuer` asks whether the credential's own account says a laboratory is standing behind it, which is a fact about the arrangement and is what §6.2 follows from. The tier asks what a verifier could establish. They are different questions and now have different functions.
+
 ## A gold reference cannot be self-declared
 
 **Closed 2026-09-04, inside the freeze window.** Open item 12.
@@ -1046,6 +1074,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
+21. **CLOSED 2026-09-20 — the provenance tier is resolved, not read off the document** — all three upper rungs took the credential's word about itself, including an accreditation the registry schema already said should be compared. See [The provenance tier is resolved](#the-provenance-tier-is-resolved-not-read-off-the-document).
 20. **CLOSED 2026-09-20 — standing must have been in force when it was used** — the authority chain checked no dates, so a 2028 signoff could rest on a 2030 credential. Revocation departs from the key-compromise rule, and says why. See [Standing is only standing if it was in force](#standing-is-only-standing-if-it-was-in-force-on-the-day-it-was-used).
 19. **CLOSED 2026-09-20 — an issuer's identifiers must agree** — the registry lookup was an OR, so a true entry beside a false DID resolved the true issuer and inherited its keys and dates. See [A true identifier beside a false one](#a-true-identifier-beside-a-false-one-bought-the-false-one-everything).
 18. **CLOSED 2026-09-20 — an assertion does not satisfy a requirement asking for proof** — `heldLevel` and `credentialedReviewer` were numbers and booleans the issuer typed, and they satisfied the L3–L5 signoff rungs. Standing is now one of five states and only `proven` or `bootstrap` counts. See [An assertion does not satisfy a requirement that asks for proof](#an-assertion-does-not-satisfy-a-requirement-that-asks-for-proof).
