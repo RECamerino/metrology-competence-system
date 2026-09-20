@@ -1048,7 +1048,7 @@ export function checkAttestableStatus(
  */
 export function checkExperienceAcrossCredentials(credentials: Credential[]): Finding[] {
   const findings: Finding[] = [];
-  const seen = new Map<string, { hours?: number; account?: string; credential?: string }>();
+  const seen = new Map<string, { hours?: number; account?: string; ref?: string; credential?: string }>();
 
   for (const credential of credentials) {
     const activities = (credential.assessment as CredentialAssessment | undefined)?.activities ?? [];
@@ -1058,7 +1058,12 @@ export function checkExperienceAcrossCredentials(credentials: Credential[]): Fin
 
       const first = seen.get(id);
       if (!first) {
-        seen.set(id, { hours: activity.hours, account: activity.account, credential: credential.id });
+        seen.set(id, {
+          hours: activity.hours,
+          account: activity.account,
+          ref: activity.ref,
+          credential: credential.id,
+        });
         continue;
       }
 
@@ -1072,9 +1077,28 @@ export function checkExperienceAcrossCredentials(credentials: Credential[]): Fin
 
       // `demonstrates` is DELIBERATELY not compared. It differs by element and
       // is the whole reason the activity is written out on each credential.
-      if (String(first.account ?? '').trim() !== String(activity.account ?? '').trim()) {
+      //
+      // ONLY COMPARED WHERE BOTH CARRY ONE. `account` is required unless the
+      // activity pins a record instead, because it can describe a customer's
+      // business rather than the holder's own, and a credential cannot be
+      // redacted after signing. A holder at liberty to describe the work on one
+      // credential and not on another is not contradicting themselves, and
+      // reading an absence as a difference would punish the reticence the field
+      // was made optional to permit.
+      const bothAccounts = typeof first.account === 'string' && typeof activity.account === 'string';
+      if (bothAccounts && first.account!.trim() !== activity.account!.trim()) {
         findings.push(
           err(`${where} with two different accounts of what the work was. If these are two pieces of work they need two ids; if they are one, the account cannot be rewritten to suit the element it is credited to.`),
+        );
+      }
+
+      // The pinned record is the half that cannot legitimately differ: one
+      // piece of work produced one set of records, and a hash that changes
+      // between credentials says the thing being pointed at changed.
+      const bothRefs = typeof first.ref === 'string' && typeof activity.ref === 'string';
+      if (bothRefs && first.ref!.trim() !== activity.ref!.trim()) {
+        findings.push(
+          err(`${where} pinning two different records. One piece of work produced one record; if these are two records they are two activities and need two ids.`),
         );
       }
     }

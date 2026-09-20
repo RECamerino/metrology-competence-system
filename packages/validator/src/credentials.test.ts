@@ -1376,6 +1376,95 @@ test('an account rewritten to suit the element it is credited to is caught', () 
   assert.ok(findings.some((f) => f.message.includes('two different accounts of what the work was')));
 });
 
+/* -- What a holder is compelled to disclose -------------------------------- */
+
+/*
+ * A calibration laboratory's customer, method and results are the CUSTOMER'S
+ * commercial information. `account` used to be required outright, so at L5's
+ * five activities the schema compelled several hundred characters describing
+ * somebody else's business, on a document built to be handed to a future
+ * employer — often that customer's competitor. And nothing can be redacted
+ * afterwards: `ecdsa-jcs-2019` canonicalizes the whole document, and the suite
+ * that permits selective disclosure works over RDF, which rule 5 forbids.
+ */
+
+test('AN ACTIVITY MAY PIN THE RECORD INSTEAD OF DESCRIBING IT', () => {
+  const validate = validatorFor('credential');
+  const { account, ...pinned } = ACTIVITIES[0] as Record<string, unknown>;
+  assert.ok(
+    validate({
+      ...credential,
+      assessment: {
+        ...(credential.assessment as object),
+        activities: [{ ...pinned, ref: `sha256:${'c'.repeat(64)}` }, ...ACTIVITIES.slice(1)],
+      },
+    }),
+    'an activity with a pinned record and no account should validate',
+  );
+});
+
+test('...but not omit both, because then it asserts nothing anybody can examine', () => {
+  // Which is what open decision 19 was about, and is not undone here.
+  const validate = validatorFor('credential');
+  const { account, ...bare } = ACTIVITIES[0] as Record<string, unknown>;
+  assert.equal(
+    validate({
+      ...credential,
+      assessment: { ...(credential.assessment as object), activities: [bare, ...ACTIVITIES.slice(1)] },
+    }),
+    false,
+  );
+});
+
+test('...and `demonstrates` is required either way', () => {
+  // The field decision 19 actually exists for. It is written against the
+  // element's anchor in the corpus's own vocabulary, so it describes a
+  // competence rather than a customer, and it always travels.
+  const validate = validatorFor('credential');
+  const { demonstrates, ...silent } = ACTIVITIES[0] as Record<string, unknown>;
+  assert.equal(
+    validate({
+      ...credential,
+      assessment: {
+        ...(credential.assessment as object),
+        activities: [{ ...silent, ref: `sha256:${'c'.repeat(64)}` }, ...ACTIVITIES.slice(1)],
+      },
+    }),
+    false,
+  );
+});
+
+test('RETICENCE ON ONE CREDENTIAL AND NOT ANOTHER IS NOT A CONTRADICTION', () => {
+  // A holder at liberty to describe the work in one place and not in another is
+  // not contradicting themselves, and reading an absence as a difference would
+  // punish exactly the reticence the field was made optional to permit.
+  const withAccount = ACTIVITIES;
+  const withoutAccount = ACTIVITIES.map((a) => {
+    const { account, ...rest } = a as Record<string, unknown>;
+    return { ...rest, ref: `sha256:${'d'.repeat(64)}` };
+  });
+  assert.deepEqual(
+    checkExperienceAcrossCredentials([credential, other(withoutAccount as ExperienceActivity[])]),
+    [],
+  );
+  assert.deepEqual(checkExperienceAcrossCredentials([credential, other(withAccount)]), []);
+});
+
+test('two different pinned records under one id are two pieces of work', () => {
+  // The half that cannot legitimately differ: one job produced one record, and
+  // a hash that changes between credentials says the thing pointed at changed.
+  const pinned = ACTIVITIES.map((a) => ({ ...a, ref: `sha256:${'e'.repeat(64)}` }));
+  const repinned = ACTIVITIES.map((a, n) => ({
+    ...a,
+    ref: `sha256:${(n === 0 ? 'f' : 'e').repeat(64)}`,
+  }));
+  const findings = checkExperienceAcrossCredentials([
+    { ...credential, assessment: { ...(credential.assessment as object), activities: pinned } },
+    other(repinned),
+  ]);
+  assert.ok(findings.some((f) => f.message.includes('pinning two different records')));
+});
+
 test('different work under different ids is exactly what breadth looks like', () => {
   const distinct = ACTIVITIES.map((a) => ({ ...a, id: `${a.id}-b` }));
   assert.deepEqual(checkExperienceAcrossCredentials([credential, other(distinct)]), []);
