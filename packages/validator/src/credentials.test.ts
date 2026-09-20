@@ -901,6 +901,65 @@ const PROFICIENCY = parseYaml(
 ) as { levels: Array<Record<string, unknown>> };
 
 const levelEntry = (level: number) => PROFICIENCY.levels.find((l) => l.level === level)!;
+
+/* -- What "nothing gates entry" currently reaches --------------------------- */
+
+test('THE LADDER STOPS AN UNNETWORKED HOLDER AT L2, AND THE DECLARATION SAYS SO', () => {
+  /*
+   * Adversarial review finding F-03. A person with no employer and no
+   * professional network is witnessed to L2 by whoever is available; every rung
+   * above needs a specific person they have to find — somebody holding that
+   * level IN THAT ELEMENT who also holds reviewer authority.
+   *
+   * That is declared in proficiency.yaml, in the first principle in CLAUDE.md,
+   * and in docs/00-context.md. A declaration is prose, and prose describing a
+   * state the files no longer hold is this project's most repeated defect — so
+   * this pins the four numbers the declaration rests on. A steward lowering the
+   * L3 requirement, or setting one at L2, should find this test rather than a
+   * document that has quietly become wrong.
+   */
+  const signoff = (level: number) => (levelEntry(level).signoff ?? {}) as Record<string, unknown>;
+
+  // Reachable alone: a witness with no standing is enough.
+  for (const level of [1, 2]) {
+    assert.equal(signoff(level).witnessMustHoldLevel ?? null, null, `L${level} requires no held level`);
+    assert.notEqual(signoff(level).requiresCredentialedReviewer, true, `L${level} requires no reviewer authority`);
+  }
+
+  // Where it stops, and the two gates that stop it.
+  assert.equal(signoff(3).witnessMustHoldLevel, 4);
+  assert.equal(signoff(3).requiresCredentialedReviewer, true);
+  assert.equal(signoff(4).witnessMustHoldLevel, 5);
+  assert.equal(signoff(5).witnessMustHoldLevel, 5);
+
+  // The one the reviewer programme will not lift: two unaffiliated signers are
+  // two individuals, not two organizations.
+  assert.equal(signoff(5).requiresCrossOrganizational, true);
+  assert.notEqual(signoff(4).requiresCrossOrganizational, true);
+});
+
+test('...and two unaffiliated signers cannot satisfy L5, which is the residue', () => {
+  // Correct, and permanent. The rule exists so a closed group cannot certify
+  // its own experts, and three unaffiliated people are as closed a group as one
+  // laboratory. It means an unaffiliated holder's L5 rests on finding signers
+  // who are themselves affiliated.
+  const { candidateOrganization, ...assessment } = credential.assessment as Record<string, unknown>;
+  const findings = checkCredential(
+    {
+      ...credential,
+      level: 5,
+      assessment,
+      signers: credential.signers.map((signer) => ({ ...signer, organization: { name: 'Independent' } })),
+    },
+    REAL_L5,
+  );
+
+  assert.ok(
+    findings.some((f) => f.level === 'error' && f.message.includes('identifies nobody')),
+    `expected two unaffiliated signers to be refused, got: ${JSON.stringify(findings.map((f) => f.message))}`,
+  );
+});
+
 const REAL_L4 = signoffPolicyFor(levelEntry(4));
 const REAL_L5 = signoffPolicyFor(levelEntry(5));
 
