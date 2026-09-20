@@ -895,6 +895,50 @@ Export the signers' credentials alongside the holder's, and the chain resolves f
 
 **Four tests that asserted silence now assert no errors.** They were never about the chain; what they were relying on was that an unresolved chain said nothing at all, which is the defect.
 
+## An assertion does not satisfy a requirement that asks for proof
+
+**Closed 2026-09-20, inside the freeze window.** External adversarial review, finding A-03 (with A-04, which is the same defect in the same loop).
+
+`witnessMustHoldLevel` asks for a signer holding that level **in this element**. The check read:
+
+```ts
+const qualified = credential.signers.filter(
+  (s) => typeof s.heldLevel === 'number' && s.heldLevel >= required,
+);
+```
+
+— a number the issuer typed. **Two lines earlier the same function had already said, of the same signer, "Asserted, not proven."** The validator knew the claim was unsupported and let it satisfy the requirement anyway. `requiresCredentialedReviewer` was the identical hole beside it: `credentialedReviewer: true` is a claim the credential makes about its own signer.
+
+### What the review got wrong, and what survived
+
+The stated attack was manufacturing a **high-tier** credential. Built and run, it fails: `highestSupportedTier` caps an unbacked credential at `self-study` and `checkProvenanceTier` errors on any declared tier above it. That defence was real and the review had not traced it.
+
+**What worked was declaring `self-study`.** The tier was then honest about the witness, the credential produced **zero errors**, and it asserted an L5 that nobody had proved. The ladder's whole claim is that an L5 was signed by somebody holding L5 — so the tier cap was never the thing protecting the rung.
+
+### Five states, and only two of them satisfy anything
+
+| State | Meaning |
+|---|---|
+| `proven` | A backing credential was supplied, is the signer's own, and attests what the entry claims. |
+| `contradicted` | It was supplied and does not. |
+| `unresolved` | The entry names one and the caller did not supply it. **A fact about the caller.** |
+| `asserted` | No backing credential is named at all. |
+| `bootstrap` | Founding-cohort authority — the designed answer to a ladder that cannot start. |
+
+Only **`proven`** and **`bootstrap`** satisfy a requirement.
+
+**`unresolved` failing is deliberate rather than harsh.** If it passed, the ordinary call — the one with no backing supplied — would satisfy the requirement on nothing and the defect would be exactly where it started. It is the `signatureVerified` argument in a second place: the honest answer is a fact about what the caller had in front of them, and a requirement demanding proof is not met by a caller who did not look. The message says which of the two it was, because "nobody named a credential" and "you did not supply the one they named" are different problems with different fixes.
+
+**This can be a hard error only because bootstrap exists.** Nothing holds a credential today, so every signer is unbacked; without the founding cohort this would deadlock the ladder permanently rather than correctly. Rule 8 already says so, and the shipped roster convenes nobody — which is why nothing issues today, and is the correct state.
+
+### The rule worth keeping
+
+The review stated it better than the code did, and it is now the test's name:
+
+> **A warning saying "asserted, not proven" must never coexist with successful satisfaction of a requirement whose predicate requires proof.**
+
+Seven existing tests broke on this change. Every one of them had asserted that a policy was satisfied while proving nothing about the signers; each now supplies the backing credentials and tests what it meant to.
+
 ## A gold reference cannot be self-declared
 
 **Closed 2026-09-04, inside the freeze window.** Open item 12.
@@ -943,6 +987,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
+18. **CLOSED 2026-09-20 — an assertion does not satisfy a requirement asking for proof** — `heldLevel` and `credentialedReviewer` were numbers and booleans the issuer typed, and they satisfied the L3–L5 signoff rungs. Standing is now one of five states and only `proven` or `bootstrap` counts. See [An assertion does not satisfy a requirement that asks for proof](#an-assertion-does-not-satisfy-a-requirement-that-asks-for-proof).
 17. **CLOSED 2026-09-20 — a signer's authority chain says what it claims** — `element` and `level` on the entry, resolved by `checkCredential` when the caller holds the backing credentials and named unresolved when they do not. A wallet cannot supply them: a signer's record is the signer's. See [A signer's authority chain says what it claims](#a-signers-authority-chain-says-what-it-claims-and-a-wallet-cannot-resolve-it).
 16. **DECLARED 2026-09-20 — what "nothing gates entry" currently reaches** — L2, because L3 up needs a signer holding the level in that element and holding reviewer authority. The mechanism is decisions 24, 32 and 33 and it is unbuilt; L5's cross-organizational rule is a residue it will not lift. See ["Nothing gates entry" reaches L2](#nothing-gates-entry-reaches-l2-and-the-thing-that-lifts-it-is-designed-and-unbuilt).
 15. **CLOSED 2026-09-20 — the proof can carry a signature, and a verdict says when none was checked** — one shared `proof` definition with `proofValue` required, `proof` required on every document that asserts something, and `verifyAgainstRegistry` reporting that no signature was verified. See [The proof could not carry a signature, and nothing verified one](#the-proof-could-not-carry-a-signature-and-nothing-verified-one).
