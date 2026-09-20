@@ -1515,38 +1515,129 @@ test('an unbacked signer claim does not lift the tier above self-study', () => {
   );
 });
 
+/*
+ * The registry the upper two tiers are claims ABOUT.
+ *
+ * External review finding A-05. `organization` asked whether the CREDENTIAL
+ * named a registry entry, and `accredited-body` whether the CREDENTIAL carried
+ * an accreditation string — both of them the document's word about itself. The
+ * trust-registry schema had said for months that its own accreditation field
+ * exists "so a verifier can check the claim against the registry rather than
+ * taking the credential's word for it", and nothing did.
+ */
+const ACCREDITATION = 'Schedule of Accreditation 1234, dimensional';
+
+const REGISTRY = {
+  schemaVersion: 1,
+  issuedOn: '2028-06-01',
+  sequence: 1,
+  didMethods: ['did:key'],
+  issuers: [
+    {
+      entry: credential.issuer!.trustRegistryEntry!,
+      did: credential.issuer!.did!,
+      name: credential.issuer!.name!,
+      admittedOn: '2026-01-01',
+      accreditationRecognition: ACCREDITATION,
+      keys: [],
+    },
+  ],
+} as unknown as Parameters<typeof highestSupportedTier>[1];
+
+/** The same registry with the accreditation not recorded. */
+const REGISTRY_UNACCREDITED = {
+  ...(REGISTRY as unknown as Record<string, unknown>),
+  issuers: [
+    {
+      ...((REGISTRY as unknown as { issuers: Record<string, unknown>[] }).issuers[0] as object),
+      accreditationRecognition: undefined,
+    },
+  ],
+} as unknown as Parameters<typeof highestSupportedTier>[1];
+
 test('an evidenced authority chain reaches peer-reviewed', () => {
   const backed: Credential = { ...selfStudy, signers: [credential.signers[0]!], issuer: { did: REVIEWER_A } };
-  assert.equal(highestSupportedTier(backed), 'peer-reviewed');
+  assert.equal(highestSupportedTier(backed, undefined, BACKING), 'peer-reviewed');
+});
+
+test('AN AUTHORITY CHAIN NOBODY RESOLVED DOES NOT REACH IT', () => {
+  // The same defect as the rung: this used to test that the authority array was
+  // non-empty, which is the presence of a claim rather than a resolved one.
+  const backed: Credential = { ...selfStudy, signers: [credential.signers[0]!], issuer: { did: REVIEWER_A } };
+  assert.equal(highestSupportedTier(backed), 'self-study');
 });
 
 test('a founding-cohort basis also counts as evidenced standing', () => {
   // They hold no credential by definition; the bootstrap basis is the evidence,
-  // and it is stated per signer so a reader can weigh it.
+  // and it is stated per signer so a reader can weigh it. Nothing to resolve,
+  // so this one needs no backing and no registry.
   const bootstrapped: Credential = { ...selfStudy, signers: [FOUNDER], issuer: { did: REVIEWER_A } };
   assert.equal(highestSupportedTier(bootstrapped), 'peer-reviewed');
 });
 
 test('a registered issuer is what separates organization from peer-reviewed', () => {
   const peer: Credential = { ...credential, issuer: { did: REVIEWER_A } };
-  assert.equal(highestSupportedTier(peer), 'peer-reviewed');
-  assert.equal(highestSupportedTier(credential), 'organization');
+  assert.equal(highestSupportedTier(peer, REGISTRY, BACKING), 'peer-reviewed');
+  assert.equal(highestSupportedTier(credential, REGISTRY, BACKING), 'organization');
 
-  const findings = checkProvenanceTier({ ...peer, provenanceTier: 'organization' });
+  const findings = checkProvenanceTier({ ...peer, provenanceTier: 'organization' }, REGISTRY, BACKING);
   assert.ok(findings.some((f) => f.message.includes('registered entity')));
+});
+
+test('AN ISSUER THE REGISTRY DOES NOT CONTAIN IS NOT A REGISTERED ENTITY', () => {
+  // `organization` used to be satisfied by the credential naming a registry
+  // entry — its own word that it is registered.
+  const elsewhere = {
+    ...(REGISTRY as unknown as Record<string, unknown>),
+    issuers: [],
+  } as unknown as Parameters<typeof highestSupportedTier>[1];
+  assert.equal(highestSupportedTier(credential, elsewhere, BACKING), 'peer-reviewed');
+});
+
+test('...and neither is one checked without a registry at all', () => {
+  // A fact about the caller, said in the same words as everywhere else today.
+  assert.equal(highestSupportedTier(credential, undefined, BACKING), 'peer-reviewed');
 });
 
 test('accredited-body requires the issuer to record its OWN accreditation', () => {
   assert.equal(
-    highestSupportedTier({
-      ...credential,
-      issuer: { ...credential.issuer!, accreditationRecognition: 'Schedule of Accreditation 1234, dimensional' },
-    }),
+    highestSupportedTier(
+      { ...credential, issuer: { ...credential.issuer!, accreditationRecognition: ACCREDITATION } },
+      REGISTRY,
+      BACKING,
+    ),
     'accredited-body',
   );
 
-  const findings = checkProvenanceTier({ ...credential, provenanceTier: 'accredited-body' });
+  const findings = checkProvenanceTier({ ...credential, provenanceTier: 'accredited-body' }, REGISTRY, BACKING);
   assert.ok(findings.some((f) => f.message.includes('no accreditation of its own')));
+});
+
+test('A SELF-DECLARED ACCREDITATION THE REGISTRY DOES NOT RECORD IS NOT ONE', () => {
+  // The finding as filed. The credential wrote its own accreditation string and
+  // that string was the whole of the evidence for the strongest tier here.
+  assert.equal(
+    highestSupportedTier(
+      { ...credential, issuer: { ...credential.issuer!, accreditationRecognition: ACCREDITATION } },
+      REGISTRY_UNACCREDITED,
+      BACKING,
+    ),
+    'organization',
+  );
+});
+
+test('...and an accreditation that disagrees with the registry is not one either', () => {
+  assert.equal(
+    highestSupportedTier(
+      {
+        ...credential,
+        issuer: { ...credential.issuer!, accreditationRecognition: 'Schedule of Accreditation 9999, everything' },
+      },
+      REGISTRY,
+      BACKING,
+    ),
+    'organization',
+  );
 });
 
 test('the authority tier cannot be claimed by anybody, because no such issuer exists', () => {
@@ -1561,8 +1652,11 @@ test('understating the tier is permitted and silent', () => {
   // Claiming less than you can prove misleads nobody, and an organization with
   // house rules about when it puts its name to something is not this
   // validator's business.
-  assert.equal(highestSupportedTier(credential), 'organization');
-  assert.deepEqual(checkProvenanceTier({ ...credential, provenanceTier: 'self-study' }), []);
+  assert.equal(highestSupportedTier(credential, REGISTRY, BACKING), 'organization');
+  assert.deepEqual(
+    checkProvenanceTier({ ...credential, provenanceTier: 'self-study' }, REGISTRY, BACKING),
+    [],
+  );
 });
 
 test('the tier check runs from inside checkCredential, not only when remembered', () => {
