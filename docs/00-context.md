@@ -1059,6 +1059,30 @@ What a document can carry, and now does:
 
 **And it cannot establish that they scored independently.** Whether two people conferred before scoring is not a fact a document carries, and nothing here pretends otherwise. That is inter-rater reliability, it is empirical work, and it is open decision 11 — the strongest thing this project could take to NCSL and the one thing CI will never prove.
 
+## A rule enforced only by the code that happens to call it
+
+**Closed 2026-09-20, inside the freeze window.** External adversarial review, findings A-19 and A-21 — which are one finding, and the review's own closing recommendation.
+
+The validator exports **seventeen** check functions and had no authoritative one. **Six were composed by nothing at all**, so a caller validating a credential had to know to call `checkCredential`, `verifyAgainstRegistry`, `checkDefinitionDrift`, `verifyCredentialAttempt`, `checkChallengeProvenance`, `checkExperienceAcrossCredentials` and `checkReciprocity` by hand — and the no-retake rule, the drift check and the trust verdict were among the ones they had to remember.
+
+`credentials.ts` already states the principle against itself: *a rule enforced only by the code that happens to call it is a rule that fails the first time someone writes a second caller.* Every individual guardrail was good. Nothing stopped a caller running half of them and reporting a pass.
+
+### `verifyCredential` composes them, and the verdict records a state per layer
+
+`checked` — the inputs were there and the layer was examined. `not-supplied` — the caller did not provide what the layer needs. `not-applicable` — it does not apply to this credential.
+
+**`not-supplied` is never silently a pass.** That is the single lesson of every fix made against this review: `signatureVerified` defaults to false, an unresolved authority chain does not satisfy a rung, a tier that needs the registry cannot be supported without one. The verdict says it **twice on purpose** — in the layer states and in a warning finding — because a renderer that shows findings and ignores the states must still be unable to present it as verified, and one that reads the states and drops findings must still see it. That is precisely the shape that let `basis.statement` open with the word *Verified* while nothing had been cryptographically checked.
+
+A bare call checks one layer of seven and says so: *“Checked 1 of 7 layers … NOT CHECKED: the issuer against a trust registry; the signature; … A credential is not verified by the checks nobody ran.”*
+
+### And `npm run validate` says what it is
+
+It reads as *the system is valid* and means *the corpus is*. Credentials, ledgers, authorizations, disclosures and preparation records are **runtime artifacts** — none exists in this repository, so there is nothing here for that command to check and no honest way to make it check them.
+
+What there is an honest way to do is say so, which is the same move every verdict in this validator now makes. The command prints what it covered and names `verifyCredential` as the entry point for the rest.
+
+**What this is not:** an issuance engine, and it does not decide whether to issue. That is Phase 6 and `packages/credentials` is still empty. It composes the checks that exist so that forgetting one stops being possible.
+
 ## A gold reference cannot be self-declared
 
 **Closed 2026-09-04, inside the freeze window.** Open item 12.
@@ -1107,6 +1131,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
+24. **CLOSED 2026-09-20 — one entry point for one credential** — seventeen exported checks, six composed by nothing, and `npm run validate` reading as more than it was. See [A rule enforced only by the code that happens to call it](#a-rule-enforced-only-by-the-code-that-happens-to-call-it).
 23. **CLOSED 2026-09-20 — two scorers are two people** — `scorerCount: 2` was satisfied by one person scoring twice, and the disagreement-resolution path the policy asks for was recorded nowhere. See [Two scorers are two people](#two-scorers-are-two-people-and-an-integer-could-not-say-so).
 22. **CLOSED 2026-09-20 — the corpus admits no symbolic links** — `statSync` followed them, and the publication boundary scans for content rather than paths. See [A symlink is a path](#a-symlink-is-a-path-and-the-leak-check-scans-for-content).
 21. **CLOSED 2026-09-20 — the provenance tier is resolved, not read off the document** — all three upper rungs took the credential's word about itself, including an accreditation the registry schema already said should be compared. See [The provenance tier is resolved](#the-provenance-tier-is-resolved-not-read-off-the-document).
