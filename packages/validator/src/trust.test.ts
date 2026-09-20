@@ -23,6 +23,7 @@ import {
   type TrustRegistry,
   type VerifiableCredential,
   checkRegistryReplacement,
+  checkTrustRegistry,
   verifyAgainstRegistry,
 } from './trust.ts';
 
@@ -123,6 +124,146 @@ test('A CLEAN VERIFICATION STILL SAYS WHAT IT WAS DECIDED AGAINST', () => {
   assert.equal(verdict.basis.overdue, false);
   assert.match(verdict.basis.statement, /14 day\(s\) old/);
   assert.match(verdict.basis.statement, /does not appear here/);
+});
+
+/* -- A registry that cannot be resolved ------------------------------------ */
+
+/*
+ * Second-pass review findings R-01, R-02 and R-05. The registry is resolved by
+ * LOOKUP and nothing required its lookup keys to be unique. JSON Schema cannot
+ * express uniqueness on an object property, so the schema could not have caught
+ * it and no semantic check existed.
+ */
+
+const OTHER = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+type Issuer = TrustRegistry['issuers'][number];
+const issuerOf = (over: Partial<Issuer> = {}): Issuer => ({
+  entry: 'northfield-cal-2026',
+  did: ISSUER_DID,
+  name: 'Northfield Calibration',
+  admittedOn: '2026-01-01',
+  keys: [{ id: KEY, validFrom: '2026-01-01', status: 'active' }],
+  ...over,
+});
+const messagesOf = (findings: { message: string }[]) => findings.map((f) => f.message).join(' | ');
+
+test('the shipped registry passes its own integrity rules', () => {
+  assert.deepEqual(checkTrustRegistry(registry), []);
+});
+
+test('TWO ISSUERS MAY NOT SHARE A REGISTRY ENTRY', () => {
+  const findings = checkTrustRegistry({ ...registry, issuers: [issuerOf(), issuerOf({ did: OTHER })] });
+  assert.match(messagesOf(findings), /entry 'northfield-cal-2026' is claimed by more than one issuer/);
+});
+
+test('two issuers may not share a DID', () => {
+  const findings = checkTrustRegistry({ ...registry, issuers: [issuerOf(), issuerOf({ entry: 'other' })] });
+  assert.match(messagesOf(findings), /is registered to more than one issuer/);
+});
+
+test('A DUPLICATE KEY ID IS THE CASE WITH NO SECOND IDENTIFIER TO SAVE IT', () => {
+  // The sharpest instance: an active record above a compromised one for the
+  // same key produced no finding of any level, and the breach was invisible.
+  const findings = checkTrustRegistry({
+    ...registry,
+    issuers: [issuerOf({ keys: [
+      { id: KEY, validFrom: '2026-01-01', status: 'active' },
+      { id: KEY, validFrom: '2026-01-01', status: 'compromised', compromisedFrom: '2027-01-01' },
+    ] })],
+  });
+  assert.match(messagesOf(findings), /registers key '.+' more than once/);
+});
+
+test('...and a credential signed with that key is REFUSED rather than resolved to the first', () => {
+  const ambiguous: TrustRegistry = { ...registry, issuers: [issuerOf({ keys: [
+    { id: KEY, validFrom: '2026-01-01', status: 'active' },
+    { id: KEY, validFrom: '2026-01-01', status: 'compromised', compromisedFrom: '2027-01-01' },
+  ] })] };
+  const verdict = verifyAgainstRegistry(credential, ambiguous, '2028-06-15');
+  assert.ok(errorsOf(verdict.findings).some((m) => m.includes('registers 2 times')));
+});
+
+test('an entry matching two issuers refuses, even with no DID to disagree with', () => {
+  // The case A-06 could not reach: the disagreement check needs two identifiers
+  // on the CREDENTIAL. Here the credential is fine and the registry is not.
+  const ambiguous: TrustRegistry = { ...registry, issuers: [issuerOf(), issuerOf({ did: OTHER })] };
+  const entryOnly = { ...credential, issuer: { did: '', trustRegistryEntry: 'northfield-cal-2026' } };
+  const verdict = verifyAgainstRegistry(entryOnly as typeof credential, ambiguous, '2028-06-15');
+  assert.ok(errorsOf(verdict.findings).some((m) => m.includes('matches 2 records')));
+});
+
+test('duplicate revocations are an error, and BOTH are shown to the reader', () => {
+  const twice: TrustRegistry = { ...registry, revocations: [
+    { credential: credential.id, revokedOn: '2028-01-01', reason: 'holder-request' },
+    { credential: credential.id, revokedOn: '2027-01-01', reason: 'fraud' },
+  ] };
+  const errors = errorsOf(verifyAgainstRegistry(credential, twice, '2028-06-15').findings);
+  assert.ok(errors.some((m) => m.includes('revoked more than once')));
+  assert.ok(errors.some((m) => m.includes('(fraud)')), 'the hard reason must not hide behind the soft one');
+  assert.ok(errors.some((m) => m.includes('(holder-request)')));
+});
+
+/* -- Dates that contradict each other -------------------------------------- */
+
+test('nothing was removed before it was admitted', () => {
+  const findings = checkTrustRegistry({ ...registry, issuers: [issuerOf({ admittedOn: '2028-01-01', removedOn: '2027-01-01' })] });
+  assert.match(messagesOf(findings), /removed on 2027-01-01, before it was admitted/);
+});
+
+test('a key was not retired before it was valid', () => {
+  const findings = checkTrustRegistry({ ...registry, issuers: [issuerOf({ keys: [
+    { id: KEY, validFrom: '2028-01-01', status: 'retired', retiredOn: '2027-01-01' }] })] });
+  assert.match(messagesOf(findings), /retired on 2027-01-01, before it became valid/);
+});
+
+test('a compromise dated before the key existed is refused', () => {
+  const findings = checkTrustRegistry({ ...registry, issuers: [issuerOf({ keys: [
+    { id: KEY, validFrom: '2028-01-01', status: 'compromised', compromisedFrom: '2027-01-01' }] })] });
+  assert.match(messagesOf(findings), /compromised from 2027-01-01, before it became valid/);
+});
+
+test('A COMPROMISE IS A DISCOVERED FACT, NOT A SCHEDULED ONE', () => {
+  const findings = checkTrustRegistry({ ...registry, issuers: [issuerOf({ keys: [
+    { id: KEY, validFrom: '2026-01-01', status: 'compromised', compromisedFrom: '2030-01-01' }] })] });
+  assert.match(messagesOf(findings), /after this snapshot was cut/);
+});
+
+test('a revocation the snapshot could not have known about is refused', () => {
+  // It makes verifyAgainstRegistry refuse the credential NOW, on the strength
+  // of something that had not happened when the file was written.
+  const findings = checkTrustRegistry({ ...registry, revocations: [
+    { credential: credential.id, revokedOn: '2030-01-01', reason: 'fraud' }] });
+  assert.match(messagesOf(findings), /after this snapshot was cut/);
+});
+
+test('the date staleness is measured against cannot already be past at publication', () => {
+  const findings = checkTrustRegistry({ ...registry, issuedOn: '2028-06-01', nextExpectedUpdate: '2028-05-01' });
+  assert.match(messagesOf(findings), /on or before the day it was issued/);
+});
+
+/* -- What this deliberately does NOT refuse -------------------------------- */
+
+/*
+ * Both were filed as temporal impossibilities. Neither is one, and asserting a
+ * constraint on plausibility is the error category this project's own review
+ * record names.
+ */
+
+test('a key valid BEFORE its issuer was admitted is legitimate, not a defect', () => {
+  // The registry records every key an issuer has ever used. An organization
+  // that held a key before being admitted is ordinary, and the admission date
+  // is already the bound that binds a credential.
+  const findings = checkTrustRegistry({ ...registry, issuers: [issuerOf({
+    admittedOn: '2030-01-01', keys: [{ id: KEY, validFrom: '2029-01-01', status: 'active' }] })] });
+  assert.deepEqual(findings, []);
+});
+
+test('a rotation scheduled in advance is legitimate, not a defect', () => {
+  const findings = checkTrustRegistry({ ...registry, issuers: [issuerOf({ keys: [
+    { id: KEY, validFrom: '2026-01-01', status: 'retired', retiredOn: '2030-01-01' },
+    { id: `${ISSUER_DID}#key-2`, validFrom: '2030-01-01', status: 'active' },
+  ] })] });
+  assert.deepEqual(findings, []);
 });
 
 /* -- A snapshot cut after the question cannot answer it --------------------- */

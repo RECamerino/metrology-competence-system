@@ -21,6 +21,7 @@ import {
 } from './corpus.ts';
 import { type ElementLike, demonstrationRoutes, elementDefinitionHash, sectionHash } from './definitions.ts';
 import { formatErrors, validatorFor } from './schema.ts';
+import { type TrustRegistry, checkTrustRegistry } from './trust.ts';
 
 export interface Finding {
   level: 'error' | 'warn';
@@ -1634,6 +1635,27 @@ function checkProficiencyPolicy(corpus: Corpus): Finding[] {
   return findings;
 }
 
+/*
+ * The shipped registry, held to the same integrity rules a verifier holds the
+ * one they were handed to.
+ *
+ * Second-pass review findings R-01, R-02 and R-05. The registry was schema
+ * validated and nothing more, and neither uniqueness on a lookup key nor a date
+ * comparison is expressible in JSON Schema — so the two families of defect that
+ * make the file unresolvable were both outside what CI could see.
+ *
+ * It runs in BOTH places on purpose. `verifyAgainstRegistry` checks the snapshot
+ * a verifier actually holds, which this repository has never seen; this checks
+ * the one it publishes, so the project cannot ship the artifact it would refuse.
+ */
+function checkTrustRegistryFile(corpus: Corpus): Finding[] {
+  if (!corpus.trustRegistry) return [];
+  return checkTrustRegistry(corpus.trustRegistry as unknown as TrustRegistry).map((f) => ({
+    ...f,
+    message: `content/trust-registry.yaml: ${f.message}`,
+  }));
+}
+
 export function runAllChecks(corpus: Corpus): Finding[] {
   return [
     ...checkSchemas(corpus),
@@ -1647,5 +1669,6 @@ export function runAllChecks(corpus: Corpus): Finding[] {
     ...checkModules(corpus),
     ...checkItemBank(corpus),
     ...checkProficiencyPolicy(corpus),
+    ...checkTrustRegistryFile(corpus),
   ];
 }

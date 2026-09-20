@@ -219,6 +219,136 @@ export function checkCounterStatement(
   return findings;
 }
 
+/* ------------------------------------------------------------------------ */
+
+/**
+ * Is this registry an artifact that can be resolved at all?
+ *
+ * THE DEFECT. Second-pass external review, findings R-01, R-02 and R-05. The
+ * trust registry is resolved by LOOKUP — `issuers.find(entry)`,
+ * `issuers.find(did)`, `keys.find(id)` — and nothing anywhere required those
+ * lookup keys to be unique. JSON Schema cannot express uniqueness on an object
+ * property (`uniqueItems` compares whole objects) and cannot express a date
+ * comparison at all, so the schema could not have caught either family, and no
+ * semantic check existed.
+ *
+ * THE SHARPEST CASE IS KEYS, NOT ISSUERS. The issuer half is partly covered
+ * already: two issuers sharing an entry is refused whenever the credential
+ * carries both identifiers, because that resolves as a disagreement. Keys have
+ * no such second identifier. One issuer with two keys under one id, the first
+ * `active` and the second `compromised`, produced ZERO findings of any level —
+ * `.find()` returned the active one and the breach was invisible. That is the
+ * whole point of recording compromise by status and date rather than by
+ * deletion, defeated by a duplicate.
+ *
+ * WHY IT SURVIVES SIGNING, which is the part that makes it worth fixing now. A
+ * valid signature over an internally ambiguous registry does not make the
+ * registry unambiguous; it makes the ambiguity authentic. Phase 6 does not
+ * close this and would inherit it.
+ *
+ * WHAT THIS DELIBERATELY DOES NOT CHECK, because a constraint asserted on
+ * plausibility is the error category this project's own review record names:
+ *
+ *   - A key whose `validFrom` PRECEDES the issuer's `admittedOn`. Filed as a
+ *     temporal impossibility and it is not one: the registry records every key
+ *     an issuer has ever used, and an organization that held a key before it
+ *     was admitted is ordinary. `verifyAgainstRegistry` already refuses a
+ *     credential dated before admission, which is the bound that binds.
+ *   - A key `validFrom` or `retiredOn` AFTER the snapshot was cut. A scheduled
+ *     rotation announced in advance is real practice, and refusing it would
+ *     forbid the orderly case to catch nothing.
+ *
+ * A revocation dated after the snapshot is a different matter and IS refused:
+ * it makes `verifyAgainstRegistry` refuse a credential now, on the strength of
+ * an event the file could not have known about.
+ */
+export function checkTrustRegistry(registry: TrustRegistry): Finding[] {
+  const findings: Finding[] = [];
+  const at = (msg: string) => `trust registry #${registry.sequence} (${registry.issuedOn}): ${msg}`;
+
+  const duplicates = <T>(items: T[], key: (item: T) => string | undefined): string[] => {
+    const counts = new Map<string, number>();
+    for (const item of items) {
+      const k = key(item);
+      if (k === undefined) continue;
+      counts.set(k, (counts.get(k) ?? 0) + 1);
+    }
+    return [...counts.entries()].filter(([, n]) => n > 1).map(([k]) => k);
+  };
+
+  const issuers = registry.issuers ?? [];
+
+  for (const entry of duplicates(issuers, (i) => i.entry)) {
+    findings.push(
+      err(at(`registry entry '${entry}' is claimed by more than one issuer. A credential naming only that entry no longer identifies anybody, and the lookup silently returns whichever record was written first.`)),
+    );
+  }
+
+  for (const did of duplicates(issuers, (i) => i.did)) {
+    findings.push(
+      err(at(`DID ${did} is registered to more than one issuer. Two records cannot both be the party that DID belongs to.`)),
+    );
+  }
+
+  for (const issuer of issuers) {
+    const label = `${issuer.name} ('${issuer.entry}')`;
+
+    for (const id of duplicates(issuer.keys ?? [], (k) => k.id)) {
+      findings.push(
+        err(at(`${label} registers key '${id}' more than once. Key status is how a compromise is recorded, so a duplicate id hides one: the first record answers the lookup and a later 'compromised' entry for the same key is never read.`)),
+      );
+    }
+
+    if (issuer.removedOn && issuer.removedOn < issuer.admittedOn) {
+      findings.push(
+        err(at(`${label} is recorded as removed on ${issuer.removedOn}, before it was admitted on ${issuer.admittedOn}.`)),
+      );
+    }
+
+    for (const key of issuer.keys ?? []) {
+      if (key.retiredOn && key.retiredOn < key.validFrom) {
+        findings.push(
+          err(at(`${label} key '${key.id}' is recorded as retired on ${key.retiredOn}, before it became valid on ${key.validFrom}.`)),
+        );
+      }
+
+      if (key.compromisedFrom && key.compromisedFrom < key.validFrom) {
+        findings.push(
+          err(at(`${label} key '${key.id}' is recorded as compromised from ${key.compromisedFrom}, before it became valid on ${key.validFrom}. The conservative entry for an unknown compromise date is the key's own validFrom, never earlier.`)),
+        );
+      }
+
+      if (key.compromisedFrom && key.compromisedFrom > registry.issuedOn) {
+        findings.push(
+          err(at(`${label} key '${key.id}' is recorded as compromised from ${key.compromisedFrom}, after this snapshot was cut. A compromise is a discovered fact, not a scheduled one.`)),
+        );
+      }
+    }
+  }
+
+  for (const credential of duplicates(registry.revocations ?? [], (r) => r.credential)) {
+    findings.push(
+      err(at(`credential ${credential} is revoked more than once, on different terms. A holder answering one of them is answering a record that does not say what happened, and the reason a reader is shown depends on which entry was written first.`)),
+    );
+  }
+
+  for (const revocation of registry.revocations ?? []) {
+    if (revocation.revokedOn > registry.issuedOn) {
+      findings.push(
+        err(at(`credential ${revocation.credential} is recorded as revoked on ${revocation.revokedOn}, after this snapshot was cut. A verifier reading it refuses the credential now, on the strength of something that had not happened when the file was written.`)),
+      );
+    }
+  }
+
+  if (registry.nextExpectedUpdate && registry.nextExpectedUpdate <= registry.issuedOn) {
+    findings.push(
+      err(at(`says its next update was expected ${registry.nextExpectedUpdate}, on or before the day it was issued. That is what every staleness answer is measured against, and it cannot be in the past at the moment of publication.`)),
+    );
+  }
+
+  return findings;
+}
+
 /**
  * Check a credential against a registry snapshot, as of a given date.
  *
@@ -316,6 +446,15 @@ export function verifyAgainstRegistry(
     );
   }
 
+  /*
+   * THE FILE BEFORE THE FACTS IN IT. A verifier holds whichever snapshot reached
+   * them, and CI has never seen it — so the integrity of the artifact has to be
+   * established here and not only against the copy in this repository. A
+   * malformed registry is not a source of facts to be interpreted; it is a
+   * document that is not what it claims to be, and a reader must be told.
+   */
+  findings.push(...checkTrustRegistry(registry));
+
   if (!registrySigned) {
     findings.push(
       warn(at('the trust registry snapshot this was checked against is unsigned, so anything it says could have been edited on the way to the air gap — including the admission of the issuer relied on here. Signing it is a steward act and no steward has been appointed; this is the shipped state and is reported rather than hidden.')),
@@ -356,9 +495,18 @@ export function verifyAgainstRegistry(
     }
   }
 
-  // -- Revocation, distributed with the registry rather than fetched ---------
-  const revoked = (registry.revocations ?? []).find((r) => r.credential === credential.id);
-  if (revoked) {
+  /* -- Revocation, distributed with the registry rather than fetched ---------
+   *
+   * EVERY matching entry, not the first. Finding R-01: `.find()` meant that a
+   * registry recording this credential twice reported whichever was written
+   * first, so a soft `holder-request` entry listed above a `fraud` one showed
+   * the soft reason — and the holder's counter-statement answering the real
+   * revocation was then refused for naming grounds that did not match.
+   * `checkTrustRegistry` above calls the duplicate an error; this makes sure
+   * neither entry can hide behind the other while a reader decides what to do.
+   */
+  const revocations = (registry.revocations ?? []).filter((r) => r.credential === credential.id);
+  for (const revoked of revocations) {
     findings.push(
       err(at(`was revoked on ${revoked.revokedOn} (${revoked.reason}), per this registry snapshot. Revocation is for fraud and demonstrable assessment defect; it does not mean the competence was never demonstrated.`)),
     );
@@ -374,7 +522,15 @@ export function verifyAgainstRegistry(
   for (const statement of counterStatements) {
     if (statement.credential !== credential.id) continue;
 
-    const problems = checkCounterStatement(statement, credential, revoked);
+    // Answering ANY of the recorded revocations counts. Where a malformed
+    // registry records two, the holder cannot be blamed for having answered the
+    // one they were shown.
+    const answered =
+      revocations.find(
+        (r) => statement.answers?.revokedOn === r.revokedOn && statement.answers?.reason === r.reason,
+      ) ?? revocations[0];
+
+    const problems = checkCounterStatement(statement, credential, answered);
     if (problems.length > 0) {
       findings.push(...problems);
       continue;
@@ -388,7 +544,7 @@ export function verifyAgainstRegistry(
   // A verifier resolving only the registry sees only the issuer's account. That
   // asymmetry is real, and saying nothing about it would let a reader take the
   // absence of an answer for the absence of a dispute.
-  if (revoked && counterStatements.every((c) => c.credential !== credential.id)) {
+  if (revocations.length > 0 && counterStatements.every((c) => c.credential !== credential.id)) {
     findings.push(
       warn(at('no counter-statement from the holder was presented with this credential. That is not evidence the revocation is uncontested — a counter-statement travels with the holder, and a verifier reading only the registry would never see one.')),
     );
@@ -417,8 +573,27 @@ export function verifyAgainstRegistry(
   const entry = credential.issuer?.trustRegistryEntry?.trim() || undefined;
   const did = credential.issuer?.did?.trim() || undefined;
 
-  const byEntry = entry ? registry.issuers.find((i) => i.entry === entry) : undefined;
-  const byDid = did ? registry.issuers.find((i) => i.did === did) : undefined;
+  /*
+   * AMBIGUITY IN THE LOOKUP REFUSES THE ANSWER, and this is separate from the
+   * disagreement below. That one is a credential naming two parties; this is a
+   * REGISTRY holding two records under one lookup key, so the credential is
+   * fine and the file cannot answer it. `.find()` returned whichever was
+   * written first, which meant a credential carrying only `trustRegistryEntry`
+   * resolved to an arbitrary one of them with no finding of any kind.
+   */
+  const entryMatches = entry ? registry.issuers.filter((i) => i.entry === entry) : [];
+  const didMatches = did ? registry.issuers.filter((i) => i.did === did) : [];
+
+  if (entryMatches.length > 1 || didMatches.length > 1) {
+    const which = entryMatches.length > 1 ? `registry entry '${entry}'` : `DID ${did}`;
+    findings.push(
+      err(at(`cannot be resolved: ${which} matches ${Math.max(entryMatches.length, didMatches.length)} records in this registry. Nothing here may choose between them, and picking the first would hand this credential whichever issuer's keys, dates and accreditation happened to be written above the other.`)),
+    );
+    return { findings, basis };
+  }
+
+  const byEntry = entryMatches[0];
+  const byDid = didMatches[0];
 
   if (byEntry && byDid && byEntry !== byDid) {
     findings.push(
@@ -476,7 +651,22 @@ export function verifyAgainstRegistry(
     return { findings, basis };
   }
 
-  const key = issuer.keys.find((k) => k.id === methodId);
+  /*
+   * The case with no second identifier to save it. Two keys under one id and
+   * `.find()` answers with the first: an `active` record written above a
+   * `compromised` one hid the compromise completely — no error, no warning, no
+   * mention. Recording compromise by status and date rather than by deletion is
+   * the design; a duplicate id is how it silently stops working.
+   */
+  const keyMatches = issuer.keys.filter((k) => k.id === methodId);
+  if (keyMatches.length > 1) {
+    findings.push(
+      err(at(`was signed with key '${methodId}', which ${issuer.name} registers ${keyMatches.length} times (${keyMatches.map((k) => k.status).join(', ')}). Which record governs cannot be decided here, and reading the first would report an active key while a compromise sat in the second.`)),
+    );
+    return { findings, basis };
+  }
+
+  const key = keyMatches[0];
   if (!key) {
     findings.push(
       err(at(`was signed with key '${methodId}', which is not among ${issuer.name}'s registered keys. Keys are append-only in the registry precisely so this means "never theirs" rather than "theirs once, since deleted".`)),
