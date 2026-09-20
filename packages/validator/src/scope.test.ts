@@ -286,6 +286,15 @@ const disclosure = (overrides: Partial<Disclosure> = {}): Disclosure => ({
   grantedOn: '2026-09-01',
   expiresOn: '2027-09-01',
   entries: [{ element: 'CM-03-053', level: 2 }],
+  // Granted by the subject, so it is signed by the subject. A consent nobody
+  // signed is a consent anybody could have written.
+  proof: {
+    type: 'DataIntegrityProof',
+    cryptosuite: 'ecdsa-jcs-2019',
+    proofPurpose: 'assertionMethod',
+    verificationMethod: `${HOLDER}#key-1`,
+    proofValue: `z${'3'.repeat(87)}`,
+  },
   ...overrides,
 });
 

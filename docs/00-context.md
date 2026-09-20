@@ -778,6 +778,40 @@ What it took:
 
 **Left open deliberately: nothing checks WHEN the activity happened.** An activity list could carry dates, and a checker could then ask whether the hours fell after the previous level was attained. Decision 37 does not say they must, and asserting it would be a new policy rather than an enforcement of an existing one. The waiting period is still measured from `previousLevelAttainedOn`, which is unaffected.
 
+## The proof could not carry a signature, and nothing verified one
+
+**Closed 2026-09-20, inside the freeze window.** Found by an adversarial review of intent against execution, as finding F-01.
+
+The project's second founding deliverable is that **a future employer verifies a credential offline, against cryptography, without contacting anyone.** Three facts about the state of that claim, all demonstrable from the files:
+
+- **`proof` required exactly one property, `cryptosuite`.** No `type`, no `proofPurpose`, no `verificationMethod`, and no **`proofValue`** — the field that holds the signature. Every other property of a proof DESCRIBES a signature; only that one IS one, and the word appeared nowhere in the repository.
+- **`proof` was not required at all** on the credential, the disclosure or the trust registry. A credential with no proof object whatsoever was schema-valid, passed every check in `credentials.ts` without a single finding, and came back from `verifyAgainstRegistry` with a populated basis whose statement began with the word *Verified*.
+- **`checkCounterStatement`'s "an unsigned answer is refused" was satisfied by the string `ecdsa-jcs-2019`.** Presence of a suite NAME was standing in for presence of a signature.
+
+**It is the same error as the cryptosuite identifier, one field out.** That one was caught before the freeze, the field's VALUE was corrected, and the SHAPE around it was never looked at — so the object went on naming a W3C suite without the W3C structure to use it. Both are the category the review record names: a claim about the outside world taken on plausibility, invisible to every check here because a `const` is only ever compared with itself, and about to freeze permanently.
+
+**What the specification actually requires, read from it rather than recalled.** W3C *Verifiable Credential Data Integrity 1.0* §2.1 requires `type` and `proofPurpose`; §4.4 states that verification MUST raise an error if `proof.type`, `proof.verificationMethod` or `proof.proofPurpose` is absent. W3C *Data Integrity ECDSA Cryptosuites 1.0* §2.2.1 fixes `type` to `DataIntegrityProof`, §3.3.1 encodes `proofValue` as base58-btc multibase, and §3.3.6 gives the P-256 signature as exactly 64 bytes.
+
+**One definition now, in `common.schema.json`, for four documents** — credential, counter-statement, disclosure and trust registry. They were four copies of one shape carrying one defect, which is the argument that put `sectionPin` and `person` there. A verifier that can check a credential and not the registry it resolves against has verified nothing.
+
+**`proofPurpose` is fixed to `assertionMethod`, and the schema says that constraint is this project's rather than the specification's.** Neither spec prescribes a value. Saying so is the direct lesson of the field next to it.
+
+**The length bound on `proofValue` is computed, and is deliberately looser than it looks.** 64 bytes is log58(2^512) ≈ 87.4 base58 digits, so almost every signature is 87 or 88 characters — measured over 100,000 random values, 80.7% at 88 and 19.3% at 87. But a leading zero byte renders as a literal `1`, and 86 turns up about once in 25,000. **A pattern of `{87,88}` — the one that looks right, and the one this field nearly shipped with — would reject a valid signature now and then, undiagnosably.** The bound is the full range the encoding can produce for 64 bytes, and a test recomputes it. That is the same discipline as `publicKeyMultibase` and the opposite outcome: there the multicodec header fixes the length exactly, so the pattern is tight.
+
+### The registry's proof is the one that stays optional
+
+Requiring it would make this project's own shipped artifact invalid, and the way that gets resolved is somebody fabricating a proof, which is the worst outcome available. The registry shipped here is **unsigned**, because signing it is a steward act and no steward has been appointed. The attack that leaves open is precise: edit the file on the way to the air gap, admit yourself as an issuer, and everything you sign checks out.
+
+So the gap is made **measurable** rather than unrepresentable, exactly as the snapshot's age already is. Every verdict resting on an unsigned registry says so.
+
+### And the half that mattered more than the schema
+
+**Nothing in this repository verifies a signature.** The ECDSA work belongs to `packages/credentials`, which is an empty directory, and until now nothing anywhere said so.
+
+`verifyAgainstRegistry` answers who **could** have signed this and when — the issuer was admitted and not removed, the key is one of theirs, it was valid on the date, the credential is not revoked, and here is how old the snapshot carrying those answers is. It does not answer whether the signature is good. Rule 8c already says a bare "verified" with no statement of what the answer rests on is the defect; it was written about the snapshot's AGE and applies with more force here.
+
+`signatureVerified` is therefore a **parameter**, defaulting to false. A caller who has done the ECDSA work says so; a caller who has not gets a verdict whose statement opens with *Checked* rather than *Verified*, carries `NO SIGNATURE WAS VERIFIED` in the basis a renderer cannot drop, and a warning saying which half of the question was answered. **The honest answer is a fact about the caller, not about the credential**, and a module that guessed would be asserting the one thing it cannot check.
+
 ## A gold reference cannot be self-declared
 
 **Closed 2026-09-04, inside the freeze window.** Open item 12.
@@ -826,6 +860,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
+15. **CLOSED 2026-09-20 — the proof can carry a signature, and a verdict says when none was checked** — one shared `proof` definition with `proofValue` required, `proof` required on every document that asserts something, and `verifyAgainstRegistry` reporting that no signature was verified. See [The proof could not carry a signature, and nothing verified one](#the-proof-could-not-carry-a-signature-and-nothing-verified-one).
 14. **CLOSED 2026-09-20 — an experience claim names its activities** — `assessment.activities` replaces two declared integers, both totals are derived from it, and `demonstrates` records what each piece of work showed about THIS element. See [An experience claim has to say which part demonstrated what](#an-experience-claim-has-to-say-which-part-demonstrated-what).
 13. **CLOSED 2026-09-20 — many routes reach one assessment** — `route` on the preparation record, `pending-demonstration` derived from the element rather than from a module, and the principle declared in `proficiency.yaml`. See [Many routes reach one assessment, and none of them is required](#many-routes-reach-one-assessment-and-none-of-them-is-required).
 7. **Skeleton scale** — resolved. Landed at 2232 elements across 257 areas and 43 domains, against a 2000+ target.
