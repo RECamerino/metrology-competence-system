@@ -550,9 +550,41 @@ function checkBok(corpus: Corpus): Finding[] {
     if (duplicate) findings.push(err(at(`article ID '${id}' is also defined in ${duplicate}`)));
     seen.set(id, article.path);
 
-    const declared = new Set<string>(
-      ((d.sections ?? []) as Array<Record<string, any>>).map((s) => s?.id).filter(Boolean),
-    );
+    /*
+     * ONE FILE MAY NOT CLAIM ONE ID TWICE.
+     *
+     * The invariant underneath second-pass review finding R-01, found while
+     * fixing the trust registry and true of the corpus as well. This project
+     * checks rigorously that two FILES never claim one ID — elements, articles,
+     * modules, archetypes, binding units, taxonomy IDs, all covered, and the
+     * line above is one of them. Nothing checked that one file claims one id
+     * twice, and every such id is resolved by a LOOKUP that answers with
+     * whichever entry was written first.
+     *
+     * A section is the sharp case because it reaches the credential. Two entries
+     * declaring `s03` collapse into this Set silently, `sectionHash` resolves
+     * the first, and the second's `consensus`, `contestedBasis` and
+     * `alternativeViews` are invisible to the pin. Those three fields were moved
+     * INSIDE the pin precisely so that flipping a section from `established` to
+     * `contested` could not leave a credential's knowledge unchanged; a
+     * duplicate id reopens exactly that, with the file reading perfectly well.
+     */
+    const sectionIds = ((d.sections ?? []) as Array<Record<string, any>>)
+      .map((s) => s?.id)
+      .filter(Boolean) as string[];
+
+    for (const [sectionId, count] of sectionIds.reduce(
+      (counts, sectionId) => counts.set(sectionId, (counts.get(sectionId) ?? 0) + 1),
+      new Map<string, number>(),
+    )) {
+      if (count > 1) {
+        findings.push(
+          err(at(`section '${sectionId}' is declared ${count} times. A section id is resolved by lookup — by an element's knowledgeRef, by a reader's bookmark, and by the hash a credential pins — and every one of those answers with whichever entry was written first, so the rest are unreachable and their consensus and alternativeViews never reach the pin.`)),
+        );
+      }
+    }
+
+    const declared = new Set<string>(sectionIds);
     const anchored = new Set(
       [...article.body.matchAll(/\{#(s[0-9]{2})\}/g)].map((m) => m[1]!),
     );
@@ -1619,6 +1651,35 @@ function checkItemBank(corpus: Corpus): Finding[] {
 function checkProficiencyPolicy(corpus: Corpus): Finding[] {
   const findings: Finding[] = [];
   const levels = (corpus.proficiency?.levels ?? []) as Array<Record<string, any>>;
+
+  /*
+   * The same invariant, one rung more consequential. `levelDefinition` resolves
+   * a rung by `levels.find(l => l.level === level)`, and `assessmentPolicyRef`
+   * pins whatever it returns — signer counts, hours, waiting period, reviewer
+   * requirements. The schema fixes the array at exactly five items and each
+   * `level` at 1..5, which makes [1, 1, 2, 3, 4] perfectly valid: one rung
+   * defined twice under two different bars, one rung not defined at all.
+   *
+   * A credential would then pin whichever entry was written first while an
+   * assessor read the other, and rule 1b's whole argument — that the element
+   * does not move but the BAR does, so the bar must be pinned too — would be
+   * resting on an ambiguous lookup.
+   */
+  if (corpus.proficiency) {
+    const defined = levels.map((entry) => Number(entry?.level));
+    for (const rung of [1, 2, 3, 4, 5]) {
+      const count = defined.filter((level) => level === rung).length;
+      if (count === 0) {
+        findings.push(
+          err(`content/competence/taxonomy/proficiency.yaml: L${rung} has no entry. Every rung the corpus can declare a ceiling at must be defined, or a credential at that level pins nothing.`),
+        );
+      } else if (count > 1) {
+        findings.push(
+          err(`content/competence/taxonomy/proficiency.yaml: L${rung} is defined ${count} times. The rung is resolved by lookup and assessmentPolicyRef pins whatever that returns, so a credential would pin one bar while an assessor read the other.`),
+        );
+      }
+    }
+  }
 
   for (const entry of levels) {
     const level = Number(entry?.level);

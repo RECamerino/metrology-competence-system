@@ -146,23 +146,36 @@ export function authorizationCovers(
       );
       verdicts.push('undecidable');
     } else {
-      const granted = methods.find((m) => m.identifier === work.method!.identifier);
-      if (!granted) {
+      /*
+       * Two grants of one method identifier cannot be told apart, and the same
+       * lookup-ambiguity argument applies here as in the trust registry: one
+       * naming a revision and one not, or two naming different revisions,
+       * resolve to whichever was written first. `undecidable` is what this
+       * module has for exactly this — collapsing it either way wrongly blocks
+       * work or wrongly permits signing.
+       */
+      const matches = methods.filter((m) => m.identifier === work.method!.identifier);
+      if (matches.length > 1) {
+        findings.push(
+          note(at(`grants method '${work.method.identifier}' ${matches.length} times (revisions: ${matches.map((m) => m.revision ?? 'unstated').join(', ')}), so which grant governs cannot be decided.`)),
+        );
+        verdicts.push('undecidable');
+      } else if (!matches[0]) {
         findings.push(
           note(at(`does not cover method '${work.method.identifier}'. Granted: ${methods.map((m) => m.identifier).join(', ')}.`)),
         );
         verdicts.push('not-covered');
-      } else if (granted.revision && !work.method.revision) {
+      } else if (matches[0]!.revision && !work.method.revision) {
         // The grant is revision-specific and the question is not, so the two
         // cannot be compared. Reading silence as "the granted revision" is the
         // assumption that permits more.
         findings.push(
-          note(at(`covers '${granted.identifier}' at revision ${granted.revision}, and the work names no revision, so they cannot be compared.`)),
+          note(at(`covers '${matches[0]!.identifier}' at revision ${matches[0]!.revision}, and the work names no revision, so they cannot be compared.`)),
         );
         verdicts.push('undecidable');
-      } else if (granted.revision && work.method.revision !== granted.revision) {
+      } else if (matches[0]!.revision && work.method.revision !== matches[0]!.revision) {
         findings.push(
-          note(at(`covers '${granted.identifier}' at revision ${granted.revision}, not ${work.method.revision}. A revision can change what the method is.`)),
+          note(at(`covers '${matches[0]!.identifier}' at revision ${matches[0]!.revision}, not ${work.method.revision}. A revision can change what the method is.`)),
         );
         verdicts.push('not-covered');
       }
