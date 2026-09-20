@@ -776,6 +776,119 @@ const backingCredential = (overrides: Record<string, unknown> = {}) => ({
   ...overrides,
 });
 
+/* -- Standing has to have been in force on the day it was used ------------- */
+
+/*
+ * External review finding A-13. The authority chain checked subject, element
+ * and level, and no dates at all — so a signoff dated 2028 could rest on a
+ * credential its signer did not attain until 2030.
+ *
+ * Harmless while an asserted `heldLevel` satisfied the rung anyway. The moment
+ * `proven` became the only thing that counts, an unchecked date became the
+ * obvious way to manufacture one.
+ */
+
+/** BACKING, with one held-level credential bent in time. */
+const backingWith = (overrides: Record<string, unknown>) =>
+  // BOTH signers' held-level credentials. Bending only one leaves the other
+  // proving the rung, which is correct behaviour and not what these test.
+  BACKING.map((c) =>
+    (c as Record<string, unknown>).element === 'CM-03-046'
+      ? ({ ...(c as object), ...overrides } as typeof c)
+      : c,
+  );
+
+const messagesFor = (backing: typeof BACKING) =>
+  checkCredential(credential, L5_POLICY, undefined, undefined, backing).map((f) => f.message);
+
+test('A SIGNOFF CANNOT REST ON STANDING THE SIGNER DID NOT YET HAVE', () => {
+  const later = String((credential as Record<string, unknown>).attainedOn).replace(/^\d{4}/, (y) => String(Number(y) + 2));
+  const messages = messagesFor(backingWith({ attainedOn: later }));
+  assert.ok(
+    messages.some((m) => m.includes('was not attained until') && m.includes('did not yet have')),
+    `expected the future standing to be refused, got: ${JSON.stringify(messages)}`,
+  );
+});
+
+test('...and it does not count toward the rung either', () => {
+  // The state and the finding have to agree: a contradicted standing is not a
+  // proven one, so the requirement is unmet rather than merely commented on.
+  const later = String((credential as Record<string, unknown>).attainedOn).replace(/^\d{4}/, (y) => String(Number(y) + 2));
+  const errors = errorsOf(
+    checkCredential(credential, L5_POLICY, undefined, undefined, backingWith({ attainedOn: later })),
+  ).map((f) => f.message);
+  assert.ok(errors.some((m) => m.includes('no signer is PROVEN to hold level 5')));
+});
+
+test('standing that had expired before the signoff is not standing', () => {
+  const messages = messagesFor(backingWith({ expiresOn: '2020-01-01' }));
+  assert.ok(messages.some((m) => m.includes('expired on 2020-01-01')));
+});
+
+test('A REVOCATION BEFORE THE SIGNOFF IS AN ERROR', () => {
+  const messages = messagesFor(
+    backingWith({ status: { revoked: true, revokedOn: '2020-01-01', reason: 'fraud' } }),
+  );
+  assert.ok(
+    messages.some((m) => m.includes('on or before this signoff') && m.includes('not competent at the time')),
+    `expected the revoked standing to be refused, got: ${JSON.stringify(messages)}`,
+  );
+});
+
+test('...and a revocation AFTER it is reported rather than silently invalidating', () => {
+  // Deliberately NOT the key-compromise rule. A signature made before a key was
+  // compromised stands because the key was sound until the breach; a competence
+  // credential is revoked for fraud or assessment defect, both of which say the
+  // attestation should never have existed. Nothing here adjudicates that, so it
+  // is surfaced for a reader to weigh — the counter-statement treatment.
+  const findings = checkCredential(
+    credential,
+    L5_POLICY,
+    undefined,
+    undefined,
+    backingWith({ status: { revoked: true, revokedOn: '2099-01-01', reason: 'fraud' } }),
+  );
+  assert.ok(
+    findings.some((f) => f.level === 'warn' && f.message.includes('after this signoff') && f.message.includes('Unlike a compromised key')),
+    `expected the later revocation to be weighed, got: ${JSON.stringify(findings.map((f) => f.message))}`,
+  );
+  assert.deepEqual(
+    errorsOf(findings).filter((f) => f.message.includes('revoked')),
+    [],
+  );
+});
+
+test('a sufficiency decided AFTER issuance is not the judgement the credential rests on', () => {
+  const evidence = (credential.evidence as Array<Record<string, any>>).map((e, n) =>
+    n === 0 ? { ...e, sufficiency: { ...e.sufficiency, decidedOn: '2099-01-01' } } : e,
+  );
+  const errors = errorsOf(
+    checkCredential({ ...credential, evidence } as typeof credential, L5_POLICY, undefined, undefined, BACKING),
+  ).map((f) => f.message);
+  assert.ok(
+    errors.some((m) => m.includes('after the credential was attained')),
+    `expected the late judgement to be refused, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('a custody interval that ends before it begins is refused', () => {
+  const custody = [
+    { custodian: credential.subject, role: 'holder', since: '2030-01-01', retentionUntil: '2029-01-01' },
+  ];
+  const errors = errorsOf(
+    checkCredential({ ...credential, custody } as unknown as typeof credential, undefined, undefined, undefined, BACKING),
+  ).map((f) => f.message);
+  assert.ok(errors.some((m) => m.includes('ends before it begins')));
+});
+
+test('nobody held the credential before it existed', () => {
+  const custody = (credential.custody as unknown as Array<Record<string, unknown>>).map((c) => ({ ...c, since: '2000-01-01' }));
+  const errors = errorsOf(
+    checkCredential({ ...credential, custody } as unknown as typeof credential, undefined, undefined, undefined, BACKING),
+  ).map((f) => f.message);
+  assert.ok(errors.some((m) => m.includes('before the credential was attained')));
+});
+
 /* -- Asserted is not proven ------------------------------------------------ */
 
 /*
