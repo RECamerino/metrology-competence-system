@@ -6,7 +6,7 @@
  * produces a clear parse diagnostic rather than a confusing schema error.
  */
 
-import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync, lstatSync } from 'node:fs';
 import { join, resolve, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
@@ -165,11 +165,37 @@ export function parseFrontmatter(raw: string, path: string): { data: Record<stri
   return { data, body };
 }
 
+/**
+ * THE CORPUS CONTAINS NO SYMLINKS, and this is where that is enforced.
+ *
+ * `statSync` FOLLOWS a symbolic link, so a walker built on it reads whatever
+ * the link points at. External review finding A-20. The consequence is worst at
+ * the publication boundary: `build-public` copies the content tree into
+ * `dist/public/`, and `check:leak` defends that boundary by scanning for
+ * restricted CONTENT. A symlink is not restricted content — it is a path — so
+ * a link planted in `content/` would have copied whatever it addressed into a
+ * published distribution without the allowlist seeing anything at all.
+ *
+ * REFUSED RATHER THAN SKIPPED. `lstatSync` alone would make the walker ignore
+ * symlinks, which trades a disclosure for a silent absence: content somebody
+ * believes is in the corpus, missing, with nothing saying so. That is the
+ * failure mode this project names most often. Every walker here now refuses,
+ * loudly, and the corpus has no legitimate symlink to lose.
+ */
+export function assertNoSymlink(full: string): void {
+  if (lstatSync(full).isSymbolicLink()) {
+    throw new Error(
+      `${repoRelative(full)}: is a symbolic link. The corpus is read and published by walking these directories, and a link is followed to wherever it points — including outside the repository. Nothing here needs one; replace it with the file itself.`,
+    );
+  }
+}
+
 function walkFiles(dir: string, matches: (name: string) => boolean, out: string[] = []): string[] {
   if (!existsSync(dir)) return out;
   for (const entry of readdirSync(dir).sort()) {
     const full = join(dir, entry);
-    if (statSync(full).isDirectory()) {
+    assertNoSymlink(full);
+    if (lstatSync(full).isDirectory()) {
       walkFiles(full, matches, out);
     } else if (matches(entry)) {
       out.push(full);
@@ -218,6 +244,7 @@ export function loadCorpus(): { corpus: Corpus; parseErrors: string[] } {
   const taxonomyFiles: TaxonomyFile[] = [];
   if (existsSync(PATHS.taxonomyDir)) {
     for (const entry of readdirSync(PATHS.taxonomyDir).sort()) {
+      assertNoSymlink(join(PATHS.taxonomyDir, entry));
       if (!entry.endsWith('.yaml') && !entry.endsWith('.yml')) continue;
       const full = join(PATHS.taxonomyDir, entry);
       try {

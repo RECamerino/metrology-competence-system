@@ -32,7 +32,7 @@
  * Usage:  node tools/build-viewer.ts
  */
 
-import { readFileSync, writeFileSync, readdirSync, statSync, existsSync, rmSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, lstatSync, existsSync, rmSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
@@ -58,7 +58,10 @@ function loadAuthoredElements(): Map<string, Record<string, unknown>> {
   const walk = (dir: string): string[] =>
     readdirSync(dir).sort().flatMap((entry) => {
       const full = join(dir, entry);
-      return statSync(full).isDirectory() ? walk(full) : full.endsWith('.md') ? [full] : [];
+      if (lstatSync(full).isSymbolicLink()) {
+        throw new Error(`${full}: is a symbolic link. See corpus.ts for why none is admitted.`);
+      }
+      return lstatSync(full).isDirectory() ? walk(full) : full.endsWith('.md') ? [full] : [];
     });
 
   for (const file of walk(ELEMENTS_DIR)) {

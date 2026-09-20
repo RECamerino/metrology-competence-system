@@ -1026,6 +1026,18 @@ The custody check used to read the tier: if the credential supported `organizati
 
 So the two questions are separated. `claimsOrganizationalIssuer` asks whether the credential's own account says a laboratory is standing behind it, which is a fact about the arrangement and is what §6.2 follows from. The tier asks what a verifier could establish. They are different questions and now have different functions.
 
+## A symlink is a path, and the leak check scans for content
+
+**Closed 2026-09-20, inside the freeze window.** External adversarial review, finding A-20.
+
+Four recursive walkers decided "is this a directory" with `statSync`, which **follows** a symbolic link. The review filed it as CI hygiene — traversal outside the repository, a denial of service, processing files that are not repository content. The sharper consequence is at the publication boundary.
+
+`build-public` copies the content tree into `dist/public/`, and `check:leak` defends that boundary by scanning for restricted **content**. **A symlink is not content. It is a path.** A link planted in `content/` would have copied whatever it addressed into a published distribution, and the allowlist — which works on FIELDS of known objects — would have seen nothing to withhold. Decision 42 makes publication an allowlist precisely so a new field defaults to withheld; a symlink goes around the question rather than answering it wrongly.
+
+**Refused rather than skipped.** `lstatSync` alone would make the walkers ignore links, which trades a disclosure for a silent absence: content somebody believes is in the corpus, missing, with nothing saying so. That is the failure this project names most often, and the corpus has no legitimate symlink to lose — there are none in it today and none is needed.
+
+**The test plants a real link rather than trusting the reasoning.** Windows refuses a plain symlink without developer mode, so it falls back to a directory JUNCTION, which needs no privilege and which `lstat` reports as a symbolic link — the same predicate and the same refusal. CI runs on Linux and takes the first branch. The first draft of the test skipped on Windows and said so honestly; finding the junction was better than accepting an unexercised check.
+
 ## A gold reference cannot be self-declared
 
 **Closed 2026-09-04, inside the freeze window.** Open item 12.
@@ -1074,6 +1086,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
+22. **CLOSED 2026-09-20 — the corpus admits no symbolic links** — `statSync` followed them, and the publication boundary scans for content rather than paths. See [A symlink is a path](#a-symlink-is-a-path-and-the-leak-check-scans-for-content).
 21. **CLOSED 2026-09-20 — the provenance tier is resolved, not read off the document** — all three upper rungs took the credential's word about itself, including an accreditation the registry schema already said should be compared. See [The provenance tier is resolved](#the-provenance-tier-is-resolved-not-read-off-the-document).
 20. **CLOSED 2026-09-20 — standing must have been in force when it was used** — the authority chain checked no dates, so a 2028 signoff could rest on a 2030 credential. Revocation departs from the key-compromise rule, and says why. See [Standing is only standing if it was in force](#standing-is-only-standing-if-it-was-in-force-on-the-day-it-was-used).
 19. **CLOSED 2026-09-20 — an issuer's identifiers must agree** — the registry lookup was an OR, so a true entry beside a false DID resolved the true issuer and inherited its keys and dates. See [A true identifier beside a false one](#a-true-identifier-beside-a-false-one-bought-the-false-one-everything).
