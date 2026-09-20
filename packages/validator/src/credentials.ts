@@ -171,6 +171,8 @@ export interface Credential {
   element: string;
   level: number;
   attainedOn?: string;
+  expiresOn?: string;
+  status?: { revoked?: boolean; revokedOn?: string; reason?: string; supersededBy?: string };
   provenanceTier?: ProvenanceTier;
   assessment?: CredentialAssessment;
   custody?: CustodyRecord[];
@@ -740,6 +742,45 @@ export function checkCredential(
 
   findings.push(...checkCustody(credential));
   findings.push(...checkEvidenceSufficiency(credential));
+
+  /*
+   * The credential's own lifecycle dates, checked against each other.
+   *
+   * External review finding A-12. Nothing read the credential's own `expiresOn`
+   * or `status` at all — only the trust registry's revocation list — so a
+   * credential carrying `status: { revoked: true }` ON ITS FACE passed every
+   * check here, and `inForce()`, written days earlier for exactly this question,
+   * was applied to a signer's BACKING credential and never to the credential
+   * under examination.
+   *
+   * WHAT BELONGS HERE AND WHAT DOES NOT. These are the internal contradictions,
+   * true of the document whenever anybody reads it. Whether the credential is
+   * still CURRENT is a question asked at a time, it needs the reader's date, and
+   * it is answered by `verifyCredential` — which reports it rather than ruling
+   * on it, because the schema settles that: an expired credential is not a false
+   * one, and verifiers decide what weight to give currency.
+   */
+  const lifecycle = credential.status as
+    | { revoked?: boolean; revokedOn?: string; reason?: string }
+    | undefined;
+
+  if (credential.expiresOn && credential.attainedOn && credential.expiresOn <= credential.attainedOn) {
+    findings.push(
+      err(at(`expires on ${credential.expiresOn}, on or before the day it was attained (${credential.attainedOn}). A recertification date that arrives with the credential is not a recertification date.`)),
+    );
+  }
+
+  if (lifecycle?.revoked) {
+    if (!lifecycle.revokedOn) {
+      findings.push(
+        err(at('is revoked and records no date. Without one, nothing can tell a revocation that preceded a signoff resting on this credential from one that followed the work it is read against — which is the reason a compromised key in the trust registry has required a date all along.')),
+      );
+    } else if (credential.attainedOn && lifecycle.revokedOn < credential.attainedOn) {
+      findings.push(
+        err(at(`is revoked as of ${lifecycle.revokedOn}, before it was attained on ${credential.attainedOn}. Nothing was revoked before it existed.`)),
+      );
+    }
+  }
 
   // -- Is the signer's own standing evidenced, or merely stated? -----------
   // A system built to replace "trust me, he's competent" should not rest on
