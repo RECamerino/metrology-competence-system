@@ -20,7 +20,7 @@ Three things are being built:
 
 **No single person should hold all of it.** The corpus is meant to exceed any individual. If someone can complete it, it is too small.
 
-**Nothing gates entry.** No employer, no budget, no professional network required. The Personal edition is the *full* platform, free, running with no server. Someone with no experience must be able to install it, do the work, produce real evidence, and arrive at an interview with verifiable proof.
+**Nothing gates entry** — and see ["Nothing gates entry" reaches L2](#nothing-gates-entry-reaches-l2-and-the-thing-that-lifts-it-is-designed-and-unbuilt) for which rung that currently means. No employer, no budget, no professional network required. The Personal edition is the *full* platform, free, running with no server. Someone with no experience must be able to install it, do the work, produce real evidence, and arrive at an interview with verifiable proof.
 
 **Rigor cannot be negotiable.** If the credential is easy, it is worthless, and the person who worked for it is the one harmed. Escalating evidence, mandatory experience hours, waiting periods between levels, no self-signoff, and recertification because competence decays.
 
@@ -130,6 +130,8 @@ The cost is real and lands in a specific place: **a badly bound archetype tests 
 Decision 45. The training layer was an empty directory and a phase number until now, which meant the most obvious way to reintroduce the project's founding objection had no guard on it at all.
 
 **A module produces a training record, not a credential.** `attestsCompetence` is `const false` and cannot be authored otherwise. "Completed Advanced Metrology Training" is precisely the claim this system exists to replace, and a training layer that quietly issued competence claims would have rebuilt the problem inside the solution.
+
+**And it currently means it to L2.** From L3 the signoff needs a signer holding that level in that element and holding reviewer authority — a specific person the holder has to find, by a mechanism that is designed and unbuilt. Declared in full in `proficiency.yaml`; the paragraph below was written before anybody had traced which rung it stopped at.
 
 **What "nothing gates entry" does and does not mean.** It means the *system* imposes no gate: no employer, no budget, no professional network is required to learn, to be assessed, or to hold what you earn. It does **not** mean the system removes the requirement to do the work.
 
@@ -824,6 +826,39 @@ So the gap is made **measurable** rather than unrepresentable, exactly as the sn
 
 `signatureVerified` is therefore a **parameter**, defaulting to false. A caller who has done the ECDSA work says so; a caller who has not gets a verdict whose statement opens with *Checked* rather than *Verified*, carries `NO SIGNATURE WAS VERIFIED` in the basis a renderer cannot drop, and a warning saying which half of the question was answered. **The honest answer is a fact about the caller, not about the credential**, and a module that guessed would be asserting the one thing it cannot check.
 
+## "Nothing gates entry" reaches L2, and the thing that lifts it is designed and unbuilt
+
+**Declared 2026-09-20, inside the freeze window.** Adversarial review finding F-03, **materially narrowed by checking it** — and then made larger in a direction the finding had not looked.
+
+The finding as filed said the consequence was undeclared because nobody had thought about it. **That half is refuted.** Decisions 24, 32 and 33 are a designed answer aimed precisely at this person: reviewer authority is itself a verifiable credential, **reviews given to UNAFFILIATED individuals are counted separately and displayed prominently** so that a reviewer's prestige signal points at the person with no network, and review requests and signed reviews are portable signed documents that move over a website, an intranet, email or a USB stick. That is not an oversight. It is the mechanism, and it is a good one.
+
+### What survives
+
+**None of it is built.** "Reviewer programme" is outstanding Phase 2 work, `packages/exchange` is an empty directory, and nothing counts a service record. So the principle as written — *no employer, no budget, no professional network is required to learn, to be assessed, or to hold what you earn* — is a present-tense claim that is **true at L1 and L2 and an intention above them**, and nothing anywhere said which rung that stops a person at.
+
+The gates, enumerated in one place for the first time:
+
+| Level | What the signoff needs |
+|---|---|
+| L1, L2 | One signer. No held level, no reviewer authority. |
+| L3 | One signer holding **L4 in the same element**, and reviewer authority. |
+| L4 | Two signers, one holding L5 in the same element, reviewer authority. |
+| L5 | As L4, plus **cross-organizational** signing. |
+
+**`requiresCredentialedReviewer` is the gate the finding did not name**, and it bites from L3 alongside the held level. Reviewer authority is decision 32's credential, so the rung that stops an unaffiliated holder is gated on the very mechanism that is meant to unstop them.
+
+### And one gate the reviewer programme will not lift
+
+L5 requires cross-organizational signing. A candidate who records no organization needs **two signers from two distinct identifying organizations**, because two unaffiliated practitioners are two individuals rather than two organizations — `credentials.ts` says so in terms and refuses to count them.
+
+That is correct. The rule exists so a closed group cannot certify its own experts, and three unaffiliated people are as closed a group as one laboratory. The consequence is that **a genuinely unaffiliated holder's L5 depends on finding signers who are themselves affiliated**, permanently, and not on anything the reviewer programme can supply. Same shape as decision 26: a rule identified as transitional turns out to have a permanent residue once you trace who it lands on.
+
+### The remedy is a declaration, and only a declaration
+
+No schema, no code, no change to any threshold — the ladder is steward-controlled and nothing here touches it. `proficiency.yaml` carries the statement, beside the education exclusion and the many-routes principle, for the same stated reason: **an undeclared limit reads as an oversight.** The first principle in `CLAUDE.md` and rule 12 now carry the ceiling with them, because a reader meets the claim there and should not have to find the ladder to learn what it currently means.
+
+**What this is not** is an argument for lowering any of it. Rigour is the third principle and these requirements are most of what carries it. Recording the cost is not a proposal to pay less of it; the routes out, if stewards ever want them, are the four decision 26 already lists.
+
 ## A gold reference cannot be self-declared
 
 **Closed 2026-09-04, inside the freeze window.** Open item 12.
@@ -872,6 +907,7 @@ CI enforces this. Stewards may not waive it. See [`../GOVERNANCE.md`](../GOVERNA
 10. **CLOSED 2026-09-04 — `demonstration` is a set** — see [Some elements have two evidence routes](#some-elements-have-two-evidence-routes). Taken inside the freeze window, at 21 authored elements and no issued credential; it would have been permanent after Phase 3.
 11. **The source register has no physics and no safety** — see […and the source register cannot support it](#and-the-source-register-cannot-support-it). Blocks a substantial fraction of the 443 foundational elements. A licence and editorial-policy question, not an authoring one.
 12. **CLOSED 2026-09-04 — a gold reference is derived from review, not declared** — see [A gold reference cannot be self-declared](#a-gold-reference-cannot-be-self-declared). Elements gained review provenance in the process, because there was nothing to derive it from. Reviewer STANDING is still unevidenced, which is item 16 and now applies in two places.
+16. **DECLARED 2026-09-20 — what "nothing gates entry" currently reaches** — L2, because L3 up needs a signer holding the level in that element and holding reviewer authority. The mechanism is decisions 24, 32 and 33 and it is unbuilt; L5's cross-organizational rule is a residue it will not lift. See ["Nothing gates entry" reaches L2](#nothing-gates-entry-reaches-l2-and-the-thing-that-lifts-it-is-designed-and-unbuilt).
 15. **CLOSED 2026-09-20 — the proof can carry a signature, and a verdict says when none was checked** — one shared `proof` definition with `proofValue` required, `proof` required on every document that asserts something, and `verifyAgainstRegistry` reporting that no signature was verified. See [The proof could not carry a signature, and nothing verified one](#the-proof-could-not-carry-a-signature-and-nothing-verified-one).
 14. **CLOSED 2026-09-20 — an experience claim names its activities** — `assessment.activities` replaces two declared integers, both totals are derived from it, and `demonstrates` records what each piece of work showed about THIS element. See [An experience claim has to say which part demonstrated what](#an-experience-claim-has-to-say-which-part-demonstrated-what).
 13. **CLOSED 2026-09-20 — many routes reach one assessment** — `route` on the preparation record, `pending-demonstration` derived from the element rather than from a module, and the principle declared in `proficiency.yaml`. See [Many routes reach one assessment, and none of them is required](#many-routes-reach-one-assessment-and-none-of-them-is-required).

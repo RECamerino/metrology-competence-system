@@ -161,6 +161,62 @@
 # the only preparation that had an object, which is how a route becomes the
 # path without anybody deciding it.
 
+# WHAT "NOTHING GATES ENTRY" REACHES TODAY, AND WHERE IT STOPS — declared
+# 2026-09-20, after an adversarial review found the consequence written down
+# nowhere that the principle is written down.
+#
+# Nothing below is a change to the ladder, which is steward-controlled. It is a
+# statement of what the ladder already does, for the reader the first principle
+# is about.
+#
+# THE SIGNOFF GATES, ENUMERATED IN ONE PLACE FOR THE FIRST TIME:
+#
+#   L1, L2  one signer, no held level required, no reviewer authority required.
+#   L3      one signer holding L4 IN THE SAME ELEMENT, and reviewer authority.
+#   L4      two signers, one holding L5 in the same element, reviewer authority.
+#   L5      as L4, plus cross-organizational signing.
+#
+# So a person with no employer and no professional network is witnessed to L2
+# by whoever is available — a colleague, a mentor, a former supervisor — and
+# that is the whole of what they can reach alone. Every rung above needs a
+# specific person they have to find: somebody holding a level in that element,
+# who also holds reviewer authority.
+#
+# THIS IS NOT AN OVERSIGHT, AND THE REVIEW THAT RAISED IT WAS WRONG ABOUT THAT.
+# The answer is designed and recorded in docs/00-context.md as decisions 24, 32
+# and 33: reviewer authority is itself a verifiable credential; reviews given to
+# UNAFFILIATED individuals are counted separately and displayed prominently, so
+# the prestige signal for a reviewer points at exactly the person with no
+# network; and review requests and signed reviews are portable signed documents
+# that move over a website, an intranet, email or a USB stick. That is a
+# thought-through mechanism aimed precisely at this person.
+#
+# WHAT IS TRUE IS THAT NONE OF IT IS BUILT. "Reviewer programme" is outstanding
+# Phase 2 work, packages/exchange is an empty directory, and no service record
+# counts anything. So the principle as written — no professional network is
+# required to learn, to be assessed, or to hold what you earn — is a present
+# tense claim that is true at L1 and L2 and is an INTENTION above them. An
+# undeclared limit reads as an oversight, which is the same reason the education
+# exclusion above is declared rather than left implicit.
+#
+# ONE GATE THE REVIEWER PROGRAMME WILL NOT LIFT, and it is worth knowing before
+# anybody plans around it. L5 requires cross-organizational signing. A candidate
+# who records no organization needs two signers from two DISTINCT IDENTIFYING
+# organizations, because two unaffiliated practitioners are two individuals and
+# not two organizations — the validator says so in terms, and it is right: the
+# rule exists so that a closed group cannot certify its own experts, and three
+# unaffiliated people are as closed a group as one laboratory. The consequence
+# is that a genuinely unaffiliated holder's L5 depends on finding signers who
+# are themselves affiliated. That is a permanent property of the design rather
+# than a transitional one, in the same way decision 26 is.
+#
+# WHAT THIS IS NOT: a proposal to lower any of it. Rigour is the third principle
+# and these requirements are most of what carries it; a credential that is easy
+# is worthless and the person who worked for it is the one harmed. The routes
+# out, if stewards ever want them, are the four decision 26 lists for the
+# neighbouring problem. Recording the cost is not an argument for paying less of
+# it.
+
 schemaVersion: 1
 
 levels:
