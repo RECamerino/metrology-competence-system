@@ -149,6 +149,28 @@ test('a question that names no element cannot be decided', () => {
   assert.equal(coverage, 'undecidable');
 });
 
+test('TWO GRANTS OF ONE METHOD CANNOT BE TOLD APART', () => {
+  // The lookup-ambiguity argument from the trust registry, in the one place
+  // this module resolves by identifier. Reading the first would authorize
+  // against whichever revision happened to be written above the other.
+  const twice: AuthorizationLike = {
+    ...authorization,
+    scope: {
+      ...authorization.scope,
+      methods: [
+        { identifier: 'ISO 6789-2', revision: '2017' },
+        { identifier: 'ISO 6789-2', revision: '2003' },
+      ],
+    },
+  };
+  const { coverage, findings } = authorizationCovers(
+    twice,
+    work({ method: { identifier: 'ISO 6789-2', revision: '2017' } }),
+  );
+  assert.equal(coverage, 'undecidable');
+  assert.ok(findings.some((f) => f.message.includes('grants method')));
+});
+
 test('a revision-specific grant cannot be compared against an unversioned question', () => {
   const versioned: AuthorizationLike = {
     ...authorization,

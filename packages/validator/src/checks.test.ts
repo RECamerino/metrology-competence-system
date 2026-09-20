@@ -224,6 +224,86 @@ const errorsOf = (c: Corpus): string[] =>
     .filter((f) => f.level === 'error')
     .map((f) => f.message);
 
+/* -- One file may not claim one id twice ----------------------------------- */
+
+/*
+ * The invariant underneath second-pass review finding R-01, found while fixing
+ * the trust registry and true of the corpus too. This file already proves that
+ * two FILES never claim one ID. Nothing proved that one file claims one id
+ * twice, and every such id is resolved by a lookup that answers with whichever
+ * entry was written first.
+ */
+
+test('A SECTION ID DECLARED TWICE IS AN ERROR, NOT A SILENTLY ABSORBED DUPLICATE', () => {
+  // It reaches the credential. `sectionHash` resolves the first entry, so the
+  // second's consensus, contestedBasis and alternativeViews never reach the pin
+  // — which is exactly what moving those fields INSIDE the pin existed to stop.
+  const errors = errorsOf(
+    corpus([element()], undefined, {
+      bok: [
+        article(
+          {
+            sections: [
+              { id: 's01', heading: 'First' },
+              { id: 's01', heading: 'First, again, meaning something else' },
+            ],
+          },
+          'Prose.\n\n## First {#s01}\n\nMore prose.\n',
+        ),
+      ],
+    }),
+  );
+  assert.ok(
+    errors.some((m) => m.includes("section 's01' is declared 2 times")),
+    `expected a duplicate-section error, got: ${JSON.stringify(errors)}`,
+  );
+});
+
+test('the ordinary article, with distinct section ids, stays clean', () => {
+  assert.deepEqual(
+    errorsOf(
+      corpus([element()], undefined, {
+        bok: [
+          article(
+            { sections: [{ id: 's01', heading: 'First' }, { id: 's02', heading: 'Second' }] },
+            'Prose.\n\n## First {#s01}\n\n## Second {#s02}\n\nMore.\n',
+          ),
+        ],
+      }),
+    ),
+    [],
+  );
+});
+
+test('A PROFICIENCY RUNG DEFINED TWICE IS AN ERROR, AND ONE DEFINED NEVER IS TOO', () => {
+  // The schema fixes the array at five items with each `level` in 1..5, which
+  // makes [1, 1, 2, 3, 4] valid: one rung under two different bars, one rung
+  // missing. `assessmentPolicyRef` pins whatever the lookup returns.
+  const bent = corpus([element()]);
+  bent.proficiency = {
+    schemaVersion: 1,
+    levels: [{ level: 1 }, { level: 1 }, { level: 2 }, { level: 3 }, { level: 4 }],
+  } as unknown as Corpus['proficiency'];
+
+  const errors = errorsOf(bent);
+  assert.ok(errors.some((m) => m.includes('L1 is defined 2 times')), JSON.stringify(errors));
+  assert.ok(errors.some((m) => m.includes('L5 has no entry')), JSON.stringify(errors));
+});
+
+test('a proficiency file defining each rung once is clean', () => {
+  const ok = corpus([element()]);
+  ok.proficiency = {
+    schemaVersion: 1,
+    levels: [1, 2, 3, 4, 5].map((level) => ({ level })),
+  } as unknown as Corpus['proficiency'];
+  // Only the rung accounting: the stub is not a whole proficiency document and
+  // the schema rightly complains about the rest of it.
+  assert.deepEqual(
+    errorsOf(ok).filter((m) => m.includes('is defined') || m.includes('has no entry')),
+    [],
+  );
+});
+
 /* -- The baseline must be clean ------------------------------------------ */
 
 test('a well-formed element produces no errors', () => {
