@@ -356,6 +356,117 @@ test('removal stops new issuance and does not unmake old credentials', () => {
   );
 });
 
+/* -- Every identifier the credential supplies must agree -------------------- */
+
+/*
+ * External review finding A-06. The lookup was an OR:
+ *
+ *   (entry && i.entry === entry) || (did && i.did === credential.issuer.did)
+ *
+ * so a credential naming a legitimate registry entry beside an attacker's DID
+ * resolved the legitimate issuer — by the half that matched — and then read
+ * that issuer's keys, dates and accreditation out of it. The DID it claimed to
+ * be signed by was never compared with anything.
+ *
+ * No existing test exercised the mismatch, which is why it survived.
+ */
+
+const ATTACKER_DID = 'did:key:z6MkwPyzcwrHPKPRXPRSQN5BbQiVvEN9YqjFjSrtnGdaZnpS';
+
+test('A TRUE REGISTRY ENTRY BESIDE A FALSE DID NO LONGER RESOLVES THE ISSUER', () => {
+  const findings = verifyAgainstRegistry(
+    { ...credential, issuer: { did: ATTACKER_DID, trustRegistryEntry: 'northfield-cal-2026' } },
+    registry,
+    '2028-06-15',
+  ).findings;
+
+  assert.ok(
+    errorsOf(findings).some(
+      (m) => m.includes("registry entry 'northfield-cal-2026'") && m.includes('must be the same party'),
+    ),
+    `expected the disagreement to be refused, got: ${JSON.stringify(findings.map((f) => f.message))}`,
+  );
+});
+
+test('...and it does NOT go on to read that issuer\'s keys and dates', () => {
+  // The substance of the attack: resolving the legitimate entry meant the
+  // attacker inherited everything the registry says about Northfield.
+  const findings = verifyAgainstRegistry(
+    { ...credential, issuer: { did: ATTACKER_DID, trustRegistryEntry: 'northfield-cal-2026' } },
+    registry,
+    '2028-06-15',
+  ).findings;
+
+  assert.deepEqual(
+    findings.filter((f) => f.message.includes('signing key') || f.message.includes('admitted to the registry')),
+    [],
+  );
+});
+
+test('a true DID beside a false entry is refused symmetrically', () => {
+  const findings = verifyAgainstRegistry(
+    { ...credential, issuer: { did: ISSUER_DID, trustRegistryEntry: 'somebody-elses-lab' } },
+    registry,
+    '2028-06-15',
+  ).findings;
+  assert.ok(errorsOf(findings).some((m) => m.includes("is registered as 'northfield-cal-2026'")));
+});
+
+test('two identifiers naming two DIFFERENT registered issuers is its own finding', () => {
+  const twoIssuers: TrustRegistry = {
+    ...registry,
+    issuers: [
+      registry.issuers[0]!,
+      {
+        entry: 'ardleigh-met-2025',
+        did: ATTACKER_DID,
+        name: 'Ardleigh Metrology',
+        admittedOn: '2026-01-01',
+        keys: [{ id: `${ATTACKER_DID}#key-1`, validFrom: '2026-01-01', status: 'active', publicKeyMultibase: 'zDnaerDaTF5BXEavCrfRZEk316dpbLsfPDZ3WJ5hRTPFU2169' }],
+      },
+    ],
+  };
+
+  const findings = verifyAgainstRegistry(
+    { ...credential, issuer: { did: ATTACKER_DID, trustRegistryEntry: 'northfield-cal-2026' } },
+    twoIssuers,
+    '2028-06-15',
+  ).findings;
+
+  assert.ok(
+    errorsOf(findings).some((m) => m.includes('names two different registered issuers')),
+    `expected the two-issuer case to be named, got: ${JSON.stringify(findings.map((f) => f.message))}`,
+  );
+});
+
+test('AN UNKNOWN ISSUER AND A DISAGREEMENT ARE DIFFERENT FINDINGS', () => {
+  // Both are refusals; they have different remedies. One says nobody by that
+  // name was admitted, the other says this document names two parties.
+  const unknown = verifyAgainstRegistry(
+    { ...credential, issuer: { did: ATTACKER_DID, trustRegistryEntry: 'nobody-at-all' } },
+    registry,
+    '2028-06-15',
+  ).findings;
+  assert.ok(errorsOf(unknown).some((m) => m.includes('does not contain')));
+  assert.deepEqual(errorsOf(unknown).filter((m) => m.includes('same party')), []);
+});
+
+test('either identifier alone still resolves, because a credential need not carry both', () => {
+  const byDid = verifyAgainstRegistry(
+    { ...credential, issuer: { did: ISSUER_DID } },
+    registry,
+    '2028-06-15',
+  ).findings;
+  assert.deepEqual(errorsOf(byDid), []);
+
+  const byEntry = verifyAgainstRegistry(
+    { ...credential, issuer: { trustRegistryEntry: 'northfield-cal-2026' } } as typeof credential,
+    registry,
+    '2028-06-15',
+  ).findings;
+  assert.deepEqual(errorsOf(byEntry), []);
+});
+
 test('an unknown issuer says the snapshot age is what distinguishes the two cases', () => {
   const findings = verifyAgainstRegistry(credential, { ...registry, issuers: [] }, '2028-06-15').findings;
   assert.ok(errorsOf(findings).some((m) => m.includes('predates their admission')));

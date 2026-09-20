@@ -354,15 +354,58 @@ export function verifyAgainstRegistry(
     );
   }
 
-  // -- The issuer ------------------------------------------------------------
-  const entry = credential.issuer?.trustRegistryEntry;
-  const issuer = registry.issuers.find(
-    (i) => (entry && i.entry === entry) || (credential.issuer?.did && i.did === credential.issuer.did),
-  );
+  /* -- The issuer ----------------------------------------------------------
+   *
+   * EVERY IDENTIFIER THE CREDENTIAL SUPPLIES MUST AGREE, and this used to be an
+   * OR. A credential naming `trustRegistryEntry: northfield` and
+   * `issuer.did: did:key:zAttacker` resolved Northfield's entry — by the half
+   * that matched — and then read Northfield's keys, dates and accreditation
+   * out of it. The DID it actually claimed to be signed by was never compared
+   * with anything. Either identifier could select the issuer on its own, so
+   * supplying a true one alongside a false one cost nothing.
+   *
+   * It is latent today only because no signature is verified yet; the moment
+   * one is, this is the seam between "the registry says who this issuer is" and
+   * "the credential says who signed it", and the two have to be the same party.
+   *
+   * THE DISAGREEMENT GETS ITS OWN FINDING rather than falling through to
+   * "unknown issuer". Both are refusals, and they are different facts with
+   * different remedies: one says nobody by that name was admitted, the other
+   * says this document names two different parties as its issuer. Collapsing
+   * them would hide the only case that is an attack rather than a typo.
+   */
+  const entry = credential.issuer?.trustRegistryEntry?.trim() || undefined;
+  const did = credential.issuer?.did?.trim() || undefined;
+
+  const byEntry = entry ? registry.issuers.find((i) => i.entry === entry) : undefined;
+  const byDid = did ? registry.issuers.find((i) => i.did === did) : undefined;
+
+  if (byEntry && byDid && byEntry !== byDid) {
+    findings.push(
+      err(at(`names two different registered issuers: registry entry '${entry}' is ${byEntry.name} and DID ${did} is ${byDid.name}. A credential has one issuer, and nothing here may choose between them.`)),
+    );
+    return { findings, basis };
+  }
+
+  if (byEntry && did && byEntry.did !== did) {
+    findings.push(
+      err(at(`names registry entry '${entry}', which is registered to ${byEntry.did}, and claims to be issued by ${did}. The entry and the DID must be the same party — otherwise a true identifier beside a false one buys the false one everything the true one is trusted for.`)),
+    );
+    return { findings, basis };
+  }
+
+  if (byDid && entry && byDid.entry !== entry) {
+    findings.push(
+      err(at(`claims registry entry '${entry}', but DID ${did} is registered as '${byDid.entry}'. The entry and the DID must be the same party.`)),
+    );
+    return { findings, basis };
+  }
+
+  const issuer = byEntry ?? byDid;
 
   if (!issuer) {
     findings.push(
-      err(at(`names an issuer this registry does not contain (${entry ?? credential.issuer?.did ?? 'unidentified'}). Either the issuer was never admitted, or this snapshot predates their admission — the age above is what distinguishes those, and only one of them is a problem with the credential.`)),
+      err(at(`names an issuer this registry does not contain (${entry ?? did ?? 'unidentified'}). Either the issuer was never admitted, or this snapshot predates their admission — the age above is what distinguishes those, and only one of them is a problem with the credential.`)),
     );
     return { findings, basis };
   }
