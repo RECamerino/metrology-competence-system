@@ -177,13 +177,13 @@ test('a verdict with no registry claims no age at all', () => {
 const asOf = '2030-01-01';
 
 test('A CREDENTIAL REVOKED ON ITS OWN FACE IS REFUSED WITHOUT ANY REGISTRY', () => {
-  const revoked = {
-    ...(credential as Record<string, unknown>),
-    status: { revoked: true, revokedOn: '2029-01-01', reason: 'fraud' },
-  } as typeof credential;
-
-  const verdict = verifyCredential(revoked, { asOf });
-  assert.equal(verdict.layers.lifecycle, 'checked');
+  const verdict = verifyCredential(
+    {
+      ...(credential as Record<string, unknown>),
+      status: { revoked: true, revokedOn: '2029-01-01', reason: 'fraud' },
+    } as typeof credential,
+    { asOf },
+  );
   assert.ok(
     verdict.findings.some((f) => f.level === 'error' && f.message.includes('on its own face')),
     `expected the revocation to be refused, got: ${JSON.stringify(verdict.findings.map((f) => f.message))}`,
@@ -208,14 +208,54 @@ test('AN EXPIRED CREDENTIAL IS NOT A FALSE ONE, AND THE FINDING SAYS SO', () => 
 test('a caller who does not say WHEN they are asking has not asked', () => {
   // Currency is a question asked at a time. No date, no answer — and the
   // absence is a state and a finding rather than a quiet pass.
-  const revoked = {
+  const verdict = verifyCredential({
     ...(credential as Record<string, unknown>),
-    status: { revoked: true, revokedOn: '2029-01-01', reason: 'fraud' },
-  } as typeof credential;
+    expiresOn: '2029-06-01',
+  } as typeof credential);
 
-  const verdict = verifyCredential(revoked);
   assert.equal(verdict.layers.lifecycle, 'not-supplied');
-  assert.ok(verdict.findings.some((f) => f.message.includes('revoked or its currency has lapsed') && f.message.includes('NOT checked')));
+  assert.ok(
+    verdict.findings.some(
+      (f) => f.message.includes('whether its currency has lapsed') && f.message.includes('NOT checked'),
+    ),
+  );
+});
+
+/* -- ...but a revocation is not a currency question ------------------------ */
+
+/*
+ * Second-pass review finding R-03. The revocation sat behind the `asOf` gate
+ * with the expiry, so a credential carrying `reason: 'fraud'` on its own face,
+ * read with no date, produced the headline "Checked 1 of 8 layers with nothing
+ * failing". The invariant and the implementation disagreed and the invariant
+ * was right: the gate's own comment said revocation is not a currency question.
+ */
+
+const revoked = {
+  ...(credential as Record<string, unknown>),
+  status: { revoked: true, revokedOn: '2029-01-01', reason: 'fraud' },
+} as typeof credential;
+
+test('A REVOCATION ON THE FACE IS REFUSED WITH NO REGISTRY AND NO READING DATE', () => {
+  const verdict = verifyCredential(revoked);
+  assert.ok(
+    verdict.findings.some((f) => f.level === 'error' && f.message.includes('on its own face')),
+    `expected the revocation to be refused, got: ${JSON.stringify(verdict.findings.map((f) => f.message))}`,
+  );
+});
+
+test('...and the headline may not read "with nothing failing"', () => {
+  // The actual output before the fix, which is what makes this worth a test of
+  // its own: the layer states were honest and the sentence a reader sees first
+  // was not.
+  const verdict = verifyCredential(revoked);
+  assert.doesNotMatch(verdict.statement, /with nothing failing/);
+  assert.match(verdict.statement, /error\(s\) stand/);
+});
+
+test('the revocation is reported ONCE, not once per layer that noticed it', () => {
+  const verdict = verifyCredential(revoked, { asOf });
+  assert.equal(verdict.findings.filter((f) => f.message.includes('on its own face')).length, 1);
 });
 
 test('a credential current at the reading date reports nothing', () => {

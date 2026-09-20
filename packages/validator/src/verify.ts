@@ -119,7 +119,7 @@ export interface CredentialVerdict {
 
 const LAYER_LABEL: Record<VerificationLayer, string> = {
   'credential-rules': 'the credential’s own rules',
-  lifecycle: 'whether it is revoked or its currency has lapsed',
+  lifecycle: 'whether its currency has lapsed',
   'issuer-trust': 'the issuer against a trust registry',
   signature: 'the signature',
   'definition-drift': 'whether the element has moved since issue',
@@ -169,35 +169,34 @@ export function verifyCredential(
     ),
   );
 
-  /* -- Is it revoked, and is it still current? ------------------------------
+  /* -- Is it still current? --------------------------------------------------
    *
-   * External review finding A-12. Nothing read the credential's own `expiresOn`
+   * External review finding A-12: nothing read the credential's own `expiresOn`
    * or `status` — only the trust registry's revocation list — so a holder
    * presenting a credential that says on its face that it is revoked, to a
    * verifier with no registry, got a clean answer.
    *
    * REVOCATION AND EXPIRY ARE NOT THE SAME KIND OF FACT, and the schema settles
-   * the difference rather than leaving it to be decided here. Revocation "exists
-   * for fraud and for demonstrable assessment failure" — it says the attestation
-   * should not stand, so it is an error. Expiry says: "An expired credential is
-   * not a false one: it remains true that the competence was demonstrated on the
-   * date it was demonstrated. Verifiers decide what weight to give currency."
-   * So this REPORTS currency and does not rule on it, which is the drift
-   * treatment and the counter-statement treatment arriving a third time.
+   * the difference rather than leaving it to be decided here. Expiry says: "An
+   * expired credential is not a false one: it remains true that the competence
+   * was demonstrated on the date it was demonstrated. Verifiers decide what
+   * weight to give currency." So this REPORTS currency and does not rule on it,
+   * which is the drift treatment and the counter-statement treatment arriving a
+   * third time.
    *
-   * It needs the reader's date. A caller who does not say when they are asking
-   * has not asked, and gets `not-supplied` rather than a silent pass.
+   * THE REVOCATION USED TO BE CHECKED HERE AND IS NOT ANY MORE. Second-pass
+   * finding R-03: it does not belong behind a date gate. Revocation says the
+   * attestation should not stand, and nothing about a calendar makes that truer
+   * or falser — so a credential read with no `asOf` reported `Checked 1 of 8
+   * layers with nothing failing` while carrying `reason: 'fraud'` on its face.
+   * It is now refused by `checkCredential`, which had already been reading
+   * `status.revoked` for its date contradictions.
+   *
+   * What is left here genuinely needs the reader's date, and a caller who does
+   * not say when they are asking has not asked.
    */
   if (inputs.asOf) {
     layers.lifecycle = 'checked';
-    const status = credential.status;
-
-    if (status?.revoked) {
-      findings.push({
-        level: 'error',
-        message: at(`is revoked${status.revokedOn ? ` as of ${status.revokedOn}` : ''}${status.reason ? ` (${status.reason})` : ''}, on its own face. Revocation is for fraud and demonstrable assessment failure; it is not a currency question and it does not depend on a registry being to hand.`),
-      });
-    }
 
     if (credential.expiresOn && inputs.asOf > credential.expiresOn) {
       findings.push({
