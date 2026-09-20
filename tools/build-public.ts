@@ -27,7 +27,7 @@
  * failure would be silent and one-way — you cannot unpublish.
  */
 
-import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
@@ -52,7 +52,13 @@ function copyTree(from: string, to: string): number {
   for (const entry of readdirSync(from).sort()) {
     const src = join(from, entry);
     const dst = join(to, entry);
-    if (statSync(src).isDirectory()) {
+    if (lstatSync(src).isSymbolicLink()) {
+      // The publication boundary. `check:leak` scans for restricted CONTENT; a
+      // symlink is a path, so it would copy whatever it addresses into the
+      // distribution with the allowlist seeing nothing. See corpus.ts.
+      throw new Error(`${src}: is a symbolic link and will not be published. Nothing in the corpus needs one.`);
+    }
+    if (lstatSync(src).isDirectory()) {
       count += copyTree(src, dst);
     } else {
       writeFileSync(dst, readFileSync(src));
@@ -74,7 +80,10 @@ function yamlFiles(dir: string, out: string[] = []): string[] {
   if (!existsSync(dir)) return out;
   for (const entry of readdirSync(dir).sort()) {
     const full = join(dir, entry);
-    if (statSync(full).isDirectory()) yamlFiles(full, out);
+    if (lstatSync(full).isSymbolicLink()) {
+      throw new Error(`${full}: is a symbolic link. See corpus.ts for why none is admitted.`);
+    }
+    if (lstatSync(full).isDirectory()) yamlFiles(full, out);
     else if (entry.endsWith('.yaml') || entry.endsWith('.yml')) out.push(full);
   }
   return out;

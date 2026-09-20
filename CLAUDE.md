@@ -36,7 +36,7 @@ Three principles held in tension deliberately:
 | Kinds — knowledge / skill / judgment | 17.5% / 60.9% / 21.6% |
 | Content authored | **26 elements** · **17 BOK articles** · **2 modules** — 8 domains, all three axes |
 | Item bank | 6 archetypes · 46 bindings across 45 units · **0.2%** of units covered |
-| Checks | 0 errors · 431/431 tests · typecheck clean |
+| Checks | 0 errors · 432/432 tests · typecheck clean |
 
 ### Phases
 
@@ -146,7 +146,7 @@ content/trust-registry.yaml       Issuer trust registry. Steward-controlled.
                                   verifies.
 
 schemas/                          19 JSON Schemas. Frozen at Phase 3.
-packages/validator/               The ONLY implemented package. 431 tests.
+packages/validator/               The ONLY implemented package. 432 tests.
 apps/viewer/                      The only implemented app. TWO templates and a
                                   build script; output is an index page plus one
                                   page per domain, none committed. Every page is
@@ -213,7 +213,7 @@ Element IDs deliberately do **not** encode the competency area. `CM-03-014`'s pr
 
 ```bash
 npm run validate          # schema + integrity. Must be green.
-npm test                  # 431 guardrail tests
+npm test                  # 432 guardrail tests
 npm run typecheck
 npm run report:coverage   # per-domain counts, ceiling distribution, per-element item gaps
 npm run report:foundational # which foundational areas a person has actually graded
@@ -228,6 +228,8 @@ npm run build:public      # public distribution — BOK ships, item internals do
 npm run check:leak        # fail if restricted content reached dist/public/ (CI runs this)
 npm run check:counts      # fail if THIS FILE's own numbers disagree with the corpus
 ```
+
+**The corpus contains no symbolic links, and every walker refuses one.** `statSync` follows a link, so a walker built on it reads whatever the link points at — and `build-public` copies the content tree into `dist/public/` while `check:leak` defends that boundary by scanning for restricted CONTENT. A symlink is a PATH, not content, so a link planted in `content/` would have published whatever it addressed with the allowlist seeing nothing. Refused rather than skipped: ignoring one trades a disclosure for a silent absence.
 
 **The publication boundary.** `content/bok/`, the taxonomy, the roles and the elements are published — a person must be able to see what competence *means* and what they will be assessed against. Item internals are not: prompts, generator parameters, scoring, rubrics and binding rationale. Archetypes are published as a *projection* (identity and shape only) because a credential names the archetype it was served from and that has to resolve offline. The projection is an **allowlist** in `tools/public-projection.ts`, so a field added later defaults to withheld — publication cannot be undone. See decision 42.
 
@@ -312,7 +314,7 @@ From external architectural review, August 2026. Not a new phase — scope that 
 
 **2232 → 5407 elements in one session**, and 5459 today. The `EC` axis (21 packs, 203 equipment types, 2732 elements) and 31 `Foundational Knowledge` areas were **generated in passes** from hand-written per-type specifications. Read that as a warning label, not a boast.
 
-**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 431 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
+**Structure is sound and checked.** Zero duplicate element titles corpus-wide, zero pairs of equipment areas sharing a parameter element, every ID locked, every generated view current, 432 tests green. `checkDuplicateTitles` exists because that defect was found twice by ad-hoc script before it became a standing check.
 
 **Coverage is the thing that is not proven.** A practicing metrologist reviewed the equipment axis four times and found real gaps every time — fixture-to-print calibration absent entirely, cal kits present only as parameters, magnetics claimed by a pack that contained none of it, the whole reference-and-primary tier missing between a working instrument and the SI. Each round changed the design rather than adding to it.
 
