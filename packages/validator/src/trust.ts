@@ -71,7 +71,7 @@ export interface VerifiableCredential {
   subject: string;
   attainedOn?: string;
   issuer?: { did: string; name?: string; trustRegistryEntry?: string };
-  proof?: { cryptosuite?: string; verificationMethod?: string; [key: string]: unknown };
+  proof?: { cryptosuite?: string; verificationMethod?: string; proofValue?: string; [key: string]: unknown };
   [key: string]: unknown;
 }
 
@@ -95,6 +95,23 @@ export interface TrustBasis {
    * result, including clean ones.
    */
   statement: string;
+
+  /**
+   * Whether the CALLER cryptographically verified the proof. Nothing in this
+   * module does, and nothing in this repository does yet.
+   *
+   * It is a parameter rather than something computed because the honest answer
+   * is a fact about the caller, not about the credential. A module that guessed
+   * would be asserting the one thing it cannot check, which is the defect this
+   * field exists to stop.
+   */
+  signatureVerified: boolean;
+
+  /**
+   * Whether the registry snapshot itself carried a proof. The shipped one does
+   * not, because signing it is a steward act and no steward has been appointed.
+   */
+  registrySigned: boolean;
 }
 
 /**
@@ -110,7 +127,7 @@ export interface CounterStatement {
   basis: string;
   statement: string;
   signedOn: string;
-  proof?: { cryptosuite?: string; [key: string]: unknown };
+  proof?: { cryptosuite?: string; proofValue?: string; [key: string]: unknown };
   [key: string]: unknown;
 }
 
@@ -131,13 +148,6 @@ function didMethodOf(did: string): string {
   return parts.length >= 2 ? `did:${parts[1]}` : did;
 }
 
-/**
- * Verify a credential against a registry snapshot, as of a given date.
- *
- * `asOf` is passed rather than read from the clock so that verification is
- * reproducible and testable, and so an auditor re-running a decision years
- * later gets the answer that was actually given rather than today's.
- */
 /**
  * Is this counter-statement one this credential's holder actually made, about
  * the revocation it claims to answer?
@@ -172,7 +182,11 @@ export function checkCounterStatement(
     );
   }
 
-  if (!statement.proof?.cryptosuite) {
+  // The presence of `proofValue`, not of a cryptosuite NAME. This check was
+  // called 'an unsigned answer is refused' and was satisfied by the literal
+  // string `ecdsa-jcs-2019`: a document describing a signature rather than
+  // carrying one. It still establishes only that a signature is PRESENT.
+  if (!String(statement.proof?.proofValue ?? '').trim()) {
     findings.push(
       err(at('is unsigned. An unsigned counter-statement is an assertion anybody could have written on the holder\'s behalf.')),
     );
@@ -197,11 +211,40 @@ export function checkCounterStatement(
   return findings;
 }
 
+/**
+ * Check a credential against a registry snapshot, as of a given date.
+ *
+ * `asOf` is passed rather than read from the clock so that the answer is
+ * reproducible and testable, and so an auditor re-running a decision years
+ * later gets the answer that was actually given rather than today's.
+ *
+ * WHAT THIS ESTABLISHES, AND WHAT IT DOES NOT. It answers who COULD have signed
+ * this and when: that the issuer was admitted and not since removed, that the
+ * named key is one of theirs, that the key was valid on the date, that the
+ * credential is not revoked, and how old the snapshot carrying those answers
+ * is. It does NOT answer whether the signature on the document is good, because
+ * nothing in this repository verifies a signature yet — the ECDSA work belongs
+ * to `packages/credentials`, which is an empty directory.
+ *
+ * THAT GAP USED TO BE INVISIBLE, and it was the largest undeclared limit in the
+ * system. `basis.statement` opened with the word "Verified", every check here
+ * passed on a credential carrying no proof at all, and a renderer built against
+ * this shape would have shown a holder's document as verified against
+ * cryptography that had never been read. Rule 8c already says a bare "verified"
+ * with no statement of what the answer rests on is the defect; it was written
+ * about the snapshot's AGE and applies with more force here.
+ *
+ * So `signatureVerified` is a parameter. A caller who has done the ECDSA work
+ * says so and the verdict reports it; a caller who has not gets a verdict that
+ * says, in the basis and in a finding, exactly which half of the question was
+ * answered. The default is false because that is the truth today.
+ */
 export function verifyAgainstRegistry(
   credential: VerifiableCredential,
   registry: TrustRegistry,
   asOf: string,
   counterStatements: CounterStatement[] = [],
+  signatureVerified = false,
 ): TrustVerdict {
   const findings: Finding[] = [];
   const at = (msg: string) => `${credential.id}: ${msg}`;
@@ -209,15 +252,47 @@ export function verifyAgainstRegistry(
   const age = days(registry.issuedOn, asOf);
   const overdue = Boolean(registry.nextExpectedUpdate && asOf > registry.nextExpectedUpdate);
 
+  const registrySigned = Boolean(String((registry as { proof?: { proofValue?: string } }).proof?.proofValue ?? '').trim());
+
+  // The verb is the whole point. "Verified" was doing work no code here has
+  // ever done, and a reader cannot be expected to know that.
+  const verb = signatureVerified ? 'Verified' : 'Checked';
+  const unsigned = signatureVerified
+    ? ''
+    : ' NO SIGNATURE WAS VERIFIED: this establishes who could have signed it and when, not that they did.';
+  const unsignedRegistry = registrySigned
+    ? ''
+    : ' The registry snapshot is itself unsigned, so these answers rest on a file whose integrity was not checked either.';
+
   const basis: TrustBasis = {
     registryAgeDays: age,
     registryIssuedOn: registry.issuedOn,
     registrySequence: registry.sequence,
     overdue,
-    statement: overdue
-      ? `Verified against trust registry #${registry.sequence}, issued ${registry.issuedOn} — ${age} day(s) old, and ${days(registry.nextExpectedUpdate!, asOf)} day(s) past the update it was expected to receive. A key compromised, an issuer removed, or a credential revoked since then does not appear here.`
-      : `Verified against trust registry #${registry.sequence}, issued ${registry.issuedOn} — ${age} day(s) old. Anything that changed since then does not appear here.`,
+    signatureVerified,
+    registrySigned,
+    statement: (overdue
+      ? `${verb} against trust registry #${registry.sequence}, issued ${registry.issuedOn} — ${age} day(s) old, and ${days(registry.nextExpectedUpdate!, asOf)} day(s) past the update it was expected to receive. A key compromised, an issuer removed, or a credential revoked since then does not appear here.`
+      : `${verb} against trust registry #${registry.sequence}, issued ${registry.issuedOn} — ${age} day(s) old. Anything that changed since then does not appear here.`) + unsigned + unsignedRegistry,
   };
+
+  if (!signatureVerified) {
+    findings.push(
+      warn(at('no signature was cryptographically verified. Everything below establishes who COULD have signed this and when — the issuer, the key, the dates, the revocation list — and none of it establishes that they did. Do not render this as verified.')),
+    );
+  }
+
+  if (!registrySigned) {
+    findings.push(
+      warn(at('the trust registry snapshot this was checked against is unsigned, so anything it says could have been edited on the way to the air gap — including the admission of the issuer relied on here. Signing it is a steward act and no steward has been appointed; this is the shipped state and is reported rather than hidden.')),
+    );
+  }
+
+  if (!String(credential.proof?.proofValue ?? '').trim()) {
+    findings.push(
+      err(at('carries no proof.proofValue, so there is no signature on it to verify at all. Every other field of the proof DESCRIBES a signature; only that one IS one.')),
+    );
+  }
 
   if (overdue) {
     findings.push(

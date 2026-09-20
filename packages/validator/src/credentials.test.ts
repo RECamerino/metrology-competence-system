@@ -184,7 +184,15 @@ const credential: Credential = {
   ],
   issuer: { did: REVIEWER_A, name: 'Northfield Calibration', trustRegistryEntry: 'northfield-cal-2026' },
   portable: true,
-  proof: { cryptosuite: 'ecdsa-jcs-2019' },
+  proof: {
+    type: 'DataIntegrityProof',
+    cryptosuite: 'ecdsa-jcs-2019',
+    proofPurpose: 'assertionMethod',
+    verificationMethod: 'did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK#key-1',
+    // Shape, not a real signature — nothing here can make one yet, and the
+    // contract has to be able to hold one before there is one to hold.
+    proofValue: `z${'2'.repeat(87)}`,
+  },
 };
 
 const authorization: Authorization = {

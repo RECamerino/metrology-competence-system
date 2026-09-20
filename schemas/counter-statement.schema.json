@@ -73,17 +73,8 @@
       "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/isoDate"
     },
     "proof": {
-      "type": "object",
-      "required": [
-        "cryptosuite"
-      ],
-      "additionalProperties": true,
-      "description": "Signed by the SUBJECT. An unsigned counter-statement is an assertion anybody could have written on the holder's behalf, including the party they are disputing with.",
-      "properties": {
-        "cryptosuite": {
-          "const": "ecdsa-jcs-2019"
-        }
-      }
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proof",
+      "description": "Signed by the SUBJECT. An unsigned counter-statement is an assertion anybody could have written on the holder's behalf, including the party they are disputing with."
     }
   }
 }

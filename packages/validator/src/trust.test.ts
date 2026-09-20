@@ -28,6 +28,38 @@ import {
 
 const ISSUER_DID = 'did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK';
 const HOLDER = 'did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH';
+/*
+ * A worked proof. Every field of it describes a signature; `proofValue` is one.
+ *
+ * The value is a deterministic stand-in of the right SHAPE — base58-btc
+ * multibase over 64 bytes — not a real signature, because nothing in this
+ * repository can make one yet. That is the point of the fixture: the contract
+ * has to be able to hold a signature before there is a signature to hold.
+ */
+const B58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+
+export function base58btc(bytes: Uint8Array): string {
+  let n = 0n;
+  for (const b of bytes) n = n * 256n + BigInt(b);
+  let out = '';
+  while (n > 0n) {
+    out = B58[Number(n % 58n)] + out;
+    n /= 58n;
+  }
+  let leading = 0;
+  while (leading < bytes.length && bytes[leading] === 0) leading += 1;
+  return '1'.repeat(leading) + out;
+}
+
+const SIGNATURE_BYTES = Uint8Array.from({ length: 64 }, (_, i) => (i * 7 + 3) % 251 || 1);
+
+export const PROOF = {
+  type: 'DataIntegrityProof',
+  cryptosuite: 'ecdsa-jcs-2019',
+  proofPurpose: 'assertionMethod',
+  proofValue: `z${base58btc(SIGNATURE_BYTES)}`,
+};
+
 const KEY = 'did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK#key-1';
 
 const registry: TrustRegistry = {
@@ -52,7 +84,7 @@ const credential: VerifiableCredential = {
   subject: HOLDER,
   attainedOn: '2028-05-01',
   issuer: { did: ISSUER_DID, name: 'Northfield Calibration', trustRegistryEntry: 'northfield-cal-2026' },
-  proof: { cryptosuite: 'ecdsa-jcs-2019', verificationMethod: KEY },
+  proof: { ...PROOF, verificationMethod: KEY },
 };
 
 const errorsOf = (findings: { level: string; message: string }[]): string[] =>
@@ -86,11 +118,120 @@ test('A CLEAN VERIFICATION STILL SAYS WHAT IT WAS DECIDED AGAINST', () => {
   // current one and puts the whole weight of the gap on a reader who has not
   // been told there is one.
   const verdict = verifyAgainstRegistry(credential, registry, '2028-06-15');
-  assert.deepEqual(verdict.findings, []);
+  assert.deepEqual(errorsOf(verdict.findings), []);
   assert.equal(verdict.basis.registryAgeDays, 14);
   assert.equal(verdict.basis.overdue, false);
   assert.match(verdict.basis.statement, /14 day\(s\) old/);
   assert.match(verdict.basis.statement, /does not appear here/);
+});
+
+/* -- What a verdict does NOT establish ------------------------------------- */
+
+/*
+ * The largest undeclared limit in the system until 2026-09-20. `basis.statement`
+ * opened with "Verified", every check passed on a credential carrying no proof
+ * at all, and nothing anywhere verifies a signature. A renderer built against
+ * this shape would have shown a holder's document as verified against
+ * cryptography nobody had read.
+ */
+
+test('A CLEAN CHECK IS NOT A VERIFIED SIGNATURE, AND SAYS SO', () => {
+  const verdict = verifyAgainstRegistry(credential, registry, '2028-06-15');
+  assert.equal(verdict.basis.signatureVerified, false);
+  assert.match(verdict.basis.statement, /^Checked against/);
+  assert.doesNotMatch(verdict.basis.statement, /^Verified/);
+  assert.match(verdict.basis.statement, /NO SIGNATURE WAS VERIFIED/);
+  assert.ok(
+    verdict.findings.some((f) => f.level === 'warn' && f.message.includes('who COULD have signed')),
+    `expected the limit to be stated, got: ${JSON.stringify(verdict.findings)}`,
+  );
+});
+
+test('a caller who DID verify the signature says so, and the verdict changes', () => {
+  // A fact about the caller, not about the credential. A module that guessed
+  // would be asserting the one thing it cannot check.
+  const verdict = verifyAgainstRegistry(credential, registry, '2028-06-15', [], true);
+  assert.equal(verdict.basis.signatureVerified, true);
+  assert.match(verdict.basis.statement, /^Verified against/);
+  assert.doesNotMatch(verdict.basis.statement, /NO SIGNATURE WAS VERIFIED/);
+  assert.deepEqual(
+    verdict.findings.filter((f) => f.message.includes('who COULD have signed')),
+    [],
+  );
+});
+
+test('a credential with no proofValue has no signature to verify at all', () => {
+  const { proofValue, ...described } = credential.proof as Record<string, unknown>;
+  const findings = verifyAgainstRegistry({ ...credential, proof: described }, registry, '2028-06-15').findings;
+  assert.ok(
+    errorsOf(findings).some((m) => m.includes('no proof.proofValue')),
+    `expected the missing signature to be an error, got: ${JSON.stringify(findings)}`,
+  );
+});
+
+test('an unsigned registry snapshot is reported, not assumed sound', () => {
+  // The shipped registry is unsigned because signing it is a steward act. The
+  // attack it leaves open is precise: edit the file on the way to the air gap,
+  // admit yourself, and everything you sign checks out.
+  const verdict = verifyAgainstRegistry(credential, registry, '2028-06-15');
+  assert.equal(verdict.basis.registrySigned, false);
+  assert.ok(verdict.findings.some((f) => f.message.includes('edited on the way to the air gap')));
+
+  const signed = { ...registry, proof: { ...PROOF, verificationMethod: 'did:key:zRegistry#key-1' } };
+  const ok = verifyAgainstRegistry(credential, signed, '2028-06-15');
+  assert.equal(ok.basis.registrySigned, true);
+  assert.deepEqual(ok.findings.filter((f) => f.message.includes('air gap')), []);
+});
+
+/* -- The proof object itself ----------------------------------------------- */
+
+test('A PROOF THAT NAMES A SUITE BUT CARRIES NO SIGNATURE IS REFUSED', () => {
+  // What every proof in this system was until 2026-09-20: `required` was
+  // ["cryptosuite"] and nothing else, so the object described a signature
+  // without being able to hold one.
+  const validate = validatorFor('credential');
+  assert.equal(validate({ ...credential, proof: { cryptosuite: 'ecdsa-jcs-2019' } }), false);
+});
+
+test('...and a credential with no proof at all is refused', () => {
+  // It was schema-valid, passed every check in credentials.ts without a
+  // finding, and came back from here with a populated basis.
+  const validate = validatorFor('credential');
+  const { proof, ...unsigned } = credential as Record<string, unknown>;
+  assert.equal(validate(unsigned), false);
+});
+
+test('the proofValue bound is computed from the encoding, and {87,88} would be WRONG', () => {
+  // 64 bytes is log58(2^512) = 87.4 base58 digits, so almost every signature is
+  // 87 or 88 characters — and not every one. The tight pattern is the one that
+  // looks right and rejects a valid signature now and then, undiagnosably.
+  const lengths = new Set<number>();
+  for (let seed = 0; seed < 4000; seed += 1) {
+    let x = BigInt(seed) * 6364136223846793005n + 1442695040888963407n;
+    const bytes = new Uint8Array(64);
+    for (let i = 0; i < 64; i += 1) {
+      x = (x * 6364136223846793005n + 1442695040888963407n) & 0xffffffffffffffffn;
+      bytes[i] = Number((x >> 33n) & 0xffn);
+    }
+    lengths.add(base58btc(bytes).length);
+  }
+
+  // The common case, and the reason a naive pattern passes every test written
+  // against random data.
+  assert.ok(lengths.has(88) && lengths.has(87));
+
+  // The bound in the schema is the full range the encoding can produce.
+  assert.equal(base58btc(new Uint8Array(64)).length, 64);
+  assert.equal(base58btc(Uint8Array.from({ length: 64 }, () => 255)).length, 88);
+
+  // And 86 is reachable, which is what makes {87,88} a bug rather than a tight
+  // bound. One leading zero byte — an r component that happens to start with
+  // one, which is a 1-in-256 event — over a small remainder gets there, and
+  // measured over 100,000 uniformly random 64-byte values it turns up about
+  // once in 25,000. Rare enough never to appear in testing, frequent enough to
+  // happen to somebody, and undiagnosable by the holder it happens to.
+  const oneLeadingZero = Uint8Array.from({ length: 64 }, (_, i) => (i === 1 ? 1 : 0));
+  assert.equal(base58btc(oneLeadingZero).length, 86);
 });
 
 test('the pathological case: a stale snapshot verifies, and says how stale', () => {
@@ -179,7 +320,7 @@ test('a key never registered is not the same as one since removed', () => {
 });
 
 test('a credential naming no verification method cannot be key-checked', () => {
-  const findings = verifyAgainstRegistry({ ...credential, proof: { cryptosuite: 'x' } }, registry, '2028-06-15').findings;
+  const findings = verifyAgainstRegistry({ ...credential, proof: { ...PROOF, cryptosuite: 'x' } }, registry, '2028-06-15').findings;
   assert.ok(findings.some((f) => f.level === 'warn' && f.message.includes('which of the issuer')));
 });
 
@@ -362,7 +503,7 @@ const answer = (overrides: Partial<CounterStatement> = {}): CounterStatement => 
   statement:
     'The work the finding rests on was performed by a colleague using my login while I was on leave, and the laboratory holds the roster and the access log that show it.',
   signedOn: '2028-06-01',
-  proof: { cryptosuite: 'ecdsa-jcs-2019' },
+  proof: { ...PROOF, verificationMethod: HOLDER },
   ...overrides,
 });
 

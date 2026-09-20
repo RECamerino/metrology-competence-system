@@ -64,7 +64,7 @@
             "description": "Every key this issuer has ever used, in order. APPEND-ONLY: a key is never removed, because removing it breaks every credential signed with it, including ones signed long before anything went wrong.",
             "items": {
               "type": "object",
-              "required": ["id", "validFrom", "status"],
+              "required": ["id", "validFrom", "status", "publicKeyMultibase"],
               "additionalProperties": false,
               "properties": {
                 "id": {
@@ -120,16 +120,8 @@
     },
 
     "proof": {
-      "type": "object",
-      "required": ["cryptosuite"],
-      "additionalProperties": true,
-      "description": "The registry is itself signed, or it is a text file anybody can edit on the way to the air gap.",
-      "properties": {
-        "cryptosuite": {
-          "const": "ecdsa-jcs-2019",
-          "description": "The same suite the credentials use, and for the same reasons — see `credential.schema.json`, which carries the argument. It must not diverge: a verifier that can check a credential and not the registry it resolves against has verified nothing."
-        }
-      }
+      "$ref": "https://metrology-bok.org/schemas/common.schema.json#/$defs/proof",
+      "description": "The registry is itself signed, or it is a text file anybody can edit on the way to the air gap \u2014 and the attack is precise: add an issuer, and every credential that issuer signs verifies against it.\n\nIt uses the SAME proof definition as the credentials that resolve against it, and must: a verifier that can check a credential and not the registry it resolves against has verified nothing.\n\nIT IS THE ONE PROOF IN THIS SYSTEM THAT IS OPTIONAL, and that is a statement about the world rather than a weakening. The registry shipped in this repository is unsigned, because signing it is a steward act and no steward has been appointed. Requiring the field would make the project's own shipped artifact invalid, which would be resolved by somebody fabricating a proof \u2014 the worst available outcome. So the gap is made MEASURABLE instead, exactly as the snapshot's age is: `verifyAgainstRegistry` reports an unsigned registry in every verdict that rests on one, and says what it leaves open. An unsigned registry is a real state; a silent one is not."
     }
   }
 }
