@@ -125,6 +125,44 @@ test('A CLEAN VERIFICATION STILL SAYS WHAT IT WAS DECIDED AGAINST', () => {
   assert.match(verdict.basis.statement, /does not appear here/);
 });
 
+/* -- A snapshot cut after the question cannot answer it --------------------- */
+
+/*
+ * External review finding R-04. `asOf` is the date the verification is being
+ * made. A registry issued after it is not stale and not fresh: it carries
+ * decisions taken after the moment being reconstructed.
+ */
+
+test('A REGISTRY ISSUED AFTER THE QUESTION IS REFUSED, NOT REPORTED AS -517 DAYS OLD', () => {
+  const verdict = verifyAgainstRegistry(credential, registry, '2027-01-01');
+  assert.equal(verdict.basis.fromTheFuture, true);
+  assert.ok(errorsOf(verdict.findings).some((m) => m.includes('cannot answer it')));
+});
+
+test('...and the statement does not narrate a negative age as an age', () => {
+  const verdict = verifyAgainstRegistry(credential, registry, '2027-01-01');
+  assert.doesNotMatch(verdict.basis.statement, /-\d+ day\(s\) old/);
+  assert.doesNotMatch(verdict.basis.statement, /Anything that changed since then/);
+  assert.match(verdict.basis.statement, /AFTER 2027-01-01, the date this question was asked/);
+});
+
+test('OVERDUE INVERTS TOO, AND THAT IS THE DANGEROUS HALF', () => {
+  // `overdue` is a boolean a renderer trusts. Read from a date the snapshot
+  // predates, a registry long past its own replacement date reports false —
+  // so the silent failure is the reassuring one.
+  const stale: TrustRegistry = { ...registry, issuedOn: '2028-06-01', nextExpectedUpdate: '2028-07-01' };
+  const asked = verifyAgainstRegistry(credential, stale, '2027-01-01');
+  assert.equal(asked.basis.overdue, false, 'the inverted reading');
+  assert.equal(asked.basis.fromTheFuture, true, 'and this is what says not to believe it');
+});
+
+test('a snapshot cut on the very day of the question is not from the future', () => {
+  const verdict = verifyAgainstRegistry(credential, registry, '2028-06-01');
+  assert.equal(verdict.basis.fromTheFuture, false);
+  assert.equal(verdict.basis.registryAgeDays, 0);
+  assert.deepEqual(errorsOf(verdict.findings), []);
+});
+
 /* -- What a verdict does NOT establish ------------------------------------- */
 
 /*

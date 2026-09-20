@@ -47,7 +47,12 @@ import {
 } from './credentials.ts';
 import { type ArticleLike, type ElementLike, checkDefinitionDrift } from './definitions.ts';
 import { type Ledger, checkChallengeProvenance, verifyCredentialAttempt } from './ledger.ts';
-import { type CounterStatement, type TrustRegistry, verifyAgainstRegistry } from './trust.ts';
+import {
+  type CounterStatement,
+  type TrustBasis,
+  type TrustRegistry,
+  verifyAgainstRegistry,
+} from './trust.ts';
 
 export type VerificationLayer =
   | 'credential-rules'
@@ -92,6 +97,24 @@ export interface CredentialVerdict {
   layers: Record<VerificationLayer, LayerState>;
   /** What was established and what was not, in one sentence a renderer can show. */
   statement: string;
+
+  /*
+   * WHAT THE ISSUER ANSWER WAS DECIDED AGAINST, present whenever the trust layer
+   * ran. External review finding R-04, second half.
+   *
+   * Rule 8c: every verdict carries `registryAgeDays` and what that age leaves
+   * unknowable, and a bare verdict with no such statement IS the defect. This
+   * type carried `findings`, `layers` and `statement` and dropped `TrustBasis`
+   * on the floor — so the entry point built to be authoritative reintroduced
+   * the exact defect the rule was written about. The age appeared in neither
+   * the statement nor any finding; `signatureVerified` and `registrySigned`
+   * survived only because `verifyAgainstRegistry` also pushes them as warnings,
+   * and the age had no such luck.
+   *
+   * Composing checks means carrying what they established, not just whether
+   * they complained.
+   */
+  basis?: TrustBasis;
 }
 
 const LAYER_LABEL: Record<VerificationLayer, string> = {
@@ -121,6 +144,18 @@ export function verifyCredential(
     reciprocity: 'not-supplied',
   };
   const at = (msg: string): string => `${credential.id}: ${msg}`;
+
+  let basis: TrustBasis | undefined;
+
+  /*
+   * Why a layer went unchecked, where the generic sentence would be false.
+   *
+   * The loop below tells a caller they "supplied nothing to check it against",
+   * which is true of every layer but one: a caller can supply a registry and
+   * still be missing the date it has to be read at. Telling them they supplied
+   * nothing would send them to find the thing they already have.
+   */
+  const reasons: Partial<Record<VerificationLayer, string>> = {};
 
   // -- The credential's own rules -------------------------------------------
   findings.push(
@@ -179,18 +214,40 @@ export function verifyCredential(
     }
   }
 
-  // -- The issuer, and what the snapshot leaves unknowable -------------------
-  if (inputs.registry) {
+  /* -- The issuer, and what the snapshot leaves unknowable -------------------
+   *
+   * THE DATE IS AN INPUT, NOT SOMETHING TO SUBSTITUTE FOR. External review
+   * finding R-04. This used to pass `inputs.asOf ?? credential.attainedOn ?? ''`
+   * — and `attainedOn` is not the date of the question, it is the date of the
+   * answer being questioned. Every current registry snapshot postdates every
+   * credential already in a wallet, so the substitution made the ORDINARY call
+   * report a negative registry age and, worse, `overdue: false` on a snapshot
+   * years past its own replacement date.
+   *
+   * A caller who does not say when they are asking has not asked. That is the
+   * sentence the lifecycle layer above already lives by, and the issuer layer
+   * is the one where it matters most, because staleness is the whole reason
+   * this module exists.
+   *
+   * Refusing the layer rather than guessing costs a caller nothing: they always
+   * know today's date, and `asOf` is a parameter only so the answer is
+   * reproducible. What it buys is that the age in the verdict is an age.
+   */
+  if (inputs.registry && inputs.asOf) {
     layers['issuer-trust'] = 'checked';
     const verdict = verifyAgainstRegistry(
       credential as never,
       inputs.registry,
-      inputs.asOf ?? credential.attainedOn ?? '',
+      inputs.asOf,
       inputs.counterStatements ?? [],
       inputs.signatureVerified ?? false,
     );
     findings.push(...verdict.findings);
+    basis = verdict.basis;
     layers.signature = verdict.basis.signatureVerified ? 'checked' : 'not-supplied';
+  } else if (inputs.registry) {
+    reasons['issuer-trust'] =
+      'the caller supplied a registry snapshot but not `asOf`, the date the question is being asked. Without it the snapshot’s age cannot be computed, and an age is not a detail of this answer — it is what separates “this issuer is admitted” from “this issuer was admitted as far as a file of unknown vintage knows”.';
   }
 
   // -- Has the element moved since this was issued? -------------------------
@@ -242,9 +299,10 @@ export function verifyCredential(
   );
 
   for (const layer of missing) {
+    const why = reasons[layer] ?? 'the caller supplied nothing to check it against';
     findings.push({
       level: 'warn',
-      message: at(`${LAYER_LABEL[layer]} was NOT checked — the caller supplied nothing to check it against. This verdict establishes what is listed as checked and no more.`),
+      message: at(`${LAYER_LABEL[layer]} was NOT checked — ${why}. This verdict establishes what is listed as checked and no more.`),
     });
   }
 
@@ -260,5 +318,16 @@ export function verifyCredential(
           errors > 0 ? `, ${errors} error(s) stand` : ' with nothing failing'
         }. NOT CHECKED: ${missing.map((layer) => LAYER_LABEL[layer]).join('; ')}. A credential is not verified by the checks nobody ran.`;
 
-  return { findings, layers, statement };
+  /*
+   * The age is appended VERBATIM rather than re-worded. `basis.statement` is
+   * the sentence rule 8c requires, and a second phrasing of one fact here is
+   * two copies that drift — the argument that derived experience hours from the
+   * activities rather than carrying a total beside them.
+   */
+  return {
+    findings,
+    layers,
+    statement: basis ? `${statement} ${basis.statement}` : statement,
+    ...(basis ? { basis } : {}),
+  };
 }
