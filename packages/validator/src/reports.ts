@@ -109,7 +109,13 @@ export function coverageReport(corpus: Corpus): string {
   // with a ceiling of 4 but items only to L2 cannot be credentialed at L4 — and
   // a candidate must not be the one who discovers that.
 
+  // Two facts, and they were printed as one. `bound` is assessable UNITS with at
+  // least one item; `bindingCount` is bindings. One unit may carry more than one
+  // — CM-03-040 at L4 is bound to two archetypes, legitimately — so the numbers
+  // differ, and printing the unit count under a column headed "Bindings" is how
+  // CLAUDE.md came to say 45 bindings against 46.
   const bound = new Set<string>();
+  let bindingCount = 0;
   const archetypeUse = new Map<string, number>();
   const levelsByElement = new Map<string, Set<number>>();
 
@@ -118,6 +124,7 @@ export function coverageReport(corpus: Corpus): string {
     if (!d.element) continue;
     for (const binding of (d.bindings ?? []) as Array<Record<string, any>>) {
       bound.add(`${d.element}@${binding?.level}`);
+      bindingCount += 1;
       const archetype = binding?.archetype;
       if (archetype) archetypeUse.set(archetype, (archetypeUse.get(archetype) ?? 0) + 1);
 
@@ -133,7 +140,7 @@ export function coverageReport(corpus: Corpus): string {
   lines.push('ITEM BANK COVERAGE');
   lines.push('-'.repeat(78));
   lines.push(
-    `  Archetypes ${padLeft(corpus.archetypes.length, 6)}   Bindings ${padLeft(bound.size, 6)}   Units ${padLeft(assessableUnits, 6)}   Covered ${padLeft(((bound.size / (assessableUnits || 1)) * 100).toFixed(1), 5)}%`,
+    `  Archetypes ${padLeft(corpus.archetypes.length, 6)}   Bindings ${padLeft(bindingCount, 6)}   Units bound ${padLeft(bound.size, 6)}   of ${padLeft(assessableUnits, 6)}   Covered ${padLeft(((bound.size / (assessableUnits || 1)) * 100).toFixed(1), 5)}%`,
   );
 
   if (archetypeUse.size > 0) {
