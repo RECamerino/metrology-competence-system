@@ -1448,6 +1448,28 @@ test('a recertification date that arrives with the credential is not one', () =>
   assert.ok(errors.some((m) => m.includes('on or before the day it was attained')));
 });
 
+test('A REVOCATION IS A FACT ABOUT THE DOCUMENT, NOT ABOUT WHEN IT IS READ', () => {
+  // Second-pass finding R-03. This function already read `status.revoked` for
+  // its date contradictions and refused none of them for the revocation itself,
+  // which sat behind verifyCredential's `asOf` gate beside the expiry. Nothing
+  // about a calendar makes a revocation truer or falser.
+  const errors = errorsOf(
+    checkCredential(
+      { ...credential, status: { revoked: true, revokedOn: '2029-01-01', reason: 'fraud' } } as typeof credential,
+      undefined,
+      undefined,
+      undefined,
+      BACKING,
+    ),
+  ).map((f) => f.message);
+  assert.ok(errors.some((m) => m.includes('is revoked as of 2029-01-01 (fraud), on its own face')));
+});
+
+test('an unrevoked credential says nothing about revocation', () => {
+  const errors = errorsOf(checkCredential(credential, undefined, undefined, undefined, BACKING)).map((f) => f.message);
+  assert.deepEqual(errors.filter((m) => m.includes('on its own face')), []);
+});
+
 test('A REVOCATION WITH NO DATE IS REFUSED, for the reason a compromised key needs one', () => {
   // Without a date nothing can tell a revocation that preceded a signoff
   // resting on this credential from one that followed the work it is read

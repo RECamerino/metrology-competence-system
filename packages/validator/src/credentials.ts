@@ -753,12 +753,26 @@ export function checkCredential(
    * was applied to a signer's BACKING credential and never to the credential
    * under examination.
    *
-   * WHAT BELONGS HERE AND WHAT DOES NOT. These are the internal contradictions,
-   * true of the document whenever anybody reads it. Whether the credential is
-   * still CURRENT is a question asked at a time, it needs the reader's date, and
-   * it is answered by `verifyCredential` — which reports it rather than ruling
-   * on it, because the schema settles that: an expired credential is not a false
-   * one, and verifiers decide what weight to give currency.
+   * WHAT BELONGS HERE AND WHAT DOES NOT. These are the facts that are true of
+   * the document whenever anybody reads it. Whether the credential is still
+   * CURRENT is a question asked at a time, it needs the reader's date, and it is
+   * answered by `verifyCredential` — which reports it rather than ruling on it,
+   * because the schema settles that: an expired credential is not a false one,
+   * and verifiers decide what weight to give currency.
+   *
+   * A REVOCATION IS ON THIS SIDE OF THAT LINE, and A-12 left it on the other.
+   * Second-pass review finding R-03. The revocation itself sat behind the
+   * `asOf` gate with the expiry, so a credential carrying
+   * `status: { revoked: true, reason: 'fraud' }` read with no date produced the
+   * headline `Checked 1 of 8 layers with nothing failing`.
+   *
+   * The invariant and the implementation disagreed, and the invariant is right:
+   * the comment beside that gate says in terms that revocation "is not a
+   * currency question", and this function already READ `status.revoked` for its
+   * date contradictions. A revocation on the credential's own face is a fact
+   * about the document, not about when it is being read — nothing about a
+   * calendar makes it truer or falser — so it is refused here, and expiry stays
+   * where the reader's date is.
    */
   const lifecycle = credential.status as
     | { revoked?: boolean; revokedOn?: string; reason?: string }
@@ -771,6 +785,10 @@ export function checkCredential(
   }
 
   if (lifecycle?.revoked) {
+    findings.push(
+      err(at(`is revoked${lifecycle.revokedOn ? ` as of ${lifecycle.revokedOn}` : ''}${lifecycle.reason ? ` (${lifecycle.reason})` : ''}, on its own face. Revocation is for fraud and demonstrable assessment failure: it says the attestation should not stand, and a document asserting its own revocation is evidence enough to refuse it with no registry and no reading date.`)),
+    );
+
     if (!lifecycle.revokedOn) {
       findings.push(
         err(at('is revoked and records no date. Without one, nothing can tell a revocation that preceded a signoff resting on this credential from one that followed the work it is read against — which is the reason a compromised key in the trust registry has required a date all along.')),
