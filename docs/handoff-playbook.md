@@ -329,6 +329,49 @@ The commonest error is writing knowledge anchors for a skill element. "Understan
 
 If you cannot write an anchor of the declared kind, the kind is wrong — fix `tools/kind-plan.json` rather than bending the anchor.
 
+## An EC spine element is tested by its ANCHORS, not by its title
+
+Every `EC` area is a spine — receiving inspection, configuration, standards and
+fixturing, then adjustment, uncertainty, conformity — wrapped around the
+parameters that make the equipment type distinct. Rule 14 says the spine repeats
+because it genuinely does, and that is true of the *work*. It is not
+automatically true of what you write down.
+
+**The test is the project's own and it applies to the anchors: an `EC` element
+that could be written without naming the equipment belongs in `CM-06` instead.**
+Apply it by substitution. Take each anchor, swap the equipment for a torque
+wrench, a pressure gauge and a DMM, and read it again. If it still reads
+correctly at every level, you have written the `CM` element a second time.
+
+`EC-04-013` is the worked example, and it is worked because it failed this test
+first. Its title named a balance, its citations and closing notes were full of
+weighing-specific material, and **all four anchors said "instrument"** — so the
+only part a candidate is ever assessed against was the general judgement that
+`CM-06-027` already owns. The specific material existed; it was in the notes,
+which nobody is assessed on.
+
+There are **204** elements on this one spine step, one per equipment type. The
+cost of getting the pattern wrong is multiplied by that number, and an element
+can only ever be deprecated.
+
+Two things fix it, and you need both:
+
+- **Name the general element as a prerequisite.** The judgement is established
+  once, in `CM`, and the gap analysis then sends a supervisor to the right
+  element. `EC-04-013` requires `CM-06-027`.
+- **Put the equipment-specific material in the anchors.** Usually it is already
+  somewhere in the file. For `EC-04-013` it was two things the cited clauses and
+  the BOK article had recorded and the anchors had not: that an adjustment enters
+  the load–indication relation as a multiplier, so it moves the whole range
+  rather than the load it was performed at; and that the client's setting of the
+  zero-setting and zero-tracking devices governs the calibration as a whole while
+  the eccentricity test departs from it for two of its variants. Neither
+  sentence can be said about a torque wrench.
+
+If you cannot find any equipment-specific content for a spine step, that is a
+finding worth raising rather than an anchor worth padding — it may mean the step
+genuinely belongs to `CM` for that equipment class.
+
 ## Competence is not authorization
 
 Nothing in this corpus grants anyone permission to do anything.
