@@ -430,11 +430,57 @@ test('with no holders, an ordinary L5 signoff is impossible — this is the dead
 });
 
 test('a founding-cohort signer breaks the deadlock', () => {
+  // The roster is supplied, so the claim resolves. Without it the claim is
+  // unresolved and satisfies nothing — the test below this pair.
   const findings = checkCredential(
     { ...credential, signers: [FOUNDER, { ...credential.signers[1]!, heldLevel: null }] },
     L5_POLICY,
+    rosterFor(FOUNDER.did),
   );
   assert.equal(findings.filter((f) => f.level === 'error').length, 0);
+});
+
+test('AN UNRESOLVED BOOTSTRAP CLAIM BREAKS NOTHING', () => {
+  // Finding F-01. This returned `bootstrap` from a field the credential writes
+  // about itself, so an L5 credential whose signers merely ASSERTED founding
+  // authority produced zero errors: both rungs satisfied by a string.
+  const errors = errorsOf(
+    checkCredential(
+      { ...credential, signers: [FOUNDER, { ...credential.signers[1]!, heldLevel: null }] },
+      L5_POLICY,
+    ),
+  ).map((f) => f.message);
+
+  assert.ok(
+    errors.some((m) => m.includes('no signer is PROVEN to hold level 5')),
+    `expected the rung to fail with no roster, got: ${JSON.stringify(errors)}`,
+  );
+  assert.ok(errors.some((m) => m.includes('the founding roster a bootstrap claim resolves against')));
+});
+
+test('a roster that does not carry the signer CONTRADICTS rather than merely failing', () => {
+  // Two different answers with two different remedies: one is fixed by
+  // supplying a file, the other says this person is not on the file supplied.
+  const errors = errorsOf(
+    checkCredential(
+      { ...credential, signers: [FOUNDER, { ...credential.signers[1]!, heldLevel: null }] },
+      L5_POLICY,
+      rosterFor('did:key:z6MktvqCyLxTsXUH1tzVJmSkAzkAZ8yCveUcfhZAfKQBfKZP'),
+    ),
+  ).map((f) => f.message);
+  assert.ok(errors.some((m) => m.includes('does not carry this signer')));
+});
+
+test('a signature dated after the cohort closed holds no standing', () => {
+  const closed = { ...rosterFor(FOUNDER.did), closesOn: '2026-01-02' };
+  const errors = errorsOf(
+    checkCredential(
+      { ...credential, signers: [FOUNDER, { ...credential.signers[1]!, heldLevel: null }] },
+      L5_POLICY,
+      closed,
+    ),
+  ).map((f) => f.message);
+  assert.ok(errors.some((m) => m.includes('no signer is PROVEN to hold level 5')));
 });
 
 test('but a bootstrap-signed credential is never silent about it', () => {
@@ -443,6 +489,7 @@ test('but a bootstrap-signed credential is never silent about it', () => {
   const findings = checkCredential(
     { ...credential, signers: [FOUNDER, { ...credential.signers[1]!, heldLevel: null }] },
     L5_POLICY,
+    rosterFor(FOUNDER.did),
   );
   assert.ok(
     findings.some((f) => f.level === 'warn' && f.message.includes('founding-cohort authority')),
@@ -553,6 +600,26 @@ test('the custody check runs from inside checkCredential', () => {
 /* -- The cohort as a roster, not an adjective ------------------------------ */
 
 const FOUNDER_BASIS = FOUNDER.bootstrapAuthority.basis;
+
+/**
+ * A convened roster carrying whichever signers a test needs, with a window wide
+ * enough for the fixture credentials. A bootstrap claim now RESOLVES against
+ * one of these, so a test asserting the escape hatch works has to supply it.
+ */
+const rosterFor = (...dids: string[]) => ({
+  schemaVersion: 1 as const,
+  issuedOn: '2026-01-01',
+  sequence: 1,
+  convenedOn: '2026-01-01',
+  closesOn: '2029-01-01',
+  members: dids.map((did) => ({
+    did,
+    name: 'A. Founder',
+    admittedOn: '2026-01-01',
+    basis: FOUNDER_BASIS,
+    scope: ['CM-03'],
+  })),
+});
 
 const COHORT = {
   schemaVersion: 1 as const,
@@ -995,6 +1062,7 @@ test('a founding-cohort signer still satisfies both, because the ladder cannot o
       })),
     } as unknown as Parameters<typeof checkCredential>[0],
     L5_POLICY,
+    rosterFor(SIGNER_A, SIGNER_B),
   );
   assert.deepEqual(
     errorsOf(findings).filter((f) => f.message.includes('PROVEN')),
@@ -1786,7 +1854,15 @@ test('a founding-cohort basis also counts as evidenced standing', () => {
   // and it is stated per signer so a reader can weigh it. Nothing to resolve,
   // so this one needs no backing and no registry.
   const bootstrapped: Credential = { ...selfStudy, signers: [FOUNDER], issuer: { did: REVIEWER_A } };
-  assert.equal(highestSupportedTier(bootstrapped), 'peer-reviewed');
+  assert.equal(highestSupportedTier(bootstrapped, undefined, [], rosterFor(FOUNDER.did)), 'peer-reviewed');
+});
+
+test('AN UNRESOLVED BOOTSTRAP CLAIM DOES NOT LIFT THE TIER EITHER', () => {
+  // F-01 reached this function too. `peer-reviewed` rests on standing that is
+  // proven or bootstrap, so a claim nobody resolved lifted it for exactly the
+  // reason an unresolved authority chain must not.
+  const bootstrapped: Credential = { ...selfStudy, signers: [FOUNDER], issuer: { did: REVIEWER_A } };
+  assert.equal(highestSupportedTier(bootstrapped), 'self-study');
 });
 
 test('a registered issuer is what separates organization from peer-reviewed', () => {

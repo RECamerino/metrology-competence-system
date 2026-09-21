@@ -119,6 +119,47 @@ test('a layer the caller supplies stops being reported as unchecked', () => {
   );
 });
 
+/* -- The roster a bootstrap signer resolves against ------------------------ */
+
+/*
+ * Finding F-03, reportable only once F-01 made the roster matter. A missing
+ * roster was folded inside `credential-rules`, which then read `checked`.
+ */
+
+const bootstrapSigner = {
+  ...(credential as Record<string, unknown>),
+  signers: [{ did: SIGNER, bootstrapAuthority: { basis: 'Long-standing national metrology institute appointment' } }],
+} as typeof credential;
+
+test('MOST CREDENTIALS CARRY NO BOOTSTRAP CLAIM, AND THE LAYER SAYS SO', () => {
+  // A permanent `not-supplied` on the ordinary case would teach a reader to
+  // ignore the layer, which is the opposite of what it is for.
+  const verdict = verifyCredential(credential);
+  assert.equal(verdict.layers['founding-cohort'], 'not-applicable');
+});
+
+test('a bootstrap claim with no roster is NOT-SUPPLIED, not folded into credential-rules', () => {
+  const verdict = verifyCredential(bootstrapSigner);
+  assert.equal(verdict.layers['founding-cohort'], 'not-supplied');
+  assert.ok(
+    verdict.findings.some((f) => f.message.includes('resolves against nothing')),
+    `expected the roster to be named as missing, got: ${JSON.stringify(verdict.findings.map((f) => f.message))}`,
+  );
+});
+
+test('a roster in hand makes the layer checked', () => {
+  const verdict = verifyCredential(bootstrapSigner, {
+    cohort: {
+      schemaVersion: 1,
+      issuedOn: '2026-01-01',
+      sequence: 1,
+      closesOn: '2029-01-01',
+      members: [{ did: SIGNER, name: 'A. Founder', admittedOn: '2026-01-01', basis: 'x', scope: ['CM-03'] }],
+    } as never,
+  });
+  assert.equal(verdict.layers['founding-cohort'], 'checked');
+});
+
 /* -- The date the question is asked, and the age of the answer ------------- */
 
 /*

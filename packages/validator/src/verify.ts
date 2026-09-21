@@ -57,6 +57,7 @@ import {
 export type VerificationLayer =
   | 'credential-rules'
   | 'lifecycle'
+  | 'founding-cohort'
   | 'issuer-trust'
   | 'signature'
   | 'definition-drift'
@@ -120,6 +121,7 @@ export interface CredentialVerdict {
 const LAYER_LABEL: Record<VerificationLayer, string> = {
   'credential-rules': 'the credential’s own rules',
   lifecycle: 'whether its currency has lapsed',
+  'founding-cohort': 'a bootstrap signer against the founding roster',
   'issuer-trust': 'the issuer against a trust registry',
   signature: 'the signature',
   'definition-drift': 'whether the element has moved since issue',
@@ -136,6 +138,7 @@ export function verifyCredential(
   const layers: Record<VerificationLayer, LayerState> = {
     'credential-rules': 'checked',
     lifecycle: 'not-supplied',
+    'founding-cohort': 'not-supplied',
     'issuer-trust': 'not-supplied',
     signature: 'not-supplied',
     'definition-drift': 'not-supplied',
@@ -168,6 +171,30 @@ export function verifyCredential(
       inputs.registry,
     ),
   );
+
+  /* -- The roster a bootstrap signer resolves against ------------------------
+   *
+   * Second-pass review finding F-03, which only becomes reportable once F-01
+   * has made the roster matter. The layer model had states for the registry,
+   * the signature, drift, the ledger, the wallet and reciprocity, and none for
+   * the one input gating the highest-privilege signature in the system: a
+   * missing roster was folded inside `credential-rules`, which then read
+   * `checked`. That is how the verdict for an L5 credential resting on an
+   * unresolved bootstrap claim could open "with nothing failing".
+   *
+   * `not-applicable` is the ordinary case and says so, because most credentials
+   * carry no bootstrap claim and a permanent `not-supplied` on those would
+   * teach a reader to ignore the layer.
+   */
+  const bootstrapClaimed = (credential.signers ?? []).some((signer) => signer.bootstrapAuthority);
+  if (!bootstrapClaimed) {
+    layers['founding-cohort'] = 'not-applicable';
+  } else if (inputs.cohort) {
+    layers['founding-cohort'] = 'checked';
+  } else {
+    reasons['founding-cohort'] =
+      'a signer claims founding-cohort authority and no roster was supplied, so the claim resolves against nothing. It satisfies no rung in that state';
+  }
 
   /* -- Is it still current? --------------------------------------------------
    *
