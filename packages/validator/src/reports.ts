@@ -269,6 +269,35 @@ export function coverageReport(corpus: Corpus): string {
     lines.push('    One ref claims every attainable level, so the others\' supports are decorative.');
     lines.push('    Often honest. Nothing computable tells the honest one from the careless one.');
     if (unfalsifiable.length > 0) lines.push(`    ${listOf(unfalsifiable, 8)}`);
+
+    /*
+     * DECLARED GAPS, WHICH NOTHING SURFACED. `knowledgeGaps` is where an author
+     * records the rungs no section reaches, and an open one holds its element
+     * below L3 under rule 7 — so it has teeth. What it did not have is a
+     * reader: this report is documented as the place that names the next
+     * content work rather than making somebody infer it, and it listed item
+     * gaps and never knowledge gaps. A declaration nothing reads is the shape
+     * of the defect this project has now corrected three times.
+     *
+     * `awaiting` is printed rather than `missing`, because what a reader of
+     * this report needs is what would CLOSE the hole, and it is capped at 200
+     * characters so it fits on a line.
+     */
+    const declared: string[] = [];
+    for (const [id, file] of authored) {
+      for (const gap of ((file.data as Record<string, any>).knowledgeGaps ?? []) as Array<Record<string, any>>) {
+        const levels = ((gap?.levels ?? []) as number[]).map((l) => `L${l}`).join(', ');
+        declared.push(`${id} ${levels} — ${String(gap?.awaiting ?? '').trim()}`);
+      }
+    }
+
+    if (declared.length > 0) {
+      lines.push('');
+      lines.push(`  Rungs the BOK does not reach, declared by their authors: ${declared.length}`);
+      lines.push('    Each holds its element in `draft`, so it cannot be attested above L2.');
+      for (const entry of declared) lines.push(`    ${entry}`);
+    }
+
     lines.push('');
   }
 
