@@ -85,6 +85,42 @@
 # pins the policy in force when it was issued (assessmentPolicyRef, decision
 # 46), so revising them later does not silently rewrite what anybody earned.
 #
+# THE RECERTIFICATION INTERVALS ARE PROVISIONAL TOO, AND THEY NOW BITE —
+# declared 2026-09-21.
+#
+# `defaultRecertificationMonths` below is 60 at L3, 48 at L4 and 36 at L5. Those
+# three integers carried one line of description between them, in a file where
+# every neighbouring field carries paragraphs, and until now they were read by
+# NO CODE AT ALL: nothing derived a credential's `expiresOn` from them and
+# nothing compared one against them, so an expiry was whatever an issuer typed.
+# That is now enforced — an expiry later than the interval allows is an error,
+# an earlier one is permitted and silent, and a level declaring no interval
+# expects no expiry, which is how L1 and L2 work.
+#
+# Enforcing them does not validate them. Two things a reader should see:
+#
+#   1. The ladder asserts that competence decays FASTER the more expert the
+#      holder — 36 months at L5 against 60 at L3. There are arguments for that
+#      (expert practice rests on current technique and on contested positions
+#      that move), and none of them is written down here. It is recorded so the
+#      inversion reads as noticed rather than as a slip.
+#
+#   2. Currency is keyed to the LEVEL and to nothing about the subject, while
+#      `currency.volatility` on every element already records how fast the
+#      subject matter itself moves — static, stable, controlled, volatile. An
+#      element's `recertificationMonths` can override the level default, and one
+#      authored element of twenty-six uses it. NCSLI RP-17 (2007) 4.3.2 leaves
+#      refresher cadence to laboratory management's discretion, so a fixed
+#      interval is not a divergence from practice; but the triggers it names are
+#      EVENTS — new policies, new standards or regulations, new technology —
+#      which is what `volatility` models and what currency is connected to
+#      nowhere. Wiring the two together would be new policy rather than
+#      enforcement of existing policy, so it is left open deliberately.
+#
+# Blocked on the same review as the experience-hour thresholds, with the same
+# protection: every credential pins the policy in force when it was issued, so
+# revising these later does not rewrite what anybody earned.
+#
 # EDUCATION AND PRIOR CERTIFICATION ARE DELIBERATELY NOT INPUTS — declared
 # 2026-09-03, because an undeclared exclusion reads as an oversight.
 #
