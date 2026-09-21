@@ -1340,9 +1340,14 @@ export interface CohortMember {
 
 export interface BootstrapCohort {
   schemaVersion: 1;
+  /** When this roster was cut, and which cut it is — as the trust registry carries. */
+  issuedOn: string;
+  sequence: number;
   convenedOn?: string;
   closesOn?: string;
   members: CohortMember[];
+  /** Present when a steward has signed the roster. Nobody has. */
+  proof?: { cryptosuite?: string; proofValue?: string; [key: string]: unknown };
 }
 
 export interface BootstrapContext {
@@ -1418,10 +1423,30 @@ export function checkBootstrapAuthority(
     ];
   }
 
+  /*
+   * AN UNSIGNED ROSTER IS REPORTED, exactly as an unsigned registry is.
+   *
+   * Second-pass review finding R-02 — trust half. The registry schema names
+   * its own attack in terms: sign it, or it is a text file anybody can edit on
+   * the way to the air gap. The roster's version of that attack is one tier up
+   * — add a member, and every credential they bootstrap-sign at L3, L4 and L5
+   * validates — and the roster had no `proof` property at all, with
+   * `additionalProperties: false` above it and a schema freeze coming.
+   *
+   * It is checked before `closesOn`, because a roster whose integrity is
+   * unestablished is worth saying something about whether or not a cohort has
+   * been convened in it.
+   */
+  if (!String(cohort.proof?.proofValue ?? '').trim()) {
+    findings.push(
+      warn(at(`rests on founding-cohort authority, and the roster it resolves against (#${cohort.sequence}, ${cohort.issuedOn}) is unsigned — so a member added on the way to the air gap is indistinguishable from one a steward admitted. Signing it is a steward act and no steward has been appointed; this is the shipped state and is reported rather than hidden.`)),
+    );
+  }
+
   if (!cohort.closesOn) {
-    return [
+    return findings.concat(
       err(at('rests on founding-cohort authority, but no cohort has been convened — the roster sets no closing date. Until a steward convenes one, no bootstrap signature is valid.')),
-    ];
+    );
   }
 
   const byDid = new Map(cohort.members.map((m) => [m.did, m]));

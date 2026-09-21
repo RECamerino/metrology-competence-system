@@ -28,6 +28,13 @@
 
 schemaVersion: 1
 
+# When this roster was cut, and which cut it is. A verifier resolves this file
+# offline exactly as they resolve the trust registry, so it carries its own age
+# and its own sequence for the same reasons that one does — and it is unsigned
+# for the same reason too, which is reported rather than hidden.
+issuedOn: "2026-09-21"
+sequence: 0
+
 # convenedOn: unset — see above.
 # closesOn:   unset — no bootstrap signature is valid until a steward sets it.
 
