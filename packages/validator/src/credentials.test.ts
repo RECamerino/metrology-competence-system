@@ -556,6 +556,17 @@ const FOUNDER_BASIS = FOUNDER.bootstrapAuthority.basis;
 
 const COHORT = {
   schemaVersion: 1 as const,
+  issuedOn: '2026-09-01',
+  sequence: 3,
+  // A published roster is a signed one. The shipped roster is not signed, which
+  // is reported rather than hidden — see the unsigned test below.
+  proof: {
+    type: 'DataIntegrityProof',
+    cryptosuite: 'ecdsa-jcs-2019',
+    proofPurpose: 'assertionMethod',
+    verificationMethod: `${FOUNDER.did}#key-1`,
+    proofValue: `z${'3'.repeat(87)}`,
+  },
   convenedOn: '2026-09-01',
   closesOn: '2028-09-01',
   members: [
@@ -581,7 +592,7 @@ test('the shipped roster convenes no cohort, so no bootstrap signature is valid'
   // The correct state today: appointing stewards is blocked on people, and a
   // roster that permitted bootstrap signing before anybody was appointed would
   // reverse the rule that issuance does not proceed.
-  const findings = checkBootstrapAuthority(bootstrapSigned(), { schemaVersion: 1, members: [] });
+  const findings = checkBootstrapAuthority(bootstrapSigned(), { schemaVersion: 1, issuedOn: '2028-01-01', sequence: 0, members: [] });
   assert.ok(
     findings.some((f) => f.level === 'error' && f.message.includes('no cohort has been convened')),
     `expected a not-convened refusal, got: ${JSON.stringify(findings)}`,
@@ -608,6 +619,28 @@ test('a well-formed bootstrap signature inside scope and inside the window passe
     checkBootstrapAuthority(bootstrapSigned(), COHORT, { elementDomain: 'CM-03' }),
     [],
   );
+});
+
+test('AN UNSIGNED ROSTER IS REPORTED, as an unsigned registry is', () => {
+  // Second-pass review, trust F-02. The registry schema names its own attack:
+  // sign it, or it is a text file anybody can edit on the way to the air gap.
+  // The roster's version is one tier up — add a member, and every credential
+  // they bootstrap-sign at L3, L4 and L5 validates — and it had no `proof`
+  // property at all, under `additionalProperties: false`, with a freeze coming.
+  const { proof: _unused, ...unsigned } = COHORT;
+  const findings = checkBootstrapAuthority(bootstrapSigned(), unsigned, { elementDomain: 'CM-03' });
+
+  assert.equal(errorsOf(findings).length, 0, 'an unsigned roster does not make the signature invalid');
+  assert.ok(
+    findings.some((f) => f.level === 'warn' && f.message.includes('is unsigned')),
+    `expected the roster to be reported as unsigned, got: ${JSON.stringify(findings.map((f) => f.message))}`,
+  );
+});
+
+test('...and the report names which roster, so a reader can tell two apart', () => {
+  const { proof: _unused, ...unsigned } = COHORT;
+  const findings = checkBootstrapAuthority(bootstrapSigned(), unsigned, { elementDomain: 'CM-03' });
+  assert.ok(findings.some((f) => f.message.includes('#3, 2026-09-01')));
 });
 
 test('SCOPE: a founder may not bootstrap-sign outside the field they were admitted for', () => {

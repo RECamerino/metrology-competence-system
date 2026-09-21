@@ -22,6 +22,7 @@ import {
   type CounterStatement,
   type TrustRegistry,
   type VerifiableCredential,
+  checkCohortReplacement,
   checkRegistryReplacement,
   checkTrustRegistry,
   verifyAgainstRegistry,
@@ -124,6 +125,54 @@ test('A CLEAN VERIFICATION STILL SAYS WHAT IT WAS DECIDED AGAINST', () => {
   assert.equal(verdict.basis.overdue, false);
   assert.match(verdict.basis.statement, /14 day\(s\) old/);
   assert.match(verdict.basis.statement, /does not appear here/);
+});
+
+/* -- The roster rolls back too, and it costs something different ----------- */
+
+/*
+ * Second-pass review, trust F-02. The founding cohort is a published,
+ * offline-resolved trust artifact and it had no sequence, so it could not be
+ * compared against another copy at all.
+ */
+
+const roster = (over: Record<string, unknown> = {}) => ({
+  sequence: 4,
+  issuedOn: '2028-06-01',
+  closesOn: '2029-01-01',
+  ...over,
+});
+
+test('a newer roster replaces freely', () => {
+  assert.deepEqual(checkCohortReplacement(roster(), roster({ sequence: 5, issuedOn: '2028-07-01' })), []);
+});
+
+test('AN OLDER ROSTER MAY NOT REPLACE A NEWER ONE', () => {
+  const findings = checkCohortReplacement(roster(), roster({ sequence: 2, issuedOn: '2028-01-01' }));
+  assert.equal(findings.filter((f) => f.level === 'error').length, 1);
+  assert.match(findings[0]!.message, /founding cohort roster #2/);
+});
+
+test('...and what it costs is NOT what a registry rollback costs', () => {
+  // A member is never removed from a roster, so an older copy can only lack
+  // admissions. What it can restore is a later closing date.
+  const findings = checkCohortReplacement(roster(), roster({ sequence: 2, issuedOn: '2028-01-01' }));
+  assert.match(findings[0]!.message, /never removed/);
+  assert.doesNotMatch(findings[0]!.message, /revocation|key compromise/);
+});
+
+test('EXTENDING THE CLOSING DATE IS SURFACED, because that is the governance act', () => {
+  const findings = checkCohortReplacement(roster(), roster({ sequence: 5, closesOn: '2032-01-01' }));
+  assert.equal(findings.filter((f) => f.level === 'error').length, 0, 'a newer roster is still accepted');
+  assert.ok(findings.some((f) => f.level === 'warn' && f.message.includes('permanent aristocracy')));
+});
+
+test('one implementation serves both documents', () => {
+  // Two would eventually disagree about what counts as a rollback — the
+  // argument that put matchesSelectors in one place.
+  const older = checkCohortReplacement(roster(), roster({ sequence: 2, issuedOn: '2028-01-01' }));
+  const same = checkCohortReplacement(roster(), roster({ issuedOn: '2028-05-01' }));
+  assert.match(older[0]!.message, /is older than #4/);
+  assert.match(same[0]!.message, /same sequence and date/);
 });
 
 /* -- A registry that cannot be resolved ------------------------------------ */

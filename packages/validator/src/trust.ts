@@ -706,25 +706,92 @@ export function verifyAgainstRegistry(
 }
 
 /**
+ * Any published, offline-resolved snapshot: a trust registry or a founding
+ * cohort roster. Both are files a verifier holds and compares against another
+ * copy, so both need the same two facts and the same comparison.
+ */
+export interface Snapshot {
+  sequence: number;
+  issuedOn: string;
+}
+
+/**
  * Whether a newly presented snapshot may replace one already held.
  *
- * A signed registry cannot be forged, but a courier, a mirror or a helpful
- * colleague can hand a verifier an OLDER snapshot than the one they already
- * have — and every revocation and compromise recorded in between disappears
- * with no signature broken. The sequence number is what makes that visible.
+ * A signed file cannot be forged, but a courier, a mirror or a helpful
+ * colleague can hand a verifier an OLDER copy than the one they already have,
+ * and whatever was recorded in between disappears with no signature broken. The
+ * sequence number is what makes that visible.
+ *
+ * ONE IMPLEMENTATION FOR BOTH DOCUMENTS, deliberately. Two would eventually
+ * disagree about what counts as a rollback, which is the argument that put
+ * `matchesSelectors` in one place for the deployment scope and the
+ * authorization scope. What differs between them is what a rollback COSTS, and
+ * that is a sentence rather than a rule.
  */
-export function checkRegistryReplacement(held: TrustRegistry, presented: TrustRegistry): Finding[] {
+function snapshotReplacement(
+  label: string,
+  held: Snapshot,
+  presented: Snapshot,
+  cost: string,
+): Finding[] {
   if (presented.sequence > held.sequence) return [];
 
   if (presented.sequence === held.sequence) {
     return presented.issuedOn === held.issuedOn
       ? []
-      : [err(`trust registry #${presented.sequence} was presented with issue date ${presented.issuedOn}, but a snapshot with the same sequence and date ${held.issuedOn} is already held. Two different files claiming one sequence number means one of them is not what it says.`)];
+      : [err(`${label} #${presented.sequence} was presented with issue date ${presented.issuedOn}, but a snapshot with the same sequence and date ${held.issuedOn} is already held. Two different files claiming one sequence number means one of them is not what it says.`)];
   }
 
   return [
     err(
-      `trust registry #${presented.sequence} (${presented.issuedOn}) is older than #${held.sequence} (${held.issuedOn}), which is already held. Accepting it would silently discard every revocation and key compromise recorded in between — a rollback needs no forgery, only a helpful courier.`,
+      `${label} #${presented.sequence} (${presented.issuedOn}) is older than #${held.sequence} (${held.issuedOn}), which is already held. ${cost}`,
     ),
   ];
+}
+
+export function checkRegistryReplacement(held: TrustRegistry, presented: TrustRegistry): Finding[] {
+  return snapshotReplacement(
+    'trust registry',
+    held,
+    presented,
+    'Accepting it would silently discard every revocation and key compromise recorded in between — a rollback needs no forgery, only a helpful courier.',
+  );
+}
+
+/**
+ * The same rollback, against the roster that grants bootstrap authority.
+ *
+ * WHAT IT COSTS IS NOT WHAT THE REGISTRY'S COSTS. A member is never removed
+ * from a cohort — there is no field for it — so an older roster can only LACK
+ * admissions, which is the safe direction. What an older roster can carry is a
+ * later `closesOn`: a cohort a steward closed early reopens the moment somebody
+ * presents the previous file, and bootstrap signing resumes after the date it
+ * was supposed to end.
+ */
+export function checkCohortReplacement(
+  held: Snapshot & { closesOn?: string },
+  presented: Snapshot & { closesOn?: string },
+): Finding[] {
+  const findings = snapshotReplacement(
+    'founding cohort roster',
+    held,
+    presented,
+    'A member is never removed from a roster, so what an older copy can restore is a later closing date — reopening bootstrap signing after a steward ended it.',
+  );
+
+  if (
+    findings.length === 0 &&
+    presented.closesOn &&
+    held.closesOn &&
+    presented.closesOn > held.closesOn
+  ) {
+    findings.push(
+      warn(
+        `founding cohort roster #${presented.sequence} extends the closing date from ${held.closesOn} to ${presented.closesOn}. Extending it is a governance act and should carry a record: quietly extending it indefinitely is how a bootstrap becomes a permanent aristocracy, and the cohort exists to produce the peers who make it unnecessary.`,
+      ),
+    );
+  }
+
+  return findings;
 }
