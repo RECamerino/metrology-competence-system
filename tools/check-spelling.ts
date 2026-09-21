@@ -29,6 +29,10 @@
  *   - anything inside a source designation or document title, because a
  *     publication is not renamed by our house style.
  *
+ * IT SCANS PATHS AS WELL AS CONTENTS. A file's name is read by everybody who
+ * opens the corpus, and was the one place this check did not look — which is
+ * how a British form survived in a BOK filename while the check reported clean.
+ *
  * Usage:  node tools/check-spelling.ts
  */
 
@@ -76,10 +80,36 @@ const files = [
   ...SCAN_FILES.map((f) => join(REPO_ROOT, f)),
 ];
 
+/** `line: 0` means the hit is in the path rather than in the text. */
 interface Hit { file: string; line: number; word: string }
 const hits: Hit[] = [];
 
 for (const file of files) {
+  const rel = relative(REPO_ROOT, file).split(sep).join('/');
+
+  /*
+   * THE NAME IS PART OF THE CORPUS, AND WAS THE ONE PLACE THIS DID NOT LOOK.
+   *
+   * Corpus review finding F-03. This read file CONTENTS and used the path only
+   * to report a hit, so `linearisation` sat in a BOK article's filename while
+   * the check reported clean across 251 files and the word appeared in no file
+   * body anywhere. A rule enforced everywhere except where the defect lives is
+   * the shape this project has now corrected several times over: an unread
+   * `blockedPendingCounsel` note, a `provenanceTier` no code read, a
+   * `minDistinctActivities` nothing required, a `knowledgeGaps` nothing printed.
+   *
+   * Directories are covered too, because the whole relative path is tested: a
+   * `content/bok/optimisation/` would be caught the same way. Hyphens and
+   * slashes are word boundaries, so a stem inside a slug matches exactly as it
+   * does inside prose.
+   */
+  for (const pattern of PATTERNS) {
+    pattern.lastIndex = 0;
+    for (const m of rel.matchAll(pattern)) {
+      hits.push({ file: rel, line: 0, word: m[0] });
+    }
+  }
+
   // This file necessarily contains the stems it forbids.
   if (file.endsWith(`tools${sep}check-spelling.ts`)) continue;
   const lines = readFileSync(file, 'utf8').split('\n');
@@ -87,7 +117,7 @@ for (const file of files) {
     for (const pattern of PATTERNS) {
       pattern.lastIndex = 0;
       for (const m of text.matchAll(pattern)) {
-        hits.push({ file: relative(REPO_ROOT, file).split(sep).join('/'), line: i + 1, word: m[0] });
+        hits.push({ file: rel, line: i + 1, word: m[0] });
       }
     }
   });
@@ -100,7 +130,7 @@ if (hits.length === 0) {
 
 console.error(`British spellings found (${hits.length}). The corpus is US English — see tools/check-spelling.ts for why, and for what is deliberately NOT flagged.\n`);
 for (const h of hits.slice(0, 40)) {
-  console.error(`  ${h.file}:${h.line}  ${h.word}`);
+  console.error(`  ${h.file}${h.line === 0 ? '  (in the name)' : `:${h.line}`}  ${h.word}`);
 }
 if (hits.length > 40) console.error(`  … and ${hits.length - 40} more`);
 process.exit(1);
