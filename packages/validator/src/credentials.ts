@@ -306,12 +306,19 @@ export function highestSupportedTier(
   registry?: TrustRegistry,
   /** The signers' own credentials, for the same reason `checkCredential` takes them. */
   backing: Credential[] = [],
+  /**
+   * The founding roster. `peer-reviewed` rests on a signer whose standing is
+   * proven OR bootstrap, so an unresolved bootstrap claim lifted the tier for
+   * exactly the reason an unresolved authority chain must not — finding F-01
+   * reached this function as well as the rung.
+   */
+  cohort?: BootstrapCohort,
 ): ProvenanceTier {
   // `peer-reviewed` says the standing is EVIDENCED. This used to test that an
   // authority array was non-empty, which is the presence of a claim rather than
   // a resolved one — the same defect the rung itself had.
   const evidenced = credential.signers.some((signer) => {
-    const standing = signerStanding(signer, credential.element, backing, credential.attainedOn);
+    const standing = signerStanding(signer, credential.element, backing, credential.attainedOn, cohort);
     return (
       standing.heldLevel === 'proven' ||
       standing.heldLevel === 'bootstrap' ||
@@ -357,6 +364,8 @@ export function checkProvenanceTier(
   credential: Credential,
   registry?: TrustRegistry,
   backing: Credential[] = [],
+  /** The founding roster, for the same reason `highestSupportedTier` takes one. */
+  cohort?: BootstrapCohort,
 ): Finding[] {
   const at = (msg: string) => `${credential.id}: ${msg}`;
   const declared = credential.provenanceTier;
@@ -368,7 +377,7 @@ export function checkProvenanceTier(
     ];
   }
 
-  const supported = highestSupportedTier(credential, registry, backing);
+  const supported = highestSupportedTier(credential, registry, backing, cohort);
   if (TIER_ORDER.indexOf(declared) <= TIER_ORDER.indexOf(supported)) return [];
 
   const reason =
@@ -511,15 +520,74 @@ export interface SignerStanding {
  * `element` is the element being signed off: a held level in a different
  * element is not evidence here, which the signoff policy has always said.
  */
+/**
+ * Does this signer actually hold founding standing, per the roster in hand?
+ *
+ * `unresolved` and `contradicted` are different answers and the message a
+ * reader gets turns on which: one says the caller brought no roster, the other
+ * says the roster they brought does not carry this person. Neither satisfies a
+ * rung; only the first is fixed by supplying a file.
+ */
+function cohortStanding(
+  signer: Signer,
+  cohort: BootstrapCohort | undefined,
+  asOf: string | undefined,
+): StandingState {
+  if (!cohort) return 'unresolved';
+
+  // Nothing is convened, so nobody holds the authority. That is a fact about
+  // the roster rather than about the caller, which is why it contradicts.
+  if (!cohort.closesOn) return 'contradicted';
+
+  const member = (cohort.members ?? []).find((m) => m.did === signer.did);
+  if (!member) return 'contradicted';
+
+  if (asOf && (asOf > cohort.closesOn || asOf < member.admittedOn)) return 'contradicted';
+
+  return 'bootstrap';
+}
+
 export function signerStanding(
   signer: Signer,
   element: string,
   backing: Credential[] = [],
   /** The day the signoff happened. Standing is only standing if it was in force. */
   asOf?: string,
+  /**
+   * The founding roster, where the caller has it. Without it a bootstrap claim
+   * cannot be resolved and does not satisfy a rung — see below.
+   */
+  cohort?: BootstrapCohort,
 ): SignerStanding {
+  /*
+   * A BOOTSTRAP CLAIM IS RESOLVED, NOT READ OFF THE CREDENTIAL.
+   *
+   * Second-pass review finding F-01, and it is rule 12's own defect surviving
+   * on the one path the fix did not cover. This returned `bootstrap` for both
+   * states from `signer.bootstrapAuthority` — a field the credential writes
+   * about itself — and took no cohort parameter at all. Since only `proven` and
+   * `bootstrap` satisfy a rung, an L5 credential whose two signers asserted
+   * founding-cohort authority, with no roster presented and no backing
+   * credential anywhere, produced ZERO errors: `witnessMustHoldLevel: 5` and
+   * `requiresCredentialedReviewer` both satisfied by a string.
+   *
+   * The reasoning that killed `unresolved` applies here verbatim and was not
+   * applied — a caller who did not supply the document has established nothing
+   * — and `docs/00-context.md` states the rule this broke: a warning saying
+   * "asserted, not proven" must never coexist with successful satisfaction of a
+   * requirement whose predicate requires proof. Three such warnings did.
+   *
+   * WHAT THIS CHECKS IS DELIBERATELY NARROWER than
+   * `checkBootstrapAuthority`. This answers whether the signer has founding
+   * standing AT ALL: convened cohort, on the roster, signature inside the
+   * window. Scope, self-dealing, volume and the basis string need the element's
+   * domain and the signing history, which this function is not given and which
+   * that one checks and reports in full. Two questions, one of them a subset;
+   * failing the subset is what stops a rung.
+   */
   if (signer.bootstrapAuthority) {
-    return { heldLevel: 'bootstrap', reviewerAuthority: 'bootstrap' };
+    const state = cohortStanding(signer, cohort, asOf);
+    return { heldLevel: state, reviewerAuthority: state };
   }
 
   const byId = new Map(backing.map((c) => [c.id, c]));
@@ -622,9 +690,9 @@ function unmet(state: StandingState, what: string): string {
     case 'asserted':
       return `${what} is asserted on the credential and backed by no credential at all. An assertion does not satisfy a requirement that asks for competence to be held.`;
     case 'unresolved':
-      return `${what} names a backing credential that was not supplied, so it could not be established. That is a fact about what this caller had in front of them rather than about the credential — supply the signer's credentials to resolve it.`;
+      return `${what} names a document that was not supplied — a backing credential, or the founding roster a bootstrap claim resolves against — so it could not be established. That is a fact about what this caller had in front of them rather than about the credential; supply the document to resolve it.`;
     case 'contradicted':
-      return `${what} is contradicted by the credential it names.`;
+      return `${what} is contradicted by the document it rests on — a backing credential that does not say what was claimed, or a founding roster that does not carry this signer, has not convened, or had closed when the signature was made.`;
     default:
       return `${what} was not established.`;
   }
@@ -733,7 +801,7 @@ export function checkCredential(
   // Called from inside rather than exported for the caller to remember. The
   // tier needs nothing but the credential itself, and a check that depends on
   // being invoked is how provenanceTier came to be read by nothing at all.
-  findings.push(...checkProvenanceTier(credential, registry, backing));
+  findings.push(...checkProvenanceTier(credential, registry, backing, cohort));
 
   // Same reasoning. Without a roster this warns rather than passing, so a
   // caller who has one and forgets to pass it is told, and a bootstrap claim is
@@ -900,7 +968,7 @@ export function checkCredential(
 
   const standings = credential.signers.map((signer) => ({
     signer,
-    standing: signerStanding(signer, credential.element, backing, credential.attainedOn),
+    standing: signerStanding(signer, credential.element, backing, credential.attainedOn, cohort),
   }));
 
   if (policy.witnessMustHoldLevel !== null && policy.witnessMustHoldLevel !== undefined) {
