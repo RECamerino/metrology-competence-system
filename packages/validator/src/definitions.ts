@@ -265,6 +265,9 @@ export interface PinnedCredential {
   id: string;
   element: string;
   level: number;
+  /** Both are what the recertification interval is measured from and against. */
+  attainedOn?: string;
+  expiresOn?: string;
   definitionRef?: string;
   assessmentPolicyRef?: string;
   knowledgeSnapshot?: KnowledgeSnapshotEntry[];
@@ -301,6 +304,96 @@ export interface ArticleLike {
  * A verifier runs this to answer the question that matters when reading an old
  * credential: "did this mean then what it would mean today?"
  */
+/**
+ * A date this many whole months later, clamped to the end of the target month.
+ *
+ * 2028-01-31 plus one month is 2028-02-29, not 2028-03-02. Rolling over would
+ * hand a credential a day of currency it was not granted, which is small and is
+ * in the direction this whole check exists to stop.
+ */
+function addMonths(iso: string, months: number): string | null {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  if (!m) return null;
+
+  const [y, mo, d] = [Number(m[1]), Number(m[2]), Number(m[3])];
+  const target = mo - 1 + months;
+  const year = y + Math.floor(target / 12);
+  const month = ((target % 12) + 12) % 12;
+
+  const lastDay = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+  const day = Math.min(d, lastDay);
+
+  return `${String(year).padStart(4, '0')}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+}
+
+/**
+ * Does the credential's expiry match the interval the policy sets?
+ *
+ * THE FIELD NOTHING READ. Second-pass review finding F-04.
+ * `defaultRecertificationMonths` and the element's `recertificationMonths`
+ * override were read by no code at all: `grep -rn recertification --include=*.ts`
+ * returned a comment, a test, an unrelated ledger message and the
+ * `expiresOn <= attainedOn` check. Nothing derived an expiry and nothing
+ * compared one, so `expiresOn` was whatever an issuer typed.
+ *
+ * That is the failure pattern this project has now named four times over — a
+ * requirement nothing reads — sitting on the field that decides when a
+ * credential stops being current.
+ *
+ * WHY IT BELONGS WITH THE POLICY PIN rather than beside the other lifecycle
+ * checks: `defaultRecertificationMonths` sits INSIDE the level entry that
+ * `assessmentPolicyHash` hashes, so a credential already pins the interval
+ * through `assessmentPolicyRef`. Checking its expiry against that interval is
+ * checking the credential against the policy it pinned, which is this
+ * function's whole subject. It needs no reading date, so it is not a currency
+ * question and does not belong behind `asOf`.
+ *
+ * OVERSTATING IS AN ERROR; UNDERSTATING IS PERMITTED AND SILENT — the rule
+ * `provenanceTier` already follows. An expiry later than the policy allows
+ * claims currency that was never granted. An earlier one is an issuer holding
+ * themselves to a shorter interval than they had to, which misleads nobody.
+ *
+ * A LEVEL THAT DECLARES NO INTERVAL EXPECTS NO EXPIRY, which is how L1 and L2
+ * work today: neither carries `defaultRecertificationMonths`, so nothing fires.
+ * That is also the place a deployment says it does not operate recertification
+ * — by omitting the default, once, rather than by omitting the field on every
+ * credential it issues.
+ */
+function checkRecertification(
+  credential: PinnedCredential,
+  element: ElementLike | undefined,
+  definition: Record<string, unknown> | undefined,
+): Finding[] {
+  const override = element?.recertificationMonths;
+  const fallback = definition?.defaultRecertificationMonths;
+  const months = typeof override === 'number' ? override : typeof fallback === 'number' ? fallback : undefined;
+
+  if (months === undefined || !credential.attainedOn) return [];
+
+  const at = (msg: string) => `${credential.id}: ${msg}`;
+  const source =
+    typeof override === 'number'
+      ? `${element?.id ?? 'the element'} sets recertificationMonths to ${months}`
+      : `L${credential.level} sets defaultRecertificationMonths to ${months}`;
+
+  const due = addMonths(credential.attainedOn, months);
+  if (!due) return [];
+
+  if (!credential.expiresOn) {
+    return [
+      err(at(`records no expiresOn, and ${source} — so it reads as a credential that never lapses while the policy it pinned says it lapses on ${due}. An expiry is derived from the policy, not omitted at the issuer's discretion; a level that expects none declares none.`)),
+    ];
+  }
+
+  if (credential.expiresOn > due) {
+    return [
+      err(at(`expires on ${credential.expiresOn}, and ${source}, which makes it due on ${due}. A credential may not grant itself more currency than the policy it pinned allows.`)),
+    ];
+  }
+
+  return [];
+}
+
 export function checkDefinitionDrift(
   credential: PinnedCredential,
   element: ElementLike | undefined,
@@ -324,6 +417,8 @@ export function checkDefinitionDrift(
         warn(at(`the assessment policy for L${credential.level} has changed since this credential was issued. It was earned under the rules in force at the time; do not represent it as meeting today's.`)),
       );
     }
+
+    findings.push(...checkRecertification(credential, element, levelDefinition(proficiency, credential.level)));
   }
 
   if (!credential.definitionRef) {

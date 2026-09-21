@@ -72,6 +72,80 @@ function credential(overrides: Record<string, unknown> = {}) {
   };
 }
 
+/* -- The interval the credential pinned and never checked itself against ---- */
+
+/*
+ * Second-pass review finding F-04. `defaultRecertificationMonths` and the
+ * element's `recertificationMonths` override were read by no code at all, so a
+ * credential's `expiresOn` was whatever an issuer typed — while the interval
+ * sat inside the level entry the credential pins through `assessmentPolicyRef`.
+ */
+
+const RECERT = { ...LEVEL_4_POLICY, defaultRecertificationMonths: 48 };
+const RECERT_DOC = { schemaVersion: 1, levels: [RECERT] };
+
+const dated = (over: Record<string, unknown> = {}) =>
+  credential({ attainedOn: '2028-03-01', assessmentPolicyRef: assessmentPolicyHash(RECERT), ...over });
+
+const errorsIn = (findings: { level: string; message: string }[]) =>
+  findings.filter((f) => f.level === 'error').map((f) => f.message);
+
+test('an expiry matching the level default passes', () => {
+  const findings = checkDefinitionDrift(dated({ expiresOn: '2032-03-01' }), element, [article], RECERT_DOC);
+  assert.deepEqual(errorsIn(findings), []);
+});
+
+test('A CREDENTIAL MAY NOT GRANT ITSELF MORE CURRENCY THAN THE POLICY ALLOWS', () => {
+  const findings = checkDefinitionDrift(dated({ expiresOn: '2035-01-01' }), element, [article], RECERT_DOC);
+  assert.ok(
+    errorsIn(findings).some((m) => m.includes('more currency than the policy it pinned allows')),
+    `expected the overstated expiry to be refused, got: ${JSON.stringify(errorsIn(findings))}`,
+  );
+});
+
+test('UNDERSTATING IS PERMITTED AND SILENT, as it is for the provenance tier', () => {
+  // An issuer holding themselves to a shorter interval than they had to
+  // misleads nobody.
+  const findings = checkDefinitionDrift(dated({ expiresOn: '2029-03-01' }), element, [article], RECERT_DOC);
+  assert.deepEqual(errorsIn(findings), []);
+});
+
+test('omitting the expiry is not an opt-out from the policy', () => {
+  const findings = checkDefinitionDrift(dated(), element, [article], RECERT_DOC);
+  assert.ok(errorsIn(findings).some((m) => m.includes('records no expiresOn')));
+});
+
+test('an element override beats the level default', () => {
+  const volatile = { ...element, recertificationMonths: 12 };
+  const findings = checkDefinitionDrift(dated({ expiresOn: '2032-03-01' }), volatile, [article], RECERT_DOC);
+  assert.ok(errorsIn(findings).some((m) => m.includes('recertificationMonths to 12')));
+});
+
+test('A LEVEL THAT DECLARES NO INTERVAL EXPECTS NO EXPIRY', () => {
+  // How L1 and L2 work today: neither carries defaultRecertificationMonths, so
+  // nothing fires. It is also where a deployment says it does not operate
+  // recertification — once, rather than on every credential it issues.
+  const findings = checkDefinitionDrift(credential({ attainedOn: '2028-03-01' }), element, [article], PROFICIENCY);
+  assert.deepEqual(errorsIn(findings), []);
+});
+
+test('the interval clamps to the end of the month rather than rolling over', () => {
+  // 2028-01-31 plus one month is 2028-02-29, not 2028-03-02. Rolling over hands
+  // a credential a day of currency it was not granted.
+  const oneMonth = { ...LEVEL_4_POLICY, defaultRecertificationMonths: 1 };
+  const doc = { schemaVersion: 1, levels: [oneMonth] };
+  const c = credential({
+    attainedOn: '2028-01-31',
+    expiresOn: '2028-03-01',
+    assessmentPolicyRef: assessmentPolicyHash(oneMonth),
+  });
+  const findings = checkDefinitionDrift(c, element, [article], doc);
+  assert.ok(
+    errorsIn(findings).some((m) => m.includes('due on 2028-02-29')),
+    `expected a clamped due date, got: ${JSON.stringify(errorsIn(findings))}`,
+  );
+});
+
 /* -- Section extraction ---------------------------------------------------- */
 
 test('a section is extracted from its anchor to the next heading', () => {
