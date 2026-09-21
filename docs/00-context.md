@@ -1026,6 +1026,45 @@ The custody check used to read the tier: if the credential supported `organizati
 
 So the two questions are separated. `claimsOrganizationalIssuer` asks whether the credential's own account says a laboratory is standing behind it, which is a fact about the arrangement and is what §6.2 follows from. The tier asks what a verifier could establish. They are different questions and now have different functions.
 
+## A spine element is tested by its anchors
+
+Rule 14 asserts that every `EC` area is a spine wrapped around the parameters
+that make an equipment type distinct, and that **the spine repeats because it
+genuinely does**. Adversarial review of the authored corpus, 2026-09-20, put
+that premise to its first test, because `EC-04-013` is the only spine element
+anyone has written out.
+
+It failed. The title named a balance. The citations were to a weighing guideline
+and named weighing-specific content — the adjustment factor entering the
+load–indication relation as a multiplier, and the treatment of the automatic zero
+devices. The closing notes named a failure mode that only exists on a weighing
+instrument. And **all four anchors said "instrument"**: substitute a torque
+wrench, a pressure gauge or a DMM and every one still read correctly.
+
+That matters more than one file, because the competence they described was
+already `CM-06-027` *Deciding whether to adjust* — `judgment`, ceiling 5, in an
+area called *Execution, Adjustment and As-Found Data* — and `CM-06` appeared
+nowhere in the element, not as a prerequisite, not as a related element, not in a
+citation. **204 elements share the generated title *"Adjustment of &lt;equipment&gt;,
+and what it does to as-found data"***, and this was the worked example the other
+203 would have been written from.
+
+**The premise survives; the practice needed correcting.** The *work* of adjusting
+a balance genuinely differs from adjusting a torque wrench, which is what rule 14
+claims. What does not follow is that an author writing the element will capture
+the difference — here the author captured it in the title, the citations, the
+knowledge refs and the notes, and not in the one field a candidate is assessed
+against. So the test is now stated against the anchors specifically, and it is
+the project's own boundary test applied by substitution.
+
+The fix is two edges, both free today and both a deprecation exercise once a pack
+is authored: the general `CM` element becomes a **prerequisite**, so the judgement
+is established once and gap analysis points at the right element; and the
+equipment-specific material moves **into the anchors**. For `EC-04-013` both
+pieces of that material already existed in the file. Nothing was invented and no
+new clause was cited — `EURAMET cg-18` is not held locally, and a citation that
+has not been read is the defect `CM-21-012` exists to describe.
+
 ## A symlink is a path, and the leak check scans for content
 
 **Closed 2026-09-20, inside the freeze window.** External adversarial review, finding A-20.
