@@ -156,6 +156,28 @@ test('per-archetype reuse is printed, not only the mean', () => {
 });
 
 
+test('A DECLARED KNOWLEDGE GAP IS SURFACED, NOT ONLY RECORDED', () => {
+  // `knowledgeGaps` holds its element below L3 under rule 7, so it has teeth.
+  // What it lacked was a reader: this report is documented as the place that
+  // names the next content work, and it listed item gaps and never these. Three
+  // were already declared in the corpus and nothing printed them.
+  const one = element('CM-01-001', 3);
+  (one.data as Record<string, unknown>).knowledgeGaps = [
+    { levels: [2, 3], missing: 'Nothing covers the reporting direction.', awaiting: 'A section on stating a coverage factor.' },
+  ];
+  const report = coverageReport(corpus([one], []));
+
+  assert.match(report, /Rungs the BOK does not reach, declared by their authors: 1/);
+  assert.match(report, /CM-01-001 L2, L3 — A section on stating a coverage factor\./);
+  // What CLOSES the hole is what a reader of this report needs, not what is missing.
+  assert.doesNotMatch(report, /Nothing covers the reporting direction/);
+});
+
+test('an element with no declared gap prints no gap line', () => {
+  const report = coverageReport(corpus([element('CM-01-001', 3)], []));
+  assert.doesNotMatch(report, /Rungs the BOK does not reach/);
+});
+
 test('THE CORPUS STATES HOW MUCH OF ITS COVERAGE MAP COULD FAIL', () => {
   // The remedy for a claim that outran the code. A number the corpus reports
   // about itself is worth more than a sentence in a document saying otherwise,
